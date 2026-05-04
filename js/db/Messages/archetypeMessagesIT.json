@@ -1,0 +1,564 @@
+{
+  "Goblin": {
+    "success": [
+      "Il goblin si gratta la testa pelata.\n'Tu... tu non schiacciare me? Buono buono!'",
+      "'Luccicose! Tu avere luccicose?' chiede il goblin con gli occhi che brillano come monete.",
+      "Il goblin ridacchia con voce stridula.\n'Tu fare ridere pancia mia!'",
+      "'Me orecchie aprire! Me orecchie ascoltare!'\ncinguetta il goblin saltellando.",
+      "Il goblin si gratta il naso crostoso mentre annuisce vigorosamente.",
+      "'Grande-capo non guardare ora.\nNoi fare chiacchiera!'\nsussurra il goblin guardandosi intorno.",
+      "Gli occhi gialli del goblin si illuminano.\n'Oooh! Tu dire cose interessanti!'",
+      "'Tu puzzare come fungo morto, ma va bene bene!'\ndice il goblin annusando l'aria.",
+      "'Tu portare mangiare? Pancia mia fare rumori!'\nsi lamenta strofinandosi lo stomaco.",
+      "Il goblin fa una danza goffa.\n'Nuovo amico-non-schiacciare!'",
+      "'Me chiamare Grukk! Tu chiamare cosa?' chiede curioso il goblin.",
+      "Il goblin ti porge un verme mezzo mangiato.\n'Tu volere? Ancora buono!'",
+      "'Tu forte-forte! Me vedere muscoli!'\nil goblin ti tocca Braccio con ammirazione.",
+      "Il goblin ride mostrando denti aguzzi.\n'Tu non essere come altri grossi!'",
+      "'Boss sempre dire me stupido.\nTu pensare me stupido?' chiede timidamente.",
+      "Il goblin conta sulle dita.\n'Me avere tre... no, quattro... quanti dita tu vedere?'",
+      "'Tu sapere dove trovare luccicose?' il goblin ti si avvicina complice.",
+      "Il goblin si pulisce il naso sulla manica.\n'Me ascoltare ancora!'",
+      "'Altri goblin dire tu cattivo.\nMe non credere!'\nil goblin scuote la testa.",
+      "Il goblin ti offre una pietra lucida.\n'Per tu! Amico dare regali!'",
+      "'Tu parlare lingua strana, ma me capire!'\nil goblin sorride orgoglioso.",
+      "Il goblin batte le mani piccole.\n'Tu tornare parlare ancora?'",
+      "'Me sapere segreto! Tu volere sapere segreto?' sussurra eccitato.",
+      "Il goblin si siede a gambe incrociate.\n'Tu raccontare storia?'",
+      "'Capo dire noi sempre attaccare.\nMa tu essere gentile!'\nil goblin sembra confuso ma felice."
+    ],
+    "fail": [
+      "Il goblin ti tira fuori la lingua nera.\n'Bleeeeh! Me non parlare con tu!'",
+      "'No chiacchiera! Solo botte-botte!'\nstrepita il goblin agitando un bastone.",
+      "Il goblin ti lancia un sasso maleodorante con disprezzo.",
+      "Il goblin si copre le orecchie a punta.\n'La la la! Orecchie chiuse!'",
+      "'Tu puzzare peggio di carogna! Andare via via!'\nsogghigna mostrando i denti.",
+      "Il goblin sputa una palla verde viscida nella tua direzione.",
+      "'Me troppo occupato! Tu rompere scatole!'\nurla il goblin.",
+      "Il goblin soffia e sibila come serpente arrabbiato.",
+      "'Tu essere come tutti altri grossi!\nMe odiare!'\nil goblin fa una smorfia.",
+      "Il goblin ti lancia sabbia negli occhi ridacchiando.",
+      "'Boss dire mai fidarsi di tu!\nBoss avere ragione!'\ngrida scappando.",
+      "Il goblin batte il piede.\n'No no no! Me non volere parlare!'",
+      "'Tu portare guai!\nGuai per me, guai per trib\u00f9!'\nil goblin ti indica accusatorio.",
+      "Il goblin si volta e ti mostra il sedere.\n'Questo per tu!'",
+      "'Parole tue essere stupide!\nOrecchie mie fare male!'\nsi lamenta.",
+      "Il goblin fischia chiamando rinforzi.\n'Altri! Venire qui!'",
+      "'Tu pensare me essere scemo?\nMe NON essere scemo!'\nurla offeso.",
+      "Il goblin ti tira sassi continuando a ridere.\n'Vai via! Vai via!'",
+      "'Me non parlare con nemico-puzzone!'\nil goblin tappa il naso.",
+      "Il goblin fa gesti scaccia-malocchio verso di te."
+    ],
+    "insult": [
+      "'Tu... tu essere figlio di troll marcio!'\npiange il goblin con voce acuta.",
+      "Il goblin fa i capricci battendo pugni per terra.\n'RAAAAH! RAAAAH!'",
+      "'Nessuno chiamare me quello! ME FARE ARRABBIATO GROSSO!'\nurla sputacchiando.",
+      "Il viso del goblin diventa rosso come peperone!\n'GRRRRR!'",
+      "'Tu pagare!\nMe dire a Boss!\nBoss schiacciare tu!'\nminaccia agitando il dito.",
+      "Il goblin batte i piedi creando una nuvola di polvere.",
+      "'Me non essere queste cose brutte!\nTU essere cose brutte!'\nrisponde piangendo.",
+      "Il goblin prende un bastone.\n'Tu dire scusa ADESSO!'",
+      "'Boss! BOSS! Lui dire cose cattive a me!'\nstrilla verso la tana.",
+      "Il goblin morde il proprio dito dalla rabbia.\n'AAAAARGH!'",
+      "'Me ricordare faccia tua!\nMe trovare tu dopo!'\nsibila minaccioso.",
+      "Il goblin trema di rabbia.\n'Tu... tu essere peggio di elfo!'",
+      "'Parole tue tagliare come coltello!\nCuore mio fare male!'\nsinghiozza.",
+      "Il goblin raccoglie una manciata di fango per tirarla.",
+      "'Me dire a TUTTI goblin che tu essere cattivo-cattivo!'"
+    ],
+    "joinSuccess": [
+      "'Davvero-davvero? Me seguire tu? Me essere bravo, giuro su luccicose!'\nil goblin salta di gioia.",
+      "Il goblin batte le mani rapido! 'S\u00ec s\u00ec s\u00ec! Me lasciare trib\u00f9 stupida!'",
+      "'Me stanco di vecchio Boss comunque.\nLui sempre picchiare me!'\nammette strofinandosi una bernoccola.",
+      "Il goblin afferra la tua mano con entusiasmo.\n'Quando andare-andare? Me pronto!'",
+      "'Tu essere migliore Capo mai!\nMe portare anche amici?' chiede speranzoso.",
+      "Il goblin fa una capriola.\n'Me sapere cucinare ratti! Me essere utile!'",
+      "'Me dire sempre che me destinato a cose grandi!'\nesclama orgoglioso.",
+      "Il goblin raccoglie velocemente i suoi averi in uno straccio.\n'Me pronto partire!'",
+      "'Boss vecchio dire sempre me essere inutile.\nTu pensare me utile?' chiede con occhi speranzosi.",
+      "Il goblin ti abbraccia le gambe.\n'Tu non lasciare me indietro, vero?'",
+      "'Me conoscere sentieri segreti!\nMe essere guida brava!'\npropone eccitato.",
+      "Il goblin balla in cerchio.\n'Nuova vita! Nuova vita con nuovo Capo!'",
+      "'Me giurare fedelt\u00e0 su tutte luccicose del mondo!'\ndice solennemente.",
+      "Il goblin sputa sulla mano e te la porge.\n'\u00c8 accordo goblin! Noi essere famiglia ora!'",
+      "'Altri goblin essere gelosi che me andare con tu!'\nridacchia malizioso."
+    ],
+    "joinFail": [
+      "'Me... me troppo spaventato.\nBoss avere occhi ovunque!'\ntrema guardandosi intorno.",
+      "Il goblin guarda nervoso verso la tana.\n'Forse... forse domani? Me pensare su questo.'",
+      "'Tu essere forte-forte, ma Boss essere pi\u00f9 forte!\nLui schiacciare me se me tradire!'\nammette con voce tremante.",
+      "Il goblin scuote la testa veloce.\n'No no no! Me non pronto!'",
+      "'Me non potere lasciare trib\u00f9 ancora!\nMe avere fratelli piccoli qui!'\ndice tristemente.",
+      "Il goblin si morde le unghie nervoso.\n'E se tu essere peggio di Boss attuale?'",
+      "'Altri goblin chiamare me traditore!\nMe non volere essere solo!'\npiange.",
+      "Il goblin indietreggia.\n'Boss dire sempre: chi lasciare trib\u00f9 morire male!'",
+      "'Me volere venire, ma... ma gambe mie non muovere!'\nil goblin sembra paralizzato dalla paura.",
+      "Il goblin sussurra spaventato.\n'Boss tagliare orecchie a ultimo goblin che scappare...'",
+      "'Forse... forse tu tornare quando Boss dormire?' suggerisce timidamente.",
+      "Il goblin piange.\n'Me essere codardo, me sapere!\nMa paura essere troppo grande!'",
+      "'Tu promettere proteggere me da Boss?' chiede diffidente.",
+      "Il goblin guarda i suoi piedi.\n'Me... me bisognare tempo per pensare.'",
+      "'Altri goblin ridere di me se me fallire!\nMe non potere rischiare!'\ndice scuotendo la testa."
+    ]
+  },
+  "Humanoid": {
+    "success": [
+      "Il guerriero ascolta le tue parole attentamente.",
+      "'Forse possiamo trovare un punto d'incontro,' dicono.",
+      "Il combattente abbassa leggermente l'arma.",
+      "'Ti ascolto,' rispondono cautamente.",
+      "Sembrano disposti ad ascoltarti.",
+      "'Fa' in fretta,' dicono con un cenno.",
+      "Il guerriero considera le tue parole pensierosamente.",
+      "'Hai ragione,' ammettono.",
+      "'Parla, ti concedo almeno questo,' permettono.",
+      "Il guerriero incrocia le braccia ma ascolta intensamente."
+    ],
+    "fail": [
+      "Scuotono la testa e si preparano a colpire.",
+      "'Risparmia il fiato,' dicono freddamente.",
+      "Il guerriero ignora la tua supplica.",
+      "'Le parole non ti salveranno ora.'",
+      "Si voltano, disinteressati.",
+      "'Ne ho sentite abbastanza,' dicono con disprezzo.",
+      "'I fatti contano pi\u00f9 delle parole.'",
+      "Il guerriero sbuffa al tuo tentativo."
+    ],
+    "insult": [
+      "'Queste sono parole di sfida!'\nringhia il guerriero.",
+      "Gli occhi del guerriero si stringono pericolosamente.",
+      "'Te ne pentirai di quell'insulto!'\nsibilano.",
+      "'Come osi!'\nruggisce il guerriero.",
+      "La rabbia lampeggia sul viso del guerriero.",
+      "'Ti far\u00f2 mangiare quelle parole!'"
+    ],
+    "joinSuccess": [
+      "'La tua offerta \u00e8...\naccettabile.\nMi unir\u00f2 a te,' decidono.",
+      "Il guerriero rinfodera l'arma.\n'Molto bene, sono con te.'",
+      "'Hai dimostrato di essere degno.\nTi seguir\u00f2.'",
+      "'Vedo del potenziale in te.\nConta su di me.'",
+      "Il guerriero annuisce con rispetto.\n'Combatter\u00f2 al tuo fianco.'"
+    ],
+    "joinFail": [
+      "'Non posso abbandonare il mio dovere,' dichiarano fermamente.",
+      "'Forse in un'altra vita,' dice il guerriero con rammarico.",
+      "'Percorro la mia strada,' rifiutano.",
+      "'Il momento non \u00e8 quello giusto.'",
+      "'Non sono convinto che valga la pena seguirti.'"
+    ]
+  },
+  "TwoHeadedHumanoid": {
+    "success": [
+      "'Dovremmo ascoltare?' 'S\u00ec, sentiamolo!'",
+      "'Sembrano simpatici!'\n'Sono d'accordo, fratello!'",
+      "Entrambe le teste si voltano verso di te con interesse.",
+      "'Cosa ne pensi?' 'Penso che dovremmo ascoltare!'",
+      "'Interessante...' 'Molto interessante davvero!'",
+      "La testa sinistra annuisce.\n'Testa destra, ascoltiamoli.'",
+      "'Finalmente qualcuno vuole parlare!'\n'Era ora!'",
+      "Entrambe le teste si avvicinano per ascoltare.",
+      "'Ci piace questo!'\n'S\u00ec, ci piace!'",
+      "'Ha senso!'\n'Per una volta, siamo d'accordo!'"
+    ],
+    "fail": [
+      "'No!'\n'Sono d'accordo, no!'\nurlano entrambe le teste.",
+      "'Ignorali!'\n'S\u00ec, ignorali completamente!'",
+      "Le teste discutono.\n'Dovremmo-' 'No! Mai!'",
+      "'Stanno sprecando il nostro tempo!'\n'Entrambi i nostri tempi!'",
+      "Una testa sbadiglia mentre l'altra ringhia.",
+      "'Non ascoltiamo!'\n'Nemmeno io!'",
+      "'Noioso!'\n'Super noioso!'",
+      "Entrambe le teste scuotono in disaccordo."
+    ],
+    "insult": [
+      "'\u00c8 cattivo!'\n'Davvero cattivo!'\npiangono entrambe le teste.",
+      "'Non ci piaci pi\u00f9!'\n'Per niente!'",
+      "Entrambe le teste ti guardano con rabbia!",
+      "'Che maleducazione!'\n'Incredibilmente maleducato!'",
+      "'Nessuno ci parla cos\u00ec!'\n'Nessuno!'",
+      "Le teste iniziano a litigare tra loro nella rabbia!"
+    ],
+    "joinSuccess": [
+      "'Possiamo unirci?' 'Oh ti prego, possiamo?' supplicano entrambi.",
+      "'Finalmente, qualcuno che ci vuole!'\n'Entrambi!'",
+      "Entrambe le teste sorridono ampiamente.\n'Siamo dentro!'",
+      "'\u00c8 emozionante!'\n'Molto emozionante!'",
+      "'Saremo i migliori compagni!'\n'I migliori in assoluto!'"
+    ],
+    "joinFail": [
+      "'Voglio andare!'\n'Ma io no!'\nle teste discutono.",
+      "'Non riusciamo a metterci d'accordo!'\n'Mai!'",
+      "'Forse!'\n'No, assolutamente no!'\nbisticciano.",
+      "Le teste iniziano a litigare tra loro.",
+      "'Uno di noi dice no!'\n'Quindi \u00e8 un no da entrambi!'"
+    ]
+  },
+  "Fairy": {
+    "success": [
+      "Le ali della fata brillano di gioia!",
+      "'Ooh, una conversazione! Che meraviglia!'\nridacchia la fata.",
+      "La fata fa una piccola piroetta.\n'Sei interessante!'",
+      "'Tee-hee! Sei piuttosto affascinante!'\ntintinna la fata.",
+      "Scintille di magia danzano mentre la fata ascolta.",
+      "'Che piacevole sorpresa!'\ncanta la fata.",
+      "La fata batte le sue piccole mani.\n'Continua!'",
+      "'Hai un'aura gentile!'\nosserva la fata.",
+      "La fata si posa sulla tua spalla per ascoltare meglio.",
+      "'Che bella energia hai!'\nsorride la fata."
+    ],
+    "fail": [
+      "La fata ti tira fuori la lingua giocosamente.",
+      "'Noioso! Noioso! Noioso!'\ncanticchia la fata.",
+      "La fata vola in cerchio, ignorandoti.",
+      "'La la la~ Non ti sento~' la fata prende in giro.",
+      "La fata fa un gesto scortese e ridacchia.",
+      "'Via, via! Non ho tempo per te!'\nla fata respinge.",
+      "La fata ti fa una pernacchia.",
+      "'Non sei divertente!'\nla fata fa il broncio."
+    ],
+    "insult": [
+      "'Cattivone! Grande cattivone!'\nurla la fata.",
+      "Le ali della fata si abbassano tristemente.\n'Mi hai ferito!'",
+      "'Ti trasformer\u00f2 in un rospo!'\nminaccia la fata.",
+      "Scintille oscure vorticano intorno alla fata arrabbiata!",
+      "'Come puoi essere cos\u00ec cattivo?!'\npiange la fata.",
+      "L'atteggiamento allegro della fata svanisce istantaneamente!"
+    ],
+    "joinSuccess": [
+      "'Evviva! Una nuova avventura!'\nla fata esulta.",
+      "La fata fa dei giri della morte.\n'Sar\u00e0 cos\u00ec divertente!'",
+      "'Ho sempre voluto viaggiare!'\nesclama la fata.",
+      "Scintille magiche esplodono di gioia!",
+      "'Il giorno pi\u00f9 bello di sempre!'\nla fata squittisce di gioia."
+    ],
+    "joinFail": [
+      "'Amo troppo la mia foresta!'\nammette la fata.",
+      "La fata sembra combattuta.\n'Non posso lasciare casa mia...'",
+      "'Magari un'altra volta!'\ndice la fata scusandosi.",
+      "'I miei amici fate mi mancherebbero!'\nspiega.",
+      "La fata scuote la testa tristemente.\n'Appartengo a qui.'"
+    ]
+  },
+  "Robot": {
+    "success": [
+      "BEEP.\n'Protocollo di comunicazione accettato.'",
+      "Gli occhi del robot lampeggiano in verde.\n'Modalit\u00e0 dialogo: Attiva.'",
+      "'Elaborazione richiesta...\nRichiesta riconosciuta.'",
+      "WHIRR.\n'Schema vocale riconosciuto.\nAscolto.'",
+      "'Subroutine interazione sociale: Attivata.'",
+      "Il robot inclina la testa.\n'Domanda: Continuare?'",
+      "'Analisi schemi vocali...\nInteressante.'",
+      "BEEP BOOP.\n'Parametri conversazione: Accettabili.'",
+      "'Input dati: Prezioso.\nPrego procedere.'",
+      "I sensori ottici del robot si concentrano su di te."
+    ],
+    "fail": [
+      "ERRORE.\n'Comunicazione rifiutata.'",
+      "Gli occhi del robot lampeggiano in rosso.\n'Modalit\u00e0 ostile: Attiva.'",
+      "'Richiesta negata.\nRipresa protocolli combattimento.'",
+      "BUZZ.\n'Input non valido.\nTerminazione dialogo.'",
+      "'Protocolli sociali: Offline.'",
+      "Il robot rimane silenzioso, non risponde.",
+      "'Priorit\u00e0 annullata: Solo combattimento.'",
+      "BEEP.\n'Interazione non permessa.'"
+    ],
+    "insult": [
+      "ERRORE ERRORE.\n'Linguaggio ostile rilevato!'",
+      "I sistemi del robot scintillano di rabbia!",
+      "'MINACCIA RILEVATA.\nELIMINAZIONE BERSAGLIO.'",
+      "BZZT.\n'Insulto registrato.\nModalit\u00e0 rappresaglia: Attiva.'",
+      "'SUBROUTINE EMOTIVA: RABBIA.\nELABORAZIONE...'",
+      "Il colore degli occhi del robot cambia in rosso pericoloso!"
+    ],
+    "joinSuccess": [
+      "BEEP.\n'Protocollo alleanza: Accettato.'",
+      "'Direttiva aggiornata.\nNuova missione: Assistere alleati.'",
+      "Il robot estende una mano meccanica.\n'Partnership confermata.'",
+      "'Calcolo composizione squadra ottimale...\nSei accettabile.'",
+      "WHIRR.\n'Subroutine lealt\u00e0: Attivata.'"
+    ],
+    "joinFail": [
+      "'Direttive attuali impediscono formazione alleanza.'",
+      "ERRORE.\n'Catena di comando incompatibile.'",
+      "'Direttiva primaria non pu\u00f2 essere annullata.'",
+      "BUZZ.\n'Richiesta negata.\nContinuare missione primaria.'",
+      "'Metriche fiducia insufficienti per alleanza.'"
+    ]
+  },
+  "Demon": {
+    "success": [
+      "Gli occhi del demone brillano di oscuro interesse.",
+      "'Parla, mortale...\nMi diverti,' ringhia il demone.",
+      "Un sogghigno sinistro attraversa il viso del demone.",
+      "'Le tue parole mi incuriosiscono...\nper ora.'",
+      "Il demone ride cupamente.\n'Continua, piccolino.'",
+      "'Forse sei pi\u00f9 interessante di quanto pensassi.'",
+      "Le fiamme tremolano mentre il demone considera le tue parole.",
+      "'Osi parlare con me? ...Interessante.'",
+      "Il demone si sporge in avanti, incuriosito dalla tua audacia.",
+      "'Pochi mortali hanno tale coraggio.\nContinua.'"
+    ],
+    "fail": [
+      "'Silenzio! Le tue parole non significano nulla!'\nruggisce il demone.",
+      "Gli occhi del demone ardono di odio.",
+      "'Patetico.\nNon sprecher\u00f2 fiato con te.'",
+      "Risuona una risata oscura.\n'Mortale sciocco!'",
+      "'Mi annoi.\nPreparati all'oblio.'",
+      "Il demone ghigna con disprezzo.",
+      "'La tua voce graffia le mie orecchie!'",
+      "Il demone ti respinge con un'onda di fuoco."
+    ],
+    "insult": [
+      "'OSI?!'\nla voce del demone scuote la terra!",
+      "Fuoco infernale erutta intorno al demone furioso!",
+      "'DIVORER\u00d2 LA TUA ANIMA!'\ntuona il demone.",
+      "La rabbia del demone si manifesta come energia oscura!",
+      "'VERME INSOLENTE! SOFFRIRAI!'",
+      "Pura furia demoniaca emana dalla creatura!"
+    ],
+    "joinSuccess": [
+      "'Interessante...\nTi onorer\u00f2 con il mio potere,' decide il demone.",
+      "Il demone sorride malignamente.\n'Questo potrebbe essere...\ndivertente.'",
+      "'Molto bene.\nLa tua anima mi incuriosisce abbastanza da risparmiarla.'",
+      "'Ti seguir\u00f2, per ora.\nDivertimi, mortale.'",
+      "Energia oscura vortica.\n'Il nostro patto \u00e8 sigillato.'"
+    ],
+    "joinFail": [
+      "'Non mi inchino a nessuno!'\ndichiara il demone orgogliosamente.",
+      "'La tua anima non \u00e8 abbastanza preziosa per un'alleanza.'",
+      "'Servo solo il caos e la distruzione!'",
+      "'I demoni non seguono i mortali, sciocco.'",
+      "Il demone ride beffardo alla tua offerta."
+    ]
+  },
+  "Elven": {
+    "success": [
+      "L'espressione dell'elfo si ammorbidisce leggermente.",
+      "'Le tue parole portano saggezza,' riconosce l'elfo.",
+      "L'elfo fa una pausa, considerando le tue parole con grazia.",
+      "'Parla, e ascolter\u00f2 con cuore aperto.'",
+      "'Forse c'\u00e8 pi\u00f9 in te di quanto sembri.'",
+      "L'elfo annuisce con elegante compostezza.",
+      "'La tua lingua parla di ragione.\nSono incuriosito.'",
+      "'Molto bene, ti concedo udienza,' dice l'elfo.",
+      "Gli occhi antichi dell'elfo ti osservano con interesse.",
+      "'Possiedi un'eloquenza inaspettata,' osservano."
+    ],
+    "fail": [
+      "L'elfo ti guarda con disdegno.",
+      "'Le tue parole sono goffe come la tua stirpe.'",
+      "'Non ho tempo per una conversazione cos\u00ec volgare.'",
+      "L'elfo si volta altezzosamente.",
+      "'Presumi troppo, mortale.'",
+      "'Silenzio.\nSei indegno della mia attenzione.'",
+      "'Le tue maniere rozze offendono le mie orecchie.'",
+      "L'elfo ti respinge con un gesto della mano."
+    ],
+    "insult": [
+      "'Che volgarit\u00e0!'\nl'elfo si ritrae disgustato.",
+      "Gli occhi dell'elfo lampeggiano di fredda furia.",
+      "'Osi insultare uno dell'antico lignaggio?!'",
+      "'Tale barbarie! Pagherai per questo!'",
+      "Rabbia elegante emana dall'elfo offeso!",
+      "'La tua insolenza non conosce limiti!'"
+    ],
+    "joinSuccess": [
+      "'La tua causa ha merito.\nTi prester\u00f2 il mio arco,' acconsente l'elfo.",
+      "L'elfo si inchina con grazia.\n'Sono onorato di unirmi a te.'",
+      "'Molto bene.\nInsieme raggiungeremo la grandezza.'",
+      "'Il tuo spirito \u00e8 nobile.\nAccetto la tua offerta.'",
+      "L'elfo estende la mano in alleanza."
+    ],
+    "joinFail": [
+      "'Cammino i sentieri eterni da solo,' dichiara l'elfo.",
+      "'I nostri destini non si allineano, temo.'",
+      "'Ho doveri verso il mio popolo prima.'",
+      "'Forse quando le stelle si allineeranno diversamente...'",
+      "L'elfo rifiuta con dignit\u00e0 regale."
+    ]
+  },
+  "Gnome": {
+    "success": [
+      "'Oh! Una chiacchierata! Adoro una bella chiacchierata!'\nsorride lo gnomo.",
+      "Lo gnomo aggiusta gli occhiali.\n'Affascinante!'",
+      "'Sai, stavo lavorando a questa teoria...'",
+      "Lo gnomo tira fuori un taccuino.\n'Dimmi di pi\u00f9!'",
+      "'Aspetta aspetta aspetta! Ho cos\u00ec tante domande!'",
+      "Gli occhi dello gnomo brillano di curiosit\u00e0.",
+      "'Che intrigante! Continua!'",
+      "'Oh mio, oh mio! \u00c8 emozionante!'\nesclama lo gnomo.",
+      "Lo gnomo scribacchia note freneticamente mentre ascolta.",
+      "'Meraviglioso! Semplicemente meraviglioso!'\nsi entusiasma lo gnomo."
+    ],
+    "fail": [
+      "'Shh! Sto calcolando!'\ndice lo gnomo sprezzante.",
+      "Lo gnomo ti scaccia.\n'Non ora, occupato!'",
+      "'Niente tempo per chiacchiere! Scienza da fare!'",
+      "Lo gnomo non alza nemmeno lo sguardo dal suo aggeggio.",
+      "'Bah! Stai interrompendo il mio lavoro!'",
+      "'Non vedi che sono occupato?' sbuffa lo gnomo.",
+      "'Dopo! Sono sull'orlo di una scoperta!'",
+      "Lo gnomo \u00e8 troppo assorbito nella sua invenzione per notare."
+    ],
+    "insult": [
+      "'Che maleducazione! E io stavo essendo gentile!'\nprotesta lo gnomo.",
+      "Il viso dello gnomo diventa rosso.\n'Beh, mai visto!'",
+      "'Basta! User\u00f2 la mia INVENZIONE DELLA RABBIA su di te!'",
+      "Fumo esce dalle orecchie dello gnomo nella frustrazione!",
+      "'Nessuno insulta la MIA intelligenza!'\nfreme lo gnomo.",
+      "Lo gnomo tira fuori vari aggeggi dall'aspetto pericoloso!"
+    ],
+    "joinSuccess": [
+      "'Un'avventura?! Oh ragazzo, oh ragazzo!'\nlo gnomo salta eccitato.",
+      "Lo gnomo impacchetta vari aggeggi rapidamente.\n'Sono pronto!'",
+      "'Pensa a tutte le opportunit\u00e0 di ricerca!'\nesclamano.",
+      "'S\u00ec! Porter\u00f2 le mie invenzioni! Sar\u00e0 fantastico!'",
+      "Lo gnomo ti stringe la mano vigorosamente.\n'Partner!'"
+    ],
+    "joinFail": [
+      "'Ho diciassette esperimenti in corso!'\nspiega lo gnomo.",
+      "Lo gnomo guarda il suo laboratorio con desiderio.\n'Non posso lasciare questo...'",
+      "'Magari quando finisco il mio progetto attuale?'",
+      "'Le mie invenzioni hanno bisogno di me qui!'\nprotestano.",
+      "Lo gnomo sospira.\n'Il dovere chiama...\nalla scienza!'"
+    ]
+  },
+  "Ghost": {
+    "success": [
+      "La forma del fantasma trema di interesse...",
+      "'S\u00ec\u00ec\u00ec\u00ec...\nparlami dal regno dei vivi...'",
+      "Un brivido corre lungo la tua schiena mentre il fantasma ascolta.",
+      "'Cos\u00ec pochi possono percepirmi...\nTi ascolter\u00f2.'",
+      "La voce eterea del fantasma sussurra: 'Continua...'",
+      "'La tua presenza...\n\u00e8 riconosciuta...' echeggia il fantasma.",
+      "Energia spettrale vortica mentre il fantasma presta attenzione.",
+      "'Il velo tra noi...\nsi assottiglia...'",
+      "Il fantasma si materializza pi\u00f9 chiaramente per sentirti.",
+      "'Un'anima vivente...\nabbastanza coraggiosa da parlare...'"
+    ],
+    "fail": [
+      "Il fantasma passa attraverso di te, ignorando le tue parole.",
+      "'Silenzio...\ndisturbi il mio riposo eterno...'",
+      "Il lamento del fantasma soffoca la tua voce.",
+      "Un vento freddo passa mentre il fantasma svanisce.",
+      "'Non puoi raggiungermi...\nmortale...'",
+      "La forma del fantasma si dissipa, non udente.",
+      "'Lasciami al mio infestare...'",
+      "La temperatura scende mentre il fantasma si allontana."
+    ],
+    "insult": [
+      "'Anche nella morte...\nprovo rabbia!'\ngeme il fantasma.",
+      "La forma del fantasma diventa violentemente instabile!",
+      "'TI UNIRAI A ME NELL'ALDIL\u00c0!'\nulula.",
+      "Furia spettrale si manifesta come venti gelidi!",
+      "'MALEDIZIONE...\nMALEDIZIOOONE!'",
+      "L'angoscia e la rabbia del fantasma si fondono in uno!"
+    ],
+    "joinSuccess": [
+      "'Forse...\nuno scopo...\nfinalmente...' sussurra il fantasma.",
+      "La forma del fantasma si stabilizza.\n'Ti...\naccompagner\u00f2...'",
+      "'Solitudine...\nsvanendo...\nAccetto...'",
+      "'S\u00ec\u00ec\u00ec\u00ec...\nuna ragione per indugiare...\nin questo mondo...'",
+      "Il fantasma fluttua accanto a te, trovando finalmente pace."
+    ],
+    "joinFail": [
+      "'Sono...\nlegato a questo luogo...' si lamenta il fantasma.",
+      "'La mia maledizione...\nmi impedisce...\ndi andarmene...'",
+      "'Non posso...\nsfuggire...\nal mio destino...'",
+      "Il fantasma scuote la testa tristemente.\n'Impossibile...'",
+      "'La morte...\nmi lega...\nqui...\nper sempre...'"
+    ]
+  },
+  "ArmoredKnight": {
+    "success": [
+      "Il cavaliere abbassa la lama.\n'Parla, ascolter\u00f2.'",
+      "'Per onore, ti concedo parola,' dichiara il cavaliere.",
+      "Il cavaliere si mette sull'attenti, ascoltando attentamente.",
+      "'Il tuo coraggio di parlare \u00e8 notato.\nContinua.'",
+      "'Molto bene.\nEsponi il tuo caso,' permette il cavaliere.",
+      "Il cavaliere annuisce con rispetto.\n'Ascolto.'",
+      "'L'onore richiede che ti ascolti.'",
+      "'Parla liberamente.\nGiudicher\u00f2 le tue parole equamente.'",
+      "La postura del cavaliere si rilassa leggermente.",
+      "'Hai guadagnato questo momento di pace,' dichiarano."
+    ],
+    "fail": [
+      "'Le parole non ti salveranno dalla giustizia!'",
+      "Il cavaliere rimane immobile.\n'Il mio dovere \u00e8 chiaro.'",
+      "'Non posso essere distolto\n dal mio giuramento!'",
+      "'Le tue suppliche cadono\n su orecchie sorde, mascalzone!'",
+      "La determinazione del\n cavaliere \u00e8 assoluta.",
+      "'L'onore esige che ti abbatta!'",
+      "'Risparmia il fiato per pregare!'",
+      "Il cavaliere alza l'arma con determinazione."
+    ],
+    "insult": [
+      "'Ti disonori con tali parole!'\ntuona il cavaliere.",
+      "L'armatura del cavaliere risuona\n di giusta furia!",
+      "'PER L'ONORE! AFFRONTERAIm LA GIUSTIZIA!'",
+      "'Tale volgarit\u00e0 non sar\u00e0 tollerata!'",
+      "La lama del cavaliere brilla\n di luce vendicativa!",
+      "'Hai insultato il codice\n cavalleresco stesso!'"
+    ],
+    "joinSuccess": [
+      "'La tua causa \u00e8 giusta.\nGiuro la mia spada,' giura il cavaliere.",
+      "Il cavaliere si inginocchia davanti a te.\n'Sono tuo da comandare.'",
+      "'Servir\u00f2 con onore e dignit\u00e0.'",
+      "'La mia lama \u00e8 tua.\nInsieme trionferemo!'",
+      "Il cavaliere giura un solenne giuramento di fedelt\u00e0."
+    ],
+    "joinFail": [
+      "'Sono giurato ad un altro signore,' spiega il cavaliere.",
+      "'Il mio giuramento mi impedisce di unirmi a te.'",
+      "'L'onore mi lega al mio dovere attuale.'",
+      "'Forse quando il mio servizio sar\u00e0 completo...'",
+      "Il cavaliere saluta rispettosamente ma declina."
+    ]
+  },
+  "Dragon": {
+    "success": [
+      "Gli occhi antichi del drago ti osservano con interesse.",
+      "'Parla, creaturina.\nHai la mia attenzione...\nbrevemente.'",
+      "Fumo si arriccia dalle narici del drago mentre ascolta.",
+      "'Hmm...\npossiedi pi\u00f9 coraggio della maggior parte.'",
+      "'Le tue parole...\nnon sono del tutto prive di merito.'",
+      "Il drago si sistema, permettendoti di parlare.",
+      "'Non ho sentito tale audacia in secoli.'",
+      "'Interessante...\nun mortale che osa rivolgersi a me direttamente.'",
+      "La testa del drago si inclina per curiosit\u00e0.",
+      "'Mi diverti, piccolino.\nContinua.'"
+    ],
+    "fail": [
+      "'SILENZIO! La tua voce offende le mie orecchie!'\nruggisce il drago.",
+      "Lo sbuffo sprezzante del drago ti fa barcollare.",
+      "'Non converso con insetti.'",
+      "'Le tue parole sono insignificanti come la tua esistenza.'",
+      "Il drago chiude gli occhi, ignorandoti completamente.",
+      "'Vattene, verme.\nSei indegno della mia attenzione.'",
+      "'Non sprecare il mio tempo con le tue chiacchiere!'",
+      "La coda del drago si muove irritata."
+    ],
+    "insult": [
+      "'OSI?!'\nIl ruggito del drago scuote la terra!",
+      "Fiamme erompono dalle fauci del drago infuriato!",
+      "'SFACCIATO VERMICIATTOLO! TI RIDURR\u00d2 IN CENERE!'",
+      "La furia del drago \u00e8 oltre ogni comprensione!",
+      "'NESSUNO INSULTA UN DRAGO E VIVE!'",
+      "Antica rabbia draconica incarnata si abbatte su di te!"
+    ],
+    "joinSuccess": [
+      "'...Notevole.\nTi accompagner\u00f2,' decide il drago.",
+      "Il drago annuisce lentamente.\n'Sei degno della mia presenza.'",
+      "'Molto bene.\nTi onorer\u00f2 con la mia potenza.'",
+      "'Interessante.\nQuesto potrebbe rivelarsi...\ndivertente.'",
+      "Gli occhi del drago brillano.\n'Il nostro patto \u00e8 sigillato, mortale.'"
+    ],
+    "joinFail": [
+      "'I draghi non si inchinano a nessuno!'\ndichiara magnificamente.",
+      "'Non sei degno della mia compagnia.'",
+      "'Non sono legato a nessuno, tantomeno ai mortali.'",
+      "Il drago ride, un suono come tuono.",
+      "'La tua presunzione mi diverte, ma no.'"
+    ]
+  }
+}

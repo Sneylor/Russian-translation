@@ -248,7 +248,7 @@
   let lastClimbSoundFrame = 0;
   let lastClimbPositionX = 0;
   let lastClimbPositionY = 0;
-  
+
   // Track height
   let currentClimbHeight = 0;
 
@@ -529,7 +529,7 @@
     } else {
       const troopId =
         fishingEncounterTroopIds[
-          Math.floor(Math.random() * fishingEncounterTroopIds.length)
+        Math.floor(Math.random() * fishingEncounterTroopIds.length)
         ];
       window.skipLocalization = true;
       $gameMessage.add("Something is pulling on your line!");
@@ -637,7 +637,7 @@
 
     // Set climbing state
     isClimbing = true;
-    
+
     // Reset climb height when starting
     currentClimbHeight = 0;
 
@@ -909,7 +909,7 @@
 
   // Force player priority above * tiles when on roof (Terrain Tag 7)
   const _Game_Player_screenZ = Game_Player.prototype.screenZ;
-  Game_Player.prototype.screenZ = function() {
+  Game_Player.prototype.screenZ = function () {
     // Return high priority if on a roof
     // /* FALL MECHANICS DISABLED - || this._jumpingFromRoof */
     if (isRoofTile(this.x, this.y)) {
@@ -917,7 +917,7 @@
     }
     return _Game_Player_screenZ.call(this);
   };
-  
+
   // Disable dashing/sprinting while swimming or climbing
   const _Game_Player_isDashing = Game_Player.prototype.isDashing;
   Game_Player.prototype.isDashing = function () {
@@ -937,7 +937,7 @@
   };
 
   // Override movement to handle roof tile jumps
-// Override movement to handle roof tile jumps and climbing to land
+  // Override movement to handle roof tile jumps and climbing to land
   const _Game_Player_moveStraight = Game_Player.prototype.moveStraight;
   Game_Player.prototype.moveStraight = function (d) {
     // Check if we're on a roof tile and attempting to move to a non-roof/non-climbable tile
@@ -960,7 +960,7 @@
             case 6: jumpX = 1; break;
             case 8: jumpY = -1; break;
           }
-          
+
           isClimbing = false;
           this._isClimbing = false;
           if (stopClimbingSoundEffect) {
@@ -981,17 +981,17 @@
     if (isClimbing && d === 8) {
       const x2 = $gameMap.roundXWithDirection(this.x, d);
       const y2 = $gameMap.roundYWithDirection(this.y, d);
-      
+
       // isWallTile(x2, y2) checks for Terrain 4 (climbable) and Region 10
       // isRoofTile(x2, y2) checks for Terrain 7
       if (!isWallTile(x2, y2) && !isRoofTile(x2, y2)) {
         const isPassable = $gameMap.isPassable(x2, y2, d);
         const isClear = !this.isCollidedWithEvents(x2, y2) && !this.isCollidedWithVehicles(x2, y2);
-        
+
         if (isPassable && isClear) {
           // Perform the movement to the top and exit climbing mode
           this.jump(0, -1);
-          
+
           isClimbing = false;
           this._isClimbing = false;
           if (stopClimbingSoundEffect) {
@@ -1245,9 +1245,9 @@
         }
 
         // Check if this tile ID matches any of our event mappings
-        if (foundTileId !== 0 && window.WorldGen && window.WorldGen.MAP636_TILE_EVENTS) {
+        if (foundTileId !== 0 && window.WorldGen && window.WorldGen.Map636TileEvents) {
           for (const [commonEventId, config] of Object.entries(
-            window.WorldGen.MAP636_TILE_EVENTS
+            window.WorldGen.Map636TileEvents
           )) {
             // Skip special types like "Streetlight" (handled by DynamicLightingSystem)
             if (typeof commonEventId === 'string' && isNaN(parseInt(commonEventId))) {
@@ -1283,7 +1283,7 @@
           );
           console.log(
             "## Configured tile mappings:",
-            JSON.stringify(window.WorldGen.MAP636_TILE_EVENTS, null, 2)
+            JSON.stringify(window.WorldGen.Map636TileEvents, null, 2)
           );
         }
       }
@@ -1412,7 +1412,7 @@
     }
   };
 
-Scene_Map.prototype.showClimbOptions = function () {
+  Scene_Map.prototype.showClimbOptions = function () {
     // Prevent the climb menu from opening if "Exterior" is missing from map notes
     if (!$dataMap || (!$dataMap.meta.Exterior && !$dataMap.note.includes("Exterior"))) {
       return;
@@ -1728,9 +1728,9 @@ Scene_Map.prototype.showClimbOptions = function () {
     lastClimbSoundFrame = 0;
     lastClimbPositionX = 0;
     lastClimbPositionY = 0;
-    
+
     currentClimbHeight = 0;
-    
+
     originalCharacterName = "";
     originalCharacterIndex = 0;
     originalCanMoveFunction = null;

@@ -338,17 +338,17 @@
  */
 
 
-(function() {
+(function () {
     'use strict';
-    
+
     // The plugin name MUST match the filename (without .js)
     const pluginName = "MarkovTextGenerator";
-    
-  
-    
+
+
+
     // Parse plugin parameters
     const parameters = PluginManager.parameters(pluginName);
-    
+
     const defaultChainOrder = Number(parameters.defaultChainOrder || 2);
     const defaultMinLength = Number(parameters.defaultMinLength || 10);
     const defaultMaxLength = Number(parameters.defaultMaxLength || 50);
@@ -356,40 +356,56 @@
     const defaultMaxChars = Number(parameters.defaultMaxChars || 12);
     const maxLineLength = Number(parameters.maxLineLength || 60);
     const insertPeriods = parameters.insertPeriods !== "false";
-    
-    // Parse text databases
-    const textDatabases = window.textDatabases || [];
+
+    // Parse additional text databases from plugin parameters
+    const extraDatabases = [];
     try {
         const rawDatabases = parameters.textDatabases;
-        
         if (rawDatabases && rawDatabases !== '[]') {
-            textDatabases = JSON.parse(rawDatabases).map(dbString => {
-                const db = JSON.parse(dbString);
-                
-                return {
-                    id: db.id,
-                    name: db.name,
-                    en: db.en,
-                    it: db.it,
-
-                };
+            const parsedArray = JSON.parse(rawDatabases);
+            parsedArray.forEach(dbString => {
+                try {
+                    const db = JSON.parse(dbString);
+                    extraDatabases.push({
+                        id: db.id,
+                        name: db.name,
+                        en: db.en,
+                        it: db.it
+                    });
+                } catch (innerErr) {
+                    console.error(`[MarkovTextGenerator] Error parsing individual database entry: ${innerErr.message}`);
+                }
             });
-            
-            // Log the IDs of the loaded databases
-       
         }
     } catch (e) {
+        console.error(`[MarkovTextGenerator] Error parsing extra databases: ${e.message}`);
     }
+
+    /**
+     * Get all currently available text databases, merging dynamic (JSON files) and parameter ones.
+     * @returns {Array} Array of database objects
+     */
+    function getAllTextDatabases() {
+        const dynamicDatabases = Object.values(window.TextGen || {});
+        // Update global window.textDatabases for backward compatibility with other plugins
+        window.textDatabases = dynamicDatabases.concat(extraDatabases);
+        return window.textDatabases;
+    }
+
+    // Initial population for console log only
+    const initialDBs = getAllTextDatabases();
+    console.log(`[MarkovTextGenerator] Initialized with ${initialDBs.length} databases.`);
+
     // Store built Markov models to avoid rebuilding
     const markovModels = {};
     const characterMarkovModels = {};
-    
+
     // Helper function to capitalize first letter of a string
     function capitalizeFirstLetter(string) {
         if (!string) return string;
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    
+
     // Function to format text with proper wrapping for display in message windows
     function formatTextForMessageWindow(text) {
         // Helper function to insert line breaks for better wrapping
@@ -397,10 +413,10 @@
             let result = '';
             let currentLineLength = 0;
             const words = text.split(' ');
-            
+
             for (let i = 0; i < words.length; i++) {
                 const word = words[i];
-                
+
                 // Handle extra long words by breaking them if necessary
                 if (word.length > maxLineLength) {
                     // If we're not at the start of a line, move to a new line first
@@ -408,14 +424,14 @@
                         result += '\n';
                         currentLineLength = 0;
                     }
-                    
+
                     // Break the long word into chunks of maxLineLength
                     for (let j = 0; j < word.length; j += maxLineLength) {
                         const chunk = word.substring(j, Math.min(j + maxLineLength, word.length));
-                        
+
                         // Add the chunk
                         result += chunk;
-                        
+
                         // If this isn't the end of the word, add a hyphen and line break
                         if (j + maxLineLength < word.length) {
                             result += '-\n';
@@ -428,57 +444,57 @@
                     // Normal word processing - check if adding this word would exceed the line length
                     // Use a slightly smaller threshold (85% of maxLineLength) to wrap early
                     const wrapEarlyThreshold = Math.floor(maxLineLength * 0.75);
-                    
+
                     if (currentLineLength + word.length + (currentLineLength > 0 ? 1 : 0) > wrapEarlyThreshold) {
                         result += '\n';
                         currentLineLength = 0;
                     }
-                    
+
                     // Add the word
                     if (currentLineLength > 0) {
                         result += ' ';
                         currentLineLength += 1;
                     }
-                    
+
                     result += word;
                     currentLineLength += word.length;
                 }
-                
+
                 // Add automatic line breaks after sentence-ending punctuation
                 if (/[.!?]$/.test(word) && i < words.length - 1) {
                     result += '\n';
                     currentLineLength = 0;
                 }
             }
-            
+
             return result;
         }
-        
+
         // Helper function to insert periods in very long sentences to improve readability
         function insertPeriodsInLongSentences(text) {
             const sentences = text.split(/([.!?])/);
             let result = '';
-            
+
             for (let i = 0; i < sentences.length; i += 2) {
                 if (i + 1 < sentences.length) {
                     // This is the sentence content
                     let sentence = sentences[i];
                     // This is the punctuation
                     const punctuation = sentences[i + 1];
-                    
+
                     // If sentence is very long (more than 20 words), try to break it up
                     const words = sentence.split(' ');
                     if (words.length > 20) {
                         // Insert periods approximately every 12-15 words at a comma if possible
                         let modifiedSentence = '';
                         let lastBreak = 0;
-                        
+
                         for (let j = 0; j < words.length; j++) {
                             modifiedSentence += words[j] + ' ';
-                            
+
                             // Look for good breaking points (after commas or conjunctions)
                             if (j - lastBreak > 12 && j < words.length - 3) {
-                                if (words[j].endsWith(',') || 
+                                if (words[j].endsWith(',') ||
                                     ['and', 'but', 'or', 'yet', 'so', 'for', 'nor'].includes(words[j])) {
                                     modifiedSentence = modifiedSentence.trim() + '. ';
                                     // Capitalize the next word
@@ -489,25 +505,25 @@
                                 }
                             }
                         }
-                        
+
                         sentence = modifiedSentence.trim();
                     }
-                    
+
                     result += sentence + punctuation;
                 } else {
                     // Handle the case when there's no punctuation at the end
                     result += sentences[i];
                 }
             }
-            
+
             return result;
         }
-        
+
         // First, add periods to very long sentences if enabled
         if (insertPeriods) {
             text = insertPeriodsInLongSentences(text);
         }
-        
+
         // Then add line breaks for proper wrapping
         return addLineBreaks(text, maxLineLength);
     }
@@ -517,106 +533,106 @@
             this.order = order;
             this.model = {};
             this.startSequences = [];
-            
+
             this.buildModel(text);
         }
-        
+
         buildModel(text) {
             // Clean and tokenize the text
             const words = text
-            .split(/\s+/)
-            .filter(word => word.length > 0);
-            
-            
+                .split(/\s+/)
+                .filter(word => word.length > 0);
+
+
             // Build model
             for (let i = 0; i <= words.length - this.order; i++) {
                 // Get current sequence of words (state)
                 const currentSequence = words.slice(i, i + this.order).join(' ');
-                
+
                 // Save sequences that can start sentences
                 if (i === 0 || /[\.\?\!]$/.test(words[i - 1])) {
                     this.startSequences.push(currentSequence);
                 }
-                
+
                 // Next word
                 const nextWord = words[i + this.order];
-                
+
                 // If we reached the end of the text, continue
                 if (!nextWord) continue;
-                
+
                 // Add to model
                 if (!this.model[currentSequence]) {
                     this.model[currentSequence] = [];
                 }
                 this.model[currentSequence].push(nextWord);
             }
-            
+
         }
-        
+
         generateText(minLength = 10, maxLength = 50) {
-      
-            
+
+
 
             // Start with a random starting sequence
             let currentSequence = this.startSequences[Math.floor(Math.random() * this.startSequences.length)];
             let result = currentSequence.split(' ');
-            
-            
+
+
             // Generate text until we reach max length or can't continue
             while (result.length < maxLength) {
                 // If we don't have this sequence in our model, break
                 if (!this.model[currentSequence] || this.model[currentSequence].length === 0) {
                     break;
                 }
-                
+
                 // Get a random next word based on current sequence
                 const nextWords = this.model[currentSequence];
                 const nextWord = nextWords[Math.floor(Math.random() * nextWords.length)];
                 result.push(nextWord);
-                
+
                 // Update current sequence
                 const sequenceWords = currentSequence.split(' ');
                 sequenceWords.shift();
                 sequenceWords.push(nextWord);
                 currentSequence = sequenceWords.join(' ');
-                
+
                 // If we've reached minimum length and the last word ends with a terminal punctuation, we can stop
                 if (result.length >= minLength && /[\.\?\!]$/.test(nextWord)) {
                     break;
                 }
             }
-            
+
             // Check if the text ends with proper punctuation, if not add a period
             if (result.length > 0 && !/[\.\?\!]$/.test(result[result.length - 1])) {
                 result[result.length - 1] += '.';
             }
-            
+
             // Ensure first letter is capitalized
             if (result.length > 0) {
                 result[0] = capitalizeFirstLetter(result[0]);
             }
-            
+
             // Format the text with proper wrapping for display
             const rawText = result.join(' ');
             const formattedText = formatTextForMessageWindow(rawText);
-            
-            
+
+
             return formattedText;
         }
-        
+
         // Generate a name using words (for compound names)
         generateWordBasedName(minChars = 4, maxChars = 12) {
             if (this.startSequences.length === 0) {
                 return "Error";
             }
-            
+
             // Get an appropriate starting point - prefer single words from the start sequences
             const potentialStarts = this.startSequences
                 .map(seq => seq.split(' ')[0])
                 .filter(word => word.length >= 2);
-            
+
             let name = potentialStarts[Math.floor(Math.random() * potentialStarts.length)];
-            
+
             // Sometimes add a second word to create compound names
             if (name.length < minChars || (Math.random() > 0.7 && name.length < maxChars - 3)) {
                 // Find words that could follow our starting word
@@ -624,7 +640,7 @@
                 if (this.model[currentSequence] && this.model[currentSequence].length > 0) {
                     const nextWords = this.model[currentSequence];
                     const nextWord = nextWords[Math.floor(Math.random() * nextWords.length)];
-                    
+
                     // Create compound name - sometimes with hyphen, sometimes with space
                     if (Math.random() > 0.5) {
                         name += '-' + nextWord;
@@ -633,66 +649,66 @@
                     }
                 }
             }
-            
+
             // Truncate if too long
             if (name.length > maxChars) {
                 name = name.substring(0, maxChars);
-                
+
                 // Ensure we don't cut off in the middle of a hyphenated name
                 if (name.endsWith('-')) {
                     name = name.substring(0, name.length - 1);
                 }
             }
-            
+
             // Remove any punctuation at the end
             name = name.replace(/[^\w\s-]$/, '');
-            
+
             // Ensure first letter is capitalized and each part of a compound name is capitalized
             name = name.split(/[\s-]/).map(part => capitalizeFirstLetter(part)).join('-');
-            
-            
+
+
             return name;
         }
     }
-    
+
     // Character-based Markov Chain for name generation
     class CharacterMarkov {
         constructor(text, order = 2) {
             this.order = order;
             this.model = {};
             this.startSequences = [];
-            
+
             this.buildModel(text);
         }
-        
+
         buildModel(text) {
             // Extract words from text, we'll use these as the basis for character-based generation
             const words = text
                 .replace(/[^\w\s-]/g, '')
                 .split(/\s+/)
                 .filter(word => word.length >= this.order);
-            
-            
+
+
             // Process each word
             words.forEach(word => {
                 // Save beginning sequences
                 const startSeq = word.substring(0, this.order);
                 this.startSequences.push(startSeq);
-                
+
                 // Build character transitions
                 for (let i = 0; i <= word.length - this.order; i++) {
                     const sequence = word.substring(i, i + this.order);
                     const nextChar = word[i + this.order];
-                    
+
                     if (!nextChar) continue;
-                    
+
                     if (!this.model[sequence]) {
                         this.model[sequence] = [];
                     }
-                    
+
                     this.model[sequence].push(nextChar);
                 }
-                
+
                 // Add end-of-word marker for more natural endings
                 const endSeq = word.substring(word.length - this.order);
                 if (!this.model[endSeq]) {
@@ -700,32 +716,32 @@
                 }
                 this.model[endSeq].push('$END');
             });
-            
+
         }
-        
+
         generateName(minChars = 4, maxChars = 12) {
             if (this.startSequences.length === 0) {
                 return "Error";
             }
-            
+
             // Start with a random starting sequence
             const currentSequence = this.startSequences[Math.floor(Math.random() * this.startSequences.length)];
             let result = currentSequence;
-            
+
             // Generate characters until we reach the max length or natural ending
             while (result.length < maxChars) {
                 const currentState = result.substring(result.length - this.order);
-                
+
                 // If we don't have this sequence in our model or reached min length with ending, break
-                if (!this.model[currentState] || this.model[currentState].length === 0 || 
+                if (!this.model[currentState] || this.model[currentState].length === 0 ||
                     (result.length >= minChars && Math.random() > 0.7)) {
                     break;
                 }
-                
+
                 // Get a random next character based on current sequence
                 const nextChars = this.model[currentState];
                 const nextChar = nextChars[Math.floor(Math.random() * nextChars.length)];
-                
+
                 // Check if we reached a natural end
                 if (nextChar === '$END') {
                     if (result.length >= minChars) {
@@ -735,10 +751,10 @@
                         continue;
                     }
                 }
-                
+
                 result += nextChar;
             }
-            
+
             // Ensure the name has the specified minimum length
             if (result.length < minChars) {
                 // Add random characters from the model to reach minimum length
@@ -747,133 +763,129 @@
                     result += randomChar.charAt(0);
                 }
             }
-            
+
             // Ensure first letter is capitalized
             result = capitalizeFirstLetter(result);
-            
-            
+
+
             return result;
         }
     }
-    
-    // Log when the plugin command is registered
-    
-    // Register plugin command for normal text generation
-// Register plugin command for normal text generation
-PluginManager.registerCommand(pluginName, "generateText", function(args) {
-    const evId = this._eventId;
-    if (evId) {
-      const ev = $gameMap.event(evId);
-      if (ev) ev.turnTowardPlayer();
-    }
-    // 2) pause this event until the dialog finishes
-    this.setWaitMode('message');
-    
-    const databaseId = args.databaseId;
-    const chainOrder = Number(args.chainOrder || defaultChainOrder);
-    const minLength = Number(args.minLength || defaultMinLength);
-    const maxLength = Number(args.maxLength || defaultMaxLength);
-    const faceIndex = Number(args.faceIndex || -1);
-    const faceName = args.faceName || "";
-    const background = Number(args.background || 0);
-    const position = Number(args.position || 2);
-    
-    
-    // Find the database (now supports comma-separated IDs and "all")
-    let database;
-    try {
-        database = getTextDB(databaseId);
-    } catch (error) {
-        
-        // Show an error message in-game
-        $gameMessage.add(`[ERROR] ${error.message.split('] ')[1]}`);
-        $gameMessage.add("Please check plugin parameters.");
-        return;
-    }
-    
 
-    const selectedLanguage = ConfigManager.language === 'it' ? database.it : database.en;
-    
-    // Get or build the Markov model (use the full databaseId as key for proper caching)
-    const modelKey = `${database.id}_${chainOrder}`;
-    if (!markovModels[modelKey]) {
-        markovModels[modelKey] = new MarkovChain(selectedLanguage, chainOrder);
-    } 
-    
-    // Generate text
-    const generatedText = markovModels[modelKey].generateText(minLength, maxLength);
-    
-    // Split the text into lines if it contains line breaks
-    const textLines = generatedText.split('\n');
-    
-    // Show text in a message box
-    const messageOptions = {
-        faceName: faceName,
-        faceIndex: faceIndex,
-        background: background,
-        positionType: position
-    };
-    
-    
-    $gameMessage.setFaceImage(messageOptions.faceName, messageOptions.faceIndex);
-    $gameMessage.setBackground(messageOptions.background);
-    $gameMessage.setPositionType(messageOptions.positionType);
-    
-    // Add each line separately to ensure proper display
-    window.skipLocalization = true;
-    textLines.forEach(line => {
-        $gameMessage.add(line);
+    // Log when the plugin command is registered
+
+    // Register plugin command for normal text generation
+    // Register plugin command for normal text generation
+    PluginManager.registerCommand(pluginName, "generateText", function (args) {
+        const evId = this._eventId;
+        if (evId) {
+            const ev = $gameMap.event(evId);
+            if (ev) ev.turnTowardPlayer();
+        }
+        // 2) pause this event until the dialog finishes
+        this.setWaitMode('message');
+
+        const databaseId = args.databaseId;
+        const chainOrder = Number(args.chainOrder || defaultChainOrder);
+        const minLength = Number(args.minLength || defaultMinLength);
+        const maxLength = Number(args.maxLength || defaultMaxLength);
+        const faceIndex = Number(args.faceIndex || -1);
+        const faceName = args.faceName || "";
+        const background = Number(args.background || 0);
+        const position = Number(args.position || 2);
+
+
+        // Find the database (now supports comma-separated IDs and "all")
+        let database;
+        try {
+            database = getTextDB(databaseId);
+        } catch (error) {
+
+            // Show an error message in-game
+            $gameMessage.add(`[ERROR] ${error.message.split('] ')[1]}`);
+            $gameMessage.add("Please check plugin parameters.");
+            return;
+        }
+
+
+        const selectedLanguage = ConfigManager.language === 'it' ? database.it : database.en;
+
+        // Get or build the Markov model (use the full databaseId as key for proper caching)
+        const modelKey = `${database.id}_${chainOrder}`;
+        if (!markovModels[modelKey]) {
+            markovModels[modelKey] = new MarkovChain(selectedLanguage, chainOrder);
+        }
+
+        // Generate text
+        const generatedText = markovModels[modelKey].generateText(minLength, maxLength);
+
+        // Split the text into lines if it contains line breaks
+        const textLines = generatedText.split('\n');
+
+        // Show text in a message box
+        const messageOptions = {
+            faceName: faceName,
+            faceIndex: faceIndex,
+            background: background,
+            positionType: position
+        };
+
+
+        $gameMessage.setFaceImage(messageOptions.faceName, messageOptions.faceIndex);
+        $gameMessage.setBackground(messageOptions.background);
+        $gameMessage.setPositionType(messageOptions.positionType);
+
+        // Add each line separately to ensure proper display
+        window.skipLocalization = true;
+        textLines.forEach(line => {
+            $gameMessage.add(line);
+        });
+        window.skipLocalization = false;
     });
-    window.skipLocalization = false;
-    
-});
+
     function getTextDB(id) {
-        if (id === "all") {
+        const dbs = getAllTextDatabases();
+        const searchId = id.toLowerCase();
+
+        if (searchId === "all") {
             // Combine all databases into one
-            const combinedText = {
+            return {
                 id: "all",
                 name: "All Databases Combined",
-                en: textDatabases.map(db => db.en).join(' '),
-                it: textDatabases.map(db => db.it).join(' ')
+                en: dbs.map(db => db.en).join(' '),
+                it: dbs.map(db => db.it).join(' ')
             };
-            return combinedText;
         }
-        
+
         // Check if multiple database IDs are provided (comma-separated)
         if (id.includes(',')) {
-            const databaseIds = id.split(',').map(dbId => dbId.trim());
-            
+            const databaseIds = id.split(',').map(dbId => dbId.trim().toLowerCase());
             const foundDatabases = [];
             const missingDatabases = [];
-            
-            // Find all requested databases
+
             databaseIds.forEach(dbId => {
-                const db = textDatabases.find(d => d.id === dbId);
+                const db = dbs.find(d => d.id && d.id.toLowerCase() === dbId);
                 if (db) {
                     foundDatabases.push(db);
                 } else {
                     missingDatabases.push(dbId);
                 }
             });
-            
-            // If any databases are missing, throw an error
+
             if (missingDatabases.length > 0) {
                 throw new Error(`[${pluginName}] Text DB(s) "${missingDatabases.join(', ')}" not found`);
             }
-            
-            // Combine all found databases
-            const combinedText = {
-                id: id, // Keep the original comma-separated ID for caching purposes
+
+            return {
+                id: id,
                 name: `Combined: ${foundDatabases.map(db => db.name).join(', ')}`,
                 en: foundDatabases.map(db => db.en).join(' '),
                 it: foundDatabases.map(db => db.it).join(' ')
             };
-            
-            return combinedText;
         }
-        
-        // Single database lookup
-        const db = textDatabases.find(d => d.id === id);
+
+        // Single database lookup (case-insensitive)
+        const db = dbs.find(d => d.id && d.id.toLowerCase() === searchId);
         if (!db) {
             throw new Error(`[${pluginName}] Text DB "${id}" not found`);
         }
@@ -897,8 +909,8 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
 
         const texts = databases.map(db =>
             (language === 'it' ? db.it : db.en)
-            .split(/\s+/)
-            .filter(word => word.length > 0)
+                .split(/\s+/)
+                .filter(word => word.length > 0)
         );
 
         // Calculate how many words to take from each database per cycle
@@ -937,7 +949,7 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
     }
 
     // Register plugin command for seeded dialogue generation
-    PluginManager.registerCommand(pluginName, "generateSeededDialogue", function(args) {
+    PluginManager.registerCommand(pluginName, "generateSeededDialogue", function (args) {
         const currentMapId = $gameMap.mapId();
 
         const evId = this._eventId;
@@ -969,18 +981,19 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
 
         // Select databases based on seed
         const selectedDatabases = [];
-        if (textDatabases.length === 0) {
+        const dbs = getAllTextDatabases();
+        if (dbs.length === 0) {
             $gameMessage.add("[ERROR] No dialogue databases available!");
             return;
         }
 
         // Use seeded random to select unique databases
-        const availableIndices = Array.from({ length: textDatabases.length }, (_, i) => i);
-        for (let i = 0; i < Math.min(dbCount, textDatabases.length); i++) {
+        const availableIndices = Array.from({ length: dbs.length }, (_, i) => i);
+        for (let i = 0; i < Math.min(dbCount, dbs.length); i++) {
             const rng = seededRandom(seed + i * 1000);
             const randomIdx = Math.floor(rng * availableIndices.length);
             const dbIndex = availableIndices[randomIdx];
-            selectedDatabases.push(textDatabases[dbIndex]);
+            selectedDatabases.push(dbs[dbIndex]);
             availableIndices.splice(randomIdx, 1);
         }
 
@@ -1024,7 +1037,7 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
 
     // Register plugin command for name generation
     PluginManager.registerCommand(pluginName, "generateName", args => {
-        
+
         const databaseId = args.databaseId;
         const chainOrder = Number(args.chainOrder || 2);
         const minChars = Number(args.minChars || defaultMinChars);
@@ -1032,13 +1045,14 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
         const useWordMode = args.useWordMode === "true";
         const variableId = Number(args.variableId || 0);
         const displayInMessage = args.displayInMessage === "true";
-        
-        
+
+
         // Find the database
-        const database = textDatabases.find(db => db.id === databaseId);
-        
+        const dbs = getAllTextDatabases();
+        const database = dbs.find(db => db.id && db.id.toLowerCase() === databaseId.toLowerCase());
+
         if (!database) {
-            
+
             // Show an error message in-game
             if (displayInMessage) {
                 $gameMessage.add(`[ERROR] Text database "${databaseId}" not found.`);
@@ -1046,17 +1060,17 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
             }
             return;
         }
-        
-        
+
+
         let generatedName = "";
-        
+
         if (useWordMode) {
             // Use word-based mode (for compound names)
             const modelKey = `${databaseId}_${chainOrder}`;
             if (!markovModels[modelKey]) {
                 markovModels[modelKey] = new MarkovChain(database.en, chainOrder);
             }
-            
+
             // Generate name using word-based mode
             generatedName = markovModels[modelKey].generateWordBasedName(minChars, maxChars);
         } else {
@@ -1065,39 +1079,39 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
             if (!characterMarkovModels[modelKey]) {
                 characterMarkovModels[modelKey] = new CharacterMarkov(database.en, chainOrder);
             }
-            
+
             // Generate name using character-based mode
             generatedName = characterMarkovModels[modelKey].generateName(minChars, maxChars);
         }
-        
+
         // Ensure first letter is capitalized
         generatedName = capitalizeFirstLetter(generatedName);
-        
-        
+
+
         // Store in game variable if a variable ID was provided
         if (variableId > 0) {
             $gameVariables.setValue(variableId, generatedName);
         }
-        
+
         // Set actor name if an actor ID was provided
         const actorId = Number(args.actorId || 0);
         if (actorId > 0) {
             const actor = $gameActors.actor(actorId);
             if (actor) {
                 actor.setName(generatedName);
-            } 
+            }
         }
-        
+
         // Display in message window if requested
         if (displayInMessage) {
             $gameMessage.add(generatedName);
         }
     });
-    
+
     // Log when the plugin is fully loaded
 
     if (typeof window.generateMarkovString === 'undefined') {
-        window.generateMarkovString = function(databaseId, options = {}) {
+        window.generateMarkovString = function (databaseId, options = {}) {
 
             // Set default options
             const chainOrder = Number(options.chainOrder || defaultChainOrder);
@@ -1138,7 +1152,7 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
 
     // Generate seeded names for procedural map NPCs
     if (typeof window.generateSeededMarkovName === 'undefined') {
-        window.generateSeededMarkovName = function(worldX, worldY, eventId, databaseId, chainOrder = 2, minChars = 4, maxChars = 12) {
+        window.generateSeededMarkovName = function (worldX, worldY, eventId, databaseId, chainOrder = 2, minChars = 4, maxChars = 12) {
             // Create deterministic seed from world coordinates and event ID
             const seed = (worldX * 73856093) ^ (worldY * 19349663) ^ (eventId * 83492791);
 
@@ -1226,6 +1240,4 @@ PluginManager.registerCommand(pluginName, "generateText", function(args) {
             return capitalizeFirstLetter(result);
         };
     }
-
-
 })();

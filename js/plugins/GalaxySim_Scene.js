@@ -13,7 +13,7 @@
  * LOAD ORDER: Must load AFTER all other GalaxySim modules
  *
  * DEPENDENCIES:
- * - GalaxySimDB.js
+ * - DataManager.js
  * - GalaxySim_Math.js
  * - GalaxySim_DataManager.js
  * - GalaxySim_Renderer_Planets.js
@@ -38,39 +38,39 @@
   // ============================================================================
 
   const { Vector2, Camera, RandomGenerator, COLORS, STAR_COLORS, PLANET_COLORS,
-          ORBIT_ZOOM_THRESHOLD, ORBIT_FULL_ALPHA_ZOOM,
-          PLANET_DETAIL_THRESHOLD, PLANET_FULL_DETAIL_ZOOM,
-          PLANET_MIN_SIZE, PLANET_MAX_SIZE, ECCENTRIC_ORBIT_TYPES,
-          SCALE_SYSTEM, SCALE_GALAXY, SCALE_LOCAL_GROUP, SCALE_SUPERCLUSTER,
-          SCALE_FILAMENTS, SCALE_OBSERVABLE, SCALE_UNIVERSE_SPHERE,
-          SCALE_THRESHOLDS, LY_TO_KLY, LY_TO_MLY, LY_TO_GLY,
-          KLY_TO_LY, MLY_TO_LY, GLY_TO_LY, MAP_RADIUS, SYSTEM_DENSITY,
-          GALAXY_TYPE_SPIRAL, GALAXY_TYPE_BARRED_SPIRAL, GALAXY_TYPE_ELLIPTICAL,
-          GALAXY_TYPE_IRREGULAR, GALAXY_TYPE_DWARF, GALAXY_TYPE_DWARF_SPHEROIDAL } = window.GalaxySim.Math;
+    ORBIT_ZOOM_THRESHOLD, ORBIT_FULL_ALPHA_ZOOM,
+    PLANET_DETAIL_THRESHOLD, PLANET_FULL_DETAIL_ZOOM,
+    PLANET_MIN_SIZE, PLANET_MAX_SIZE, ECCENTRIC_ORBIT_TYPES,
+    SCALE_SYSTEM, SCALE_GALAXY, SCALE_LOCAL_GROUP, SCALE_SUPERCLUSTER,
+    SCALE_FILAMENTS, SCALE_OBSERVABLE, SCALE_UNIVERSE_SPHERE,
+    SCALE_THRESHOLDS, LY_TO_KLY, LY_TO_MLY, LY_TO_GLY,
+    KLY_TO_LY, MLY_TO_LY, GLY_TO_LY, MAP_RADIUS, SYSTEM_DENSITY,
+    GALAXY_TYPE_SPIRAL, GALAXY_TYPE_BARRED_SPIRAL, GALAXY_TYPE_ELLIPTICAL,
+    GALAXY_TYPE_IRREGULAR, GALAXY_TYPE_DWARF, GALAXY_TYPE_DWARF_SPHEROIDAL } = window.GalaxySim.Math;
 
   const StarMapDataManager = window.GalaxySim.DataManager;
   const { PlanetRenderer } = window.GalaxySim.Renderers;
   const { Particle, generateStarfield, drawStarfield, drawGrid, drawScanLines, drawGlow, drawConnectionLine } = window.GalaxySim.Renderers.Effects;
   const { generateRealisticStarName, generateBlackHoleName, determineBlackHoleType } = window.GalaxySim.Renderers.Stars;
   const { LANIAKEA_SUPERCLUSTERS, GREAT_ATTRACTOR_COORDS, OBSERVABLE_UNIVERSE_RADIUS,
-          UNIVERSE_SPHERE_RADIUS, isInGreatAttractor, getGalaxyMorphologyColor } = window.GalaxySim.Renderers.Cosmology;
+    UNIVERSE_SPHERE_RADIUS, isInGreatAttractor, getGalaxyMorphologyColor } = window.GalaxySim.Renderers.Cosmology;
 
   // Import name generators from DataManager
   const { generateProceduralGalaxyName, generateProceduralSuperclusterName,
-          generateGalaxyGroupName, generateSuperclusterName, generateProceduralLocalGroup } = window.GalaxySim.NameGenerators;
+    generateGalaxyGroupName, generateSuperclusterName, generateProceduralLocalGroup } = window.GalaxySim.NameGenerators;
 
-  // Import data from GalaxyData (GalaxySimDB.js)
-  const STAR_TYPES = window.GalaxyData?.STAR_TYPES || {};
-  const PLANET_TYPES = window.GalaxyData?.PLANET_TYPES || {};
-  const SYSTEMS = window.GalaxyData?.SYSTEMS || {};
-  const SUPERCLUSTERS = window.GalaxyData?.SUPERCLUSTERS || [];
-  const LOCAL_GROUP_GALAXIES = window.GalaxyData?.LOCAL_GROUP_GALAXIES || {};
+  // Import data from GalaxyData (DataManager.js)
+  const STAR_TYPES = window.GalaxySim?.StarTypes || {};
+  const PLANET_TYPES = window.GalaxySim?.PlanetTypes || {};
+  const SYSTEMS = window.GalaxySim?.Systems || {};
+  const SUPERCLUSTERS = window.GalaxySim?.Superclusters || [];
+  const LOCAL_GROUP_GALAXIES = window.GalaxySim?.LocalGroupGalaxies || {};
 
   // ============================================================================
   // Scene_AdvancedStarMap Class
   // ============================================================================
 
-class Scene_AdvancedStarMap extends Scene_Base {
+  class Scene_AdvancedStarMap extends Scene_Base {
     create() {
       super.create();
       this.createCanvas();
@@ -153,8 +153,8 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
       // Check if ship is orbiting a planet
       const isOrbiting = $gameSystem.starMapData &&
-                        $gameSystem.starMapData.playerShip &&
-                        $gameSystem.starMapData.playerShip.currentPlanet;
+        $gameSystem.starMapData.playerShip &&
+        $gameSystem.starMapData.playerShip.currentPlanet;
 
       if (!isOrbiting) {
         this.landToPlanetButton = null;
@@ -1653,7 +1653,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
       // Skip if off-screen
       if (screen.x < -clusterSize || screen.x > width + clusterSize ||
-          screen.y < -clusterSize || screen.y > height + clusterSize) {
+        screen.y < -clusterSize || screen.y > height + clusterSize) {
         return;
       }
 
@@ -1705,7 +1705,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
       // Skip if off-screen
       if (screenPos.x < -screenRadius || screenPos.x > width + screenRadius ||
-          screenPos.y < -screenRadius || screenPos.y > height + screenRadius) {
+        screenPos.y < -screenRadius || screenPos.y > height + screenRadius) {
         return;
       }
 
@@ -2277,7 +2277,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
         for (const galaxy of this.proceduralLocalGroup) {
           // Cull off-screen galaxies
           if (galaxy.x < topLeft.x - padding || galaxy.x > bottomRight.x + padding ||
-              galaxy.y < topLeft.y - padding || galaxy.y > bottomRight.y + padding) {
+            galaxy.y < topLeft.y - padding || galaxy.y > bottomRight.y + padding) {
             continue;
           }
 
@@ -2308,7 +2308,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
           // Cull off-screen galaxies
           if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-              y < topLeft.y - padding || y > bottomRight.y + padding) {
+            y < topLeft.y - padding || y > bottomRight.y + padding) {
             continue;
           }
 
@@ -2333,7 +2333,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
           // Cull off-screen galaxies
           if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-              y < topLeft.y - padding || y > bottomRight.y + padding) {
+            y < topLeft.y - padding || y > bottomRight.y + padding) {
             continue;
           }
 
@@ -2391,7 +2391,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
         // Cull off-screen
         if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-            y < topLeft.y - padding || y > bottomRight.y + padding) {
+          y < topLeft.y - padding || y > bottomRight.y + padding) {
           continue;
         }
 
@@ -2418,7 +2418,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
         // Skip entire cluster if off-screen
         if (clusterX < topLeft.x - padding || clusterX > bottomRight.x + padding ||
-            clusterY < topLeft.y - padding || clusterY > bottomRight.y + padding) {
+          clusterY < topLeft.y - padding || clusterY > bottomRight.y + padding) {
           continue;
         }
 
@@ -2435,7 +2435,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
           // Cull individual galaxies
           if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-              y < topLeft.y - padding || y > bottomRight.y + padding) {
+            y < topLeft.y - padding || y > bottomRight.y + padding) {
             continue;
           }
 
@@ -2496,7 +2496,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
       // Draw Great Attractor anomalous region
       if (GREAT_ATTRACTOR_X >= topLeft.x - padding && GREAT_ATTRACTOR_X <= bottomRight.x + padding &&
-          GREAT_ATTRACTOR_Y >= topLeft.y - padding && GREAT_ATTRACTOR_Y <= bottomRight.y + padding) {
+        GREAT_ATTRACTOR_Y >= topLeft.y - padding && GREAT_ATTRACTOR_Y <= bottomRight.y + padding) {
 
         // OPTIMIZATION: Adaptive galaxy count based on zoom level
         let galaxiesInAttractor = 40;
@@ -2520,7 +2520,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
           // OPTIMIZATION: Aggressive culling before processing
           if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-              y < topLeft.y - padding || y > bottomRight.y + padding) {
+            y < topLeft.y - padding || y > bottomRight.y + padding) {
             continue;
           }
 
@@ -2632,7 +2632,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
         // Cull off-screen
         if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-            y < topLeft.y - padding || y > bottomRight.y + padding) {
+          y < topLeft.y - padding || y > bottomRight.y + padding) {
           continue;
         }
 
@@ -2662,7 +2662,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
         // Skip cluster if off-screen
         if (clusterX < topLeft.x - padding || clusterX > bottomRight.x + padding ||
-            clusterY < topLeft.y - padding || clusterY > bottomRight.y + padding) {
+          clusterY < topLeft.y - padding || clusterY > bottomRight.y + padding) {
           continue;
         }
 
@@ -2679,7 +2679,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
           // Cull off-screen galaxies
           if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-              y < topLeft.y - padding || y > bottomRight.y + padding) {
+            y < topLeft.y - padding || y > bottomRight.y + padding) {
             continue;
           }
 
@@ -2796,7 +2796,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
       let nodeConnections = null;
       if (this.cosmicWebNodeConnectionsCache && this.lastCameraState) {
         const cameraMovement = Math.abs(this.camera.position.x - this.lastCameraState.x) +
-                               Math.abs(this.camera.position.y - this.lastCameraState.y);
+          Math.abs(this.camera.position.y - this.lastCameraState.y);
         if (cameraMovement < 1000 * MLY_TO_LY) { // Only recalculate if camera moved significantly
           nodeConnections = this.cosmicWebNodeConnectionsCache;
         }
@@ -2856,9 +2856,9 @@ class Scene_AdvancedStarMap extends Scene_Base {
           const endScreen = this.camera.worldToScreen(targetNode.x, targetNode.y, width, height);
 
           if ((startScreen.x < -100 && endScreen.x < -100) ||
-              (startScreen.x > width + 100 && endScreen.x > width + 100) ||
-              (startScreen.y < -100 && endScreen.y < -100) ||
-              (startScreen.y > height + 100 && endScreen.y > height + 100)) {
+            (startScreen.x > width + 100 && endScreen.x > width + 100) ||
+            (startScreen.y < -100 && endScreen.y < -100) ||
+            (startScreen.y > height + 100 && endScreen.y > height + 100)) {
             continue;
           }
 
@@ -2953,7 +2953,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
         // Skip if off-screen
         if (node.x < topLeft.x - padding || node.x > bottomRight.x + padding ||
-            node.y < topLeft.y - padding || node.y > bottomRight.y + padding) {
+          node.y < topLeft.y - padding || node.y > bottomRight.y + padding) {
           continue;
         }
 
@@ -2971,7 +2971,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
           // Cull off-screen
           if (x < topLeft.x - padding || x > bottomRight.x + padding ||
-              y < topLeft.y - padding || y > bottomRight.y + padding) {
+            y < topLeft.y - padding || y > bottomRight.y + padding) {
             continue;
           }
 
@@ -3007,7 +3007,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
         // Skip if off-screen
         if (node.x < topLeft.x - padding || node.x > bottomRight.x + padding ||
-            node.y < topLeft.y - padding || node.y > bottomRight.y + padding) {
+          node.y < topLeft.y - padding || node.y > bottomRight.y + padding) {
           continue;
         }
 
@@ -3523,7 +3523,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
         // VIEWPORT CULLING: Skip shapes completely off-screen
         const estimatedSize = Math.max(200, (progress * 0.5 + 0.2) * 100);
         if (shapeX < cullMinX || shapeX > cullMaxX ||
-            shapeY < cullMinY || shapeY > cullMaxY) {
+          shapeY < cullMinY || shapeY > cullMaxY) {
           continue; // Skip this shape entirely if off-screen
         }
 
@@ -3806,7 +3806,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
       // Don't render if too small or off-screen
       if (eventHorizonRadius < 3) return;
       if (screen.x < -eventHorizonRadius || screen.x > width + eventHorizonRadius ||
-          screen.y < -eventHorizonRadius || screen.y > height + eventHorizonRadius) {
+        screen.y < -eventHorizonRadius || screen.y > height + eventHorizonRadius) {
         return;
       }
 
@@ -4082,7 +4082,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
       // Don't render if too far off screen
       const screenRadius = LOOP_RADIUS * this.camera.zoom;
       if (loopScreenPos.x < -screenRadius * 2 || loopScreenPos.x > width + screenRadius * 2 ||
-          loopScreenPos.y < -screenRadius * 2 || loopScreenPos.y > height + screenRadius * 2) {
+        loopScreenPos.y < -screenRadius * 2 || loopScreenPos.y > height + screenRadius * 2) {
         return;
       }
 
@@ -4250,7 +4250,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
         const screenRadius = nebulaSize * this.camera.zoom;
 
         return !(screenPos.x < -screenRadius * 2 || screenPos.x > width + screenRadius * 2 ||
-                 screenPos.y < -screenRadius * 2 || screenPos.y > height + screenRadius * 2);
+          screenPos.y < -screenRadius * 2 || screenPos.y > height + screenRadius * 2);
       };
 
       // Helper function to draw nebula label
@@ -4316,7 +4316,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
           for (let i = 0; i <= numPoints; i++) {
             const angle = (i / numPoints) * Math.PI * 2;
             const turbulence = Math.sin(angle * 3 + time * 0.5 + layer * 0.4) * 0.3 +
-                               Math.sin(angle * 5 - time * 0.3 + layer * 0.2) * 0.2;
+              Math.sin(angle * 5 - time * 0.3 + layer * 0.2) * 0.2;
             const r = radius * (1.0 + turbulence);
             const x = orionScreenPos.x + Math.cos(angle) * r;
             const y = orionScreenPos.y + Math.sin(angle) * r;
@@ -4453,7 +4453,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
           for (let i = 0; i <= numPoints; i++) {
             const angle = (i / numPoints) * Math.PI * 2;
             const turbulence = Math.sin(angle * 4 + time * 0.2 + layer * 0.3) * 0.4 +
-                               Math.sin(angle * 7 - time * 0.15 + layer * 0.5) * 0.3;
+              Math.sin(angle * 7 - time * 0.15 + layer * 0.5) * 0.3;
             const r = radius * (1.0 + turbulence);
             const x = coalsackScreenPos.x + Math.cos(angle) * r;
             const y = coalsackScreenPos.y + Math.sin(angle) * r;
@@ -4928,7 +4928,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
             Math.min(
               1,
               (this.camera.zoom - dynamicOrbitThreshold) /
-                (dynamicFullAlphaZoom - dynamicOrbitThreshold)
+              (dynamicFullAlphaZoom - dynamicOrbitThreshold)
             )
           );
           ctx.globalAlpha = 1.0 - fadeProgress;
@@ -5290,7 +5290,7 @@ class Scene_AdvancedStarMap extends Scene_Base {
       // Don't render if too small or off-screen
       if (eventHorizonRadius < 5) return;
       if (screen.x < -eventHorizonRadius || screen.x > width + eventHorizonRadius ||
-          screen.y < -eventHorizonRadius || screen.y > height + eventHorizonRadius) {
+        screen.y < -eventHorizonRadius || screen.y > height + eventHorizonRadius) {
         return;
       }
 
@@ -5562,12 +5562,12 @@ class Scene_AdvancedStarMap extends Scene_Base {
         this.camera.zoom < ORBIT_ZOOM_THRESHOLD
           ? 0.3 // Minimum alpha when zoomed out but selected
           : Math.min(
-              1,
-              0.3 +
-                ((this.camera.zoom - ORBIT_ZOOM_THRESHOLD) /
-                  (ORBIT_FULL_ALPHA_ZOOM - ORBIT_ZOOM_THRESHOLD)) *
-                  0.7
-            );
+            1,
+            0.3 +
+            ((this.camera.zoom - ORBIT_ZOOM_THRESHOLD) /
+              (ORBIT_FULL_ALPHA_ZOOM - ORBIT_ZOOM_THRESHOLD)) *
+            0.7
+          );
 
       const screen = this.camera.worldToScreen(
         system.position.x,
@@ -5727,213 +5727,213 @@ class Scene_AdvancedStarMap extends Scene_Base {
 
             // Draw selection/hover highlight
             if (isPlanetSelected || isPlanetHovered) {
-            const highlightSize = planetSize + 8 + Math.sin(this.time * 3) * 2;
-            const highlightColor = isPlanetSelected
-              ? COLORS.selection
-              : COLORS.textHighlight;
+              const highlightSize = planetSize + 8 + Math.sin(this.time * 3) * 2;
+              const highlightColor = isPlanetSelected
+                ? COLORS.selection
+                : COLORS.textHighlight;
 
-            // Outer glow ring
-            ctx.strokeStyle = highlightColor;
-            ctx.lineWidth = 2;
-            ctx.globalAlpha = 0.8;
-            ctx.beginPath();
-            ctx.arc(planetX, planetY, highlightSize, 0, Math.PI * 2);
-            ctx.stroke();
-
-            // Inner glow
-            const glowGradient = ctx.createRadialGradient(
-              planetX,
-              planetY,
-              planetSize,
-              planetX,
-              planetY,
-              highlightSize
-            );
-            glowGradient.addColorStop(0, `${highlightColor}00`);
-            glowGradient.addColorStop(1, `${highlightColor}40`);
-            ctx.fillStyle = glowGradient;
-            ctx.beginPath();
-            ctx.arc(planetX, planetY, highlightSize, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.globalAlpha = fadeProgress;
-          }
-
-          // Check if this is a comet for trail rendering
-          const isComet =
-            planet.type === "comet" ||
-            planet.type === "short_period_comet" ||
-            planet.type === "long_period_comet";
-
-          // Draw comet trail BEFORE the comet body (so body renders on top)
-          if (isComet && planetSize >= PLANET_MIN_SIZE && this.camera.zoom > PLANET_DETAIL_THRESHOLD) {
-            ctx.save();
-            this.planetRenderer.drawCometTrail(
-              ctx,
-              planetX,
-              planetY,
-              planetSize,
-              screen.x,
-              screen.y,
-              planet.type,
-              planet,
-              this.time
-            );
-            ctx.restore();
-          }
-
-          // Use procedural planet rendering only when really close and large enough
-          if (
-            planetSize >= PLANET_MIN_SIZE &&
-            this.camera.zoom > PLANET_DETAIL_THRESHOLD
-          ) {
-            const seed = planet.name
-              .split("")
-              .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-            this.planetRenderer.drawPlanet(
-              ctx,
-              planetX,
-              planetY,
-              planetSize,
-              planet,
-              seed
-            );
-          } else {
-            // Simple dot rendering for distant planets with subtle glow
-            const dotSize = Math.max(1.5, planetSize);
-            const glowGradient = ctx.createRadialGradient(
-              planetX,
-              planetY,
-              0,
-              planetX,
-              planetY,
-              dotSize * 2
-            );
-            // Convert numeric color to hex string if needed
-            const colorStr = typeof planet.color === 'number'
-              ? '#' + planet.color.toString(16).padStart(6, '0')
-              : planet.color;
-            const baseColor = this.planetRenderer.hexToRgb(planet.color);
-            glowGradient.addColorStop(0, colorStr);
-            glowGradient.addColorStop(0.5, colorStr);
-            glowGradient.addColorStop(
-              1,
-              `rgba(${baseColor.r}, ${baseColor.g}, ${baseColor.b}, 0)`
-            );
-
-            ctx.fillStyle = glowGradient;
-            ctx.beginPath();
-            ctx.arc(planetX, planetY, dotSize * 2, 0, Math.PI * 2);
-            ctx.fill();
-          }
-
-          // MODIFICATION: Always show label with type
-          ctx.font = "10px monospace";
-          ctx.fillStyle = COLORS.orbitLabel;
-          ctx.textAlign = "center";
-          // Use the same fadeProgress as the planet dot, but slightly dimmer
-          ctx.globalAlpha = fadeProgress * 0.8;
-
-          const planetName = planet.name.split(" ").pop();
-          const planetType = planet.type.replace(/_/g, " ");
-          // Capitalize first letter
-          const simpleType =
-            planetType.charAt(0).toUpperCase() + planetType.slice(1);
-          const labelText = `${planetName} (${simpleType})`;
-
-          ctx.fillText(labelText, planetX, planetY - planetSize - 8);
-
-          // --- START NEW: Draw moons in Galaxy View ---
-          // Show moons when zoomed in enough AND when planet is selected
-          const showMoons = this.camera.zoom > ORBIT_FULL_ALPHA_ZOOM; // Start at 10x zoom
-
-          // Use isPlanetSelected already declared above (line 2566)
-          if (
-            showMoons &&
-            isPlanetSelected &&
-            planet.moons &&
-            planet.moons.length > 0
-          ) {
-            const numMoons = planet.moons.length;
-
-            planet.moons.forEach((moon, moonIndex) => {
-              // Space moons evenly around the planet to avoid overlap
-              // Base orbit radius increases for each moon
-              const baseOrbitSpacing = planetSize * 1.5; // Start 1.5x planet radius away
-              const orbitSpacing = planetSize * 0.8; // Add 0.8x planet radius for each moon
-              const finalMoonOrbitRadius =
-                baseOrbitSpacing + moonIndex * orbitSpacing;
-
-              // 1. Draw moon orbit (only if planet is selected)
-              ctx.strokeStyle = COLORS.orbit;
-              ctx.lineWidth = 1;
-              ctx.globalAlpha = baseAlpha * 0.5; // More visible when planet selected
-              ctx.setLineDash([2, 2]);
+              // Outer glow ring
+              ctx.strokeStyle = highlightColor;
+              ctx.lineWidth = 2;
+              ctx.globalAlpha = 0.8;
               ctx.beginPath();
-              ctx.arc(planetX, planetY, finalMoonOrbitRadius, 0, Math.PI * 2);
+              ctx.arc(planetX, planetY, highlightSize, 0, Math.PI * 2);
               ctx.stroke();
-              ctx.setLineDash([]);
 
-              // 2. Draw moon dot
-              // Distribute moons evenly around the orbit based on their index
-              const angleOffset = (moonIndex / numMoons) * (Math.PI * 2);
-              const moonAngle = moon.phase + angleOffset + this.time * 0.2;
-              const moonX =
-                planetX + Math.cos(moonAngle) * finalMoonOrbitRadius;
-              const moonY =
-                planetY + Math.sin(moonAngle) * finalMoonOrbitRadius;
-
-              const moonSize = Math.max(1.5, planetSize * 0.2); // Moons are ~1/5 size of planet
-
-              // Check if this moon is selected
-              const isMoonSelected =
-                this.selectedMoon && this.selectedMoon.name === moon.name;
-
-              // Store clickable area for moon interaction
-              moon._screenPos = {
-                x: moonX,
-                y: moonY,
-                radius: Math.max(moonSize * 2, 8), // Make clickable area a bit larger
-                worldX:
-                  (moonX - width / 2) / this.camera.zoom +
-                  this.camera.position.x,
-                worldY:
-                  (moonY - height / 2) / this.camera.zoom +
-                  this.camera.position.y,
-              };
-
-              // Draw selection ring for selected moon
-              if (isMoonSelected) {
-                ctx.globalAlpha = fadeProgress;
-                ctx.strokeStyle = COLORS.selection;
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.arc(moonX, moonY, moonSize + 3, 0, Math.PI * 2);
-                ctx.stroke();
-              }
-
-              ctx.globalAlpha = fadeProgress * 0.9;
-              ctx.fillStyle = moon.color || "#cccccc";
+              // Inner glow
+              const glowGradient = ctx.createRadialGradient(
+                planetX,
+                planetY,
+                planetSize,
+                planetX,
+                planetY,
+                highlightSize
+              );
+              glowGradient.addColorStop(0, `${highlightColor}00`);
+              glowGradient.addColorStop(1, `${highlightColor}40`);
+              ctx.fillStyle = glowGradient;
               ctx.beginPath();
-              ctx.arc(moonX, moonY, moonSize, 0, Math.PI * 2);
+              ctx.arc(planetX, planetY, highlightSize, 0, Math.PI * 2);
               ctx.fill();
 
-              // Draw moon name if zoomed in very close or if selected
-              if (
-                this.camera.zoom > PLANET_DETAIL_THRESHOLD * 0.5 ||
-                isMoonSelected
-              ) {
-                ctx.font = "8px monospace";
-                ctx.fillStyle = isMoonSelected
-                  ? COLORS.textHighlight
-                  : COLORS.orbitLabel;
-                ctx.textAlign = "center";
-                ctx.globalAlpha = fadeProgress * 0.7;
-                const moonName = moon.name.split(" ").pop();
-                ctx.fillText(moonName, moonX, moonY - moonSize - 4);
-              }
-            });
-          }
+              ctx.globalAlpha = fadeProgress;
+            }
+
+            // Check if this is a comet for trail rendering
+            const isComet =
+              planet.type === "comet" ||
+              planet.type === "short_period_comet" ||
+              planet.type === "long_period_comet";
+
+            // Draw comet trail BEFORE the comet body (so body renders on top)
+            if (isComet && planetSize >= PLANET_MIN_SIZE && this.camera.zoom > PLANET_DETAIL_THRESHOLD) {
+              ctx.save();
+              this.planetRenderer.drawCometTrail(
+                ctx,
+                planetX,
+                planetY,
+                planetSize,
+                screen.x,
+                screen.y,
+                planet.type,
+                planet,
+                this.time
+              );
+              ctx.restore();
+            }
+
+            // Use procedural planet rendering only when really close and large enough
+            if (
+              planetSize >= PLANET_MIN_SIZE &&
+              this.camera.zoom > PLANET_DETAIL_THRESHOLD
+            ) {
+              const seed = planet.name
+                .split("")
+                .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+              this.planetRenderer.drawPlanet(
+                ctx,
+                planetX,
+                planetY,
+                planetSize,
+                planet,
+                seed
+              );
+            } else {
+              // Simple dot rendering for distant planets with subtle glow
+              const dotSize = Math.max(1.5, planetSize);
+              const glowGradient = ctx.createRadialGradient(
+                planetX,
+                planetY,
+                0,
+                planetX,
+                planetY,
+                dotSize * 2
+              );
+              // Convert numeric color to hex string if needed
+              const colorStr = typeof planet.color === 'number'
+                ? '#' + planet.color.toString(16).padStart(6, '0')
+                : planet.color;
+              const baseColor = this.planetRenderer.hexToRgb(planet.color);
+              glowGradient.addColorStop(0, colorStr);
+              glowGradient.addColorStop(0.5, colorStr);
+              glowGradient.addColorStop(
+                1,
+                `rgba(${baseColor.r}, ${baseColor.g}, ${baseColor.b}, 0)`
+              );
+
+              ctx.fillStyle = glowGradient;
+              ctx.beginPath();
+              ctx.arc(planetX, planetY, dotSize * 2, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            // MODIFICATION: Always show label with type
+            ctx.font = "10px monospace";
+            ctx.fillStyle = COLORS.orbitLabel;
+            ctx.textAlign = "center";
+            // Use the same fadeProgress as the planet dot, but slightly dimmer
+            ctx.globalAlpha = fadeProgress * 0.8;
+
+            const planetName = planet.name.split(" ").pop();
+            const planetType = planet.type.replace(/_/g, " ");
+            // Capitalize first letter
+            const simpleType =
+              planetType.charAt(0).toUpperCase() + planetType.slice(1);
+            const labelText = `${planetName} (${simpleType})`;
+
+            ctx.fillText(labelText, planetX, planetY - planetSize - 8);
+
+            // --- START NEW: Draw moons in Galaxy View ---
+            // Show moons when zoomed in enough AND when planet is selected
+            const showMoons = this.camera.zoom > ORBIT_FULL_ALPHA_ZOOM; // Start at 10x zoom
+
+            // Use isPlanetSelected already declared above (line 2566)
+            if (
+              showMoons &&
+              isPlanetSelected &&
+              planet.moons &&
+              planet.moons.length > 0
+            ) {
+              const numMoons = planet.moons.length;
+
+              planet.moons.forEach((moon, moonIndex) => {
+                // Space moons evenly around the planet to avoid overlap
+                // Base orbit radius increases for each moon
+                const baseOrbitSpacing = planetSize * 1.5; // Start 1.5x planet radius away
+                const orbitSpacing = planetSize * 0.8; // Add 0.8x planet radius for each moon
+                const finalMoonOrbitRadius =
+                  baseOrbitSpacing + moonIndex * orbitSpacing;
+
+                // 1. Draw moon orbit (only if planet is selected)
+                ctx.strokeStyle = COLORS.orbit;
+                ctx.lineWidth = 1;
+                ctx.globalAlpha = baseAlpha * 0.5; // More visible when planet selected
+                ctx.setLineDash([2, 2]);
+                ctx.beginPath();
+                ctx.arc(planetX, planetY, finalMoonOrbitRadius, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // 2. Draw moon dot
+                // Distribute moons evenly around the orbit based on their index
+                const angleOffset = (moonIndex / numMoons) * (Math.PI * 2);
+                const moonAngle = moon.phase + angleOffset + this.time * 0.2;
+                const moonX =
+                  planetX + Math.cos(moonAngle) * finalMoonOrbitRadius;
+                const moonY =
+                  planetY + Math.sin(moonAngle) * finalMoonOrbitRadius;
+
+                const moonSize = Math.max(1.5, planetSize * 0.2); // Moons are ~1/5 size of planet
+
+                // Check if this moon is selected
+                const isMoonSelected =
+                  this.selectedMoon && this.selectedMoon.name === moon.name;
+
+                // Store clickable area for moon interaction
+                moon._screenPos = {
+                  x: moonX,
+                  y: moonY,
+                  radius: Math.max(moonSize * 2, 8), // Make clickable area a bit larger
+                  worldX:
+                    (moonX - width / 2) / this.camera.zoom +
+                    this.camera.position.x,
+                  worldY:
+                    (moonY - height / 2) / this.camera.zoom +
+                    this.camera.position.y,
+                };
+
+                // Draw selection ring for selected moon
+                if (isMoonSelected) {
+                  ctx.globalAlpha = fadeProgress;
+                  ctx.strokeStyle = COLORS.selection;
+                  ctx.lineWidth = 2;
+                  ctx.beginPath();
+                  ctx.arc(moonX, moonY, moonSize + 3, 0, Math.PI * 2);
+                  ctx.stroke();
+                }
+
+                ctx.globalAlpha = fadeProgress * 0.9;
+                ctx.fillStyle = moon.color || "#cccccc";
+                ctx.beginPath();
+                ctx.arc(moonX, moonY, moonSize, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw moon name if zoomed in very close or if selected
+                if (
+                  this.camera.zoom > PLANET_DETAIL_THRESHOLD * 0.5 ||
+                  isMoonSelected
+                ) {
+                  ctx.font = "8px monospace";
+                  ctx.fillStyle = isMoonSelected
+                    ? COLORS.textHighlight
+                    : COLORS.orbitLabel;
+                  ctx.textAlign = "center";
+                  ctx.globalAlpha = fadeProgress * 0.7;
+                  const moonName = moon.name.split(" ").pop();
+                  ctx.fillText(moonName, moonX, moonY - moonSize - 4);
+                }
+              });
+            }
           } // End validation check for finite planetX, planetY, planetSize
         }
       });
@@ -6627,13 +6627,13 @@ class Scene_AdvancedStarMap extends Scene_Base {
       if (!window.WorldGen) {
         window.WorldGen = {};
       }
-      if (!window.WorldGen.HARDCODED_BIOME_OVERRIDES) {
-        window.WorldGen.HARDCODED_BIOME_OVERRIDES = {};
+      if (!window.WorldGen.HardcodedBiomeOverrides) {
+        window.WorldGen.HardcodedBiomeOverrides = {};
       }
 
       // Add override for the planet landing coordinates
       const coordKey = `${planetWorldX},${planetWorldY}`;
-      window.WorldGen.HARDCODED_BIOME_OVERRIDES[coordKey] = {
+      window.WorldGen.HardcodedBiomeOverrides[coordKey] = {
         biome: biomeName
       };
 
@@ -6777,10 +6777,10 @@ class Scene_AdvancedStarMap extends Scene_Base {
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       return result
         ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16),
-          }
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
         : { r: 255, g: 255, b: 255 };
     }
 

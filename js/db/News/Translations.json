@@ -1,0 +1,230 @@
+{
+  "en": {
+    "menuTitle": "Real Estate Management - Buy, sell and rent properties",
+    "newsTitle": "Real Estate Market News - Recent events affecting property values",
+    "owned": "Owned",
+    "available": "Available",
+    "forRent": "For Rent",
+    "notRenting": "Not Renting",
+    "buy": "Buy",
+    "sell": "Sell",
+    "startRent": "Start Rent",
+    "stopRent": "Stop Rent",
+    "info": "Info",
+    "type": "Type",
+    "location": "Location",
+    "rating": "Rating",
+    "price": "Price",
+    "occupancy": "Occupancy",
+    "rentStatus": "Rent Status",
+    "dailyIncome": "Daily Income",
+    "market": "Market",
+    "hot": "\u2191 Hot",
+    "cold": "\u2193 Cold",
+    "stable": "\u2192 Stable",
+    "activeEvents": "active events",
+    "justNow": "Now",
+    "hoursAgo": "h ago",
+    "daysAgo": "d ago",
+    "dailyIncomeMsg": "Today's rental income: \u20ac{income} ({gold} gold)",
+    "propertiesOwnedMsg": "Total properties owned: {count}",
+    "marketUpdatedMsg": "Market updated! Check your properties for changes.",
+    "newsEventMsg": "News event generated! Check the news window.",
+    "breakingNews": "BREAKING NEWS",
+    "propertyTypes": {
+      "Simple House": "Simple House",
+      "Apartment": "Apartment",
+      "Villa": "Villa",
+      "Hotel": "Hotel",
+      "Hostel": "Hostel",
+      "Castle": "Castle",
+      "Yacht": "Yacht",
+      "Restaurant": "Restaurant",
+      "Camper Van": "Camper Van",
+      "B&B": "B&B"
+    },
+    "starLevels": [
+      "Budget",
+      "Standard",
+      "Quality",
+      "Premium",
+      "Luxury"
+    ],
+    "propertySuffixes": {
+      "Simple House": [
+        "Cottage",
+        "Residence",
+        "Home",
+        "Dwelling"
+      ],
+      "Apartment": [
+        "Flat",
+        "Suite",
+        "Loft",
+        "Residence"
+      ],
+      "Villa": [
+        "Villa",
+        "Estate",
+        "Manor",
+        "Retreat"
+      ],
+      "Hotel": [
+        "Hotel",
+        "Inn",
+        "Lodge",
+        "Resort"
+      ],
+      "Hostel": [
+        "Hostel",
+        "Backpackers",
+        "Lodge",
+        "Haven"
+      ],
+      "Castle": [
+        "Castle",
+        "Fortress",
+        "Ch\u00e2teau",
+        "Palace"
+      ],
+      "Yacht": [
+        "Yacht",
+        "Cruiser",
+        "Vessel",
+        "Ship"
+      ],
+      "Restaurant": [
+        "Bistro",
+        "Trattoria",
+        "Brasserie",
+        "Restaurant"
+      ],
+      "Camper Van": [
+        "Camper",
+        "RV",
+        "Mobile Home",
+        "Van"
+      ],
+      "B&B": [
+        "B&B",
+        "Guesthouse",
+        "Inn",
+        "Lodge"
+      ]
+    }
+  },
+  "it": {
+    "menuTitle": "Gestione Immobiliare - Compra, vendi e affitta propriet\u00e0",
+    "newsTitle": "Notizie del Mercato Immobiliare - Eventi recenti che influenzano i valori delle propriet\u00e0",
+    "owned": "Posseduta",
+    "available": "Disponibile",
+    "forRent": "In Affitto",
+    "notRenting": "Non in Affitto",
+    "buy": "Compra",
+    "sell": "Vendi",
+    "info": "Info",
+    "startRent": "Inizia Affitto",
+    "stopRent": "Ferma Affitto",
+    "type": "Tipo",
+    "location": "Posizione",
+    "rating": "Valutazione",
+    "price": "Prezzo",
+    "occupancy": "Occupazione",
+    "rentStatus": "Stato Affitto",
+    "dailyIncome": "Reddito Giornaliero",
+    "market": "Mercato",
+    "hot": "\u2191 Caldo",
+    "cold": "\u2193 Freddo",
+    "stable": "\u2192 Stabile",
+    "activeEvents": "eventi attivi",
+    "justNow": "Ora",
+    "hoursAgo": "h fa",
+    "daysAgo": "g fa",
+    "dailyIncomeMsg": "Reddito da affitti di oggi: \u20ac{income} ({gold} oro)",
+    "propertiesOwnedMsg": "Propriet\u00e0 totali possedute: {count}",
+    "marketUpdatedMsg": "Mercato aggiornato! Controlla le tue propriet\u00e0 per i cambiamenti.",
+    "newsEventMsg": "Evento di cronaca generato! Controlla la finestra delle notizie.",
+    "breakingNews": "ULTIME NOTIZIE",
+    "propertyTypes": {
+      "Simple House": "Casa Semplice",
+      "Apartment": "Appartamento",
+      "Villa": "Villa",
+      "Hotel": "Hotel",
+      "Hostel": "Ostello",
+      "Castle": "Castello",
+      "Yacht": "Yacht",
+      "Restaurant": "Ristorante",
+      "Camper Van": "Camper",
+      "B&B": "B&B"
+    },
+    "starLevels": [
+      "Economico",
+      "Standard",
+      "Qualit\u00e0",
+      "Premium",
+      "Lusso"
+    ],
+    "propertySuffixes": {
+      "Simple House": [
+        "Cottage",
+        "Residenza",
+        "Casa",
+        "Dimora"
+      ],
+      "Apartment": [
+        "Appartamento",
+        "Suite",
+        "Loft",
+        "Residenza"
+      ],
+      "Villa": [
+        "Villa",
+        "Tenuta",
+        "Maniero",
+        "Ritiro"
+      ],
+      "Hotel": [
+        "Hotel",
+        "Locanda",
+        "Lodge",
+        "Resort"
+      ],
+      "Hostel": [
+        "Ostello",
+        "Backpackers",
+        "Lodge",
+        "Rifugio"
+      ],
+      "Castle": [
+        "Castello",
+        "Fortezza",
+        "Ch\u00e2teau",
+        "Palazzo"
+      ],
+      "Yacht": [
+        "Yacht",
+        "Incrociatore",
+        "Imbarcazione",
+        "Nave"
+      ],
+      "Restaurant": [
+        "Bistrot",
+        "Trattoria",
+        "Brasserie",
+        "Ristorante"
+      ],
+      "Camper Van": [
+        "Camper",
+        "Roulotte",
+        "Casa Mobile",
+        "Furgone"
+      ],
+      "B&B": [
+        "B&B",
+        "Pensione",
+        "Locanda",
+        "Lodge"
+      ]
+    }
+  }
+}

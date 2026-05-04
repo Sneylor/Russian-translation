@@ -1,0 +1,808 @@
+[
+  {
+    "name": "Nervous",
+    "name_int": "",
+    "name_it": "Nervoso",
+    "description": "Prone to anxiety and high stress.",
+    "modifiers": {
+      "vitals": {
+        "heartRate": 1.1,
+        "cortisol": 1.3
+      },
+      "hormones": {
+        "adrenaline": 1.25
+      },
+      "brain": {
+        "amygdala": 1.2,
+        "prefrontalCortex": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "What was that noise?",
+        "I have a bad feeling about this.",
+        "Did I forget something important?",
+        "My heart is pounding...",
+        "I just want this to be over."
+      ],
+      "it": [
+        "Cos'\u00e8 stato quel rumore?",
+        "Ho un brutto presentimento.",
+        "Ho dimenticato qualcosa di importante?",
+        "Il mio cuore sta martellando...",
+        "Voglio solo che sia finita."
+      ]
+    }
+  },
+  {
+    "name": "Calm",
+    "name_int": "",
+    "name_it": "Calmo",
+    "description": "Resistant to stress, thinks clearly.",
+    "modifiers": {
+      "vitals": {
+        "heartRate": 0.9,
+        "cortisol": 0.7
+      },
+      "hormones": {
+        "adrenaline": 0.8
+      },
+      "brain": {
+        "amygdala": 0.8,
+        "prefrontalCortex": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "One step at a time.",
+        "Keep breathing. Everything is fine.",
+        "This, too, shall pass.",
+        "Worrying solves nothing.",
+        "Maintain focus."
+      ],
+      "it": [
+        "Un passo alla volta.",
+        "Continua a respirare. Va tutto bene.",
+        "Anche questo passer\u00e0.",
+        "Preoccuparsi non risolve nulla.",
+        "Mantieni la concentrazione."
+      ]
+    }
+  },
+  {
+    "name": "Aggressive",
+    "name_int": "",
+    "name_it": "Aggressivo",
+    "description": "Quick to anger, high physical drive.",
+    "modifiers": {
+      "vitals": {
+        "bloodPressure": 1.05
+      },
+      "hormones": {
+        "adrenaline": 1.15,
+        "testosterone": 1.2
+      },
+      "brain": {
+        "amygdala": 1.15,
+        "prefrontalCortex": 0.9,
+        "motorCortex": 1.05
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Don't test me.",
+        "I'm ready for a fight.",
+        "What are you looking at?",
+        "Patience is running thin.",
+        "Move, or be moved."
+      ],
+      "it": [
+        "Non mettermi alla prova.",
+        "Sono pronto a combattere.",
+        "Cosa stai guardando?",
+        "La pazienza sta finendo.",
+        "Spostati, o sarai spostato."
+      ]
+    }
+  },
+  {
+    "name": "Melancholic",
+    "name_int": "",
+    "name_it": "Melanconico",
+    "description": "Prone to sadness and introspection.",
+    "modifiers": {
+      "hormones": {
+        "serotonin": 0.85,
+        "dopamine": 0.9
+      },
+      "brain": {
+        "amygdala": 1.1,
+        "hippocampus": 1.1,
+        "prefrontalCortex": 0.95
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Is this all there is?",
+        "I remember when things were better.",
+        "A heavy feeling...",
+        "Solitude feels right.",
+        "Everything seems grey."
+      ],
+      "it": [
+        "\u00c8 tutto qui?",
+        "Ricordo quando le cose andavano meglio.",
+        "Una sensazione pesante...",
+        "La solitudine sembra giusta.",
+        "Tutto sembra grigio."
+      ]
+    }
+  },
+  {
+    "name": "Sanguine",
+    "name_int": "",
+    "name_it": "Sanguigno",
+    "description": "Energetic, optimistic, and social.",
+    "modifiers": {
+      "hormones": {
+        "dopamine": 1.15,
+        "serotonin": 1.1
+      },
+      "brain": {
+        "prefrontalCortex": 1.05,
+        "temporalLobe": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "What a wonderful day!",
+        "I should talk to someone.",
+        "What's next? Something fun, I hope!",
+        "I feel great!",
+        "The future is bright."
+      ],
+      "it": [
+        "Che giornata meravigliosa!",
+        "Dovrei parlare con qualcuno.",
+        "Cosa c'\u00e8 dopo? Qualcosa di divertente, spero!",
+        "Mi sento benissimo!",
+        "Il futuro \u00e8 luminoso."
+      ]
+    }
+  },
+  {
+    "name": "Cautious",
+    "name_int": "",
+    "name_it": "Cauto",
+    "description": "Thinks before acting, analyzes risk.",
+    "modifiers": {
+      "brain": {
+        "prefrontalCortex": 1.2,
+        "amygdala": 1.1,
+        "motorCortex": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Let's think this through.",
+        "What are the risks?",
+        "A hasty decision is a bad decision.",
+        "Better to be safe than sorry.",
+        "Analyze the situation first."
+      ],
+      "it": [
+        "Pensiamoci bene.",
+        "Quali sono i rischi?",
+        "Una decisione affrettata \u00e8 una cattiva decisione.",
+        "Meglio essere sicuri che dispiaciuti.",
+        "Analizzare prima la situazione."
+      ]
+    }
+  },
+  {
+    "name": "Impulsive",
+    "name_int": "",
+    "name_it": "Impulsivo",
+    "description": "Acts on instinct, low self-control.",
+    "modifiers": {
+      "brain": {
+        "prefrontalCortex": 0.8,
+        "amygdala": 1.15,
+        "motorCortex": 1.1
+      },
+      "hormones": {
+        "dopamine": 1.2
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Just do it!",
+        "Why wait?",
+        "This seems like a good idea!",
+        "Worry about consequences later.",
+        "Act now, think later."
+      ],
+      "it": [
+        "Fallo e basta!",
+        "Perch\u00e9 aspettare?",
+        "Questa sembra una buona idea!",
+        "Preoccupati delle conseguenze dopo.",
+        "Agisci ora, pensa dopo."
+      ]
+    }
+  },
+  {
+    "name": "Stoic",
+    "name_int": "",
+    "name_it": "Stoico",
+    "description": "Endures hardship without complaint.",
+    "modifiers": {
+      "vitals": {
+        "cortisol": 0.8
+      },
+      "brain": {
+        "amygdala": 0.8,
+        "prefrontalCortex": 1.1,
+        "sensoryCortex": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "This is just a thing. It will pass.",
+        "Pain is temporary.",
+        "Complaining changes nothing.",
+        "Control what you can, accept what you can't.",
+        "I will endure."
+      ],
+      "it": [
+        "\u00c8 solo una cosa. Passer\u00e0.",
+        "Il dolore \u00e8 temporaneo.",
+        "Lamentarsi non cambia nulla.",
+        "Controlla ci\u00f2 che puoi, accetta ci\u00f2 che non puoi.",
+        "Resister\u00f2."
+      ]
+    }
+  },
+  {
+    "name": "Paranoid",
+    "name_int": "",
+    "name_it": "Paranoico",
+    "description": "Distrustful and suspicious of others.",
+    "modifiers": {
+      "brain": {
+        "amygdala": 1.3,
+        "prefrontalCortex": 1.1,
+        "temporalLobe": 1.1
+      },
+      "hormones": {
+        "cortisol": 1.2,
+        "adrenaline": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "They're watching me.",
+        "Who can I trust? No one.",
+        "What do they really want?",
+        "It's a conspiracy.",
+        "I need to be careful."
+      ],
+      "it": [
+        "Mi stanno guardando.",
+        "Di chi posso fidarmi? Di nessuno.",
+        "Cosa vogliono veramente?",
+        "\u00c8 una cospirazione.",
+        "Devo stare attento."
+      ]
+    }
+  },
+  {
+    "name": "Empathetic",
+    "name_int": "",
+    "name_it": "Empatico",
+    "description": "Highly sensitive to the emotions of others.",
+    "modifiers": {
+      "brain": {
+        "temporalLobe": 1.2,
+        "sensoryCortex": 1.1,
+        "amygdala": 1.05
+      },
+      "hormones": {
+        "estrogen": 1.05
+      }
+    },
+    "thoughts": {
+      "en": [
+        "I feel what you're going through.",
+        "Are they okay? They seem sad.",
+        "I can sense the tension in the room.",
+        "How can I help?",
+        "Their joy is my joy."
+      ],
+      "it": [
+        "Sento quello che stai passando.",
+        "Stanno bene? Sembrano tristi.",
+        "Posso percepire la tensione nella stanza.",
+        "Come posso aiutare?",
+        "La loro gioia \u00e8 la mia gioia."
+      ]
+    }
+  },
+  {
+    "name": "Authoritative",
+    "name_int": "",
+    "name_it": "Autoritario",
+    "description": "A natural leader, decisive and commanding.",
+    "modifiers": {
+      "hormones": {
+        "testosterone": 1.15
+      },
+      "brain": {
+        "prefrontalCortex": 1.2,
+        "amygdala": 0.9,
+        "temporalLobe": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Follow my lead.",
+        "This is the plan. Stick to it.",
+        "I will make the decision.",
+        "Discipline is key.",
+        "We must succeed."
+      ],
+      "it": [
+        "Seguite il mio esempio.",
+        "Questo \u00e8 il piano. Rispettatelo.",
+        "Prender\u00f2 io la decisione.",
+        "La disciplina \u00e8 la chiave.",
+        "Dobbiamo avere successo."
+      ]
+    }
+  },
+  {
+    "name": "Scholarly",
+    "name_int": "",
+    "name_it": "Erudito",
+    "description": "Intellect-driven, curious, and analytical.",
+    "modifiers": {
+      "brain": {
+        "prefrontalCortex": 1.15,
+        "hippocampus": 1.2,
+        "temporalLobe": 1.1,
+        "motorCortex": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "I wonder why that is...",
+        "That reminds me of a book I read.",
+        "The data is inconclusive.",
+        "Knowledge is the true power.",
+        "I need to learn more."
+      ],
+      "it": [
+        "Mi chiedo perch\u00e9...",
+        "Questo mi ricorda un libro che ho letto.",
+        "I dati non sono conclusivi.",
+        "La conoscenza \u00e8 il vero potere.",
+        "Devo saperne di pi\u00f9."
+      ]
+    }
+  },
+  {
+    "name": "Artistic",
+    "name_int": "",
+    "name_it": "Artistico",
+    "description": "Sensitive, creative, and perceptive.",
+    "modifiers": {
+      "brain": {
+        "sensoryCortex": 1.2,
+        "occipitalLobe": 1.1,
+        "amygdala": 1.1
+      },
+      "hormones": {
+        "serotonin": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "The light here is beautiful.",
+        "What a strange, wonderful sound.",
+        "I feel this so deeply.",
+        "Inspiration... I must remember this feeling.",
+        "The world is a canvas."
+      ],
+      "it": [
+        "La luce qui \u00e8 bellissima.",
+        "Che suono strano e meraviglioso.",
+        "Lo sento cos\u00ec profondamente.",
+        "Ispirazione... devo ricordare questa sensazione.",
+        "Il mondo \u00e8 una tela."
+      ]
+    }
+  },
+  {
+    "name": "Adventurous",
+    "name_int": "",
+    "name_it": "Avventuroso",
+    "description": "Seeks novelty and thrills, high-risk.",
+    "modifiers": {
+      "hormones": {
+        "dopamine": 1.25,
+        "adrenaline": 1.1
+      },
+      "brain": {
+        "prefrontalCortex": 0.85,
+        "amygdala": 0.9,
+        "motorCortex": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "I wonder what's over that hill.",
+        "This is boring. Let's do something!",
+        "A little danger makes life interesting.",
+        "On to the next adventure!",
+        "I've never been there? Let's go!"
+      ],
+      "it": [
+        "Mi chiedo cosa ci sia oltre quella collina.",
+        "Che noia. Facciamo qualcosa!",
+        "Un po' di pericolo rende la vita interessante.",
+        "Verso la prossima avventura!",
+        "Non ci sono mai stato? Andiamo!"
+      ]
+    }
+  },
+  {
+    "name": "Nurturing",
+    "name_int": "",
+    "name_it": "Protettivo",
+    "description": "Caring, protective, and compassionate.",
+    "modifiers": {
+      "hormones": {
+        "estrogen": 1.1
+      },
+      "brain": {
+        "temporalLobe": 1.15,
+        "prefrontalCortex": 1.1,
+        "amygdala": 1.05
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Are you alright?",
+        "You look cold. Take my cloak.",
+        "Everyone needs to be cared for.",
+        "I must protect them.",
+        "Let me help with that."
+      ],
+      "it": [
+        "Stai bene?",
+        "Sembri infreddolito. Prendi il mio mantello.",
+        "Tutti hanno bisogno di cure.",
+        "Devo proteggerli.",
+        "Lascia che ti aiuti."
+      ]
+    }
+  },
+  {
+    "name": "Mischievous",
+    "name_int": "",
+    "name_it": "Malizioso",
+    "description": "Playful, clever, and enjoys chaos.",
+    "modifiers": {
+      "hormones": {
+        "dopamine": 1.2
+      },
+      "brain": {
+        "prefrontalCortex": 1.1,
+        "amygdala": 0.85,
+        "temporalLobe": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "This would be so much funnier if...",
+        "Let's stir things up a bit.",
+        "They'll never see this coming.",
+        "I wonder what this button does?",
+        "A little prank never hurt anyone... much."
+      ],
+      "it": [
+        "Sarebbe molto pi\u00f9 divertente se...",
+        "Mescoliamo un po' le carte.",
+        "Non se lo aspetteranno mai.",
+        "Mi chiedo cosa faccia questo pulsante?",
+        "Un piccolo scherzo non ha mai fatto male a nessuno... molto."
+      ]
+    }
+  },
+  {
+    "name": "Cynical",
+    "name_int": "",
+    "name_it": "Cinico",
+    "description": "Distrustful of human sincerity or integrity.",
+    "modifiers": {
+      "hormones": {
+        "serotonin": 0.9
+      },
+      "brain": {
+        "prefrontalCortex": 1.1,
+        "amygdala": 1.1,
+        "temporalLobe": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Everyone's in it for themselves.",
+        "What's the catch?",
+        "That's just what they want me to think.",
+        "Sure, 'altruism'. Right.",
+        "This will all end badly."
+      ],
+      "it": [
+        "Ognuno pensa solo a s\u00e9 stesso.",
+        "Dov'\u00e8 l'inganno?",
+        "\u00c8 solo quello che vogliono farmi credere.",
+        "Certo, 'altruismo'. Come no.",
+        "Finir\u00e0 tutto male."
+      ]
+    }
+  },
+  {
+    "name": "Disciplined",
+    "name_int": "",
+    "name_it": "Disciplinato",
+    "description": "High self-control, follows a strict code.",
+    "modifiers": {
+      "brain": {
+        "prefrontalCortex": 1.3,
+        "amygdala": 0.8,
+        "dopamine": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "First, the task. Then, the rest.",
+        "Feelings are secondary to duty.",
+        "Stick to the regimen.",
+        "Control is strength.",
+        "No shortcuts."
+      ],
+      "it": [
+        "Prima il dovere. Poi il resto.",
+        "I sentimenti sono secondari al dovere.",
+        "Attieniti al regime.",
+        "Il controllo \u00e8 forza.",
+        "Nessuna scorciatoia."
+      ]
+    }
+  },
+  {
+    "name": "Fatalistic",
+    "name_int": "",
+    "name_it": "Fatalista",
+    "description": "Believes all events are predetermined.",
+    "modifiers": {
+      "vitals": {
+        "cortisol": 0.9
+      },
+      "brain": {
+        "prefrontalCortex": 0.85,
+        "motorCortex": 0.9,
+        "dopamine": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Whatever happens, happens.",
+        "It was meant to be.",
+        "There's no point fighting it.",
+        "My path is already written.",
+        "What's the use?"
+      ],
+      "it": [
+        "Succeda quel che succeda.",
+        "Era destino.",
+        "Non ha senso combatterlo.",
+        "Il mio cammino \u00e8 gi\u00e0 scritto.",
+        "A che serve?"
+      ]
+    }
+  },
+  {
+    "name": "Grumpy",
+    "name_int": "",
+    "name_it": "Scontroso",
+    "description": "Chronically irritable and bad-tempered.",
+    "modifiers": {
+      "vitals": {
+        "cortisol": 1.15
+      },
+      "hormones": {
+        "serotonin": 0.85
+      },
+      "brain": {
+        "amygdala": 1.15,
+        "prefrontalCortex": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Ugh, what now?",
+        "This is all so stupid.",
+        "Leave me alone.",
+        "Of course this would happen.",
+        "I hate this."
+      ],
+      "it": [
+        "Uff, e ora che c'\u00e8?",
+        "\u00c8 tutto cos\u00ec stupido.",
+        "Lasciatemi in pace.",
+        "Certo che doveva succedere.",
+        "Odio tutto questo."
+      ]
+    }
+  },
+  {
+    "name": "Loyal",
+    "name_int": "",
+    "name_it": "Leale",
+    "description": "Steadfast and devoted to allies.",
+    "modifiers": {
+      "brain": {
+        "amygdala": 1.1,
+        "prefrontalCortex": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "I will not abandon them.",
+        "For my friends, anything.",
+        "I must keep my promise.",
+        "Together, no matter what.",
+        "My loyalty is my bond."
+      ],
+      "it": [
+        "Non li abbandoner\u00f2.",
+        "Per i miei amici, qualsiasi cosa.",
+        "Devo mantenere la mia promessa.",
+        "Insieme, non importa cosa.",
+        "La mia lealt\u00e0 \u00e8 il mio vincolo."
+      ]
+    }
+  },
+  {
+    "name": "Brave",
+    "name_int": "",
+    "name_it": "Coraggioso",
+    "description": "Faces danger with low fear response.",
+    "modifiers": {
+      "brain": {
+        "amygdala": 0.75,
+        "prefrontalCortex": 1.1,
+        "motorCortex": 1.1
+      },
+      "hormones": {
+        "adrenaline": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Someone has to do it.",
+        "This is scary, but I must act.",
+        "Fear is just a feeling.",
+        "I will not back down.",
+        "Forward!"
+      ],
+      "it": [
+        "Qualcuno deve farlo.",
+        "\u00c8 spaventoso, ma devo agire.",
+        "La paura \u00e8 solo una sensazione.",
+        "Non mi tirer\u00f2 indietro.",
+        "Avanti!"
+      ]
+    }
+  },
+  {
+    "name": "Timid",
+    "name_int": "",
+    "name_it": "Timido",
+    "description": "Easily frightened, avoidant of conflict.",
+    "modifiers": {
+      "vitals": {
+        "cortisol": 1.25
+      },
+      "brain": {
+        "amygdala": 1.3,
+        "motorCortex": 0.85,
+        "prefrontalCortex": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Oh, dear. This looks bad.",
+        "I'd rather not...",
+        "Maybe someone else can handle this?",
+        "I want to go home.",
+        "Please don't notice me."
+      ],
+      "it": [
+        "Oh, cielo. Sembra male.",
+        "Preferirei di no...",
+        "Forse qualcun altro pu\u00f2 occuparsene?",
+        "Voglio andare a casa.",
+        "Per favore, non notatemi."
+      ]
+    }
+  },
+  {
+    "name": "Hedonistic",
+    "name_int": "",
+    "name_it": "Edonista",
+    "description": "Believes the pursuit of pleasure is the highest good.",
+    "modifiers": {
+      "hormones": {
+        "dopamine": 1.3
+      },
+      "brain": {
+        "prefrontalCortex": 0.8,
+        "sensoryCortex": 1.1
+      }
+    },
+    "thoughts": {
+      "en": [
+        "If it feels good, do it.",
+        "Life is short, enjoy it now.",
+        "I need more wine. And cheese.",
+        "This is the life!",
+        "Work? Ugh. Later."
+      ],
+      "it": [
+        "Se ti fa sentire bene, fallo.",
+        "La vita \u00e8 breve, goditela ora.",
+        "Ho bisogno di altro vino. E formaggio.",
+        "Questa \u00e8 la vita!",
+        "Lavoro? Uff. Dopo."
+      ]
+    }
+  },
+  {
+    "name": "Apathetic",
+    "name_int": "",
+    "name_it": "Apatico",
+    "description": "Lacking interest, enthusiasm, or concern.",
+    "modifiers": {
+      "hormones": {
+        "dopamine": 0.8,
+        "adrenaline": 0.85
+      },
+      "vitals": {
+        "heartRate": 0.95
+      },
+      "brain": {
+        "amygdala": 0.9,
+        "motorCortex": 0.9,
+        "prefrontalCortex": 0.9
+      }
+    },
+    "thoughts": {
+      "en": [
+        "Meh.",
+        "I don't really care.",
+        "Whatever.",
+        "Is it over yet?",
+        "It doesn't matter."
+      ],
+      "it": [
+        "Meh.",
+        "Non mi interessa.",
+        "Come vuoi.",
+        "\u00c8 ancora finita?",
+        "Non importa."
+      ]
+    }
+  }
+]

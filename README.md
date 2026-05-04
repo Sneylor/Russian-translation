@@ -1,3 +1,7 @@
+
+Open hypernet-explorer.html to use internal game web browser
+---
+
 ## CHARACTER & HEALTH SYSTEMS
 
 ### Health_Core.js
@@ -20,6 +24,28 @@
 - **Menu Commands**: "Health Status", "Biologics"
 - **Plugin Commands**: HealBodyParts, ChangeArchetype, CreateCreature
 
+### Health_BiologicSimulation.js
+**Real-time vital and immune system simulation**
+- **Dependency**: Requires Health_Core.js
+- **Features**:
+  - Simulates Heart Rate, Blood Pressure, Temperature, and Cortisol
+  - Brain Activity: Tracks 15+ brain regions and neuron firing patterns
+  - Immune System: Simulates WBC, Antibodies, Viruses, and Bacteria
+  - Ley Veins: Arcane circulation system
+  - Pregnancy: Real-time fetus development and hormonal changes
+  - State Reactions: Poison, Rage, and Infection affect biologics
+- **Integration**: Adds "Biologics" command to Main Menu
+
+### Health_ProstheticShop.js
+**Body part replacement and implant system**
+- **Dependency**: Requires Health_Core.js
+- **Features**:
+  - Full-screen UI for installing/removing parts and implants
+  - Archetype-based part filtering (e.g., Human vs. Android)
+  - Price scaling based on HP percentage and stat bonuses
+  - Dynamic stat modification based on installed prosthetics
+- **Plugin Command**: openProstheticShop
+
 ### TimeDateSystem.js
 **Survival mechanics with calorie/nutrition tracking**
 - **Variables**:
@@ -29,6 +55,8 @@
   - Variable 89: Fat value
   - Variable 90: Protein value
   - Variable 91: Caffeine value
+  - Variable 113: Current Date/Time string (Format: "DD MMM YYYY HH:MM")
+  - Variable 114: Total game time in minutes
 - **Mechanics**:
   - Hunger -0.05/step (3x faster when running)
   - Sleep -0.03/step
@@ -123,7 +151,7 @@
 - **Features**:
   - Automatically changes based on current map
   - Adds "Tutorial" option to Options menu
-  - Configurable in TODO_LISTS object
+  - Configurable in TodoList object
 
 ---
 
@@ -145,7 +173,68 @@
 
 ---
 
+## FACTION & ARMY SYSTEMS
+
+### FactionDataManager.js
+**Faction reputation and political influence**
+- **Variables**:
+  - Variable 53: Soul Tendency (Influenced by faction deeds)
+- **Features**:
+  - 18 Factions: Includes Mages Guild, Archive Foundation, Hypercapitalist Collective, and procedural sub-factions
+  - Reputation: Scale of -100 to +100 affecting quest availability and troop prices
+  - Leaders: Unique faction leaders with distinct personalities and sprites
+  - Sub-factions: Branch groups like Technomancers or Loyalists
+- **Plugin Commands**: open, setReputation, changeReputation, checkQuestAvailability
+
+### ArmyManager.js
+**Mount & Blade style troop management**
+- **Variables**:
+  - Variable 86: Country ID (Used for location-based recruitment)
+  - Variable 43/44: World X/Y (Used for random troop seeding)
+- **Features**:
+  - Recruitment: Hire troops from factions or random location-based pools
+  - Upkeep: Weekly maintenance costs paid in euros (gold)
+  - Coherence: Bonus system based on army faction homogeneity
+  - Squads: Group troops under actor leaders for 8% stat bonuses
+  - Upgrades: Release/upgrade mechanics for army progression
+- **Plugin Commands**: buyTroops, debugAddTroops
+
+---
+
 ## SHOP & ECONOMY SYSTEMS
+
+### NewsSystem.js
+**Dynamic news and market influencer**
+- **Variables**:
+  - Variable 53: Soul Tendency (Value modified by news events)
+- **Features**:
+  - Daily news events at 8:00 AM
+  - Procedural and real (hardcoded) news generation
+  - Market effects: Influences Real Estate occupancy and prices
+  - Soul Tendency: News category (Positive/Negative/Surreal) shifts world state
+  - News History: Track recent market events
+- **Plugin Commands**: checkNewsHistory, forceNewsEvent
+
+### RealEstateMarket.js
+**Property investment and rental system**
+- **Dependency**: Requires NewsSystem.js
+- **Features**:
+  - 30 randomized European properties (Simple House, Villa, Yacht, Castle, etc.)
+  - Star ratings (1-5) affecting base price and occupancy
+  - Midnight rent collection (100 gold = 1.00€)
+  - Market fluctuations: News events cause immediate price/occupancy shifts
+- **Plugin Commands**: openRealEstateMenu, checkDailyIncome, forceMarketUpdate
+
+### WorkSystem.js
+**Job and labor system**
+- **Variables**:
+  - Variable 114: Time tracker (shares with TimeDateSystem)
+- **Features**:
+  - 30+ jobs across categories (Combat, Magical, Social, Technical, etc.)
+  - Success Rates: Influenced by stats (AGI, LUK) and custom attributes (Arcane, Substance, etc.)
+  - Labor Risks: Failures can cause HP/MP damage or status effects
+  - Procedural Outcomes: Random events during shifts
+- **Plugin Commands**: OpenWorkMenu, OpenWorkMenuCategory, ShowSingleJob
 
 ### ShopManagement.js
 **Complex shop management with production system**
@@ -171,9 +260,29 @@
 
 ## BATTLE SYSTEMS
 
+### BladeSeedSystem.js
+**Spirit weapon binding and evolution**
+- **Features**:
+  - Bound Weapon: Players can bind a "Blade Seed" spirit weapon to their soul
+  - Procedural Names: Generates unique weapon names (e.g., Shardbane, Stormedge)
+  - Spirit Companion: Elemental spirit that levels up and evolves (Lv 10, Lv 30)
+  - Learning Points: Earn points to learn elemental skills
+  - Sealed Slot: Weapon slot is locked while a Blade Seed is bound
+- **Plugin Commands**: bindBladeSeed, unbindBladeSeed
+
 ### BattleSystemEnhanced.js
 - **Variables**: Variable 1 (battle system state)
 - **Switches**: Switch 13 (battle end), Switch 34 (victory flag)
+
+### RoguelikeCardSystem.js
+**Card-based tactical combat**
+- **Switch**: Switch 45 (Activates card system)
+- **Mechanics**:
+  - 40-card deck (skills and items)
+  - Energy System: Max energy starts at 1, gains +1/turn (max 10)
+  - Energy Cost: Calculated from skill MP/TP costs
+  - Hearthstone-style UI: Animated hand and hover effects
+- **Integration**: Overrides standard battle commands when active
 
 ### 3DBattlerSystem.js
 **3D battle visuals**
@@ -200,6 +309,120 @@
 - **ScratchingCardSystem.js** - Scratch card lottery
 - **AnimatedHorseRace.js** - Horse racing with betting
 - **AnimatedTarotReading.js** - Tarot card reading
+
+### HyperTamer.js
+**Virtual Pet simulation (LCD retro style)**
+- **Features**:
+  - LCD Filter: Monochrome pixelated aesthetic
+  - Pet Care: Hunger, Happiness, Cleanliness, Energy, and Health
+  - Growth System: Pets grow and level up over time (real-time offline progression)
+  - Training: Mini-games to improve Strength, Intelligence, and Agility
+  - Personality System: Affects need decay rates
+- **Plugin Commands**: openHyperTamer, resetPet
+
+---
+
+## ANIMAL & PLANT HUSBANDRY
+
+### AnimalGrowthSystem.js
+**Livestock management and production**
+- **Variables**:
+  - Variable 114: Game time tracker
+- **Features**:
+  - Lifecycle: Animals grow from Baby to Adult (direction rows 0 and 1)
+  - Production: Adult animals produce items (Milk, Eggs, etc.) at day intervals
+  - Skins: Randomized sprite variants upon purchase
+  - Slots: Limited by "Animal" named events on map
+- **Plugin Commands**: AnimalMenu, BuyAnimal, CollectProduce
+
+### PlantGrowthSystem.js
+**Farming and seasonal agriculture**
+- **Variables**:
+  - Variable 114: Game time tracker
+- **Features**:
+  - Seasons: Growth restricted to specific seasons (SPRING, SUMMER, etc.)
+  - Environmental Effects: Rain (+30% speed), Greenhouse (x1.5 speed), Snow (-50% speed)
+  - Stages: 4 growth stages (Seedling, Sprout, Growing, Mature)
+  - Yield: Harvest amount depends on effective growth time
+- **Plugin Commands**: PlantMenu, PlantSeed, HarvestPlant
+
+---
+
+## PROCEDURAL GENERATION & AI
+
+### MarkovTextGenerator.js
+**N-gram based text synthesis**
+- **Features**:
+  - Training: Analyzes source texts to build probability tables
+  - Generation: Produces human-like (but nonsensical) sentences
+  - Contexts: Used for NPC dialogue, book content, and item descriptions
+- **Plugin Commands**: trainMarkov, generateMarkovText
+
+### RandomBookGenerator.js
+**Procedural book creation**
+- **Dependency**: Requires BookViewer.js and MarkovTextGenerator.js
+- **Features**:
+  - Randomly generates titles, authors, and 5-20 pages of content
+  - Covers 12+ genres (Science, Occult, History, Fiction, etc.)
+  - Integration: Adds books to shelves or libraries dynamically
+
+### RandomTVTransmissionGenerator.js
+**Dynamic TV channel simulation**
+- **Features**:
+  - 20+ Procedural Channels: News, Weather, Shopping, Static, "The Void"
+  - Visual Effects: CRT filters, static, and scrolling text
+  - Real-time Updates: News channels reflect current game events/NewsSystem
+- **Plugin Command**: openTV
+
+### ArctifactGenerator.js
+**Unique item and relic generation**
+- **Features**:
+  - Random names, icons, and stat modifiers
+  - Lore generation using Markov chains
+  - Rarity tiers from Common to Mythic
+- **Plugin Command**: generateArtifact
+
+### WFC_MapGenerator.js
+**Wave Function Collapse map synthesis**
+- **Features**:
+  - Generates complex, rule-based tile patterns
+  - Used for indoor layouts and structural details
+  - Deterministic based on coordinate seeds
+
+---
+
+## MINIGAMES & HOBBIES
+
+### VisualPiano.js
+**Interactive musical instrument**
+- **Features**:
+  - 88-key piano simulation with mouse/keyboard support
+  - Recording/playback of played sequences
+  - Learning mode with falling "Synthesia" style notes
+- **Plugin Command**: openPiano
+
+### TunableRadio.js
+**Signal-based audio simulation**
+- **Features**:
+  - Frequency tuning (88.0 - 108.0 MHz)
+  - Static and interference based on player location/weather
+  - Multiple procedural stations with music and talk shows
+- **Plugin Command**: openRadio
+
+### ApiarySystem.js
+**Beekeeping and honey production**
+- **Features**:
+  - Hive maintenance: Managing bee health and population
+  - Item Production: Honey, Wax, and Royal Jelly
+  - Cross-pollination: Boosts nearby PlantGrowthSystem speed by 15%
+- **Plugin Command**: openApiaryMenu
+
+### SurfingMiniGame.js
+**Wave riding simulation**
+- **Features**:
+  - Physics-based movement on water tiles
+  - Trick system with score multipliers
+- **Plugin Command**: startSurfing
 
 ---
 
@@ -406,7 +629,7 @@ const procSeed = $gameSystem._procGenData.currentSeed;
 - `blendBiomeBorders(mapData, biome, adjacentBiomes)` - Smooth transitions to adjacent biomes
 - `generateBiomeOnProcMap(biome, seed, cache)` - Main generation pipeline
 
-**Hardcoded Biome Overrides** (`window.WorldGen.HARDCODED_BIOME_OVERRIDES`):
+**Hardcoded Biome Overrides** (`window.WorldGen.HardcodedBiomeOverrides`):
 ```javascript
 "100,50": { biome: "Road", roadDirection: "cross" }
 "110,50": { biome: "Forest" }
@@ -418,6 +641,16 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 - Noise-based: Uses Perlin noise to create clustering
 - Scattered: Random placement avoiding water/forbidden zones
 - Multi-tile features check bounds and overlap
+
+### ProceduralMapTransfer.js
+**Map loading and seamless navigation**
+- **Dependency**: Requires ProceduralMapUtils and BiomeGenerator
+- **Features**:
+  - Seamless Transitions: Teleports player to opposite edge when crossing borders
+  - Visual Indicators: Animated arrows point to nearby map exits
+  - Layer Navigation: Handles surface/underground depth switching
+  - Dynamic Respawn: Refreshes enemies based on the current biome after transfer
+- **Plugin Commands**: startProcGen, stopProcGen, goDown, goUp
 
 **Water Handling**:
 - Region ID 99 marks water tiles for MovementInteractionSystem
@@ -450,6 +683,80 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 - Monsters/NPCs as encounters
 
 **Seeding**: Uses world coordinates to ensure same prefabs spawn at same locations
+
+---
+
+---
+
+## MOBILE & COMMUNICATION SYSTEMS
+
+### HexphoneSystem.js
+**Modular mobile device ecosystem**
+- **Version**: v2.1.0 (Component-based architecture)
+- **Features**:
+  - Messaging System: Procedural contacts and message threads
+  - App Store: Installable mini-games and tools
+  - Credits System: Credits used for calls and app downloads
+  - Wallpaper/Settings: Personalized UI customization
+- **UI Components**:
+  - `Hexphone_App`: Base class for modular app development
+  - `Hexphone_BaseComponent`: Scalable UI building blocks
+- **Plugin Commands**: openHexphone, registerApp, addContact
+
+---
+
+## ADVANCED GAMEPLAY SYSTEMS
+
+### RentSystem.js
+**Automated property leasing**
+- **Dependency**: Requires RealEstateMarket.js
+- **Features**:
+  - Renting out player-owned properties to NPCs
+  - Daily rent calculation and automated collection
+  - Occupancy based on local NewsSystem events
+- **Plugin Command**: openRentManagement
+
+### StealingSystem.js
+**Thievery and pickpocketing mechanics**
+- **Variables**:
+  - Variable 88: Stealth stat (affects success chance)
+- **Features**:
+  - NPC Pickpocketing: Steal gold or items from moving NPCs
+  - Crime Integration: Failed attempts increase Bounty (Variable 66)
+  - Skill Progression: Higher success leads to "Master Thief" perks
+- **Plugin Command**: attemptSteal
+
+### ContainerSystem.js
+**Persistent storage and inventory management**
+- **Features**:
+  - Unlimited storage boxes with custom names
+  - Cross-map persistence: Access items from any linked container
+  - Weight limits based on container type (Chest, Locker, Safe)
+- **Plugin Command**: openContainer
+
+### FurnitureSystem.js
+**Dynamic interior customization**
+- **Features**:
+  - Grid-based placement of 100+ furniture items
+  - Rotation and layering support
+  - Functional furniture: Beds for sleep, Stoves for cooking
+- **Plugin Command**: enterBuildMode
+
+### AutonomousNPCSystem.js
+**NPC schedule and AI simulation**
+- **Features**:
+  - Daily Routines: NPCs move between home, work, and leisure maps based on time
+  - Reactive AI: NPCs flee from combat or seek shelter during storms
+  - Social Interactions: NPCs talk to each other and form relationships
+- **Plugin Commands**: setNPCRoutine, forceNPCObjective
+
+### ErisDateSystem.js
+**Social bonding and dating simulation**
+- **Features**:
+  - Relationship Levels: Rank 1-10 with unique dialogue and rewards
+  - Date Locations: 15+ spots (Cafe, Park, Arcade, Cinema)
+  - Gift System: Liked/Disliked items based on personality
+- **Plugin Command**: openDatingMenu
 
 ---
 
@@ -486,9 +793,49 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 ### DreamSystem.js
 **Dream sequences**
 
+### ErisTrial.js
+**Procedural trial and debate system**
+- **Features**:
+  - Evidence gathering during exploration
+  - Ace Attorney style courtroom battles
+  - Logic chains and contradiction spotting
+- **Plugin Command**: startErisTrial
+
+### MatrixGameOver.js
+**Dynamic game over screen**
+- **Features**:
+  - Digital rain effect with customizable colors
+  - "Resurrection" mechanic allowing one-time continuation
+- **Plugin Command**: triggerMatrixGameOver
+
 ---
 
-## UI & MENU SYSTEMS
+## UI & NAVIGATION
+
+### KanbanQuestLog.js
+**Visual quest management board**
+- **Features**:
+  - Trello-style board with columns: To-Do, In Progress, Completed
+  - Drag-and-drop quest prioritization
+  - Detail view for rewards and objectives
+- **Plugin Command**: openKanbanBoard
+
+### CompassHud.js
+**Directional navigation overlay**
+- **Features**:
+  - Horizontal compass showing N/S/E/W and quest markers
+  - Dynamic scaling based on distance to objective
+
+### BookViewer.js
+**Full-screen book reading interface**
+- **Features**:
+  - 2-page spread with realistic page-flip animations
+  - Support for images and nested text formatting
+- **Plugin Command**: openBook
+
+---
+
+## SHOP & ECONOMY SYSTEMS
 
 ### CustomSceneStatus.js
 **Custom status screen**
@@ -506,7 +853,7 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 **Character busts for dialogue** (v1.8.0 with monster battler support)
 - **Auto Display**: Busts automatically load on message start based on active event sprite
 - **Bust Loading Pipeline**:
-  1. Event sprite character name → lookup in `SPRITES_ASSOCIATION` global object (from DB.js)
+  1. Event sprite character name → lookup in `SpritesAssociation` global object (from DB.js)
   2. If match found → loads `img/busts/{bustName}.png`
   3. Monster sprites: If sprite contains "monster/" → uses Variables 106/107/108 (battler images from `img/enemies/`)
   4. Fallback: If image fails to load → uses `img/busts/7.png` as default
@@ -583,6 +930,41 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 ### Hotkeys.js
 **Keyboard shortcuts**
 
+### SteamAchievements.js
+**Steamworks integration**
+- **Dependency**: Requires Greenworks library and NW.js
+- **Features**:
+  - Grant/Unlock achievements via Steam API
+  - Progress tracking for long-term goals
+  - In-game notifications for unlocks
+- **Plugin Commands**: unlockAchievement, setAchievementProgress
+
+### ModManager.js
+**RimWorld-style Mod Management**
+- **Features**:
+  - External Load: Loads assets from a "mods" folder in the project root
+  - Asset Redirection: Overrides default data, img, and audio files
+  - Dynamic Data: Loads custom JSONs into `$dataCustom`
+  - Load Order: Priority-based management (bottom items load last/override others)
+- **UI**: Custom "Mods" command on Title Screen
+
+### BoosterPackSystem.js
+**Trading card pack opening**
+- **Features**:
+  - Randomized card pulls with rarity weights
+  - Animated pack opening sequence with PIXI filters
+- **Plugin Command**: openBoosterPack
+
+### MoneyFormatter.js
+**Global currency styling**
+- **Logic**: Formats all gold values to Euro format (e.g. 1500 gold -> 15.00€)
+
+### ResolutionSwitcher.js
+**Dynamic display settings**
+- **Features**:
+  - Switch between windowed, full-screen, and custom resolutions
+  - High-DPI scaling support
+
 ---
 
 ## CORE LIBRARIES
@@ -605,7 +987,7 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 - **Var 42**: Class
 - **Var 43-44**: Player X/Y (map 315)
 - **Var 45**: Travel timer / destination map
-- **Var 53**: Fuel price base
+- **Var 53**: Soul tendency / Fuel price base (System context dependent)
 - **Var 61**: Temperature
 - **Var 63-67**: Camper position/fuel/map
 - **Var 69-72**: Car position/fuel/map
@@ -619,6 +1001,8 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 - **Var 106**: Actor 1 battler image name (creature/monster bust)
 - **Var 107**: Actor 2 battler image name (creature/monster bust)
 - **Var 108**: Actor 3 battler image name (creature/monster bust)
+- **Var 113**: Current Date/Time string
+- **Var 114**: Total game time (minutes)
 - **Var 115**: Player 2 reproduction type
 - **Var 116**: Player 3 reproduction type
 
@@ -629,6 +1013,7 @@ Format: `"worldX,worldY": { biome: "name", roadDirection: "..." }`
 - **Sw 29**: Floor selection
 - **Sw 33**: Character creation done
 - **Sw 34**: Battle victory
+- **Sw 45**: Roguelike Card System active
 - **Sw 45-46**: Card deck slots
 - **Sw 51**: Camper available
 - **Sw 55**: Fast travel active

@@ -10,7 +10,7 @@
  * This is the main entry point for the modular GalaxySim system.
  *
  * REQUIRED MODULE LOAD ORDER:
- * 1. GalaxySimDB.js (external database)
+ * 1. DataService.js (external database)
  * 2. GalaxySim_Math.js
  * 3. GalaxySim_DataManager.js
  * 4. GalaxySim_Renderer_Planets.js
@@ -58,8 +58,8 @@
   // Check Dependencies
   // ============================================================================
 
-  if (!window.GalaxyData) {
-    throw new Error("GalaxySim_Core requires GalaxySimDB.js to be loaded first");
+  if (!window.GalaxySim) {
+    throw new Error("GalaxySim_Core requires DataManager.js to be loaded first");
   }
 
   if (!window.GalaxySim) {

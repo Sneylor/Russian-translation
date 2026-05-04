@@ -1,0 +1,187 @@
+import json
+import re
+from pathlib import Path
+
+# ==========================================
+# 1. EXPANDED ENGLISH PIRATE DICTIONARY
+# ==========================================
+EN_PIRATE_DICT = {
+    r"\bhello\b": "ahoy",
+    r"\bhi\b": "ahoy",
+    r"\bfriend\b": "matey",
+    r"\bfriends\b": "me hearties",
+    r"\bmy\b": "me",
+    r"\byou\b": "ye",
+    r"\byour\b": "yer",
+    r"\bare\b": "be",
+    r"\bis\b": "be",
+    r"\bam\b": "be",
+    r"\byes\b": "aye",
+    r"\bno\b": "nay",
+    r"\bmoney\b": "booty",
+    r"\bcryptocurrency\b": "cursed digital doubloons",
+    r"\beveryone\b": "all hands",
+    r"\bpeople\b": "scallywags",
+    r"\bcrowd\b": "crew",
+    r"\bthe\b": "th'",
+    r"\bof\b": "o'",
+    r"\bto\b": "t'",
+    r"\bwow\b": "shiver me timbers",
+    r"\bohz*\b": "blimey",
+    r"\btrain\b": "galleon",
+    r"\btrains\b": "galleons",
+    r"\bcar\b": "ship",
+    r"\bcars\b": "ships",
+    r"\bcoffee\b": "grog",
+    r"\bguy\b": "buccaneer",
+    r"\bman\b": "pirate",
+    r"\bunderstand\b": "savvy",
+    r"\bexcuse me\b": "avast",
+    r"\bdragon\b": "kraken",
+    r"\bwyvern\b": "sea beast",
+    r"\bmagical\b": "cursed voodoo",
+    r"\bmagic\b": "voodoo",
+    r"\bschedule\b": "navigation chart",
+    r"\bticket\b": "passage writ",
+    r"\btickets\b": "writs",
+    r"\bstation\b": "dock",
+    r"\bterminal\b": "harbor",
+    r"\bplatform\b": "pier",
+    r"\bconductor\b": "cap'n",
+    r"\bcommute\b": "voyage",
+    r"\bcommuter\b": "voyager",
+    r"\bpassenger\b": "deckhand",
+    r"\bpassengers\b": "deckhands",
+    r"\bweather\b": "sea squalls",
+    r"\bsupernatural\b": "ghostly",
+    r"\bwizard\b": "witch doctor",
+    r"\bgnome\b": "powder monkey"
+}
+
+# ==========================================
+# 2. EXPANDED ITALIAN PIRATE DICTIONARY
+# ==========================================
+IT_PIRATE_DICT = {
+    r"\bciao\b": "olà",
+    r"\bsalve\b": "ehi della nave",
+    r"\bamico\b": "mozzo",
+    r"\bamici\b": "filibustieri",
+    r"\bsì\b": "aye",
+    r"\btutti\b": "ciurma",
+    r"\bgente\b": "manigoldi",
+    r"\bfolla\b": "ciurma",
+    r"\bsoldi\b": "dobloni",
+    r"\bcriptovalute\b": "dobloni maledetti",
+    r"\bwow\b": "corpo di mille balene",
+    r"\boh\b": "per la barba di Nettuno",
+    r"\btreno\b": "vascello",
+    r"\btreni\b": "vascelli",
+    r"\bmacchina\b": "scialuppa",
+    r"\bcarrozza\b": "stiva",
+    r"\bconduttore\b": "capitano",
+    r"\bcaffè\b": "grog",
+    r"\bcapito\b": "chiaro?",
+    r"\bvero\b": "chiaro?",
+    r"\bdrago\b": "leviatano",
+    r"\bviverna\b": "bestia marina",
+    r"\bmagici\b": "maledetti",
+    r"\bmagica\b": "stregata",
+    r"\borario\b": "mappa nautica",
+    r"\bbiglietti\b": "lasciapassare",
+    r"\bbiglietto\b": "lasciapassare",
+    r"\bstazione\b": "molo",
+    r"\bpasseggeri\b": "marinai",
+    r"\bpasseggero\b": "marinaio",
+    r"\bpendolari\b": "viaggiatori dei mari",
+    r"\bterminal\b": "porto",
+    r"\bpiattaforma\b": "pontile",
+    r"\bviaggio\b": "viaggio in mare",
+    r"\btempo\b": "burrasca",
+    r"\bsoprannaturali\b": "spettrali",
+    r"\bmago\b": "stregone dei mari",
+    r"\bgnomo\b": "scimmia delle polveri"
+}
+
+def translate_text(text, pirate_dict):
+    """Applies regex dictionary replacements to a string."""
+    if not isinstance(text, str):
+        return text
+        
+    translated_text = text
+    for word_pattern, replacement in pirate_dict.items():
+        def match_case(match):
+            original = match.group()
+            if original.istitle():
+                return replacement.capitalize()
+            elif original.isupper():
+                return replacement.upper()
+            return replacement
+            
+        translated_text = re.sub(word_pattern, match_case, translated_text, flags=re.IGNORECASE)
+        
+    return translated_text
+
+def process_json_structure(data, modified_flag=False):
+    """Recursively walks through JSON lists and dictionaries looking for 'en' and 'it' keys."""
+    
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key == "en" and isinstance(value, str):
+                new_val = translate_text(value, EN_PIRATE_DICT)
+                if new_val != value:
+                    data[key] = new_val
+                    modified_flag = True
+            elif key == "it" and isinstance(value, str):
+                new_val = translate_text(value, IT_PIRATE_DICT)
+                if new_val != value:
+                    data[key] = new_val
+                    modified_flag = True
+            elif isinstance(value, (dict, list)):
+                # Dig deeper into nested structures
+                modified_flag = process_json_structure(value, modified_flag)
+                
+    elif isinstance(data, list):
+        for item in data:
+            if isinstance(item, (dict, list)):
+                modified_flag = process_json_structure(item, modified_flag)
+                
+    return modified_flag
+
+def process_directory(directory_path="."):
+    """Finds all JSON files recursively and modifies them in place."""
+    base_dir = Path(directory_path)
+    
+    # rglob finds all .json files in this folder AND all subfolders
+    json_files = list(base_dir.rglob("*.json"))
+    
+    if not json_files:
+        print("No JSON files found in this directory or subdirectories.")
+        return
+
+    for filepath in json_files:
+        try:
+            with open(filepath, 'r', encoding='utf-8') as file:
+                data = json.load(file)
+        except json.JSONDecodeError:
+            print(f"Skipping {filepath.name}: Invalid JSON format.")
+            continue
+        except Exception as e:
+            print(f"Error reading {filepath.name}: {e}")
+            continue
+        
+        # Traverse and translate
+        is_modified = process_json_structure(data)
+            
+        # If we changed anything, write it back to the EXACT SAME FILE
+        if is_modified:
+            try:
+                with open(filepath, 'w', encoding='utf-8') as file:
+                    json.dump(data, file, ensure_ascii=False, indent=2)
+                print(f"Successfully pirated in-place: {filepath.relative_to(base_dir)}")
+            except Exception as e:
+                print(f"Failed to save {filepath.name}: {e}")
+
+if __name__ == "__main__":
+    print("Hoist the colors! Scouring all folders for JSON files...")
+    process_directory()
+    print("Done! Yer files be overwritten with pirate speak.")

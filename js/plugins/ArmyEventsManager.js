@@ -115,7 +115,7 @@ function Game_AIArmy() {
   this.initialize(...arguments);
 }
 
-Game_AIArmy.prototype.initialize = function(eventId) {
+Game_AIArmy.prototype.initialize = function (eventId) {
   this._eventId = eventId;
   this._troops = [];
   this._isIndependent = false;
@@ -126,44 +126,44 @@ Game_AIArmy.prototype.initialize = function(eventId) {
   this._validRegions = []; // Region IDs where this army can spawn
 };
 
-Game_AIArmy.prototype.getEventId = function() {
+Game_AIArmy.prototype.getEventId = function () {
   return this._eventId;
 };
 
-Game_AIArmy.prototype.getTroops = function() {
+Game_AIArmy.prototype.getTroops = function () {
   return this._troops;
 };
 
-Game_AIArmy.prototype.getTroopCount = function() {
+Game_AIArmy.prototype.getTroopCount = function () {
   return this._troops.length;
 };
 
-Game_AIArmy.prototype.isIndependent = function() {
+Game_AIArmy.prototype.isIndependent = function () {
   return this._isIndependent;
 };
 
-Game_AIArmy.prototype.getFactionId = function() {
+Game_AIArmy.prototype.getFactionId = function () {
   return this._factionId;
 };
 
-Game_AIArmy.prototype.getLeader = function() {
+Game_AIArmy.prototype.getLeader = function () {
   return this._leader;
 };
 
-Game_AIArmy.prototype.setPosition = function(x, y) {
+Game_AIArmy.prototype.setPosition = function (x, y) {
   this._x = x;
   this._y = y;
 };
 
-Game_AIArmy.prototype.getPosition = function() {
+Game_AIArmy.prototype.getPosition = function () {
   return { x: this._x, y: this._y };
 };
 
-Game_AIArmy.prototype.getValidRegions = function() {
+Game_AIArmy.prototype.getValidRegions = function () {
   return this._validRegions;
 };
 
-Game_AIArmy.prototype.generateRandomArmy = function() {
+Game_AIArmy.prototype.generateRandomArmy = function () {
   const isFactionArmy = Math.random() * 100 < ArmyEventsManager.Params.factionArmyPercent;
 
   if (isFactionArmy) {
@@ -173,7 +173,7 @@ Game_AIArmy.prototype.generateRandomArmy = function() {
   }
 };
 
-Game_AIArmy.prototype._generateFactionArmy = function() {
+Game_AIArmy.prototype._generateFactionArmy = function () {
   this._isIndependent = false;
 
   // Get all main factions (those with iconIndex)
@@ -192,9 +192,9 @@ Game_AIArmy.prototype._generateFactionArmy = function() {
   this._factionId = faction.id;
 
   // Get region IDs for countries belonging to this faction
-  if (window.Countries && window.Countries.Countries) {
+  if (window.WorldGen && window.WorldGen.Countries) {
     const factionName = faction.name;
-    this._validRegions = window.Countries.Countries
+    this._validRegions = window.WorldGen.Countries
       .filter(country => country.faction === factionName && country.id > 0)
       .map(country => country.id);
   }
@@ -240,7 +240,7 @@ Game_AIArmy.prototype._generateFactionArmy = function() {
   }
 };
 
-Game_AIArmy.prototype._generateFactionArmyForCountry = function(faction, countryId) {
+Game_AIArmy.prototype._generateFactionArmyForCountry = function (faction, countryId) {
   this._isIndependent = false;
   this._factionId = faction.id;
 
@@ -289,13 +289,13 @@ Game_AIArmy.prototype._generateFactionArmyForCountry = function(faction, country
   }
 };
 
-Game_AIArmy.prototype._generateIndependentArmy = function() {
+Game_AIArmy.prototype._generateIndependentArmy = function () {
   this._isIndependent = true;
   this._factionId = -1;
 
   // Get region IDs for all countries (independent armies can spawn anywhere)
-  if (window.Countries && window.Countries.Countries) {
-    this._validRegions = window.Countries.Countries
+  if (window.WorldGen && window.WorldGen.Countries) {
+    this._validRegions = window.WorldGen.Countries
       .filter(country => country.id > 0)
       .map(country => country.id);
   }
@@ -362,7 +362,7 @@ Game_AIArmy.prototype._generateIndependentArmy = function() {
   }
 };
 
-Game_AIArmy.prototype.getFactionName = function() {
+Game_AIArmy.prototype.getFactionName = function () {
   if (this._isIndependent) {
     return "indie";
   }
@@ -376,7 +376,7 @@ Game_AIArmy.prototype.getFactionName = function() {
   return "Unknown";
 };
 
-Game_AIArmy.prototype.getFactionColor = function() {
+Game_AIArmy.prototype.getFactionColor = function () {
   if (this._isIndependent) {
     return "#FFFF00"; // Yellow for independent
   }
@@ -394,12 +394,12 @@ function Game_AIArmies() {
   this.initialize(...arguments);
 }
 
-Game_AIArmies.prototype.initialize = function() {
+Game_AIArmies.prototype.initialize = function () {
   this._armies = [];
   this._initialized = false;
 };
 
-Game_AIArmies.prototype.initializeArmies = function() {
+Game_AIArmies.prototype.initializeArmies = function () {
   if (this._initialized) return;
 
   // Find all Army events on world map
@@ -438,9 +438,9 @@ Game_AIArmies.prototype.initializeArmies = function() {
   );
 
   const factionCountryPairs = [];
-  if (window.Countries && window.Countries.Countries) {
+  if (window.WorldGen && window.WorldGen.Countries) {
     for (const faction of mainFactions) {
-      const countries = window.Countries.Countries.filter(
+      const countries = window.WorldGen.Countries.filter(
         country => country.faction === faction.name && country.id > 0
       );
       for (const country of countries) {
@@ -565,15 +565,15 @@ Game_AIArmies.prototype.initializeArmies = function() {
   this._initialized = true;
 };
 
-Game_AIArmies.prototype._getCountryNameFromRegionId = function(regionId) {
-  if (window.Countries && window.Countries.Countries) {
-    const country = window.Countries.Countries.find(c => c.id === regionId);
+Game_AIArmies.prototype._getCountryNameFromRegionId = function (regionId) {
+  if (window.WorldGen && window.WorldGen.Countries) {
+    const country = window.WorldGen.Countries.find(c => c.id === regionId);
     return country ? country.country : "Unknown";
   }
   return "Unknown";
 };
 
-Game_AIArmies.prototype._findRandomPassablePosition = function(validRegions) {
+Game_AIArmies.prototype._findRandomPassablePosition = function (validRegions) {
   const maxAttempts = 1000;
   let attempts = 0;
 
@@ -584,7 +584,7 @@ Game_AIArmies.prototype._findRandomPassablePosition = function(validRegions) {
       const y = Math.floor(Math.random() * $gameMap.height());
 
       if ($gameMap.isPassable(x, y, 2) && $gameMap.isPassable(x, y, 4) &&
-          $gameMap.isPassable(x, y, 6) && $gameMap.isPassable(x, y, 8)) {
+        $gameMap.isPassable(x, y, 6) && $gameMap.isPassable(x, y, 8)) {
         return { x, y };
       }
 
@@ -599,8 +599,8 @@ Game_AIArmies.prototype._findRandomPassablePosition = function(validRegions) {
       const regionId = $gameMap.regionId(x, y);
 
       if (validRegions.includes(regionId) &&
-          $gameMap.isPassable(x, y, 2) && $gameMap.isPassable(x, y, 4) &&
-          $gameMap.isPassable(x, y, 6) && $gameMap.isPassable(x, y, 8)) {
+        $gameMap.isPassable(x, y, 2) && $gameMap.isPassable(x, y, 4) &&
+        $gameMap.isPassable(x, y, 6) && $gameMap.isPassable(x, y, 8)) {
         return { x, y };
       }
 
@@ -612,15 +612,15 @@ Game_AIArmies.prototype._findRandomPassablePosition = function(validRegions) {
   return { x: Math.floor($gameMap.width() / 2), y: Math.floor($gameMap.height() / 2) };
 };
 
-Game_AIArmies.prototype.getArmyByEventId = function(eventId) {
+Game_AIArmies.prototype.getArmyByEventId = function (eventId) {
   return this._armies.find(army => army.getEventId() === eventId);
 };
 
-Game_AIArmies.prototype.getAllArmies = function() {
+Game_AIArmies.prototype.getAllArmies = function () {
   return this._armies;
 };
 
-Game_AIArmies.prototype.restoreArmyPositions = function() {
+Game_AIArmies.prototype.restoreArmyPositions = function () {
   if ($gameMap.mapId() !== ArmyEventsManager.Params.worldMapId) return;
 
   // Only restore faction armies - independent armies will be regenerated
@@ -635,14 +635,14 @@ Game_AIArmies.prototype.restoreArmyPositions = function() {
   }
 };
 
-Game_AIArmies.prototype.updateArmyPosition = function(eventId, x, y) {
+Game_AIArmies.prototype.updateArmyPosition = function (eventId, x, y) {
   const army = this.getArmyByEventId(eventId);
   if (army) {
     army.setPosition(x, y);
   }
 };
 
-Game_AIArmies.prototype._restoreAndRegenerateArmies = function(armyEvents) {
+Game_AIArmies.prototype._restoreAndRegenerateArmies = function (armyEvents) {
   const savedFactionArmies = $gameSystem._savedFactionArmies || [];
   const playerX = $gamePlayer.x;
   const playerY = $gamePlayer.y;
@@ -717,7 +717,7 @@ Game_AIArmies.prototype._restoreAndRegenerateArmies = function(armyEvents) {
   console.log(`[ArmyEventsManager] ============================================`);
 };
 
-Game_AIArmies.prototype._findPassablePositionNearPlayer = function(centerX, centerY, radius) {
+Game_AIArmies.prototype._findPassablePositionNearPlayer = function (centerX, centerY, radius) {
   const attempts = 100; // Try up to 100 times to find a passable position
 
   for (let i = 0; i < attempts; i++) {
@@ -739,7 +739,7 @@ Game_AIArmies.prototype._findPassablePositionNearPlayer = function(centerX, cent
   return { x: centerX, y: centerY };
 };
 
-Game_AIArmies.prototype._isPositionPassable = function(x, y) {
+Game_AIArmies.prototype._isPositionPassable = function (x, y) {
   // Check if the position is passable in at least one direction
   return (
     $gameMap.isPassable(x, y, 2) ||
@@ -749,7 +749,7 @@ Game_AIArmies.prototype._isPositionPassable = function(x, y) {
   );
 };
 
-Game_AIArmies.prototype.saveFactionArmies = function() {
+Game_AIArmies.prototype.saveFactionArmies = function () {
   if ($gameMap.mapId() !== ArmyEventsManager.Params.worldMapId) return;
 
   const factionArmies = [];
@@ -776,20 +776,20 @@ Game_AIArmies.prototype.saveFactionArmies = function() {
 //=============================================================================
 
 const _DataManager_createGameObjects_ArmyEvents = DataManager.createGameObjects;
-DataManager.createGameObjects = function() {
+DataManager.createGameObjects = function () {
   _DataManager_createGameObjects_ArmyEvents.call(this);
   $gameAIArmies = new Game_AIArmies();
 };
 
 const _DataManager_makeSaveContents_ArmyEvents = DataManager.makeSaveContents;
-DataManager.makeSaveContents = function() {
+DataManager.makeSaveContents = function () {
   const contents = _DataManager_makeSaveContents_ArmyEvents.call(this);
   contents.aiArmies = $gameAIArmies;
   return contents;
 };
 
 const _DataManager_extractSaveContents_ArmyEvents = DataManager.extractSaveContents;
-DataManager.extractSaveContents = function(contents) {
+DataManager.extractSaveContents = function (contents) {
   _DataManager_extractSaveContents_ArmyEvents.call(this, contents);
   $gameAIArmies = contents.aiArmies || new Game_AIArmies();
 };
@@ -799,7 +799,7 @@ DataManager.extractSaveContents = function(contents) {
 //=============================================================================
 
 const _Game_System_initialize_ArmyEvents = Game_System.prototype.initialize;
-Game_System.prototype.initialize = function() {
+Game_System.prototype.initialize = function () {
   _Game_System_initialize_ArmyEvents.call(this);
   this._savedFactionArmies = [];
 };
@@ -809,7 +809,7 @@ Game_System.prototype.initialize = function() {
 //=============================================================================
 
 const _Scene_Map_onMapLoaded_ArmyEvents = Scene_Map.prototype.onMapLoaded;
-Scene_Map.prototype.onMapLoaded = function() {
+Scene_Map.prototype.onMapLoaded = function () {
   _Scene_Map_onMapLoaded_ArmyEvents.call(this);
 
   if ($gameMap.mapId() === ArmyEventsManager.Params.worldMapId) {
@@ -828,7 +828,7 @@ Scene_Map.prototype.onMapLoaded = function() {
 //=============================================================================
 
 const _Game_Event_locate_ArmyEvents = Game_Event.prototype.locate;
-Game_Event.prototype.locate = function(x, y) {
+Game_Event.prototype.locate = function (x, y) {
   _Game_Event_locate_ArmyEvents.call(this, x, y);
 
   if ($gameMap.mapId() === ArmyEventsManager.Params.worldMapId) {
@@ -839,7 +839,7 @@ Game_Event.prototype.locate = function(x, y) {
 };
 
 const _Game_Event_update_ArmyEvents = Game_Event.prototype.update;
-Game_Event.prototype.update = function() {
+Game_Event.prototype.update = function () {
   _Game_Event_update_ArmyEvents.call(this);
 
   if ($gameMap.mapId() === ArmyEventsManager.Params.worldMapId) {
@@ -849,7 +849,7 @@ Game_Event.prototype.update = function() {
   }
 };
 
-Game_Event.prototype.updateArmyMovement = function() {
+Game_Event.prototype.updateArmyMovement = function () {
   // Only move if player is moving
   if (!$gamePlayer.isMoving()) {
     return;
@@ -874,7 +874,7 @@ Game_Event.prototype.updateArmyMovement = function() {
   this.moveArmyRandom(army);
 };
 
-Game_Event.prototype.moveArmyRandom = function(army) {
+Game_Event.prototype.moveArmyRandom = function (army) {
   const directions = [2, 4, 6, 8]; // down, left, right, up
   const validDirections = [];
 
@@ -892,7 +892,7 @@ Game_Event.prototype.moveArmyRandom = function(army) {
   }
 };
 
-Game_Event.prototype.canMoveInDirection = function(direction, army) {
+Game_Event.prototype.canMoveInDirection = function (direction, army) {
   const x2 = $gameMap.roundXWithDirection(this.x, direction);
   const y2 = $gameMap.roundYWithDirection(this.y, direction);
 
@@ -924,7 +924,7 @@ Game_Event.prototype.canMoveInDirection = function(direction, army) {
 //=============================================================================
 
 const _Game_Player_performTransfer_ArmyEvents = Game_Player.prototype.performTransfer;
-Game_Player.prototype.performTransfer = function() {
+Game_Player.prototype.performTransfer = function () {
   const currentMapId = $gameMap.mapId();
   const newMapId = this._newMapId;
 
@@ -950,12 +950,12 @@ Game_Player.prototype.performTransfer = function() {
 //=============================================================================
 
 const _Spriteset_Map_createCharacters_ArmyEvents = Spriteset_Map.prototype.createCharacters;
-Spriteset_Map.prototype.createCharacters = function() {
+Spriteset_Map.prototype.createCharacters = function () {
   _Spriteset_Map_createCharacters_ArmyEvents.call(this);
   // Don't create army labels here - they need to be created after armies are initialized
 };
 
-Spriteset_Map.prototype.createArmyLabels = function() {
+Spriteset_Map.prototype.createArmyLabels = function () {
   this._armyLabelSprites = [];
 
   // Player troop counter
@@ -977,12 +977,12 @@ Spriteset_Map.prototype.createArmyLabels = function() {
 };
 
 const _Spriteset_Map_update_ArmyEvents = Spriteset_Map.prototype.update;
-Spriteset_Map.prototype.update = function() {
+Spriteset_Map.prototype.update = function () {
   _Spriteset_Map_update_ArmyEvents.call(this);
   this.updateArmyLabels();
 };
 
-Spriteset_Map.prototype.updateArmyLabels = function() {
+Spriteset_Map.prototype.updateArmyLabels = function () {
   if (this._armyLabelSprites) {
     for (const sprite of this._armyLabelSprites) {
       sprite.update();
@@ -1001,21 +1001,21 @@ function Sprite_PlayerTroopCounter() {
 Sprite_PlayerTroopCounter.prototype = Object.create(Sprite.prototype);
 Sprite_PlayerTroopCounter.prototype.constructor = Sprite_PlayerTroopCounter;
 
-Sprite_PlayerTroopCounter.prototype.initialize = function() {
+Sprite_PlayerTroopCounter.prototype.initialize = function () {
   Sprite.prototype.initialize.call(this);
   this.createBitmap();
   this._lastTroopCount = -1;
   this.z = 7;
 };
 
-Sprite_PlayerTroopCounter.prototype.createBitmap = function() {
+Sprite_PlayerTroopCounter.prototype.createBitmap = function () {
   this.bitmap = new Bitmap(120, 32);
   this.bitmap.fontSize = 18;
   this.bitmap.outlineWidth = 4;
   this.bitmap.outlineColor = "black";
 };
 
-Sprite_PlayerTroopCounter.prototype.update = function() {
+Sprite_PlayerTroopCounter.prototype.update = function () {
   Sprite.prototype.update.call(this);
 
   const player = $gamePlayer;
@@ -1038,7 +1038,7 @@ Sprite_PlayerTroopCounter.prototype.update = function() {
   this.visible = troopCount > 0;
 };
 
-Sprite_PlayerTroopCounter.prototype.refresh = function() {
+Sprite_PlayerTroopCounter.prototype.refresh = function () {
   this.bitmap.clear();
 
   const text = `${this._lastTroopCount}`;
@@ -1058,7 +1058,7 @@ function Sprite_ArmyLabel() {
 Sprite_ArmyLabel.prototype = Object.create(Sprite.prototype);
 Sprite_ArmyLabel.prototype.constructor = Sprite_ArmyLabel;
 
-Sprite_ArmyLabel.prototype.initialize = function(event, army) {
+Sprite_ArmyLabel.prototype.initialize = function (event, army) {
   Sprite.prototype.initialize.call(this);
   this._event = event;
   this._army = army;
@@ -1067,7 +1067,7 @@ Sprite_ArmyLabel.prototype.initialize = function(event, army) {
   this.z = 7;
 };
 
-Sprite_ArmyLabel.prototype.createBitmap = function() {
+Sprite_ArmyLabel.prototype.createBitmap = function () {
   this.bitmap = new Bitmap(200, 56);
   this.bitmap.fontSize = 16;
   this.bitmap.outlineWidth = 3;
@@ -1079,7 +1079,7 @@ Sprite_ArmyLabel.prototype.createBitmap = function() {
   this.addChild(this._iconSprite);
 };
 
-Sprite_ArmyLabel.prototype.update = function() {
+Sprite_ArmyLabel.prototype.update = function () {
   Sprite.prototype.update.call(this);
 
   const screenX = this._event.screenX();
@@ -1089,7 +1089,7 @@ Sprite_ArmyLabel.prototype.update = function() {
   this.y = screenY;
 };
 
-Sprite_ArmyLabel.prototype.refresh = function() {
+Sprite_ArmyLabel.prototype.refresh = function () {
   this.bitmap.clear();
 
   const troopCount = this._army.getTroopCount();

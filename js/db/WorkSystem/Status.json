@@ -1,0 +1,21 @@
+{
+    "POISON": 4,
+    "BLIND": 5,
+    "SILENCE": 6,
+    "RAGE": 7,
+    "CONFUSION": 8,
+    "SLEEP": 10,
+    "FREEZE": 11,
+    "PARALYSIS": 12,
+    "STUN": 13,
+    "HOT": 25,
+    "COLD": 26,
+    "STATIC": 27,
+    "WET": 28,
+    "BERSERK": 31,
+    "NAUSEA": 41,
+    "DRUNK": 42,
+    "BURNED": 43,
+    "INFECTED": 44,
+    "BLEEDING": 48
+}

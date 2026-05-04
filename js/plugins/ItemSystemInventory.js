@@ -819,7 +819,7 @@
     if (fatMatch) $gameVariables.setValue(89, Number(fatMatch[1]));
     if (proteinMatch) $gameVariables.setValue(90, Number(proteinMatch[1]));
 
-      let commonEventId = 0;
+    let commonEventId = 0;
 
     if (isParty || !actor) {
       commonEventId = FOOD_COMMON_EVENT_ACTOR1;
@@ -844,7 +844,7 @@
     return commonEventEffect ? commonEventEffect.dataId : 0;
   };
 
-  Scene_EnhancedItem.prototype.getAnimationSound = function(item) {
+  Scene_EnhancedItem.prototype.getAnimationSound = function (item) {
     if (!item || !item.animationId || item.animationId <= 0) {
       return null;
     }
@@ -856,7 +856,7 @@
     return sortedSounds[0] ? sortedSounds[0].se : null;
   };
 
-  Scene_EnhancedItem.prototype.playItemSound = function(item) {
+  Scene_EnhancedItem.prototype.playItemSound = function (item) {
     const animationSound = this.getAnimationSound(item);
     if (animationSound && animationSound.name) {
       AudioManager.playSe(animationSound);
@@ -965,7 +965,7 @@
 
   // Hook into Game_Party hunger update to trigger auto-eat
   const _Game_Party_updateHungerAndSleep = Game_Party.prototype.updateHungerAndSleep;
-  Game_Party.prototype.updateHungerAndSleep = function() {
+  Game_Party.prototype.updateHungerAndSleep = function () {
     // Call original function first
     _Game_Party_updateHungerAndSleep.call(this);
 
@@ -1566,12 +1566,12 @@
     const faceY = rect.y + padding;
 
     try {
-      // Get bust image path (checks variables 106-109 based on actor ID, uses SPRITES_ASSOCIATION)
+      // Get bust image path (checks variables 106-109 based on actor ID, uses SpritesAssociation)
       const bustImagePath = utils.getActorBustImagePath(actor);
 
       // Load fallback image with error handling
       let fallbackImage = null;
-    try {
+      try {
         fallbackImage = ImageManager.loadBitmap("img/busts/", "7");
       } catch (err) {
         console.error("Failed to load fallback bust image:", err);
@@ -1609,15 +1609,15 @@
         this.contents.blt(bustBitmap, 0, 180, bustBitmap.width, bustBitmap.height - 180, faceX, faceY, faceWidth, faceHeight);
       }
     } catch (error) {
-        // Fallback on exception
-        const fallbackImage = ImageManager.loadBitmap("img/busts/", "7");
-        if (fallbackImage.isReady()) {
+      // Fallback on exception
+      const fallbackImage = ImageManager.loadBitmap("img/busts/", "7");
+      if (fallbackImage.isReady()) {
+        this.contents.blt(fallbackImage, 0, 180, fallbackImage.width, fallbackImage.height - 180, faceX, faceY, faceWidth, faceHeight);
+      } else {
+        fallbackImage.addLoadListener(() => {
           this.contents.blt(fallbackImage, 0, 180, fallbackImage.width, fallbackImage.height - 180, faceX, faceY, faceWidth, faceHeight);
-        } else {
-          fallbackImage.addLoadListener(() => {
-            this.contents.blt(fallbackImage, 0, 180, fallbackImage.width, fallbackImage.height - 180, faceX, faceY, faceWidth, faceHeight);
-          });
-        }
+        });
+      }
     }
 
     // Position name and stats below the large sprite instead of to the right
@@ -1804,7 +1804,7 @@
       const faceY = rect.y + padding;
 
       try {
-        // Get bust image path (checks variables 106-109 based on actor ID, uses SPRITES_ASSOCIATION)
+        // Get bust image path (checks variables 106-109 based on actor ID, uses SpritesAssociation)
         const bustImagePath = utils.getActorBustImagePath(actor);
 
         // Load fallback image with error handling
@@ -1902,7 +1902,7 @@
     const faceX = x;
     const faceY = y;
 
-    // Get bust image path (checks variables 106-109 based on actor ID, uses SPRITES_ASSOCIATION)
+    // Get bust image path (checks variables 106-109 based on actor ID, uses SpritesAssociation)
     const bustImagePath = utils.getActorBustImagePath(actor);
 
     // Load fallback image with error handling

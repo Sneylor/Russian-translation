@@ -144,7 +144,7 @@
         } while (i >= 0);
         return letters;
     };
-    
+
     for (const name of spriteSheets) {
         const config = SPRITE_SHEET_CONFIG[name];
         // Determine cutoff index for this sheet (use config or default based on sheet type)
@@ -173,16 +173,16 @@
         // Get random index from available sprites
         const randomIndex = Math.floor(Math.random() * spriteOptions.length);
         const randomSprite = spriteOptions[randomIndex];
-        
+
         // Apply the randomly selected sprite to the specified actor
         const actor = $gameActors.actor(actorId);
         actor.setCharacterImage(randomSprite.name, randomSprite.index);
-        
+
         // Refresh player if this is the party leader
         if (actorId === $gameParty.leader().actorId()) {
             $gamePlayer.refresh();
         }
-        
+
         return randomSprite;
     }
 
@@ -192,12 +192,12 @@
             super();
             this._actorId = 1; // Default to Actor 1
         }
-        
+
         // Add a method to set the actor ID
         setActor(actorId) {
             this._actorId = actorId;
         }
-        
+
         create() {
             super.create();
             this.createHelpWindow();
@@ -208,10 +208,10 @@
         createHelpWindow() {
             const rect = this.helpWindowRect();
             this._helpWindow = new Window_Help(rect);
-            if(ConfigManager.language === 'it' ){
+            if (ConfigManager.language === 'it') {
                 this._helpWindow.setText("Scegli pure il personaggio");
 
-            }else{
+            } else {
                 this._helpWindow.setText("Select a character sprite.");
 
             }
@@ -268,9 +268,9 @@
 
                 SoundManager.playOk();
 
-                // Look up associated bust from SPRITES_ASSOCIATION
+                // Look up associated bust from SpritesAssociation
                 let preselectedBust = null;
-                const spritesAssoc = window.Sprites && window.Sprites.SPRITES_ASSOCIATION;
+                const spritesAssoc = window.Sprites && window.Sprites.SpritesAssociation;
                 if (spritesAssoc && spritesAssoc[entry.name]) {
                     const busts = spritesAssoc[entry.name];
                     preselectedBust = busts[entry.index] !== undefined ? busts[entry.index] : busts[0];
@@ -334,10 +334,10 @@
         rowSpacing() {
             return this.spacing();
         }
-        
+
         update() {
             super.update();
-            
+
             // Check if selection changed
             if (this.index() !== this._lastSelectedIndex) {
                 if (this._lastSelectedIndex >= 0) {
@@ -345,7 +345,7 @@
                 }
                 this._lastSelectedIndex = this.index();
             }
-            
+
             // Update animation for selected sprite only
             if (this.index() >= 0) {
                 this._animationCount++;
@@ -354,7 +354,7 @@
                 }
             }
         }
-        
+
         updateCharacterAnimation() {
             const index = this.index();
             if (index >= 0) {
@@ -364,7 +364,7 @@
 
         drawAllItems() {
             super.drawAllItems();
-            
+
             // Clear any existing character sprites
             if (this._characterSprites) {
                 this._characterSprites.forEach(sprite => {
@@ -388,24 +388,24 @@
             // Draw only the character sprite (no bust)
             this.drawCharacterSprite(sprite.name, sprite.index, rect.x + rect.width / 2, rect.y + rect.height / 2, index === this.index());
         }
-        
+
         drawCharacterSprite(characterName, characterIndex, x, y, isSelected) {
             // Find the index in the sprite options array
             const spriteIndex = this._sprites.findIndex(s => s.name === characterName && s.index === characterIndex);
-            
+
             // Get the complete item rect
             const rect = this.itemRectWithPadding(this.indexToRect(spriteIndex));
-            
+
             // Load character bitmap
             const bitmap = ImageManager.loadCharacter(characterName);
             if (!bitmap.isReady()) {
                 bitmap.addLoadListener(() => this.redrawItem(spriteIndex));
                 return;
             }
-            
+
             // Determine character sheet type
             const big = ImageManager.isBigCharacter(characterName);
-            
+
             // Calculate pattern (animation frame) - only animate selected sprite
             let pattern = 1; // Default to middle frame (standing)
             if (isSelected) {
@@ -414,28 +414,28 @@
                 // Pattern for walking: 0, 1, 2, 1
                 pattern = animFrame === 3 ? 1 : animFrame;
             }
-            
+
             // Face down (direction 2)
             const direction = 2;
-            
+
             // Calculate dimensions and source rectangle
             const pw = bitmap.width / (big ? 3 : 12);
             const ph = bitmap.height / (big ? 4 : 8);
-            
+
             // For big characters: pattern = column (animation frame), direction = row
             // For regular characters: characterIndex determines position in grid
             const sx = (big ? pattern : characterIndex % 4 * 3 + pattern) * pw;
             const sy = (big ? (direction / 2 - 1) : Math.floor(characterIndex / 4) * 4 + (direction / 2 - 1)) * ph;
-            
+
             // Use integer scaling for pixel perfect rendering
             const scale = 1; // 1x scale for compact grid
             const dw = Math.floor(pw * scale);
             const dh = Math.floor(ph * scale);
-            
+
             // Use integer coordinates for pixel perfect positioning
             const dx = Math.floor(x - dw / 2);
             const dy = Math.floor(y - dh / 2);
-            
+
             // Draw directly to the window contents with integer coordinates
             this.contents.blt(bitmap, Math.floor(sx), Math.floor(sy), Math.floor(pw), Math.floor(ph), dx, dy, dw, dh);
         }
@@ -443,7 +443,7 @@
         drawItemBackground(index) {
             // Do nothing - no background highlight for selected item
         }
-        
+
         // Helper method to convert index to rect coordinates
         indexToRect(index) {
             if (index < 0) return new Rectangle(0, 0, 0, 0);
@@ -458,7 +458,7 @@
             const y = row * itemHeight + row * rowSpacing;
             return new Rectangle(x, y, itemWidth, itemHeight);
         }
-        
+
         // Add padding to rect
         itemRectWithPadding(rect) {
             const padding = this.itemPadding();
@@ -469,18 +469,18 @@
                 rect.height - padding * 2
             );
         }
-        
+
         select(index) {
             const lastIndex = this.index();
             super.select(index);
-            
+
             if (lastIndex !== index) {
                 // Force complete redraw of both the previous and new selected items
                 if (lastIndex >= 0) this.redrawItem(lastIndex);
                 if (index >= 0) this.redrawItem(index);
             }
         }
-        
+
         // Override the cursor rectangle to hide the selection border
         refreshCursor() {
             // Override to hide the cursor/border completely
@@ -780,11 +780,11 @@
                     this._bustCategories['Cat'].push(bust);
                 } else if (bust.startsWith('Kobold')) {
                     this._bustCategories['Kobold'].push(bust);
-                }else if (bust.startsWith('Alien')) {
+                } else if (bust.startsWith('Alien')) {
                     this._bustCategories['Alien'].push(bust);
-                }else if (bust.startsWith('Insectoid')) {
+                } else if (bust.startsWith('Insectoid')) {
                     this._bustCategories['Insectoid'].push(bust);
-                }else {
+                } else {
                     this._bustCategories['Human'].push(bust);
                 }
             }
@@ -988,16 +988,16 @@
 
     // Patch the prepareNextScene method to properly handle Scene_SpriteGridSelector and Scene_BustSelector
     const _SceneManager_prepareNextScene = SceneManager.prepareNextScene;
-    SceneManager.prepareNextScene = function(sceneClass, ...args) {
+    SceneManager.prepareNextScene = function (sceneClass, ...args) {
         if (sceneClass === Scene_SpriteGridSelector || sceneClass === Scene_BustSelector) {
             // Handle sprite grid selector and bust selector preparation
             const [actorId] = args;
             if (sceneClass === Scene_SpriteGridSelector) {
-                Scene_SpriteGridSelector.prototype.setActor = function(actorId) {
+                Scene_SpriteGridSelector.prototype.setActor = function (actorId) {
                     this._actorId = actorId || 1;
                 };
             } else if (sceneClass === Scene_BustSelector) {
-                Scene_BustSelector.prototype.setActor = function(actorId) {
+                Scene_BustSelector.prototype.setActor = function (actorId) {
                     this._actorId = actorId || 1;
                 };
             }
@@ -1015,7 +1015,7 @@
     PluginManager.registerCommand(pluginName, "OpenSpriteSelector", () => {
         SceneManager.push(Scene_SpriteGridSelector);
     });
-    
+
     PluginManager.registerCommand(pluginName, "OpenSpriteSelectorForActor", args => {
         const actorId = parseInt(args.actorId) || 1;
         SceneManager.push(Scene_SpriteGridSelector);
@@ -1023,7 +1023,7 @@
             SceneManager._nextScene.setActor(actorId);
         }
     });
-    
+
     // Register the new random sprite selection command
     PluginManager.registerCommand(pluginName, "SelectRandomSprite", args => {
         const actorId = parseInt(args.actorId) || 1;
@@ -1032,12 +1032,12 @@
     });
 
     // Expose selectRandomSprite globally for use by other plugins
-    window.selectRandomSpriteForActor = function(actorId) {
+    window.selectRandomSpriteForActor = function (actorId) {
         return selectRandomSprite(actorId);
     };
 
     // Global function to select a random bust and store it in appropriate variable
-    window.selectRandomBustForActor = function(actorId) {
+    window.selectRandomBustForActor = function (actorId) {
         // Get a list of all available bust files
         const availableBusts = [];
 

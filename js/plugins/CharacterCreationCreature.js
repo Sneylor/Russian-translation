@@ -35,27 +35,27 @@
   Window_ArchetypeSelect.prototype = Object.create(Window_Selectable.prototype);
   Window_ArchetypeSelect.prototype.constructor = Window_ArchetypeSelect;
 
-  Window_ArchetypeSelect.prototype.initialize = function(rect) {
+  Window_ArchetypeSelect.prototype.initialize = function (rect) {
     Window_Selectable.prototype.initialize.call(this, rect);
     this._data = [];
     this.refresh();
   };
 
-  Window_ArchetypeSelect.prototype.maxCols = function() {
+  Window_ArchetypeSelect.prototype.maxCols = function () {
     return 1;
   };
 
-  Window_ArchetypeSelect.prototype.maxItems = function() {
+  Window_ArchetypeSelect.prototype.maxItems = function () {
     return this._data ? this._data.length : 0;
   };
 
-  Window_ArchetypeSelect.prototype.item = function() {
+  Window_ArchetypeSelect.prototype.item = function () {
     return this._data && this.index() >= 0 ? this._data[this.index()] : null;
   };
 
-  Window_ArchetypeSelect.prototype.makeItemList = function() {
+  Window_ArchetypeSelect.prototype.makeItemList = function () {
     this._data = [];
-    const { EnemyArchetypes } = window.ProstheticsData || {};
+    const { EnemyArchetypes } = window.Health || {};
     if (EnemyArchetypes) {
       for (const key in EnemyArchetypes) {
         this._data.push({
@@ -66,7 +66,7 @@
     }
   };
 
-  Window_ArchetypeSelect.prototype.drawItem = function(index) {
+  Window_ArchetypeSelect.prototype.drawItem = function (index) {
     const item = this._data[index];
     if (item) {
       const rect = this.itemLineRect(index);
@@ -74,14 +74,14 @@
     }
   };
 
-  Window_ArchetypeSelect.prototype.refresh = function() {
+  Window_ArchetypeSelect.prototype.refresh = function () {
     this.makeItemList();
     Window_Selectable.prototype.refresh.call(this);
   };
 
   // Patch to call 'select' handler for live updates
   const _Window_ArchetypeSelect_select = Window_ArchetypeSelect.prototype.select;
-  Window_ArchetypeSelect.prototype.select = function(index) {
+  Window_ArchetypeSelect.prototype.select = function (index) {
     _Window_ArchetypeSelect_select.call(this, index);
     if (this.isHandled('select')) {
       this.callHandler('select');
@@ -98,26 +98,26 @@
   Window_BattlerList.prototype = Object.create(Window_Selectable.prototype);
   Window_BattlerList.prototype.constructor = Window_BattlerList;
 
-  Window_BattlerList.prototype.initialize = function(rect) {
+  Window_BattlerList.prototype.initialize = function (rect) {
     this._images = [];
     this._loadingComplete = false;
     Window_Selectable.prototype.initialize.call(this, rect);
     this.loadImages();
   };
 
-  Window_BattlerList.prototype.maxCols = function() {
+  Window_BattlerList.prototype.maxCols = function () {
     return 1;
   };
 
-  Window_BattlerList.prototype.maxItems = function() {
+  Window_BattlerList.prototype.maxItems = function () {
     return this._images.length;
   };
 
-  Window_BattlerList.prototype.itemHeight = function() {
+  Window_BattlerList.prototype.itemHeight = function () {
     return this.lineHeight();
   };
 
-  Window_BattlerList.prototype.loadImages = function() {
+  Window_BattlerList.prototype.loadImages = function () {
     this._images = [];
 
     // Get list of enemy images from img/enemies/ folder
@@ -148,11 +148,11 @@
     this.refresh();
   };
 
-  Window_BattlerList.prototype.item = function() {
+  Window_BattlerList.prototype.item = function () {
     return this._images[this.index()];
   };
 
-  Window_BattlerList.prototype.drawItem = function(index) {
+  Window_BattlerList.prototype.drawItem = function (index) {
     if (!this._images[index]) return;
 
     const filename = this._images[index];
@@ -161,12 +161,12 @@
     this.drawText(filename, rect.x, rect.y, rect.width);
   };
 
-  Window_BattlerList.prototype.refresh = function() {
+  Window_BattlerList.prototype.refresh = function () {
     this.contents.clear();
     this.drawAllItems();
   };
 
-  Window_BattlerList.prototype.select = function(index) {
+  Window_BattlerList.prototype.select = function (index) {
     Window_Selectable.prototype.select.call(this, index);
     // Trigger the select handler when selection changes
     if (this.isHandled('select')) {
@@ -184,19 +184,19 @@
   Window_BattlerPreview.prototype = Object.create(Window_Base.prototype);
   Window_BattlerPreview.prototype.constructor = Window_BattlerPreview;
 
-  Window_BattlerPreview.prototype.initialize = function(rect) {
+  Window_BattlerPreview.prototype.initialize = function (rect) {
     Window_Base.prototype.initialize.call(this, rect);
     this._currentBattler = null;
   };
 
-  Window_BattlerPreview.prototype.setBattler = function(filename) {
+  Window_BattlerPreview.prototype.setBattler = function (filename) {
     if (this._currentBattler !== filename) {
       this._currentBattler = filename;
       this.refresh();
     }
   };
 
-  Window_BattlerPreview.prototype.refresh = function() {
+  Window_BattlerPreview.prototype.refresh = function () {
     this.contents.clear();
 
     if (!this._currentBattler) {
@@ -257,23 +257,23 @@
     { displayName: 'FarmAnimals02RM_5', path: 'FarmAnimals02RM', index: 5 },
     { displayName: 'FarmAnimals02RM_6', path: 'FarmAnimals02RM', index: 6 },
     { displayName: 'FarmAnimals02RM_7', path: 'FarmAnimals02RM', index: 7 },
-    { displayName: 'MV_Chick',        path: 'Animals/!$MV_Chick',        index: 0 },
-    { displayName: 'MV_Chicken_1',    path: 'Animals/!$MV_Chicken_1',    index: 0 },
-    { displayName: 'MV_Chicken_2',    path: 'Animals/!$MV_Chicken_2',    index: 0 },
-    { displayName: 'MV_Chicken_3',    path: 'Animals/!$MV_Chicken_3',    index: 0 },
-    { displayName: 'MV_Chicken_4',    path: 'Animals/!$MV_Chicken_4',    index: 0 },
-    { displayName: 'MV_Chicken_5',    path: 'Animals/!$MV_Chicken_5',    index: 0 },
-    { displayName: 'MV_Chicken_6',    path: 'Animals/!$MV_Chicken_6',    index: 0 },
-    { displayName: 'MV_Chicken_7',    path: 'Animals/!$MV_Chicken_7',    index: 0 },
-    { displayName: 'MV_Chicken_Old',  path: 'Animals/!$MV_Chicken_Old',  index: 0 },
-    { displayName: 'MV_Cow_Baby_1',   path: 'Animals/!$MV_Cow_Baby_1',   index: 0 },
-    { displayName: 'MV_Cow_Baby_2',   path: 'Animals/!$MV_Cow_Baby_2',   index: 0 },
-    { displayName: 'MV_Duckling_1',   path: 'Animals/!$MV_Duckling_1',   index: 0 },
-    { displayName: 'MV_Duckling_2',   path: 'Animals/!$MV_Duckling_2',   index: 0 },
-    { displayName: 'MV_Goat_Baby_1',  path: 'Animals/!$MV_Goat_Baby_1',  index: 0 },
-    { displayName: 'MV_Goat_Baby_2',  path: 'Animals/!$MV_Goat_Baby_2',  index: 0 },
-    { displayName: 'MV_Piglet_1',     path: 'Animals/!$MV_Piglet_1',     index: 0 },
-    { displayName: 'MV_Piglet_2',     path: 'Animals/!$MV_Piglet_2',     index: 0 },
+    { displayName: 'MV_Chick', path: 'Animals/!$MV_Chick', index: 0 },
+    { displayName: 'MV_Chicken_1', path: 'Animals/!$MV_Chicken_1', index: 0 },
+    { displayName: 'MV_Chicken_2', path: 'Animals/!$MV_Chicken_2', index: 0 },
+    { displayName: 'MV_Chicken_3', path: 'Animals/!$MV_Chicken_3', index: 0 },
+    { displayName: 'MV_Chicken_4', path: 'Animals/!$MV_Chicken_4', index: 0 },
+    { displayName: 'MV_Chicken_5', path: 'Animals/!$MV_Chicken_5', index: 0 },
+    { displayName: 'MV_Chicken_6', path: 'Animals/!$MV_Chicken_6', index: 0 },
+    { displayName: 'MV_Chicken_7', path: 'Animals/!$MV_Chicken_7', index: 0 },
+    { displayName: 'MV_Chicken_Old', path: 'Animals/!$MV_Chicken_Old', index: 0 },
+    { displayName: 'MV_Cow_Baby_1', path: 'Animals/!$MV_Cow_Baby_1', index: 0 },
+    { displayName: 'MV_Cow_Baby_2', path: 'Animals/!$MV_Cow_Baby_2', index: 0 },
+    { displayName: 'MV_Duckling_1', path: 'Animals/!$MV_Duckling_1', index: 0 },
+    { displayName: 'MV_Duckling_2', path: 'Animals/!$MV_Duckling_2', index: 0 },
+    { displayName: 'MV_Goat_Baby_1', path: 'Animals/!$MV_Goat_Baby_1', index: 0 },
+    { displayName: 'MV_Goat_Baby_2', path: 'Animals/!$MV_Goat_Baby_2', index: 0 },
+    { displayName: 'MV_Piglet_1', path: 'Animals/!$MV_Piglet_1', index: 0 },
+    { displayName: 'MV_Piglet_2', path: 'Animals/!$MV_Piglet_2', index: 0 },
   ];
 
   // ============================================================================
@@ -286,26 +286,26 @@
   Window_CharacterSelect.prototype = Object.create(Window_Selectable.prototype);
   Window_CharacterSelect.prototype.constructor = Window_CharacterSelect;
 
-  Window_CharacterSelect.prototype.initialize = function(rect) {
+  Window_CharacterSelect.prototype.initialize = function (rect) {
     this._images = [];  // array of { displayName, path, index, isAnimal }
     this._bitmaps = [];
     Window_Selectable.prototype.initialize.call(this, rect);
     this.loadImages();
   };
 
-  Window_CharacterSelect.prototype.maxCols = function() {
+  Window_CharacterSelect.prototype.maxCols = function () {
     return 3;
   };
 
-  Window_CharacterSelect.prototype.maxItems = function() {
+  Window_CharacterSelect.prototype.maxItems = function () {
     return this._images.length;
   };
 
-  Window_CharacterSelect.prototype.itemHeight = function() {
+  Window_CharacterSelect.prototype.itemHeight = function () {
     return 96;
   };
 
-  Window_CharacterSelect.prototype.loadImages = function() {
+  Window_CharacterSelect.prototype.loadImages = function () {
     this._images = [];
     this._bitmaps = [];
 
@@ -343,11 +343,11 @@
     this.refresh();
   };
 
-  Window_CharacterSelect.prototype.item = function() {
+  Window_CharacterSelect.prototype.item = function () {
     return this._images[this.index()] || null;
   };
 
-  Window_CharacterSelect.prototype.drawItem = function(index) {
+  Window_CharacterSelect.prototype.drawItem = function (index) {
     if (index < 0 || index >= this._images.length) return;
 
     const entry = this._images[index];
@@ -399,12 +399,12 @@
     this.contents.blt(bitmap, sx, sy, pw, ph, dx, dy, dw, dh);
   };
 
-  Window_CharacterSelect.prototype.refresh = function() {
+  Window_CharacterSelect.prototype.refresh = function () {
     this.contents.clear();
     this.drawAllItems();
   };
 
-  Window_CharacterSelect.prototype.update = function() {
+  Window_CharacterSelect.prototype.update = function () {
     Window_Selectable.prototype.update.call(this);
   };
 
@@ -418,11 +418,11 @@
   Window_CreateCreatureMode.prototype = Object.create(Window_Command.prototype);
   Window_CreateCreatureMode.prototype.constructor = Window_CreateCreatureMode;
 
-  Window_CreateCreatureMode.prototype.initialize = function(rect) {
+  Window_CreateCreatureMode.prototype.initialize = function (rect) {
     Window_Command.prototype.initialize.call(this, rect);
   };
 
-  Window_CreateCreatureMode.prototype.makeCommandList = function() {
+  Window_CreateCreatureMode.prototype.makeCommandList = function () {
     this.addCommand(getTranslatedText("Baseline", "Base"), "baseline");
     this.addCommand(getTranslatedText("Hybrid", "Ibrido"), "hybrid");
   };
@@ -437,13 +437,13 @@
   Window_ArchetypeParts.prototype = Object.create(Window_Base.prototype);
   Window_ArchetypeParts.prototype.constructor = Window_ArchetypeParts;
 
-  Window_ArchetypeParts.prototype.initialize = function(rect) {
+  Window_ArchetypeParts.prototype.initialize = function (rect) {
     Window_Base.prototype.initialize.call(this, rect);
     this._arch1Key = null;
     this._arch2Key = null;
   };
 
-  Window_ArchetypeParts.prototype.setArchetypes = function(arch1Key, arch2Key) {
+  Window_ArchetypeParts.prototype.setArchetypes = function (arch1Key, arch2Key) {
     if (this._arch1Key !== arch1Key || this._arch2Key !== arch2Key) {
       this._arch1Key = arch1Key;
       this._arch2Key = arch2Key;
@@ -451,9 +451,9 @@
     }
   };
 
-  Window_ArchetypeParts.prototype.refresh = function() {
+  Window_ArchetypeParts.prototype.refresh = function () {
     this.contents.clear();
-    const { EnemyArchetypes } = window.ProstheticsData || {};
+    const { EnemyArchetypes } = window.Health || {};
     if (!EnemyArchetypes) return;
 
     const arch1 = this._arch1Key ? EnemyArchetypes[this._arch1Key] : null;
@@ -539,11 +539,11 @@
   Scene_CreateCreature.prototype.constructor = Scene_CreateCreature;
 
   // Static method to set target actor ID before opening the scene
-  Scene_CreateCreature.setTargetActorId = function(actorId) {
+  Scene_CreateCreature.setTargetActorId = function (actorId) {
     Scene_CreateCreature._targetActorId = actorId || 1;
   };
 
-  Scene_CreateCreature.prototype.initialize = function() {
+  Scene_CreateCreature.prototype.initialize = function () {
     Scene_MenuBase.prototype.initialize.call(this);
     this._selectedArchetype1 = null;
     this._selectedArchetype2 = null;
@@ -554,7 +554,7 @@
     this._targetActorId = Scene_CreateCreature._targetActorId || 1; // Target actor ID (default: 1, can be 1, 2, or 3)
   };
 
-  Scene_CreateCreature.prototype.create = function() {
+  Scene_CreateCreature.prototype.create = function () {
     Scene_MenuBase.prototype.create.call(this);
     this.createHelpWindow();
     this.createModeWindow();
@@ -567,13 +567,13 @@
 
   // --- Window Creation ---
 
-  Scene_CreateCreature.prototype.createHelpWindow = function() {
+  Scene_CreateCreature.prototype.createHelpWindow = function () {
     const rect = this.helpWindowRect();
     this._helpWindow = new Window_Help(rect);
     this.addWindow(this._helpWindow);
   };
 
-  Scene_CreateCreature.prototype.createModeWindow = function() {
+  Scene_CreateCreature.prototype.createModeWindow = function () {
     const rect = this.modeWindowRect();
     this._modeWindow = new Window_CreateCreatureMode(rect);
     this._modeWindow.setHandler('baseline', this.onModeSelect.bind(this, 'baseline'));
@@ -582,7 +582,7 @@
     this.addWindow(this._modeWindow);
   };
 
-  Scene_CreateCreature.prototype.createArchetypeWindow = function() {
+  Scene_CreateCreature.prototype.createArchetypeWindow = function () {
     const rect = this.archetypeListRect();
     this._archetypeWindow = new Window_ArchetypeSelect(rect);
     this._archetypeWindow.setHandler('ok', this.onArchetypeOk.bind(this));
@@ -591,13 +591,13 @@
     this.addWindow(this._archetypeWindow);
   };
 
-  Scene_CreateCreature.prototype.createArchetypePartsWindow = function() {
+  Scene_CreateCreature.prototype.createArchetypePartsWindow = function () {
     const rect = this.archetypePartsRect();
     this._archetypePartsWindow = new Window_ArchetypeParts(rect);
     this.addWindow(this._archetypePartsWindow);
   };
 
-  Scene_CreateCreature.prototype.createBattlerWindow = function() {
+  Scene_CreateCreature.prototype.createBattlerWindow = function () {
     const listRect = this.battlerListRect();
     this._battlerListWindow = new Window_BattlerList(listRect);
     this._battlerListWindow.setHandler('ok', this.onBattlerOk.bind(this));
@@ -610,7 +610,7 @@
     this.addWindow(this._battlerPreviewWindow);
   };
 
-  Scene_CreateCreature.prototype.createCharacterWindow = function() {
+  Scene_CreateCreature.prototype.createCharacterWindow = function () {
     const rect = this.fullMainWindowRect();
     this._characterWindow = new Window_CharacterSelect(rect);
     this._characterWindow.setHandler('ok', this.onCharacterOk.bind(this));
@@ -620,13 +620,13 @@
 
   // --- Window Rects ---
 
-  Scene_CreateCreature.prototype.helpWindowRect = function() {
+  Scene_CreateCreature.prototype.helpWindowRect = function () {
     const ww = Graphics.boxWidth;
     const wh = this.calcWindowHeight(2, false);
     return new Rectangle(0, 0, ww, wh);
   };
 
-  Scene_CreateCreature.prototype.modeWindowRect = function() {
+  Scene_CreateCreature.prototype.modeWindowRect = function () {
     const ww = 240;
     const wh = this.calcWindowHeight(2, true);
     const wx = (Graphics.boxWidth - ww) / 2;
@@ -634,22 +634,22 @@
     return new Rectangle(wx, wy, ww, wh);
   };
 
-  Scene_CreateCreature.prototype.mainRectY = function() {
+  Scene_CreateCreature.prototype.mainRectY = function () {
     return this._helpWindow.y + this._helpWindow.height;
   }
 
-  Scene_CreateCreature.prototype.mainRectHeight = function() {
+  Scene_CreateCreature.prototype.mainRectHeight = function () {
     return Graphics.boxHeight - this.mainRectY();
   }
 
-  Scene_CreateCreature.prototype.archetypeListRect = function() {
+  Scene_CreateCreature.prototype.archetypeListRect = function () {
     const wy = this.mainRectY();
     const wh = this.mainRectHeight();
     const ww = Math.floor(Graphics.boxWidth * 0.5);
     return new Rectangle(0, wy, ww, wh);
   };
 
-  Scene_CreateCreature.prototype.archetypePartsRect = function() {
+  Scene_CreateCreature.prototype.archetypePartsRect = function () {
     const wy = this.mainRectY();
     const wh = this.mainRectHeight();
     const ww = Graphics.boxWidth - Math.floor(Graphics.boxWidth * 0.5);
@@ -657,20 +657,20 @@
     return new Rectangle(wx, wy, ww, wh);
   };
 
-  Scene_CreateCreature.prototype.fullMainWindowRect = function() {
+  Scene_CreateCreature.prototype.fullMainWindowRect = function () {
     const wy = this.mainRectY();
     const wh = this.mainRectHeight();
     return new Rectangle(0, wy, Graphics.boxWidth, wh);
   };
 
-  Scene_CreateCreature.prototype.battlerListRect = function() {
+  Scene_CreateCreature.prototype.battlerListRect = function () {
     const wy = this.mainRectY();
     const wh = this.mainRectHeight();
     const ww = Math.floor(Graphics.boxWidth * 0.3);
     return new Rectangle(0, wy, ww, wh);
   };
 
-  Scene_CreateCreature.prototype.battlerPreviewRect = function() {
+  Scene_CreateCreature.prototype.battlerPreviewRect = function () {
     const wy = this.mainRectY();
     const wh = this.mainRectHeight();
     const ww = Graphics.boxWidth - Math.floor(Graphics.boxWidth * 0.3);
@@ -680,7 +680,7 @@
 
   // --- Step Management ---
 
-  Scene_CreateCreature.prototype.showStep = function(step) {
+  Scene_CreateCreature.prototype.showStep = function (step) {
     this._step = step;
 
     // Hide all windows
@@ -743,12 +743,12 @@
 
   // --- Event Handlers ---
 
-  Scene_CreateCreature.prototype.onModeSelect = function(mode) {
+  Scene_CreateCreature.prototype.onModeSelect = function (mode) {
     this._mode = mode;
     this.showStep(1); // Go to Archetype 1 selection
   };
 
-  Scene_CreateCreature.prototype.onArchetypeSelect = function() {
+  Scene_CreateCreature.prototype.onArchetypeSelect = function () {
     const item = this._archetypeWindow.item();
     if (!item) return;
 
@@ -760,7 +760,7 @@
     }
   };
 
-  Scene_CreateCreature.prototype.onArchetypeOk = function() {
+  Scene_CreateCreature.prototype.onArchetypeOk = function () {
     const item = this._archetypeWindow.item();
     if (!item) return;
 
@@ -777,7 +777,7 @@
     }
   };
 
-  Scene_CreateCreature.prototype.onArchetypeCancel = function() {
+  Scene_CreateCreature.prototype.onArchetypeCancel = function () {
     if (this._step === 1) {
       this.showStep(0); // Back to Mode
     } else if (this._step === 2) {
@@ -785,14 +785,14 @@
     }
   };
 
-  Scene_CreateCreature.prototype.onBattlerSelect = function() {
+  Scene_CreateCreature.prototype.onBattlerSelect = function () {
     const battlerName = this._battlerListWindow.item();
     if (this._battlerPreviewWindow) {
       this._battlerPreviewWindow.setBattler(battlerName);
     }
   };
 
-  Scene_CreateCreature.prototype.onBattlerOk = function() {
+  Scene_CreateCreature.prototype.onBattlerOk = function () {
     const battlerName = this._battlerListWindow.item();
     if (battlerName) {
       this._selectedBattler = battlerName;
@@ -804,7 +804,7 @@
     }
   };
 
-  Scene_CreateCreature.prototype.onBattlerCancel = function() {
+  Scene_CreateCreature.prototype.onBattlerCancel = function () {
     if (this._mode === 'hybrid') {
       this.showStep(2); // Back to Archetype 2
     } else {
@@ -812,7 +812,7 @@
     }
   };
 
-  Scene_CreateCreature.prototype.onCharacterOk = function() {
+  Scene_CreateCreature.prototype.onCharacterOk = function () {
     const entry = this._characterWindow.item();
     if (entry) {
       this._selectedCharacter = entry;
@@ -821,13 +821,13 @@
     }
   };
 
-  Scene_CreateCreature.prototype.onCharacterCancel = function() {
+  Scene_CreateCreature.prototype.onCharacterCancel = function () {
     this.showStep(3); // Back to Battler
   };
 
   // --- Logic Functions ---
 
-  Scene_CreateCreature.prototype.applyCreatureSettings = function() {
+  Scene_CreateCreature.prototype.applyCreatureSettings = function () {
     const actor = $gameActors.actor(this._targetActorId);
     if (!actor) return;
 
@@ -855,10 +855,10 @@
   };
 
   // Local implementation of changeArchetype for standalone use
-  Scene_CreateCreature.prototype.changeArchetypeLocal = function(actor, archetypeName) {
+  Scene_CreateCreature.prototype.changeArchetypeLocal = function (actor, archetypeName) {
     if (!actor) return false;
 
-    const { EnemyArchetypes } = window.ProstheticsData || {};
+    const { EnemyArchetypes } = window.Health || {};
 
     if (!EnemyArchetypes || !EnemyArchetypes[archetypeName]) {
       console.warn(`Archetype "${archetypeName}" not found in EnemyArchetypes`);
@@ -944,8 +944,8 @@
     return true;
   };
 
-  Scene_CreateCreature.prototype.applyHybridArchetype = function(actor) {
-    const { EnemyArchetypes } = window.ProstheticsData || {};
+  Scene_CreateCreature.prototype.applyHybridArchetype = function (actor) {
+    const { EnemyArchetypes } = window.Health || {};
     const arch1 = EnemyArchetypes[this._selectedArchetype1];
     const arch2 = EnemyArchetypes[this._selectedArchetype2];
     if (!arch1 || !arch2) return;

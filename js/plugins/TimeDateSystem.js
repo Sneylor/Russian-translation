@@ -392,7 +392,7 @@
     date.setMinutes(date.getMinutes() + minutes);
 
     const months = [
-+      "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+      +      "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
       "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
     ];
 
@@ -451,42 +451,42 @@
     const actor = $gameActors.actor(actorId);
 
     if (actor) {
-        const calories = $gameVariables.value(calorieVariableId) || 0;
-        const protein = $gameVariables.value(proteinVariableId) || 0;
-        const fat = $gameVariables.value(fatVariableId) || 0;
-        const caffeine = $gameVariables.value(caffeineVariableId) || 0;
+      const calories = $gameVariables.value(calorieVariableId) || 0;
+      const protein = $gameVariables.value(proteinVariableId) || 0;
+      const fat = $gameVariables.value(fatVariableId) || 0;
+      const caffeine = $gameVariables.value(caffeineVariableId) || 0;
 
-        // Calculate hunger recovery based on nutritional values
-        const recoveryAmount = (calories * calorieFactor) + (protein * proteinFactor) + (fat * fatFactor);
-        
-        debug(
-            `Eating food for actor ${actorId}: C=${calories}, P=${protein}, F=${fat}, Caffeine=${caffeine}. Recovering ${recoveryAmount.toFixed(2)} hunger.`
-        );
-        
-        actor.addHunger(recoveryAmount);
+      // Calculate hunger recovery based on nutritional values
+      const recoveryAmount = (calories * calorieFactor) + (protein * proteinFactor) + (fat * fatFactor);
 
-        // Handle caffeine effect on sleep
-        if (caffeine > 0) {
-            const sleepReduction = caffeine * caffeineFactor;
-            actor.reduceSleep(sleepReduction);
-            debug(`Caffeine reduced sleep by ${sleepReduction.toFixed(2)} points.`);
-        }
+      debug(
+        `Eating food for actor ${actorId}: C=${calories}, P=${protein}, F=${fat}, Caffeine=${caffeine}. Recovering ${recoveryAmount.toFixed(2)} hunger.`
+      );
 
-        // Reset nutrient variables to 0 after consumption
-        $gameVariables.setValue(calorieVariableId, 0);
-        $gameVariables.setValue(proteinVariableId, 0);
-        $gameVariables.setValue(fatVariableId, 0);
-        $gameVariables.setValue(caffeineVariableId, 0);
-        debug("Nutrient variables have been reset to 0.");
+      actor.addHunger(recoveryAmount);
 
-        // Refresh menu if open
-        if (SceneManager._scene instanceof Scene_Menu) {
-            SceneManager._scene._hungerSleepStatusWindow.refresh();
-        }
+      // Handle caffeine effect on sleep
+      if (caffeine > 0) {
+        const sleepReduction = caffeine * caffeineFactor;
+        actor.reduceSleep(sleepReduction);
+        debug(`Caffeine reduced sleep by ${sleepReduction.toFixed(2)} points.`);
+      }
+
+      // Reset nutrient variables to 0 after consumption
+      $gameVariables.setValue(calorieVariableId, 0);
+      $gameVariables.setValue(proteinVariableId, 0);
+      $gameVariables.setValue(fatVariableId, 0);
+      $gameVariables.setValue(caffeineVariableId, 0);
+      debug("Nutrient variables have been reset to 0.");
+
+      // Refresh menu if open
+      if (SceneManager._scene instanceof Scene_Menu) {
+        SceneManager._scene._hungerSleepStatusWindow.refresh();
+      }
     } else {
-        debug(`Actor with ID ${actorId} not found.`);
+      debug(`Actor with ID ${actorId} not found.`);
     }
-});
+  });
 
 
   PluginManager.registerCommand(pluginName, "RecoverSleep", function (args) {
@@ -625,7 +625,7 @@
     const wasAtZero = this._hunger <= 0;
     const oldState = this.hungerState();
     const wasAtMax = this._hunger >= maxHunger; // Check if already at 100%
-  
+
     // New logic: cap at 100% unless already at 100%
     if (wasAtMax) {
       // If already at 100%, allow overeating
@@ -639,13 +639,12 @@
         debug(`Actor ${this._actorId} hunger capped at ${maxHunger} (would have been ${newHunger.toFixed(2)})`);
       }
     }
-    
+
     debug(
-      `Actor ${this._actorId} hunger updated to ${
-        this._hunger
+      `Actor ${this._actorId} hunger updated to ${this._hunger
       }/${maxHunger} (${this.hungerPercent()}%)`
     );
-  
+
     // If hunger was at 0 and is now above 0, restore HP to max
     if (wasAtZero && this._hunger > 0) {
       const hpDifference = this.mhp - this.hp;
@@ -657,7 +656,7 @@
         );
       }
     }
-  
+
     // Check for state changes
     this.checkStateChange("hunger", oldState);
     this.updateOvereatState(); // Check for overeating state
@@ -696,15 +695,14 @@
   Game_Actor.prototype.addSleep = function (amount) {
     const wasAtZero = this._sleep <= 0;
     const oldState = this.sleepState();
-  
+
     // Update sleep value
     this._sleep = Math.min(maxSleep, this._sleep + amount);
     debug(
-      `Actor ${this._actorId} sleep updated to ${
-        this._sleep
+      `Actor ${this._actorId} sleep updated to ${this._sleep
       }/${maxSleep} (${this.sleepPercent()}%)`
     );
-  
+
     // If sleep was at 0 and is now above 0, restore MP to max
     if (wasAtZero && this._sleep > 0) {
       const mpDifference = this.mmp - this.mp;
@@ -716,7 +714,7 @@
         );
       }
     }
-  
+
     // Check for state changes
     this.checkStateChange("sleep", oldState);
   };
@@ -739,15 +737,15 @@
     const isOvereating = this.isStateAffected(overeatStateId);
 
     if (this._hunger > overeatThreshold) {
-        if (!isOvereating) {
-            this.addState(overeatStateId);
-            debug(`Actor ${this._actorId} is overeating. Applied state ${overeatStateId}.`);
-        }
+      if (!isOvereating) {
+        this.addState(overeatStateId);
+        debug(`Actor ${this._actorId} is overeating. Applied state ${overeatStateId}.`);
+      }
     } else if (this._hunger < normalThreshold) {
-        if (isOvereating) {
-            this.removeState(overeatStateId);
-            debug(`Actor ${this._actorId} is no longer overeating. Removed state ${overeatStateId}.`);
-        }
+      if (isOvereating) {
+        this.removeState(overeatStateId);
+        debug(`Actor ${this._actorId} is no longer overeating. Removed state ${overeatStateId}.`);
+      }
     }
   };
 
@@ -838,98 +836,98 @@
     this.updateHungerAndSleep();
   };
 
-Game_Party.prototype.updateHungerAndSleep = function () {
-  // Maps where hunger/sleep should not deplete (prison, transport maps, etc.)
-  const noDepletionMaps = [718, 719, 720, 327, 1094, 317, 1102];
-  const mapId = $gameMap ? $gameMap.mapId() : 0;
-  const isInRestZone = noDepletionMaps.includes(mapId);
-  if (isInRestZone) {
-    return; // Skip hunger and sleep updates in these maps
-  }
+  Game_Party.prototype.updateHungerAndSleep = function () {
+    // Maps where hunger/sleep should not deplete (prison, transport maps, etc.)
+    const noDepletionMaps = [718, 719, 720, 327, 1094, 317, 1102];
+    const mapId = $gameMap ? $gameMap.mapId() : 0;
+    const isInRestZone = noDepletionMaps.includes(mapId);
+    if (isInRestZone) {
+      return; // Skip hunger and sleep updates in these maps
+    }
 
-  // Check if Shift key is pressed for speed boost
-  const isShiftPressed = Input.isPressed("shift");
-  const baseMultiplier = isShiftPressed ? shiftMultiplier : 1.0;
+    // Check if Shift key is pressed for speed boost
+    const isShiftPressed = Input.isPressed("shift");
+    const baseMultiplier = isShiftPressed ? shiftMultiplier : 1.0;
 
-  // Check if on map 315 (world map) for special time/depletion rules
-  const isOnWorldMap = $gameMap && $gameMap.mapId() === 315;
+    // Check if on map 315 (world map) for special time/depletion rules
+    const isOnWorldMap = $gameMap && $gameMap.mapId() === 315;
 
-  const hungerRate = isOnWorldMap ? (maxHunger * 0.008) : hungerDecreaseRate;
-  const sleepRate = isOnWorldMap ? (maxSleep * 0.02) : sleepDecreaseRate;
+    const hungerRate = isOnWorldMap ? (maxHunger * 0.008) : hungerDecreaseRate;
+    const sleepRate = isOnWorldMap ? (maxSleep * 0.02) : sleepDecreaseRate;
 
-  // Update game time based on map
-  const currentTime = getGameTimeMinutes();
-  if (isOnWorldMap) {
-    // On world map, time passes quickly with each step
-    const isInVehicle = $gamePlayer && ($gamePlayer.isInBoat() || $gamePlayer.isInShip() || $gamePlayer.isInAirship());
-    const minutesToAdd = isInVehicle ? 2 : 10; // 5 minutes for vehicles, 15 for walking
-    setGameTimeMinutes(currentTime + minutesToAdd);
-  } else {
-    // On all other maps, time advances by 1 minute every 10 steps.
-    if ($gameParty.steps() % 10 === 0) {
+    // Update game time based on map
+    const currentTime = getGameTimeMinutes();
+    if (isOnWorldMap) {
+      // On world map, time passes quickly with each step
+      const isInVehicle = $gamePlayer && ($gamePlayer.isInBoat() || $gamePlayer.isInShip() || $gamePlayer.isInAirship());
+      const minutesToAdd = isInVehicle ? 2 : 10; // 5 minutes for vehicles, 15 for walking
+      setGameTimeMinutes(currentTime + minutesToAdd);
+    } else {
+      // On all other maps, time advances by 1 minute every 10 steps.
+      if ($gameParty.steps() % 10 === 0) {
         setGameTimeMinutes(currentTime + 1);
+      }
     }
-  }
-  updateGameDateVariable();
+    updateGameDateVariable();
 
-  // ONLY process actor 1 for hunger/sleep management
-  const actor = $gameActors.actor(1);
-  if (actor) {
-    // Overeating logic: increase hunger depletion if over 100%
-    let hungerMultiplier = baseMultiplier;
-    if (actor.hunger() > maxHunger) {
-      hungerMultiplier *= overeatDepletionMultiplier;
-    }
+    // ONLY process actor 1 for hunger/sleep management
+    const actor = $gameActors.actor(1);
+    if (actor) {
+      // Overeating logic: increase hunger depletion if over 100%
+      let hungerMultiplier = baseMultiplier;
+      if (actor.hunger() > maxHunger) {
+        hungerMultiplier *= overeatDepletionMultiplier;
+      }
 
-    actor.reduceHunger(hungerRate * hungerMultiplier);
-    actor.reduceSleep(sleepRate * baseMultiplier);
+      actor.reduceHunger(hungerRate * hungerMultiplier);
+      actor.reduceSleep(sleepRate * baseMultiplier);
 
-    // Drain HP if hunger is at 0
-    if (actor.hunger() <= 0 && actor.hp > 0) {
-      const hpDrain = Math.ceil(actor.mhp * 0.01); // 1% of max HP per step
-      const newHp = Math.max(0, actor.hp - hpDrain);
-      actor.setHp(newHp);
+      // Drain HP if hunger is at 0
+      if (actor.hunger() <= 0 && actor.hp > 0) {
+        const hpDrain = Math.ceil(actor.mhp * 0.01); // 1% of max HP per step
+        const newHp = Math.max(0, actor.hp - hpDrain);
+        actor.setHp(newHp);
 
-      debug(`Actor ${actor._actorId} HP drained: ${hpDrain} (${actor.hp}/${actor.mhp})`);
+        debug(`Actor ${actor._actorId} HP drained: ${hpDrain} (${actor.hp}/${actor.mhp})`);
 
-      // Show notification when HP reaches 0
-      if (actor.hp === 0) {
-        const lang = getCurrentLanguage();
-        const message = lang === 'it'
-          ? `${actor.name()} è collassato per la fame!`
-          : `${actor.name()} collapsed from starvation!`;
-        $gameTemp.addHungerSleepNotification(message);
+        // Show notification when HP reaches 0
+        if (actor.hp === 0) {
+          const lang = getCurrentLanguage();
+          const message = lang === 'it'
+            ? `${actor.name()} è collassato per la fame!`
+            : `${actor.name()} collapsed from starvation!`;
+          $gameTemp.addHungerSleepNotification(message);
+        }
+      }
+
+      // Drain MP if sleep is at 0
+      if (actor.sleep() <= 0 && actor.mp > 0) {
+        const mpDrain = Math.ceil(actor.mmp * 0.01); // 1% of max MP per step
+        const newMp = Math.max(0, actor.mp - mpDrain);
+        actor.setMp(newMp);
+
+        debug(`Actor ${actor._actorId} MP drained: ${mpDrain} (${actor.mp}/${actor.mmp})`);
+
+        // Show notification when MP reaches 0
+        if (actor.mp === 0) {
+          const lang = getCurrentLanguage();
+          const message = lang === 'it'
+            ? `${actor.name()} ha esaurito i PM!`
+            : `${actor.name()} ran out of MP!`;
+          $gameTemp.addHungerSleepNotification(message);
+        }
       }
     }
 
-    // Drain MP if sleep is at 0
-    if (actor.sleep() <= 0 && actor.mp > 0) {
-      const mpDrain = Math.ceil(actor.mmp * 0.01); // 1% of max MP per step
-      const newMp = Math.max(0, actor.mp - mpDrain);
-      actor.setMp(newMp);
-
-      debug(`Actor ${actor._actorId} MP drained: ${mpDrain} (${actor.mp}/${actor.mmp})`);
-
-      // Show notification when MP reaches 0
-      if (actor.mp === 0) {
-        const lang = getCurrentLanguage();
-        const message = lang === 'it'
-          ? `${actor.name()} ha esaurito i PM!`
-          : `${actor.name()} ran out of MP!`;
-        $gameTemp.addHungerSleepNotification(message);
+    // Keep actors 2 and 3 at 100% hunger and sleep
+    for (let i = 2; i <= 3; i++) {
+      const otherActor = $gameActors.actor(i);
+      if (otherActor) {
+        otherActor._hunger = maxHunger;
+        otherActor._sleep = maxSleep;
       }
     }
-  }
-
-  // Keep actors 2 and 3 at 100% hunger and sleep
-  for (let i = 2; i <= 3; i++) {
-    const otherActor = $gameActors.actor(i);
-    if (otherActor) {
-      otherActor._hunger = maxHunger;
-      otherActor._sleep = maxSleep;
-    }
-  }
-};
+  };
 
   //=============================================================================
   // Game_Player Extensions - Seat System
@@ -1041,11 +1039,11 @@ Game_Party.prototype.updateHungerAndSleep = function () {
     let timeString;
     let dateString = "01/01/01";
 
-      // Full cycle mode - show game time (from system clock)
-      const gameMinutes = getGameTimeMinutes();
-      const dateTime = getDateTimeFromMinutes(gameMinutes);
-      timeString = dateTime.time24;
-      dateString = dateTime.dateShort;
+    // Full cycle mode - show game time (from system clock)
+    const gameMinutes = getGameTimeMinutes();
+    const dateTime = getDateTimeFromMinutes(gameMinutes);
+    timeString = dateTime.time24;
+    dateString = dateTime.dateShort;
 
     // Get temperature from variable
     const weatherName = window.weatherName || "Clear";
@@ -1472,8 +1470,8 @@ Game_Party.prototype.updateHungerAndSleep = function () {
     // Map 315 needs 3 lines (Date/Time + Biome + Hunger), Rest zones need 2 lines (Date + Time), others need 1 line
     const height = isOnWorldMap ? this.fittingHeight(3) : (isInRestZone ? this.fittingHeight(2) : this.fittingHeight(1));
 
-    const x = Graphics.boxWidth - width - 10; // Bottom right position
-    const y = Graphics.boxHeight - height - 10;
+    const x = Graphics.boxWidth - width - 10; // Top right position
+    const y = 10;
     Window_Base.prototype.initialize.call(
       this,
       new Rectangle(x, y, width, height)
@@ -1529,21 +1527,21 @@ Game_Party.prototype.updateHungerAndSleep = function () {
     // --- REST ZONE LOGIC (Prison, Transport maps, etc.) ---
     // If in rest zone, draw date on first line and time on second line
     if (isInRestZone) {
-        const minutes = getGameTimeMinutes();
-        const dateTime = getDateTimeFromMinutes(minutes);
-        const dateStr = `${dateTime.dateShort}`;
-        const timeStr = dateTime.time24;
+      const minutes = getGameTimeMinutes();
+      const dateTime = getDateTimeFromMinutes(minutes);
+      const dateStr = `${dateTime.dateShort}`;
+      const timeStr = dateTime.time24;
 
-        // Draw date on first line
-        this.resetTextColor();
-        this.drawIcon(timeIcon, 0, 0);
-        this.drawText(dateStr, 32, 0, 250);
+      // Draw date on first line
+      this.resetTextColor();
+      this.drawIcon(timeIcon, 0, 0);
+      this.drawText(dateStr, 32, 0, 250);
 
-        // Draw time on second line
-        this.resetTextColor();
-        this.drawIcon(timeIcon, 0, this.lineHeight());
-        this.drawText(timeStr, 32, this.lineHeight(), 250);
-        return; // STOP HERE: Do not draw hunger or sleep
+      // Draw time on second line
+      this.resetTextColor();
+      this.drawIcon(timeIcon, 0, this.lineHeight());
+      this.drawText(timeStr, 32, this.lineHeight(), 250);
+      return; // STOP HERE: Do not draw hunger or sleep
     }
 
     // --- STANDARD LOGIC ---
@@ -1579,12 +1577,12 @@ Game_Party.prototype.updateHungerAndSleep = function () {
       let locationName = null;
 
       // Check if player is at a hardcoded biome location
-      if ($gamePlayer && window.WorldGen && window.WorldGen.HARDCODED_BIOME_NAMES) {
+      if ($gamePlayer && window.WorldGen && window.WorldGen.HardcodedBiomeNames) {
         const playerX = $gamePlayer.x;
         const playerY = $gamePlayer.y;
         const coordKey = `${playerX},${playerY}`;
 
-        locationName = window.WorldGen.HARDCODED_BIOME_NAMES[coordKey];
+        locationName = window.WorldGen.HardcodedBiomeNames[coordKey];
       }
 
       // If no hardcoded location found, get biome name

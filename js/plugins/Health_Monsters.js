@@ -90,7 +90,7 @@
   // ===========================================================================
   // Each archetype defines a set of body parts with their properties
 
-  const { EnemyArchetypes } = window.ProstheticsData;
+  const { EnemyArchetypes } = window.Health;
 
   const msgTranslations = {
     "Torso has been crushed into pulp!":
@@ -248,10 +248,10 @@
     if (!archetype) {
       console.error(
         "Invalid archetype: " +
-          archetypeName +
-          " for enemy " +
-          enemy.name() +
-          ". Defaulting to Humanoid."
+        archetypeName +
+        " for enemy " +
+        enemy.name() +
+        ". Defaulting to Humanoid."
       );
       archetypeName = "Humanoid";
       archetype = EnemyArchetypes.Humanoid;
@@ -358,8 +358,8 @@
       if (!archetype) {
         console.error(
           "Archetype not found: " +
-            enemy._archetypeName +
-            ". Using Humanoid as fallback."
+          enemy._archetypeName +
+          ". Using Humanoid as fallback."
         );
         archetype = EnemyArchetypes.Humanoid;
         enemy._archetypeName = "Humanoid";
@@ -531,76 +531,76 @@
         );
         return 0;
       }
-  
+
       var part = enemy._bodyParts[partKey];
       if (!part) {
         console.error(
           "Part not found: " +
-            partKey +
-            " for enemy: " +
-            (enemy.name ? enemy.name() : "Unknown")
+          partKey +
+          " for enemy: " +
+          (enemy.name ? enemy.name() : "Unknown")
         );
         return 0;
       }
-  
+
       if (part.destroyed) return 0;
-  
+
       // Find the archetype data
       var archetype = EnemyArchetypes[enemy._archetypeName];
       if (!archetype) {
         console.error("Archetype not found: " + enemy._archetypeName);
         return 0;
       }
-  
+
       var basePart = archetype.parts[partKey];
       if (!basePart) {
         console.error(
           "Base part data not found: " +
-            partKey +
-            " in archetype: " +
-            enemy._archetypeName
+          partKey +
+          " in archetype: " +
+          enemy._archetypeName
         );
         return 0;
       }
-  
+
       // Parts can always take damage
       var appliedDamage = Math.min(part.currentHp, damage);
       part.currentHp -= appliedDamage;
-  
+
       // Check if part can be destroyed/severed
       // Vital parts can only be destroyed when enemy HP is below 50%
       // Non-vital parts can only be severed/destroyed when enemy HP is below 50%
       var canBeDestroyed = enemy.hpRate() <= 0.5;
-      
+
       // For vital parts with targeted attacks, allow destruction at 50% or below
       if (basePart.vital && isTargeted && enemy.hpRate() > 0.5) {
         canBeDestroyed = false;
       }
-  
+
       // Check if part is now destroyed
       if (part.currentHp <= 0) {
         part.currentHp = 0;
-        
+
         if (canBeDestroyed) {
           part.destroyed = true;
           handleDestroyedBodyPart(enemy, partKey);
         } else {
           // Keep part at 1 HP if enemy health is too high
           part.currentHp = 1;
-          
+
           // Show message that the part can't be fully destroyed yet
           if ($gameTemp && showHitLocation) {
             if (ConfigManager.language === "it") {
-              $gameTemp.hitLocationMessage = 
+              $gameTemp.hitLocationMessage =
                 part.name + " gravemente danneggiato, ma il mostro è ancora troppo forte!";
             } else {
-              $gameTemp.hitLocationMessage = 
+              $gameTemp.hitLocationMessage =
                 part.name + " severely damaged, but the monster is still too strong!";
             }
           }
         }
       }
-  
+
       return appliedDamage;
     } catch (e) {
       console.error("Error in applyDamageToBodyPart: " + e.message);
@@ -608,24 +608,24 @@
       return 0;
     }
   }
-  
+
   // Replace the commandTarget handler (around line 1150)
   Scene_Battle.prototype.commandTarget = function () {
     var enemy = $gameTroop.members()[0];
-  
+
     if (enemy && enemy._bodyParts) {
       this._actorCommandWindow.deactivate();
-  
+
       // Create info window (left side)
       this._monsterInfoWindow = new Window_MonsterInfo(enemy);
       this.addWindow(this._monsterInfoWindow);
-  
+
       // Create targeting body parts list window (right side)
       this._bodyPartsWindow = new Window_MonsterBodyPartsList(enemy, true);
       this.addWindow(this._bodyPartsWindow);
       this._bodyPartsWindow.setHandler("ok", this.onTargetingOk.bind(this));
       this._bodyPartsWindow.setHandler("cancel", this.onTargetingCancel.bind(this));
-      
+
       $gameTemp.checkWindowActive = true;
     } else {
       this._actorCommandWindow.activate();
@@ -748,9 +748,9 @@
       if (!part) {
         console.error(
           "Part not found: " +
-            partKey +
-            " for enemy: " +
-            (enemy.name ? enemy.name() : "Unknown")
+          partKey +
+          " for enemy: " +
+          (enemy.name ? enemy.name() : "Unknown")
         );
         return;
       }
@@ -766,9 +766,9 @@
       if (!basePart) {
         console.error(
           "Base part data not found: " +
-            partKey +
-            " in archetype: " +
-            enemy._archetypeName
+          partKey +
+          " in archetype: " +
+          enemy._archetypeName
         );
         return;
       }
@@ -905,82 +905,82 @@
 
   // Apply limb damage to enemy
   // Apply limb damage to enemy
-// Apply limb damage to enemy - FIXED VERSION
-function applyLimbDamage(enemy, damage, elementalType) {
-  try {
-    // Ensure we're using enemy1
-    if (enemy !== $gameTroop.members()[0]) {
-      console.warn("Warning: enemy is not enemy1, using enemy1 instead");
-      enemy = $gameTroop.members()[0];
-    }
+  // Apply limb damage to enemy - FIXED VERSION
+  function applyLimbDamage(enemy, damage, elementalType) {
+    try {
+      // Ensure we're using enemy1
+      if (enemy !== $gameTroop.members()[0]) {
+        console.warn("Warning: enemy is not enemy1, using enemy1 instead");
+        enemy = $gameTroop.members()[0];
+      }
 
-    // Make sure enemy has body parts initialized
-    if (!enemy._bodyParts) initializeEnemyBodyParts(enemy);
+      // Make sure enemy has body parts initialized
+      if (!enemy._bodyParts) initializeEnemyBodyParts(enemy);
 
-    // Make sure $gameTemp exists
-    if (!$gameTemp) {
-      $gameTemp = {};
-    }
+      // Make sure $gameTemp exists
+      if (!$gameTemp) {
+        $gameTemp = {};
+      }
 
-    // Get a random hit location
-    var hitLocation = getRandomHitLocation(enemy);
-    if (!hitLocation || !hitLocation.key) {
-      console.error("Failed to get hit location for enemy: " + enemy.name());
-      return;
-    }
+      // Get a random hit location
+      var hitLocation = getRandomHitLocation(enemy);
+      if (!hitLocation || !hitLocation.key) {
+        console.error("Failed to get hit location for enemy: " + enemy.name());
+        return;
+      }
 
-    var partKey = hitLocation.key;
-    if (!enemy._bodyParts[partKey]) {
-      console.error(
-        "Body part not found: " + partKey + " for enemy: " + enemy.name()
-      );
-      return;
-    }
+      var partKey = hitLocation.key;
+      if (!enemy._bodyParts[partKey]) {
+        console.error(
+          "Body part not found: " + partKey + " for enemy: " + enemy.name()
+        );
+        return;
+      }
 
-    var part = enemy._bodyParts[partKey];
-    var isTargeted = hitLocation.targeted || false;
+      var part = enemy._bodyParts[partKey];
+      var isTargeted = hitLocation.targeted || false;
 
-    // Show hit location in battle log if enabled
-    if (showHitLocation && $gameParty.inBattle()) {
-      if (isTargeted) {
-        // Show precise strike message for targeted hits
-        if (ConfigManager.language === "it") {
-          $gameTemp.hitLocationMessage =
-            "Un colpo preciso a " + part.name + "!";
+      // Show hit location in battle log if enabled
+      if (showHitLocation && $gameParty.inBattle()) {
+        if (isTargeted) {
+          // Show precise strike message for targeted hits
+          if (ConfigManager.language === "it") {
+            $gameTemp.hitLocationMessage =
+              "Un colpo preciso a " + part.name + "!";
+          } else {
+            $gameTemp.hitLocationMessage =
+              "A precise strike to the " + part.name + "!";
+          }
+        } else if ($gameTemp.targetMissMessage) {
+          // Show the miss message if a targeted attack missed
+          $gameTemp.hitLocationMessage = $gameTemp.targetMissMessage;
+          $gameTemp.targetMissMessage = null; // Clear the message after use
         } else {
-          $gameTemp.hitLocationMessage =
-            "A precise strike to the " + part.name + "!";
-        }
-      } else if ($gameTemp.targetMissMessage) {
-        // Show the miss message if a targeted attack missed
-        $gameTemp.hitLocationMessage = $gameTemp.targetMissMessage;
-        $gameTemp.targetMissMessage = null; // Clear the message after use
-      } else {
-        // Default hit message
-        if (ConfigManager.language === "it") {
-          $gameTemp.hitLocationMessage =
-            enemy.name() + "'s " + part.name + " colpito!";
-        } else {
-          $gameTemp.hitLocationMessage =
-            enemy.name() + "'s " + part.name + " was hit!";
+          // Default hit message
+          if (ConfigManager.language === "it") {
+            $gameTemp.hitLocationMessage =
+              enemy.name() + "'s " + part.name + " colpito!";
+          } else {
+            $gameTemp.hitLocationMessage =
+              enemy.name() + "'s " + part.name + " was hit!";
+          }
         }
       }
+
+      // Apply damage to the part
+      applyDamageToBodyPart(enemy, partKey, damage, isTargeted);
+
+      // Store the elemental type for displaying the correct message later
+      $gameTemp.lastElementalType = elementalType;
+
+      // Reset targeted body part after use
+      if (isTargeted) {
+        $gameTemp.targetedBodyPart = null;
+      }
+    } catch (e) {
+      console.error(e.stack);
     }
-
-    // Apply damage to the part
-    applyDamageToBodyPart(enemy, partKey, damage, isTargeted);
-
-    // Store the elemental type for displaying the correct message later
-    $gameTemp.lastElementalType = elementalType;
-
-    // Reset targeted body part after use
-    if (isTargeted) {
-      $gameTemp.targetedBodyPart = null;
-    }
-  } catch (e) {
-    console.error(e.stack);
   }
-}
   // Override Game_Enemy.param to apply body part damage effects
   var _Game_Enemy_param = Game_Enemy.prototype.param;
   Game_Enemy.prototype.param = function (paramId) {
@@ -1108,492 +1108,492 @@ function applyLimbDamage(enemy, damage, elementalType) {
     $gameTemp.lastElementalType = null;
     $gameTemp.statEffectMessage = null;
   };
-// ============================================================================
-// NEW: Window_MonsterInfo - Left side information window
-// ============================================================================
+  // ============================================================================
+  // NEW: Window_MonsterInfo - Left side information window
+  // ============================================================================
 
-function Window_MonsterInfo() {
-  this.initialize.apply(this, arguments);
-}
-
-Window_MonsterInfo.prototype = Object.create(Window_Base.prototype);
-Window_MonsterInfo.prototype.constructor = Window_MonsterInfo;
-
-Window_MonsterInfo.prototype.initialize = function (enemy) {
-  var width = Graphics.boxWidth * 0.55; // Left half
-  var height = 520; // Increased from 440 to 520
-  var x = 0;
-  var y = (Graphics.boxHeight - height) / 2 + 88;
-  var rect = new Rectangle(x, y, width, height);
-  Window_Base.prototype.initialize.call(this, rect);
-  this._enemy = enemy;
-  this._monsterDescription = this.extractMonsterDescription(enemy);
-  this.refresh();
-  this.show();
-  this.z = 9999;
-};
-
-Window_MonsterInfo.prototype.extractMonsterDescription = function (enemy) {
-  if (!enemy || !enemy.enemy() || !enemy.enemy().note) return "";
-  const noteText = enemy.enemy().note;
-  if (ConfigManager.language === "it") {
-    const itMatch = noteText.match(/<It:\s*([^>]+)>/i);
-    if (itMatch && itMatch[1]) {
-      return this.addLineBreaks(itMatch[1].trim(), 20);
-    }
-  } else {
-    const enMatch = noteText.match(/<En:\s*([^>]+)>/i);
-    if (enMatch && enMatch[1]) {
-      return this.addLineBreaks(enMatch[1].trim(), 20);
-    }
+  function Window_MonsterInfo() {
+    this.initialize.apply(this, arguments);
   }
-  return "";
-};
 
-Window_MonsterInfo.prototype.addLineBreaks = function (text, maxLength) {
-  if (!text || text.length <= maxLength) return text;
-  var result = "";
-  var currentLine = "";
-  var words = text.split(" ");
-  for (var i = 0; i < words.length; i++) {
-    var word = words[i];
-    if (currentLine.length + word.length + 1 > maxLength) {
-      result += currentLine.trim() + "\n";
-      currentLine = word + " ";
+  Window_MonsterInfo.prototype = Object.create(Window_Base.prototype);
+  Window_MonsterInfo.prototype.constructor = Window_MonsterInfo;
+
+  Window_MonsterInfo.prototype.initialize = function (enemy) {
+    var width = Graphics.boxWidth * 0.55; // Left half
+    var height = 520; // Increased from 440 to 520
+    var x = 0;
+    var y = (Graphics.boxHeight - height) / 2 + 88;
+    var rect = new Rectangle(x, y, width, height);
+    Window_Base.prototype.initialize.call(this, rect);
+    this._enemy = enemy;
+    this._monsterDescription = this.extractMonsterDescription(enemy);
+    this.refresh();
+    this.show();
+    this.z = 9999;
+  };
+
+  Window_MonsterInfo.prototype.extractMonsterDescription = function (enemy) {
+    if (!enemy || !enemy.enemy() || !enemy.enemy().note) return "";
+    const noteText = enemy.enemy().note;
+    if (ConfigManager.language === "it") {
+      const itMatch = noteText.match(/<It:\s*([^>]+)>/i);
+      if (itMatch && itMatch[1]) {
+        return this.addLineBreaks(itMatch[1].trim(), 20);
+      }
     } else {
-      currentLine += word + " ";
+      const enMatch = noteText.match(/<En:\s*([^>]+)>/i);
+      if (enMatch && enMatch[1]) {
+        return this.addLineBreaks(enMatch[1].trim(), 20);
+      }
     }
-  }
-  if (currentLine.length > 0) {
-    result += currentLine.trim();
-  }
-  return result;
-};
-Window_MonsterInfo.prototype.refresh = function () {
-  this.contents.clear();
-  if (!this._enemy || !this._enemy._bodyParts) return;
-  var lineHeight = this.lineHeight();
-  var y = 0;
-  
-  // Draw monster description FIRST
-  if (this._monsterDescription && this._monsterDescription.length > 0) {
-    this.resetTextColor();
-    var descLines = this._monsterDescription.split("\n");
-    for (var i = 0; i < descLines.length; i++) {
-      this.drawText(descLines[i], 10, y, this.contentsWidth() - 20);
-      y += lineHeight;
-    }
-    y += lineHeight / 2; // Add some space after description
-  }
-  
-  // Then draw element info
-  this.drawElementInfo(y);
-  y += lineHeight * 2; // Two lines for element info
-  
-  y += lineHeight / 2;
-  this.drawHorzLine(y - lineHeight / 2);
-  this.drawEnemyStats(y);
-  y += lineHeight * 2;
-  
-  this.drawHorzLine(y - lineHeight / 2);
-  this.drawAppliedStates(y);
-  this.changeTextColor(this.systemColor());
-};
+    return "";
+  };
 
-Window_MonsterInfo.prototype.drawHorzLine = function (y) {
-  var lineY = y + this.lineHeight() / 2 - 1;
-  this.contents.fillRect(0, lineY, this.contentsWidth(), 2, this.systemColor());
-};
+  Window_MonsterInfo.prototype.addLineBreaks = function (text, maxLength) {
+    if (!text || text.length <= maxLength) return text;
+    var result = "";
+    var currentLine = "";
+    var words = text.split(" ");
+    for (var i = 0; i < words.length; i++) {
+      var word = words[i];
+      if (currentLine.length + word.length + 1 > maxLength) {
+        result += currentLine.trim() + "\n";
+        currentLine = word + " ";
+      } else {
+        currentLine += word + " ";
+      }
+    }
+    if (currentLine.length > 0) {
+      result += currentLine.trim();
+    }
+    return result;
+  };
+  Window_MonsterInfo.prototype.refresh = function () {
+    this.contents.clear();
+    if (!this._enemy || !this._enemy._bodyParts) return;
+    var lineHeight = this.lineHeight();
+    var y = 0;
 
-Window_MonsterInfo.prototype.drawElementInfo = function (y) {
-  const useTranslation = ConfigManager.language === "it";
-  const lineHeight = this.lineHeight();
-  const enemy = this._enemy;
-  
-  let attackElement = "Normal";
-  const traits = enemy.enemy().traits;
-  for (let i = 0; i < traits.length; i++) {
-    const trait = traits[i];
-    if (trait.code === Game_BattlerBase.TRAIT_ATTACK_ELEMENT && trait.dataId > 0) {
-      attackElement = $dataSystem.elements[trait.dataId];
-      break;
-    }
-  }
-  
-  const weaknesses = [];
-  for (let i = 1; i < $dataSystem.elements.length; i++) {
-    const rate = enemy.elementRate(i) * 100;
-    if (rate > 100) {
-      weaknesses.push({ name: $dataSystem.elements[i], rate: rate });
-    }
-  }
-  weaknesses.sort((a, b) => b.rate - a.rate);
-  
-  this.changeTextColor(this.systemColor());
-  this.drawText(useTranslation ? "Elemento" : "Element:", 0, y, 140);
-  this.resetTextColor();
-  this.drawText(attackElement, 140, y, this.contentsWidth() - 140);
-  y += lineHeight;
-  
-  this.changeTextColor(this.systemColor());
-  this.drawText(useTranslation ? "Debole a" : "Weak to:", 0, y, 120);
-  this.resetTextColor();
-  
-  if (weaknesses.length > 0) {
-    let weaknessText = "";
-    for (let i = 0; i < weaknesses.length; i++) {
-      const weakness = weaknesses[i];
-      if (i > 0) weaknessText += ", ";
-      weaknessText += weakness.name + " " + weakness.rate + "%";
-    }
-    this.drawText(weaknessText, 140, y, this.contentsWidth() - 140);
-  } else {
-    this.drawText("None", 140, y, this.contentsWidth() - 140);
-  }
-};
-
-Window_MonsterInfo.prototype.drawEnemyStats = function (y) {
-  const useTranslation = ConfigManager.language === "it";
-  const enemy = this._enemy;
-  const paramNames = useTranslation ? 
-    ["FRZ", "INT", "COS", "SAG", "DES"] :
-    ["STR", "INT", "COS", "SAG", "DEX"];
-  
-  const baseValues = [];
-  for (let i = 2; i < 7; i++) {
-    baseValues.push(enemy.enemy().params[i]);
-  }
-  
-  const currentValues = [];
-  for (let i = 2; i < 7; i++) {
-    currentValues.push(enemy.param(i));
-  }
-  
-  const startX = 10;
-  const availableWidth = this.contentsWidth() - startX - 10;
-  const colWidth = Math.floor(availableWidth / 6);
-  
-  for (let i = 0; i < 5; i++) {
-    const x = startX + i * colWidth;
-    const current = currentValues[i];
-    const base = baseValues[i];
-    const diff = current - base;
-    
-    this.changeTextColor(this.systemColor());
-    this.drawText(paramNames[i], x, y, colWidth - 5, 'center');
-    
-    if (diff < 0) {
-      this.changeTextColor(this.powerDownColor());
-    } else if (diff > 0) {
-      this.changeTextColor(this.powerUpColor());
-    } else {
+    // Draw monster description FIRST
+    if (this._monsterDescription && this._monsterDescription.length > 0) {
       this.resetTextColor();
+      var descLines = this._monsterDescription.split("\n");
+      for (var i = 0; i < descLines.length; i++) {
+        this.drawText(descLines[i], 10, y, this.contentsWidth() - 20);
+        y += lineHeight;
+      }
+      y += lineHeight / 2; // Add some space after description
     }
-    
-    this.drawText(current, x, y + this.lineHeight(), colWidth - 5, 'center');
-  }
-  this.resetTextColor();
-};
 
-Window_MonsterInfo.prototype.drawAppliedStates = function (y) {
-  const useTranslation = ConfigManager.language === "it";
-  const enemy = this._enemy;
-  const states = enemy.states();
-  
-  this.changeTextColor(this.systemColor());
-  this.drawText(useTranslation ? "Stati:" : "States:", 0, y, 120);
-  this.resetTextColor();
-  
-  if (states.length === 0) {
-    this.drawText(useTranslation ? "Nessuno" : "None", 120, y, this.contentsWidth() - 120);
-    return;
-  }
-  
-  let x = 120;
-  const iconWidth = 32;
-  
-  for (let i = 0; i < states.length; i++) {
-    const state = states[i];
-    if (x + iconWidth + this.textWidth(state.name) > this.contentsWidth()) {
-      y += this.lineHeight();
-      x = 120;
+    // Then draw element info
+    this.drawElementInfo(y);
+    y += lineHeight * 2; // Two lines for element info
+
+    y += lineHeight / 2;
+    this.drawHorzLine(y - lineHeight / 2);
+    this.drawEnemyStats(y);
+    y += lineHeight * 2;
+
+    this.drawHorzLine(y - lineHeight / 2);
+    this.drawAppliedStates(y);
+    this.changeTextColor(this.systemColor());
+  };
+
+  Window_MonsterInfo.prototype.drawHorzLine = function (y) {
+    var lineY = y + this.lineHeight() / 2 - 1;
+    this.contents.fillRect(0, lineY, this.contentsWidth(), 2, this.systemColor());
+  };
+
+  Window_MonsterInfo.prototype.drawElementInfo = function (y) {
+    const useTranslation = ConfigManager.language === "it";
+    const lineHeight = this.lineHeight();
+    const enemy = this._enemy;
+
+    let attackElement = "Normal";
+    const traits = enemy.enemy().traits;
+    for (let i = 0; i < traits.length; i++) {
+      const trait = traits[i];
+      if (trait.code === Game_BattlerBase.TRAIT_ATTACK_ELEMENT && trait.dataId > 0) {
+        attackElement = $dataSystem.elements[trait.dataId];
+        break;
+      }
     }
-    if (state.iconIndex > 0) {
-      this.drawIcon(state.iconIndex, x, y);
-      x += iconWidth;
+
+    const weaknesses = [];
+    for (let i = 1; i < $dataSystem.elements.length; i++) {
+      const rate = enemy.elementRate(i) * 100;
+      if (rate > 100) {
+        weaknesses.push({ name: $dataSystem.elements[i], rate: rate });
+      }
     }
-    const stateNameWidth = Math.min(150, this.textWidth(state.name) + 10);
-    this.drawText(state.name, x, y, stateNameWidth);
-    x += stateNameWidth + 10;
-  }
-};
-// ============================================================================
-// NEW: Window_MonsterBodyPartsList - Right side parts list window
-// ============================================================================
+    weaknesses.sort((a, b) => b.rate - a.rate);
 
-function Window_MonsterBodyPartsList() {
-  this.initialize.apply(this, arguments);
-}
-
-Window_MonsterBodyPartsList.prototype = Object.create(Window_Selectable.prototype);
-Window_MonsterBodyPartsList.prototype.constructor = Window_MonsterBodyPartsList;
-
-Window_MonsterBodyPartsList.prototype.initialize = function (enemy, isTargeting) {
-  var width = Graphics.boxWidth * 0.50;
-  var height = 520;
-  var x = Graphics.boxWidth * 0.45;
-  var y = (Graphics.boxHeight - height) / 2 + 88;
-  var rect = new Rectangle(x, y, width, height);
-  Window_Selectable.prototype.initialize.call(this, rect);
-  this._enemy = enemy;
-  this._isTargeting = isTargeting || false;
-  this._data = [];
-
-  if (!$gameTemp) {
-    $gameTemp = {};
-  }
-  if (!$gameTemp.lastTargetSelections) {
-    $gameTemp.lastTargetSelections = {};
-  }
-
-  var enemyId = enemy.enemyId();
-
-  if (enemy && enemy._bodyParts) {
-    for (var partKey in enemy._bodyParts) {
-      this._data.push({
-        key: partKey,
-        part: enemy._bodyParts[partKey],
-        selectable: !(this._isTargeting && enemy._bodyParts[partKey].destroyed),
-      });
-    }
-  }
-  this.refresh();
-
-  var indexToSelect = 0;
-  
-  // If in targeting mode, try to restore last selected index
-  if (this._isTargeting && $gameTemp.lastTargetSelections[enemyId] !== undefined) {
-    var lastIndex = $gameTemp.lastTargetSelections[enemyId];
-    if (lastIndex >= 0 && lastIndex < this._data.length && this._data[lastIndex].selectable !== false) {
-      indexToSelect = lastIndex;
-    }
-  }
-
-  this.select(indexToSelect);
-  this.activate();
-  this.show();
-  this.z = 9999;
-  
-  if (this.parent) {
-    this.parent.removeChild(this);
-    this.parent.addChild(this);
-  }
-};
-
-Window_MonsterBodyPartsList.prototype.maxItems = function () {
-  return this._data.length;
-};
-
-Window_MonsterBodyPartsList.prototype.itemHeight = function () {
-  return this.lineHeight();
-};
-
-Window_MonsterBodyPartsList.prototype.refresh = function () {
-  this.contents.clear();
-  if (!this._enemy || !this._enemy._bodyParts) return;
-
-  var lineHeight = this.lineHeight();
-  var y = 0;
-  var useTranslation = ConfigManager.language === "it";
-  
-  this.changeTextColor(this.systemColor());
-  this.drawText(useTranslation ? "Parti del Corpo" : "Body Parts", 0, y, this.contentsWidth(), 'center');
-  this.resetTextColor();
-  this.itemY = lineHeight * 2;
-
-  this.drawAllItems();
-};
-
-Window_MonsterBodyPartsList.prototype.drawItem = function (index) {
-  if (index < 0 || index >= this._data.length) return;
-
-  var item = this._data[index];
-  var part = item.part;
-  var rect = this.itemRect(index);
-  var useTranslation = ConfigManager.language === "it";
-  
-  var hpPercent = Math.floor((part.currentHp / part.maxHp) * 100);
-  
-  // Highlight if this is the currently targeted part (in targeting mode)
-  var enemyId = this._enemy.enemyId();
-  var isCurrentTarget = this._isTargeting && 
-                        $gameTemp.lastTargetSelections && 
-                        $gameTemp.lastTargetSelections[enemyId] === index;
-  
-  if (isCurrentTarget && index === this.index()) {
-    // Draw selection background with special color
-    this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, 'rgba(255, 255, 0, 0.2)');
-  }
-  
-  if (part.destroyed) {
-    this.changeTextColor(ColorManager.deathColor());
-  } else if (hpPercent <= 25) {
-    this.changeTextColor(ColorManager.crisisColor());
-  } else if (hpPercent <= 50) {
-    this.changeTextColor(ColorManager.textColor(17));
-  } else {
+    this.changeTextColor(this.systemColor());
+    this.drawText(useTranslation ? "Elemento" : "Element:", 0, y, 140);
     this.resetTextColor();
-  }
-  
-  var partName = useTranslation && part.name_it ? part.name_it : part.name;
-  this.drawText(partName, rect.x + 4, rect.y, rect.width - 60);
-  
-  var hpText = part.destroyed ? "X" : hpPercent + "%";
-  this.drawText(hpText, rect.x + rect.width - 70, rect.y, 66, 'right');
-  
-  this.resetTextColor();
-  
-  if (this._isTargeting && index === this.index()) {
-    this.changePaintOpacity(true);
-  }
-};
+    this.drawText(attackElement, 140, y, this.contentsWidth() - 140);
+    y += lineHeight;
 
-Window_MonsterBodyPartsList.prototype.itemRect = function (index) {
-  var rect = new Rectangle();
-  rect.width = this.contentsWidth();
-  rect.height = this.lineHeight();
-  rect.x = 0;
-  rect.y = this.itemY + index * rect.height - this._scrollY;
-  return rect;
-};
+    this.changeTextColor(this.systemColor());
+    this.drawText(useTranslation ? "Debole a" : "Weak to:", 0, y, 120);
+    this.resetTextColor();
 
-Window_MonsterBodyPartsList.prototype.update = function () {
-  Window_Selectable.prototype.update.call(this);
-  if (this._isTargeting && this.active && this._data.length > 0) {
-    if (!this.isCurrentItemEnabled() && this._index >= 0) {
-      this.selectNextAvailable();
+    if (weaknesses.length > 0) {
+      let weaknessText = "";
+      for (let i = 0; i < weaknesses.length; i++) {
+        const weakness = weaknesses[i];
+        if (i > 0) weaknessText += ", ";
+        weaknessText += weakness.name + " " + weakness.rate + "%";
+      }
+      this.drawText(weaknessText, 140, y, this.contentsWidth() - 140);
+    } else {
+      this.drawText("None", 140, y, this.contentsWidth() - 140);
     }
-  }
-};
+  };
 
-Window_MonsterBodyPartsList.prototype.selectNextAvailable = function () {
-  var currentIndex = this.index();
-  var maxItems = this._data.length;
-  for (var i = 1; i < maxItems; i++) {
-    var index = (currentIndex + i) % maxItems;
-    if (this._data[index].selectable !== false) {
-      this.select(index);
+  Window_MonsterInfo.prototype.drawEnemyStats = function (y) {
+    const useTranslation = ConfigManager.language === "it";
+    const enemy = this._enemy;
+    const paramNames = useTranslation ?
+      ["FRZ", "INT", "COS", "SAG", "DES"] :
+      ["STR", "INT", "COS", "SAG", "DEX"];
+
+    const baseValues = [];
+    for (let i = 2; i < 7; i++) {
+      baseValues.push(enemy.enemy().params[i]);
+    }
+
+    const currentValues = [];
+    for (let i = 2; i < 7; i++) {
+      currentValues.push(enemy.param(i));
+    }
+
+    const startX = 10;
+    const availableWidth = this.contentsWidth() - startX - 10;
+    const colWidth = Math.floor(availableWidth / 6);
+
+    for (let i = 0; i < 5; i++) {
+      const x = startX + i * colWidth;
+      const current = currentValues[i];
+      const base = baseValues[i];
+      const diff = current - base;
+
+      this.changeTextColor(this.systemColor());
+      this.drawText(paramNames[i], x, y, colWidth - 5, 'center');
+
+      if (diff < 0) {
+        this.changeTextColor(this.powerDownColor());
+      } else if (diff > 0) {
+        this.changeTextColor(this.powerUpColor());
+      } else {
+        this.resetTextColor();
+      }
+
+      this.drawText(current, x, y + this.lineHeight(), colWidth - 5, 'center');
+    }
+    this.resetTextColor();
+  };
+
+  Window_MonsterInfo.prototype.drawAppliedStates = function (y) {
+    const useTranslation = ConfigManager.language === "it";
+    const enemy = this._enemy;
+    const states = enemy.states();
+
+    this.changeTextColor(this.systemColor());
+    this.drawText(useTranslation ? "Stati:" : "States:", 0, y, 120);
+    this.resetTextColor();
+
+    if (states.length === 0) {
+      this.drawText(useTranslation ? "Nessuno" : "None", 120, y, this.contentsWidth() - 120);
       return;
     }
+
+    let x = 120;
+    const iconWidth = 32;
+
+    for (let i = 0; i < states.length; i++) {
+      const state = states[i];
+      if (x + iconWidth + this.textWidth(state.name) > this.contentsWidth()) {
+        y += this.lineHeight();
+        x = 120;
+      }
+      if (state.iconIndex > 0) {
+        this.drawIcon(state.iconIndex, x, y);
+        x += iconWidth;
+      }
+      const stateNameWidth = Math.min(150, this.textWidth(state.name) + 10);
+      this.drawText(state.name, x, y, stateNameWidth);
+      x += stateNameWidth + 10;
+    }
+  };
+  // ============================================================================
+  // NEW: Window_MonsterBodyPartsList - Right side parts list window
+  // ============================================================================
+
+  function Window_MonsterBodyPartsList() {
+    this.initialize.apply(this, arguments);
   }
-  this.select(-1);
-};
 
-Window_MonsterBodyPartsList.prototype.isCurrentItemEnabled = function () {
-  if (this.index() < 0 || this.index() >= this._data.length) return false;
-  var item = this._data[this.index()];
-  return item.selectable !== false;
-};
+  Window_MonsterBodyPartsList.prototype = Object.create(Window_Selectable.prototype);
+  Window_MonsterBodyPartsList.prototype.constructor = Window_MonsterBodyPartsList;
 
-Window_MonsterBodyPartsList.prototype.processOk = function () {
-  if (this._isTargeting && this.index() >= 0 && this.isCurrentItemEnabled()) {
+  Window_MonsterBodyPartsList.prototype.initialize = function (enemy, isTargeting) {
+    var width = Graphics.boxWidth * 0.50;
+    var height = 520;
+    var x = Graphics.boxWidth * 0.45;
+    var y = (Graphics.boxHeight - height) / 2 + 88;
+    var rect = new Rectangle(x, y, width, height);
+    Window_Selectable.prototype.initialize.call(this, rect);
+    this._enemy = enemy;
+    this._isTargeting = isTargeting || false;
+    this._data = [];
+
     if (!$gameTemp) {
       $gameTemp = {};
     }
     if (!$gameTemp.lastTargetSelections) {
       $gameTemp.lastTargetSelections = {};
     }
+
+    var enemyId = enemy.enemyId();
+
+    if (enemy && enemy._bodyParts) {
+      for (var partKey in enemy._bodyParts) {
+        this._data.push({
+          key: partKey,
+          part: enemy._bodyParts[partKey],
+          selectable: !(this._isTargeting && enemy._bodyParts[partKey].destroyed),
+        });
+      }
+    }
+    this.refresh();
+
+    var indexToSelect = 0;
+
+    // If in targeting mode, try to restore last selected index
+    if (this._isTargeting && $gameTemp.lastTargetSelections[enemyId] !== undefined) {
+      var lastIndex = $gameTemp.lastTargetSelections[enemyId];
+      if (lastIndex >= 0 && lastIndex < this._data.length && this._data[lastIndex].selectable !== false) {
+        indexToSelect = lastIndex;
+      }
+    }
+
+    this.select(indexToSelect);
+    this.activate();
+    this.show();
+    this.z = 9999;
+
+    if (this.parent) {
+      this.parent.removeChild(this);
+      this.parent.addChild(this);
+    }
+  };
+
+  Window_MonsterBodyPartsList.prototype.maxItems = function () {
+    return this._data.length;
+  };
+
+  Window_MonsterBodyPartsList.prototype.itemHeight = function () {
+    return this.lineHeight();
+  };
+
+  Window_MonsterBodyPartsList.prototype.refresh = function () {
+    this.contents.clear();
+    if (!this._enemy || !this._enemy._bodyParts) return;
+
+    var lineHeight = this.lineHeight();
+    var y = 0;
+    var useTranslation = ConfigManager.language === "it";
+
+    this.changeTextColor(this.systemColor());
+    this.drawText(useTranslation ? "Parti del Corpo" : "Body Parts", 0, y, this.contentsWidth(), 'center');
+    this.resetTextColor();
+    this.itemY = lineHeight * 2;
+
+    this.drawAllItems();
+  };
+
+  Window_MonsterBodyPartsList.prototype.drawItem = function (index) {
+    if (index < 0 || index >= this._data.length) return;
+
+    var item = this._data[index];
+    var part = item.part;
+    var rect = this.itemRect(index);
+    var useTranslation = ConfigManager.language === "it";
+
+    var hpPercent = Math.floor((part.currentHp / part.maxHp) * 100);
+
+    // Highlight if this is the currently targeted part (in targeting mode)
     var enemyId = this._enemy.enemyId();
-    $gameTemp.lastTargetSelections[enemyId] = this.index();
-    $gameTemp.targetedBodyPart = this._data[this.index()].key;
-    SoundManager.playOk();
-  }
-  this.close();
-};
+    var isCurrentTarget = this._isTargeting &&
+      $gameTemp.lastTargetSelections &&
+      $gameTemp.lastTargetSelections[enemyId] === index;
 
-Window_MonsterBodyPartsList.prototype.close = function () {
-  $gameTemp.checkWindowActive = false;
-  if (!this._isTargeting) {
-    SoundManager.playCancel();
-  }
-  Window_Selectable.prototype.close.call(this);
-  setTimeout(
-    function () {
-      if (this.parent) this.parent.removeChild(this);
-    }.bind(this),
-    100
-  );
-};
-Window_MonsterInfo.prototype.powerUpColor = function() {
-  return ColorManager.powerUpColor ? ColorManager.powerUpColor() : ColorManager.textColor(24);
-};
+    if (isCurrentTarget && index === this.index()) {
+      // Draw selection background with special color
+      this.contents.fillRect(rect.x, rect.y, rect.width, rect.height, 'rgba(255, 255, 0, 0.2)');
+    }
 
-Window_MonsterInfo.prototype.powerDownColor = function() {
-  return ColorManager.powerDownColor ? ColorManager.powerDownColor() : ColorManager.textColor(25);
-};
+    if (part.destroyed) {
+      this.changeTextColor(ColorManager.deathColor());
+    } else if (hpPercent <= 25) {
+      this.changeTextColor(ColorManager.crisisColor());
+    } else if (hpPercent <= 50) {
+      this.changeTextColor(ColorManager.textColor(17));
+    } else {
+      this.resetTextColor();
+    }
+
+    var partName = useTranslation && part.name_it ? part.name_it : part.name;
+    this.drawText(partName, rect.x + 4, rect.y, rect.width - 60);
+
+    var hpText = part.destroyed ? "X" : hpPercent + "%";
+    this.drawText(hpText, rect.x + rect.width - 70, rect.y, 66, 'right');
+
+    this.resetTextColor();
+
+    if (this._isTargeting && index === this.index()) {
+      this.changePaintOpacity(true);
+    }
+  };
+
+  Window_MonsterBodyPartsList.prototype.itemRect = function (index) {
+    var rect = new Rectangle();
+    rect.width = this.contentsWidth();
+    rect.height = this.lineHeight();
+    rect.x = 0;
+    rect.y = this.itemY + index * rect.height - this._scrollY;
+    return rect;
+  };
+
+  Window_MonsterBodyPartsList.prototype.update = function () {
+    Window_Selectable.prototype.update.call(this);
+    if (this._isTargeting && this.active && this._data.length > 0) {
+      if (!this.isCurrentItemEnabled() && this._index >= 0) {
+        this.selectNextAvailable();
+      }
+    }
+  };
+
+  Window_MonsterBodyPartsList.prototype.selectNextAvailable = function () {
+    var currentIndex = this.index();
+    var maxItems = this._data.length;
+    for (var i = 1; i < maxItems; i++) {
+      var index = (currentIndex + i) % maxItems;
+      if (this._data[index].selectable !== false) {
+        this.select(index);
+        return;
+      }
+    }
+    this.select(-1);
+  };
+
+  Window_MonsterBodyPartsList.prototype.isCurrentItemEnabled = function () {
+    if (this.index() < 0 || this.index() >= this._data.length) return false;
+    var item = this._data[this.index()];
+    return item.selectable !== false;
+  };
+
+  Window_MonsterBodyPartsList.prototype.processOk = function () {
+    if (this._isTargeting && this.index() >= 0 && this.isCurrentItemEnabled()) {
+      if (!$gameTemp) {
+        $gameTemp = {};
+      }
+      if (!$gameTemp.lastTargetSelections) {
+        $gameTemp.lastTargetSelections = {};
+      }
+      var enemyId = this._enemy.enemyId();
+      $gameTemp.lastTargetSelections[enemyId] = this.index();
+      $gameTemp.targetedBodyPart = this._data[this.index()].key;
+      SoundManager.playOk();
+    }
+    this.close();
+  };
+
+  Window_MonsterBodyPartsList.prototype.close = function () {
+    $gameTemp.checkWindowActive = false;
+    if (!this._isTargeting) {
+      SoundManager.playCancel();
+    }
+    Window_Selectable.prototype.close.call(this);
+    setTimeout(
+      function () {
+        if (this.parent) this.parent.removeChild(this);
+      }.bind(this),
+      100
+    );
+  };
+  Window_MonsterInfo.prototype.powerUpColor = function () {
+    return ColorManager.powerUpColor ? ColorManager.powerUpColor() : ColorManager.textColor(24);
+  };
+
+  Window_MonsterInfo.prototype.powerDownColor = function () {
+    return ColorManager.powerDownColor ? ColorManager.powerDownColor() : ColorManager.textColor(25);
+  };
   // Scene_Battle modifications
-// REPLACE THIS HOOK:
-var _Scene_Battle_update = Scene_Battle.prototype.update;
-Scene_Battle.prototype.update = function () {
-  if ($gameTemp.checkWindowActive) {
-    if (this._bodyPartsWindow) {
-      this._bodyPartsWindow.update();
+  // REPLACE THIS HOOK:
+  var _Scene_Battle_update = Scene_Battle.prototype.update;
+  Scene_Battle.prototype.update = function () {
+    if ($gameTemp.checkWindowActive) {
+      if (this._bodyPartsWindow) {
+        this._bodyPartsWindow.update();
+      }
+      if (this._monsterInfoWindow) {
+        this._monsterInfoWindow.update();
+      }
+    } else {
+      _Scene_Battle_update.call(this);
     }
-    if (this._monsterInfoWindow) {
-      this._monsterInfoWindow.update();
-    }
-  } else {
-    _Scene_Battle_update.call(this);
-  }
-};
+  };
 
   // Check command handler
-// REPLACE THIS METHOD:
-Scene_Battle.prototype.commandCheck = function () {
-  var enemy = $gameTroop.members()[0];
+  // REPLACE THIS METHOD:
+  Scene_Battle.prototype.commandCheck = function () {
+    var enemy = $gameTroop.members()[0];
 
-  if (enemy && enemy._bodyParts) {
-    this._actorCommandWindow.deactivate();
+    if (enemy && enemy._bodyParts) {
+      this._actorCommandWindow.deactivate();
 
-    // Create info window (left side)
-    this._monsterInfoWindow = new Window_MonsterInfo(enemy);
-    this.addWindow(this._monsterInfoWindow);
+      // Create info window (left side)
+      this._monsterInfoWindow = new Window_MonsterInfo(enemy);
+      this.addWindow(this._monsterInfoWindow);
 
-    // Create body parts list window (right side)
-    this._bodyPartsWindow = new Window_MonsterBodyPartsList(enemy, false);
-    this.addWindow(this._bodyPartsWindow);
-    this._bodyPartsWindow.setHandler("ok", this.onBodyPartsOk.bind(this));
-    this._bodyPartsWindow.setHandler("cancel", this.onBodyPartsCancel.bind(this));
-    
-    $gameTemp.checkWindowActive = true;
-  } else {
-    this._actorCommandWindow.activate();
-  }
-};
+      // Create body parts list window (right side)
+      this._bodyPartsWindow = new Window_MonsterBodyPartsList(enemy, false);
+      this.addWindow(this._bodyPartsWindow);
+      this._bodyPartsWindow.setHandler("ok", this.onBodyPartsOk.bind(this));
+      this._bodyPartsWindow.setHandler("cancel", this.onBodyPartsCancel.bind(this));
+
+      $gameTemp.checkWindowActive = true;
+    } else {
+      this._actorCommandWindow.activate();
+    }
+  };
 
   // Target command handler
-// REPLACE THIS METHOD:
-Scene_Battle.prototype.commandTarget = function () {
-  var enemy = $gameTroop.members()[0];
+  // REPLACE THIS METHOD:
+  Scene_Battle.prototype.commandTarget = function () {
+    var enemy = $gameTroop.members()[0];
 
-  if (enemy && enemy._bodyParts) {
-    this._actorCommandWindow.deactivate();
+    if (enemy && enemy._bodyParts) {
+      this._actorCommandWindow.deactivate();
 
-    // Create info window (left side)
-    this._monsterInfoWindow = new Window_MonsterInfo(enemy);
-    this.addWindow(this._monsterInfoWindow);
+      // Create info window (left side)
+      this._monsterInfoWindow = new Window_MonsterInfo(enemy);
+      this.addWindow(this._monsterInfoWindow);
 
-    // Create targeting body parts list window (right side)
-    this._bodyPartsWindow = new Window_MonsterBodyPartsList(enemy, true);
-    this.addWindow(this._bodyPartsWindow);
-    this._bodyPartsWindow.setHandler("ok", this.onTargetingOk.bind(this));
-    this._bodyPartsWindow.setHandler("cancel", this.onTargetingCancel.bind(this));
-    
-    $gameTemp.checkWindowActive = true;
-  } else {
-    this._actorCommandWindow.activate();
-  }
-};
+      // Create targeting body parts list window (right side)
+      this._bodyPartsWindow = new Window_MonsterBodyPartsList(enemy, true);
+      this.addWindow(this._bodyPartsWindow);
+      this._bodyPartsWindow.setHandler("ok", this.onTargetingOk.bind(this));
+      this._bodyPartsWindow.setHandler("cancel", this.onTargetingCancel.bind(this));
+
+      $gameTemp.checkWindowActive = true;
+    } else {
+      this._actorCommandWindow.activate();
+    }
+  };
   // Handler for closing check window
   Scene_Battle.prototype.onBodyPartsOk = function () {
     this.closeBodyPartsWindow();
@@ -1604,51 +1604,51 @@ Scene_Battle.prototype.commandTarget = function () {
   };
 
   // Handler for targeting window
-// Replace the onTargetingOk handler
-Scene_Battle.prototype.onTargetingOk = function () {
-  // Store the selected index for this enemy
-  if (this._bodyPartsWindow && this._bodyPartsWindow._enemy) {
-    var enemyId = this._bodyPartsWindow._enemy.enemyId();
-    if (!$gameTemp.lastTargetSelections) {
-      $gameTemp.lastTargetSelections = {};
+  // Replace the onTargetingOk handler
+  Scene_Battle.prototype.onTargetingOk = function () {
+    // Store the selected index for this enemy
+    if (this._bodyPartsWindow && this._bodyPartsWindow._enemy) {
+      var enemyId = this._bodyPartsWindow._enemy.enemyId();
+      if (!$gameTemp.lastTargetSelections) {
+        $gameTemp.lastTargetSelections = {};
+      }
+      $gameTemp.lastTargetSelections[enemyId] = this._bodyPartsWindow.index();
     }
-    $gameTemp.lastTargetSelections[enemyId] = this._bodyPartsWindow.index();
-  }
-  
-  // Close BOTH windows (body parts list and monster info)
-  if (this._bodyPartsWindow) {
-    this._bodyPartsWindow.close();
-    this._bodyPartsWindow = null;
-  }
 
-  if (this._monsterInfoWindow) {
-    this._monsterInfoWindow.close();
-    setTimeout(
-      function () {
-        if (this._monsterInfoWindow && this._monsterInfoWindow.parent) {
-          this._monsterInfoWindow.parent.removeChild(this._monsterInfoWindow);
-        }
-        this._monsterInfoWindow = null;
-      }.bind(this),
-      100
-    );
-  }
+    // Close BOTH windows (body parts list and monster info)
+    if (this._bodyPartsWindow) {
+      this._bodyPartsWindow.close();
+      this._bodyPartsWindow = null;
+    }
 
-  if ($gameTemp) {
-    $gameTemp.checkWindowActive = false;
-  }
-  
-  // After targeting, return to the actor command window and select Attack
-  this._actorCommandWindow.activate();
-  this._actorCommandWindow.selectSymbol("attack");
-};
+    if (this._monsterInfoWindow) {
+      this._monsterInfoWindow.close();
+      setTimeout(
+        function () {
+          if (this._monsterInfoWindow && this._monsterInfoWindow.parent) {
+            this._monsterInfoWindow.parent.removeChild(this._monsterInfoWindow);
+          }
+          this._monsterInfoWindow = null;
+        }.bind(this),
+        100
+      );
+    }
+
+    if ($gameTemp) {
+      $gameTemp.checkWindowActive = false;
+    }
+
+    // After targeting, return to the actor command window and select Attack
+    this._actorCommandWindow.activate();
+    this._actorCommandWindow.selectSymbol("attack");
+  };
 
   Scene_Battle.prototype.onTargetingCancel = function () {
     // Clear targeted part if $gameTemp exists
     if ($gameTemp) {
       $gameTemp.targetedBodyPart = null;
     }
-    
+
     // Clear the last target selection for this enemy
     if (this._bodyPartsWindow && this._bodyPartsWindow._enemy) {
       var enemyId = this._bodyPartsWindow._enemy.enemyId();
@@ -1656,37 +1656,37 @@ Scene_Battle.prototype.onTargetingOk = function () {
         delete $gameTemp.lastTargetSelections[enemyId];
       }
     }
-    
+
     this.closeBodyPartsWindow();
   };
 
-// REPLACE THIS METHOD:
-Scene_Battle.prototype.closeBodyPartsWindow = function () {
-  // Close both windows
-  if (this._bodyPartsWindow) {
-    this._bodyPartsWindow.close();
-    this._bodyPartsWindow = null;
-  }
+  // REPLACE THIS METHOD:
+  Scene_Battle.prototype.closeBodyPartsWindow = function () {
+    // Close both windows
+    if (this._bodyPartsWindow) {
+      this._bodyPartsWindow.close();
+      this._bodyPartsWindow = null;
+    }
 
-  if (this._monsterInfoWindow) {
-    this._monsterInfoWindow.close();
-    setTimeout(
-      function () {
-        if (this._monsterInfoWindow && this._monsterInfoWindow.parent) {
-          this._monsterInfoWindow.parent.removeChild(this._monsterInfoWindow);
-        }
-        this._monsterInfoWindow = null;
-      }.bind(this),
-      100
-    );
-  }
+    if (this._monsterInfoWindow) {
+      this._monsterInfoWindow.close();
+      setTimeout(
+        function () {
+          if (this._monsterInfoWindow && this._monsterInfoWindow.parent) {
+            this._monsterInfoWindow.parent.removeChild(this._monsterInfoWindow);
+          }
+          this._monsterInfoWindow = null;
+        }.bind(this),
+        100
+      );
+    }
 
-  if ($gameTemp) {
-    $gameTemp.checkWindowActive = false;
-  }
+    if ($gameTemp) {
+      $gameTemp.checkWindowActive = false;
+    }
 
-  this._actorCommandWindow.activate();
-};
+    this._actorCommandWindow.activate();
+  };
 
   // Add a hook to BattleManager.update to handle delayed enemy death
   var _BattleManager_update = BattleManager.update;
@@ -1703,9 +1703,10 @@ Scene_Battle.prototype.closeBodyPartsWindow = function () {
     if ($gameTemp.scheduleEnemyDeath && $gameTemp.vitalPartDestroyedEnemy) {
       // Only apply death if battle log is done processing
       if (!this._logWindow || this._logWindow._methods.length === 0) {
-        $gameTemp.vitalPartDestroyedEnemy.addState(
-          $gameTemp.vitalPartDestroyedEnemy.deathStateId()
-        );
+        const target = $gameTemp.vitalPartDestroyedEnemy;
+        target.setHp(0);
+        target.addState(target.deathStateId());
+        target.performCollapse();
         $gameTemp.vitalPartDestroyedEnemy = null;
         $gameTemp.scheduleEnemyDeath = false;
       }
@@ -1778,24 +1779,24 @@ Scene_Battle.prototype.closeBodyPartsWindow = function () {
 
   // Add this section after the plugin parameters definition, around line 70
 
-// Register plugin command for opening enemy detail window
-if (PluginManager.registerCommand) {
-  PluginManager.registerCommand(pluginName, "OpenEnemyDetails", args => {
-    if ($gameParty.inBattle()) {
-      const scene = SceneManager._scene;
-      if (scene instanceof Scene_Battle) {
-        scene.commandCheck();
+  // Register plugin command for opening enemy detail window
+  if (PluginManager.registerCommand) {
+    PluginManager.registerCommand(pluginName, "OpenEnemyDetails", args => {
+      if ($gameParty.inBattle()) {
+        const scene = SceneManager._scene;
+        if (scene instanceof Scene_Battle) {
+          scene.commandCheck();
+        }
       }
-    }
-  });
+    });
 
-  PluginManager.registerCommand(pluginName, "OpenTargeting", args => {
-    if ($gameParty.inBattle()) {
-      const scene = SceneManager._scene;
-      if (scene instanceof Scene_Battle) {
-        scene.commandTarget();
+    PluginManager.registerCommand(pluginName, "OpenTargeting", args => {
+      if ($gameParty.inBattle()) {
+        const scene = SceneManager._scene;
+        if (scene instanceof Scene_Battle) {
+          scene.commandTarget();
+        }
       }
-    }
-  });
-}
+    });
+  }
 })();

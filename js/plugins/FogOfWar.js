@@ -56,7 +56,7 @@
  * 
  * @param Vision Smoothing
  * @desc How smoothly vision follows the player (0-1, higher is smoother)
- * @default 0.8
+ * @default 0.5
  * @type number
  * @decimals 2
  * @min 0.1
@@ -64,7 +64,7 @@
  * 
  * @param Transition Duration
  * @desc Duration of transition between visible and previously seen (in frames)
- * @default 30
+ * @default 15
  * @type number
  * @min 1
  * @max 120
@@ -121,1890 +121,1193 @@
  * @command revealEntireMap
  * @text Reveal Entire Map
  * @desc Reveals the entire current map
- * 
- * @help
- * FOG_OF_WAR.js
- * 
- * This plugin adds a high-performance fog of war system to your RPG Maker MZ game,
- * inspired by Dwarf Fortress's adventure mode.
- * 
- * Features:
- * - Unexplored tiles appear black
- * - Previously seen tiles appear grayscale
- * - Currently visible tiles appear normal
- * - Enemies outside vision are hidden
- * - Non-enemy events outside vision appear in black and white
- * - Vision cone system (configurable angle and distance)
- * - Persistent fog of war data across map visits
- * - Properly handles looping maps
- * - High-performance chunked rendering system
- * - Reveals wall tiles above the player when standing below terrain tag 4
- * - Smooth vision cone movement for fluid exploration
- * - In-game option to toggle Fog of War in the Options menu
- * - NEW: Smooth transition between visible and previously seen tiles
- * - NEW: Edge feathering for more natural vision boundaries
- * 
- * To determine if an event is an enemy:
- * - Add a number in the event's note field (e.g., "22", "55")
- * - Events with names like "NPC-33" or "Chest" won't be hidden
- * 
- * Plugin Commands:
- * - Toggle Fog of War: Enable or disable the entire system
- * - Reset Fog of War: Reset fog data for current map or all maps
- * - Reveal Entire Map: Makes the entire current map visible
- * 
- * Map Notes:
- * - To set a custom vision range for a specific map, add this to the map's notes:
- *   <VisionRange:15>
- * - If no vision range is specified in the map notes, the default of 10 will be used
- * 
- * Vision Blocking:
- * - Events with names listed in "Vision Blocking Event Names" parameter will block vision rays
- * - Use terrain tag 4 for tiles that should block vision
- * - When standing below terrain tag 4 (wall), the plugin will reveal 3 tiles above
- * 
- * Performance Tips:
- * - Increase the "Chunk Size" parameter for better performance (at cost of responsiveness)
- * - Increase the "Update Frequency" parameter to reduce CPU usage
- * - Decrease the "Ray Count" parameter if you experience lag
- * - For larger maps, consider using a smaller Vision Range
- * 
- * Version 3.6 Changes:
- * - Added smooth transition effect between visible and previously seen tiles
- * - Implemented edge feathering for more natural vision boundaries
- * - Enhanced tile state system to track transition progress
- * - Optimized rendering for better performance with transitions
  */
 
-(function() {
+(function () {
     'use strict';
-    
+
     const pluginName = "FOG_OF_WAR";
     const parameters = PluginManager.parameters(pluginName);
-    
+
+    // Constants & Configuration
     const DEFAULT_VISION_RANGE = 10;
-    const DEFAULT_VISION_ANGLE = 160;
     const EXEMPT_EVENT_NAMES = (parameters['Exempt Event Names'] || "NPC,Chest,Trigger").split(',').map(s => s.trim());
     const VISION_BLOCKING_EVENT_NAMES = ("locked_key,door_i,locked,Wall,Pillar,Door,Column,Room,Obstacle").split(',').map(s => s.trim());
     const UPDATE_FREQUENCY = Number(parameters['Update Frequency'] || 3);
-    const RAY_COUNT = Number(parameters['Ray Count'] || 60);
+    const RAY_COUNT = Number(parameters['Ray Count'] || 120);
     const RESET_ON_NEW_GAME = parameters['Reset On New Game'] !== 'false';
     const CHUNK_SIZE = Number(parameters['Chunk Size'] || 8);
     const NEVER_SEEN_COLOR = parameters['Never Seen Color'] || '#000000';
     const PREVIOUSLY_SEEN_COLOR = parameters['Previously Seen Color'] || 'rgba(0,0,0,0.4)';
-    const VISION_SMOOTHING = Number(parameters['Vision Smoothing'] || 0.8);
-    const REVEAL_TRANSITION_DURATION = Number(parameters['Reveal Transition Duration'] || 10);
-    // New parameters for transitions
-    const TRANSITION_DURATION = Number(parameters['Transition Duration'] || 30);
-    const EDGE_FEATHERING = Number(parameters['Edge Feathering'] || 0.3);
-    
-    // New parameters for options menu
+    const REVEAL_TRANSITION_DURATION = Number(parameters['Reveal Transition Duration'] || 16);
+    const BASE_ALPHA = (function() {
+        const css = parameters['Previously Seen Color'] || 'rgba(0,0,0,0.4)';
+        const match = css.match(/rgba\(\d+,\s*\d+,\s*\d+,\s*([\d.]+)\)/);
+        return match ? parseFloat(match[1]) : 0.4;
+    })();
+    const VISION_ANGLE = 110;
+    const VISION_SMOOTHING = Number(parameters['Vision Smoothing'] || 0.9);
+    const EDGE_FEATHERING = 0;
     const ADD_TO_OPTIONS_MENU = parameters['Add To Options Menu'] !== 'false';
     const OPTIONS_MENU_TEXT = parameters['Options Menu Text'] || 'Fog of War';
-    
+
+    // Map Feature Constants
+    const TERRAIN_WALL = 4;
+    const TERRAIN_ROOF = 7;
+    const REGION_BLOCK = 10;
+
     let fogOfWarEnabled = true;
     let updateCounter = 0;
-    
-    // Register plugin commands
+
+    //=============================================================================
+    // Plugin Commands
+    //=============================================================================
+
     PluginManager.registerCommand(pluginName, "toggleFogOfWar", args => {
         fogOfWarEnabled = args.enable === "true";
-        
-        // Save this setting to config if options menu is enabled
         if (ADD_TO_OPTIONS_MENU) {
             ConfigManager.fogOfWar = fogOfWarEnabled;
             ConfigManager.save();
         }
-        
         if (SceneManager._scene instanceof Scene_Map) {
             SceneManager._scene._spriteset.refreshFogOfWar();
         }
     });
 
-    
-// Register the new plugin command
-PluginManager.registerCommand(pluginName, "disableFogForMap", args => {
-    const disable = args.disable === "true";
-    if (disable) {
-        // Store in map metadata that this map should have fog disabled
-        $gameMap._fogOfWarDisabled = true;
-        
-        // Hide the fog container if we're in a map scene
+    PluginManager.registerCommand(pluginName, "disableFogForMap", args => {
+        const disable = args.disable === "true";
+        $gameMap._fogOfWarDisabled = disable;
         if (SceneManager._scene instanceof Scene_Map) {
-            SceneManager._scene._spriteset._fogContainer.visible = false;
+            const container = SceneManager._scene._spriteset._fogContainer;
+            if (container) {
+                container.visible = !disable && fogOfWarEnabled;
+                if (!disable && fogOfWarEnabled) {
+                    SceneManager._scene._spriteset.refreshFogOfWar(true);
+                }
+            }
         }
-    } else {
-        // Re-enable fog for this map
-        $gameMap._fogOfWarDisabled = false;
-        
-        // Show the fog container if we're in a map scene and fog is globally enabled
-        if (SceneManager._scene instanceof Scene_Map && fogOfWarEnabled) {
-            SceneManager._scene._spriteset._fogContainer.visible = true;
-            SceneManager._scene._spriteset.refreshFogOfWar(true);
-        }
-    }
-});
-    
-    // Command to reset fog of war data
+    });
+
     PluginManager.registerCommand(pluginName, "resetFogOfWar", args => {
         const target = args.target || "current";
         if (target === "current") {
-            // Reset current map only
             $gameSystem.resetFogOfWarForMap($gameMap.mapId());
-            $gameMap.initializeFogOfWar();
-        } else if (target === "all") {
-            // Reset all maps
+        } else {
             $gameSystem.resetAllFogOfWar();
-            $gameMap.initializeFogOfWar();
         }
+        $gameMap.initializeFogOfWar();
         if (SceneManager._scene instanceof Scene_Map) {
             SceneManager._scene._spriteset.refreshFogOfWar();
         }
     });
-    
-    // Command to reveal the entire map
+
     PluginManager.registerCommand(pluginName, "revealEntireMap", args => {
         if ($gameMap && $gameMap._fogOfWarData) {
-            // Set all tiles to "visible" state (2) with a reveal transition
             for (let i = 0; i < $gameMap._fogOfWarData.length; i++) {
-                const oldState = $gameMap._fogOfWarData[i];
-                if (oldState !== 2) { // Only transition if not already visible
-                    $gameMap._fogOfWarData[i] = 2;
-                    // Apply reveal transition
-                    $gameMap._fogTransitionTimers[i] = -REVEAL_TRANSITION_DURATION;
-                } else {
-                    $gameMap._fogTransitionTimers[i] = 0;
-                }
+                $gameMap.setFogOfWarStateByIndex(i, 2);
             }
-            
-            // Mark all chunks as dirty for refresh
+            $gameMap._forceVisionUpdate = true;
             $gameMap.markAllChunksDirty();
-            
-            // Save the updated fog data
-            $gameSystem.setFogOfWarData($gameMap.mapId(), {
-                states: Array.from($gameMap._fogOfWarData),
-                timers: Array.from($gameMap._fogTransitionTimers)
-            });
-            
-            // Refresh the fog of war display
+            $gameSystem.saveCurrentFogData();
             if (SceneManager._scene instanceof Scene_Map) {
                 SceneManager._scene._spriteset.refreshFogOfWar();
             }
         }
     });
-    // Add reset functionality on new game
+
+    //=============================================================================
+    // DataManager & ConfigManager
+    //=============================================================================
+
     const _DataManager_setupNewGame = DataManager.setupNewGame;
-    DataManager.setupNewGame = function() {
+    DataManager.setupNewGame = function () {
         _DataManager_setupNewGame.call(this);
-
-        // Reset fog of war data when starting a new game
-        if (RESET_ON_NEW_GAME) {
-            if ($gameSystem) {
-                $gameSystem.resetAllFogOfWar();
-            }
+        if (RESET_ON_NEW_GAME && $gameSystem) {
+            $gameSystem.resetAllFogOfWar();
         }
     };
 
-    // Add method to Game_System to handle full lighting reload
-    Game_System.prototype.reloadFogOfWarLighting = function() {
-        if (!$gameMap) return;
-
-        // Reset lighting state
-        $gameMap._lastUpdateTime = 0;
-        $gameMap._playerIdleTime = 0;
-        $gameMap._playerWasMoving = false;
-
-        // Clear terrain cache to force recalculation
-        if ($gameMap._terrainCache) {
-            $gameMap._terrainCache.clear();
-        }
-
-        // Reset all transitions to clean state
-        if ($gameMap._fogTransitionTimers) {
-            for (let i = 0; i < $gameMap._fogTransitionTimers.length; i++) {
-                $gameMap._fogTransitionTimers[i] = 0;
-            }
-        }
-
-        // Clear active transitions
-        if ($gameMap._activeTransitions) {
-            $gameMap._activeTransitions.clear();
-        }
-
-        // Force all chunks to be dirty and redrawn
-        $gameMap.markAllChunksDirty();
-
-        // Trigger immediate vision update
-        if ($gamePlayer) {
-            $gameMap.updateFogOfWar();
-        }
-    };
-    
-    //=============================================================================
-    // ConfigManager - Handle options menu
-    //=============================================================================
-    
-    // Add FOG_OF_WAR to ConfigManager
     ConfigManager.fogOfWar = true;
-    
-    // Save FOG_OF_WAR setting
+
     const _ConfigManager_makeData = ConfigManager.makeData;
-    ConfigManager.makeData = function() {
+    ConfigManager.makeData = function () {
         const config = _ConfigManager_makeData.call(this);
         config.fogOfWar = this.fogOfWar;
         return config;
     };
-    
-    // Load FOG_OF_WAR setting
+
     const _ConfigManager_applyData = ConfigManager.applyData;
-    ConfigManager.applyData = function(config) {
+    ConfigManager.applyData = function (config) {
         _ConfigManager_applyData.call(this, config);
         this.fogOfWar = this.readFlag(config, 'fogOfWar', true);
-        
-        // Apply the loaded setting
         fogOfWarEnabled = this.fogOfWar;
     };
-    
-    //=============================================================================
-    // Window_Options - Add FOG_OF_WAR option
-    //=============================================================================
-    
+
     if (ADD_TO_OPTIONS_MENU) {
         const _Window_Options_addGeneralOptions = Window_Options.prototype.addGeneralOptions;
-        Window_Options.prototype.addGeneralOptions = function() {
+        Window_Options.prototype.addGeneralOptions = function () {
             _Window_Options_addGeneralOptions.call(this);
             this.addCommand(OPTIONS_MENU_TEXT, 'fogOfWar');
         };
     }
-    
+
     //=============================================================================
     // Game_System
     //=============================================================================
-    
+
     const _Game_System_initialize = Game_System.prototype.initialize;
-    Game_System.prototype.initialize = function() {
+    Game_System.prototype.initialize = function () {
         _Game_System_initialize.call(this);
-        this._fogOfWarData = {}; // Store fog data for each map
+        this._fogOfWarData = {};
     };
-    
-    Game_System.prototype.getFogOfWarData = function(mapId) {
-        if (!this._fogOfWarData) this._fogOfWarData = {};
-        return this._fogOfWarData[mapId] || null;
+
+    Game_System.prototype.getFogOfWarData = function (mapId) {
+        return this._fogOfWarData?.[mapId] || null;
     };
-    
-    Game_System.prototype.setFogOfWarData = function(mapId, data) {
+
+    Game_System.prototype.setFogOfWarData = function (mapId, data) {
         if (!this._fogOfWarData) this._fogOfWarData = {};
         this._fogOfWarData[mapId] = data;
     };
-    
-    Game_System.prototype.resetFogOfWarForMap = function(mapId) {
+
+    Game_System.prototype.saveCurrentFogData = function () {
+        if ($gameMap) {
+            this.setFogOfWarData($gameMap.mapId(), {
+                states: Array.from($gameMap._fogOfWarData),
+                timers: Array.from($gameMap._fogTransitionTimers)
+            });
+        }
+    };
+
+    Game_System.prototype.resetFogOfWarForMap = function (mapId) {
         if (this._fogOfWarData && this._fogOfWarData[mapId]) {
             delete this._fogOfWarData[mapId];
         }
     };
-    
-    Game_System.prototype.resetAllFogOfWar = function() {
+
+    Game_System.prototype.resetAllFogOfWar = function () {
         this._fogOfWarData = {};
     };
-    
+
+    Game_System.prototype.reloadFogOfWarLighting = function () {
+        if (!$gameMap) return;
+        $gameMap._lastUpdateTime = 0;
+        $gameMap._playerIdleTime = 0;
+        $gameMap._playerWasMoving = false;
+        $gameMap._terrainCacheDirty = true;
+
+        if ($gameMap._fogTransitionTimers) {
+            $gameMap._fogTransitionTimers.fill(0);
+        }
+        if ($gameMap._activeTransitions) {
+            $gameMap._activeTransitions.clear();
+        }
+
+        $gameMap.markAllChunksDirty();
+        if ($gamePlayer) $gameMap.updateFogOfWar();
+    };
+
     //=============================================================================
     // Game_Map
     //=============================================================================
-    
+
     const _Game_Map_initialize = Game_Map.prototype.initialize;
-    Game_Map.prototype.initialize = function() {
+    Game_Map.prototype.initialize = function () {
         _Game_Map_initialize.call(this);
         this._fogOfWarData = null;
         this._fogTransitionTimers = null;
-        this._dirtyChunks = new Set();
-        this._activeTransitions = new Set(); // Add this line
+        this._dirtyChunks = null;
+        this._activeTransitions = new Set();
         this._playerLastX = -1;
         this._playerLastY = -1;
         this._playerLastDir = -1;
+        this._player2LastX = -1;
+        this._player2LastY = -1;
+        this._player2LastDir = -1;
         this._lastUpdateTime = 0;
         this._visionRange = DEFAULT_VISION_RANGE;
         this._visionX = 0;
         this._visionY = 0;
-        
-        // New variables for idle detection
+        this._visionX2 = 0;
+        this._visionY2 = 0;
         this._playerIdleTime = 0;
         this._playerIdleThreshold = 10;
         this._playerWasMoving = false;
+        this._terrainCache = null;
+        this._eventMap = [];
+        this._visibleIndices = [];
+        this._lastVisibleIndices = [];
+        this._currentFrameVisible = null;
+        this._forceVisionUpdate = true;
     };
-    
-    
+
     const _Game_Map_setup = Game_Map.prototype.setup;
-    Game_Map.prototype.setup = function(mapId) {
+    Game_Map.prototype.setup = function (mapId) {
         _Game_Map_setup.call(this, mapId);
 
-
-        // Check if this map should have fog disabled based on notes
         this._fogOfWarDisabled = false;
-        this._visibleFogOfWar = false; // NEW: Flag for persistent visibility
+        this._visibleFogOfWar = false;
         if ($dataMap && $dataMap.note) {
             this._fogOfWarDisabled = $dataMap.note.includes("<DisableFogOfWar>");
-            this._visibleFogOfWar = $dataMap.note.includes("<VisibleFogOfWar>"); // NEW: Check for visible fog tag
+            this._visibleFogOfWar = $dataMap.note.includes("<VisibleFogOfWar>");
         }
 
-        // Always reset fog of war for procedural map (map 636) on every visit
-        // This ensures fog regenerates even when teleporting to the same map
+        // Procedural map force clear
         if (mapId === 636) {
             $gameSystem.resetFogOfWarForMap(mapId);
         }
 
         this.initializeFogOfWar();
-        this.loadVisionRangeFromMapNotes(); // Load custom vision range from map notes
+        this.loadVisionRangeFromMapNotes();
 
-        // Initialize vision coordinates to player position
         this._visionX = $gamePlayer.x;
         this._visionY = $gamePlayer.y;
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active && window.$gameSplitScreen.p2Event) {
+            this._visionX2 = window.$gameSplitScreen.p2Event.x;
+            this._visionY2 = window.$gameSplitScreen.p2Event.y;
+        } else {
+            this._visionX2 = this._visionX;
+            this._visionY2 = this._visionY;
+        }
     };
 
-    
-    // New method to load vision range from map notes
-    Game_Map.prototype.loadVisionRangeFromMapNotes = function() {
-        this._visionRange = DEFAULT_VISION_RANGE; // Reset to default
-        
+    Game_Map.prototype.normalizePos = function (x, y) {
+        if (this.isLoopHorizontal()) x = (x + this.width()) % this.width();
+        if (this.isLoopVertical()) y = (y + this.height()) % this.height();
+        return { x, y, isValid: x >= 0 && y >= 0 && x < this.width() && y < this.height() };
+    };
+
+    Game_Map.prototype.loadVisionRangeFromMapNotes = function () {
+        this._visionRange = DEFAULT_VISION_RANGE;
         if ($dataMap && $dataMap.note) {
             const match = $dataMap.note.match(/<VisionRange:(\d+)>/i);
             if (match) {
-                const value = parseInt(match[1]);
-                if (!isNaN(value) && value > 0) {
-                    this._visionRange = value;
-                }
+                const value = parseInt(match[1], 10);
+                if (!isNaN(value) && value > 0) this._visionRange = value;
             }
         }
     };
-    Game_Map.prototype.revealBorderingTiles = function(centerX, centerY) {
-        // Define the 8 directions around the player (including diagonals)
-        const cardinalDirections = [
-            [-1, 0], [1, 0], [0, -1], [0, 1]  // Left, Right, Up, Down
-        ];
-        const diagonalDirections = [
-            [-1, -1], [-1, 1], [1, -1], [1, 1]  // Top-left, Top-right, Bottom-left, Bottom-right
-        ];
 
-        // Always reveal the player's current tile
-        this.setFogOfWarState(centerX, centerY, 2);
-
-        // Reveal cardinal direction tiles (only if they don't block vision)
-        for (const [dx, dy] of cardinalDirections) {
-            const x = centerX + dx;
-            const y = centerY + dy;
-
-            // Always reveal the adjacent tile (including walls/doors so you can see them)
-            this.setFogOfWarState(x, y, 2);
-
-            // Mark events on these tiles as bordering player
-            const events = this.eventsXy(x, y);
-            if (events.length > 0) {
-                for (const event of events) {
-                    event.updateFogOfWarVisibility(true);
-                    event._fogOfWarBorderingPlayer = true;
-                }
-            }
-        }
-
-        // For diagonal tiles, only reveal if the path isn't blocked
-        for (const [dx, dy] of diagonalDirections) {
-            const x = centerX + dx;
-            const y = centerY + dy;
-
-            // Check if the two cardinal tiles that lead to this diagonal are blocking
-            const horizontalBlocked = this.isVisionBlocking(centerX + dx, centerY);
-            const verticalBlocked = this.isVisionBlocking(centerX, centerY + dy);
-
-            // Only reveal diagonal tile if at least one path is clear
-            if (!horizontalBlocked || !verticalBlocked) {
-                this.setFogOfWarState(x, y, 2);
-
-                // Mark events on these tiles as bordering player
-                const events = this.eventsXy(x, y);
-                if (events.length > 0) {
-                    for (const event of events) {
-                        event.updateFogOfWarVisibility(true);
-                        event._fogOfWarBorderingPlayer = true;
-                    }
-                }
-            }
-        }
-    };
-    
-    // Method to get current vision range
-    Game_Map.prototype.visionRange = function() {
+    Game_Map.prototype.visionRange = function () {
         return this._visionRange;
     };
-    
-    Game_Map.prototype.initializeFogOfWar = function() {
+
+    Game_Map.prototype.initializeFogOfWar = function () {
         const size = this.width() * this.height();
-        
-        // Check if we have saved data for this map
         const savedData = $gameSystem.getFogOfWarData(this._mapId);
-        
-        if (savedData && savedData.states && savedData.timers) {
-            // Use saved data if it exists and dimensions match
-            if (savedData.states.length === size && savedData.timers.length === size) {
-                this._fogOfWarData = new Uint8Array(savedData.states);
-                this._fogTransitionTimers = new Uint8Array(savedData.timers);
-            } else {
-                // If dimensions don't match (map was changed), create new data
-                this._fogOfWarData = new Uint8Array(size);
-                this._fogTransitionTimers = new Uint8Array(size);
-            }
-        } else if (savedData && !savedData.states && !savedData.timers && savedData.length === size) {
-            // Backward compatibility with old format (before transitions)
-            this._fogOfWarData = new Uint8Array(savedData);
-            this._fogTransitionTimers = new Uint8Array(size);
+
+        if (savedData && savedData.states && savedData.states.length === size) {
+            this._fogOfWarData = new Uint8Array(savedData.states);
+            this._fogTransitionTimers = new Int16Array(savedData.timers);
         } else {
-            // Create new fog data if none exists
-            this._fogOfWarData = new Uint8Array(size);
-            this._fogTransitionTimers = new Uint8Array(size);
+            this._fogOfWarData = (savedData && savedData.length === size) ? new Uint8Array(savedData) : new Uint8Array(size);
+            this._fogTransitionTimers = new Int16Array(size);
+            for (let i = 0; i < size; i++) {
+                const state = this._fogOfWarData[i];
+                if (state === 0) this._fogTransitionTimers[i] = 255;
+                else if (state === 1) this._fogTransitionTimers[i] = Math.floor(BASE_ALPHA * 255);
+                else this._fogTransitionTimers[i] = 0;
+            }
         }
-        
-        // Ensure _activeTransitions and _terrainCache are properly initialized
+
         this._activeTransitions = new Set();
-        this._terrainCache = new Map();
-        
-        // Mark all chunks as dirty for initial render
-        this._dirtyChunks = new Set();
+        this._terrainCache = new Uint8Array(size);
+        this._terrainCacheDirty = true;
+
         const chunksX = Math.ceil(this.width() / CHUNK_SIZE);
         const chunksY = Math.ceil(this.height() / CHUNK_SIZE);
-        
-        for (let cy = 0; cy < chunksY; cy++) {
-            for (let cx = 0; cx < chunksX; cx++) {
-                this._dirtyChunks.add(`${cx},${cy}`);
-            }
+        this._dirtyChunks = new Uint8Array(chunksX * chunksY).fill(1);
+
+        this.refreshEventMap();
+
+        this._visibleIndices = [];
+        this._currentFrameVisible = new Uint8Array(size);
+        this._lastVisibleIndices = [];
+
+        for (let i = 0; i < size; i++) {
+            if (this._fogOfWarData[i] === 2) this._lastVisibleIndices.push(i);
         }
-        
+
         this._playerLastX = -1;
         this._playerLastY = -1;
         this._playerLastDir = -1;
+        this._player2LastX = -1;
+        this._player2LastY = -1;
+        this._player2LastDir = -1;
         this._lastUpdateTime = 0;
+        this._forceVisionUpdate = true;
     };
-    
-    Game_Map.prototype.fogOfWarState = function(x, y) {
-        if (this._fogOfWarDisabled || !fogOfWarEnabled) return 2;        // Handle map looping
-        if (this.isLoopHorizontal()) {
-            x = (x + this.width()) % this.width();
+
+    Game_Map.prototype.refreshEventMap = function () {
+        const width = this.width();
+        const size = width * this.height();
+        this._eventMap = new Array(size);
+
+        const events = this.events();
+        for (let i = 0; i < events.length; i++) {
+            const event = events[i];
+            if (this.isValid(event.x, event.y)) {
+                const index = event.y * width + event.x;
+                if (!this._eventMap[index]) this._eventMap[index] = [];
+                this._eventMap[index].push(event);
+            }
         }
-        if (this.isLoopVertical()) {
-            y = (y + this.height()) % this.height();
-        }
-        
-        // Check boundaries after adjusting for looping
-        if (x < 0 || y < 0 || x >= this.width() || y >= this.height()) return 0;
-        
-        return this._fogOfWarData[y * this.width() + x] || 0;
     };
-    
-    // New method to get transition timer for a tile
-    Game_Map.prototype.fogTransitionTimer = function(x, y) {
-        // Handle map looping
-        if (this.isLoopHorizontal()) {
-            x = (x + this.width()) % this.width();
-        }
-        if (this.isLoopVertical()) {
-            y = (y + this.height()) % this.height();
-        }
-        
-        // Check boundaries after adjusting for looping
-        if (x < 0 || y < 0 || x >= this.width() || y >= this.height()) return 0;
-        
-        return this._fogTransitionTimers[y * this.width() + x] || 0;
+
+    Game_Map.prototype.fogOfWarState = function (x, y) {
+        if (this._fogOfWarDisabled || !fogOfWarEnabled) return 2;
+        const pos = this.normalizePos(x, y);
+        if (!pos.isValid) return 0;
+        return this._fogOfWarData[pos.y * this.width() + pos.x] || 0;
     };
-    Game_Map.prototype.setFogOfWarState = function(x, y, state) {
-        // Handle map looping
-        if (this.isLoopHorizontal()) {
-            x = (x + this.width()) % this.width();
+
+    Game_Map.prototype.fogTransitionTimer = function (x, y) {
+        const pos = this.normalizePos(x, y);
+        if (!pos.isValid) return 0;
+        return this._fogTransitionTimers[pos.y * this.width() + pos.x] || 0;
+    };
+
+    Game_Map.prototype.setFogOfWarState = function (x, y, state) {
+        const pos = this.normalizePos(x, y);
+        if (pos.isValid) {
+            this.setFogOfWarStateByIndex(pos.y * this.width() + pos.x, state);
         }
-        if (this.isLoopVertical()) {
-            y = (y + this.height()) % this.height();
-        }
-        
-        // Check boundaries
-        if (x >= 0 && y >= 0 && x < this.width() && y < this.height()) {
-            const index = y * this.width() + x;
-            const oldState = this._fogOfWarData[index];
+    };
+
+    Game_Map.prototype.setFogOfWarStateByIndex = function (index, state) {
+        if (this._fogOfWarData[index] !== state) {
+            this._fogOfWarData[index] = state;
+            this._activeTransitions.add(index);
             
-            // Only update if the state has changed
-            if (oldState !== state) {
-                // Ensure _activeTransitions is properly initialized as a Set
-                if (!this._activeTransitions || typeof this._activeTransitions.add !== 'function') {
-                    this._activeTransitions = new Set();
-                }
-                
-                // Ensure _fogTransitionTimers is initialized
-                if (!this._fogTransitionTimers) {
-                    this._fogTransitionTimers = new Uint8Array(this.width() * this.height());
-                }
-                
-                if (oldState === 2 && state === 1) {
-                    this._fogTransitionTimers[index] = TRANSITION_DURATION;
-                    this._activeTransitions.add(index);
-                } else if ((oldState === 1 || oldState === 0) && state === 2) {
-                    this._fogTransitionTimers[index] = -REVEAL_TRANSITION_DURATION;
-                    this._activeTransitions.add(index);
-                } else {
-                    this._fogTransitionTimers[index] = 0;
-                    this._activeTransitions.delete(index);
-                }
-                
-                this._fogOfWarData[index] = state;
-                
-                // Mark chunk as dirty
-                const chunkX = Math.floor(x / CHUNK_SIZE);
-                const chunkY = Math.floor(y / CHUNK_SIZE);
-                if (!this._dirtyChunks || !(this._dirtyChunks instanceof Set)) {
-                    this._dirtyChunks = new Set();
-                }
-                this._dirtyChunks.add(`${chunkX},${chunkY}`);
-            }
+            const width = this.width();
+            this.markChunkDirty(index % width, (index / width) | 0);
+        }
+
+        if (state === 2 && this._currentFrameVisible && !this._currentFrameVisible[index]) {
+            this._currentFrameVisible[index] = 1;
+            this._visibleIndices.push(index);
         }
     };
-    // New method to update transition timers
-// New method to update transition timers
-Game_Map.prototype.updateTransitionTimers = function() {
-    const width = this.width();
-    const size = width * this.height();
-    
-    // Only check tiles that are likely to have active transitions
-    // Keep track of active transition indices for faster updates
-    if (!this._activeTransitions || typeof this._activeTransitions.values !== 'function') {
-        this._activeTransitions = new Set();
-        return; // Exit early if we just initialized
-    }
-    
-    // Update existing active transitions
-    // Create array copy to avoid modification during iteration
-    const activeIndices = Array.from(this._activeTransitions);
-    for (const i of activeIndices) {
-        if (i >= size) {
-            this._activeTransitions.delete(i);
-            continue;
-        }
-        
-        const timer = this._fogTransitionTimers[i];
-        if (timer > 0) {
-            this._fogTransitionTimers[i]--;
-            if (this._fogTransitionTimers[i] === 0) {
-                this._activeTransitions.delete(i);
-            }
-        } else if (timer < 0) {
-            this._fogTransitionTimers[i]++;
-            if (this._fogTransitionTimers[i] === 0) {
-                this._activeTransitions.delete(i);
-            }
-        } else {
-            this._activeTransitions.delete(i);
-            continue;
-        }
-        
-        // Mark chunk as dirty
-        const x = i % width;
-        const y = Math.floor(i / width);
-        const chunkX = Math.floor(x / CHUNK_SIZE);
-        const chunkY = Math.floor(y / CHUNK_SIZE);
-        this._dirtyChunks.add(`${chunkX},${chunkY}`);
-    }
-};
-    
-    Game_Map.prototype.markAllChunksDirty = function() {
-        this._dirtyChunks = new Set();
+
+    Game_Map.prototype.markChunkDirty = function (x, y) {
+        const chunkX = (x / CHUNK_SIZE) | 0;
+        const chunkY = (y / CHUNK_SIZE) | 0;
         const chunksX = Math.ceil(this.width() / CHUNK_SIZE);
         const chunksY = Math.ceil(this.height() / CHUNK_SIZE);
-        
-        for (let cy = 0; cy < chunksY; cy++) {
-            for (let cx = 0; cx < chunksX; cx++) {
-                this._dirtyChunks.add(`${cx},${cy}`);
-            }
+        if (chunkX >= 0 && chunkY >= 0 && chunkX < chunksX && chunkY < chunksY) {
+            this._dirtyChunks[chunkY * chunksX + chunkX] = 1;
         }
     };
-    
-    Game_Map.prototype.getDirtyChunks = function() {
-        return Array.from(this._dirtyChunks);
+
+    Game_Map.prototype.updateTransitionTimers = function () {
+        if (!this._activeTransitions || this._activeTransitions.size === 0) return;
+
+        const width = this.width();
+        const frames = Math.max(1, REVEAL_TRANSITION_DURATION);
+        const toDelete = [];
+        const step = Math.ceil(255 / frames);
+
+        for (const index of this._activeTransitions) {
+            const state = this._fogOfWarData[index];
+            let target = 0;
+            if (state === 0) target = 255;
+            else if (state === 1) target = Math.floor(BASE_ALPHA * 255);
+            else if (state === 2) target = 0;
+
+            const current = this._fogTransitionTimers[index];
+            if (current < target) {
+                this._fogTransitionTimers[index] = Math.min(target, current + step);
+                this.markChunkDirty(index % width, (index / width) | 0);
+            } else if (current > target) {
+                this._fogTransitionTimers[index] = Math.max(target, current - step);
+                this.markChunkDirty(index % width, (index / width) | 0);
+            }
+
+            if (this._fogTransitionTimers[index] === target) {
+                toDelete.push(index);
+            }
+        }
+
+        for (const index of toDelete) {
+            this._activeTransitions.delete(index);
+        }
     };
-    
-    Game_Map.prototype.clearDirtyChunks = function() {
-        this._dirtyChunks.clear();
+
+    Game_Map.prototype.markAllChunksDirty = function () {
+        if (this._dirtyChunks) this._dirtyChunks.fill(1);
     };
-    
-    Game_Map.prototype.isPositionVisible = function(x, y) {
+
+    Game_Map.prototype.getDirtyChunks = function () {
+        const result = [];
+        if (!this._dirtyChunks) return result;
+        const chunksX = Math.ceil(this.width() / CHUNK_SIZE);
+        for (let i = 0; i < this._dirtyChunks.length; i++) {
+            if (this._dirtyChunks[i]) {
+                result.push(`${i % chunksX},${(i / chunksX) | 0}`);
+            }
+        }
+        return result;
+    };
+
+    Game_Map.prototype.clearDirtyChunks = function () {
+        if (this._dirtyChunks) this._dirtyChunks.fill(0);
+    };
+
+    Game_Map.prototype.isPositionVisible = function (x, y) {
         return this.fogOfWarState(x, y) === 2;
     };
-    
-    // Updated to use smooth vision position and handle transitions
-    Game_Map.prototype.updateFogOfWar = function() {
+
+    Game_Map.prototype.updateFogOfWar = function () {
         if (!ConfigManager.fogOfWar) {
             fogOfWarEnabled = false;
             return;
-        } else {
-            fogOfWarEnabled = true;
         }
+        fogOfWarEnabled = true;
+
         if (this._fogOfWarDisabled) return;
-        
-        const player = $gamePlayer;
-        
-        // Initialize vision coordinates if needed
-        if (this._visionX === undefined) this._visionX = player.x;
-        if (this._visionY === undefined) this._visionY = player.y;
-        
-        // Only update vision if player moved significantly or direction changed
-        const positionChanged = Math.abs(player.x - this._playerLastX) > 0.1 || 
-                               Math.abs(player.y - this._playerLastY) > 0.1;
-        const directionChanged = player.direction() !== this._playerLastDir;
-        
-        // Always update transition timers for smooth fading
-        this.updateTransitionTimers();
-        
-        // REMOVED THE CONDITION - Always update vision to detect moving enemies
-        // Smoothly update vision coordinates with higher precision
-        const realX = player.x + (player._realX - player.x);
-        const realY = player.y + (player._realY - player.y);
-        
-        this._visionX += (realX - this._visionX) * VISION_SMOOTHING;
-        this._visionY += (realY - this._visionY) * VISION_SMOOTHING;
-        
-        // Only update last position if it actually changed
-        if (positionChanged || directionChanged) {
-            this._playerLastX = player.x;
-            this._playerLastY = player.y;
-            this._playerLastDir = player.direction();
-            
-            // Clear terrain cache when player moves to new position
-            if (this._terrainCache) {
-                this._terrainCache.clear();
-            }
+
+        // Vision sources (P1 and P2)
+        const players = [{ char: $gamePlayer, id: 1 }];
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active && window.$gameSplitScreen.p2Event) {
+            players.push({ char: window.$gameSplitScreen.p2Event, id: 2 });
         }
-        
-        if (!this._visibleFogOfWar && (positionChanged || directionChanged)) {
-            // Optimized fog reset - only reset in a smaller radius
-            const resetRange = this.visionRange() + 1;
-            const centerX = Math.floor(this._visionX);
-            const centerY = Math.floor(this._visionY);
+
+        const isInitial = this._forceVisionUpdate;
+        let needsVisionUpdate = isInitial;
+
+        this.updateTransitionTimers();
+
+        // Process movement and smoothing for all vision sources
+        for (const p of players) {
+            const char = p.char;
+            const lastX = p.id === 1 ? this._playerLastX : this._player2LastX;
+            const lastY = p.id === 1 ? this._playerLastY : this._player2LastY;
+            const lastDir = p.id === 1 ? this._playerLastDir : this._player2LastDir;
+            const visionX = p.id === 1 ? this._visionX : this._visionX2;
+            const visionY = p.id === 1 ? this._visionY : this._visionY2;
+
+            const positionChanged = Math.abs(char.x - lastX) > 0.2 || Math.abs(char.y - lastY) > 0.2;
+            const directionChanged = char.direction() !== lastDir;
             
-            for (let dy = -resetRange; dy <= resetRange; dy++) {
-                for (let dx = -resetRange; dx <= resetRange; dx++) {
-                    const x = centerX + dx;
-                    const y = centerY + dy;
-                    
-                    if (this.isValid(x, y)) {
-                        const index = y * this.width() + x;
-                        if (this._fogOfWarData[index] === 2) {
-                            this._fogOfWarData[index] = 1;
-                            this._fogTransitionTimers[index] = TRANSITION_DURATION;
-                            
-                            const chunkX = Math.floor(x / CHUNK_SIZE);
-                            const chunkY = Math.floor(y / CHUNK_SIZE);
-                            this._dirtyChunks.add(`${chunkX},${chunkY}`);
-                        }
-                    }
+            const realX = char.x + (char._realX - char.x);
+            const realY = char.y + (char._realY - char.y);
+            const isSmoothing = Math.abs(visionX - realX) > 0.05 || Math.abs(visionY - realY) > 0.05;
+
+            if (positionChanged || directionChanged || isSmoothing) needsVisionUpdate = true;
+
+            // Update vision smoothing coords for this source
+            if (directionChanged || isInitial || Math.abs(realX - visionX) > 2 || Math.abs(realY - visionY) > 2) {
+                if (p.id === 1) { this._visionX = realX; this._visionY = realY; }
+                else { this._visionX2 = realX; this._visionY2 = realY; }
+            } else if (positionChanged) {
+                if (p.id === 1) {
+                    this._visionX += (realX - this._visionX) * VISION_SMOOTHING;
+                    this._visionY += (realY - this._visionY) * VISION_SMOOTHING;
+                } else {
+                    this._visionX2 += (realX - this._visionX2) * VISION_SMOOTHING;
+                    this._visionY2 += (realY - this._visionY2) * VISION_SMOOTHING;
+                }
+            } else {
+                if (p.id === 1) { this._visionX = realX; this._visionY = realY; }
+                else { this._visionX2 = realX; this._visionY2 = realY; }
+            }
+
+            if (positionChanged || directionChanged) {
+                if (p.id === 1) {
+                    this._playerLastX = char.x;
+                    this._playerLastY = char.y;
+                    this._playerLastDir = char.direction();
+                } else {
+                    this._player2LastX = char.x;
+                    this._player2LastY = char.y;
+                    this._player2LastDir = char.direction();
                 }
             }
         }
-        
-        // Always calculate vision to detect moving enemies
-        this.calculateVision(this._visionX, this._visionY, player.direction());
-        this.updateEventVisibility();
-        
-        // Batch save fog data less frequently
-        if (!this._fogSaveTimer) this._fogSaveTimer = 0;
-        this._fogSaveTimer++;
-        
-        if (this._fogSaveTimer >= 10) { // Save every 10 updates instead of every update
-            $gameSystem.setFogOfWarData(this._mapId, {
-                states: Array.from(this._fogOfWarData),
-                timers: Array.from(this._fogTransitionTimers)
-            });
+
+        if (needsVisionUpdate) {
+            this._forceVisionUpdate = false;
+            if (this._currentFrameVisible) this._currentFrameVisible.fill(0);
+            this._visibleIndices = [];
+            this.refreshEventMap();
+
+            // Calculate vision for all sources
+            for (const p of players) {
+                const visionX = p.id === 1 ? this._visionX : this._visionX2;
+                const visionY = p.id === 1 ? this._visionY : this._visionY2;
+                this.calculateVision(visionX, visionY, p.char.direction(), p.char);
+            }
+
+            if (isInitial) {
+                for (let i = 0; i < this._visibleIndices.length; i++) {
+                    const index = this._visibleIndices[i];
+                    this._fogTransitionTimers[index] = 0;
+                    this._activeTransitions.delete(index);
+                }
+            }
+
+            const size = this._fogOfWarData.length;
+            const fogData = this._fogOfWarData;
+            const currentVisible = this._currentFrameVisible;
+
+            for (let i = 0; i < size; i++) {
+                if (fogData[i] === 2 && !currentVisible[i]) {
+                    this.setFogOfWarStateByIndex(i, 1);
+                }
+            }
+            this._lastVisibleIndices = this._visibleIndices;
+        }
+
+        this.updateEventVisibility(isInitial);
+
+        this._fogSaveTimer = (this._fogSaveTimer || 0) + 1;
+        if (this._fogSaveTimer >= 10) {
+            $gameSystem.saveCurrentFogData();
             this._fogSaveTimer = 0;
         }
     };
-    
-    // Updated to work with fractional coordinates, extended behind player, and edge feathering
-    Game_Map.prototype.calculateVision = function(centerX, centerY, direction) {
-        let range = this.visionRange(); // Use map-specific vision range
 
-        // Check if player is standing on a roof tile (terrain tag 7)
-        const playerX = Math.floor(centerX);
-        const playerY = Math.floor(centerY);
-        const playerOnRoof = this.terrainTag(playerX, playerY) === 7;
+    Game_Map.prototype.calculateVision = function (centerX, centerY, direction, character) {
+        let range = this.visionRange();
+        const char = character || $gamePlayer;
+        const charActualX = Math.round(char._realX);
+        const charActualY = Math.round(char._realY);
+        const playerOnRoof = this.terrainTag(charActualX, charActualY) === TERRAIN_ROOF;
 
-        // Double vision range if player is standing on a roof tile
-        if (playerOnRoof) {
-            range = range * 2;
+        if (playerOnRoof) range *= 2;
+
+        this.setFogOfWarState(charActualX, charActualY, 2);
+
+        const frontX = this.roundXWithDirection(charActualX, direction);
+        const frontY = this.roundYWithDirection(charActualY, direction);
+        if (this.isValid(frontX, frontY)) {
+            this.setFogOfWarState(frontX, frontY, 2);
         }
 
-        const angleInDegrees = DEFAULT_VISION_ANGLE;
-        const angleInRadians = angleInDegrees * Math.PI / 180;
-
-        // Always make the player's tile and adjacent tiles visible for smoother experience
-        const cX = Math.floor(centerX);
-        const cY = Math.floor(centerY);
-
-        // NEW: Always reveal bordering tiles and their events
-        this.revealBorderingTiles(cX, cY);
-
-        // Check if player is standing below a terrain tag 4 (wall) to reveal wall tiles above
-        this.revealWallTilesAbovePlayer(cX, cY);
-        
-        // Calculate the direction vectors
-        const dirVectors = {
-            2: [0, 1],   // Down
-            4: [-1, 0],  // Left
-            6: [1, 0],   // Right
-            8: [0, -1]   // Up
-        };
-        
-        // Get the direction vector for the current direction
-        const dirVector = dirVectors[direction] || [0, 0];
-        
-        // Reveal tiles behind the player, but stop at vision blockers
-        let blocked = false;
-        for (let i = 1; i <= 3 && !blocked; i++) {
-            const behindX = cX - dirVector[0] * i;
-            const behindY = cY - dirVector[1] * i;
-
-            // Check if this tile blocks vision
-            if (this.isVisionBlocking(behindX, behindY)) {
-                // Reveal the blocker itself but stop here
-                this.setFogOfWarState(behindX, behindY, 2);
-                blocked = true;
-                break;
-            }
-
-            // Set this tile as visible
-            this.setFogOfWarState(behindX, behindY, 2);
-
-            // Also reveal adjacent tiles to the "behind" line, but check for blockers
-            if (i <= 2) { // Only for the first 2 tiles to avoid excessive width
-                if (direction === 2 || direction === 8) { // Up or Down
-                    const leftX = behindX - 1;
-                    const rightX = behindX + 1;
-                    // Only reveal if not blocking
-                    if (!this.isVisionBlocking(leftX, behindY)) {
-                        this.setFogOfWarState(leftX, behindY, 2);
-                    }
-                    if (!this.isVisionBlocking(rightX, behindY)) {
-                        this.setFogOfWarState(rightX, behindY, 2);
-                    }
-                } else { // Left or Right
-                    const aboveY = behindY - 1;
-                    const belowY = behindY + 1;
-                    // Only reveal if not blocking
-                    if (!this.isVisionBlocking(behindX, aboveY)) {
-                        this.setFogOfWarState(behindX, aboveY, 2);
-                    }
-                    if (!this.isVisionBlocking(behindX, belowY)) {
-                        this.setFogOfWarState(behindX, belowY, 2);
-                    }
-                }
-            }
-        }
-        
-        // Direction to base angle conversion
-        const baseAngle = {
-            2: Math.PI / 2,  // Down
-            4: Math.PI,      // Left
-            6: 0,            // Right
-            8: Math.PI * 3/2 // Up
-        }[direction] || 0;
-
-        // Check if there's a vision blocker directly behind the player
-        const behindX = cX - dirVector[0];
-        const behindY = cY - dirVector[1];
-        const blockerBehind = this.isVisionBlocking(behindX, behindY);
-
-        // Only shift origin if there's no blocker behind player
-        // This prevents casting rays through walls when turning
-        let visionOriginX, visionOriginY, effectiveRange;
-        if (!blockerBehind) {
-            // Safe to shift - no wall behind player
-            visionOriginX = centerX - dirVector[0] * 1.5;
-            visionOriginY = centerY - dirVector[1] * 1.5;
-            effectiveRange = range + 1.5;
-        } else {
-            // Don't shift - cast from player position to avoid seeing through walls
-            visionOriginX = centerX;
-            visionOriginY = centerY;
-            effectiveRange = range;
+        const backX = this.roundXWithDirection(charActualX, 10 - direction);
+        const backY = this.roundYWithDirection(charActualY, 10 - direction);
+        if (this.isValid(backX, backY)) {
+            this.setFogOfWarState(backX, backY, 2);
         }
 
-        // Cast rays in a cone shape from the origin
+        this.revealWallTilesAbovePlayer(charActualX, charActualY);
+
+        const baseAngle = { 2: Math.PI / 2, 4: Math.PI, 6: 0, 8: Math.PI * 3 / 2 }[direction] || 0;
+        const offsetDist = 1.0;
+        const dx = direction === 6 ? -offsetDist : direction === 4 ? offsetDist : 0;
+        const dy = direction === 2 ? -offsetDist : direction === 8 ? offsetDist : 0;
+
+        const visionOriginX = centerX + 0.5 + dx;
+        const visionOriginY = centerY + 0.5 + dy;
+        const effectiveRange = range + offsetDist;
+
+        const angleInRadians = VISION_ANGLE * Math.PI / 180;
         const halfAngle = angleInRadians / 2;
-        const rayCount = RAY_COUNT; // Configurable ray count
 
-        for (let i = 0; i < rayCount; i++) {
-            const angle = baseAngle - halfAngle + (angleInRadians * i / rayCount);
+        for (let i = 0; i < RAY_COUNT; i++) {
+            const angle = baseAngle - halfAngle + (angleInRadians * (i + 0.5) / RAY_COUNT);
             this.castRay(visionOriginX, visionOriginY, angle, effectiveRange, playerOnRoof);
         }
     };
-    
-    // New method to reveal wall tiles above the player
-    Game_Map.prototype.revealWallTilesAbovePlayer = function(playerX, playerY) {
-        // Check if the tile above the player has terrain tag 4 (wall)
-        const wallY = playerY - 1; // The tile immediately above
-        
-        if (this.isValid(playerX, wallY) && this.terrainTag(playerX, wallY) === 4) {
-            // Reveal the wall and 2 tiles above it
-            for (let y = 1; y <= 3; y++) {
-                const tileY = playerY - y;
-                if (this.isValid(playerX, tileY)) {
-                    this.setFogOfWarState(playerX, tileY, 2);
-                    
-                    // Also reveal adjacent wall tiles for continuous walls
-                    if (this.isValid(playerX - 1, tileY) && this.terrainTag(playerX - 1, tileY) === 4) {
-                        this.setFogOfWarState(playerX - 1, tileY, 2);
-                    }
-                    if (this.isValid(playerX + 1, tileY) && this.terrainTag(playerX + 1, tileY) === 4) {
-                        this.setFogOfWarState(playerX + 1, tileY, 2);
-                    }
+
+    Game_Map.prototype.revealWallTilesAbovePlayer = function (playerX, playerY) {
+        const checkAndReveal = (x, basePathY) => {
+            if (this.isValid(x, basePathY) && this.terrainTag(x, basePathY) === TERRAIN_WALL) {
+                for (let y = 1; y <= 3; y++) {
+                    const tileY = basePathY + 1 - y;
+                    if (this.isValid(x, tileY)) this.setFogOfWarState(x, tileY, 2);
                 }
             }
-        }
-        
-        // Also check the tiles to the left and right if they have terrain tag 4
-        const leftX = playerX - 1;
-        const rightX = playerX + 1;
-        
-        if (this.isValid(leftX, playerY) && this.terrainTag(leftX, playerY) === 4) {
-            // Reveal the wall above the left tile
+        };
+
+        checkAndReveal(playerX, playerY - 1);
+        checkAndReveal(playerX - 1, playerY);
+        checkAndReveal(playerX + 1, playerY);
+
+        const wallY = playerY - 1;
+        if (this.isValid(playerX, wallY) && this.terrainTag(playerX, wallY) === TERRAIN_WALL) {
             for (let y = 1; y <= 3; y++) {
                 const tileY = playerY - y;
-                if (this.isValid(leftX, tileY)) {
-                    this.setFogOfWarState(leftX, tileY, 2);
+                if (this.isValid(playerX - 1, tileY) && this.terrainTag(playerX - 1, tileY) === TERRAIN_WALL) {
+                    this.setFogOfWarState(playerX - 1, tileY, 2);
                 }
-            }
-        }
-        
-        if (this.isValid(rightX, playerY) && this.terrainTag(rightX, playerY) === 4) {
-            // Reveal the wall above the right tile
-            for (let y = 1; y <= 3; y++) {
-                const tileY = playerY - y;
-                if (this.isValid(rightX, tileY)) {
-                    this.setFogOfWarState(rightX, tileY, 2);
+                if (this.isValid(playerX + 1, tileY) && this.terrainTag(playerX + 1, tileY) === TERRAIN_WALL) {
+                    this.setFogOfWarState(playerX + 1, tileY, 2);
                 }
             }
         }
     };
-    
-    // Modified to prevent seeing through walls/doors - check blocking BEFORE revealing tile
-Game_Map.prototype.castRay = function(startX, startY, angle, maxDistance) {
-    const dx = Math.cos(angle);
-    const dy = Math.sin(angle);
-    const width = this.width();
-    const height = this.height();
-    const isLoopHorizontal = this.isLoopHorizontal();
-    const isLoopVertical = this.isLoopVertical();
 
-    let currentX = startX;
-    let currentY = startY;
-    let distance = 0;
-    let lastTileX = Math.floor(startX);
-    let lastTileY = Math.floor(startY);
-
-    // Use DDA-like algorithm for more efficient tile traversal
-    const stepSize = 0.5; // Fixed step size for better performance
-    const maxSteps = Math.ceil(maxDistance / stepSize);
-
-    for (let step = 0; step < maxSteps; step++) {
-        currentX += dx * stepSize;
-        currentY += dy * stepSize;
-        distance += stepSize;
-
-        if (distance >= maxDistance) break;
-
-        let tileX = Math.floor(currentX);
-        let tileY = Math.floor(currentY);
-
-        // Skip if we're still on the same tile
-        if (tileX === lastTileX && tileY === lastTileY) {
-            continue;
-        }
-
-        // Handle map looping
-        if (isLoopHorizontal) {
-            tileX = (tileX + width) % width;
-        }
-        if (isLoopVertical) {
-            tileY = (tileY + height) % height;
-        }
-
-        // Check boundaries
-        if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= height) {
-            break;
-        }
-
-        lastTileX = tileX;
-        lastTileY = tileY;
-
-        // Check for vision blocking BEFORE revealing tile to prevent seeing through walls
-        if (this.isVisionBlocking(tileX, tileY)) {
-            // Reveal the blocking tile itself (so you can see walls/doors)
-            this.setFogOfWarState(tileX, tileY, 2);
-            // Do NOT apply edge feathering - this prevents revealing tiles behind walls
-            break;
-        }
-
-        // Mark tile as visible only if it doesn't block
-        this.setFogOfWarState(tileX, tileY, 2);
-
-        // Apply edge feathering only near max distance AND only for non-blocking tiles
-        if (distance > maxDistance - 1) {
-            this.applyEdgeFeathering(tileX, tileY);
-        }
-    }
-};
-    // New method to apply edge feathering - improved to not reveal tiles behind blockers
-    Game_Map.prototype.applyEdgeFeathering = function(centerX, centerY) {
-        // Only apply edge feathering if enabled
-        if (EDGE_FEATHERING <= 0) return;
-
-        // Don't apply feathering if the center tile itself is a vision blocker
-        // This prevents revealing tiles on the other side of walls/doors
-        if (this.isVisionBlocking(centerX, centerY)) {
-            return;
-        }
-
-        // Process adjacent tiles with special transition effects
-        // This creates a subtle gradient at the edge of vision
-        const adjacentOffsets = [
-            [-1, 0], [1, 0], [0, -1], [0, 1]  // Four cardinal directions
-        ];
-
-        for (const [dx, dy] of adjacentOffsets) {
-            const adjX = centerX + dx;
-            const adjY = centerY + dy;
-
-            // Skip if out of bounds
-            if (!this.isValid(adjX, adjY)) continue;
-
-            // IMPORTANT: Don't feather tiles that are vision blockers themselves
-            // This prevents revealing what's behind walls/doors
-            if (this.isVisionBlocking(adjX, adjY)) {
-                continue;
-            }
-
-            // Get the current state of this adjacent tile
-            const index = adjY * this.width() + adjX;
-            const currentState = this._fogOfWarData[index];
-
-            // Only apply feathering to tiles not currently visible
-            if (currentState !== 2) {
-                // If the tile is in never-seen state, switch it to previously-seen
-                if (currentState === 0) {
-                    this._fogOfWarData[index] = 1;
-                }
-
-                // Apply a transition timer based on distance to create a wave effect
-                // if the tile isn't already transitioning
-                if (this._fogTransitionTimers[index] === 0) {
-                    this._fogTransitionTimers[index] = Math.floor(TRANSITION_DURATION * 0.8);
-                }
-
-                // Mark the corresponding chunk as dirty
-                const chunkX = Math.floor(adjX / CHUNK_SIZE);
-                const chunkY = Math.floor(adjY / CHUNK_SIZE);
-                if (!this._dirtyChunks || !(this._dirtyChunks instanceof Set)) {
-                    this._dirtyChunks = new Set();
-                }
-                this._dirtyChunks.add(`${chunkX},${chunkY}`);
-            }
-        }
-    };
-    
-// Optimized refreshFogOfWar function to load a circular area around the player on map load
-Spriteset_Map.prototype.refreshFogOfWar = function(fullRefresh = false) {
-    if (!fogOfWarEnabled) {
-        this._fogContainer.visible = false;
+    Game_Map.prototype.applyEdgeFeathering = function (centerX, centerY) {
+        // Feature intentionally disabled
         return;
-    }
-    if ($gameMap && $gameMap._fogOfWarDisabled) {
-        this._fogContainer.visible = false;
-        return;
-    }
-    this._fogContainer.visible = true;
-    
-    if (fullRefresh) {
-        // Clear all existing chunks
-        for (const key in this._fogChunks) {
-            if (this._fogChunks[key]) {
-                this._fogContainer.removeChild(this._fogChunks[key]);
+    };
+
+    Game_Map.prototype.castRay = function (startX, startY, angle, maxDistance, playerOnRoof = false) {
+        const baseStepSize = 0.2;
+        const maxStepSize = 0.8;
+        const dx = Math.cos(angle);
+        const dy = Math.sin(angle);
+        const width = this.width();
+        const height = this.height();
+        const isLoopH = this.isLoopHorizontal();
+        const isLoopV = this.isLoopVertical();
+
+        let currentX = startX;
+        let currentY = startY;
+        let distance = 0;
+        let lastTileX = Math.floor(startX);
+        let lastTileY = Math.floor(startY);
+        let stepSizeFactor = 1.0;
+
+        while (distance < maxDistance) {
+            const stepSize = Math.min(maxStepSize, baseStepSize * stepSizeFactor);
+            currentX += dx * stepSize;
+            currentY += dy * stepSize;
+            distance += stepSize;
+            stepSizeFactor = Math.min(4.0, stepSizeFactor + 0.05);
+
+            let tileX = Math.floor(currentX);
+            let tileY = Math.floor(currentY);
+
+            if (tileX === lastTileX && tileY === lastTileY) continue;
+
+            if (isLoopH) tileX = (tileX + width) % width;
+            if (isLoopV) tileY = (tileY + height) % height;
+
+            if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= height) break;
+
+            lastTileX = tileX;
+            lastTileY = tileY;
+
+            if (this.isVisionBlocking(tileX, tileY, playerOnRoof)) {
+                this.setFogOfWarState(tileX, tileY, 2);
+                break;
             }
-        }
-        this._fogChunks = {};
-        
-        // If this is a full refresh on map load, reveal a circular area around the player
-        if ($gamePlayer && $gameMap) {
-            const playerX = $gamePlayer.x;
-            const playerY = $gamePlayer.y;
-            const playerDirection = $gamePlayer.direction();
-            
-            // Initialize vision coordinates to player position
-            $gameMap._visionX = playerX;
-            $gameMap._visionY = playerY;
-            
-            // Calculate and reveal the current vision cone
-            $gameMap.calculateVision(playerX, playerY, playerDirection);
-            
-            // Force an immediate update of fog and transitions
-            $gameMap.updateTransitionTimers();
-        }
-        
-        // Mark all chunks as dirty for a full refresh
-        $gameMap.markAllChunksDirty();
-    }
-    
-    // Update all dirty chunks
-    const dirtyChunks = $gameMap.getDirtyChunks();
-    this.updateDirtyChunks(dirtyChunks);
-    $gameMap.clearDirtyChunks();
-};
 
-// New helper method to reveal a circular area around a point
-Spriteset_Map.prototype.revealCircularArea = function(centerX, centerY, radius) {
-    // Calculate the square of the radius for faster distance checks
-    const radiusSquared = radius * radius;
-    
-    // Calculate bounds with extra buffer
-    const startX = Math.max(0, centerX - radius - 1);
-    const endX = Math.min($gameMap.width() - 1, centerX + radius + 1);
-    const startY = Math.max(0, centerY - radius - 1);
-    const endY = Math.min($gameMap.height() - 1, centerY + radius + 1);
-    
-    // Loop through tiles in a square and check if they're in the circle
-    for (let y = startY; y <= endY; y++) {
-        for (let x = startX; x <= endX; x++) {
-            // Calculate squared distance to center (faster than using Math.sqrt)
-            const distanceSquared = (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY);
-            
-            // If within circle, set to visible state
-            if (distanceSquared <= radiusSquared) {
-                // Use state 2 for visible, with a reveal transition
-                $gameMap.setFogOfWarState(x, y, 2);
-                
-                // Set a small transition timer for a nice reveal effect
-                const distance = Math.sqrt(distanceSquared);
-                const transitionDelay = Math.round((distance / radius) * REVEAL_TRANSITION_DURATION);
-                
-                // Store negative timer value for reveal transition (fade in)
-                const index = y * $gameMap.width() + x;
-                $gameMap._fogTransitionTimers[index] = -Math.max(1, REVEAL_TRANSITION_DURATION - transitionDelay);
-            }
-        }
-    }
-    
-    // Save the updated fog data
-    $gameSystem.setFogOfWarData($gameMap.mapId(), {
-        states: Array.from($gameMap._fogOfWarData),
-        timers: Array.from($gameMap._fogTransitionTimers)
-    });
-};
-
-// Optimized raycast function for better performance - prevents seeing through walls/doors
-Game_Map.prototype.castRay = function(startX, startY, angle, maxDistance, playerOnRoof = false) {
-    // Use adaptive step size - smaller near player, larger far away
-    const baseStepSize = 0.2;
-    const maxStepSize = 0.8;
-
-    // Pre-calculate constants for better performance
-    const dx = Math.cos(angle);
-    const dy = Math.sin(angle);
-    const width = this.width();
-    const height = this.height();
-    const isLoopHorizontal = this.isLoopHorizontal();
-    const isLoopVertical = this.isLoopVertical();
-
-    let currentX = startX;
-    let currentY = startY;
-    let distance = 0;
-    let lastTileX = Math.floor(startX);
-    let lastTileY = Math.floor(startY);
-
-    // Adaptive step size - increase with distance
-    let stepSizeFactor = 1.0;
-
-    // Use a fast while loop with break conditions
-    while (distance < maxDistance) {
-        // Calculate adaptive step size - larger steps when further from player
-        const stepSize = Math.min(maxStepSize, baseStepSize * stepSizeFactor);
-
-        // Move along the ray
-        currentX += dx * stepSize;
-        currentY += dy * stepSize;
-        distance += stepSize;
-
-        // Increase step size for next iteration (adaptive stepping)
-        stepSizeFactor = Math.min(4.0, stepSizeFactor + 0.05);
-
-        // Get the tile coordinates
-        let tileX = Math.floor(currentX);
-        let tileY = Math.floor(currentY);
-
-        // Skip if we're still on the same tile
-        if (tileX === lastTileX && tileY === lastTileY) {
-            continue;
-        }
-
-        // Handle map looping for ray casting
-        if (isLoopHorizontal) {
-            tileX = (tileX + width) % width;
-        }
-        if (isLoopVertical) {
-            tileY = (tileY + height) % height;
-        }
-
-        // Check boundaries after adjusting for looping
-        if (tileX < 0 || tileY < 0 || tileX >= width || tileY >= height) {
-            break;
-        }
-
-        // Update last tile coordinates
-        lastTileX = tileX;
-        lastTileY = tileY;
-
-        // Check for vision blocking BEFORE revealing tile to prevent seeing through walls/doors
-        // When player is on roof, can see through walls (tag 4) and roofs (tag 7)
-        if (this.isVisionBlocking(tileX, tileY, playerOnRoof)) {
-            // Reveal the blocking tile itself (so you can see walls/doors)
             this.setFogOfWarState(tileX, tileY, 2);
-            // Do NOT apply edge feathering - this prevents revealing tiles behind walls/doors
-            break;
+            if (distance > maxDistance - (maxDistance * EDGE_FEATHERING)) {
+                this.applyEdgeFeathering(tileX, tileY);
+            }
+        }
+    };
+
+    Game_Map.prototype.refreshTerrainCache = function () {
+        const width = this.width();
+        const height = this.height();
+        const size = width * height;
+
+        if (!this._terrainCache || this._terrainCache.length !== size) {
+            this._terrainCache = new Uint8Array(size);
         }
 
-        // Mark tile as visible only if it doesn't block
-        this.setFogOfWarState(tileX, tileY, 2);
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                const tag = this.terrainTag(x, y);
+                const region = this.regionId(x, y);
 
-        // Apply edge feathering at the edges of the vision range ONLY for non-blocking tiles
-        if (distance > maxDistance - (maxDistance * EDGE_FEATHERING)) {
-            this.applyEdgeFeathering(tileX, tileY);
+                let blockType = 0;
+                if (region === REGION_BLOCK) blockType = 3;
+                else if (tag === TERRAIN_WALL) blockType = 1;
+                else if (tag === TERRAIN_ROOF) blockType = 2;
+
+                this._terrainCache[y * width + x] = blockType;
+            }
         }
-    }
-};
+        this._terrainCacheDirty = false;
+    };
 
-// Optimized method to check if a tile blocks vision
-// Optimized method to check if a tile blocks vision
-Game_Map.prototype.isVisionBlocking = function(x, y, playerOnRoof = false) {
-    // When player is on roof, terrain tags 4 and 7 don't block vision
-    // Check non-caching path first if on roof
-    if (playerOnRoof) {
-        // Only region and event blocks apply when on roof
-        const regionBlocks = this.regionId(x, y) === 10;
+    Game_Map.prototype.isVisionBlocking = function (x, y, playerOnRoof = false) {
+        if (x < 0 || y < 0 || x >= this.width() || y >= this.height()) return true;
+        if (this._terrainCacheDirty) this.refreshTerrainCache();
 
-        // Check events
-        let eventBlocks = false;
-        const events = this.eventsXy(x, y);
-        if (events.length > 0) {
-            for (const event of events) {
-                if (this.isVisionBlockingEvent(event)) {
-                    eventBlocks = true;
-                    break;
+        const staticBlocks = this._terrainCache[y * this.width() + x];
+        if (playerOnRoof ? (staticBlocks === 3) : (staticBlocks > 0)) return true;
+
+        if (this._eventMap) {
+            const events = this._eventMap[y * this.width() + x];
+            if (events) {
+                for (let i = 0; i < events.length; i++) {
+                    if (this.isVisionBlockingEvent(events[i])) return true;
                 }
             }
         }
+        return false;
+    };
 
-        return regionBlocks || eventBlocks;
-    }
+    Game_Map.prototype.isVisionBlockingEvent = function (event) {
+        if (!event || typeof event.event !== 'function') return false;
+        const data = event.event();
+        if (!data || (typeof event.priorityType === 'function' && event.priorityType() !== 1)) return false;
 
-    // Use cached terrain data if available (when not on roof)
-    if (!this._terrainCache || !(this._terrainCache instanceof Map)) {
-        this._terrainCache = new Map();
-    }
+        const name = (data.name || "").toLowerCase();
+        if (name.includes("door")) return true;
+        return VISION_BLOCKING_EVENT_NAMES.some(blocker => blocker && name.includes(blocker.toLowerCase()));
+    };
 
-    const key = `${x},${y}`;
-    let cached = this._terrainCache.get(key);
+    Game_Map.prototype.isEnemyEvent = function (event) {
+        if (!event || typeof event.event !== 'function') return false;
+        const data = event.event();
+        return data && data.note && /^\d+$/.test(data.note.trim());
+    };
 
-    if (cached === undefined) {
-        // Cache terrain tag check for walls (tag 4) and roofs (tag 7)
-        const terrainTag = this.terrainTag(x, y);
-        const terrainBlocks = terrainTag === 4 || terrainTag === 7;
+    Game_Map.prototype.isExemptEventName = function (event) {
+        if (!event || typeof event.event !== 'function') return false;
+        const data = event.event();
+        return data && EXEMPT_EVENT_NAMES.some(exempt => (data.name || "").includes(exempt));
+    };
 
-        // Cache region ID check - NEW: Region ID 10 blocks vision
-        const regionBlocks = this.regionId(x, y) === 10;
+    Game_Map.prototype.updateEventVisibility = function (snap = false) {
+        this._eventVisibilityCounter = (this._eventVisibilityCounter || 0) + 1;
+        if (this._eventVisibilityCounter < 3 && !snap) return;
+        this._eventVisibilityCounter = 0;
 
-        // Cache event check
-        let eventBlocks = false;
-        const events = this.eventsXy(x, y);
-        if (events.length > 0) {
-            for (const event of events) {
-                if (this.isVisionBlockingEvent(event)) {
-                    eventBlocks = true;
-                    break;
-                }
+        const players = [$gamePlayer];
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active && window.$gameSplitScreen.p2Event) {
+            players.push(window.$gameSplitScreen.p2Event);
+        }
+        
+        const events = this.events();
+
+        for (let i = 0; i < events.length; i++) {
+            const event = events[i];
+            
+            // Proximity to ANY player reveals the event
+            const isBordering = players.some(p => Math.abs(event.x - p.x) <= 1 && Math.abs(event.y - p.y) <= 1);
+            let isVisible = this.isPositionVisible(event.x, event.y);
+
+            if (this._visibleFogOfWar && this.fogOfWarState(event.x, event.y) >= 1) {
+                isVisible = true;
             }
-        }
 
-        cached = terrainBlocks || regionBlocks || eventBlocks;
-        this._terrainCache.set(key, cached);
-
-        // Clear cache after 100 entries to prevent memory bloat
-        if (this._terrainCache.size > 100) {
-            const firstKey = this._terrainCache.keys().next().value;
-            this._terrainCache.delete(firstKey);
-        }
-    }
-
-    return cached;
-};
-
-// Updated method to check if an event is vision blocking
-Game_Map.prototype.isVisionBlockingEvent = function(event) {
-    if (!event || !event.event) return false;
-    try {
-        const eventName = event.event().name.toLowerCase();
-        // Check for events containing "door" or any name from VISION_BLOCKING_EVENT_NAMES
-        return eventName.includes("door") || VISION_BLOCKING_EVENT_NAMES.some(blocking => eventName.includes(blocking.toLowerCase()));
-    } catch (error) {
-        return false; // If there's any error, assume it's not a vision blocking event
-    }
-};
-    
-    Game_Map.prototype.isEnemyEvent = function(event) {
-        if (!event || !event.event) return false;
-        try {
-            const note = event.event().note;
-            return note && /^\d+$/.test(note.trim());
-        } catch (error) {
-            return false; // If there's any error, assume it's not an enemy event
+            event._fogOfWarBorderingPlayer = isBordering;
+            event.updateFogOfWarVisibility(isBordering || isVisible, snap);
         }
     };
-    
-    Game_Map.prototype.isExemptEventName = function(event) {
-        if (!event || !event.event) return false;
-        try {
-            const eventName = event.event().name;
-            return EXEMPT_EVENT_NAMES.some(exempt => eventName.includes(exempt));
-        } catch (error) {
-            return false; // If there's any error, assume it's not exempt
-        }
-    };
-    // Also update the map change handling to initialize the circular reveal
-const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
-Scene_Map.prototype.onMapLoaded = function() {
-    _Scene_Map_onMapLoaded.call(this);
-    
-    // Schedule a circular reveal around the player's starting position
-    if (this._spriteset && fogOfWarEnabled) {
-        // Small delay to ensure everything is loaded properly
-        setTimeout(() => {
-            // Do a full refresh with circular reveal
-            this._spriteset.refreshFogOfWar(true);
-        }, 100);
-    }
-};
+
     //=============================================================================
     // Game_Event
     //=============================================================================
-    // Add this new initialization override
+
     const _Game_Event_initialize = Game_Event.prototype.initialize;
-    Game_Event.prototype.initialize = function(mapId, eventId) {
+    Game_Event.prototype.initialize = function (mapId, eventId) {
         _Game_Event_initialize.call(this, mapId, eventId);
         this._fogOfWarVisible = true;
         this._fogOfWarTransitioning = false;
         this._fogOfWarTransitionTimer = 0;
         this._isEnemy = false;
-        this._fogOfWarBorderingPlayer = false; // NEW: Flag to track if bordering player
+        this._fogOfWarBorderingPlayer = false;
     };
-    // Add a new method to Game_Event to control fog of war visibility
-    Game_Event.prototype.updateFogOfWarVisibility = function(isVisible) {
-        // If this event is bordering the player, force it to be visible
-        if (this._fogOfWarBorderingPlayer) {
-            isVisible = true;
-        }
-        
+
+    Game_Event.prototype.updateFogOfWarVisibility = function (isVisible, snap = false) {
+        if (this._fogOfWarBorderingPlayer) isVisible = true;
+
         if (this._fogOfWarVisible !== isVisible) {
-            // Check if this is an enemy event
             this._isEnemy = $gameMap.isEnemyEvent(this);
             const isExempt = $gameMap.isExemptEventName(this);
+
+            this._fogOfWarVisible = isVisible;
             
-            // If becoming invisible
-            if (!isVisible) {
-                this._fogOfWarVisible = false;
-                
-                if (this._isEnemy && !isExempt && !this._fogOfWarBorderingPlayer) {
-                    // Enemies disappear when not visible (unless bordering player)
-                    this._fogOfWarTransitioning = true;
-                    this._fogOfWarTransitionTimer = 80; // 0.5 seconds fade-out
-                } else {
-                    // Non-enemy events remain visible but in grayscale
-                    // OR events bordering player stay fully visible
-                    this._fogOfWarTransitioning = false;
-                    this._fogOfWarTransitionTimer = 0;
-                    this._opacity = 255; // Keep full opacity
-                    this._transparent = false;
-                    
-                    // Grayscale effect will be applied by the sprite (unless bordering player)
-                }
-            } 
-            // If becoming visible
-            else {
-                this._fogOfWarVisible = true;
+            if (snap) {
                 this._fogOfWarTransitioning = false;
                 this._fogOfWarTransitionTimer = 0;
-                
-                // Make fully visible and in color
-                this._opacity = 255;
-                this._transparent = false;
-            }
-        }
-    };
-    
-    
-Game_Map.prototype.updateEventVisibility = function() {
-    // Update only every few frames for better performance
-    if (!this._eventVisibilityCounter) this._eventVisibilityCounter = 0;
-    this._eventVisibilityCounter++;
-    
-    if (this._eventVisibilityCounter < 3) return; // Update every 3 frames
-    this._eventVisibilityCounter = 0;
-    
-    const playerX = $gamePlayer.x;
-    const playerY = $gamePlayer.y;
-    const events = this.events();
-    
-    // Use for loop instead of forEach for better performance
-    for (let i = 0; i < events.length; i++) {
-        const event = events[i];
-        const dx = Math.abs(event.x - playerX);
-        const dy = Math.abs(event.y - playerY);
-        const isBordering = dx <= 1 && dy <= 1;
-        
-        let isVisible = this.isPositionVisible(event.x, event.y);
-        
-        if (this._visibleFogOfWar && this.fogOfWarState(event.x, event.y) >= 1) {
-            isVisible = true;
-        }
-        
-        if (isBordering) {
-            isVisible = true;
-            event._fogOfWarBorderingPlayer = true;
-        } else {
-            event._fogOfWarBorderingPlayer = false;
-        }
-        
-        event.updateFogOfWarVisibility(isVisible);
-    }
-};
-    
-    Game_Event.prototype.updateFogOfWarTransition = function() {
-        if (this._fogOfWarTransitioning) {
-            this._fogOfWarTransitionTimer--;
-            
-            // Fade out enemies gradually
-            if (this._isEnemy && !$gameMap.isExemptEventName(this)) {
-                const fadeRatio = Math.max(0, this._fogOfWarTransitionTimer / 240);
-                this._opacity = Math.floor(255 * fadeRatio);
-                
-                if (this._fogOfWarTransitionTimer <= 0) {
-                    // Transition complete - hide enemy events completely
-                    this._fogOfWarTransitioning = false;
-                    this._opacity = 0;
-                    this._transparent = true;
+                if (!isVisible) {
+                    if (this._isEnemy && !isExempt && !this._fogOfWarBorderingPlayer) {
+                        this._opacity = 0;
+                        this._transparent = true;
+                    } else {
+                        this._opacity = 255;
+                        this._transparent = false;
+                    }
+                } else {
+                    this._opacity = 255;
+                    this._transparent = false;
+                }
+            } else {
+                this._fogOfWarTransitioning = true;
+                this._fogOfWarTransitionTimer = REVEAL_TRANSITION_DURATION;
+
+                if (!isVisible) {
+                    if (this._isEnemy && !isExempt && !this._fogOfWarBorderingPlayer) {
+                        // Start fading out
+                    } else {
+                        this._opacity = 255;
+                        this._transparent = false;
+                        this._fogOfWarTransitioning = false;
+                    }
+                } else {
+                    this._opacity = 255;
+                    this._transparent = false;
+                    // Fade in logic if needed
+                    this._fogOfWarTransitioning = true;
                 }
             }
         }
     };
-    
-    // Flag to track if this event is in grayscale mode
-    Game_Event.prototype.isFogOfWarGrayscale = function() {
-        // Don't apply grayscale to events bordering the player
-        if (this._fogOfWarBorderingPlayer) {
-            return false;
+
+    Game_Event.prototype.updateFogOfWarTransition = function () {
+        if (this._fogOfWarTransitioning) {
+            
+            this._fogOfWarTransitionTimer--;
+            const duration = REVEAL_TRANSITION_DURATION;
+            
+            if (this._isEnemy && !$gameMap.isExemptEventName(this)) {
+                if (!this._fogOfWarVisible) {
+                    // Fading out
+                    const fadeRatio = Math.max(0, this._fogOfWarTransitionTimer / duration);
+                    this._opacity = Math.floor(255 * fadeRatio);
+                    if (this._fogOfWarTransitionTimer <= 0) {
+                        this._fogOfWarTransitioning = false;
+                        this._opacity = 0;
+                        this._transparent = true;
+                    }
+                } else {
+                    // Fading in
+                    const fadeRatio = Math.max(0, 1 - (this._fogOfWarTransitionTimer / duration));
+                    this._opacity = Math.floor(255 * fadeRatio);
+                    this._transparent = false;
+                    if (this._fogOfWarTransitionTimer <= 0) {
+                        this._fogOfWarTransitioning = false;
+                        this._opacity = 255;
+                    }
+                }
+            } else {
+                if (this._fogOfWarTransitionTimer <= 0) {
+                    this._fogOfWarTransitioning = false;
+                }
+            }
         }
-        
-        // Only apply grayscale to non-enemies that are not currently visible
+    };
+
+    Game_Event.prototype.isFogOfWarGrayscale = function () {
+        if (this._fogOfWarBorderingPlayer) return false;
         return !this._fogOfWarVisible && !this._isEnemy && !$gameMap.isExemptEventName(this);
     };
-    
-    
-    // Flag to track if this event is transitioning (fading out)
-    Game_Event.prototype.isFogOfWarTransitioning = function() {
+
+    Game_Event.prototype.isFogOfWarTransitioning = function () {
         return this._fogOfWarTransitioning;
     };
-    
+
     const _Game_Event_update = Game_Event.prototype.update;
-    Game_Event.prototype.update = function() {
+    Game_Event.prototype.update = function () {
         _Game_Event_update.call(this);
-        
-        // Update fog of war transition if needed
         this.updateFogOfWarTransition();
     };
 
     //=============================================================================
     // Game_Player
     //=============================================================================
-    
+
     const _Game_Player_update = Game_Player.prototype.update;
-    Game_Player.prototype.update = function(sceneActive) {
+    Game_Player.prototype.update = function (sceneActive) {
         _Game_Player_update.call(this, sceneActive);
-        
         if (sceneActive) {
-            // Track if player is moving
-            const isMoving = this.isMoving();
-            
-            // Reset idle timer if player is moving
-            if (isMoving) {
+            if (this.isMoving()) {
                 $gameMap._playerIdleTime = 0;
                 $gameMap._playerWasMoving = true;
-            } 
-            // Increment idle timer if player has stopped
-            else if ($gameMap._playerWasMoving) {
+            } else if ($gameMap._playerWasMoving) {
                 $gameMap._playerIdleTime++;
-                
-                // If player just stopped moving, update fog one more time
                 if ($gameMap._playerIdleTime === 1) {
                     $gameMap.updateFogOfWar();
                 }
-                
-                // If idle timer is below threshold, continue updating fog
-                // This ensures fog updates for a short time after player stops moving
                 if ($gameMap._playerIdleTime < $gameMap._playerIdleThreshold) {
                     updateCounter = (updateCounter + 1) % UPDATE_FREQUENCY;
-                    if (updateCounter === 0) {
-                        $gameMap.updateFogOfWar();
-                    }
+                    if (updateCounter === 0) $gameMap.updateFogOfWar();
                 }
             }
         }
     };
-    
-    // Update fog immediately when player completes movement
+
     const _Game_Player_updateNonmoving = Game_Player.prototype.updateNonmoving;
-    Game_Player.prototype.updateNonmoving = function(wasMoving, sceneActive) {
+    Game_Player.prototype.updateNonmoving = function (wasMoving, sceneActive) {
         _Game_Player_updateNonmoving.call(this, wasMoving, sceneActive);
-        
-        // If player just finished moving, update fog immediately
         if (wasMoving && sceneActive) {
-            $gameMap._playerIdleTime = 0; // Reset idle timer
-            $gameMap._playerWasMoving = true; // Set flag that player was moving
-            $gameMap.updateFogOfWar(); // Update fog immediately
+            $gameMap._playerIdleTime = 0;
+            $gameMap._playerWasMoving = true;
+            $gameMap.updateFogOfWar();
         }
     };
-    // Add this to Scene_Map to check for the refresh flag
-const _Scene_Map_start = Scene_Map.prototype.start;
-Scene_Map.prototype.start = function() {
-    _Scene_Map_start.call(this);
 
-    // Check if we need to refresh fog of war after loading
-    if ($gameSystem && $gameSystem._needsFogOfWarRefresh) {
-        // Wait a few frames to ensure everything is loaded
-        setTimeout(() => {
-            if (this._spriteset && $gameMap) {
-                // If force reload is set, completely reinitialize the lighting system
-                if ($gameSystem._forceFogReload) {
-                    // Use the dedicated lighting reload method
-                    $gameSystem.reloadFogOfWarLighting();
+    const _Game_Player_performTransfer = Game_Player.prototype.performTransfer;
+    Game_Player.prototype.performTransfer = function() {
+        const sameMap = this._newMapId === $gameMap.mapId();
+        _Game_Player_performTransfer.call(this);
+        if (sameMap && fogOfWarEnabled && $gameMap) {
+            $gameMap._forceVisionUpdate = true;
+            $gameMap.updateFogOfWar();
+        }
+    };
 
-                    // Reinitialize fog of war data from scratch
-                    $gameMap.initializeFogOfWar();
-
-                    // Reset player position tracking
-                    $gameMap._playerLastX = -1;
-                    $gameMap._playerLastY = -1;
-                    $gameMap._playerLastDir = -1;
-
-                    // Reset vision position
-                    if ($gamePlayer) {
-                        $gameMap._visionX = $gamePlayer.x;
-                        $gameMap._visionY = $gamePlayer.y;
-                    }
-
-                    $gameSystem._forceFogReload = false;
-                }
-
-                // Do a full refresh of fog of war with complete chunk rebuild
-                this._spriteset.refreshFogOfWar(true);
-
-                // Force an immediate update of the lighting system
-                if ($gameMap) {
-                    // Ensure all chunks are marked dirty before redraw
-                    $gameMap.markAllChunksDirty();
-
-                    // Update fog of war to recalculate vision
-                    $gameMap.updateFogOfWar();
-
-                    // Update transitions one more time to ensure clean state
-                    $gameMap.updateTransitionTimers();
-                }
-
-                // Update all event visibility
-                this._spriteset.updateEventVisibility();
-            }
-
-            // Clear the flag
-            $gameSystem._needsFogOfWarRefresh = false;
-        }, 100); // Small delay to ensure everything is loaded
-    }
-};
-    // Continuously update fog during player movement for smooth transitions
     const _Game_Player_updateMove = Game_Player.prototype.updateMove;
-    Game_Player.prototype.updateMove = function() {
+    Game_Player.prototype.updateMove = function () {
         _Game_Player_updateMove.call(this);
-        
-        // Update the fog container position every frame during movement
         if (SceneManager._scene instanceof Scene_Map && SceneManager._scene._spriteset) {
-            const spriteset = SceneManager._scene._spriteset;
-            spriteset._fogContainer.x = -Math.round($gameMap.displayX() * $gameMap.tileWidth());
-            spriteset._fogContainer.y = -Math.round($gameMap.displayY() * $gameMap.tileHeight());
-            
-            // Update fog of war during movement for smoother transitions
+            const container = SceneManager._scene._spriteset._fogContainer;
+            container.x = -Math.round($gameMap.displayX() * $gameMap.tileWidth());
+            container.y = -Math.round($gameMap.displayY() * $gameMap.tileHeight());
+
             updateCounter = (updateCounter + 1) % Math.max(1, Math.floor(UPDATE_FREQUENCY / 2));
-            if (updateCounter === 0) {
-                $gameMap.updateFogOfWar();
-            }
+            if (updateCounter === 0) $gameMap.updateFogOfWar();
         }
     };
-    const _Scene_Load_onLoadSuccess = Scene_Load.prototype.onLoadSuccess;
-    Scene_Load.prototype.onLoadSuccess = function() {
-        _Scene_Load_onLoadSuccess.call(this);
 
-        // Flag to indicate we need to fully reload and refresh fog of war after loading
+    //=============================================================================
+    // Scene_Map & Scene_Load
+    //=============================================================================
+
+    const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
+    Scene_Map.prototype.onMapLoaded = function () {
+        _Scene_Map_onMapLoaded.call(this);
+        if (this._spriteset && fogOfWarEnabled) {
+            setTimeout(() => this._spriteset.refreshFogOfWar(true), 100);
+        }
+    };
+
+    const _Scene_Map_start = Scene_Map.prototype.start;
+    Scene_Map.prototype.start = function () {
+        _Scene_Map_start.call(this);
+        if ($gameSystem && $gameSystem._needsFogOfWarRefresh) {
+            setTimeout(() => {
+                if (this._spriteset && $gameMap) {
+                    if ($gameSystem._forceFogReload) {
+                        $gameSystem.reloadFogOfWarLighting();
+                        $gameMap.initializeFogOfWar();
+                        $gameMap._playerLastX = -1;
+                        $gameMap._playerLastY = -1;
+                        $gameMap._playerLastDir = -1;
+                        if ($gamePlayer) {
+                            $gameMap._visionX = $gamePlayer.x;
+                            $gameMap._visionY = $gamePlayer.y;
+                        }
+                        $gameSystem._forceFogReload = false;
+                    }
+                    this._spriteset.refreshFogOfWar(true);
+                    if ($gameMap) {
+                        $gameMap.markAllChunksDirty();
+                        $gameMap.updateFogOfWar();
+                        $gameMap.updateTransitionTimers();
+                    }
+                    this._spriteset.updateEventVisibility();
+                }
+                $gameSystem._needsFogOfWarRefresh = false;
+            }, 100);
+        }
+    };
+
+    const _Scene_Load_onLoadSuccess = Scene_Load.prototype.onLoadSuccess;
+    Scene_Load.prototype.onLoadSuccess = function () {
+        _Scene_Load_onLoadSuccess.call(this);
         $gameSystem._needsFogOfWarRefresh = true;
         $gameSystem._forceFogReload = true;
     };
+
     //=============================================================================
     // Spriteset_Map
     //=============================================================================
-    
-const _Spriteset_Map_createLowerLayer = Spriteset_Map.prototype.createLowerLayer;
-Spriteset_Map.prototype.createLowerLayer = function() {
-    _Spriteset_Map_createLowerLayer.call(this);
-    // Remove the old fog creation from here if it exists
-};
- const _Spriteset_Map_createUpperLayer = Spriteset_Map.prototype.createUpperLayer;
-Spriteset_Map.prototype.createUpperLayer = function() {
-    _Spriteset_Map_createUpperLayer.call(this);
-    // Create fog of war layer after everything else is created
-    this.createFogOfWarLayer();
-};   
-Spriteset_Map.prototype.createFogOfWarLayer = function() {
-    // Create a container for fog chunks
-    this._fogContainer = new PIXI.Container();
-    
-    // Instead of adding to tilemap, add directly to the main spriteset
-    // This ensures it renders on top of everything including overlays
-    this.addChild(this._fogContainer);
-    
-    // Initialize chunk containers
-    this._fogChunks = {};
-    
-    // Track last display position
-    this._lastDisplayX = -999;
-    this._lastDisplayY = -999;
-    
-    // Prepare colors
-    this._neverSeenColor = NEVER_SEEN_COLOR;
-    this._previouslySeenColor = PREVIOUSLY_SEEN_COLOR;
-    
-    this.refreshFogOfWar(true); // Initial full refresh
-};
 
-    
+    const _Spriteset_Map_createLowerLayer = Spriteset_Map.prototype.createLowerLayer;
+    Spriteset_Map.prototype.createLowerLayer = function () {
+        _Spriteset_Map_createLowerLayer.call(this);
+    };
+
+    const _Spriteset_Map_createUpperLayer = Spriteset_Map.prototype.createUpperLayer;
+    Spriteset_Map.prototype.createUpperLayer = function () {
+        _Spriteset_Map_createUpperLayer.call(this);
+        this.createFogOfWarLayer();
+    };
+
+    Spriteset_Map.prototype.createFogOfWarLayer = function () {
+        this._fogContainer = new PIXI.Container();
+        this.addChild(this._fogContainer);
+        this._fogChunks = {};
+        this._lastDisplayX = -999;
+        this._lastDisplayY = -999;
+        this.refreshFogOfWar(true);
+    };
+
     const _Spriteset_Map_update = Spriteset_Map.prototype.update;
-    Spriteset_Map.prototype.update = function() {
+    Spriteset_Map.prototype.update = function () {
         _Spriteset_Map_update.call(this);
-            // If fog is disabled for this specific map, ensure container is hidden
         if ($gameMap && $gameMap._fogOfWarDisabled) {
             this._fogContainer.visible = false;
         }
+
         const displayX = $gameMap.displayX();
         const displayY = $gameMap.displayY();
-        
-        // Always update fog container position every frame to prevent lag
+
         this._fogContainer.x = -Math.round(displayX * $gameMap.tileWidth());
         this._fogContainer.y = -Math.round(displayY * $gameMap.tileHeight());
-        
-        // Check if display position changed significantly
-        if (Math.abs(displayX - this._lastDisplayX) >= 0.25 || 
-            Math.abs(displayY - this._lastDisplayY) >= 0.25) {
+
+        if (Math.abs(displayX - this._lastDisplayX) >= 0.25 || Math.abs(displayY - this._lastDisplayY) >= 0.25) {
             this._lastDisplayX = displayX;
             this._lastDisplayY = displayY;
-            
-            // Update fog of war during scrolling for better smoothness - REMOVED CONDITION
-            $gameMap.updateFogOfWar();
-            
-            // Check if there are any dirty chunks to update
-            const dirtyChunks = $gameMap.getDirtyChunks();
-            if (dirtyChunks.length > 0) {
-                this.updateDirtyChunks(dirtyChunks);
-                $gameMap.clearDirtyChunks();
-            }
-        } else {
-            // UPDATE EVEN WHEN PLAYER IS STATIONARY
-            $gameMap.updateFogOfWar();
-            
-            // Check if there are any dirty chunks to update
-            const dirtyChunks = $gameMap.getDirtyChunks();
-            if (dirtyChunks.length > 0) {
-                this.updateDirtyChunks(dirtyChunks);
-                $gameMap.clearDirtyChunks();
-            }
         }
-        
-        // Update event visibility
+
+        $gameMap.updateFogOfWar();
+
+        const dirtyChunks = $gameMap.getDirtyChunks();
+        if (dirtyChunks.length > 0) {
+            this.updateDirtyChunks(dirtyChunks);
+            $gameMap.clearDirtyChunks();
+        }
+
         this.updateEventVisibility();
     };
-    
-    Spriteset_Map.prototype.refreshFogOfWar = function(fullRefresh = false) {
-        if (!fogOfWarEnabled) {
+
+    Spriteset_Map.prototype.refreshFogOfWar = function (fullRefresh = false) {
+        if (!fogOfWarEnabled || ($gameMap && $gameMap._fogOfWarDisabled)) {
             this._fogContainer.visible = false;
             return;
         }
-        
         this._fogContainer.visible = true;
-        
+
         if (fullRefresh) {
-            // Clear all existing chunks
             for (const key in this._fogChunks) {
                 if (this._fogChunks[key]) {
                     this._fogContainer.removeChild(this._fogChunks[key]);
                 }
             }
             this._fogChunks = {};
-            
-            // If this is a full refresh on map load, reveal a circular area around the player
-            if ($gamePlayer && $gameMap) {
-                const playerX = $gamePlayer.x;
-                const playerY = $gamePlayer.y;
-                const playerDirection = $gamePlayer.direction();
-                
-                // Initialize vision coordinates to player position
-                $gameMap._visionX = playerX;
-                $gameMap._visionY = playerY;
-                
-                // Calculate and reveal the current vision cone
-                $gameMap.calculateVision(playerX, playerY, playerDirection);
-                
-                // Force an immediate update of fog and transitions
+
+            if ($gameMap) {
+                const players = [$gamePlayer];
+                if (window.$gameSplitScreen && window.$gameSplitScreen.active && window.$gameSplitScreen.p2Event) {
+                    players.push(window.$gameSplitScreen.p2Event);
+                }
+
+                players.forEach((p, i) => {
+                    if (i === 0) {
+                        $gameMap._visionX = p.x;
+                        $gameMap._visionY = p.y;
+                    } else {
+                        $gameMap._visionX2 = p.x;
+                        $gameMap._visionY2 = p.y;
+                    }
+                    $gameMap.calculateVision(p.x, p.y, p.direction(), p);
+                });
                 $gameMap.updateTransitionTimers();
             }
-            
-            
-            // Mark all chunks as dirty for a full refresh
             $gameMap.markAllChunksDirty();
         }
-        
-        // Update all dirty chunks
+
         const dirtyChunks = $gameMap.getDirtyChunks();
         this.updateDirtyChunks(dirtyChunks);
         $gameMap.clearDirtyChunks();
     };
 
+    Spriteset_Map.prototype.updateDirtyChunks = function (dirtyChunkKeys) {
+        if (!dirtyChunkKeys.length || !$gameMap || !$gameMap._fogOfWarData) return;
 
-    // New helper method to reveal a circular area around a point
-Spriteset_Map.prototype.revealCircularArea = function(centerX, centerY, radius) {
-    // Calculate the square of the radius for faster distance checks
-    const radiusSquared = radius * radius;
-    
-    // Calculate bounds with extra buffer
-    const startX = Math.max(0, centerX - radius - 1);
-    const endX = Math.min($gameMap.width() - 1, centerX + radius + 1);
-    const startY = Math.max(0, centerY - radius - 1);
-    const endY = Math.min($gameMap.height() - 1, centerY + radius + 1);
-    
-    // Loop through tiles in a square and check if they're in the circle
-    for (let y = startY; y <= endY; y++) {
-        for (let x = startX; x <= endX; x++) {
-            // Calculate squared distance to center (faster than using Math.sqrt)
-            const distanceSquared = (x - centerX) * (x - centerX) + (y - centerY) * (y - centerY);
-            
-            // If within circle, set to visible state
-            if (distanceSquared <= radiusSquared) {
-                // Use state 2 for visible, with a reveal transition
-                $gameMap.setFogOfWarState(x, y, 2);
-                
-                // Set a small transition timer for a nice reveal effect
-                const distance = Math.sqrt(distanceSquared);
-                const transitionDelay = Math.round((distance / radius) * REVEAL_TRANSITION_DURATION);
-                
-                // Store negative timer value for reveal transition (fade in)
-                const index = y * $gameMap.width() + x;
-                $gameMap._fogTransitionTimers[index] = -Math.max(1, REVEAL_TRANSITION_DURATION - transitionDelay);
+        const tileWidth = $gameMap.tileWidth();
+        const tileHeight = $gameMap.tileHeight();
+        const mapWidth = $gameMap.width();
+        const mapHeight = $gameMap.height();
+
+        if (this._neverSeenColorValue === undefined) {
+            this._neverSeenColorValue = this.parseColor(NEVER_SEEN_COLOR);
+            this._previouslySeenColorValue = this.parseColor(PREVIOUSLY_SEEN_COLOR);
+            this._baseAlphaValue = this.extractAlpha(PREVIOUSLY_SEEN_COLOR);
+        }
+
+        const neverSeenColor = this._neverSeenColorValue;
+        const previouslySeenColor = this._previouslySeenColorValue;
+        const baseAlpha = this._baseAlphaValue;
+
+        for (let i = 0; i < dirtyChunkKeys.length; i++) {
+            const key = dirtyChunkKeys[i];
+            const [chunkX, chunkY] = key.split(',').map(Number);
+
+            if (!this._fogChunks[key]) {
+                this._fogChunks[key] = new PIXI.Graphics();
+                this._fogContainer.addChild(this._fogChunks[key]);
             }
-        }
-    }
-    
-    // Save the updated fog data
-    $gameSystem.setFogOfWarData($gameMap.mapId(), {
-        states: Array.from($gameMap._fogOfWarData),
-        timers: Array.from($gameMap._fogTransitionTimers)
-    });
-};
-    // Enhanced to support smooth transitions between visibility states
-Spriteset_Map.prototype.updateDirtyChunks = function(dirtyChunkKeys) {
-    if (dirtyChunkKeys.length === 0) return;
-    
-    const tileWidth = $gameMap.tileWidth();
-    const tileHeight = $gameMap.tileHeight();
-    
-    // Pre-parse colors once
-    const neverSeenColor = this.parseColor(this._neverSeenColor);
-    const previouslySeenColor = this.parseColor(this._previouslySeenColor);
-    const baseAlpha = this.extractAlpha(this._previouslySeenColor);
-    
-    // Batch process chunks
-    for (let i = 0; i < dirtyChunkKeys.length; i++) {
-        const key = dirtyChunkKeys[i];
-        const [chunkX, chunkY] = key.split(',').map(Number);
-        
-        // Create or get the chunk graphics object
-        if (!this._fogChunks[key]) {
-            this._fogChunks[key] = new PIXI.Graphics();
-            this._fogContainer.addChild(this._fogChunks[key]);
-        }
-        
-        const chunk = this._fogChunks[key];
-        chunk.clear();
-        
-        // Position the chunk
-        chunk.x = chunkX * CHUNK_SIZE * tileWidth;
-        chunk.y = chunkY * CHUNK_SIZE * tileHeight;
-        
-        // Calculate chunk bounds
-        const startX = chunkX * CHUNK_SIZE;
-        const startY = chunkY * CHUNK_SIZE;
-        const endX = Math.min(startX + CHUNK_SIZE, $gameMap.width());
-        const endY = Math.min(startY + CHUNK_SIZE, $gameMap.height());
-        
-        // Group consecutive tiles of same state for batch drawing
-        let currentState = -1;
-        let currentAlpha = -1;
-        let rectStartX = 0;
-        let rectStartY = 0;
-        let rectWidth = 0;
-        
-        for (let y = startY; y < endY; y++) {
-            for (let x = startX; x < endX; x++) {
-                const fogState = $gameMap.fogOfWarState(x, y);
-                const transitionTimer = $gameMap.fogTransitionTimer(x, y);
-                
-                let drawState = fogState;
-                let alpha = 1.0;
-                
-                if (fogState === 1) {
-                    alpha = baseAlpha;
-                    if (transitionTimer > 0) {
-                        const transitionProgress = 1 - (transitionTimer / TRANSITION_DURATION);
-                        alpha = baseAlpha * transitionProgress;
-                    }
-                } else if (fogState === 2 && transitionTimer < 0) {
-                    drawState = 1; // Draw as previously seen during reveal
-                    const transitionProgress = -transitionTimer / REVEAL_TRANSITION_DURATION;
-                    alpha = baseAlpha * transitionProgress;
-                }
-                
-                // Only draw if there's something to draw
-                if (drawState === 0 || (drawState === 1 && alpha > 0.01)) {
-                    if (drawState === 0) {
-                        chunk.beginFill(neverSeenColor, 1.0);
+
+            const chunk = this._fogChunks[key];
+            chunk.clear();
+            chunk.x = chunkX * CHUNK_SIZE * tileWidth;
+            chunk.y = chunkY * CHUNK_SIZE * tileHeight;
+
+            const startX = chunkX * CHUNK_SIZE;
+            const startY = chunkY * CHUNK_SIZE;
+            const endX = Math.min(startX + CHUNK_SIZE, mapWidth);
+            const endY = Math.min(startY + CHUNK_SIZE, mapHeight);
+
+            const blackAlphaBatches = Array.from({ length: 11 }, () => []);
+            const grayAlphaBatches = Array.from({ length: 11 }, () => []);
+
+            for (let y = startY; y < endY; y++) {
+                const rowOffset = y * mapWidth;
+                for (let x = startX; x < endX; x++) {
+                    const index = rowOffset + x;
+                    const vAlpha = $gameMap._fogTransitionTimers[index] / 255;
+
+                    if (vAlpha <= 0.01) continue;
+
+                    const bucket = Math.min(10, Math.round(vAlpha * 10));
+                    if (vAlpha > BASE_ALPHA + 0.05) {
+                        blackAlphaBatches[bucket].push((x - startX) * tileWidth, (y - startY) * tileHeight);
                     } else {
-                        chunk.beginFill(previouslySeenColor, alpha);
+                        grayAlphaBatches[bucket].push((x - startX) * tileWidth, (y - startY) * tileHeight);
                     }
-                    
-                    chunk.drawRect(
-                        (x - startX) * tileWidth,
-                        (y - startY) * tileHeight,
-                        tileWidth,
-                        tileHeight
-                    );
+                }
+            }
+
+            for (let a = 0; a <= 10; a++) {
+                if (blackAlphaBatches[a].length > 0) {
+                    chunk.beginFill(neverSeenColor, a / 10);
+                    for (let r = 0; r < blackAlphaBatches[a].length; r += 2) {
+                        chunk.drawRect(blackAlphaBatches[a][r], blackAlphaBatches[a][r + 1], tileWidth, tileHeight);
+                    }
+                    chunk.endFill();
+                }
+                if (grayAlphaBatches[a].length > 0) {
+                    chunk.beginFill(previouslySeenColor, a / 10);
+                    for (let r = 0; r < grayAlphaBatches[a].length; r += 2) {
+                        chunk.drawRect(grayAlphaBatches[a][r], grayAlphaBatches[a][r + 1], tileWidth, tileHeight);
+                    }
                     chunk.endFill();
                 }
             }
         }
-    }
-};
-    
-    
-    // Helper method to parse CSS color to PIXI color
-    Spriteset_Map.prototype.parseColor = function(cssColor) {
-        // Handle hex format
-        if (cssColor.startsWith('#')) {
-            return parseInt(cssColor.slice(1), 16);
-        }
-        
-        // Handle rgba format - extract just the color part
-        if (cssColor.startsWith('rgba')) {
-            const parts = cssColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
-            if (parts) {
-                const r = parseInt(parts[1]);
-                const g = parseInt(parts[2]);
-                const b = parseInt(parts[3]);
-                return (r << 16) | (g << 8) | b;
-            }
-        }
-        
-        // Handle rgb format
-        if (cssColor.startsWith('rgb')) {
-            const parts = cssColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
-            if (parts) {
-                const r = parseInt(parts[1]);
-                const g = parseInt(parts[2]);
-                const b = parseInt(parts[3]);
-                return (r << 16) | (g << 8) | b;
-            }
-        }
-        
-        // Default to black if parsing fails
+    };
+
+    Spriteset_Map.prototype.parseColor = function (cssColor) {
+        if (cssColor.startsWith('#')) return parseInt(cssColor.slice(1), 16);
+        const rgbaMatch = cssColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (rgbaMatch) return (parseInt(rgbaMatch[1]) << 16) | (parseInt(rgbaMatch[2]) << 8) | parseInt(rgbaMatch[3]);
         return 0x000000;
     };
-    
-    // Helper method to extract alpha from CSS color
-    Spriteset_Map.prototype.extractAlpha = function(cssColor) {
-        if (cssColor.startsWith('rgba')) {
-            const parts = cssColor.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
-            if (parts) {
-                return parseFloat(parts[4]);
-            }
-        }
-        return 1.0; // Default to fully opaque
+
+    Spriteset_Map.prototype.extractAlpha = function (cssColor) {
+        const match = cssColor.match(/rgba\(\d+,\s*\d+,\s*\d+,\s*([\d.]+)\)/);
+        return match ? parseFloat(match[1]) : 1.0;
     };
-    
-    // Updated to apply grayscale effect to non-enemy events outside of vision
-    Spriteset_Map.prototype.updateEventVisibility = function() {
-        for (const sprite of this._characterSprites) {
+
+    Spriteset_Map.prototype.updateEventVisibility = function () {
+        for (let i = 0; i < this._characterSprites.length; i++) {
+            const sprite = this._characterSprites[i];
             if (sprite._character instanceof Game_Event) {
                 const event = sprite._character;
-                
-                // Update sprite opacity based on event opacity
                 sprite.opacity = event.opacity();
-                
-                // Apply grayscale filter for non-enemy events outside vision
-                if (event.isFogOfWarGrayscale()) {
-                    // Create a color matrix filter for grayscale effect if not already created
+
+                const isGrayscale = event.isFogOfWarGrayscale() || (event.isFogOfWarTransitioning && event.isFogOfWarTransitioning());
+
+                if (isGrayscale) {
                     if (!sprite._fogColorFilter) {
                         sprite._fogColorFilter = new PIXI.filters.ColorMatrixFilter();
                         sprite.filters = sprite.filters || [];
                         sprite.filters.push(sprite._fogColorFilter);
+                        sprite._fogColorFilter.saturate(-1);
                     }
-                    
-                    // Set to grayscale
-                    sprite._fogColorFilter.saturate(-1);
-                } 
-                // Apply grayscale with fading for transitioning enemy events
-                else if (event.isFogOfWarTransitioning && event.isFogOfWarTransitioning()) {
-                    // Create a color matrix filter for grayscale effect if not already created
-                    if (!sprite._fogColorFilter) {
-                        sprite._fogColorFilter = new PIXI.filters.ColorMatrixFilter();
-                        sprite.filters = sprite.filters || [];
-                        sprite.filters.push(sprite._fogColorFilter);
-                    }
-                    
-                    // Set to grayscale during transition
-                    sprite._fogColorFilter.saturate(-1);
-                }
-                // Remove filter if event is visible or exempt
-                else if (sprite._fogColorFilter) {
-                    // Remove color filter when event is visible
+                } else if (sprite._fogColorFilter) {
                     if (sprite.filters) {
-                        const index = sprite.filters.indexOf(sprite._fogColorFilter);
-                        if (index !== -1) {
-                            sprite.filters.splice(index, 1);
-                        }
-                        if (sprite.filters.length === 0) {
-                            sprite.filters = null;
-                        }
+                        sprite.filters = sprite.filters.filter(f => f !== sprite._fogColorFilter);
+                        if (!sprite.filters.length) sprite.filters = null;
                     }
                     sprite._fogColorFilter = null;
                 }
             }
         }
     };
-    
+
 })();

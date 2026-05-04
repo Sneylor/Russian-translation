@@ -114,7 +114,7 @@
 
 (() => {
     'use strict';
-    
+
     const pluginName = 'DynamicLightingSystem';
     const parameters = PluginManager.parameters(pluginName);
     const defaultLightFile = parameters['defaultLightFile'] || 'light';
@@ -126,28 +126,28 @@
     const enableDebug = parameters['enableDebug'] === 'true';
     const sunriseHour = Number(parameters['sunriseHour'] || 6);
     const sunsetHour = Number(parameters['sunsetHour'] || 18);
-    
+
     // Light types enum
     const LightTypes = {
         ALWAYS: 'Light',
         STREET: 'Streetlight',
         DAY: 'Daylight'
     };
-    
+
     // Plugin Commands
     PluginManager.registerCommand(pluginName, 'refreshLights', args => {
         if ($gameLighting) {
             $gameLighting.refreshAllLights();
         }
     });
-    
+
     PluginManager.registerCommand(pluginName, 'toggleLight', args => {
         const eventId = Number(args.eventId);
         if ($gameLighting && eventId > 0) {
             $gameLighting.toggleLight(eventId);
         }
     });
-    
+
     PluginManager.registerCommand(pluginName, 'addPlayerLight', args => {
         if ($gameLighting) {
             $gameLighting.addPlayerLight();
@@ -156,7 +156,7 @@
             }
         }
     });
-    
+
     PluginManager.registerCommand(pluginName, 'removePlayerLight', args => {
         if ($gameLighting) {
             $gameLighting.removePlayerLight();
@@ -165,7 +165,7 @@
             }
         }
     });
-    
+
     // Player Light Sprite Class
     class Sprite_PlayerLight extends Sprite {
         constructor() {
@@ -177,44 +177,44 @@
             this._lastDirection = $gamePlayer.direction();
             this.initMembers();
         }
-        
+
         initMembers() {
             this.loadBitmap();
             this.updatePosition();
             this.updateRotation();
             this.opacity = 0; // Start faded out
         }
-        
+
         loadBitmap() {
             this.bitmap = ImageManager.loadBitmap('img/lights/', 'flashlight');
             this.scale.set(flashlightScale);
-            
+
             this.bitmap.addLoadListener(() => {
                 if (enableDebug) {
                     console.log('Loaded flashlight image');
                 }
             });
         }
-        
+
         updatePosition() {
             if (!$gamePlayer) return;
-            
+
             const tw = $gameMap.tileWidth();
             const th = $gameMap.tileHeight();
-            
+
             this.x = $gamePlayer.screenX();
-            this.y = $gamePlayer.screenY() - th/2;
+            this.y = $gamePlayer.screenY() - th / 2;
         }
-        
+
         updateRotation() {
             if (!$gamePlayer) return;
-            
+
             const direction = $gamePlayer.direction();
-            
+
             // Only update rotation if direction changed
             if (direction !== this._lastDirection) {
                 this._lastDirection = direction;
-                
+
                 // Set rotation based on direction
                 switch (direction) {
                     case 2: // Down
@@ -230,20 +230,20 @@
                         this.rotation = Math.PI;
                         break;
                 }
-                
+
                 if (enableDebug) {
                     console.log(`Flashlight rotated for direction: ${direction}, rotation: ${this.rotation}`);
                 }
             }
         }
-        
+
         update() {
             super.update();
             this.updatePosition();
             this.updateRotation();
             this.updateOpacity();
         }
-        
+
         updateOpacity() {
             // Smooth fade transition
             if (this.opacity < this._targetOpacity) {
@@ -252,16 +252,16 @@
                 this.opacity = Math.max(this.opacity - (255 / this._fadeSpeed), this._targetOpacity);
             }
         }
-        
+
         fadeOut() {
             this._targetOpacity = 0;
         }
-        
+
         fadeIn() {
             this._targetOpacity = flashlightOpacity;
         }
     }
-    
+
     // Light Sprite Class
     class Sprite_Light extends Sprite {
         constructor(event) {
@@ -276,7 +276,7 @@
             this._manuallyDisabled = false;
             this.initMembers();
         }
-        
+
         initMembers() {
             if (!this._event || typeof this._event.event !== 'function') {
                 if (enableDebug) {
@@ -284,24 +284,24 @@
                 }
                 return;
             }
-            
+
             this.parseLightType();
             this.parseLightConfig();
             this.loadBitmap();
             this.updatePosition();
             this.updateVisibility();
         }
-        
+
         parseLightType() {
             if (!this._event || typeof this._event.event !== 'function') {
                 return;
             }
-            
+
             const eventData = this._event.event();
             if (!eventData || !eventData.name) {
                 return;
             }
-            
+
             const eventName = eventData.name;
             if (eventName === LightTypes.ALWAYS) {
                 this._lightType = LightTypes.ALWAYS;
@@ -311,19 +311,19 @@
                 this._lightType = LightTypes.DAY;
             }
         }
-        
+
         parseLightConfig() {
             if (!this._event || typeof this._event.event !== 'function') {
                 return;
             }
-            
+
             const event = this._event.event();
             if (!event) {
                 return;
             }
-            
+
             const note = event.note || '';
-            
+
             this._lightConfig = {
                 file: defaultLightFile,
                 scale: defaultScale,
@@ -331,33 +331,33 @@
                 offsetX: 0,
                 offsetY: 0
             };
-            
+
             // Parse tag format
             const fileMatch = note.match(/<lightFile:(\w+)>/i);
             if (fileMatch) {
                 this._lightConfig.file = fileMatch[1];
             }
-            
+
             const scaleMatch = note.match(/<lightScale:([\d.]+)>/i);
             if (scaleMatch) {
                 this._lightConfig.scale = parseFloat(scaleMatch[1]);
             }
-            
+
             const opacityMatch = note.match(/<lightOpacity:(\d+)>/i);
             if (opacityMatch) {
                 this._lightConfig.opacity = parseInt(opacityMatch[1]);
             }
-            
+
             const offsetXMatch = note.match(/<lightOffsetX:([-\d]+)>/i);
             if (offsetXMatch) {
                 this._lightConfig.offsetX = parseInt(offsetXMatch[1]);
             }
-            
+
             const offsetYMatch = note.match(/<lightOffsetY:([-\d]+)>/i);
             if (offsetYMatch) {
                 this._lightConfig.offsetY = parseInt(offsetYMatch[1]);
             }
-            
+
             // Parse shorthand format
             const shorthandMatch = note.match(/^(\w+)\s+([\d.]+)(?:\s+(\d+))?$/);
             if (shorthandMatch) {
@@ -367,36 +367,36 @@
                     this._lightConfig.opacity = parseInt(shorthandMatch[3]);
                 }
             }
-            
+
             if (enableDebug) {
                 console.log(`Light Config for Event ${this._event.eventId()}:`, this._lightConfig);
             }
         }
-        
+
         loadBitmap() {
             const filename = `img/lights/${this._lightConfig.file}.png`;
             this.bitmap = ImageManager.loadBitmap('img/lights/', this._lightConfig.file);
             this.scale.set(this._lightConfig.scale);
-            
+
             this.bitmap.addLoadListener(() => {
                 if (enableDebug) {
                     console.log(`Loaded light image: ${filename}`);
                 }
             });
         }
-        
+
         updatePosition() {
             if (!this._event || typeof this._event.screenX !== 'function') {
                 return;
             }
-            
+
             const tw = $gameMap.tileWidth();
             const th = $gameMap.tileHeight();
-            
+
             this.x = this._event.screenX() + this._lightConfig.offsetX;
-            this.y = this._event.screenY() - th/2 + this._lightConfig.offsetY;
+            this.y = this._event.screenY() - th / 2 + this._lightConfig.offsetY;
         }
-        
+
         // MODIFIED FUNCTION
         updateVisibility() {
             if (this._manuallyDisabled) {
@@ -405,8 +405,8 @@
             }
 
             // Get the sunlight mode from WeatherSystem.js, default to 'full' if not available.
-            const sunlightMode = ($gameWeather && typeof $gameWeather.getSunlightMode === 'function') 
-                ? $gameWeather.getSunlightMode() 
+            const sunlightMode = ($gameWeather && typeof $gameWeather.getSunlightMode === 'function')
+                ? $gameWeather.getSunlightMode()
                 : 'full';
 
             let shouldBeVisible = false;
@@ -447,35 +447,35 @@
 
             this._targetOpacity = shouldBeVisible ? this._lightConfig.opacity : 0;
         }
-        
+
         getCurrentHour() {
             // This function is now only used for 'full' cycle mode.
             if ($gameWeather && $gameWeather.currentHour !== undefined) {
                 return $gameWeather.currentHour;
             }
-            
+
             if ($gameVariables) {
                 const hour = $gameVariables.value(23);
                 if (hour >= 0 && hour <= 23) {
                     return hour;
                 }
             }
-            
+
             return 12; // Default to noon if no time source is found
         }
-        
+
         update() {
             super.update();
-            
+
             if (!this._event || typeof this._event.screenX !== 'function') {
                 return;
             }
-            
+
             this.updatePosition();
             this.updateVisibility();
             this.updateOpacity();
         }
-        
+
         updateOpacity() {
             if (this.opacity < this._targetOpacity) {
                 this.opacity = Math.min(this.opacity + (255 / this._fadeSpeed), this._targetOpacity);
@@ -483,23 +483,23 @@
                 this.opacity = Math.max(this.opacity - (255 / this._fadeSpeed), this._targetOpacity);
             }
         }
-        
+
         toggle() {
             this._manuallyDisabled = !this._manuallyDisabled;
             this.updateVisibility();
         }
-        
+
         refresh() {
             if (!this._event || typeof this._event.event !== 'function') {
                 return;
             }
-            
+
             this.parseLightConfig();
             this.loadBitmap();
             this.updateVisibility();
         }
     }
-    
+
     // Tile-based Light Class (for map 636 streetlight tiles)
     class Sprite_TileLight extends Sprite {
         constructor(x, y, tileId) {
@@ -690,7 +690,7 @@
 
         createTileLights() {
 
-            if (!window.WorldGen || !window.WorldGen.MAP636_TILE_EVENTS) {
+            if (!window.WorldGen || !window.WorldGen.Map636TileEvents) {
                 return;
             }
 
@@ -699,9 +699,9 @@
             if (currentBiome) {
                 const biomeLower = currentBiome.toLowerCase();
                 const shouldHaveLights = biomeLower.includes('road') ||
-                                       biomeLower.includes('city') ||
-                                       biomeLower.includes('village') ||
-                                       biomeLower.includes('burg');
+                    biomeLower.includes('city') ||
+                    biomeLower.includes('village') ||
+                    biomeLower.includes('burg');
 
                 if (!shouldHaveLights) {
                     console.log(`[DynamicLighting] Biome "${currentBiome}" does not require streetlights - skipping`);
@@ -711,7 +711,7 @@
                 console.log(`[DynamicLighting] Biome "${currentBiome}" requires streetlights - creating lights`);
             }
 
-            const streetlightConfig = window.WorldGen.MAP636_TILE_EVENTS['Streetlight'];
+            const streetlightConfig = window.WorldGen.Map636TileEvents['Streetlight'];
             if (!streetlightConfig || !streetlightConfig.tilesets) {
                 return;
             }
@@ -757,22 +757,22 @@
                 }
             }
 
-           
+
         }
-        
+
         createPlayerLight() {
             if (this._playerLight) {
                 this.removeChild(this._playerLight);
             }
-            
+
             this._playerLight = new Sprite_PlayerLight();
             this.addChild(this._playerLight);
-            
+
             if (enableDebug) {
                 console.log('Created player flashlight');
             }
         }
-        
+
         removePlayerLight() {
             if (this._playerLight) {
                 this._playerLight.fadeOut();
@@ -785,23 +785,23 @@
                 }, fadeSpeed * 16); // Convert frames to milliseconds
             }
         }
-        
+
         isLightEvent(event) {
             if (!event || typeof event.event !== 'function') {
                 return false;
             }
-            
+
             const eventData = event.event();
             if (!eventData || !eventData.name) {
                 return false;
             }
-            
+
             const eventName = eventData.name;
-            return eventName === LightTypes.ALWAYS || 
-                   eventName === LightTypes.STREET || 
-                   eventName === LightTypes.DAY;
+            return eventName === LightTypes.ALWAYS ||
+                eventName === LightTypes.STREET ||
+                eventName === LightTypes.DAY;
         }
-        
+
         update() {
             super.update();
             this._lightSprites.forEach(sprite => sprite.update());
@@ -809,11 +809,11 @@
                 this._playerLight.update();
             }
         }
-        
+
         refresh() {
             this._lightSprites.forEach(sprite => sprite.refresh());
         }
-        
+
         toggleLight(eventId) {
             const sprite = this._lightSprites.find(s => s._event && s._event.eventId() === eventId);
             if (sprite) {
@@ -821,7 +821,7 @@
             }
         }
     }
-    
+
     // Lighting System Manager
     class Game_LightingSystem {
         constructor() {
@@ -829,50 +829,50 @@
             this._lightingLayer = null;
             this._hasPlayerLight = false;
         }
-        
+
         setLightingLayer(layer) {
             this._lightingLayer = layer;
         }
-        
+
         refreshAllLights() {
             if (this._lightingLayer) {
                 this._lightingLayer.refresh();
             }
         }
-        
+
         toggleLight(eventId) {
             if (this._lightingLayer) {
                 this._lightingLayer.toggleLight(eventId);
             }
         }
-        
+
         addPlayerLight() {
             this._hasPlayerLight = true;
             if (this._lightingLayer) {
                 this._lightingLayer.createPlayerLight();
             }
         }
-        
+
         removePlayerLight() {
             this._hasPlayerLight = false;
             if (this._lightingLayer) {
                 this._lightingLayer.removePlayerLight();
             }
         }
-        
+
         hasPlayerLight() {
             return this._hasPlayerLight;
         }
-        
+
         isEnabled() {
             return this._enabled;
         }
-        
+
         setEnabled(enabled) {
             this._enabled = enabled;
         }
     }
-    
+
     // Night Light Sprite Class (follows player, visible at night on Exterior maps)
     class Sprite_NightLight extends Sprite {
         constructor() {
@@ -1033,41 +1033,41 @@
 
     // Global lighting system object
     window.$gameLighting = null;
-    
+
     // Initialize lighting system with game objects
     const _DataManager_createGameObjects = DataManager.createGameObjects;
-    DataManager.createGameObjects = function() {
+    DataManager.createGameObjects = function () {
         _DataManager_createGameObjects.call(this);
         $gameLighting = new Game_LightingSystem();
     };
-    
-    // Save/Load lighting system
-// Save/Load lighting system
-const _DataManager_makeSaveContents = DataManager.makeSaveContents;
-DataManager.makeSaveContents = function() {
-    const contents = _DataManager_makeSaveContents.call(this);
-    // Manually store only the necessary, serializable data
-    contents.lighting = {
-        _enabled: $gameLighting._enabled,
-        _hasPlayerLight: $gameLighting._hasPlayerLight
-    };
-    return contents;
-};
 
-const _DataManager_extractSaveContents = DataManager.extractSaveContents;
-DataManager.extractSaveContents = function(contents) {
-    _DataManager_extractSaveContents.call(this, contents);
-    const lightingData = contents.lighting;
-    // Recreate the system object and restore its saved state
-    $gameLighting = new Game_LightingSystem();
-    if (lightingData) {
-        $gameLighting._enabled = lightingData._enabled;
-        $gameLighting._hasPlayerLight = lightingData._hasPlayerLight;
-    }
-};
+    // Save/Load lighting system
+    // Save/Load lighting system
+    const _DataManager_makeSaveContents = DataManager.makeSaveContents;
+    DataManager.makeSaveContents = function () {
+        const contents = _DataManager_makeSaveContents.call(this);
+        // Manually store only the necessary, serializable data
+        contents.lighting = {
+            _enabled: $gameLighting._enabled,
+            _hasPlayerLight: $gameLighting._hasPlayerLight
+        };
+        return contents;
+    };
+
+    const _DataManager_extractSaveContents = DataManager.extractSaveContents;
+    DataManager.extractSaveContents = function (contents) {
+        _DataManager_extractSaveContents.call(this, contents);
+        const lightingData = contents.lighting;
+        // Recreate the system object and restore its saved state
+        $gameLighting = new Game_LightingSystem();
+        if (lightingData) {
+            $gameLighting._enabled = lightingData._enabled;
+            $gameLighting._hasPlayerLight = lightingData._hasPlayerLight;
+        }
+    };
     // Add night light to tilemap (below character sprites)
     const _Spriteset_Map_createCharacters = Spriteset_Map.prototype.createCharacters;
-    Spriteset_Map.prototype.createCharacters = function() {
+    Spriteset_Map.prototype.createCharacters = function () {
         // Create night light before characters so it renders behind them
         this._nightLight = new Sprite_NightLight();
         this._nightLight.z = 0; // Characters use z=3, so this goes below
@@ -1077,12 +1077,12 @@ DataManager.extractSaveContents = function(contents) {
 
     // Add lighting layer to map spriteset
     const _Spriteset_Map_createLowerLayer = Spriteset_Map.prototype.createLowerLayer;
-    Spriteset_Map.prototype.createLowerLayer = function() {
+    Spriteset_Map.prototype.createLowerLayer = function () {
         _Spriteset_Map_createLowerLayer.call(this);
         this.createLightingLayer();
     };
-    
-    Spriteset_Map.prototype.createLightingLayer = function() {
+
+    Spriteset_Map.prototype.createLightingLayer = function () {
         this._lightingLayer = new Spriteset_Lighting();
         const weatherIndex = this.children.indexOf(this._weather);
         if (weatherIndex >= 0) {
@@ -1090,14 +1090,14 @@ DataManager.extractSaveContents = function(contents) {
         } else {
             this.addChild(this._lightingLayer);
         }
-        
+
         if ($gameLighting) {
             $gameLighting.setLightingLayer(this._lightingLayer);
         }
     };
-    
+
     const _Spriteset_Map_update = Spriteset_Map.prototype.update;
-    Spriteset_Map.prototype.update = function() {
+    Spriteset_Map.prototype.update = function () {
         _Spriteset_Map_update.call(this);
         if (this._lightingLayer) {
             this._lightingLayer.update();
@@ -1106,26 +1106,26 @@ DataManager.extractSaveContents = function(contents) {
             this._nightLight.update();
         }
     };
-    
+
     // Refresh lights when entering a new map
     const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
-    Scene_Map.prototype.onMapLoaded = function() {
+    Scene_Map.prototype.onMapLoaded = function () {
         _Scene_Map_onMapLoaded.call(this);
-        
+
         setTimeout(() => {
             if ($gameLighting && this._spriteset && this._spriteset._lightingLayer) {
                 this._spriteset._lightingLayer.createLights();
-                
+
                 if (enableDebug) {
                     console.log('Lights refreshed for new map');
                 }
             }
         }, 100);
     };
-    
+
     // Initialize on game start
     const _Scene_Boot_start = Scene_Boot.prototype.start;
-    Scene_Boot.prototype.start = function() {
+    Scene_Boot.prototype.start = function () {
         _Scene_Boot_start.call(this);
         if (!$gameLighting) {
             $gameLighting = new Game_LightingSystem();
@@ -1138,21 +1138,21 @@ DataManager.extractSaveContents = function(contents) {
     ConfigManager.nightLight = true;
 
     const _ConfigManager_makeData_lighting = ConfigManager.makeData;
-    ConfigManager.makeData = function() {
+    ConfigManager.makeData = function () {
         const config = _ConfigManager_makeData_lighting.call(this);
         config.nightLight = this.nightLight;
         return config;
     };
 
     const _ConfigManager_applyData_lighting = ConfigManager.applyData;
-    ConfigManager.applyData = function(config) {
+    ConfigManager.applyData = function (config) {
         _ConfigManager_applyData_lighting.call(this, config);
         this.nightLight = this.readFlag(config, 'nightLight', true);
     };
 
     // Add "Night Light" to Options menu
     const _Window_Options_addGeneralOptions_lighting = Window_Options.prototype.addGeneralOptions;
-    Window_Options.prototype.addGeneralOptions = function() {
+    Window_Options.prototype.addGeneralOptions = function () {
         _Window_Options_addGeneralOptions_lighting.call(this);
         this.addCommand('Night Light', 'nightLight');
     };

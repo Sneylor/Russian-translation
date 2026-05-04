@@ -1,0 +1,10 @@
+{
+    "GENERAL": "General",
+    "COMBAT": "Combat",
+    "MAGICAL": "Magical",
+    "SOCIAL": "Social",
+    "TECHNICAL": "Technical",
+    "LABOR": "Labor",
+    "CRIMINAL": "Criminal",
+    "FACTION": "Faction"
+}

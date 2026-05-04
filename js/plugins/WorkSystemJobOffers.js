@@ -11,7 +11,7 @@
  * Displays job details including duration, hourly pay, and locations.
  *
  * Requirements:
- * - WorkSystemDB.js must be loaded first
+ * - DataService.js must be loaded first
  *
  * --- Plugin Commands ---
  *
@@ -151,12 +151,12 @@
       }
   
       makeItemList() {
-        if (!window.WorkSystemDB || !window.WorkSystemDB.JOBS) {
-          console.error("WorkSystemDB not loaded!");
+        if (!window.WorkSystem || !window.WorkSystem.Jobs) {
+          console.error("WorkSystem.Jobs not loaded!");
           return [];
         }
   
-        const allJobs = window.WorkSystemDB.JOBS;
+        const allJobs = window.WorkSystem.Jobs;
         const shuffled = [...allJobs].sort(() => Math.random() - 0.5);
         return shuffled.slice(0, numberOfJobs);
       }
@@ -330,23 +330,7 @@
       }
   
       getActorStat(actor, stat) {
-        if (!actor) return 0;
-
-        switch(stat) {
-          case 'ATK': return actor.atk;
-          case 'DEF': return actor.def;
-          case 'MAT': return actor.mat;
-          case 'MDF': return actor.mdf;
-          case 'AGI': return actor.agi;
-          case 'LUK': return actor.luk;
-          case 'HP': return actor.mhp;
-          case 'MP': return actor.mmp;
-          case 'Arcane': return $gameVariables.value(86);
-          case 'Substance': return $gameVariables.value(87);
-          case 'Stealth': return $gameVariables.value(88);
-          case 'Intimidation': return $gameVariables.value(89);
-          default: return 0;
-        }
+        return window.WorkSystem.getActorStat(actor, stat);
       }
 
       getFactionName(factionId) {
@@ -355,7 +339,7 @@
           return $dataFactions[factionId].name || `Faction ${factionId}`;
         }
 
-        // Fallback to hardcoded faction names based on WorkSystemDB comments
+        // Fallback to hardcoded faction names based on WorkSystem comments
         const factionNames = {
           0: "Mages Guild",
           1: "Archive Foundation",

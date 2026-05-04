@@ -32,7 +32,7 @@
     ProstheticTypes,
     ProstheticCompatibility,
     EnemyArchetypes,
-  } = window.ProstheticsData || {};
+  } = window.Health || {};
 
   // --- Utility constants & functions ---
 
@@ -62,8 +62,8 @@
   }
 
   function getParamName(paramId) {
-    const en = ["Max HP","Max MP","STR","Hit Rate","INT","COS","DEX","PSI"];
-    const it = ["PV Max","PM Max","FOR","Precisione","INT","COS","DES","PSI"];
+    const en = ["Max HP", "Max MP", "STR", "Hit Rate", "INT", "COS", "DEX", "PSI"];
+    const it = ["PV Max", "PM Max", "FOR", "Precisione", "INT", "COS", "DES", "PSI"];
     return (ConfigManager.language === "it" ? it : en)[paramId] || "Stat";
   }
 
@@ -103,13 +103,13 @@
     }
   }
 
-  const getTextColor = function(id) {
+  const getTextColor = function (id) {
     if (this && this.textColor) return this.textColor(id);
     if (Utils.RPGMAKER_NAME === "MZ" && window.ColorManager) return ColorManager.textColor(id);
     return "rgba(255,255,255,1)";
   };
 
-  const getSystemColor = function() {
+  const getSystemColor = function () {
     if (this && this.systemColor) return this.systemColor();
     if (Utils.RPGMAKER_NAME === "MZ" && window.ColorManager) return ColorManager.systemColor();
     return "rgba(176,224,248,1)";
@@ -167,7 +167,7 @@
     const ww = 400;
     const members = $gameParty.members();
     const wh = members.length * 36 + 24;
-    const wx = (Graphics.boxWidth  - ww) / 2;
+    const wx = (Graphics.boxWidth - ww) / 2;
     const wy = (Graphics.boxHeight - wh) / 2;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_Command.prototype.initialize.call(this, new Rectangle(wx, wy, ww, wh));
@@ -196,7 +196,7 @@
   Window_ShopCommand.prototype.initialize = function () {
     const ww = 400;
     const wh = 5 * 36 + 24; // 5 commands
-    const wx = (Graphics.boxWidth  - ww) / 2;
+    const wx = (Graphics.boxWidth - ww) / 2;
     const wy = (Graphics.boxHeight - wh) / 2;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_Command.prototype.initialize.call(this, new Rectangle(wx, wy, ww, wh));
@@ -206,11 +206,11 @@
   };
 
   Window_ShopCommand.prototype.makeCommandList = function () {
-    this.addCommand(getTranslatedText("Install bodypart",  "Installa parte"),    "installBodypart",  true);
-    this.addCommand(getTranslatedText("Remove bodypart",   "Rimuovi parte"),     "removeBodypart",   true);
-    this.addCommand(getTranslatedText("Replace bodypart",  "Sostituisci parte"), "replaceBodypart",  true);
-    this.addCommand(getTranslatedText("Install implant",   "Installa impianto"), "installImplant",   true);
-    this.addCommand(getTranslatedText("Cancel",            "Annulla"),           "cancel",           true);
+    this.addCommand(getTranslatedText("Install bodypart", "Installa parte"), "installBodypart", true);
+    this.addCommand(getTranslatedText("Remove bodypart", "Rimuovi parte"), "removeBodypart", true);
+    this.addCommand(getTranslatedText("Replace bodypart", "Sostituisci parte"), "replaceBodypart", true);
+    this.addCommand(getTranslatedText("Install implant", "Installa impianto"), "installImplant", true);
+    this.addCommand(getTranslatedText("Cancel", "Annulla"), "cancel", true);
   };
 
   // ===========================================================================
@@ -221,7 +221,7 @@
   Window_ArchetypeSelect.prototype.constructor = Window_ArchetypeSelect;
 
   Window_ArchetypeSelect.prototype.initialize = function () {
-    const width  = Graphics.boxWidth;
+    const width = Graphics.boxWidth;
     const height = Graphics.boxHeight - 120;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_Command.prototype.initialize.call(this, new Rectangle(0, 0, width, height));
@@ -257,21 +257,21 @@
   Window_ArchetypePartList.prototype.constructor = Window_ArchetypePartList;
 
   Window_ArchetypePartList.prototype.initialize = function () {
-    const width  = Graphics.boxWidth;
+    const width = Graphics.boxWidth;
     const height = Graphics.boxHeight - 120;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_StatusBase.prototype.initialize.call(this, new Rectangle(0, 0, width, height));
     } else {
       Window_Selectable.prototype.initialize.call(this, 0, 0, width, height);
     }
-    this._actor       = null;
+    this._actor = null;
     this._archetypeKey = null;
-    this._partList    = [];
+    this._partList = [];
     this.refresh();
   };
 
   Window_ArchetypePartList.prototype.setContext = function (actor, archetypeKey) {
-    this._actor        = actor;
+    this._actor = actor;
     this._archetypeKey = archetypeKey;
     this.refresh();
     this.select(0);
@@ -287,15 +287,15 @@
     if (!archetype || !archetype.parts) return;
 
     for (const partKey of Object.keys(archetype.parts)) {
-      const part       = archetype.parts[partKey];
+      const part = archetype.parts[partKey];
 
       // Skip vital parts and parts whose key or name contains "Core" or "Body"
       if (part.vital) continue;
-      const keyLower  = partKey.toLowerCase();
+      const keyLower = partKey.toLowerCase();
       const nameLower = (part.name || "").toLowerCase();
       if (keyLower.includes("core") || keyLower.includes("body") ||
-          nameLower.includes("core") || nameLower.includes("body") ||
-          nameLower.includes("head") || nameLower.includes("head")) continue;
+        nameLower.includes("core") || nameLower.includes("body") ||
+        nameLower.includes("head") || nameLower.includes("head")) continue;
 
       // Key-based check first, then name-based: hide if the actor already owns
       // any part whose name is contained in this part's name (case-insensitive).
@@ -308,22 +308,22 @@
           if (existingName && partName.includes(existingName)) { alreadyOwned = true; break; }
         }
       }
-      const cost       = part.hpPercent * 1000 +  Math.abs(part.statEffect.amount) * 10000;
-      const statBonus  = computeStatBonus(part.statEffect);
+      const cost = part.hpPercent * 1000 + Math.abs(part.statEffect.amount) * 10000;
+      const statBonus = computeStatBonus(part.statEffect);
 
       this._partList.push({
         isArchetypePart: true,
         partKey,
         archetypeKey: this._archetypeKey,
-        name:        ConfigManager.language === "it" && part.name_it ? part.name_it : part.name,
-        hpPercent:   part.hpPercent,
-        vital:       part.vital,
-        statEffect:  part.statEffect || null,
+        name: ConfigManager.language === "it" && part.name_it ? part.name_it : part.name,
+        hpPercent: part.hpPercent,
+        vital: part.vital,
+        statEffect: part.statEffect || null,
         statBonus,
-        skillId:     part.skillId || 0,
+        skillId: part.skillId || 0,
         cost,
         alreadyOwned,
-        archPart:    part,   // keep full archetype part data for installation
+        archPart: part,   // keep full archetype part data for installation
       });
     }
   };
@@ -332,8 +332,8 @@
     const item = this._partList[index];
     if (!item) return;
 
-    const rect  = this.itemRect(index);
-    const x     = rect.x + 4;
+    const rect = this.itemRect(index);
+    const x = rect.x + 4;
     const width = rect.width - 8;
     this.contents.clearRect(rect.x, rect.y, rect.width, rect.height);
 
@@ -407,14 +407,14 @@
   Window_RemovePartList.prototype.constructor = Window_RemovePartList;
 
   Window_RemovePartList.prototype.initialize = function () {
-    const width  = Graphics.boxWidth;
+    const width = Graphics.boxWidth;
     const height = Graphics.boxHeight - 120;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_StatusBase.prototype.initialize.call(this, new Rectangle(0, 0, width, height));
     } else {
       Window_Selectable.prototype.initialize.call(this, 0, 0, width, height);
     }
-    this._actor    = null;
+    this._actor = null;
     this._partList = [];
     this.refresh();
   };
@@ -433,24 +433,24 @@
     if (!this._actor || !this._actor._bodyParts) return;
 
     for (const partKey of Object.keys(this._actor._bodyParts)) {
-      const part       = this._actor._bodyParts[partKey];
+      const part = this._actor._bodyParts[partKey];
       const hasImplant = !!(this._actor._prosthetics && this._actor._prosthetics[partKey]);
-      const hpPercent  = inferHpPercent(part, this._actor);
-      const cost       = hpPercent * 100;
+      const hpPercent = inferHpPercent(part, this._actor);
+      const cost = hpPercent * 100;
       const statEffect = lookupStatEffect(partKey, part, this._actor);
-      const statBonus  = computeStatBonus(statEffect);
+      const statBonus = computeStatBonus(statEffect);
 
       this._partList.push({
         isRemoveBodypart: true,
         partKey,
-        name:       part.name || partKey,
-        vital:      isPartVital(this._actor, partKey, part),
+        name: part.name || partKey,
+        vital: isPartVital(this._actor, partKey, part),
         hasImplant,
         hpPercent,
         cost,
         statEffect,
         statBonus,
-        skillId:    part.skillId || 0,
+        skillId: part.skillId || 0,
       });
     }
   };
@@ -459,8 +459,8 @@
     const item = this._partList[index];
     if (!item) return;
 
-    const rect  = this.itemRect(index);
-    const x     = rect.x + 4;
+    const rect = this.itemRect(index);
+    const x = rect.x + 4;
     const width = rect.width - 8;
     this.contents.clearRect(rect.x, rect.y, rect.width, rect.height);
 
@@ -535,7 +535,7 @@
   Window_ConfirmRemove.prototype.initialize = function () {
     const ww = Math.min(520, Math.floor(Graphics.boxWidth * 0.75));
     const wh = 3 * 36 + 24; // warning line + 2 choices
-    const wx = (Graphics.boxWidth  - ww) / 2;
+    const wx = (Graphics.boxWidth - ww) / 2;
     const wy = (Graphics.boxHeight - wh) / 2;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_Command.prototype.initialize.call(this, new Rectangle(wx, wy, ww, wh));
@@ -546,7 +546,7 @@
 
   Window_ConfirmRemove.prototype.makeCommandList = function () {
     this.addCommand(getTranslatedText("Yes, remove it", "Sì, rimuovi"), "confirm", true);
-    this.addCommand(getTranslatedText("Cancel",         "Annulla"),     "cancel",  true);
+    this.addCommand(getTranslatedText("Cancel", "Annulla"), "cancel", true);
   };
 
   // Push items down one line to leave room for the warning text
@@ -579,14 +579,14 @@
   Window_ReplacePartList.prototype.constructor = Window_ReplacePartList;
 
   Window_ReplacePartList.prototype.initialize = function () {
-    const width  = Graphics.boxWidth;
+    const width = Graphics.boxWidth;
     const height = Graphics.boxHeight - 120;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_StatusBase.prototype.initialize.call(this, new Rectangle(0, 0, width, height));
     } else {
       Window_Selectable.prototype.initialize.call(this, 0, 0, width, height);
     }
-    this._actor    = null;
+    this._actor = null;
     this._partList = [];
     this.refresh();
   };
@@ -597,7 +597,7 @@
     this.select(0);
   };
 
-  Window_ReplacePartList.prototype.maxItems  = function () { return this._partList.length; };
+  Window_ReplacePartList.prototype.maxItems = function () { return this._partList.length; };
   Window_ReplacePartList.prototype.itemHeight = function () { return this.lineHeight() * 2; };
 
   Window_ReplacePartList.prototype.setupPartList = function () {
@@ -605,11 +605,11 @@
     if (!this._actor || !this._actor._bodyParts) return;
 
     for (const partKey of Object.keys(this._actor._bodyParts)) {
-      const part       = this._actor._bodyParts[partKey];
-      const hpPercent  = inferHpPercent(part, this._actor);
+      const part = this._actor._bodyParts[partKey];
+      const hpPercent = inferHpPercent(part, this._actor);
       const removalFee = hpPercent * 100;
       const statEffect = lookupStatEffect(partKey, part, this._actor);
-      const statBonus  = computeStatBonus(statEffect);
+      const statBonus = computeStatBonus(statEffect);
 
       // Only show parts that have at least one replacement option in any archetype
       let hasReplacement = false;
@@ -624,8 +624,8 @@
       this._partList.push({
         isReplaceSelectPart: true,
         partKey,
-        name:       part.name || partKey,
-        vital:      part.vital,
+        name: part.name || partKey,
+        vital: part.vital,
         hpPercent,
         removalFee,
         statEffect,
@@ -638,8 +638,8 @@
     const item = this._partList[index];
     if (!item) return;
 
-    const rect  = this.itemRect(index);
-    const x     = rect.x + 4;
+    const rect = this.itemRect(index);
+    const x = rect.x + 4;
     const width = rect.width - 8;
     this.contents.clearRect(rect.x, rect.y, rect.width, rect.height);
     this.resetTextColor();
@@ -697,29 +697,29 @@
   Window_ReplaceArchetypePartList.prototype.constructor = Window_ReplaceArchetypePartList;
 
   Window_ReplaceArchetypePartList.prototype.initialize = function () {
-    const width  = Graphics.boxWidth;
+    const width = Graphics.boxWidth;
     const height = Graphics.boxHeight - 120;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_StatusBase.prototype.initialize.call(this, new Rectangle(0, 0, width, height));
     } else {
       Window_Selectable.prototype.initialize.call(this, 0, 0, width, height);
     }
-    this._actor      = null;
-    this._partKey    = null;
+    this._actor = null;
+    this._partKey = null;
     this._removalFee = 0;
-    this._partList   = [];
+    this._partList = [];
     this.refresh();
   };
 
   Window_ReplaceArchetypePartList.prototype.setContext = function (actor, partKey, removalFee) {
-    this._actor      = actor;
-    this._partKey    = partKey;
+    this._actor = actor;
+    this._partKey = partKey;
     this._removalFee = removalFee || 0;
     this.refresh();
     this.select(0);
   };
 
-  Window_ReplaceArchetypePartList.prototype.maxItems  = function () { return this._partList.length; };
+  Window_ReplaceArchetypePartList.prototype.maxItems = function () { return this._partList.length; };
   Window_ReplaceArchetypePartList.prototype.itemHeight = function () { return this.lineHeight() * 2; };
 
   Window_ReplaceArchetypePartList.prototype.setupPartList = function () {
@@ -733,26 +733,26 @@
       if (!part) continue;
 
       const installCost = part.hpPercent * 1000 + Math.abs((part.statEffect && part.statEffect.amount) || 0) * 10000;
-      const totalCost   = installCost + this._removalFee;
-      const statBonus   = computeStatBonus(part.statEffect);
-      const partName    = ConfigManager.language === "it" && part.name_it ? part.name_it : part.name;
-      const archLabel   = archKey.replace(/([A-Z])/g, " $1").trim();
+      const totalCost = installCost + this._removalFee;
+      const statBonus = computeStatBonus(part.statEffect);
+      const partName = ConfigManager.language === "it" && part.name_it ? part.name_it : part.name;
+      const archLabel = archKey.replace(/([A-Z])/g, " $1").trim();
 
       this._partList.push({
         isReplacePart: true,
-        partKey:      this._partKey,
+        partKey: this._partKey,
         archetypeKey: archKey,
         archetypeLabel: archLabel,
-        name:         partName,
-        hpPercent:    part.hpPercent,
-        vital:        part.vital,
-        statEffect:   part.statEffect || null,
+        name: partName,
+        hpPercent: part.hpPercent,
+        vital: part.vital,
+        statEffect: part.statEffect || null,
         statBonus,
-        skillId:      part.skillId || 0,
+        skillId: part.skillId || 0,
         installCost,
-        removalFee:   this._removalFee,
-        cost:         totalCost,
-        archPart:     part,
+        removalFee: this._removalFee,
+        cost: totalCost,
+        archPart: part,
       });
     }
   };
@@ -761,8 +761,8 @@
     const item = this._partList[index];
     if (!item) return;
 
-    const rect  = this.itemRect(index);
-    const x     = rect.x + 4;
+    const rect = this.itemRect(index);
+    const x = rect.x + 4;
     const width = rect.width - 8;
     this.contents.clearRect(rect.x, rect.y, rect.width, rect.height);
     this.resetTextColor();
@@ -820,14 +820,14 @@
   Window_BodyPartSelect.prototype.constructor = Window_BodyPartSelect;
 
   Window_BodyPartSelect.prototype.initialize = function () {
-    const width  = Graphics.boxWidth;
+    const width = Graphics.boxWidth;
     const height = Graphics.boxHeight - 120;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_StatusBase.prototype.initialize.call(this, new Rectangle(0, 0, width, height));
     } else {
       Window_Selectable.prototype.initialize.call(this, 0, 0, width, height);
     }
-    this._actor       = null;
+    this._actor = null;
     this._bodyPartKeys = [];
     this.refresh();
     this.activate();
@@ -840,10 +840,10 @@
     this.select(0);
   };
 
-  Window_BodyPartSelect.prototype.colSpacing  = function () { return 12; };
-  Window_BodyPartSelect.prototype.maxCols     = function () { return 2; };
-  Window_BodyPartSelect.prototype.maxItems    = function () { return this._bodyPartKeys.length; };
-  Window_BodyPartSelect.prototype.itemHeight  = function () { return this.lineHeight() * 2; };
+  Window_BodyPartSelect.prototype.colSpacing = function () { return 12; };
+  Window_BodyPartSelect.prototype.maxCols = function () { return 2; };
+  Window_BodyPartSelect.prototype.maxItems = function () { return this._bodyPartKeys.length; };
+  Window_BodyPartSelect.prototype.itemHeight = function () { return this.lineHeight() * 2; };
 
   Window_BodyPartSelect.prototype.setupBodyParts = function () {
     if (!this._actor) { this._bodyPartKeys = []; return; }
@@ -904,15 +904,15 @@
   Window_ProstheticList.prototype.constructor = Window_ProstheticList;
 
   Window_ProstheticList.prototype.initialize = function () {
-    const width  = Graphics.boxWidth;
+    const width = Graphics.boxWidth;
     const height = Graphics.boxHeight - 120;
     if (Utils.RPGMAKER_NAME === "MZ") {
       Window_StatusBase.prototype.initialize.call(this, new Rectangle(0, 0, width, height));
     } else {
       Window_Selectable.prototype.initialize.call(this, 0, 0, width, height);
     }
-    this._actor          = null;
-    this._partKey        = null;
+    this._actor = null;
+    this._partKey = null;
     this._prostheticList = [];
     this._selectedProsthetics = {};
     this.refresh();
@@ -931,7 +931,7 @@
     }
   };
 
-  Window_ProstheticList.prototype.maxItems   = function () { return this._prostheticList.length; };
+  Window_ProstheticList.prototype.maxItems = function () { return this._prostheticList.length; };
   Window_ProstheticList.prototype.itemHeight = function () { return this.lineHeight() * 2; };
 
   Window_ProstheticList.prototype.setupProstheticList = function () {
@@ -950,7 +950,7 @@
     const compatibleProsthetics = ProstheticCompatibility[this._partKey] || [];
     for (var i = 0; i < compatibleProsthetics.length; i++) {
       const prostheticKey = compatibleProsthetics[i];
-      const prosthetic    = ProstheticTypes[prostheticKey];
+      const prosthetic = ProstheticTypes[prostheticKey];
       if (!prosthetic) continue;
       this._prostheticList.push({
         isProsthetic: true,
@@ -984,7 +984,7 @@
         this.drawText(getTranslatedText("(Original Part)", "(Parte Originale)"), rect.x, rect.y + this.lineHeight(), rect.width, "center");
       }
     } else if (item.isProsthetic) {
-      const x     = rect.x + 12;
+      const x = rect.x + 12;
       const width = rect.width - 24;
       if (item.isCurrentlyInstalled) {
         this.contents.paintOpacity = 96;
@@ -1027,7 +1027,7 @@
     const item = this._prostheticList[this.index()];
     if (!item) return false;
     if (item.isRemoveOption) return item.canRemove;
-    if (item.isProsthetic)   return !item.isCurrentlyInstalled;
+    if (item.isProsthetic) return !item.isCurrentlyInstalled;
     return false;
   };
 
@@ -1040,7 +1040,7 @@
     const prosthetic = ProstheticTypes[prostheticKey];
     if (!prosthetic) return;
 
-    if (!actor._prosthetics)       actor._prosthetics      = {};
+    if (!actor._prosthetics) actor._prosthetics = {};
     if (!actor._prostheticEffects) actor._prostheticEffects = {};
 
     this.removeProstheticImmediate(actor, partKey);
@@ -1056,11 +1056,11 @@
     if (prosthetic.skill) actor.learnSkill(prosthetic.skill);
 
     const reproVarId = getReproductionVariableId(actor);
-    if      (prostheticKey === "UTERUS")       $gameVariables.setValue(reproVarId, 1);
-    else if (prostheticKey === "OVIDUCT")      $gameVariables.setValue(reproVarId, 2);
-    else if (prostheticKey === "SPORE_GLAND")  $gameVariables.setValue(reproVarId, 3);
-    else if (prostheticKey === "MITOSIS_GLAND")$gameVariables.setValue(reproVarId, 4);
-    else if (prostheticKey === "TESTES")       $gameVariables.setValue(reproVarId, 0);
+    if (prostheticKey === "UTERUS") $gameVariables.setValue(reproVarId, 1);
+    else if (prostheticKey === "OVIDUCT") $gameVariables.setValue(reproVarId, 2);
+    else if (prostheticKey === "SPORE_GLAND") $gameVariables.setValue(reproVarId, 3);
+    else if (prostheticKey === "MITOSIS_GLAND") $gameVariables.setValue(reproVarId, 4);
+    else if (prostheticKey === "TESTES") $gameVariables.setValue(reproVarId, 0);
 
     actor.refresh();
   };
@@ -1083,7 +1083,7 @@
     if (prosthetic.skill) actor.forgetSkill(prosthetic.skill);
 
     const reproVarId = getReproductionVariableId(actor);
-    if (["UTERUS","OVIDUCT","SPORE_GLAND","MITOSIS_GLAND"].includes(currentProstheticKey)) {
+    if (["UTERUS", "OVIDUCT", "SPORE_GLAND", "MITOSIS_GLAND"].includes(currentProstheticKey)) {
       $gameVariables.setValue(reproVarId, 0);
     }
 
@@ -1123,7 +1123,7 @@
   Window_ProstheticCost.prototype.refresh = function () {
     this.contents.clear();
     const sel = this._selection;
-    const w   = this.contents.width - 12;
+    const w = this.contents.width - 12;
 
     // Line 1: cost
     if (sel && sel.isProsthetic && !sel.isCurrentlyInstalled) {
@@ -1171,7 +1171,7 @@
 
   Scene_ProstheticShop.prototype.initialize = function () {
     Scene_MenuBase.prototype.initialize.call(this);
-    this._selectedActor   = null;
+    this._selectedActor = null;
     this._selectedPartKey = null;
   };
 
@@ -1201,7 +1201,7 @@
   Scene_ProstheticShop.prototype.createPartyWindow = function () {
     this._partyWindow = new Window_PartySelect();
     this._partyWindow.setHandler("selectMember", this.onPartySelect.bind(this));
-    this._partyWindow.setHandler("cancel",        this.popScene.bind(this));
+    this._partyWindow.setHandler("cancel", this.popScene.bind(this));
     this.addWindow(this._partyWindow);
   };
 
@@ -1219,11 +1219,11 @@
 
   Scene_ProstheticShop.prototype.createCommandWindow = function () {
     this._commandWindow = new Window_ShopCommand();
-    this._commandWindow.setHandler("installBodypart",  this.onCmdInstallBodypart.bind(this));
-    this._commandWindow.setHandler("removeBodypart",   this.onCmdRemoveBodypart.bind(this));
-    this._commandWindow.setHandler("replaceBodypart",  this.onCmdReplaceBodypart.bind(this));
-    this._commandWindow.setHandler("installImplant",   this.onCmdInstallImplant.bind(this));
-    this._commandWindow.setHandler("cancel",           this.onCmdCancel.bind(this));
+    this._commandWindow.setHandler("installBodypart", this.onCmdInstallBodypart.bind(this));
+    this._commandWindow.setHandler("removeBodypart", this.onCmdRemoveBodypart.bind(this));
+    this._commandWindow.setHandler("replaceBodypart", this.onCmdReplaceBodypart.bind(this));
+    this._commandWindow.setHandler("installImplant", this.onCmdInstallImplant.bind(this));
+    this._commandWindow.setHandler("cancel", this.onCmdCancel.bind(this));
     this._commandWindow.hide();
     this._commandWindow.deactivate();
     this.addWindow(this._commandWindow);
@@ -1281,7 +1281,7 @@
 
   Scene_ProstheticShop.prototype.createReplacePartListWindow = function () {
     this._replacePartListWindow = new Window_ReplacePartList();
-    this._replacePartListWindow.setHandler("ok",     this.onReplacePartSelect.bind(this));
+    this._replacePartListWindow.setHandler("ok", this.onReplacePartSelect.bind(this));
     this._replacePartListWindow.setHandler("cancel", this.onReplacePartCancel.bind(this));
     this._replacePartListWindow.hide();
     this._replacePartListWindow.deactivate();
@@ -1311,7 +1311,7 @@
 
   Scene_ProstheticShop.prototype.createReplaceArchetypePartListWindow = function () {
     this._replaceArchetypePartListWindow = new Window_ReplaceArchetypePartList();
-    this._replaceArchetypePartListWindow.setHandler("ok",     this.onReplaceArchetypePartOk.bind(this));
+    this._replaceArchetypePartListWindow.setHandler("ok", this.onReplaceArchetypePartOk.bind(this));
     this._replaceArchetypePartListWindow.setHandler("cancel", this.onReplaceArchetypePartCancel.bind(this));
     this._replaceArchetypePartListWindow.hide();
     this._replaceArchetypePartListWindow.deactivate();
@@ -1332,7 +1332,7 @@
       return;
     }
 
-    const actor   = this._selectedActor;
+    const actor = this._selectedActor;
     const partKey = item.partKey;
     const archPart = item.archPart;
 
@@ -1353,7 +1353,7 @@
       // Remove implant on the old part if present (no refund)
       if (actor._prosthetics && actor._prosthetics[partKey]) {
         const prostheticKey = actor._prosthetics[partKey];
-        const prosthetic    = ProstheticTypes[prostheticKey];
+        const prosthetic = ProstheticTypes[prostheticKey];
         if (prosthetic) {
           if (prosthetic.effects) {
             for (const paramId in prosthetic.effects) {
@@ -1378,18 +1378,18 @@
     if (!actor._bodyParts) actor._bodyParts = {};
     const hpPercentage = item.hpPercent / 100;
     actor._bodyParts[partKey] = {
-      name:              item.name,
-      maxHp:             Math.round(actor.mhp * hpPercentage),
-      currentHp:         Math.round(actor.mhp * hpPercentage),
-      vital:             item.vital,
-      damaged:           false,
-      equipSlot:         archPart.equipSlot   || null,
-      childParts:        archPart.childParts  || [],
-      multiple:          archPart.multiple    || false,
+      name: item.name,
+      maxHp: Math.round(actor.mhp * hpPercentage),
+      currentHp: Math.round(actor.mhp * hpPercentage),
+      vital: item.vital,
+      damaged: false,
+      equipSlot: archPart.equipSlot || null,
+      childParts: archPart.childParts || [],
+      multiple: archPart.multiple || false,
       appliedStatEffect: false,
-      hpPercent:         item.hpPercent,
-      statEffect:        item.statEffect,
-      skillId:           item.skillId || 0,
+      hpPercent: item.hpPercent,
+      statEffect: item.statEffect,
+      skillId: item.skillId || 0,
     };
 
     // Apply new stat bonus
@@ -1430,7 +1430,7 @@
   Scene_ProstheticShop.prototype.createArchetypeSelectWindow = function () {
     this._archetypeSelectWindow = new Window_ArchetypeSelect();
     this._archetypeSelectWindow.setHandler("archetype", this.onArchetypeSelect.bind(this));
-    this._archetypeSelectWindow.setHandler("cancel",    this.onArchetypeCancel.bind(this));
+    this._archetypeSelectWindow.setHandler("cancel", this.onArchetypeCancel.bind(this));
     this._archetypeSelectWindow.hide();
     this._archetypeSelectWindow.deactivate();
     this.addWindow(this._archetypeSelectWindow);
@@ -1458,7 +1458,7 @@
 
   Scene_ProstheticShop.prototype.createArchetypePartListWindow = function () {
     this._archetypePartListWindow = new Window_ArchetypePartList();
-    this._archetypePartListWindow.setHandler("ok",     this.onArchetypePartOk.bind(this));
+    this._archetypePartListWindow.setHandler("ok", this.onArchetypePartOk.bind(this));
     this._archetypePartListWindow.setHandler("cancel", this.onArchetypePartCancel.bind(this));
     this._archetypePartListWindow.hide();
     this._archetypePartListWindow.deactivate();
@@ -1466,7 +1466,7 @@
   };
 
   Scene_ProstheticShop.prototype.onArchetypePartOk = function () {
-    const item  = this._archetypePartListWindow.getCurrentSelection();
+    const item = this._archetypePartListWindow.getCurrentSelection();
     if (!item) return;
 
     if (!this._costWindow.canAfford()) {
@@ -1480,7 +1480,7 @@
     }
 
     // Install the body part
-    const actor   = this._selectedActor;
+    const actor = this._selectedActor;
     const archPart = item.archPart;
 
     $gameParty.loseGold(item.cost);
@@ -1489,18 +1489,18 @@
     if (!actor._bodyParts) actor._bodyParts = {};
     const hpPercentage = item.hpPercent / 100;
     actor._bodyParts[item.partKey] = {
-      name:             item.name,
-      maxHp:            Math.round(actor.mhp * hpPercentage),
-      currentHp:        Math.round(actor.mhp * hpPercentage),
-      vital:            item.vital,
-      damaged:          false,
-      equipSlot:        archPart.equipSlot   || null,
-      childParts:       archPart.childParts  || [],
-      multiple:         archPart.multiple    || false,
-      appliedStatEffect:false,
-      hpPercent:        item.hpPercent,
-      statEffect:       item.statEffect,
-      skillId:          item.skillId || 0,
+      name: item.name,
+      maxHp: Math.round(actor.mhp * hpPercentage),
+      currentHp: Math.round(actor.mhp * hpPercentage),
+      vital: item.vital,
+      damaged: false,
+      equipSlot: archPart.equipSlot || null,
+      childParts: archPart.childParts || [],
+      multiple: archPart.multiple || false,
+      appliedStatEffect: false,
+      hpPercent: item.hpPercent,
+      statEffect: item.statEffect,
+      skillId: item.skillId || 0,
     };
 
     // Apply stat bonus
@@ -1538,7 +1538,7 @@
 
   Scene_ProstheticShop.prototype.createRemovePartListWindow = function () {
     this._removePartListWindow = new Window_RemovePartList();
-    this._removePartListWindow.setHandler("ok",     this.onRemovePartOk.bind(this));
+    this._removePartListWindow.setHandler("ok", this.onRemovePartOk.bind(this));
     this._removePartListWindow.setHandler("cancel", this.onRemovePartCancel.bind(this));
     this._removePartListWindow.hide();
     this._removePartListWindow.deactivate();
@@ -1576,7 +1576,7 @@
   Scene_ProstheticShop.prototype.createConfirmRemoveWindow = function () {
     this._confirmRemoveWindow = new Window_ConfirmRemove();
     this._confirmRemoveWindow.setHandler("confirm", this.onConfirmRemoveYes.bind(this));
-    this._confirmRemoveWindow.setHandler("cancel",  this.onConfirmRemoveNo.bind(this));
+    this._confirmRemoveWindow.setHandler("cancel", this.onConfirmRemoveNo.bind(this));
     this._confirmRemoveWindow.hide();
     this._confirmRemoveWindow.deactivate();
     this.addWindow(this._confirmRemoveWindow);
@@ -1613,7 +1613,7 @@
     // Remove installed implant first (no refund)
     if (item.hasImplant && actor._prosthetics && actor._prosthetics[item.partKey]) {
       const prostheticKey = actor._prosthetics[item.partKey];
-      const prosthetic    = ProstheticTypes[prostheticKey];
+      const prosthetic = ProstheticTypes[prostheticKey];
       if (prosthetic) {
         if (prosthetic.effects) {
           for (const paramId in prosthetic.effects) {
@@ -1662,7 +1662,7 @@
 
   Scene_ProstheticShop.prototype.createBodyPartSelectWindow = function () {
     this._partSelectWindow = new Window_BodyPartSelect();
-    this._partSelectWindow.setHandler("ok",     this.onPartSelectOk.bind(this));
+    this._partSelectWindow.setHandler("ok", this.onPartSelectOk.bind(this));
     this._partSelectWindow.setHandler("cancel", this.onPartSelectCancel.bind(this));
     this._partSelectWindow.hide();
     this._partSelectWindow.deactivate();
@@ -1692,7 +1692,7 @@
 
   Scene_ProstheticShop.prototype.createProstheticListWindow = function () {
     this._prostheticListWindow = new Window_ProstheticList();
-    this._prostheticListWindow.setHandler("ok",     this.onProstheticListOk.bind(this));
+    this._prostheticListWindow.setHandler("ok", this.onProstheticListOk.bind(this));
     this._prostheticListWindow.setHandler("cancel", this.onProstheticListCancel.bind(this));
     this._prostheticListWindow.hide();
     this._prostheticListWindow.deactivate();
@@ -1782,8 +1782,8 @@
   var _Game_Actor_param_prosthetic = Game_Actor.prototype.param;
   Game_Actor.prototype.param = function (paramId) {
     var value = _Game_Actor_param_prosthetic.call(this, paramId);
-    if (this._prostheticEffects    && this._prostheticEffects[paramId])    value += this._prostheticEffects[paramId];
-    if (this._bodyPartStatEffects  && this._bodyPartStatEffects[paramId])  value += this._bodyPartStatEffects[paramId];
+    if (this._prostheticEffects && this._prostheticEffects[paramId]) value += this._prostheticEffects[paramId];
+    if (this._bodyPartStatEffects && this._bodyPartStatEffects[paramId]) value += this._bodyPartStatEffects[paramId];
     return Math.max(1, value);
   };
 
@@ -1804,14 +1804,14 @@
   // autoAssignProsthetic  (targets actor 1 only)
   // ===========================================================================
   Game_System.prototype.autoAssignProsthetic = function () {
-    const actor       = $gameActors.actor(1);
+    const actor = $gameActors.actor(1);
     const assignmentDone = $gameSwitches.value(88);
-    const storedName     = $gameVariables.value(89);
-    const currentName    = actor.name();
-    const shouldAssign   = !assignmentDone || currentName !== storedName;
+    const storedName = $gameVariables.value(89);
+    const currentName = actor.name();
+    const shouldAssign = !assignmentDone || currentName !== storedName;
 
     if (shouldAssign) {
-      const v87Value   = $gameVariables.value(87);
+      const v87Value = $gameVariables.value(87);
       const implantName = AUTO_ASSIGN_IMPLANTS[v87Value] !== undefined
         ? AUTO_ASSIGN_IMPLANTS[v87Value]
         : "TESTES";

@@ -3,14 +3,12 @@
  * @plugindesc v1.0.0 Work System - Select jobs, earn money, gain experience through labor
  * @author Omni-Lex
  * @base TimeDateSystem
- * @base WorkSystemDB
  * @orderAfter TimeDateSystem
- * @orderAfter WorkSystemDB
  *
  * @help WorkSystem.js
  * === Work System v1.0.0 ===
  *
- * Requires: TimeDateSystem.js and WorkSystemDB.js
+ * Requires: TimeDateSystem.js and DataService.js
  *
  * --- Features ---
  * - Select from 30+ different jobs across multiple categories
@@ -107,6 +105,93 @@
     workDuration: Number(parameters.workDuration || 120),
     workSoundEffect: String(parameters.workSoundEffect || "")
   };
+  window.WorkSystem = window.WorkSystem || {};
+
+  // Helper function to get job by ID
+  window.WorkSystem.getJob = function (jobId) {
+    if (!window.WorkSystem || !window.WorkSystem.Jobs) return null;
+    return window.WorkSystem.Jobs.find(job => job.id === jobId);
+  };
+
+  // Helper function to get jobs by category
+  window.WorkSystem.getJobsByCategory = function (category) {
+    if (!window.WorkSystem || !window.WorkSystem.Jobs) return [];
+    return window.WorkSystem.Jobs.filter(job => job.category === category);
+  };
+
+  // Helper function to get faction jobs
+  window.WorkSystem.getFactionJobs = function (factionId) {
+    if (!window.WorkSystem || !window.WorkSystem.Jobs) return [];
+    return window.WorkSystem.Jobs.filter(job => job.factionId === factionId);
+  };
+
+  // Helper function to get actor stat (including custom ones)
+  window.WorkSystem.getActorStat = function (actor, stat) {
+    if (!actor) return 0;
+    switch (stat) {
+      case 'ATK': return actor.atk;
+      case 'DEF': return actor.def;
+      case 'MAT': return actor.mat;
+      case 'MDF': return actor.mdf;
+      case 'AGI': return actor.agi;
+      case 'LUK': return actor.luk;
+      case 'HP': return actor.mhp;
+      case 'MP': return actor.mmp;
+      case 'Arcane': return $gameVariables.value(86);
+      case 'Substance': return $gameVariables.value(87);
+      case 'Stealth': return $gameVariables.value(88);
+      case 'Intimidation': return $gameVariables.value(89);
+      default: return 0;
+    }
+  };
+
+  // Helper function to check if actor meets requirements
+  window.WorkSystem.meetsRequirements = function (actor, job) {
+    const requirements = job.requirements;
+    const results = {
+      meets: true,
+      deficits: []
+    };
+
+    for (const [stat, required] of Object.entries(requirements)) {
+      const actorValue = this.getActorStat(actor, stat);
+
+      if (actorValue < required) {
+        results.meets = false;
+        results.deficits.push({
+          stat: stat,
+          required: required,
+          current: actorValue,
+          deficit: required - actorValue
+        });
+      }
+    }
+
+    return results;
+  };
+
+  // Calculate success chance based on stat deficits
+  window.WorkSystem.calculateSuccessChance = function (actor, job) {
+    const check = this.meetsRequirements(actor, job);
+
+    if (check.meets) {
+      return 0.80; // 80% base success rate if requirements met
+    }
+
+    // Calculate penalty based on deficits
+    let totalDeficit = 0;
+    let totalRequired = 0;
+
+    for (const deficit of check.deficits) {
+      totalDeficit += deficit.deficit;
+      totalRequired += deficit.required;
+    }
+
+    const deficitRatio = totalDeficit / totalRequired;
+    const successChance = Math.max(0.10, 0.80 - (deficitRatio * 2)); // Minimum 10% chance
+
+    return successChance;
+  };
 
   // ============================================================================
   // Work Manager - Core Logic
@@ -114,7 +199,7 @@
 
   class WorkManager {
     static executeWork(actor, job) {
-      const successChance = window.WorkSystemDB.calculateSuccessChance(actor, job);
+      const successChance = window.WorkSystem.calculateSuccessChance(actor, job);
       const roll = Math.random();
 
       let outcomeType;
@@ -183,8 +268,16 @@
       }
 
       // Apply status effects
-      for (const stateId of result.statuses) {
-        actor.addState(stateId);
+      for (const statusName of result.statuses) {
+        const stateId = window.WorkSystem.Status[statusName.toUpperCase()];
+        if (stateId) {
+          actor.addState(stateId);
+        } else {
+          // If it's already a number, add it directly
+          if (!isNaN(statusName)) {
+            actor.addState(Number(statusName));
+          }
+        }
       }
 
       // Advance time (duration in hours, convert to minutes)
@@ -229,12 +322,12 @@
     }
 
     makeItemList() {
-      if (!window.WorkSystemDB || !window.WorkSystemDB.JOBS) {
+      if (!window.WorkSystem || !window.WorkSystem.Jobs) {
         this._data = [];
         return;
       }
 
-      let jobs = window.WorkSystemDB.JOBS;
+      let jobs = window.WorkSystem.Jobs;
 
       // Filter by category if specified
       if (this._category) {
@@ -335,27 +428,11 @@
       y += lineHeight;
 
       // Check requirements
-      const reqCheck = window.WorkSystemDB.meetsRequirements(actor, job);
+      const reqCheck = window.WorkSystem.meetsRequirements(actor, job);
 
       // Draw each requirement
       for (const [stat, required] of Object.entries(job.requirements)) {
-        let actorValue = 0;
-
-        // Get actor's stat value
-        switch(stat) {
-          case 'ATK': actorValue = actor.atk; break;
-          case 'DEF': actorValue = actor.def; break;
-          case 'MAT': actorValue = actor.mat; break;
-          case 'MDF': actorValue = actor.mdf; break;
-          case 'AGI': actorValue = actor.agi; break;
-          case 'LUK': actorValue = actor.luk; break;
-          case 'HP': actorValue = actor.mhp; break;
-          case 'MP': actorValue = actor.mmp; break;
-          case 'Arcane': actorValue = $gameVariables.value(86); break;
-          case 'Substance': actorValue = $gameVariables.value(87); break;
-          case 'Stealth': actorValue = $gameVariables.value(88); break;
-          case 'Intimidation': actorValue = $gameVariables.value(89); break;
-        }
+        const actorValue = window.WorkSystem.getActorStat(actor, stat);
 
         // Color code: green if met, red if not
         if (actorValue >= required) {
@@ -372,7 +449,7 @@
 
       // Success chance (if enabled)
       if (settings.showSuccessChance) {
-        const successChance = window.WorkSystemDB.calculateSuccessChance(actor, job);
+        const successChance = window.WorkSystem.calculateSuccessChance(actor, job);
         const chancePercent = Math.floor(successChance * 100);
 
         this.changeTextColor(ColorManager.systemColor());
@@ -656,7 +733,7 @@
 
       const requirements = job.requirements;
       for (const [stat, required] of Object.entries(requirements)) {
-        let actorValue = this.getActorStat(actor, stat);
+        const actorValue = window.WorkSystem.getActorStat(actor, stat);
         const meetsReq = actorValue >= required;
 
         this.changeTextColor(meetsReq ? ColorManager.powerUpColor() : ColorManager.deathColor());
@@ -666,7 +743,7 @@
 
       // Success rate at bottom
       if (settings.showSuccessChance && actor) {
-        const successChance = window.WorkSystemDB.calculateSuccessChance(actor, job);
+        const successChance = window.WorkSystem.calculateSuccessChance(actor, job);
         const chancePercent = Math.floor(successChance * 100);
 
         y = this.contentsHeight() - lineHeight * 2;
@@ -725,23 +802,7 @@
     }
 
     getActorStat(actor, stat) {
-      if (!actor) return 0;
-
-      switch(stat) {
-        case 'ATK': return actor.atk;
-        case 'DEF': return actor.def;
-        case 'MAT': return actor.mat;
-        case 'MDF': return actor.mdf;
-        case 'AGI': return actor.agi;
-        case 'LUK': return actor.luk;
-        case 'HP': return actor.mhp;
-        case 'MP': return actor.mmp;
-        case 'Arcane': return $gameVariables.value(86);
-        case 'Substance': return $gameVariables.value(87);
-        case 'Stealth': return $gameVariables.value(88);
-        case 'Intimidation': return $gameVariables.value(89);
-        default: return 0;
-      }
+      return window.WorkSystem.getActorStat(actor, stat);
     }
 
     getFactionName(factionId) {
@@ -750,7 +811,7 @@
         return $dataFactions[factionId].name || `Faction ${factionId}`;
       }
 
-      // Fallback to hardcoded faction names based on WorkSystemDB comments
+      // Fallback to hardcoded faction names based on WorkSystem comments
       const factionNames = {
         0: "Mages Guild",
         1: "Archive Foundation",
@@ -843,7 +904,7 @@
       this.addWindow(this._detailsPanel);
 
       // Load the specific job
-      const job = window.WorkSystemDB.getJob(this._singleJobId);
+      const job = window.WorkSystem.getJob(this._singleJobId);
       if (job) {
         this._detailsPanel.setJob(job);
         this._detailsPanel.setActor($gameParty.leader());

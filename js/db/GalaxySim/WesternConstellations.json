@@ -1,0 +1,5132 @@
+{
+  "andromeda": {
+    "name": "Andromeda",
+    "center": {
+      "x": 200,
+      "y": 400
+    },
+    "stars": [
+      {
+        "x": 150,
+        "y": 380,
+        "name": "Alpheratz",
+        "magnitude": 2.06
+      },
+      {
+        "x": 180,
+        "y": 390,
+        "name": "Mirach",
+        "magnitude": 2.05
+      },
+      {
+        "x": 210,
+        "y": 400,
+        "name": "Almach",
+        "magnitude": 2.1
+      },
+      {
+        "x": 240,
+        "y": 410,
+        "name": "Delta And",
+        "magnitude": 3.27
+      },
+      {
+        "x": 170,
+        "y": 420,
+        "name": "51 And",
+        "magnitude": 3.57
+      },
+      {
+        "x": 190,
+        "y": 370,
+        "name": "Mu And",
+        "magnitude": 3.87
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        1,
+        5
+      ]
+    ]
+  },
+  "aquarius": {
+    "zodiac": true,
+    "name": "Aquarius",
+    "center": {
+      "x": 2200,
+      "y": 1100
+    },
+    "stars": [
+      {
+        "x": 2180,
+        "y": 1080,
+        "name": "Sadalsuud",
+        "magnitude": 2.87
+      },
+      {
+        "x": 2200,
+        "y": 1090,
+        "name": "Sadalmelik",
+        "magnitude": 2.96
+      },
+      {
+        "x": 2220,
+        "y": 1100,
+        "name": "Sadachbia",
+        "magnitude": 3.84
+      },
+      {
+        "x": 2240,
+        "y": 1110,
+        "name": "Skat",
+        "magnitude": 3.27
+      },
+      {
+        "x": 2160,
+        "y": 1120,
+        "name": "Albali",
+        "magnitude": 3.77
+      },
+      {
+        "x": 2190,
+        "y": 1130,
+        "name": "Ancha",
+        "magnitude": 4.16
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        4,
+        5
+      ]
+    ]
+  },
+  "aquila": {
+    "name": "Aquila",
+    "center": {
+      "x": 1900,
+      "y": 900
+    },
+    "stars": [
+      {
+        "x": 1900,
+        "y": 900,
+        "name": "Altair",
+        "magnitude": 0.77
+      },
+      {
+        "x": 1880,
+        "y": 890,
+        "name": "Alshain",
+        "magnitude": 3.71
+      },
+      {
+        "x": 1920,
+        "y": 890,
+        "name": "Tarazed",
+        "magnitude": 2.72
+      },
+      {
+        "x": 1870,
+        "y": 920,
+        "name": "Theta Aql",
+        "magnitude": 3.23
+      },
+      {
+        "x": 1930,
+        "y": 920,
+        "name": "Delta Aql",
+        "magnitude": 3.36
+      },
+      {
+        "x": 1900,
+        "y": 870,
+        "name": "Lambda Aql",
+        "magnitude": 3.44
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ]
+    ]
+  },
+  "aries": {
+    "name": "Aries",
+    "zodiac": true,
+    "center": {
+      "x": 300,
+      "y": 500
+    },
+    "stars": [
+      {
+        "x": 280,
+        "y": 490,
+        "name": "Hamal",
+        "magnitude": 2
+      },
+      {
+        "x": 300,
+        "y": 500,
+        "name": "Sheratan",
+        "magnitude": 2.64
+      },
+      {
+        "x": 320,
+        "y": 510,
+        "name": "Mesarthim",
+        "magnitude": 3.86
+      },
+      {
+        "x": 310,
+        "y": 480,
+        "name": "41 Ari",
+        "magnitude": 3.63
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        3
+      ]
+    ]
+  },
+  "auriga": {
+    "name": "Auriga",
+    "center": {
+      "x": 600,
+      "y": 400
+    },
+    "stars": [
+      {
+        "x": 600,
+        "y": 380,
+        "name": "Capella",
+        "magnitude": 0.08
+      },
+      {
+        "x": 580,
+        "y": 400,
+        "name": "Menkalinan",
+        "magnitude": 1.9
+      },
+      {
+        "x": 620,
+        "y": 410,
+        "name": "Mahasim",
+        "magnitude": 2.62
+      },
+      {
+        "x": 630,
+        "y": 390,
+        "name": "Hassaleh",
+        "magnitude": 2.69
+      },
+      {
+        "x": 590,
+        "y": 420,
+        "name": "Almaaz",
+        "magnitude": 2.99
+      },
+      {
+        "x": 570,
+        "y": 390,
+        "name": "Haedus I",
+        "magnitude": 3.75
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        0,
+        5
+      ]
+    ]
+  },
+  "bootes": {
+    "name": "Boötes",
+    "center": {
+      "x": 1400,
+      "y": 600
+    },
+    "stars": [
+      {
+        "x": 1400,
+        "y": 580,
+        "name": "Arcturus",
+        "magnitude": -0.05
+      },
+      {
+        "x": 1380,
+        "y": 600,
+        "name": "Izar",
+        "magnitude": 2.7
+      },
+      {
+        "x": 1420,
+        "y": 610,
+        "name": "Muphrid",
+        "magnitude": 2.68
+      },
+      {
+        "x": 1410,
+        "y": 560,
+        "name": "Seginus",
+        "magnitude": 3.03
+      },
+      {
+        "x": 1390,
+        "y": 620,
+        "name": "Delta Boo",
+        "magnitude": 3.47
+      },
+      {
+        "x": 1430,
+        "y": 590,
+        "name": "Nekkar",
+        "magnitude": 3.5
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        5
+      ]
+    ]
+  },
+  "canis_major": {
+    "name": "Canis Major",
+    "center": {
+      "x": 700,
+      "y": 1200
+    },
+    "stars": [
+      {
+        "x": 700,
+        "y": 1180,
+        "name": "Sirius",
+        "magnitude": -1.46
+      },
+      {
+        "x": 680,
+        "y": 1200,
+        "name": "Adhara",
+        "magnitude": 1.5
+      },
+      {
+        "x": 720,
+        "y": 1210,
+        "name": "Wezen",
+        "magnitude": 1.84
+      },
+      {
+        "x": 710,
+        "y": 1160,
+        "name": "Mirzam",
+        "magnitude": 1.98
+      },
+      {
+        "x": 690,
+        "y": 1220,
+        "name": "Aludra",
+        "magnitude": 2.45
+      },
+      {
+        "x": 730,
+        "y": 1190,
+        "name": "Phurud",
+        "magnitude": 3.02
+      },
+      {
+        "x": 670,
+        "y": 1190,
+        "name": "Furud",
+        "magnitude": 3.02
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        1,
+        6
+      ]
+    ]
+  },
+  "canis_minor": {
+    "name": "Canis Minor",
+    "center": {
+      "x": 800,
+      "y": 900
+    },
+    "stars": [
+      {
+        "x": 800,
+        "y": 900,
+        "name": "Procyon",
+        "magnitude": 0.34
+      },
+      {
+        "x": 820,
+        "y": 910,
+        "name": "Gomeisa",
+        "magnitude": 2.9
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "capricornus": {
+    "zodiac": true,
+    "name": "Capricornus",
+    "center": {
+      "x": 2100,
+      "y": 1200
+    },
+    "stars": [
+      {
+        "x": 2080,
+        "y": 1180,
+        "name": "Deneb Algedi",
+        "magnitude": 2.87
+      },
+      {
+        "x": 2100,
+        "y": 1190,
+        "name": "Dabih",
+        "magnitude": 3.08
+      },
+      {
+        "x": 2120,
+        "y": 1200,
+        "name": "Nashira",
+        "magnitude": 3.68
+      },
+      {
+        "x": 2090,
+        "y": 1210,
+        "name": "Yen",
+        "magnitude": 4.14
+      },
+      {
+        "x": 2110,
+        "y": 1220,
+        "name": "Dorsum",
+        "magnitude": 4.08
+      },
+      {
+        "x": 2130,
+        "y": 1210,
+        "name": "Zeta Cap",
+        "magnitude": 3.74
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "cassiopeia": {
+    "name": "Cassiopeia",
+    "center": {
+      "x": 100,
+      "y": 300
+    },
+    "stars": [
+      {
+        "x": 60,
+        "y": 290,
+        "name": "Schedar",
+        "magnitude": 2.23
+      },
+      {
+        "x": 80,
+        "y": 300,
+        "name": "Caph",
+        "magnitude": 2.27
+      },
+      {
+        "x": 100,
+        "y": 295,
+        "name": "Gamma Cas",
+        "magnitude": 2.47
+      },
+      {
+        "x": 120,
+        "y": 305,
+        "name": "Ruchbah",
+        "magnitude": 2.68
+      },
+      {
+        "x": 140,
+        "y": 310,
+        "name": "Segin",
+        "magnitude": 3.38
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  },
+  "cepheus": {
+    "name": "Cepheus",
+    "center": {
+      "x": 2300,
+      "y": 300
+    },
+    "stars": [
+      {
+        "x": 2280,
+        "y": 280,
+        "name": "Alderamin",
+        "magnitude": 2.51
+      },
+      {
+        "x": 2300,
+        "y": 290,
+        "name": "Alfirk",
+        "magnitude": 3.23
+      },
+      {
+        "x": 2320,
+        "y": 300,
+        "name": "Errai",
+        "magnitude": 3.21
+      },
+      {
+        "x": 2310,
+        "y": 320,
+        "name": "Iota Cep",
+        "magnitude": 3.52
+      },
+      {
+        "x": 2290,
+        "y": 310,
+        "name": "Zeta Cep",
+        "magnitude": 3.35
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "cetus": {
+    "name": "Cetus",
+    "center": {
+      "x": 200,
+      "y": 1000
+    },
+    "stars": [
+      {
+        "x": 180,
+        "y": 980,
+        "name": "Diphda",
+        "magnitude": 2.04
+      },
+      {
+        "x": 200,
+        "y": 990,
+        "name": "Menkar",
+        "magnitude": 2.53
+      },
+      {
+        "x": 220,
+        "y": 1000,
+        "name": "Mira",
+        "magnitude": 3.04
+      },
+      {
+        "x": 210,
+        "y": 1020,
+        "name": "Tau Cet",
+        "magnitude": 3.5
+      },
+      {
+        "x": 190,
+        "y": 1010,
+        "name": "Theta Cet",
+        "magnitude": 3.6
+      },
+      {
+        "x": 170,
+        "y": 1000,
+        "name": "Eta Cet",
+        "magnitude": 3.45
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ]
+  },
+  "corona_borealis": {
+    "name": "Corona Borealis",
+    "center": {
+      "x": 1600,
+      "y": 600
+    },
+    "stars": [
+      {
+        "x": 1600,
+        "y": 590,
+        "name": "Alphecca",
+        "magnitude": 2.23
+      },
+      {
+        "x": 1580,
+        "y": 595,
+        "name": "Nusakan",
+        "magnitude": 3.68
+      },
+      {
+        "x": 1620,
+        "y": 595,
+        "name": "Gamma CrB",
+        "magnitude": 3.84
+      },
+      {
+        "x": 1590,
+        "y": 605,
+        "name": "Theta CrB",
+        "magnitude": 4.13
+      },
+      {
+        "x": 1610,
+        "y": 605,
+        "name": "Delta CrB",
+        "magnitude": 4.59
+      },
+      {
+        "x": 1570,
+        "y": 600,
+        "name": "Iota CrB",
+        "magnitude": 4.98
+      },
+      {
+        "x": 1630,
+        "y": 600,
+        "name": "Epsilon CrB",
+        "magnitude": 4.15
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "corvus": {
+    "name": "Corvus",
+    "center": {
+      "x": 1200,
+      "y": 1200
+    },
+    "stars": [
+      {
+        "x": 1180,
+        "y": 1180,
+        "name": "Gienah",
+        "magnitude": 2.59
+      },
+      {
+        "x": 1200,
+        "y": 1190,
+        "name": "Kraz",
+        "magnitude": 2.65
+      },
+      {
+        "x": 1220,
+        "y": 1200,
+        "name": "Algorab",
+        "magnitude": 2.95
+      },
+      {
+        "x": 1210,
+        "y": 1220,
+        "name": "Minkar",
+        "magnitude": 3
+      },
+      {
+        "x": 1190,
+        "y": 1210,
+        "name": "Alchiba",
+        "magnitude": 4.02
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "crater": {
+    "name": "Crater",
+    "center": {
+      "x": 1100,
+      "y": 1100
+    },
+    "stars": [
+      {
+        "x": 1080,
+        "y": 1080,
+        "name": "Labrum",
+        "magnitude": 3.56
+      },
+      {
+        "x": 1100,
+        "y": 1090,
+        "name": "Gamma Crt",
+        "magnitude": 4.08
+      },
+      {
+        "x": 1120,
+        "y": 1100,
+        "name": "Zeta Crt",
+        "magnitude": 4.73
+      },
+      {
+        "x": 1110,
+        "y": 1120,
+        "name": "Eta Crt",
+        "magnitude": 5.18
+      },
+      {
+        "x": 1090,
+        "y": 1110,
+        "name": "Theta Crt",
+        "magnitude": 4.7
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "cygnus": {
+    "name": "Cygnus",
+    "center": {
+      "x": 2000,
+      "y": 400
+    },
+    "stars": [
+      {
+        "x": 2000,
+        "y": 380,
+        "name": "Deneb",
+        "magnitude": 1.25
+      },
+      {
+        "x": 1980,
+        "y": 400,
+        "name": "Albireo",
+        "magnitude": 3.18
+      },
+      {
+        "x": 2020,
+        "y": 410,
+        "name": "Sadr",
+        "magnitude": 2.2
+      },
+      {
+        "x": 2010,
+        "y": 390,
+        "name": "Gienah",
+        "magnitude": 2.48
+      },
+      {
+        "x": 1990,
+        "y": 420,
+        "name": "Rukh",
+        "magnitude": 2.87
+      },
+      {
+        "x": 2030,
+        "y": 430,
+        "name": "Zeta Cyg",
+        "magnitude": 3.2
+      }
+    ],
+    "lines": [
+      [
+        0,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        5
+      ]
+    ]
+  },
+  "delphinus": {
+    "name": "Delphinus",
+    "center": {
+      "x": 2050,
+      "y": 800
+    },
+    "stars": [
+      {
+        "x": 2040,
+        "y": 790,
+        "name": "Sualocin",
+        "magnitude": 3.63
+      },
+      {
+        "x": 2050,
+        "y": 795,
+        "name": "Rotanev",
+        "magnitude": 3.64
+      },
+      {
+        "x": 2060,
+        "y": 800,
+        "name": "Gamma Del",
+        "magnitude": 3.9
+      },
+      {
+        "x": 2055,
+        "y": 810,
+        "name": "Delta Del",
+        "magnitude": 4.43
+      },
+      {
+        "x": 2045,
+        "y": 805,
+        "name": "Epsilon Del",
+        "magnitude": 4.03
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "draco": {
+    "name": "Draco",
+    "center": {
+      "x": 1700,
+      "y": 300
+    },
+    "stars": [
+      {
+        "x": 1680,
+        "y": 280,
+        "name": "Eltanin",
+        "magnitude": 2.23
+      },
+      {
+        "x": 1700,
+        "y": 290,
+        "name": "Rastaban",
+        "magnitude": 2.79
+      },
+      {
+        "x": 1720,
+        "y": 300,
+        "name": "Thuban",
+        "magnitude": 3.65
+      },
+      {
+        "x": 1710,
+        "y": 320,
+        "name": "Edasich",
+        "magnitude": 3.29
+      },
+      {
+        "x": 1690,
+        "y": 310,
+        "name": "Eta Dra",
+        "magnitude": 2.74
+      },
+      {
+        "x": 1730,
+        "y": 330,
+        "name": "Aldhibah",
+        "magnitude": 3.17
+      },
+      {
+        "x": 1670,
+        "y": 300,
+        "name": "Kappa Dra",
+        "magnitude": 3.87
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "equuleus": {
+    "name": "Equuleus",
+    "center": {
+      "x": 2100,
+      "y": 900
+    },
+    "stars": [
+      {
+        "x": 2090,
+        "y": 890,
+        "name": "Kitalpha",
+        "magnitude": 3.92
+      },
+      {
+        "x": 2100,
+        "y": 895,
+        "name": "Delta Equ",
+        "magnitude": 4.49
+      },
+      {
+        "x": 2110,
+        "y": 900,
+        "name": "Gamma Equ",
+        "magnitude": 4.7
+      },
+      {
+        "x": 2105,
+        "y": 910,
+        "name": "Beta Equ",
+        "magnitude": 5.16
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "eridanus": {
+    "name": "Eridanus",
+    "center": {
+      "x": 400,
+      "y": 1300
+    },
+    "stars": [
+      {
+        "x": 380,
+        "y": 1280,
+        "name": "Achernar",
+        "magnitude": 0.46
+      },
+      {
+        "x": 400,
+        "y": 1290,
+        "name": "Cursa",
+        "magnitude": 2.79
+      },
+      {
+        "x": 420,
+        "y": 1300,
+        "name": "Zaurak",
+        "magnitude": 2.95
+      },
+      {
+        "x": 410,
+        "y": 1320,
+        "name": "Rana",
+        "magnitude": 3.54
+      },
+      {
+        "x": 390,
+        "y": 1310,
+        "name": "Acamar",
+        "magnitude": 2.91
+      },
+      {
+        "x": 430,
+        "y": 1330,
+        "name": "Azha",
+        "magnitude": 3.96
+      },
+      {
+        "x": 370,
+        "y": 1300,
+        "name": "Zibal",
+        "magnitude": 4.8
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "gemini": {
+    "name": "Gemini",
+    "zodiac": true,
+    "center": {
+      "x": 700,
+      "y": 700
+    },
+    "stars": [
+      {
+        "x": 680,
+        "y": 680,
+        "name": "Pollux",
+        "magnitude": 1.14
+      },
+      {
+        "x": 700,
+        "y": 690,
+        "name": "Castor",
+        "magnitude": 1.57
+      },
+      {
+        "x": 720,
+        "y": 700,
+        "name": "Alhena",
+        "magnitude": 1.93
+      },
+      {
+        "x": 710,
+        "y": 720,
+        "name": "Wasat",
+        "magnitude": 3.53
+      },
+      {
+        "x": 690,
+        "y": 710,
+        "name": "Mebsuta",
+        "magnitude": 3.06
+      },
+      {
+        "x": 730,
+        "y": 710,
+        "name": "Mekbuda",
+        "magnitude": 3.79
+      },
+      {
+        "x": 670,
+        "y": 700,
+        "name": "Propus",
+        "magnitude": 3.15
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        0,
+        6
+      ]
+    ]
+  },
+  "hercules": {
+    "name": "Hercules",
+    "center": {
+      "x": 1700,
+      "y": 700
+    },
+    "stars": [
+      {
+        "x": 1680,
+        "y": 680,
+        "name": "Rasalgethi",
+        "magnitude": 3.48
+      },
+      {
+        "x": 1700,
+        "y": 690,
+        "name": "Kornephoros",
+        "magnitude": 2.77
+      },
+      {
+        "x": 1720,
+        "y": 700,
+        "name": "Zeta Her",
+        "magnitude": 2.89
+      },
+      {
+        "x": 1710,
+        "y": 720,
+        "name": "Eta Her",
+        "magnitude": 3.53
+      },
+      {
+        "x": 1690,
+        "y": 710,
+        "name": "Pi Her",
+        "magnitude": 3.15
+      },
+      {
+        "x": 1730,
+        "y": 710,
+        "name": "Sarin",
+        "magnitude": 3.14
+      },
+      {
+        "x": 1670,
+        "y": 700,
+        "name": "Mu Her",
+        "magnitude": 3.42
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "hydra": {
+    "name": "Hydra",
+    "center": {
+      "x": 1000,
+      "y": 1100
+    },
+    "stars": [
+      {
+        "x": 980,
+        "y": 1080,
+        "name": "Alphard",
+        "magnitude": 1.98
+      },
+      {
+        "x": 1000,
+        "y": 1090,
+        "name": "Gamma Hya",
+        "magnitude": 3
+      },
+      {
+        "x": 1020,
+        "y": 1100,
+        "name": "Zeta Hya",
+        "magnitude": 3.11
+      },
+      {
+        "x": 1010,
+        "y": 1120,
+        "name": "Nu Hya",
+        "magnitude": 3.11
+      },
+      {
+        "x": 990,
+        "y": 1110,
+        "name": "Pi Hya",
+        "magnitude": 3.27
+      },
+      {
+        "x": 1030,
+        "y": 1110,
+        "name": "Epsilon Hya",
+        "magnitude": 3.38
+      },
+      {
+        "x": 970,
+        "y": 1100,
+        "name": "Sigma Hya",
+        "magnitude": 4.44
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        0,
+        6
+      ]
+    ]
+  },
+  "lacerta": {
+    "name": "Lacerta",
+    "center": {
+      "x": 2200,
+      "y": 450
+    },
+    "stars": [
+      {
+        "x": 2180,
+        "y": 440,
+        "name": "Alpha Lac",
+        "magnitude": 3.77
+      },
+      {
+        "x": 2200,
+        "y": 445,
+        "name": "Beta Lac",
+        "magnitude": 4.43
+      },
+      {
+        "x": 2220,
+        "y": 450,
+        "name": "4 Lac",
+        "magnitude": 4.57
+      },
+      {
+        "x": 2210,
+        "y": 460,
+        "name": "5 Lac",
+        "magnitude": 4.36
+      },
+      {
+        "x": 2190,
+        "y": 455,
+        "name": "2 Lac",
+        "magnitude": 4.55
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "leo": {
+    "name": "Leo",
+    "zodiac": true,
+    "center": {
+      "x": 1000,
+      "y": 800
+    },
+    "stars": [
+      {
+        "x": 980,
+        "y": 780,
+        "name": "Regulus",
+        "magnitude": 1.35
+      },
+      {
+        "x": 1000,
+        "y": 790,
+        "name": "Denebola",
+        "magnitude": 2.14
+      },
+      {
+        "x": 1020,
+        "y": 800,
+        "name": "Algieba",
+        "magnitude": 2.28
+      },
+      {
+        "x": 1010,
+        "y": 820,
+        "name": "Zosma",
+        "magnitude": 2.56
+      },
+      {
+        "x": 990,
+        "y": 810,
+        "name": "Ras Elased",
+        "magnitude": 2.98
+      },
+      {
+        "x": 1030,
+        "y": 810,
+        "name": "Adhafera",
+        "magnitude": 3.44
+      },
+      {
+        "x": 970,
+        "y": 800,
+        "name": "Eta Leo",
+        "magnitude": 3.52
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "leo_minor": {
+    "name": "Leo Minor",
+    "center": {
+      "x": 1050,
+      "y": 750
+    },
+    "stars": [
+      {
+        "x": 1040,
+        "y": 740,
+        "name": "Praecipua",
+        "magnitude": 3.83
+      },
+      {
+        "x": 1050,
+        "y": 745,
+        "name": "Beta LMi",
+        "magnitude": 4.21
+      },
+      {
+        "x": 1060,
+        "y": 750,
+        "name": "21 LMi",
+        "magnitude": 4.48
+      },
+      {
+        "x": 1055,
+        "y": 760,
+        "name": "10 LMi",
+        "magnitude": 4.55
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "lepus": {
+    "name": "Lepus",
+    "center": {
+      "x": 550,
+      "y": 1200
+    },
+    "stars": [
+      {
+        "x": 540,
+        "y": 1180,
+        "name": "Arneb",
+        "magnitude": 2.58
+      },
+      {
+        "x": 550,
+        "y": 1190,
+        "name": "Nihal",
+        "magnitude": 2.84
+      },
+      {
+        "x": 560,
+        "y": 1200,
+        "name": "Epsilon Lep",
+        "magnitude": 3.19
+      },
+      {
+        "x": 555,
+        "y": 1220,
+        "name": "Mu Lep",
+        "magnitude": 3.31
+      },
+      {
+        "x": 545,
+        "y": 1210,
+        "name": "Zeta Lep",
+        "magnitude": 3.55
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "libra": {
+    "name": "Libra",
+    "zodiac": true,
+    "center": {
+      "x": 1500,
+      "y": 1000
+    },
+    "stars": [
+      {
+        "x": 1480,
+        "y": 980,
+        "name": "Zubenelgenubi",
+        "magnitude": 2.61
+      },
+      {
+        "x": 1500,
+        "y": 990,
+        "name": "Zubeneschamali",
+        "magnitude": 2.75
+      },
+      {
+        "x": 1520,
+        "y": 1000,
+        "name": "Zubenelhakrabi",
+        "magnitude": 3.91
+      },
+      {
+        "x": 1510,
+        "y": 1020,
+        "name": "Theta Lib",
+        "magnitude": 4.15
+      },
+      {
+        "x": 1490,
+        "y": 1010,
+        "name": "Iota Lib",
+        "magnitude": 4.54
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "lynx": {
+    "name": "Lynx",
+    "center": {
+      "x": 900,
+      "y": 500
+    },
+    "stars": [
+      {
+        "x": 880,
+        "y": 490,
+        "name": "Alpha Lyn",
+        "magnitude": 3.13
+      },
+      {
+        "x": 900,
+        "y": 495,
+        "name": "38 Lyn",
+        "magnitude": 3.82
+      },
+      {
+        "x": 920,
+        "y": 500,
+        "name": "31 Lyn",
+        "magnitude": 4.25
+      },
+      {
+        "x": 910,
+        "y": 510,
+        "name": "21 Lyn",
+        "magnitude": 4.64
+      },
+      {
+        "x": 890,
+        "y": 505,
+        "name": "15 Lyn",
+        "magnitude": 4.35
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "lyra": {
+    "name": "Lyra",
+    "center": {
+      "x": 1850,
+      "y": 500
+    },
+    "stars": [
+      {
+        "x": 1850,
+        "y": 480,
+        "name": "Vega",
+        "magnitude": 0.03
+      },
+      {
+        "x": 1835,
+        "y": 500,
+        "name": "Sheliak",
+        "magnitude": 3.45
+      },
+      {
+        "x": 1865,
+        "y": 505,
+        "name": "Sulafat",
+        "magnitude": 3.24
+      },
+      {
+        "x": 1855,
+        "y": 520,
+        "name": "Delta Lyr",
+        "magnitude": 4.3
+      },
+      {
+        "x": 1845,
+        "y": 515,
+        "name": "Epsilon Lyr",
+        "magnitude": 4.67
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        1,
+        4
+      ]
+    ]
+  },
+  "monoceros": {
+    "name": "Monoceros",
+    "center": {
+      "x": 750,
+      "y": 1000
+    },
+    "stars": [
+      {
+        "x": 740,
+        "y": 980,
+        "name": "Beta Mon",
+        "magnitude": 3.74
+      },
+      {
+        "x": 750,
+        "y": 990,
+        "name": "Gamma Mon",
+        "magnitude": 3.98
+      },
+      {
+        "x": 760,
+        "y": 1000,
+        "name": "Delta Mon",
+        "magnitude": 4.15
+      },
+      {
+        "x": 755,
+        "y": 1020,
+        "name": "Epsilon Mon",
+        "magnitude": 4.44
+      },
+      {
+        "x": 745,
+        "y": 1010,
+        "name": "Zeta Mon",
+        "magnitude": 4.34
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "ophiuchus": {
+    "name": "Ophiuchus",
+    "center": {
+      "x": 1700,
+      "y": 900
+    },
+    "stars": [
+      {
+        "x": 1680,
+        "y": 880,
+        "name": "Rasalhague",
+        "magnitude": 2.08
+      },
+      {
+        "x": 1700,
+        "y": 890,
+        "name": "Cebalrai",
+        "magnitude": 2.77
+      },
+      {
+        "x": 1720,
+        "y": 900,
+        "name": "Yed Prior",
+        "magnitude": 2.74
+      },
+      {
+        "x": 1710,
+        "y": 920,
+        "name": "Yed Posterior",
+        "magnitude": 3.24
+      },
+      {
+        "x": 1690,
+        "y": 910,
+        "name": "Sabik",
+        "magnitude": 2.43
+      },
+      {
+        "x": 1730,
+        "y": 910,
+        "name": "Marfik",
+        "magnitude": 3.54
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        2,
+        5
+      ]
+    ]
+  },
+  "orion": {
+    "name": "Orion",
+    "center": {
+      "x": 600,
+      "y": 1000
+    },
+    "stars": [
+      {
+        "x": 580,
+        "y": 970,
+        "name": "Betelgeuse",
+        "magnitude": 0.42
+      },
+      {
+        "x": 620,
+        "y": 970,
+        "name": "Bellatrix",
+        "magnitude": 1.64
+      },
+      {
+        "x": 580,
+        "y": 1030,
+        "name": "Rigel",
+        "magnitude": 0.13
+      },
+      {
+        "x": 620,
+        "y": 1030,
+        "name": "Saiph",
+        "magnitude": 2.06
+      },
+      {
+        "x": 595,
+        "y": 1000,
+        "name": "Alnitak",
+        "magnitude": 1.77
+      },
+      {
+        "x": 600,
+        "y": 1000,
+        "name": "Alnilam",
+        "magnitude": 1.7
+      },
+      {
+        "x": 605,
+        "y": 1000,
+        "name": "Mintaka",
+        "magnitude": 2.23
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        1,
+        6
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        5
+      ]
+    ]
+  },
+  "pegasus": {
+    "name": "Pegasus",
+    "center": {
+      "x": 2300,
+      "y": 600
+    },
+    "stars": [
+      {
+        "x": 2280,
+        "y": 580,
+        "name": "Enif",
+        "magnitude": 2.4
+      },
+      {
+        "x": 2300,
+        "y": 590,
+        "name": "Scheat",
+        "magnitude": 2.42
+      },
+      {
+        "x": 2320,
+        "y": 600,
+        "name": "Markab",
+        "magnitude": 2.49
+      },
+      {
+        "x": 2310,
+        "y": 620,
+        "name": "Algenib",
+        "magnitude": 2.84
+      },
+      {
+        "x": 2290,
+        "y": 610,
+        "name": "Homam",
+        "magnitude": 3.41
+      },
+      {
+        "x": 2330,
+        "y": 610,
+        "name": "Matar",
+        "magnitude": 2.94
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        2,
+        5
+      ]
+    ]
+  },
+  "perseus": {
+    "name": "Perseus",
+    "center": {
+      "x": 350,
+      "y": 400
+    },
+    "stars": [
+      {
+        "x": 340,
+        "y": 380,
+        "name": "Mirfak",
+        "magnitude": 1.8
+      },
+      {
+        "x": 350,
+        "y": 390,
+        "name": "Algol",
+        "magnitude": 2.12
+      },
+      {
+        "x": 360,
+        "y": 400,
+        "name": "Gamma Per",
+        "magnitude": 2.93
+      },
+      {
+        "x": 355,
+        "y": 420,
+        "name": "Delta Per",
+        "magnitude": 3.01
+      },
+      {
+        "x": 345,
+        "y": 410,
+        "name": "Epsilon Per",
+        "magnitude": 2.89
+      },
+      {
+        "x": 365,
+        "y": 415,
+        "name": "Zeta Per",
+        "magnitude": 2.85
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        2,
+        5
+      ]
+    ]
+  },
+  "pisces": {
+    "name": "Pisces",
+    "zodiac": true,
+    "center": {
+      "x": 100,
+      "y": 900
+    },
+    "stars": [
+      {
+        "x": 80,
+        "y": 880,
+        "name": "Alpherg",
+        "magnitude": 3.79
+      },
+      {
+        "x": 100,
+        "y": 890,
+        "name": "Gamma Psc",
+        "magnitude": 3.69
+      },
+      {
+        "x": 120,
+        "y": 900,
+        "name": "Kappa Psc",
+        "magnitude": 4.94
+      },
+      {
+        "x": 110,
+        "y": 920,
+        "name": "Lambda Psc",
+        "magnitude": 4.5
+      },
+      {
+        "x": 90,
+        "y": 910,
+        "name": "Iota Psc",
+        "magnitude": 4.13
+      },
+      {
+        "x": 105,
+        "y": 895,
+        "name": "Omega Psc",
+        "magnitude": 4.01
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        1,
+        5
+      ]
+    ]
+  },
+  "piscis_austrinus": {
+    "name": "Piscis Austrinus",
+    "center": {
+      "x": 2200,
+      "y": 1300
+    },
+    "stars": [
+      {
+        "x": 2200,
+        "y": 1280,
+        "name": "Fomalhaut",
+        "magnitude": 1.16
+      },
+      {
+        "x": 2180,
+        "y": 1300,
+        "name": "Epsilon PsA",
+        "magnitude": 4.17
+      },
+      {
+        "x": 2220,
+        "y": 1310,
+        "name": "Delta PsA",
+        "magnitude": 4.2
+      },
+      {
+        "x": 2210,
+        "y": 1320,
+        "name": "Beta PsA",
+        "magnitude": 4.29
+      },
+      {
+        "x": 2190,
+        "y": 1315,
+        "name": "Gamma PsA",
+        "magnitude": 4.46
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  },
+  "sagitta": {
+    "name": "Sagitta",
+    "zodiac": true,
+    "center": {
+      "x": 1950,
+      "y": 800
+    },
+    "stars": [
+      {
+        "x": 1940,
+        "y": 795,
+        "name": "Gamma Sge",
+        "magnitude": 3.47
+      },
+      {
+        "x": 1950,
+        "y": 800,
+        "name": "Delta Sge",
+        "magnitude": 3.82
+      },
+      {
+        "x": 1960,
+        "y": 805,
+        "name": "Alpha Sge",
+        "magnitude": 4.37
+      },
+      {
+        "x": 1955,
+        "y": 790,
+        "name": "Beta Sge",
+        "magnitude": 4.37
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "sagittarius": {
+    "name": "Sagittarius",
+    "center": {
+      "x": 1900,
+      "y": 1200
+    },
+    "stars": [
+      {
+        "x": 1880,
+        "y": 1180,
+        "name": "Kaus Australis",
+        "magnitude": 1.85
+      },
+      {
+        "x": 1900,
+        "y": 1190,
+        "name": "Nunki",
+        "magnitude": 2.02
+      },
+      {
+        "x": 1920,
+        "y": 1200,
+        "name": "Ascella",
+        "magnitude": 2.6
+      },
+      {
+        "x": 1910,
+        "y": 1220,
+        "name": "Kaus Media",
+        "magnitude": 2.7
+      },
+      {
+        "x": 1890,
+        "y": 1210,
+        "name": "Kaus Borealis",
+        "magnitude": 2.81
+      },
+      {
+        "x": 1930,
+        "y": 1210,
+        "name": "Phi Sgr",
+        "magnitude": 3.17
+      },
+      {
+        "x": 1870,
+        "y": 1200,
+        "name": "Alnasl",
+        "magnitude": 2.99
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "scorpius": {
+    "zodiac": true,
+    "name": "Scorpius",
+    "center": {
+      "x": 1600,
+      "y": 1200
+    },
+    "stars": [
+      {
+        "x": 1600,
+        "y": 1180,
+        "name": "Antares",
+        "magnitude": 1.03
+      },
+      {
+        "x": 1580,
+        "y": 1190,
+        "name": "Graffias",
+        "magnitude": 2.62
+      },
+      {
+        "x": 1620,
+        "y": 1195,
+        "name": "Dschubba",
+        "magnitude": 2.32
+      },
+      {
+        "x": 1610,
+        "y": 1210,
+        "name": "Sargas",
+        "magnitude": 1.63
+      },
+      {
+        "x": 1590,
+        "y": 1220,
+        "name": "Shaula",
+        "magnitude": 1.63
+      },
+      {
+        "x": 1630,
+        "y": 1215,
+        "name": "Lesath",
+        "magnitude": 2.69
+      },
+      {
+        "x": 1570,
+        "y": 1205,
+        "name": "Wei",
+        "magnitude": 2.89
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        1,
+        6
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "scutum": {
+    "name": "Scutum",
+    "center": {
+      "x": 1850,
+      "y": 1100
+    },
+    "stars": [
+      {
+        "x": 1840,
+        "y": 1090,
+        "name": "Alpha Sct",
+        "magnitude": 3.85
+      },
+      {
+        "x": 1850,
+        "y": 1095,
+        "name": "Beta Sct",
+        "magnitude": 4.22
+      },
+      {
+        "x": 1860,
+        "y": 1100,
+        "name": "Gamma Sct",
+        "magnitude": 4.7
+      },
+      {
+        "x": 1855,
+        "y": 1110,
+        "name": "Delta Sct",
+        "magnitude": 4.72
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "serpens": {
+    "name": "Serpens",
+    "zodiac": true,
+    "center": {
+      "x": 1550,
+      "y": 900
+    },
+    "stars": [
+      {
+        "x": 1530,
+        "y": 880,
+        "name": "Unukalhai",
+        "magnitude": 2.65
+      },
+      {
+        "x": 1550,
+        "y": 890,
+        "name": "Beta Ser",
+        "magnitude": 3.67
+      },
+      {
+        "x": 1570,
+        "y": 900,
+        "name": "Gamma Ser",
+        "magnitude": 3.85
+      },
+      {
+        "x": 1560,
+        "y": 920,
+        "name": "Delta Ser",
+        "magnitude": 4.23
+      },
+      {
+        "x": 1540,
+        "y": 910,
+        "name": "Epsilon Ser",
+        "magnitude": 3.71
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "taurus": {
+    "name": "Taurus",
+    "zodiac": true,
+    "center": {
+      "x": 450,
+      "y": 600
+    },
+    "stars": [
+      {
+        "x": 450,
+        "y": 580,
+        "name": "Aldebaran",
+        "magnitude": 0.85
+      },
+      {
+        "x": 430,
+        "y": 600,
+        "name": "Elnath",
+        "magnitude": 1.68
+      },
+      {
+        "x": 470,
+        "y": 610,
+        "name": "Alcyone",
+        "magnitude": 2.87
+      },
+      {
+        "x": 460,
+        "y": 590,
+        "name": "Tianguan",
+        "magnitude": 3
+      },
+      {
+        "x": 440,
+        "y": 620,
+        "name": "Hyadum I",
+        "magnitude": 3.54
+      },
+      {
+        "x": 480,
+        "y": 615,
+        "name": "Atlas",
+        "magnitude": 3.63
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ]
+    ]
+  },
+  "triangulum": {
+    "name": "Triangulum",
+    "center": {
+      "x": 250,
+      "y": 350
+    },
+    "stars": [
+      {
+        "x": 240,
+        "y": 340,
+        "name": "Beta Tri",
+        "magnitude": 3
+      },
+      {
+        "x": 250,
+        "y": 350,
+        "name": "Alpha Tri",
+        "magnitude": 3.41
+      },
+      {
+        "x": 260,
+        "y": 360,
+        "name": "Gamma Tri",
+        "magnitude": 4.01
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ]
+  },
+  "ursa_major": {
+    "name": "Ursa Major",
+    "center": {
+      "x": 1200,
+      "y": 400
+    },
+    "stars": [
+      {
+        "x": 1150,
+        "y": 390,
+        "name": "Dubhe",
+        "magnitude": 1.79
+      },
+      {
+        "x": 1180,
+        "y": 395,
+        "name": "Merak",
+        "magnitude": 2.37
+      },
+      {
+        "x": 1210,
+        "y": 400,
+        "name": "Phecda",
+        "magnitude": 2.44
+      },
+      {
+        "x": 1240,
+        "y": 405,
+        "name": "Megrez",
+        "magnitude": 3.31
+      },
+      {
+        "x": 1270,
+        "y": 410,
+        "name": "Alioth",
+        "magnitude": 1.77
+      },
+      {
+        "x": 1300,
+        "y": 415,
+        "name": "Mizar",
+        "magnitude": 2.27
+      },
+      {
+        "x": 1290,
+        "y": 380,
+        "name": "Alkaid",
+        "magnitude": 1.86
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        3,
+        6
+      ]
+    ]
+  },
+  "ursa_minor": {
+    "name": "Ursa Minor",
+    "center": {
+      "x": 1400,
+      "y": 200
+    },
+    "stars": [
+      {
+        "x": 1400,
+        "y": 180,
+        "name": "Polaris",
+        "magnitude": 1.98
+      },
+      {
+        "x": 1380,
+        "y": 195,
+        "name": "Kochab",
+        "magnitude": 2.08
+      },
+      {
+        "x": 1420,
+        "y": 200,
+        "name": "Pherkad",
+        "magnitude": 3.05
+      },
+      {
+        "x": 1410,
+        "y": 210,
+        "name": "Eta UMi",
+        "magnitude": 4.95
+      },
+      {
+        "x": 1390,
+        "y": 205,
+        "name": "Zeta UMi",
+        "magnitude": 4.32
+      },
+      {
+        "x": 1430,
+        "y": 190,
+        "name": "Delta UMi",
+        "magnitude": 4.36
+      },
+      {
+        "x": 1385,
+        "y": 215,
+        "name": "Epsilon UMi",
+        "magnitude": 4.23
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        4,
+        6
+      ]
+    ]
+  },
+  "virgo": {
+    "name": "Virgo",
+    "zodiac": true,
+    "center": {
+      "x": 1300,
+      "y": 1000
+    },
+    "stars": [
+      {
+        "x": 1300,
+        "y": 980,
+        "name": "Spica",
+        "magnitude": 0.97
+      },
+      {
+        "x": 1280,
+        "y": 990,
+        "name": "Zavijava",
+        "magnitude": 3.61
+      },
+      {
+        "x": 1320,
+        "y": 995,
+        "name": "Porrima",
+        "magnitude": 2.74
+      },
+      {
+        "x": 1310,
+        "y": 1010,
+        "name": "Vindemiatrix",
+        "magnitude": 2.83
+      },
+      {
+        "x": 1290,
+        "y": 1020,
+        "name": "Heze",
+        "magnitude": 3.37
+      },
+      {
+        "x": 1330,
+        "y": 1005,
+        "name": "Zaniah",
+        "magnitude": 3.89
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  },
+  "vulpecula": {
+    "name": "Vulpecula",
+    "center": {
+      "x": 2000,
+      "y": 600
+    },
+    "stars": [
+      {
+        "x": 1990,
+        "y": 590,
+        "name": "Anser",
+        "magnitude": 4.44
+      },
+      {
+        "x": 2000,
+        "y": 595,
+        "name": "23 Vul",
+        "magnitude": 4.52
+      },
+      {
+        "x": 2010,
+        "y": 600,
+        "name": "31 Vul",
+        "magnitude": 4.59
+      },
+      {
+        "x": 2005,
+        "y": 610,
+        "name": "32 Vul",
+        "magnitude": 5.01
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "antlia": {
+    "name": "Antlia",
+    "center": {
+      "x": 1000,
+      "y": 1400
+    },
+    "stars": [
+      {
+        "x": 990,
+        "y": 1390,
+        "name": "Alpha Ant",
+        "magnitude": 4.25
+      },
+      {
+        "x": 1000,
+        "y": 1395,
+        "name": "Epsilon Ant",
+        "magnitude": 4.51
+      },
+      {
+        "x": 1010,
+        "y": 1400,
+        "name": "Iota Ant",
+        "magnitude": 4.6
+      },
+      {
+        "x": 1005,
+        "y": 1410,
+        "name": "Theta Ant",
+        "magnitude": 4.79
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "apus": {
+    "name": "Apus",
+    "center": {
+      "x": 1600,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 1590,
+        "y": 1590,
+        "name": "Alpha Aps",
+        "magnitude": 3.83
+      },
+      {
+        "x": 1600,
+        "y": 1595,
+        "name": "Gamma Aps",
+        "magnitude": 3.89
+      },
+      {
+        "x": 1610,
+        "y": 1600,
+        "name": "Beta Aps",
+        "magnitude": 4.24
+      },
+      {
+        "x": 1605,
+        "y": 1610,
+        "name": "Delta Aps",
+        "magnitude": 4.68
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "ara": {
+    "name": "Ara",
+    "center": {
+      "x": 1700,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 1680,
+        "y": 1480,
+        "name": "Alpha Ara",
+        "magnitude": 2.95
+      },
+      {
+        "x": 1700,
+        "y": 1490,
+        "name": "Beta Ara",
+        "magnitude": 2.85
+      },
+      {
+        "x": 1720,
+        "y": 1500,
+        "name": "Gamma Ara",
+        "magnitude": 3.34
+      },
+      {
+        "x": 1710,
+        "y": 1520,
+        "name": "Zeta Ara",
+        "magnitude": 3.13
+      },
+      {
+        "x": 1690,
+        "y": 1510,
+        "name": "Delta Ara",
+        "magnitude": 3.62
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "caelum": {
+    "name": "Caelum",
+    "center": {
+      "x": 500,
+      "y": 1400
+    },
+    "stars": [
+      {
+        "x": 490,
+        "y": 1390,
+        "name": "Alpha Cae",
+        "magnitude": 4.45
+      },
+      {
+        "x": 500,
+        "y": 1395,
+        "name": "Beta Cae",
+        "magnitude": 5.05
+      },
+      {
+        "x": 510,
+        "y": 1400,
+        "name": "Gamma Cae",
+        "magnitude": 4.55
+      },
+      {
+        "x": 505,
+        "y": 1410,
+        "name": "Delta Cae",
+        "magnitude": 5.07
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "camelopardalis": {
+    "name": "Camelopardalis",
+    "center": {
+      "x": 500,
+      "y": 200
+    },
+    "stars": [
+      {
+        "x": 480,
+        "y": 180,
+        "name": "Beta Cam",
+        "magnitude": 4.03
+      },
+      {
+        "x": 500,
+        "y": 190,
+        "name": "Alpha Cam",
+        "magnitude": 4.29
+      },
+      {
+        "x": 520,
+        "y": 200,
+        "name": "Gamma Cam",
+        "magnitude": 4.63
+      },
+      {
+        "x": 510,
+        "y": 220,
+        "name": "7 Cam",
+        "magnitude": 4.47
+      },
+      {
+        "x": 490,
+        "y": 210,
+        "name": "BE Cam",
+        "magnitude": 4.39
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "cancer": {
+    "name": "Cancer",
+    "zodiac": true,
+    "center": {
+      "x": 850,
+      "y": 700
+    },
+    "stars": [
+      {
+        "x": 830,
+        "y": 680,
+        "name": "Tarf",
+        "magnitude": 3.52
+      },
+      {
+        "x": 850,
+        "y": 690,
+        "name": "Asellus Australis",
+        "magnitude": 3.94
+      },
+      {
+        "x": 870,
+        "y": 700,
+        "name": "Asellus Borealis",
+        "magnitude": 4.67
+      },
+      {
+        "x": 860,
+        "y": 720,
+        "name": "Acubens",
+        "magnitude": 4.25
+      },
+      {
+        "x": 840,
+        "y": 710,
+        "name": "Iota Cnc",
+        "magnitude": 4.02
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "canes_venatici": {
+    "name": "Canes Venatici",
+    "center": {
+      "x": 1300,
+      "y": 500
+    },
+    "stars": [
+      {
+        "x": 1300,
+        "y": 490,
+        "name": "Cor Caroli",
+        "magnitude": 2.9
+      },
+      {
+        "x": 1320,
+        "y": 510,
+        "name": "Chara",
+        "magnitude": 4.26
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "carina": {
+    "name": "Carina",
+    "center": {
+      "x": 900,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 900,
+        "y": 1580,
+        "name": "Canopus",
+        "magnitude": -0.74
+      },
+      {
+        "x": 880,
+        "y": 1590,
+        "name": "Miaplacidus",
+        "magnitude": 1.68
+      },
+      {
+        "x": 920,
+        "y": 1595,
+        "name": "Avior",
+        "magnitude": 1.86
+      },
+      {
+        "x": 910,
+        "y": 1610,
+        "name": "Aspidiske",
+        "magnitude": 2.25
+      },
+      {
+        "x": 890,
+        "y": 1620,
+        "name": "Theta Car",
+        "magnitude": 2.76
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ]
+    ]
+  },
+  "centaurus": {
+    "name": "Centaurus",
+    "center": {
+      "x": 1300,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 1280,
+        "y": 1480,
+        "name": "Alpha Centauri",
+        "magnitude": -0.27
+      },
+      {
+        "x": 1300,
+        "y": 1490,
+        "name": "Hadar",
+        "magnitude": 0.61
+      },
+      {
+        "x": 1320,
+        "y": 1500,
+        "name": "Menkent",
+        "magnitude": 2.06
+      },
+      {
+        "x": 1310,
+        "y": 1520,
+        "name": "Gamma Cen",
+        "magnitude": 2.17
+      },
+      {
+        "x": 1290,
+        "y": 1510,
+        "name": "Epsilon Cen",
+        "magnitude": 2.3
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "chamaeleon": {
+    "name": "Chamaeleon",
+    "center": {
+      "x": 1100,
+      "y": 1700
+    },
+    "stars": [
+      {
+        "x": 1080,
+        "y": 1680,
+        "name": "Alpha Cha",
+        "magnitude": 4.07
+      },
+      {
+        "x": 1100,
+        "y": 1690,
+        "name": "Gamma Cha",
+        "magnitude": 4.11
+      },
+      {
+        "x": 1120,
+        "y": 1700,
+        "name": "Beta Cha",
+        "magnitude": 4.26
+      },
+      {
+        "x": 1110,
+        "y": 1720,
+        "name": "Delta Cha",
+        "magnitude": 4.45
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "circinus": {
+    "name": "Circinus",
+    "center": {
+      "x": 1500,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 1490,
+        "y": 1590,
+        "name": "Alpha Cir",
+        "magnitude": 3.19
+      },
+      {
+        "x": 1500,
+        "y": 1595,
+        "name": "Beta Cir",
+        "magnitude": 4.07
+      },
+      {
+        "x": 1510,
+        "y": 1600,
+        "name": "Gamma Cir",
+        "magnitude": 4.51
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ]
+  },
+  "columba": {
+    "name": "Columba",
+    "center": {
+      "x": 600,
+      "y": 1350
+    },
+    "stars": [
+      {
+        "x": 590,
+        "y": 1330,
+        "name": "Phact",
+        "magnitude": 2.6
+      },
+      {
+        "x": 600,
+        "y": 1340,
+        "name": "Wazn",
+        "magnitude": 3.12
+      },
+      {
+        "x": 610,
+        "y": 1350,
+        "name": "Gamma Col",
+        "magnitude": 4.36
+      },
+      {
+        "x": 605,
+        "y": 1370,
+        "name": "Delta Col",
+        "magnitude": 3.85
+      },
+      {
+        "x": 595,
+        "y": 1360,
+        "name": "Epsilon Col",
+        "magnitude": 3.87
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "coma_berenices": {
+    "name": "Coma Berenices",
+    "center": {
+      "x": 1250,
+      "y": 700
+    },
+    "stars": [
+      {
+        "x": 1240,
+        "y": 690,
+        "name": "Diadem",
+        "magnitude": 4.26
+      },
+      {
+        "x": 1250,
+        "y": 695,
+        "name": "Beta Com",
+        "magnitude": 4.26
+      },
+      {
+        "x": 1260,
+        "y": 700,
+        "name": "Gamma Com",
+        "magnitude": 4.35
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "corona_australis": {
+    "name": "Corona Australis",
+    "center": {
+      "x": 1900,
+      "y": 1400
+    },
+    "stars": [
+      {
+        "x": 1885,
+        "y": 1390,
+        "name": "Alphekka Meridiana",
+        "magnitude": 4.11
+      },
+      {
+        "x": 1895,
+        "y": 1395,
+        "name": "Beta CrA",
+        "magnitude": 4.12
+      },
+      {
+        "x": 1905,
+        "y": 1400,
+        "name": "Gamma CrA",
+        "magnitude": 4.21
+      },
+      {
+        "x": 1910,
+        "y": 1410,
+        "name": "Delta CrA",
+        "magnitude": 4.59
+      },
+      {
+        "x": 1900,
+        "y": 1415,
+        "name": "Theta CrA",
+        "magnitude": 4.62
+      },
+      {
+        "x": 1890,
+        "y": 1410,
+        "name": "Zeta CrA",
+        "magnitude": 4.75
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ]
+  },
+  "crux": {
+    "name": "Crux",
+    "center": {
+      "x": 1200,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 1190,
+        "y": 1590,
+        "name": "Acrux",
+        "magnitude": 0.76
+      },
+      {
+        "x": 1210,
+        "y": 1590,
+        "name": "Gacrux",
+        "magnitude": 1.64
+      },
+      {
+        "x": 1200,
+        "y": 1610,
+        "name": "Becrux",
+        "magnitude": 1.25
+      },
+      {
+        "x": 1200,
+        "y": 1580,
+        "name": "Delta Cru",
+        "magnitude": 2.8
+      },
+      {
+        "x": 1205,
+        "y": 1600,
+        "name": "Epsilon Cru",
+        "magnitude": 3.58
+      }
+    ],
+    "lines": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        2,
+        4
+      ]
+    ]
+  },
+  "dorado": {
+    "name": "Dorado",
+    "center": {
+      "x": 500,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 490,
+        "y": 1580,
+        "name": "Alpha Dor",
+        "magnitude": 3.27
+      },
+      {
+        "x": 500,
+        "y": 1590,
+        "name": "Beta Dor",
+        "magnitude": 3.46
+      },
+      {
+        "x": 510,
+        "y": 1600,
+        "name": "Gamma Dor",
+        "magnitude": 4.25
+      },
+      {
+        "x": 505,
+        "y": 1620,
+        "name": "Delta Dor",
+        "magnitude": 4.35
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "fornax": {
+    "name": "Fornax",
+    "center": {
+      "x": 300,
+      "y": 1300
+    },
+    "stars": [
+      {
+        "x": 290,
+        "y": 1290,
+        "name": "Dalim",
+        "magnitude": 3.87
+      },
+      {
+        "x": 300,
+        "y": 1295,
+        "name": "Beta For",
+        "magnitude": 4.46
+      },
+      {
+        "x": 310,
+        "y": 1300,
+        "name": "Nu For",
+        "magnitude": 4.96
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "grus": {
+    "name": "Grus",
+    "center": {
+      "x": 2200,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 2180,
+        "y": 1480,
+        "name": "Alnair",
+        "magnitude": 1.74
+      },
+      {
+        "x": 2200,
+        "y": 1490,
+        "name": "Gruid",
+        "magnitude": 2.11
+      },
+      {
+        "x": 2220,
+        "y": 1500,
+        "name": "Gamma Gru",
+        "magnitude": 3.01
+      },
+      {
+        "x": 2210,
+        "y": 1520,
+        "name": "Delta Gru",
+        "magnitude": 3.97
+      },
+      {
+        "x": 2190,
+        "y": 1510,
+        "name": "Epsilon Gru",
+        "magnitude": 3.51
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "horologium": {
+    "name": "Horologium",
+    "center": {
+      "x": 400,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 390,
+        "y": 1490,
+        "name": "Alpha Hor",
+        "magnitude": 3.86
+      },
+      {
+        "x": 400,
+        "y": 1495,
+        "name": "Beta Hor",
+        "magnitude": 4.98
+      },
+      {
+        "x": 410,
+        "y": 1500,
+        "name": "Gamma Hor",
+        "magnitude": 5.35
+      },
+      {
+        "x": 405,
+        "y": 1510,
+        "name": "Delta Hor",
+        "magnitude": 4.93
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "hydrus": {
+    "name": "Hydrus",
+    "center": {
+      "x": 200,
+      "y": 1700
+    },
+    "stars": [
+      {
+        "x": 190,
+        "y": 1680,
+        "name": "Beta Hyi",
+        "magnitude": 2.8
+      },
+      {
+        "x": 200,
+        "y": 1690,
+        "name": "Alpha Hyi",
+        "magnitude": 2.86
+      },
+      {
+        "x": 210,
+        "y": 1700,
+        "name": "Gamma Hyi",
+        "magnitude": 3.24
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ]
+  },
+  "indus": {
+    "name": "Indus",
+    "center": {
+      "x": 2100,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 2090,
+        "y": 1590,
+        "name": "Persian",
+        "magnitude": 3.11
+      },
+      {
+        "x": 2100,
+        "y": 1595,
+        "name": "Beta Ind",
+        "magnitude": 3.65
+      },
+      {
+        "x": 2110,
+        "y": 1600,
+        "name": "Theta Ind",
+        "magnitude": 4.39
+      },
+      {
+        "x": 2105,
+        "y": 1610,
+        "name": "Delta Ind",
+        "magnitude": 4.4
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "mensa": {
+    "name": "Mensa",
+    "center": {
+      "x": 600,
+      "y": 1700
+    },
+    "stars": [
+      {
+        "x": 590,
+        "y": 1690,
+        "name": "Alpha Men",
+        "magnitude": 5.09
+      },
+      {
+        "x": 600,
+        "y": 1695,
+        "name": "Gamma Men",
+        "magnitude": 5.18
+      },
+      {
+        "x": 610,
+        "y": 1700,
+        "name": "Beta Men",
+        "magnitude": 5.31
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "microscopium": {
+    "name": "Microscopium",
+    "center": {
+      "x": 2100,
+      "y": 1350
+    },
+    "stars": [
+      {
+        "x": 2090,
+        "y": 1340,
+        "name": "Gamma Mic",
+        "magnitude": 4.67
+      },
+      {
+        "x": 2100,
+        "y": 1345,
+        "name": "Epsilon Mic",
+        "magnitude": 4.71
+      },
+      {
+        "x": 2110,
+        "y": 1350,
+        "name": "Alpha Mic",
+        "magnitude": 4.88
+      },
+      {
+        "x": 2105,
+        "y": 1360,
+        "name": "Theta Mic",
+        "magnitude": 4.82
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "musca": {
+    "name": "Musca",
+    "center": {
+      "x": 1250,
+      "y": 1650
+    },
+    "stars": [
+      {
+        "x": 1240,
+        "y": 1640,
+        "name": "Alpha Mus",
+        "magnitude": 2.69
+      },
+      {
+        "x": 1250,
+        "y": 1645,
+        "name": "Beta Mus",
+        "magnitude": 3.05
+      },
+      {
+        "x": 1260,
+        "y": 1650,
+        "name": "Delta Mus",
+        "magnitude": 3.62
+      },
+      {
+        "x": 1255,
+        "y": 1660,
+        "name": "Gamma Mus",
+        "magnitude": 3.87
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "norma": {
+    "name": "Norma",
+    "center": {
+      "x": 1600,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 1590,
+        "y": 1490,
+        "name": "Gamma2 Nor",
+        "magnitude": 4.02
+      },
+      {
+        "x": 1600,
+        "y": 1495,
+        "name": "Epsilon Nor",
+        "magnitude": 4.47
+      },
+      {
+        "x": 1610,
+        "y": 1500,
+        "name": "Eta Nor",
+        "magnitude": 4.65
+      },
+      {
+        "x": 1605,
+        "y": 1510,
+        "name": "Delta Nor",
+        "magnitude": 4.73
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "octans": {
+    "name": "Octans",
+    "center": {
+      "x": 2200,
+      "y": 1800
+    },
+    "stars": [
+      {
+        "x": 2190,
+        "y": 1790,
+        "name": "Nu Oct",
+        "magnitude": 3.76
+      },
+      {
+        "x": 2200,
+        "y": 1795,
+        "name": "Beta Oct",
+        "magnitude": 4.15
+      },
+      {
+        "x": 2210,
+        "y": 1800,
+        "name": "Delta Oct",
+        "magnitude": 4.32
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ]
+  },
+  "pavo": {
+    "name": "Pavo",
+    "center": {
+      "x": 1900,
+      "y": 1650
+    },
+    "stars": [
+      {
+        "x": 1880,
+        "y": 1630,
+        "name": "Peacock",
+        "magnitude": 1.94
+      },
+      {
+        "x": 1900,
+        "y": 1640,
+        "name": "Beta Pav",
+        "magnitude": 3.42
+      },
+      {
+        "x": 1920,
+        "y": 1650,
+        "name": "Delta Pav",
+        "magnitude": 3.56
+      },
+      {
+        "x": 1910,
+        "y": 1670,
+        "name": "Gamma Pav",
+        "magnitude": 4.22
+      },
+      {
+        "x": 1890,
+        "y": 1660,
+        "name": "Epsilon Pav",
+        "magnitude": 3.95
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "phoenix": {
+    "name": "Phoenix",
+    "center": {
+      "x": 100,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 80,
+        "y": 1480,
+        "name": "Ankaa",
+        "magnitude": 2.38
+      },
+      {
+        "x": 100,
+        "y": 1490,
+        "name": "Beta Phe",
+        "magnitude": 3.31
+      },
+      {
+        "x": 120,
+        "y": 1500,
+        "name": "Gamma Phe",
+        "magnitude": 3.39
+      },
+      {
+        "x": 110,
+        "y": 1520,
+        "name": "Delta Phe",
+        "magnitude": 3.93
+      },
+      {
+        "x": 90,
+        "y": 1510,
+        "name": "Epsilon Phe",
+        "magnitude": 3.88
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "pictor": {
+    "name": "Pictor",
+    "center": {
+      "x": 600,
+      "y": 1550
+    },
+    "stars": [
+      {
+        "x": 590,
+        "y": 1540,
+        "name": "Alpha Pic",
+        "magnitude": 3.27
+      },
+      {
+        "x": 600,
+        "y": 1545,
+        "name": "Beta Pic",
+        "magnitude": 3.86
+      },
+      {
+        "x": 610,
+        "y": 1550,
+        "name": "Gamma Pic",
+        "magnitude": 4.5
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "puppis": {
+    "name": "Puppis",
+    "center": {
+      "x": 800,
+      "y": 1400
+    },
+    "stars": [
+      {
+        "x": 780,
+        "y": 1380,
+        "name": "Naos",
+        "magnitude": 2.25
+      },
+      {
+        "x": 800,
+        "y": 1390,
+        "name": "Pi Pup",
+        "magnitude": 2.7
+      },
+      {
+        "x": 820,
+        "y": 1400,
+        "name": "Tureis",
+        "magnitude": 2.81
+      },
+      {
+        "x": 810,
+        "y": 1420,
+        "name": "Nu Pup",
+        "magnitude": 3.17
+      },
+      {
+        "x": 790,
+        "y": 1410,
+        "name": "Tau Pup",
+        "magnitude": 2.93
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "pyxis": {
+    "name": "Pyxis",
+    "center": {
+      "x": 900,
+      "y": 1300
+    },
+    "stars": [
+      {
+        "x": 890,
+        "y": 1290,
+        "name": "Alpha Pyx",
+        "magnitude": 3.68
+      },
+      {
+        "x": 900,
+        "y": 1295,
+        "name": "Beta Pyx",
+        "magnitude": 3.97
+      },
+      {
+        "x": 910,
+        "y": 1300,
+        "name": "Gamma Pyx",
+        "magnitude": 4.01
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "reticulum": {
+    "name": "Reticulum",
+    "center": {
+      "x": 400,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 390,
+        "y": 1590,
+        "name": "Alpha Ret",
+        "magnitude": 3.35
+      },
+      {
+        "x": 400,
+        "y": 1595,
+        "name": "Beta Ret",
+        "magnitude": 3.85
+      },
+      {
+        "x": 410,
+        "y": 1600,
+        "name": "Delta Ret",
+        "magnitude": 4.56
+      },
+      {
+        "x": 405,
+        "y": 1610,
+        "name": "Epsilon Ret",
+        "magnitude": 4.44
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "sculptor": {
+    "name": "Sculptor",
+    "center": {
+      "x": 100,
+      "y": 1300
+    },
+    "stars": [
+      {
+        "x": 90,
+        "y": 1290,
+        "name": "Alpha Scl",
+        "magnitude": 4.31
+      },
+      {
+        "x": 100,
+        "y": 1295,
+        "name": "Beta Scl",
+        "magnitude": 4.37
+      },
+      {
+        "x": 110,
+        "y": 1300,
+        "name": "Gamma Scl",
+        "magnitude": 4.41
+      },
+      {
+        "x": 105,
+        "y": 1310,
+        "name": "Delta Scl",
+        "magnitude": 4.59
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "sextans": {
+    "name": "Sextans",
+    "center": {
+      "x": 1000,
+      "y": 900
+    },
+    "stars": [
+      {
+        "x": 990,
+        "y": 890,
+        "name": "Alpha Sex",
+        "magnitude": 4.49
+      },
+      {
+        "x": 1000,
+        "y": 895,
+        "name": "Beta Sex",
+        "magnitude": 5
+      },
+      {
+        "x": 1010,
+        "y": 900,
+        "name": "Gamma Sex",
+        "magnitude": 5.05
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "telescopium": {
+    "name": "Telescopium",
+    "center": {
+      "x": 1900,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 1890,
+        "y": 1490,
+        "name": "Alpha Tel",
+        "magnitude": 3.51
+      },
+      {
+        "x": 1900,
+        "y": 1495,
+        "name": "Zeta Tel",
+        "magnitude": 4.13
+      },
+      {
+        "x": 1910,
+        "y": 1500,
+        "name": "Epsilon Tel",
+        "magnitude": 4.52
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "triangulum_australe": {
+    "name": "Triangulum Australe",
+    "center": {
+      "x": 1600,
+      "y": 1650
+    },
+    "stars": [
+      {
+        "x": 1590,
+        "y": 1640,
+        "name": "Atria",
+        "magnitude": 1.92
+      },
+      {
+        "x": 1600,
+        "y": 1650,
+        "name": "Beta TrA",
+        "magnitude": 2.85
+      },
+      {
+        "x": 1610,
+        "y": 1660,
+        "name": "Gamma TrA",
+        "magnitude": 2.89
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ]
+  },
+  "tucana": {
+    "name": "Tucana",
+    "center": {
+      "x": 2300,
+      "y": 1600
+    },
+    "stars": [
+      {
+        "x": 2290,
+        "y": 1590,
+        "name": "Alpha Tuc",
+        "magnitude": 2.86
+      },
+      {
+        "x": 2300,
+        "y": 1595,
+        "name": "Gamma Tuc",
+        "magnitude": 3.99
+      },
+      {
+        "x": 2310,
+        "y": 1600,
+        "name": "Beta Tuc",
+        "magnitude": 4.29
+      },
+      {
+        "x": 2305,
+        "y": 1610,
+        "name": "Zeta Tuc",
+        "magnitude": 4.23
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "vela": {
+    "name": "Vela",
+    "center": {
+      "x": 900,
+      "y": 1500
+    },
+    "stars": [
+      {
+        "x": 880,
+        "y": 1480,
+        "name": "Regor",
+        "magnitude": 1.78
+      },
+      {
+        "x": 900,
+        "y": 1490,
+        "name": "Alsephina",
+        "magnitude": 1.96
+      },
+      {
+        "x": 920,
+        "y": 1500,
+        "name": "Suhail",
+        "magnitude": 2.21
+      },
+      {
+        "x": 910,
+        "y": 1520,
+        "name": "Markeb",
+        "magnitude": 2.69
+      },
+      {
+        "x": 890,
+        "y": 1510,
+        "name": "Phi Vel",
+        "magnitude": 3.54
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "volans": {
+    "name": "Volans",
+    "center": {
+      "x": 800,
+      "y": 1650
+    },
+    "stars": [
+      {
+        "x": 790,
+        "y": 1640,
+        "name": "Beta Vol",
+        "magnitude": 3.77
+      },
+      {
+        "x": 800,
+        "y": 1645,
+        "name": "Gamma Vol",
+        "magnitude": 3.62
+      },
+      {
+        "x": 810,
+        "y": 1650,
+        "name": "Delta Vol",
+        "magnitude": 3.97
+      },
+      {
+        "x": 805,
+        "y": 1660,
+        "name": "Alpha Vol",
+        "magnitude": 4
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  }
+}

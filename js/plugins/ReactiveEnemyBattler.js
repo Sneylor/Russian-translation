@@ -202,7 +202,7 @@
     //-----------------------------------------------------------------------------
 
     const _Scene_Battle_createSpriteset = Scene_Battle.prototype.createSpriteset;
-    Scene_Battle.prototype.createSpriteset = function() {
+    Scene_Battle.prototype.createSpriteset = function () {
         _Scene_Battle_createSpriteset.call(this);
         this._bloodStains = [];
     };
@@ -212,14 +212,14 @@
     //-----------------------------------------------------------------------------
 
     const _Game_Enemy_setup = Game_Enemy.prototype.setup;
-    Game_Enemy.prototype.setup = function(enemyId, x, y) {
+    Game_Enemy.prototype.setup = function (enemyId, x, y) {
         _Game_Enemy_setup.call(this, enemyId, x, y);
         this.parseParticleType();
     };
 
-    Game_Enemy.prototype.parseParticleType = function() {
+    Game_Enemy.prototype.parseParticleType = function () {
         const note = this.enemy().note;
-        
+
         if (note.match(/<NoBlood>/i)) {
             this._particleType = 'none';
         } else if (note.match(/<Bark>/i)) {
@@ -239,7 +239,7 @@
         }
     };
 
-    Game_Enemy.prototype.getParticleType = function() {
+    Game_Enemy.prototype.getParticleType = function () {
         return this._particleType || 'blood';
     };
 
@@ -248,8 +248,11 @@
     //-----------------------------------------------------------------------------
 
     const _Sprite_Enemy_initialize = Sprite_Enemy.prototype.initialize;
-    Sprite_Enemy.prototype.initialize = function(battler) {
+    Sprite_Enemy.prototype.initialize = function (battler) {
         _Sprite_Enemy_initialize.call(this, battler);
+        this.opacity = 0;
+        this._fadeValue = 0;
+        this._fadeInFinished = false;
         this._showingAttack = false;
         this._showingDodge = false;
         this._showingCounter = false;
@@ -259,7 +262,7 @@
         this._baseX = 0;
         this._baseY = 0;
         this._bloodParticles = [];
-        
+
         // Refactored lunge system
         this._lungeAnimation = {
             active: false,
@@ -267,7 +270,7 @@
             totalFrames: lungeDuration,
             targetScale: lungeScale
         };
-        
+
         // Dodge system
         this._dodgeAnimation = {
             active: false,
@@ -276,7 +279,7 @@
             direction: 1,
             distance: dodgeDistance
         };
-        
+
         // Jump system
         this._jumpAnimation = {
             active: false,
@@ -284,13 +287,13 @@
             totalFrames: jumpDuration,
             height: jumpHeight
         };
-        
+
         this.scale.x = defaultScale;
         this.scale.y = defaultScale;
     };
 
     const _Sprite_Enemy_setBattler = Sprite_Enemy.prototype.setBattler;
-    Sprite_Enemy.prototype.setBattler = function(battler) {
+    Sprite_Enemy.prototype.setBattler = function (battler) {
         _Sprite_Enemy_setBattler.call(this, battler);
         if (battler) {
             this._defaultBattlerName = battler.battlerName();
@@ -298,7 +301,7 @@
     };
 
     const _Sprite_Enemy_updatePosition = Sprite_Enemy.prototype.updatePosition;
-    Sprite_Enemy.prototype.updatePosition = function() {
+    Sprite_Enemy.prototype.updatePosition = function () {
         _Sprite_Enemy_updatePosition.call(this);
         this.y += yOffset;
         this.x += xOffset;
@@ -306,15 +309,16 @@
     };
 
     const _Sprite_Enemy_update = Sprite_Enemy.prototype.update;
-    Sprite_Enemy.prototype.update = function() {
+    Sprite_Enemy.prototype.update = function () {
         _Sprite_Enemy_update.call(this);
-        
+
         // Store base position when not animating
         if (!this._dodgeAnimation.active && !this._jumpAnimation.active) {
             this._baseX = this.x;
             this._baseY = this.y;
         }
-        
+
+        this.updateFadeIn();
         this.updateAttackState();
         this.updateLungeAnimation();
         this.updateDodgeAnimation();
@@ -322,7 +326,22 @@
         this.updateBloodParticles();
     };
 
-    Sprite_Enemy.prototype.updateAttackState = function() {
+    Sprite_Enemy.prototype.updateFadeIn = function () {
+        if (!this._fadeInFinished) {
+            if (this._battler && this._battler.isAppeared()) {
+                this._fadeValue = (this._fadeValue || 0) + 6;
+                this.opacity = Math.min(255, this._fadeValue);
+                if (this._fadeValue >= 255) {
+                    this._fadeInFinished = true;
+                }
+            } else {
+                this.opacity = 0;
+                this._fadeValue = 0;
+            }
+        }
+    };
+
+    Sprite_Enemy.prototype.updateAttackState = function () {
         if (this._attackTimer > 0) {
             this._attackTimer--;
             if (this._attackTimer === 0) {
@@ -332,53 +351,53 @@
     };
 
     // Refactored lunge animation
-  // Refactored lunge animation
-// Refactored lunge animation - centered and subtle
-Sprite_Enemy.prototype.updateLungeAnimation = function() {
-    const anim = this._lungeAnimation;
-    if (!anim.active) return;
-    
-    anim.frame++;
-    
-    const halfFrames = anim.totalFrames / 2;
-    let scale;
-    
-    if (anim.frame <= halfFrames) {
-        // First half: scale up slightly (subtle zoom in)
-        const t = anim.frame / halfFrames;
-        const easedT = this.easeOutCubic(t); // Using cubic for smoother easing
-        const targetScale = this._baseScale * anim.targetScale;
-        scale = this._baseScale + (targetScale - this._baseScale) * easedT;
-    } else {
-        // Second half: scale back to normal
-        const t = (anim.frame - halfFrames) / halfFrames;
-        const easedT = this.easeInCubic(t); // Using cubic for smoother easing
-        const targetScale = this._baseScale * anim.targetScale;
-        scale = targetScale - (targetScale - this._baseScale) * easedT;
-    }
-    
-    this.scale.x = scale;
-    this.scale.y = scale;
-    
-    // End animation
-    if (anim.frame >= anim.totalFrames) {
-        anim.active = false;
-        anim.frame = 0;
-        this.scale.x = this._baseScale;
-        this.scale.y = this._baseScale;
-    }
-};
+    // Refactored lunge animation
+    // Refactored lunge animation - centered and subtle
+    Sprite_Enemy.prototype.updateLungeAnimation = function () {
+        const anim = this._lungeAnimation;
+        if (!anim.active) return;
+
+        anim.frame++;
+
+        const halfFrames = anim.totalFrames / 2;
+        let scale;
+
+        if (anim.frame <= halfFrames) {
+            // First half: scale up slightly (subtle zoom in)
+            const t = anim.frame / halfFrames;
+            const easedT = this.easeOutCubic(t); // Using cubic for smoother easing
+            const targetScale = this._baseScale * anim.targetScale;
+            scale = this._baseScale + (targetScale - this._baseScale) * easedT;
+        } else {
+            // Second half: scale back to normal
+            const t = (anim.frame - halfFrames) / halfFrames;
+            const easedT = this.easeInCubic(t); // Using cubic for smoother easing
+            const targetScale = this._baseScale * anim.targetScale;
+            scale = targetScale - (targetScale - this._baseScale) * easedT;
+        }
+
+        this.scale.x = scale;
+        this.scale.y = scale;
+
+        // End animation
+        if (anim.frame >= anim.totalFrames) {
+            anim.active = false;
+            anim.frame = 0;
+            this.scale.x = this._baseScale;
+            this.scale.y = this._baseScale;
+        }
+    };
 
     // Refactored dodge animation
-    Sprite_Enemy.prototype.updateDodgeAnimation = function() {
+    Sprite_Enemy.prototype.updateDodgeAnimation = function () {
         const anim = this._dodgeAnimation;
         if (!anim.active) return;
-        
+
         anim.frame++;
-        
+
         const halfFrames = anim.totalFrames / 2;
         let offsetX = 0;
-        
+
         if (anim.frame <= halfFrames) {
             // First half: move away
             const t = anim.frame / halfFrames;
@@ -390,9 +409,9 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
             const easedT = this.easeInQuad(t);
             offsetX = anim.distance * (1 - easedT) * anim.direction;
         }
-        
+
         this.x = this._baseX + offsetX;
-        
+
         // End animation
         if (anim.frame >= anim.totalFrames) {
             anim.active = false;
@@ -402,15 +421,15 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     };
 
     // Refactored jump animation
-    Sprite_Enemy.prototype.updateJumpAnimation = function() {
+    Sprite_Enemy.prototype.updateJumpAnimation = function () {
         const anim = this._jumpAnimation;
         if (!anim.active) return;
-        
+
         anim.frame++;
-        
+
         const halfFrames = anim.totalFrames / 2;
         let offsetY = 0;
-        
+
         if (anim.frame <= halfFrames) {
             // First half: jump up
             const t = anim.frame / halfFrames;
@@ -422,9 +441,9 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
             const easedT = this.easeInQuad(t);
             offsetY = -anim.height * (1 - easedT);
         }
-        
+
         this.y = this._baseY + offsetY;
-        
+
         // End animation
         if (anim.frame >= anim.totalFrames) {
             anim.active = false;
@@ -433,30 +452,30 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
         }
     };
 
-    Sprite_Enemy.prototype.easeOutQuad = function(t) {
+    Sprite_Enemy.prototype.easeOutQuad = function (t) {
         return t * (2 - t);
     };
-    
-    Sprite_Enemy.prototype.easeInQuad = function(t) {
+
+    Sprite_Enemy.prototype.easeInQuad = function (t) {
         return t * t;
     };
-    
+
     // Cubic easing for smoother lunge animation
-    Sprite_Enemy.prototype.easeOutCubic = function(t) {
+    Sprite_Enemy.prototype.easeOutCubic = function (t) {
         return 1 - Math.pow(1 - t, 3);
     };
-    
-    Sprite_Enemy.prototype.easeInCubic = function(t) {
+
+    Sprite_Enemy.prototype.easeInCubic = function (t) {
         return t * t * t;
     };
 
     // NEW: Calculate damage percentage and determine spray intensity
-    Sprite_Enemy.prototype.determineSprayIntensityByHP = function(damage, enemy) {
+    Sprite_Enemy.prototype.determineSprayIntensityByHP = function (damage, enemy) {
         if (!damage || !enemy) return 'minimal';
-        
+
         const maxHp = enemy.mhp;
         const damagePercent = (damage / maxHp) * 100;
-        
+
         // Determine intensity based on damage percentage
         if (damagePercent < 5) return 'minimal';
         if (damagePercent < 10) return 'light';
@@ -467,31 +486,31 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     };
 
     // MODIFIED: Enhanced particle creation with HP-based scaling
-    Sprite_Enemy.prototype.createDamageParticles = function(damage = 100) {
+    Sprite_Enemy.prototype.createDamageParticles = function (damage = 100) {
         if (!this._enemy) return;
-        
+
         const particleType = this._enemy.getParticleType();
         if (particleType === 'none') return;
-        
+
         const config = particleTypes[particleType];
         if (!config || !this.parent) return;
-        
+
         // Use HP-based intensity calculation
         const intensity = this.determineSprayIntensityByHP(damage, this._enemy);
         const sprayData = hpScaledSprayConfig[intensity];
-        
+
         // Calculate actual particle count (random between min and max)
         const particleCount = Math.floor(
             sprayData.count[0] + Math.random() * (sprayData.count[1] - sprayData.count[0])
         );
-        
+
         // Fixed 100px spread from sprite center
         const maxSpread = 50;
-        
+
         // Calculate sprite center position
         const spriteCenterX = this.x;
         const spriteCenterY = this.y - 270; // Adjusted for sprite anchor (720px * 0.75 / 2)
-        
+
         // Create multiple spawn points for devastating hits
         const spawnPoints = [];
         if (intensity === 'devastating' || intensity === 'brutal') {
@@ -514,16 +533,16 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
                 y: spriteCenterY + Math.sin(angle) * distance
             });
         }
-        
+
         // Distribute particles across spawn points
         const particlesPerPoint = Math.ceil(particleCount / spawnPoints.length);
-        
+
         for (const point of spawnPoints) {
             // Main particles
             for (let i = 0; i < particlesPerPoint; i++) {
                 this.createParticle(point.x, point.y, config, sprayData, false, intensity);
             }
-            
+
             // Secondary particles (smaller, more numerous for heavy hits)
             if (Math.random() < sprayData.secondaryChance) {
                 const secondaryCount = Math.floor(particlesPerPoint * 0.4);
@@ -531,7 +550,7 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
                     this.createParticle(point.x, point.y, config, sprayData, true, intensity);
                 }
             }
-            
+
             // Mist particles for blood effects
             if (config.accumulates && sprayData.mistCount > 0) {
                 for (let i = 0; i < sprayData.mistCount; i++) {
@@ -542,33 +561,33 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     };
 
     // MODIFIED: Enhanced particle creation with intensity parameter
-    Sprite_Enemy.prototype.createParticle = function(centerX, centerY, config, sprayData, isSecondary, intensity) {
+    Sprite_Enemy.prototype.createParticle = function (centerX, centerY, config, sprayData, isSecondary, intensity) {
         const particle = new Sprite();
         const particleType = this._enemy.getParticleType();
-        
+
         // Determine particle visual type
         const visualTypes = config.types || ['drop'];
         let visualType = visualTypes[Math.floor(Math.random() * visualTypes.length)];
-        
+
         // Bias toward streaks for heavy damage
         if ((intensity === 'brutal' || intensity === 'devastating') && Math.random() < 0.6) {
             visualType = 'streak';
         }
-        
+
         // Size variation based on intensity
         const sizeMultiplier = isSecondary ? 0.4 : 1;
-        const intensityMultiplier = intensity === 'devastating' ? 1.3 : 
-                                   intensity === 'brutal' ? 1.2 : 
-                                   intensity === 'heavy' ? 1.1 : 1.0;
+        const intensityMultiplier = intensity === 'devastating' ? 1.3 :
+            intensity === 'brutal' ? 1.2 :
+                intensity === 'heavy' ? 1.1 : 1.0;
         const size = (Math.random() * (config.size[1] - config.size[0]) + config.size[0]) * sizeMultiplier * intensityMultiplier;
-        
+
         particle.bitmap = new Bitmap(size * 4, size * 4);
-        
+
         // Color with variation
         const colorIndex = Math.floor(Math.random() * config.colors.length);
         const color = config.colors[colorIndex];
         const darkerColor = this.darkenColor(color, 0.7);
-        
+
         // Draw particle based on type
         if (visualType === 'drop') {
             this.drawBloodDrop(particle.bitmap, size * 2, color, darkerColor);
@@ -585,28 +604,28 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
                 this.drawRock(particle.bitmap, size * 2, color);
             }
         }
-        
+
         particle.anchor.x = 0.5;
         particle.anchor.y = 0.5;
         particle.x = centerX + (Math.random() - 0.5) * 20;
         particle.y = centerY + (Math.random() - 0.5) * 20;
         particle.blendMode = particleType === 'spark' ? 1 : 0;
         particle.opacity = isSecondary ? 200 : 255;
-        
+
         // Enhanced spray pattern based on intensity
         const spreadAngle = sprayData.spread;
         const baseAngle = (Math.PI * 0.25) + (Math.random() * Math.PI * 1.5);
         const angle = baseAngle + (Math.random() - 0.5) * (spreadAngle * Math.PI / 180);
-        
+
         const minSpeed = sprayData.speed[0];
         const maxSpeed = sprayData.speed[1];
         const speed = (minSpeed + Math.random() * (maxSpeed - minSpeed)) * (isSecondary ? 0.6 : 1);
-        
+
         // Longer life for more severe wounds
-        const lifeMultiplier = intensity === 'devastating' ? 1.5 : 
-                              intensity === 'brutal' ? 1.3 : 
-                              intensity === 'heavy' ? 1.1 : 1.0;
-        
+        const lifeMultiplier = intensity === 'devastating' ? 1.5 :
+            intensity === 'brutal' ? 1.3 :
+                intensity === 'heavy' ? 1.1 : 1.0;
+
         particle._particleData = {
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed - (isSecondary ? 2 : 4),
@@ -627,34 +646,34 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
             stainChance: sprayData.stainChance,
             intensity: intensity
         };
-        
+
         this._bloodParticles.push(particle);
-        
+
         if (SceneManager._scene && SceneManager._scene._spriteset) {
             SceneManager._scene._spriteset._battleField.addChildAt(particle, 0);
         }
     };
 
     // NEW: Create mist particles for atmospheric blood spray
-    Sprite_Enemy.prototype.createMistParticle = function(centerX, centerY, config, intensity) {
+    Sprite_Enemy.prototype.createMistParticle = function (centerX, centerY, config, intensity) {
         const particle = new Sprite();
-        
+
         const size = 15 + Math.random() * 10;
         particle.bitmap = new Bitmap(size * 2, size * 2);
-        
+
         const color = config.colors[Math.floor(Math.random() * config.colors.length)];
         this.drawMist(particle.bitmap, size, color);
-        
+
         particle.anchor.x = 0.5;
         particle.anchor.y = 0.5;
         particle.x = centerX + (Math.random() - 0.5) * 40;
         particle.y = centerY + (Math.random() - 0.5) * 40;
         particle.blendMode = 0;
         particle.opacity = 40 + Math.random() * 40;
-        
+
         const angle = Math.random() * Math.PI * 2;
         const speed = 0.5 + Math.random() * 1.5;
-        
+
         particle._particleData = {
             vx: Math.cos(angle) * speed,
             vy: -Math.abs(Math.sin(angle) * speed) - 1,
@@ -670,67 +689,67 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
             accumulates: false,
             intensity: intensity
         };
-        
+
         this._bloodParticles.push(particle);
-        
+
         if (SceneManager._scene && SceneManager._scene._spriteset) {
             SceneManager._scene._spriteset._battleField.addChildAt(particle, 0);
         }
     };
 
-    Sprite_Enemy.prototype.darkenColor = function(color, factor) {
+    Sprite_Enemy.prototype.darkenColor = function (color, factor) {
         const r = parseInt(color.substr(1, 2), 16);
         const g = parseInt(color.substr(3, 2), 16);
         const b = parseInt(color.substr(5, 2), 16);
-        
+
         const newR = Math.floor(r * factor);
         const newG = Math.floor(g * factor);
         const newB = Math.floor(b * factor);
-        
-        return '#' + 
-            newR.toString(16).padStart(2, '0') + 
-            newG.toString(16).padStart(2, '0') + 
+
+        return '#' +
+            newR.toString(16).padStart(2, '0') +
+            newG.toString(16).padStart(2, '0') +
             newB.toString(16).padStart(2, '0');
     };
 
-    Sprite_Enemy.prototype.drawBloodDrop = function(bitmap, size, color, darkerColor) {
+    Sprite_Enemy.prototype.drawBloodDrop = function (bitmap, size, color, darkerColor) {
         const ctx = bitmap._context;
         const centerX = size;
         const centerY = size;
-        
+
         const gradient = ctx.createRadialGradient(centerX - size * 0.2, centerY - size * 0.2, 0, centerX, centerY, size * 0.5);
         gradient.addColorStop(0, color);
         gradient.addColorStop(1, darkerColor);
-        
+
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(centerX, centerY, size * 0.4, 0, Math.PI * 2);
         ctx.fill();
     };
 
-    Sprite_Enemy.prototype.drawStreak = function(bitmap, size, color) {
+    Sprite_Enemy.prototype.drawStreak = function (bitmap, size, color) {
         const ctx = bitmap._context;
         const centerX = size;
         const centerY = size;
-        
+
         ctx.strokeStyle = color;
         ctx.lineWidth = size * 0.3;
         ctx.lineCap = 'round';
-        
+
         ctx.beginPath();
         ctx.moveTo(centerX - size * 0.5, centerY);
         ctx.lineTo(centerX + size * 0.5, centerY - size * 0.2);
         ctx.stroke();
     };
 
-    Sprite_Enemy.prototype.drawMist = function(bitmap, size, color) {
+    Sprite_Enemy.prototype.drawMist = function (bitmap, size, color) {
         const ctx = bitmap._context;
         const centerX = size;
         const centerY = size;
-        
+
         ctx.fillStyle = color;
         ctx.globalAlpha = 0.3;
-        
+
         for (let i = 0; i < 3; i++) {
             const offsetX = (Math.random() - 0.5) * size * 0.3;
             const offsetY = (Math.random() - 0.5) * size * 0.3;
@@ -738,16 +757,16 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
             ctx.arc(centerX + offsetX, centerY + offsetY, size * 0.25, 0, Math.PI * 2);
             ctx.fill();
         }
-        
+
         ctx.globalAlpha = 1.0;
     };
 
-    Sprite_Enemy.prototype.drawSpark = function(bitmap, size, color) {
+    Sprite_Enemy.prototype.drawSpark = function (bitmap, size, color) {
         const ctx = bitmap._context;
         ctx.fillStyle = color;
         ctx.strokeStyle = color;
         ctx.lineWidth = 2;
-        
+
         ctx.beginPath();
         for (let i = 0; i < 8; i++) {
             const angle = (i * Math.PI) / 4;
@@ -761,10 +780,10 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
         ctx.fill();
     };
 
-    Sprite_Enemy.prototype.drawRock = function(bitmap, size, color) {
+    Sprite_Enemy.prototype.drawRock = function (bitmap, size, color) {
         const ctx = bitmap._context;
         ctx.fillStyle = color;
-        
+
         const sides = 5 + Math.floor(Math.random() * 3);
         ctx.beginPath();
         for (let i = 0; i < sides; i++) {
@@ -779,55 +798,55 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
         ctx.fill();
     };
 
-    Sprite_Enemy.prototype.drawBark = function(bitmap, size, color) {
+    Sprite_Enemy.prototype.drawBark = function (bitmap, size, color) {
         const ctx = bitmap._context;
         ctx.fillStyle = color;
-        
+
         ctx.beginPath();
         ctx.ellipse(size, size, size * 0.6, size * 0.3, Math.random() * Math.PI, 0, Math.PI * 2);
         ctx.fill();
     };
 
     // MODIFIED: Enhanced particle update with stain chance based on intensity
-    Sprite_Enemy.prototype.updateBloodParticles = function() {
+    Sprite_Enemy.prototype.updateBloodParticles = function () {
         for (let i = this._bloodParticles.length - 1; i >= 0; i--) {
             const particle = this._bloodParticles[i];
             const data = particle._particleData;
-            
+
             if (!data) continue;
-            
+
             if (!data.isGrounded && data.accumulates && particle.y >= groundLevel) {
                 data.isGrounded = true;
                 data.vy = 0;
                 data.vx = 0;
                 particle.y = groundLevel;
-                
+
                 this.convertToGroundStain(particle, data);
                 this._bloodParticles.splice(i, 1);
                 continue;
             }
-            
+
             if (!data.isGrounded) {
                 particle.x += data.vx;
                 particle.y += data.vy;
                 data.vy += data.gravity;
-                
+
                 data.vx *= data.airResistance;
                 data.vy *= data.airResistance;
-                
+
                 if (data.visualType === 'drop' || data.visualType === 'chunk') {
                     particle.rotation += data.rotationSpeed;
                 } else if (data.visualType === 'streak') {
                     particle.rotation = Math.atan2(data.vy, data.vx);
                 }
-                
+
                 data.life--;
-                
+
                 const fadeRatio = data.type === 'spark' ? 0.6 : 0.4;
                 if (data.life < data.maxLife * fadeRatio) {
                     particle.opacity = 255 * (data.life / (data.maxLife * fadeRatio));
                 }
-                
+
                 if (data.type === 'spark') {
                     const scale = 0.3 + 0.7 * (data.life / data.maxLife);
                     particle.scale.x = scale;
@@ -846,7 +865,7 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
                     particle.scale.x = scale;
                     particle.scale.y = scale;
                 }
-                
+
                 if (!data.accumulates && (data.life <= 0 || particle.y > groundLevel + 100)) {
                     if (particle.parent) {
                         particle.parent.removeChild(particle);
@@ -861,22 +880,22 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     };
 
     // MODIFIED: Use stain chance from particle data
-    Sprite_Enemy.prototype.convertToGroundStain = function(particle, data) {
+    Sprite_Enemy.prototype.convertToGroundStain = function (particle, data) {
         if (!SceneManager._scene || !SceneManager._scene._spriteset) return;
-        
+
         particle.opacity = 180 + Math.random() * 75;
         particle.rotation = 0;
         particle.scale.x = 0.7 + Math.random() * 0.3;
         particle.scale.y = 0.7 + Math.random() * 0.3;
-        
+
         const verticalSpread = Math.random() * 40;
         particle.y = groundLevel + verticalSpread;
-        
+
         if (!SceneManager._scene._bloodStains) {
             SceneManager._scene._bloodStains = [];
         }
         SceneManager._scene._bloodStains.push(particle);
-        
+
         // Use stain chance from particle data
         if (!data.isSecondary && Math.random() < data.stainChance) {
             this.createGroundStain(data.enemyX, particle.y, data.type, data.color, data.intensity);
@@ -884,32 +903,32 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     };
 
     // MODIFIED: Enhanced ground stains based on intensity
-    Sprite_Enemy.prototype.createGroundStain = function(enemyX, y, type, particleColor, intensity) {
+    Sprite_Enemy.prototype.createGroundStain = function (enemyX, y, type, particleColor, intensity) {
         if (!SceneManager._scene || !SceneManager._scene._spriteset) return;
-        
+
         const config = particleTypes[type];
         if (!config || !config.accumulates) return;
-        
+
         // More stains for higher intensity
         const stainCount = intensity === 'devastating' ? 3 :
-                          intensity === 'brutal' ? 2 : 1;
-        
+            intensity === 'brutal' ? 2 : 1;
+
         for (let s = 0; s < stainCount; s++) {
             const stain = new Sprite();
-            
+
             // Larger stains for more severe wounds
             const sizeMultiplier = intensity === 'devastating' ? 1.5 :
-                                  intensity === 'brutal' ? 1.3 :
-                                  intensity === 'heavy' ? 1.1 : 1.0;
+                intensity === 'brutal' ? 1.3 :
+                    intensity === 'heavy' ? 1.1 : 1.0;
             const size = (Math.random() * 12 + 8) * sizeMultiplier;
-            
+
             stain.bitmap = new Bitmap(size, size);
-            
+
             const ctx = stain.bitmap._context;
             const stainColors = config.stainColors || config.colors;
             const color = stainColors[Math.floor(Math.random() * stainColors.length)];
             ctx.fillStyle = color;
-            
+
             // Draw irregular stain with multiple circles
             const numCircles = Math.floor(Math.random() * 4) + 3;
             for (let i = 0; i < numCircles; i++) {
@@ -918,26 +937,26 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
                 const radius = Math.random() * size * 0.35 + size * 0.15;
                 ctx.globalAlpha = 0.3 + Math.random() * 0.4;
                 ctx.beginPath();
-                ctx.arc(size/2 + offsetX, size/2 + offsetY, radius, 0, Math.PI * 2);
+                ctx.arc(size / 2 + offsetX, size / 2 + offsetY, radius, 0, Math.PI * 2);
                 ctx.fill();
             }
-            
+
             ctx.globalAlpha = 1.0;
-            
+
             stain.anchor.x = 0.5;
             stain.anchor.y = 0.5;
-            
+
             // Wider spread for more intense damage
             const spreadMultiplier = intensity === 'devastating' ? 2.0 :
-                                    intensity === 'brutal' ? 1.5 : 1.0;
+                intensity === 'brutal' ? 1.5 : 1.0;
             const spreadX = (Math.random() - 0.5) * 70 * spreadMultiplier;
             stain.x = enemyX + spreadX + (s * 20 - stainCount * 10);
             stain.y = y + Math.random() * 10;
             stain.opacity = 160 + Math.random() * 95;
             stain.blendMode = 0;
-            
+
             SceneManager._scene._spriteset._battleField.addChildAt(stain, 0);
-            
+
             if (!SceneManager._scene._bloodStains) {
                 SceneManager._scene._bloodStains = [];
             }
@@ -945,30 +964,30 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
         }
     };
 
-    Sprite_Enemy.prototype.loadBitmapWithHue = function(filename) {
+    Sprite_Enemy.prototype.loadBitmapWithHue = function (filename) {
         if (!this._enemy) return;
-        
+
         const bitmap = ImageManager.loadEnemy(filename);
         const hue = this._enemy.battlerHue();
-        
+
         bitmap.addLoadListener(() => {
             if (this.bitmap === bitmap) {
                 this.setHue(hue);
             }
         });
-        
+
         this.bitmap = bitmap;
         this.setHue(hue);
     };
 
-    Sprite_Enemy.prototype.showAttackSprite = function(isSkill = false) {
+    Sprite_Enemy.prototype.showAttackSprite = function (isSkill = false) {
         if (!this._enemy || this._showingAttack) return;
-        
+
         if (isSkill) {
             const hitFilename = 'hit/' + this._defaultBattlerName + '_hit';
             const bitmap = ImageManager.loadEnemy(hitFilename);
             const hue = this._enemy.battlerHue();
-            
+
             bitmap.addLoadListener(() => {
                 if (!bitmap.isError() && this.bitmap === bitmap) {
                     this._showingAttack = true;
@@ -976,7 +995,7 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
                     this.setHue(hue);
                 }
             });
-            
+
             this.bitmap = bitmap;
             this.setHue(hue);
             this.startJump();
@@ -984,48 +1003,48 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
             this.startLunge();
         }
     };
-    
-    Sprite_Enemy.prototype.showDodgeSprite = function() {
+
+    Sprite_Enemy.prototype.showDodgeSprite = function () {
         if (!this._enemy || this._showingDodge) return;
         this.startDodge();
     };
-    
-    Sprite_Enemy.prototype.showCounterSprite = function() {
+
+    Sprite_Enemy.prototype.showCounterSprite = function () {
         if (!this._enemy || this._showingCounter) return;
         this.startLunge();
     };
-    
-    Sprite_Enemy.prototype.returnToIdle = function() {
+
+    Sprite_Enemy.prototype.returnToIdle = function () {
         if (!this._enemy) return;
         if (!this._showingAttack && !this._showingDodge && !this._showingCounter) return;
-        
+
         this._showingAttack = false;
         this._showingDodge = false;
         this._showingCounter = false;
-        
+
         this.loadBitmapWithHue(this._defaultBattlerName);
         this._appeared = this._enemy.isAlive();
     };
 
     // Refactored trigger methods
-    Sprite_Enemy.prototype.startLunge = function() {
+    Sprite_Enemy.prototype.startLunge = function () {
         this._lungeAnimation.active = true;
         this._lungeAnimation.frame = 0;
     };
 
-    Sprite_Enemy.prototype.startDodge = function() {
+    Sprite_Enemy.prototype.startDodge = function () {
         this._dodgeAnimation.active = true;
         this._dodgeAnimation.frame = 0;
         this._dodgeAnimation.direction = Math.random() < 0.5 ? -1 : 1;
     };
 
-    Sprite_Enemy.prototype.startJump = function() {
+    Sprite_Enemy.prototype.startJump = function () {
         this._jumpAnimation.active = true;
         this._jumpAnimation.frame = 0;
     };
 
     const _Sprite_Enemy_updateBitmap = Sprite_Enemy.prototype.updateBitmap;
-    Sprite_Enemy.prototype.updateBitmap = function() {
+    Sprite_Enemy.prototype.updateBitmap = function () {
         const name = this._enemy.battlerName();
         if (this._battlerName !== name && !this._showingAttack && !this._showingDodge && !this._showingCounter) {
             this._battlerName = name;
@@ -1039,9 +1058,9 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     //-----------------------------------------------------------------------------
 
     const _Game_Action_apply = Game_Action.prototype.apply;
-    Game_Action.prototype.apply = function(target) {
+    Game_Action.prototype.apply = function (target) {
         const subject = this.subject();
-        
+
         // Trigger lunge animation for enemy attackers
         if (subject && subject.isEnemy()) {
             const sprite = subject.getBattlerSprite();
@@ -1054,9 +1073,9 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
                 // Skills trigger jump instead (handled in showAttackSprite)
             }
         }
-        
+
         _Game_Action_apply.call(this, target);
-        
+
         if (target && target.isEnemy()) {
             const result = target.result();
             if (result.isHit() && result.hpDamage > 0) {
@@ -1079,9 +1098,9 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     //-----------------------------------------------------------------------------
 
     const _Game_Enemy_performEvasion = Game_Enemy.prototype.performEvasion;
-    Game_Enemy.prototype.performEvasion = function() {
+    Game_Enemy.prototype.performEvasion = function () {
         _Game_Enemy_performEvasion.call(this);
-        
+
         const sprite = this.getBattlerSprite();
         if (sprite) {
             sprite.showDodgeSprite();
@@ -1089,23 +1108,23 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     };
 
     const _Game_Enemy_performCounter = Game_Enemy.prototype.performCounter;
-    Game_Enemy.prototype.performCounter = function() {
+    Game_Enemy.prototype.performCounter = function () {
         _Game_Enemy_performCounter.call(this);
-        
+
         const sprite = this.getBattlerSprite();
         if (sprite) {
             sprite.showCounterSprite();
         }
     };
 
-    Game_Enemy.prototype.getBattlerSprite = function() {
+    Game_Enemy.prototype.getBattlerSprite = function () {
         if (!SceneManager._scene || !SceneManager._scene._spriteset) {
             return null;
         }
-        
+
         const spriteset = SceneManager._scene._spriteset;
         if (!spriteset._enemySprites) return null;
-        
+
         for (const sprite of spriteset._enemySprites) {
             if (sprite._battler === this) {
                 return sprite;
@@ -1115,17 +1134,17 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
     };
 
     // Disable default blink and whiten effects
-    Sprite_Enemy.prototype.updateBlink = function() {
+    Sprite_Enemy.prototype.updateBlink = function () {
         // Disabled - no transparency blink effect
     };
-    
-    Sprite_Enemy.prototype.updateWhiten = function() {
+
+    Sprite_Enemy.prototype.updateWhiten = function () {
         // Disabled - no white flash effect
     };
 
     // Add this to your plugin to override damage popup positioning
     const _Sprite_Damage_setup = Sprite_Damage.prototype.setup;
-    Sprite_Damage.prototype.setup = function(target) {
+    Sprite_Damage.prototype.setup = function (target) {
         const result = target.result();
         if (result.missed || result.evaded) {
             this._colorType = 0;
@@ -1135,12 +1154,12 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
             this.createDigits(result.hpDamage);
         } else if (target.isAlive() && result.mpDamage !== 0) {
             this._colorType = result.mpDamage >= 0 ? 2 : 3;
-            this.createDigits(result.mpDamage)  ;
+            this.createDigits(result.mpDamage);
         }
         if (result.critical) {
             this.setupCriticalEffect();
         }
-        
+
         // Center the damage display on screen
         this.x = Graphics.boxWidth / 2;
         this.y = Graphics.boxHeight / 2;
@@ -1148,7 +1167,7 @@ Sprite_Enemy.prototype.updateLungeAnimation = function() {
 
     // Override the update position to keep it centered
     const _Sprite_Damage_updatePosition = Sprite_Damage.prototype.updatePosition;
-    Sprite_Damage.prototype.updatePosition = function() {
+    Sprite_Damage.prototype.updatePosition = function () {
         // Keep damage centered instead of following the battler
         this.x = Graphics.boxWidth / 2;
         this.y = Graphics.boxHeight / 2 - (this._duration * 0.5); // Small upward movement

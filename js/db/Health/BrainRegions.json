@@ -1,0 +1,123 @@
+{
+  "prefrontalCortex": {
+    "name": "Prefrontal Cortex",
+    "function": "Executive function, decision making",
+    "activity": 75.66675239610417,
+    "status": "Active",
+    "oxygenConsumption": 0,
+    "maxOxygen": 25,
+    "neurotransmitters": {
+      "dopamine": 73.60041850399625,
+      "serotonin": 49.46995013730863,
+      "norepinephrine": 74.34930972116618
+    }
+  },
+  "motorCortex": {
+    "name": "Motor Cortex",
+    "function": "Motor control, movement",
+    "activity": 52.77091278255247,
+    "status": "Moderate",
+    "oxygenConsumption": 0,
+    "maxOxygen": 20,
+    "neurotransmitters": {
+      "acetylcholine": 79.66202971310634,
+      "gaba": 68.78176172250221
+    }
+  },
+  "sensoryCortex": {
+    "name": "Sensory Cortex",
+    "function": "Sensory processing",
+    "activity": 71.50129318117516,
+    "status": "Active",
+    "oxygenConsumption": 0,
+    "maxOxygen": 22,
+    "neurotransmitters": {
+      "glutamate": 65.15093887418878,
+      "gaba": 60.64268426532107
+    }
+  },
+  "hippocampus": {
+    "name": "Hippocampus",
+    "function": "Memory formation, learning",
+    "activity": 67.1034306456817,
+    "status": "Active",
+    "oxygenConsumption": 0,
+    "maxOxygen": 18,
+    "neurotransmitters": {
+      "acetylcholine": 77.48829485983538,
+      "dopamine": 44.147825747253634
+    }
+  },
+  "amygdala": {
+    "name": "Amygdala",
+    "function": "Emotion, fear response",
+    "activity": 62.54462988374437,
+    "status": "Moderate",
+    "oxygenConsumption": 0,
+    "maxOxygen": 15,
+    "neurotransmitters": {
+      "norepinephrine": 69.83544172008435,
+      "serotonin": 51.00515162831059
+    }
+  },
+  "cerebellum": {
+    "name": "Cerebellum",
+    "function": "Balance, coordination",
+    "activity": 67.64719125131343,
+    "status": "Moderate",
+    "oxygenConsumption": 0,
+    "maxOxygen": 20,
+    "neurotransmitters": {
+      "gaba": 76.48421899605394,
+      "glutamate": 58.50112467742947
+    }
+  },
+  "brainstem": {
+    "name": "Brainstem",
+    "function": "Vital functions, breathing",
+    "activity": 96.53610206148501,
+    "status": "Highly Active",
+    "oxygenConsumption": 0,
+    "maxOxygen": 30,
+    "neurotransmitters": {
+      "serotonin": 80.3917126711933,
+      "norepinephrine": 76.93481278539106
+    }
+  },
+  "occipitalLobe": {
+    "name": "Occipital Lobe",
+    "function": "Visual processing",
+    "activity": 76.48916251105594,
+    "status": "Active",
+    "oxygenConsumption": 0,
+    "maxOxygen": 25,
+    "neurotransmitters": {
+      "glutamate": 84.274685880014,
+      "gaba": 71.9875277578542
+    }
+  },
+  "temporalLobe": {
+    "name": "Temporal Lobe",
+    "function": "Auditory processing, language",
+    "activity": 66.50366679975784,
+    "status": "Active",
+    "oxygenConsumption": 0,
+    "maxOxygen": 22,
+    "neurotransmitters": {
+      "acetylcholine": 78.9453290622858,
+      "dopamine": 66.29789441667944
+    }
+  },
+  "parietalLobe": {
+    "name": "Parietal Lobe",
+    "function": "Spatial processing, integration",
+    "activity": 81.28168926614079,
+    "status": "Active",
+    "oxygenConsumption": 0,
+    "maxOxygen": 20,
+    "neurotransmitters": {
+      "glutamate": 64.6012374259526,
+      "gaba": 59.919436774166925
+    }
+  }
+}

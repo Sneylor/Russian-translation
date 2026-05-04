@@ -75,7 +75,7 @@
     const pluginName = 'CustomSceneStatus';
     const parameters = PluginManager.parameters(pluginName);
     const maxDescriptionLength = parseInt(parameters['maxDescriptionLength'] || 200);
-    const { Traits } = window.ProstheticsData;
+    const { Traits } = window.Health;
 
     // Initialize character descriptions storage safely
     function initializeDescriptions() {
@@ -96,7 +96,7 @@
 
         const actorId = actor.actorId && actor.actorId();
         const characterName = actor.characterName();
-        const { SPRITES_ASSOCIATION } = window.Sprites || {};
+        const { SpritesAssociation } = window.Sprites || {};
 
         // Player 1 (Actor 1) special handling
         if (actorId === 1) {
@@ -114,14 +114,14 @@
                 }
             }
 
-            // Priority 3: Fall back to SPRITES_ASSOCIATION
-            if (characterName && SPRITES_ASSOCIATION) {
+            // Priority 3: Fall back to SpritesAssociation
+            if (characterName && SpritesAssociation) {
                 const spritesheetName = characterName.split('.')[0];
                 const characterIndex = actor.characterIndex();
 
-                if (SPRITES_ASSOCIATION[spritesheetName] &&
-                    SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-                    const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+                if (SpritesAssociation[spritesheetName] &&
+                    SpritesAssociation[spritesheetName][characterIndex]) {
+                    const bustName = SpritesAssociation[spritesheetName][characterIndex];
                     return "img/busts/" + bustName;
                 }
             }
@@ -145,14 +145,14 @@
                 }
             }
 
-            // Priority 3: Fall back to SPRITES_ASSOCIATION
-            if (characterName && SPRITES_ASSOCIATION) {
+            // Priority 3: Fall back to SpritesAssociation
+            if (characterName && SpritesAssociation) {
                 const spritesheetName = characterName.split('.')[0];
                 const characterIndex = actor.characterIndex();
 
-                if (SPRITES_ASSOCIATION[spritesheetName] &&
-                    SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-                    const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+                if (SpritesAssociation[spritesheetName] &&
+                    SpritesAssociation[spritesheetName][characterIndex]) {
+                    const bustName = SpritesAssociation[spritesheetName][characterIndex];
                     return "img/busts/" + bustName;
                 }
             }
@@ -176,14 +176,14 @@
                 }
             }
 
-            // Priority 3: Fall back to SPRITES_ASSOCIATION
-            if (characterName && SPRITES_ASSOCIATION) {
+            // Priority 3: Fall back to SpritesAssociation
+            if (characterName && SpritesAssociation) {
                 const spritesheetName = characterName.split('.')[0];
                 const characterIndex = actor.characterIndex();
 
-                if (SPRITES_ASSOCIATION[spritesheetName] &&
-                    SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-                    const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+                if (SpritesAssociation[spritesheetName] &&
+                    SpritesAssociation[spritesheetName][characterIndex]) {
+                    const bustName = SpritesAssociation[spritesheetName][characterIndex];
                     return "img/busts/" + bustName;
                 }
             }
@@ -191,14 +191,14 @@
             return "img/busts/7";
         }
 
-        // Fallback to SPRITES_ASSOCIATION for any other actors
-        if (characterName && SPRITES_ASSOCIATION) {
+        // Fallback to SpritesAssociation for any other actors
+        if (characterName && SpritesAssociation) {
             const spritesheetName = characterName.split('.')[0];
             const characterIndex = actor.characterIndex();
 
-            if (SPRITES_ASSOCIATION[spritesheetName] &&
-                SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-                const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+            if (SpritesAssociation[spritesheetName] &&
+                SpritesAssociation[spritesheetName][characterIndex]) {
+                const bustName = SpritesAssociation[spritesheetName][characterIndex];
                 return "img/busts/" + bustName;
             }
         }
@@ -284,7 +284,7 @@
     //=============================================================================
     // Translation Helper
     //=============================================================================
-    
+
     const translations = {
         description: { en: "Description", it: "Descrizione" },
         parameters: { en: "Parameters", it: "Parametri" },
@@ -296,29 +296,29 @@
         total: { en: "Total", it: "Totale" },
         next: { en: "Next", it: "Prossimo" },
         defaultDescriptions: {
-            warrior: { 
-                en: "A skilled warrior\ntrained in combat.", 
-                it: "Un guerriero esperto\naddestrato al combattimento." 
+            warrior: {
+                en: "A skilled warrior\ntrained in combat.",
+                it: "Un guerriero esperto\naddestrato al combattimento."
             },
-            mage: { 
-                en: "A wielder of arcane magic.", 
-                it: "Un utilizzatore di magia arcana." 
+            mage: {
+                en: "A wielder of arcane magic.",
+                it: "Un utilizzatore di magia arcana."
             },
-            priest: { 
-                en: "A devoted follower\nwith healing powers.", 
-                it: "Un seguace devoto\ncon poteri curativi." 
+            priest: {
+                en: "A devoted follower\nwith healing powers.",
+                it: "Un seguace devoto\ncon poteri curativi."
             },
-            rogue: { 
-                en: "A nimble individual\nskilled in stealth.", 
-                it: "Un individuo agile\nesperto in furtività." 
+            rogue: {
+                en: "A nimble individual\nskilled in stealth.",
+                it: "Un individuo agile\nesperto in furtività."
             },
-            archer: { 
-                en: "An expert marksman\nwith keen eyes.", 
-                it: "Un tiratore esperto\ncon occhi acuti." 
+            archer: {
+                en: "An expert marksman\nwith keen eyes.",
+                it: "Un tiratore esperto\ncon occhi acuti."
             },
-            default: { 
-                en: "A brave", 
-                it: "Un coraggioso" 
+            default: {
+                en: "A brave",
+                it: "Un coraggioso"
             }
         }
     };
@@ -331,18 +331,18 @@
     //=============================================================================
     // Seeded Random Number Generator
     //=============================================================================
-    
+
     class SeededRandom {
         constructor(seed) {
             this.seed = seed;
         }
-        
+
         next() {
             this.seed = (this.seed * 9301 + 49297) % 233280;
             return this.seed / 233280;
         }
     }
-    
+
     function stringToSeed(str) {
         let hash = 0;
         for (let i = 0; i < str.length; i++) {
@@ -352,41 +352,41 @@
         }
         return Math.abs(hash);
     }
-    
+
     //=============================================================================
     // Trait Generation
     //=============================================================================
-    
+
     function getTraitById(traitId) {
-        if (!window.ProstheticsData || !window.ProstheticsData.Traits) {
+        if (!window.Health || !window.Health.Traits) {
             return null;
         }
-        return window.ProstheticsData.Traits.find(trait => trait.id === traitId);
+        return window.Health.Traits.find(trait => trait.id === traitId);
     }
-    
+
     function generateRandomTraits(actorName, count = 5) {
-        if (!window.ProstheticsData || !window.ProstheticsData.Traits) {
+        if (!window.Health || !window.Health.Traits) {
             return [];
         }
-        
-        const availableTraits = window.ProstheticsData.Traits;
+
+        const availableTraits = window.Health.Traits;
         if (availableTraits.length === 0) {
             return [];
         }
-        
+
         const seed = stringToSeed(actorName);
         const rng = new SeededRandom(seed);
         const traits = [];
         const usedIds = new Set();
         const maxTraitId = Math.max(...availableTraits.map(t => t.id));
-        
+
         let attempts = 0;
         const maxAttempts = count * 10;
-        
+
         while (traits.length < count && attempts < maxAttempts) {
             attempts++;
             const traitId = Math.floor(rng.next() * maxTraitId) + 1;
-            
+
             if (!usedIds.has(traitId)) {
                 const traitData = getTraitById(traitId);
                 if (traitData) {
@@ -399,10 +399,10 @@
                 }
             }
         }
-        
+
         return traits;
     }
-    
+
     function ensureActorTraits(actor, partyIndex) {
         if (partyIndex === 0) {
             // First party member has no auto-generated traits
@@ -425,16 +425,16 @@
         const partyIndex = parseInt(args.partyMemberIndex) - 1;
         const description = args.description || "";
         const actor = $gameParty.allMembers()[partyIndex];
-        
+
         if (actor) {
             if (!$dataSystem || !$dataSystem.characterDescriptions) {
                 initializeDescriptions();
             }
-            
-            const truncatedDescription = description.length > maxDescriptionLength 
+
+            const truncatedDescription = description.length > maxDescriptionLength
                 ? description.substring(0, maxDescriptionLength) + "..."
                 : description;
-            
+
             $dataSystem.characterDescriptions[actor.actorId()] = truncatedDescription;
             $gameMessage.add(`Description set for ${actor.name()}.`);
         } else {
@@ -446,27 +446,27 @@
     // Scene_Status
     //=============================================================================
 
-    Scene_Status.prototype.create = function() {
+    Scene_Status.prototype.create = function () {
         Scene_MenuBase.prototype.create.call(this);
         this._actorIndex = 0;
         this.createStatusWindow();
     };
 
-    Scene_Status.prototype.start = function() {
+    Scene_Status.prototype.start = function () {
         Scene_MenuBase.prototype.start.call(this);
         this.refreshActor();
         this._statusWindow.activate();
     };
 
-    Scene_Status.prototype.needsPageButtons = function() {
+    Scene_Status.prototype.needsPageButtons = function () {
         return false;
     };
 
-    Scene_Status.prototype.createBackground = function() {
+    Scene_Status.prototype.createBackground = function () {
         Scene_MenuBase.prototype.createBackground.call(this);
     };
 
-    Scene_Status.prototype.createStatusWindow = function() {
+    Scene_Status.prototype.createStatusWindow = function () {
         const rect = this.statusWindowRect();
         this._statusWindow = new Window_CustomStatus(rect);
         this._statusWindow.setHandler('cancel', this.popScene.bind(this));
@@ -479,26 +479,26 @@
         this.addWindow(this._paramsWindow);
     };
 
-    Scene_Status.prototype.statusWindowRect = function() {
+    Scene_Status.prototype.statusWindowRect = function () {
         const ww = Math.floor(Graphics.boxWidth * 0.65);
         return new Rectangle(0, 0, ww, Graphics.boxHeight);
     };
 
-    Scene_Status.prototype.statesWindowRect = function() {
+    Scene_Status.prototype.statesWindowRect = function () {
         const rx = Math.floor(Graphics.boxWidth * 0.65);
         const rw = Graphics.boxWidth - rx;
         const rh = Math.floor(Graphics.boxHeight * 0.30);
         return new Rectangle(rx, 0, rw, rh);
     };
 
-    Scene_Status.prototype.paramsWindowRect = function() {
+    Scene_Status.prototype.paramsWindowRect = function () {
         const rx = Math.floor(Graphics.boxWidth * 0.65);
         const rw = Graphics.boxWidth - rx;
         const stH = Math.floor(Graphics.boxHeight * 0.30);
         return new Rectangle(rx, stH, rw, Graphics.boxHeight - stH);
     };
 
-    Scene_Status.prototype.refreshActor = function() {
+    Scene_Status.prototype.refreshActor = function () {
         const actor = this.actor();
         ensureActorTraits(actor, this._actorIndex);
         this._statusWindow.setActor(actor);
@@ -507,19 +507,19 @@
         this._paramsWindow.setActor(actor);
     };
 
-    Scene_Status.prototype.onActorChange = function() {
+    Scene_Status.prototype.onActorChange = function () {
         Scene_MenuBase.prototype.onActorChange.call(this);
         this.refreshActor();
     };
 
-    Scene_Status.prototype.update = function() {
+    Scene_Status.prototype.update = function () {
         Scene_MenuBase.prototype.update.call(this);
         if (this._statusWindow.active) {
             this.updateActorSelection();
         }
     };
 
-    Scene_Status.prototype.updateActorSelection = function() {
+    Scene_Status.prototype.updateActorSelection = function () {
         if (Input.isTriggered('right')) {
             this.nextActor();
         } else if (Input.isTriggered('left')) {
@@ -527,19 +527,19 @@
         }
     };
 
-    Scene_Status.prototype.nextActor = function() {
+    Scene_Status.prototype.nextActor = function () {
         this._actorIndex = (this._actorIndex + 1) % $gameParty.allMembers().length;
         this.refreshActor();
         SoundManager.playCursor();
     };
 
-    Scene_Status.prototype.previousActor = function() {
+    Scene_Status.prototype.previousActor = function () {
         this._actorIndex = (this._actorIndex - 1 + $gameParty.allMembers().length) % $gameParty.allMembers().length;
         this.refreshActor();
         SoundManager.playCursor();
     };
 
-    Scene_Status.prototype.actor = function() {
+    Scene_Status.prototype.actor = function () {
         return $gameParty.allMembers()[this._actorIndex];
     };
 
@@ -554,26 +554,26 @@
     Window_CustomStatus.prototype = Object.create(Window_StatusBase.prototype);
     Window_CustomStatus.prototype.constructor = Window_CustomStatus;
 
-    Window_CustomStatus.prototype.initialize = function(rect) {
+    Window_CustomStatus.prototype.initialize = function (rect) {
         Window_StatusBase.prototype.initialize.call(this, rect);
         this._actor = null;
         this._actorIndex = 0;
         this.activate();
     };
 
-    Window_CustomStatus.prototype.processCancel = function() {
+    Window_CustomStatus.prototype.processCancel = function () {
         this.callHandler('cancel');
     };
 
-    Window_CustomStatus.prototype.isOkEnabled = function() {
+    Window_CustomStatus.prototype.isOkEnabled = function () {
         return true;
     };
 
-    Window_CustomStatus.prototype.isCancelEnabled = function() {
+    Window_CustomStatus.prototype.isCancelEnabled = function () {
         return true;
     };
 
-    Window_CustomStatus.prototype.setActor = function(actor) {
+    Window_CustomStatus.prototype.setActor = function (actor) {
         if (this._actor !== actor) {
             this._actor = actor;
             this._bodyPartsScrollIndex = 0;
@@ -581,7 +581,7 @@
         }
     };
 
-    Window_CustomStatus.prototype.setActorIndex = function(index) {
+    Window_CustomStatus.prototype.setActorIndex = function (index) {
         if (this._actorIndex !== index) {
             this._actorIndex = index;
             this._bodyPartsScrollIndex = 0;
@@ -591,13 +591,13 @@
 
 
     // Override drawActorFace to use bust images from variables 106-108
-    Window_CustomStatus.prototype.drawActorFace = function(actor, x, y, width, height) {
+    Window_CustomStatus.prototype.drawActorFace = function (actor, x, y, width, height) {
         width = width || ImageManager.faceWidth;
         height = height || ImageManager.faceHeight;
         drawBustImage(this.contents, actor, x, y, width, height);
     };
 
-    Window_CustomStatus.prototype.refresh = function() {
+    Window_CustomStatus.prototype.refresh = function () {
         this.contents.clear();
         if (this._actor) {
             this.drawPartyTabs();
@@ -605,7 +605,7 @@
         }
     };
 
-    Window_CustomStatus.prototype.drawPartyTabs = function() {
+    Window_CustomStatus.prototype.drawPartyTabs = function () {
         const allMembers = $gameParty.allMembers();
         if (allMembers.length <= 1) return;
 
@@ -632,35 +632,35 @@
             const leftActor = allMembers[prevIndex];
             const leftTabX = startX;
             const leftTabY = startY;
-            
+
             this.drawArrow(leftTabX - arrowWidth - 5, leftTabY + tabHeight / 2, "left");
             this.drawTab(leftActor, leftTabX, leftTabY, tabWidth, tabHeight);
 
             const rightActor = allMembers[nextIndex];
             const rightTabX = startX + tabWidth + tabSpacing;
             const rightTabY = startY;
-            
+
             this.drawTab(rightActor, rightTabX, rightTabY, tabWidth, tabHeight);
             this.drawArrow(rightTabX + tabWidth + 5, rightTabY + tabHeight / 2, "right");
         }
     };
 
-    Window_CustomStatus.prototype.drawArrow = function(x, y, direction) {
+    Window_CustomStatus.prototype.drawArrow = function (x, y, direction) {
         const arrowSize = 12;
         this.changeTextColor(ColorManager.normalColor());
         this.contents.fontSize = arrowSize * 1.8;
-        
+
         const arrowText = direction === "left" ? "◀" : "▶";
         const textY = y - this.contents.fontSize / 2;
         this.contents.drawText(arrowText, x - arrowSize, textY, arrowSize * 2, this.contents.fontSize, "center");
-        
+
         this.resetFontSettings();
     };
 
-    Window_CustomStatus.prototype.drawTab = function(actor, x, y, width, height) {
+    Window_CustomStatus.prototype.drawTab = function (actor, x, y, width, height) {
         const tabColor = ColorManager.dimColor1();
         this.contents.fillRect(x, y, width, height, tabColor);
-        
+
         const borderColor = ColorManager.outlineColor();
         this.contents.strokeRect(x, y, width, height, borderColor);
 
@@ -672,7 +672,7 @@
     };
 
     // [NEW] Helper function to draw bordered/filled boxes
-    Window_CustomStatus.prototype.drawSectionBox = function(x, y, width, height) {
+    Window_CustomStatus.prototype.drawSectionBox = function (x, y, width, height) {
         const c1 = ColorManager.dimColor1();
         const c2 = ColorManager.dimColor2();
         // Use a subtle gradient for the background
@@ -682,7 +682,7 @@
     };
 
     // [REFACTORED] Main drawing logic
-    Window_CustomStatus.prototype.drawActorStatus = function() {
+    Window_CustomStatus.prototype.drawActorStatus = function () {
         const line = this.lineHeight();
         const pad = 10; // Padding between sections
         const innerPad = 15; // Padding inside sections
@@ -697,7 +697,7 @@
         let y = 10; // Start Y, below tabs
 
         // --- LEFT COLUMN ---
-        
+
         // Section 1: Actor Info (Name/Class/Level on first row, Face on second row)
         const baseFaceWidth = ImageManager.faceWidth;
         const baseFaceHeight = ImageManager.faceHeight;
@@ -731,12 +731,12 @@
         // Section 2: Gauges (HP, MP, TP)
         const gaugeRectH = Math.floor(line * 0.95) * 3 + 12 + innerPad * 2;
         const gaugeWidth = leftColWidth - innerPad * 2;
-        
+
         this.drawSectionBox(leftColX, y, leftColWidth, gaugeRectH);
         this.drawActorHp(this._actor, leftColX + innerPad, y + innerPad, gaugeWidth);
         this.drawActorMp(this._actor, leftColX + innerPad, y + innerPad + Math.floor(line * 0.95) + 4, gaugeWidth);
         this.drawActorTp(this._actor, leftColX + innerPad, y + innerPad + Math.floor(line * 0.95) * 2 + 8, gaugeWidth);
-        
+
         y += gaugeRectH + (pad / 2); // Reduce padding to prevent cutoff
 
         // Section 3: Experience
@@ -776,9 +776,9 @@
     };
 
     // [REFACTORED] Draws description inside its new box
-    Window_CustomStatus.prototype.drawCharacterDescription = function(actor, x, y, width) {
+    Window_CustomStatus.prototype.drawCharacterDescription = function (actor, x, y, width) {
         const useTranslation = ConfigManager.language === "it";
-        
+
         this.changeTextColor(ColorManager.systemColor());
         this.contents.fontSize = 20;
         this.drawText(getText('description'), x, y, width);
@@ -787,25 +787,25 @@
 
         const actorId = actor.actorId();
         let description = "";
-        
+
         if ($dataSystem && $dataSystem.characterDescriptions && $dataSystem.characterDescriptions[actorId]) {
             description = $dataSystem.characterDescriptions[actorId];
         } else {
             const className = actor.currentClass().name.toLowerCase();
-            if (className.includes('warrior') || className.includes('fighter') || className.includes('gladiator') || 
+            if (className.includes('warrior') || className.includes('fighter') || className.includes('gladiator') ||
                 className.includes('guerriero') || className.includes('combattente')) {
                 description = useTranslation ? translations.defaultDescriptions.warrior.it : translations.defaultDescriptions.warrior.en;
             } else if (className.includes('mage') || className.includes('wizard') || className.includes('sorcerer') ||
-                       className.includes('mago') || className.includes('stregone')) {
+                className.includes('mago') || className.includes('stregone')) {
                 description = useTranslation ? translations.defaultDescriptions.mage.it : translations.defaultDescriptions.mage.en;
             } else if (className.includes('priest') || className.includes('cleric') || className.includes('healer') ||
-                       className.includes('sacerdote') || className.includes('chierico') || className.includes('guaritore')) {
+                className.includes('sacerdote') || className.includes('chierico') || className.includes('guaritore')) {
                 description = useTranslation ? translations.defaultDescriptions.priest.it : translations.defaultDescriptions.priest.en;
             } else if (className.includes('rogue') || className.includes('thief') || className.includes('assassin') ||
-                       className.includes('ladro') || className.includes('assassino')) {
+                className.includes('ladro') || className.includes('assassino')) {
                 description = useTranslation ? translations.defaultDescriptions.rogue.it : translations.defaultDescriptions.rogue.en;
             } else if (className.includes('archer') || className.includes('ranger') || className.includes('hunter') ||
-                       className.includes('arciere') || className.includes('cacciatore')) {
+                className.includes('arciere') || className.includes('cacciatore')) {
                 description = useTranslation ? translations.defaultDescriptions.archer.it : translations.defaultDescriptions.archer.en;
             } else {
                 const prefix = useTranslation ? translations.defaultDescriptions.default.it : translations.defaultDescriptions.default.en;
@@ -820,7 +820,7 @@
     };
 
     // [REFACTORED] Draws parameters inside their new box in two columns
-    Window_CustomStatus.prototype.drawParametersColumn = function(x, y, width) {
+    Window_CustomStatus.prototype.drawParametersColumn = function (x, y, width) {
         const lineHeight = this.lineHeight();
         const colWidth = Math.floor((width - 20) / 2);
         const col2X = x + colWidth + 20;
@@ -840,9 +840,9 @@
 
         this.resetFontSettings();
     };
-    
+
     // [REFACTORED] Draws traits inside their new box
-    Window_CustomStatus.prototype.drawCharacterTraitsColumn = function(actor, x, y, width) {
+    Window_CustomStatus.prototype.drawCharacterTraitsColumn = function (actor, x, y, width) {
         const useTranslation = ConfigManager.language === "it";
 
         this.changeTextColor(ColorManager.systemColor());
@@ -889,7 +889,7 @@
     };
 
     // Helper function to wrap text without breaking words
-    Window_CustomStatus.prototype.wrapTextWithoutBreakingWords = function(text, maxChars) {
+    Window_CustomStatus.prototype.wrapTextWithoutBreakingWords = function (text, maxChars) {
         const words = text.split(' ');
         const lines = [];
         let currentLine = '';
@@ -927,7 +927,7 @@
     Window_StatusStates.prototype = Object.create(Window_Base.prototype);
     Window_StatusStates.prototype.constructor = Window_StatusStates;
 
-    Window_StatusStates.prototype.initialize = function(rect) {
+    Window_StatusStates.prototype.initialize = function (rect) {
         Window_Base.prototype.initialize.call(this, rect);
         this._actor = null;
         this._cycleFrame = 0;
@@ -935,14 +935,14 @@
         this._cycleInterval = 90; // frames between page advances
     };
 
-    Window_StatusStates.prototype.setActor = function(actor) {
+    Window_StatusStates.prototype.setActor = function (actor) {
         this._actor = actor;
         this._cyclePage = 0;
         this._cycleFrame = 0;
         this.refresh();
     };
 
-    Window_StatusStates.prototype.update = function() {
+    Window_StatusStates.prototype.update = function () {
         Window_Base.prototype.update.call(this);
         if (!this._actor) return;
         const states = this._getVisibleStates();
@@ -960,23 +960,23 @@
         }
     };
 
-    Window_StatusStates.prototype._getVisibleStates = function() {
+    Window_StatusStates.prototype._getVisibleStates = function () {
         if (!this._actor) return [];
         return this._actor._states
             .map(id => $dataStates[id])
             .filter(s => s && s.iconIndex > 0);
     };
 
-    Window_StatusStates.prototype._iconsPerRow = function() {
+    Window_StatusStates.prototype._iconsPerRow = function () {
         return Math.max(1, Math.floor(this.contentsWidth() / (ImageManager.iconWidth + 4)));
     };
 
-    Window_StatusStates.prototype._rowsVisible = function() {
+    Window_StatusStates.prototype._rowsVisible = function () {
         const headerH = this.lineHeight() + 6;
         return Math.max(1, Math.floor((this.contentsHeight() - headerH) / (ImageManager.iconHeight + 4)));
     };
 
-    Window_StatusStates.prototype.refresh = function() {
+    Window_StatusStates.prototype.refresh = function () {
         this.contents.clear();
         const useTranslation = ConfigManager.language === "it";
         const label = useTranslation ? "Stati" : "States";
@@ -1059,17 +1059,17 @@
     Window_StatusParams.prototype = Object.create(Window_Base.prototype);
     Window_StatusParams.prototype.constructor = Window_StatusParams;
 
-    Window_StatusParams.prototype.initialize = function(rect) {
+    Window_StatusParams.prototype.initialize = function (rect) {
         Window_Base.prototype.initialize.call(this, rect);
         this._actor = null;
     };
 
-    Window_StatusParams.prototype.setActor = function(actor) {
+    Window_StatusParams.prototype.setActor = function (actor) {
         this._actor = actor;
         this.refresh();
     };
 
-    Window_StatusParams.prototype.refresh = function() {
+    Window_StatusParams.prototype.refresh = function () {
         this.contents.clear();
         if (!this._actor) return;
         const actor = this._actor;
@@ -1174,7 +1174,7 @@
     };
 
     // [REFACTORED] Draws HP with full width and new gauge
-    Window_CustomStatus.prototype.drawActorHp = function(actor, x, y, width) {
+    Window_CustomStatus.prototype.drawActorHp = function (actor, x, y, width) {
         this.contents.fontSize = 18;
         this.changeTextColor(ColorManager.systemColor());
         this.drawText(TextManager.hpA, x, y, 40);
@@ -1190,7 +1190,7 @@
     };
 
     // [REFACTORED] Draws MP with full width and new gauge
-    Window_CustomStatus.prototype.drawActorMp = function(actor, x, y, width) {
+    Window_CustomStatus.prototype.drawActorMp = function (actor, x, y, width) {
         this.contents.fontSize = 18;
         this.changeTextColor(ColorManager.systemColor());
         this.drawText(TextManager.mpA, x, y, 40);
@@ -1206,7 +1206,7 @@
     };
 
     // [REFACTORED] Draws TP with full width and new gauge
-    Window_CustomStatus.prototype.drawActorTp = function(actor, x, y, width) {
+    Window_CustomStatus.prototype.drawActorTp = function (actor, x, y, width) {
         this.contents.fontSize = 18;
         this.changeTextColor(ColorManager.systemColor());
         this.drawText(TextManager.tpA, x, y, 40);
@@ -1221,51 +1221,51 @@
     };
 
     // [REFACTORED] Draws EXP, fixing label width bug
-   // [REFACTORED] Draws EXP, fixing label width bug and EXP bar logic
-   Window_CustomStatus.prototype.drawActorExp = function(actor, x, y, width) {
-    this.contents.fontSize = 16;
+    // [REFACTORED] Draws EXP, fixing label width bug and EXP bar logic
+    Window_CustomStatus.prototype.drawActorExp = function (actor, x, y, width) {
+        this.contents.fontSize = 16;
 
-    const currentExp = actor.currentExp() || 0;
-    let rate = 0;
-    let expForThisLevel = 0;
-    let expGainedThisLevel = 0;
+        const currentExp = actor.currentExp() || 0;
+        let rate = 0;
+        let expForThisLevel = 0;
+        let expGainedThisLevel = 0;
 
-    if (actor.isMaxLevel()) {
-        rate = 1;
-        expForThisLevel = 0;
-        expGainedThisLevel = 0;
-    } else {
-        // Correct logic for a "progress within level" EXP bar
-        const currentLevelExp = actor.currentLevelExp(); // Total EXP needed for current level
-        const nextLevelExp = actor.nextLevelExp();     // Total EXP needed for next level
-
-        expForThisLevel = nextLevelExp - currentLevelExp; // How much EXP this level requires
-        expGainedThisLevel = currentExp - currentLevelExp;  // How much EXP gained since last level
-
-        if (expForThisLevel > 0) {
-            rate = expGainedThisLevel / expForThisLevel;
+        if (actor.isMaxLevel()) {
+            rate = 1;
+            expForThisLevel = 0;
+            expGainedThisLevel = 0;
         } else {
-            rate = 0; // Should not happen, but good to prevent division by zero
+            // Correct logic for a "progress within level" EXP bar
+            const currentLevelExp = actor.currentLevelExp(); // Total EXP needed for current level
+            const nextLevelExp = actor.nextLevelExp();     // Total EXP needed for next level
+
+            expForThisLevel = nextLevelExp - currentLevelExp; // How much EXP this level requires
+            expGainedThisLevel = currentExp - currentLevelExp;  // How much EXP gained since last level
+
+            if (expForThisLevel > 0) {
+                rate = expGainedThisLevel / expForThisLevel;
+            } else {
+                rate = 0; // Should not happen, but good to prevent division by zero
+            }
         }
-    }
 
-    rate = isFinite(rate) ? Math.max(0, Math.min(1, rate)) : 0;
+        rate = isFinite(rate) ? Math.max(0, Math.min(1, rate)) : 0;
 
-    // Draw EXP text above the bar: EXP: 50/4500
-    this.changeTextColor(ColorManager.textColor(6)); // Yellow color for "EXP:"
-    this.drawText("EXP:", x, y, width, 'left');
+        // Draw EXP text above the bar: EXP: 50/4500
+        this.changeTextColor(ColorManager.textColor(6)); // Yellow color for "EXP:"
+        this.drawText("EXP:", x, y, width, 'left');
 
-    const expText = `${expGainedThisLevel}/${expForThisLevel}`;
-    this.resetTextColor(); // Default color for the numbers
-    this.drawText(expText, x + this.textWidth("EXP:") + 10, y, width - this.textWidth("EXP:") - 10, 'left');
+        const expText = `${expGainedThisLevel}/${expForThisLevel}`;
+        this.resetTextColor(); // Default color for the numbers
+        this.drawText(expText, x + this.textWidth("EXP:") + 10, y, width - this.textWidth("EXP:") - 10, 'left');
 
-    // Draw the gauge below the text
-    const gaugeY = y + this.lineHeight();
-    this.drawGauge(x, gaugeY, width, 6, rate, ColorManager.normalColor(), ColorManager.normalColor());
-    this.resetFontSettings();
-};
+        // Draw the gauge below the text
+        const gaugeY = y + this.lineHeight();
+        this.drawGauge(x, gaugeY, width, 6, rate, ColorManager.normalColor(), ColorManager.normalColor());
+        this.resetFontSettings();
+    };
 
-    Window_CustomStatus.prototype.drawActorParamCompact = function(actor, paramId, x, y, width) {
+    Window_CustomStatus.prototype.drawActorParamCompact = function (actor, paramId, x, y, width) {
         this.changeTextColor(ColorManager.systemColor());
         const paramName = TextManager.param(paramId);
         this.drawText(paramName, x, y, 70);
@@ -1296,7 +1296,7 @@
     };
 
     // Draw actor element with icon
-    Window_CustomStatus.prototype.drawActorElement = function(actor, x, y, width) {
+    Window_CustomStatus.prototype.drawActorElement = function (actor, x, y, width) {
         const actorClass = actor.currentClass();
         if (!actorClass || !actorClass.note) return;
 
@@ -1346,7 +1346,7 @@
     };
 
     // [REFACTORED] Draws states inside their new box
-    Window_CustomStatus.prototype.drawActorStates = function(actor, x, y, width) {
+    Window_CustomStatus.prototype.drawActorStates = function (actor, x, y, width) {
         this.changeTextColor(ColorManager.systemColor());
         this.contents.fontSize = 18;
         this.drawText(getText('states'), x, y, 200);
@@ -1354,7 +1354,7 @@
         y += this.lineHeight() + 5;
 
         const states = actor._states.map(id => $dataStates[id]).filter(state => state && state.iconIndex > 0);
-        
+
         if (states.length === 0) {
             this.resetTextColor();
             this.contents.fontSize = 16;
@@ -1365,7 +1365,7 @@
 
         const iconWidth = ImageManager.iconWidth + 2;
         const maxIconsPerRow = Math.floor(width / iconWidth);
-        
+
         for (let i = 0; i < states.length; i++) {
             const iconX = x + (i % maxIconsPerRow) * iconWidth;
             const iconY = y + Math.floor(i / maxIconsPerRow) * (ImageManager.iconHeight + 2);
@@ -1376,7 +1376,7 @@
         const iconRows = Math.ceil(states.length / maxIconsPerRow);
         y += iconRows * (ImageManager.iconHeight + 2) + 5;
         this.contents.fontSize = 14;
-        
+
         for (let i = 0; i < Math.min(states.length, 3); i++) {
             const textY = y + i * (this.lineHeight() - 5);
             this.resetTextColor();
@@ -1391,7 +1391,7 @@
     };
 
     // [MODIFIED] Gauge function now accepts height
-    Window_CustomStatus.prototype.drawGauge = function(x, y, width, height, rate, color1, color2) {
+    Window_CustomStatus.prototype.drawGauge = function (x, y, width, height, rate, color1, color2) {
         const fillW = Math.floor((width - 2) * rate);
         const gaugeH = height;
         this.contents.fillRect(x, y, width, gaugeH, ColorManager.gaugeBackColor());

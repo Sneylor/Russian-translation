@@ -31,8 +31,8 @@
 
   // Import from Math module
   const { RandomGenerator, COLORS, ORBIT_ZOOM_THRESHOLD, ORBIT_FULL_ALPHA_ZOOM,
-          PLANET_MIN_SIZE, PLANET_DETAIL_THRESHOLD, ECCENTRIC_ORBIT_TYPES,
-          SCALE_GALAXY, SCALE_SYSTEM } = window.GalaxySim.Math;
+    PLANET_MIN_SIZE, PLANET_DETAIL_THRESHOLD, ECCENTRIC_ORBIT_TYPES,
+    SCALE_GALAXY, SCALE_SYSTEM } = window.GalaxySim.Math;
 
   // ============================================================================
   // Name Generation Functions
@@ -136,10 +136,10 @@
       const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       return result
         ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16),
-          }
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
         : { r: 255, g: 255, b: 255 };
     },
 

@@ -1,0 +1,121 @@
+{
+  "154": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": [
+          300
+        ]
+      },
+      {
+        "tilesetId": 303,
+        "tileIds": [
+          595
+        ]
+      },
+      {
+        "tilesetId": 300,
+        "tileIds": [
+          990
+        ]
+      }
+    ]
+  },
+  "155": {
+    "tilesets": [
+      {
+        "tilesetId": 303,
+        "tileIds": [
+          889
+        ]
+      },
+      {
+        "tilesetId": 300,
+        "tileIds": [
+          1006
+        ]
+      }
+    ]
+  },
+  "156": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": [
+          998
+        ]
+      }
+    ]
+  },
+  "157": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": []
+      }
+    ]
+  },
+  "158": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": []
+      }
+    ]
+  },
+  "159": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": []
+      }
+    ]
+  },
+  "160": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": []
+      }
+    ]
+  },
+  "161": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": []
+      }
+    ]
+  },
+  "162": {
+    "tilesets": [
+      {
+        "tilesetId": 900,
+        "tileIds": []
+      }
+    ]
+  },
+  "Streetlight": {
+    "tilesets": [
+      {
+        "tilesetId": 300,
+        "tileIds": [
+          300,
+          990,
+          1006
+        ]
+      },
+      {
+        "tilesetId": 303,
+        "tileIds": [
+          595,
+          889
+        ]
+      },
+      {
+        "tilesetId": 900,
+        "tileIds": []
+      }
+    ]
+  }
+}

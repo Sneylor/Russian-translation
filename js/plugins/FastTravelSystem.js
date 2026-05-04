@@ -233,7 +233,8 @@
     const fuelConsumptionRate = parseFloat(parameters['fuelConsumptionRate']) || 0.1;
     
     // Base time in seconds it takes to travel one tile. Used in timer calculation.
-    const baseTimePerTile = 0.15;
+    // Adjusted to 0.666 so that 100km (tiles) with Train (3.33x) takes 20 seconds.
+    const baseTimePerTile = 0.666;
 const TRANSPORT_DESTINATIONS = {
     "Antwerpen": {
         "base": {"x":88, "y":118},
@@ -1633,7 +1634,7 @@ const TRANSPORT_DESTINATIONS = {
     };
 
     Scene_Map.prototype.createTravelTimerWindow = function() {
-        const rect = new Rectangle(Graphics.boxWidth - 300, 0, 300, this.calcWindowHeight(3, false));
+        const rect = new Rectangle(10, 0, 300, this.calcWindowHeight(3, false));
         this._travelTimerWindow = new Window_TravelTimer(rect);
         this._travelTimerWindow.hide();
         this.addWindow(this._travelTimerWindow);
@@ -1842,7 +1843,7 @@ Scene_Map.prototype.createRefuelWindow = function() {
             if (data.timerActive) {
                 // For car sharing, show timer in all scenes
                 if (data.selectedTransport === 'carsharing'||data.selectedTransport === 'camper') {
-                    const rect = new Rectangle(Graphics.boxWidth - 300, 0, 300, Window_Base.prototype.fittingHeight(3));
+                    const rect = new Rectangle(10, 0, 300, Window_Base.prototype.fittingHeight(3));
                     this._persistentTimerWindow = new Window_TravelTimer(rect);
                     this._persistentTimerWindow.refreshFromGameSystem();
                     this._persistentTimerWindow.show();

@@ -57,7 +57,7 @@
   const { getCharacterPresets, markStepCompleted, isStepCompleted, hasCompletedFirstCreation, markFirstCreationComplete, Window_CharacterPresets } = window.CharacterPresets || {};
   const { Scene_ClassSelection } = window.ClassSelection || {};
 
-﻿  const CharacterCreationData = [
+  const CharacterCreationData = [
     {
       // 0: Difficulty - Show only once
       get title() {
@@ -303,7 +303,7 @@
           $gameVariables.setValue(genderVar, choice.value);
 
           // Set reproduction type based on gender
-          switch(choice.value){
+          switch (choice.value) {
             case 0: // Male
               $gameVariables.setValue(reproductiveVar, 0); // Testicles
               break;
@@ -979,9 +979,9 @@
           4,                        // min characters
           12                        // max characters
         );
-      } else if (window.textDatabases) {
+      } else if (window.TextGen) {
         // Fallback: pick a random name from the names database
-        const namesDB = window.textDatabases.find(db => db.id === "names");
+        const namesDB = window.TextGen.names;
         if (namesDB && namesDB.en) {
           const namesList = namesDB.en.trim().split(/\s+/);
           if (namesList.length > 0) {
@@ -1047,7 +1047,7 @@
       $gameVariables.setValue(genderVar, randomGender);
 
       // Set reproduction type based on gender
-      switch(randomGender) {
+      switch (randomGender) {
         case 0: // Male
           $gameVariables.setValue(reproductiveVar, 0); // Testicles
           break;
@@ -1079,15 +1079,15 @@
         console.warn("selectRandomSpriteForActor not available for total randomization");
       }
 
-      // Set bust based on SPRITES_ASSOCIATION for the selected sprite
-      if (selectedSprite && window.Sprites && window.Sprites.SPRITES_ASSOCIATION) {
-        const SPRITES_ASSOCIATION = window.Sprites.SPRITES_ASSOCIATION;
+      // Set bust based on SpritesAssociation for the selected sprite
+      if (selectedSprite && window.Sprites && window.Sprites.SpritesAssociation) {
+        const SpritesAssociation = window.Sprites.SpritesAssociation;
         const spriteName = selectedSprite.name;
         const spriteIndex = selectedSprite.index;
 
         // Check if this sprite has an associated bust
-        if (SPRITES_ASSOCIATION[spriteName] && SPRITES_ASSOCIATION[spriteName][spriteIndex]) {
-          const associatedBust = SPRITES_ASSOCIATION[spriteName][spriteIndex];
+        if (SpritesAssociation[spriteName] && SpritesAssociation[spriteName][spriteIndex]) {
+          const associatedBust = SpritesAssociation[spriteName][spriteIndex];
 
           // Set Variable 109 for actor 1, Variable 107 for actor 2, Variable 108 for actor 3
           if (targetActorId === 1) {
@@ -1102,15 +1102,15 @@
           }
         } else {
           // No association found, fall back to random bust selection
-          console.log(`Total Random: No SPRITES_ASSOCIATION found for ${spriteName}[${spriteIndex}], selecting random bust`);
+          console.log(`Total Random: No SpritesAssociation found for ${spriteName}[${spriteIndex}], selecting random bust`);
           if (window.selectRandomBustForActor) {
             const selectedBust = window.selectRandomBustForActor(targetActorId);
             console.log(`Total Random: Selected random bust ${selectedBust} for actor ${targetActorId}`);
           }
         }
       } else {
-        // SPRITES_ASSOCIATION not available, fall back to random bust selection
-        console.log(`Total Random: SPRITES_ASSOCIATION not available, selecting random bust`);
+        // SpritesAssociation not available, fall back to random bust selection
+        console.log(`Total Random: SpritesAssociation not available, selecting random bust`);
         if (window.selectRandomBustForActor) {
           const selectedBust = window.selectRandomBustForActor(targetActorId);
           console.log(`Total Random: Selected random bust ${selectedBust} for actor ${targetActorId}`);

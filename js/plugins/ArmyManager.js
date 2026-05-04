@@ -116,26 +116,26 @@ function Game_Army() {
   this.initialize(...arguments);
 }
 
-Game_Army.prototype.initialize = function() {
+Game_Army.prototype.initialize = function () {
   this._troops = []; // Array of troop objects
   this._nextTroopId = 1;
   this._squads = []; // Array of squad objects
   this._nextSquadId = 1;
 };
 
-Game_Army.prototype.getTroops = function() {
+Game_Army.prototype.getTroops = function () {
   return this._troops;
 };
 
-Game_Army.prototype.getTroopCount = function() {
+Game_Army.prototype.getTroopCount = function () {
   return this._troops.length;
 };
 
-Game_Army.prototype.canRecruitMore = function() {
+Game_Army.prototype.canRecruitMore = function () {
   return this._troops.length < ArmyManager.Params.maxArmySize;
 };
 
-Game_Army.prototype.addTroop = function(factionId, troopData) {
+Game_Army.prototype.addTroop = function (factionId, troopData) {
   if (!this.canRecruitMore()) {
     return false;
   }
@@ -163,7 +163,7 @@ Game_Army.prototype.addTroop = function(factionId, troopData) {
   return true;
 };
 
-Game_Army.prototype.removeTroop = function(troopId) {
+Game_Army.prototype.removeTroop = function (troopId) {
   const index = this._troops.findIndex(t => t.id === troopId);
   if (index >= 0) {
     this._troops.splice(index, 1);
@@ -172,11 +172,11 @@ Game_Army.prototype.removeTroop = function(troopId) {
   return false;
 };
 
-Game_Army.prototype.getTotalWeeklyCost = function() {
+Game_Army.prototype.getTotalWeeklyCost = function () {
   return this._troops.reduce((sum, troop) => sum + troop.weeklyCost, 0);
 };
 
-Game_Army.prototype.getCoherence = function() {
+Game_Army.prototype.getCoherence = function () {
   if (this._troops.length === 0) return 100;
 
   // Count troops by faction
@@ -192,7 +192,7 @@ Game_Army.prototype.getCoherence = function() {
   return Math.floor((maxCount / this._troops.length) * 100);
 };
 
-Game_Army.prototype.getFactionBreakdown = function() {
+Game_Army.prototype.getFactionBreakdown = function () {
   const breakdown = {};
 
   for (const troop of this._troops) {
@@ -221,11 +221,11 @@ Game_Army.prototype.getFactionBreakdown = function() {
 // Squad Management
 //=============================================================================
 
-Game_Army.prototype.getSquads = function() {
+Game_Army.prototype.getSquads = function () {
   return this._squads;
 };
 
-Game_Army.prototype.createSquad = function(troopName) {
+Game_Army.prototype.createSquad = function (troopName) {
   const squad = {
     id: this._nextSquadId++,
     name: troopName,
@@ -236,11 +236,11 @@ Game_Army.prototype.createSquad = function(troopName) {
   return squad;
 };
 
-Game_Army.prototype.getSquadById = function(squadId) {
+Game_Army.prototype.getSquadById = function (squadId) {
   return this._squads.find(s => s.id === squadId);
 };
 
-Game_Army.prototype.assignLeaderToSquad = function(squadId, actorId) {
+Game_Army.prototype.assignLeaderToSquad = function (squadId, actorId) {
   const squad = this.getSquadById(squadId);
   if (squad) {
     squad.leaderId = actorId;
@@ -249,7 +249,7 @@ Game_Army.prototype.assignLeaderToSquad = function(squadId, actorId) {
   return false;
 };
 
-Game_Army.prototype.removeLeaderFromSquad = function(squadId) {
+Game_Army.prototype.removeLeaderFromSquad = function (squadId) {
   const squad = this.getSquadById(squadId);
   if (squad) {
     squad.leaderId = null;
@@ -258,7 +258,7 @@ Game_Army.prototype.removeLeaderFromSquad = function(squadId) {
   return false;
 };
 
-Game_Army.prototype.addTroopToSquad = function(troopId, squadId) {
+Game_Army.prototype.addTroopToSquad = function (troopId, squadId) {
   const troop = this._troops.find(t => t.id === troopId);
   const squad = this.getSquadById(squadId);
 
@@ -279,7 +279,7 @@ Game_Army.prototype.addTroopToSquad = function(troopId, squadId) {
   return true;
 };
 
-Game_Army.prototype.removeTroopFromSquad = function(troopId) {
+Game_Army.prototype.removeTroopFromSquad = function (troopId) {
   const troop = this._troops.find(t => t.id === troopId);
   if (!troop || !troop.squadId) return false;
 
@@ -303,7 +303,7 @@ Game_Army.prototype.removeTroopFromSquad = function(troopId) {
   return true;
 };
 
-Game_Army.prototype.getTroopWithBonuses = function(troopId) {
+Game_Army.prototype.getTroopWithBonuses = function (troopId) {
   const troop = this._troops.find(t => t.id === troopId);
   if (!troop) return null;
 
@@ -335,7 +335,7 @@ Game_Army.prototype.getTroopWithBonuses = function(troopId) {
   return troopWithBonuses;
 };
 
-Game_Army.prototype.autoOrganizeSquads = function() {
+Game_Army.prototype.autoOrganizeSquads = function () {
   // Group troops by name
   const troopsByName = {};
   for (const troop of this._troops) {
@@ -368,20 +368,20 @@ Game_Army.prototype.autoOrganizeSquads = function() {
 //=============================================================================
 
 const _DataManager_createGameObjects_ArmyManager = DataManager.createGameObjects;
-DataManager.createGameObjects = function() {
+DataManager.createGameObjects = function () {
   _DataManager_createGameObjects_ArmyManager.call(this);
   $gameArmy = new Game_Army();
 };
 
 const _DataManager_makeSaveContents_ArmyManager = DataManager.makeSaveContents;
-DataManager.makeSaveContents = function() {
+DataManager.makeSaveContents = function () {
   const contents = _DataManager_makeSaveContents_ArmyManager.call(this);
   contents.army = $gameArmy;
   return contents;
 };
 
 const _DataManager_extractSaveContents_ArmyManager = DataManager.extractSaveContents;
-DataManager.extractSaveContents = function(contents) {
+DataManager.extractSaveContents = function (contents) {
   _DataManager_extractSaveContents_ArmyManager.call(this, contents);
   $gameArmy = contents.army || new Game_Army();
 };
@@ -391,7 +391,7 @@ DataManager.extractSaveContents = function(contents) {
 //=============================================================================
 
 const _Window_MenuCommand_makeCommandList_ArmyManager = Window_MenuCommand.prototype.makeCommandList;
-Window_MenuCommand.prototype.makeCommandList = function() {
+Window_MenuCommand.prototype.makeCommandList = function () {
   _Window_MenuCommand_makeCommandList_ArmyManager.call(this);
   if (ArmyManager.Params.showInMenu && $gameArmy && $gameArmy.getTroopCount() > 0) {
     this.addCommand(ArmyManager.Params.menuText, "army", true);
@@ -401,12 +401,12 @@ Window_MenuCommand.prototype.makeCommandList = function() {
 };
 
 const _Scene_Menu_createCommandWindow_ArmyManager = Scene_Menu.prototype.createCommandWindow;
-Scene_Menu.prototype.createCommandWindow = function() {
+Scene_Menu.prototype.createCommandWindow = function () {
   _Scene_Menu_createCommandWindow_ArmyManager.call(this);
   this._commandWindow.setHandler("army", this.commandArmy.bind(this));
 };
 
-Scene_Menu.prototype.commandArmy = function() {
+Scene_Menu.prototype.commandArmy = function () {
   SceneManager.push(Scene_Army);
 };
 
@@ -421,11 +421,11 @@ function Scene_Army() {
 Scene_Army.prototype = Object.create(Scene_MenuBase.prototype);
 Scene_Army.prototype.constructor = Scene_Army;
 
-Scene_Army.prototype.initialize = function() {
+Scene_Army.prototype.initialize = function () {
   Scene_MenuBase.prototype.initialize.call(this);
 };
 
-Scene_Army.prototype.create = function() {
+Scene_Army.prototype.create = function () {
   Scene_MenuBase.prototype.create.call(this);
   this.createHelpWindow();
   this.createInfoWindow();
@@ -434,7 +434,7 @@ Scene_Army.prototype.create = function() {
   this.createStatsWindow();
 };
 
-Scene_Army.prototype.createCommandWindow = function() {
+Scene_Army.prototype.createCommandWindow = function () {
   const rect = this.commandWindowRect();
   this._commandWindow = new Window_ArmyCommand(rect);
   this._commandWindow.setHandler("troops", this.commandTroops.bind(this));
@@ -443,7 +443,7 @@ Scene_Army.prototype.createCommandWindow = function() {
   this.addWindow(this._commandWindow);
 };
 
-Scene_Army.prototype.commandWindowRect = function() {
+Scene_Army.prototype.commandWindowRect = function () {
   const wx = 0;
   const wy = this._infoWindow.y + this._infoWindow.height;
   const ww = 200;
@@ -451,22 +451,22 @@ Scene_Army.prototype.commandWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Army.prototype.commandTroops = function() {
+Scene_Army.prototype.commandTroops = function () {
   this._troopListWindow.activate();
   this._troopListWindow.select(0);
 };
 
-Scene_Army.prototype.commandSquads = function() {
+Scene_Army.prototype.commandSquads = function () {
   SceneManager.push(Scene_Squads);
 };
 
-Scene_Army.prototype.createHelpWindow = function() {
+Scene_Army.prototype.createHelpWindow = function () {
   const rect = this.helpWindowRect();
   this._helpWindow = new Window_Help(rect);
   this.addWindow(this._helpWindow);
 };
 
-Scene_Army.prototype.helpWindowRect = function() {
+Scene_Army.prototype.helpWindowRect = function () {
   const wx = 0;
   const wy = 0;
   const ww = Graphics.boxWidth;
@@ -474,13 +474,13 @@ Scene_Army.prototype.helpWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Army.prototype.createInfoWindow = function() {
+Scene_Army.prototype.createInfoWindow = function () {
   const rect = this.infoWindowRect();
   this._infoWindow = new Window_ArmyInfo(rect);
   this.addWindow(this._infoWindow);
 };
 
-Scene_Army.prototype.infoWindowRect = function() {
+Scene_Army.prototype.infoWindowRect = function () {
   const wx = 0;
   const wy = this._helpWindow.y + this._helpWindow.height;
   const ww = Graphics.boxWidth;
@@ -488,7 +488,7 @@ Scene_Army.prototype.infoWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Army.prototype.createTroopListWindow = function() {
+Scene_Army.prototype.createTroopListWindow = function () {
   const rect = this.troopListWindowRect();
   this._troopListWindow = new Window_TroopList(rect);
   this._troopListWindow.setHelpWindow(this._helpWindow);
@@ -498,7 +498,7 @@ Scene_Army.prototype.createTroopListWindow = function() {
   this.addWindow(this._troopListWindow);
 };
 
-Scene_Army.prototype.troopListWindowRect = function() {
+Scene_Army.prototype.troopListWindowRect = function () {
   const wx = 200;
   const wy = this._commandWindow.y;
   const ww = (Graphics.boxWidth - 200) / 2;
@@ -506,20 +506,20 @@ Scene_Army.prototype.troopListWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Army.prototype.onTroopCancel = function() {
+Scene_Army.prototype.onTroopCancel = function () {
   this._troopListWindow.deselect();
   this._commandWindow.activate();
   this._statsWindow.setTroop(null);
 };
 
-Scene_Army.prototype.createStatsWindow = function() {
+Scene_Army.prototype.createStatsWindow = function () {
   const rect = this.statsWindowRect();
   this._statsWindow = new Window_TroopStats(rect);
   this._troopListWindow.setStatsWindow(this._statsWindow);
   this.addWindow(this._statsWindow);
 };
 
-Scene_Army.prototype.statsWindowRect = function() {
+Scene_Army.prototype.statsWindowRect = function () {
   const wx = 200 + (Graphics.boxWidth - 200) / 2;
   const wy = this._commandWindow.y;
   const ww = (Graphics.boxWidth - 200) / 2;
@@ -527,7 +527,7 @@ Scene_Army.prototype.statsWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Army.prototype.onTroopOk = function() {
+Scene_Army.prototype.onTroopOk = function () {
   const troop = this._troopListWindow.item();
   if (troop) {
     const message = "Release this troop from your army?";
@@ -558,11 +558,11 @@ function Window_ArmyCommand() {
 Window_ArmyCommand.prototype = Object.create(Window_Command.prototype);
 Window_ArmyCommand.prototype.constructor = Window_ArmyCommand;
 
-Window_ArmyCommand.prototype.initialize = function(rect) {
+Window_ArmyCommand.prototype.initialize = function (rect) {
   Window_Command.prototype.initialize.call(this, rect);
 };
 
-Window_ArmyCommand.prototype.makeCommandList = function() {
+Window_ArmyCommand.prototype.makeCommandList = function () {
   this.addCommand("Troops", "troops", true);
   this.addCommand("Squads", "squads", true);
   this.addCommand("Back", "cancel", true);
@@ -579,12 +579,12 @@ function Window_ArmyInfo() {
 Window_ArmyInfo.prototype = Object.create(Window_Base.prototype);
 Window_ArmyInfo.prototype.constructor = Window_ArmyInfo;
 
-Window_ArmyInfo.prototype.initialize = function(rect) {
+Window_ArmyInfo.prototype.initialize = function (rect) {
   Window_Base.prototype.initialize.call(this, rect);
   this.refresh();
 };
 
-Window_ArmyInfo.prototype.refresh = function() {
+Window_ArmyInfo.prototype.refresh = function () {
   this.contents.clear();
 
   const troopCount = $gameArmy.getTroopCount();
@@ -652,31 +652,31 @@ function Window_TroopList() {
 Window_TroopList.prototype = Object.create(Window_Selectable.prototype);
 Window_TroopList.prototype.constructor = Window_TroopList;
 
-Window_TroopList.prototype.initialize = function(rect) {
+Window_TroopList.prototype.initialize = function (rect) {
   Window_Selectable.prototype.initialize.call(this, rect);
   this._data = [];
   this._statsWindow = null;
   this.refresh();
 };
 
-Window_TroopList.prototype.setStatsWindow = function(window) {
+Window_TroopList.prototype.setStatsWindow = function (window) {
   this._statsWindow = window;
   this.updateStatsWindow();
 };
 
-Window_TroopList.prototype.maxItems = function() {
+Window_TroopList.prototype.maxItems = function () {
   return this._data ? this._data.length : 0;
 };
 
-Window_TroopList.prototype.item = function() {
+Window_TroopList.prototype.item = function () {
   return this._data[this.index()];
 };
 
-Window_TroopList.prototype.makeItemList = function() {
+Window_TroopList.prototype.makeItemList = function () {
   this._data = $gameArmy.getTroops();
 };
 
-Window_TroopList.prototype.drawItem = function(index) {
+Window_TroopList.prototype.drawItem = function (index) {
   const troop = this._data[index];
   if (!troop) return;
 
@@ -709,12 +709,12 @@ Window_TroopList.prototype.drawItem = function(index) {
   this.drawText(`€${weeklyEuros}/w`, rect.x + rect.width - 100, rect.y, 100, "right");
 };
 
-Window_TroopList.prototype.refresh = function() {
+Window_TroopList.prototype.refresh = function () {
   this.makeItemList();
   Window_Selectable.prototype.refresh.call(this);
 };
 
-Window_TroopList.prototype.updateHelp = function() {
+Window_TroopList.prototype.updateHelp = function () {
   const troop = this.item();
   if (troop) {
     const faction = $gameFactions.getFaction(troop.factionId);
@@ -726,12 +726,12 @@ Window_TroopList.prototype.updateHelp = function() {
   }
 };
 
-Window_TroopList.prototype.select = function(index) {
+Window_TroopList.prototype.select = function (index) {
   Window_Selectable.prototype.select.call(this, index);
   this.updateStatsWindow();
 };
 
-Window_TroopList.prototype.updateStatsWindow = function() {
+Window_TroopList.prototype.updateStatsWindow = function () {
   if (this._statsWindow) {
     this._statsWindow.setTroop(this.item());
   }
@@ -748,19 +748,19 @@ function Window_TroopStats() {
 Window_TroopStats.prototype = Object.create(Window_Base.prototype);
 Window_TroopStats.prototype.constructor = Window_TroopStats;
 
-Window_TroopStats.prototype.initialize = function(rect) {
+Window_TroopStats.prototype.initialize = function (rect) {
   Window_Base.prototype.initialize.call(this, rect);
   this._troop = null;
 };
 
-Window_TroopStats.prototype.setTroop = function(troop) {
+Window_TroopStats.prototype.setTroop = function (troop) {
   if (this._troop !== troop) {
     this._troop = troop;
     this.refresh();
   }
 };
 
-Window_TroopStats.prototype.refresh = function() {
+Window_TroopStats.prototype.refresh = function () {
   this.contents.clear();
 
   if (!this._troop) {
@@ -859,15 +859,15 @@ function Scene_BuyTroops() {
 Scene_BuyTroops.prototype = Object.create(Scene_MenuBase.prototype);
 Scene_BuyTroops.prototype.constructor = Scene_BuyTroops;
 
-Scene_BuyTroops.prototype.initialize = function() {
+Scene_BuyTroops.prototype.initialize = function () {
   Scene_MenuBase.prototype.initialize.call(this);
 };
 
-Scene_BuyTroops.prototype.prepare = function(factionId) {
+Scene_BuyTroops.prototype.prepare = function (factionId) {
   this._factionId = factionId;
 };
 
-Scene_BuyTroops.prototype.create = function() {
+Scene_BuyTroops.prototype.create = function () {
   Scene_MenuBase.prototype.create.call(this);
   this.createHelpWindow();
   this.createGoldWindow();
@@ -875,13 +875,13 @@ Scene_BuyTroops.prototype.create = function() {
   this.createStatsWindow();
 };
 
-Scene_BuyTroops.prototype.createHelpWindow = function() {
+Scene_BuyTroops.prototype.createHelpWindow = function () {
   const rect = this.helpWindowRect();
   this._helpWindow = new Window_Help(rect);
   this.addWindow(this._helpWindow);
 };
 
-Scene_BuyTroops.prototype.helpWindowRect = function() {
+Scene_BuyTroops.prototype.helpWindowRect = function () {
   const wx = 0;
   const wy = 0;
   const ww = Graphics.boxWidth;
@@ -889,13 +889,13 @@ Scene_BuyTroops.prototype.helpWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_BuyTroops.prototype.createGoldWindow = function() {
+Scene_BuyTroops.prototype.createGoldWindow = function () {
   const rect = this.goldWindowRect();
   this._goldWindow = new Window_Gold(rect);
   this.addWindow(this._goldWindow);
 };
 
-Scene_BuyTroops.prototype.goldWindowRect = function() {
+Scene_BuyTroops.prototype.goldWindowRect = function () {
   const wx = 0;
   const wy = this._helpWindow.y + this._helpWindow.height;
   const ww = Graphics.boxWidth;
@@ -903,7 +903,7 @@ Scene_BuyTroops.prototype.goldWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_BuyTroops.prototype.createTroopShopWindow = function() {
+Scene_BuyTroops.prototype.createTroopShopWindow = function () {
   const rect = this.troopShopWindowRect();
   this._troopShopWindow = new Window_TroopShop(rect);
   this._troopShopWindow.setHelpWindow(this._helpWindow);
@@ -915,7 +915,7 @@ Scene_BuyTroops.prototype.createTroopShopWindow = function() {
   this.addWindow(this._troopShopWindow);
 };
 
-Scene_BuyTroops.prototype.troopShopWindowRect = function() {
+Scene_BuyTroops.prototype.troopShopWindowRect = function () {
   const wx = 0;
   const wy = this._goldWindow.y + this._goldWindow.height;
   const ww = Graphics.boxWidth / 2;
@@ -923,14 +923,14 @@ Scene_BuyTroops.prototype.troopShopWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_BuyTroops.prototype.createStatsWindow = function() {
+Scene_BuyTroops.prototype.createStatsWindow = function () {
   const rect = this.statsWindowRect();
   this._statsWindow = new Window_RecruitStats(rect);
   this._troopShopWindow.setStatsWindow(this._statsWindow);
   this.addWindow(this._statsWindow);
 };
 
-Scene_BuyTroops.prototype.statsWindowRect = function() {
+Scene_BuyTroops.prototype.statsWindowRect = function () {
   const wx = Graphics.boxWidth / 2;
   const wy = this._goldWindow.y + this._goldWindow.height;
   const ww = Graphics.boxWidth / 2;
@@ -938,7 +938,7 @@ Scene_BuyTroops.prototype.statsWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_BuyTroops.prototype.onBuyOk = function() {
+Scene_BuyTroops.prototype.onBuyOk = function () {
   const item = this._troopShopWindow.item();
   if (!item) {
     this._troopShopWindow.activate();
@@ -989,7 +989,7 @@ function Window_TroopShop() {
 Window_TroopShop.prototype = Object.create(Window_Selectable.prototype);
 Window_TroopShop.prototype.constructor = Window_TroopShop;
 
-Window_TroopShop.prototype.initialize = function(rect) {
+Window_TroopShop.prototype.initialize = function (rect) {
   Window_Selectable.prototype.initialize.call(this, rect);
   this._data = [];
   this._factionId = -1;
@@ -997,26 +997,26 @@ Window_TroopShop.prototype.initialize = function(rect) {
   this.refresh();
 };
 
-Window_TroopShop.prototype.setStatsWindow = function(window) {
+Window_TroopShop.prototype.setStatsWindow = function (window) {
   this._statsWindow = window;
   this.updateStatsWindow();
 };
 
-Window_TroopShop.prototype.setFactionFilter = function(factionId) {
+Window_TroopShop.prototype.setFactionFilter = function (factionId) {
   this._factionId = factionId !== undefined ? factionId : -1;
   this.refresh();
   this.select(0);
 };
 
-Window_TroopShop.prototype.maxItems = function() {
+Window_TroopShop.prototype.maxItems = function () {
   return this._data ? this._data.length : 0;
 };
 
-Window_TroopShop.prototype.item = function() {
+Window_TroopShop.prototype.item = function () {
   return this._data[this.index()];
 };
 
-Window_TroopShop.prototype.makeItemList = function() {
+Window_TroopShop.prototype.makeItemList = function () {
   this._data = [];
 
   const allFactions = $gameFactions.getAllFactions();
@@ -1027,8 +1027,8 @@ Window_TroopShop.prototype.makeItemList = function() {
 
     // Look up country in Countries data
     let countryFaction = null;
-    if (window.Countries && window.Countries.Countries) {
-      const country = window.Countries.Countries.find(c => c.id === countryId);
+    if (window.WorldGen && window.WorldGen.Countries) {
+      const country = window.WorldGen.Countries.find(c => c.id === countryId);
       if (country && country.faction && country.faction !== "") {
         countryFaction = country.faction;
       }
@@ -1064,8 +1064,8 @@ Window_TroopShop.prototype.makeItemList = function() {
       const seed = worldX * 1000 + worldY;
 
       // Seeded random number generator
-      const seededRandom = (function(s) {
-        return function() {
+      const seededRandom = (function (s) {
+        return function () {
           s = Math.sin(s) * 10000;
           return s - Math.floor(s);
         };
@@ -1113,7 +1113,7 @@ Window_TroopShop.prototype.makeItemList = function() {
   }
 };
 
-Window_TroopShop.prototype.drawItem = function(index) {
+Window_TroopShop.prototype.drawItem = function (index) {
   const item = this._data[index];
   if (!item) return;
 
@@ -1148,12 +1148,12 @@ Window_TroopShop.prototype.drawItem = function(index) {
   this.changePaintOpacity(true);
 };
 
-Window_TroopShop.prototype.refresh = function() {
+Window_TroopShop.prototype.refresh = function () {
   this.makeItemList();
   Window_Selectable.prototype.refresh.call(this);
 };
 
-Window_TroopShop.prototype.updateHelp = function() {
+Window_TroopShop.prototype.updateHelp = function () {
   const item = this.item();
   if (item) {
     const troop = item.troop;
@@ -1169,12 +1169,12 @@ Window_TroopShop.prototype.updateHelp = function() {
   }
 };
 
-Window_TroopShop.prototype.select = function(index) {
+Window_TroopShop.prototype.select = function (index) {
   Window_Selectable.prototype.select.call(this, index);
   this.updateStatsWindow();
 };
 
-Window_TroopShop.prototype.updateStatsWindow = function() {
+Window_TroopShop.prototype.updateStatsWindow = function () {
   if (this._statsWindow) {
     this._statsWindow.setTroop(this.item());
   }
@@ -1191,19 +1191,19 @@ function Window_RecruitStats() {
 Window_RecruitStats.prototype = Object.create(Window_Base.prototype);
 Window_RecruitStats.prototype.constructor = Window_RecruitStats;
 
-Window_RecruitStats.prototype.initialize = function(rect) {
+Window_RecruitStats.prototype.initialize = function (rect) {
   Window_Base.prototype.initialize.call(this, rect);
   this._item = null;
 };
 
-Window_RecruitStats.prototype.setTroop = function(item) {
+Window_RecruitStats.prototype.setTroop = function (item) {
   if (this._item !== item) {
     this._item = item;
     this.refresh();
   }
 };
 
-Window_RecruitStats.prototype.refresh = function() {
+Window_RecruitStats.prototype.refresh = function () {
   this.contents.clear();
 
   if (!this._item || !this._item.troop) {
@@ -1275,11 +1275,11 @@ function Scene_Squads() {
 Scene_Squads.prototype = Object.create(Scene_MenuBase.prototype);
 Scene_Squads.prototype.constructor = Scene_Squads;
 
-Scene_Squads.prototype.initialize = function() {
+Scene_Squads.prototype.initialize = function () {
   Scene_MenuBase.prototype.initialize.call(this);
 };
 
-Scene_Squads.prototype.create = function() {
+Scene_Squads.prototype.create = function () {
   Scene_MenuBase.prototype.create.call(this);
 
   // Auto-organize squads when entering
@@ -1290,14 +1290,14 @@ Scene_Squads.prototype.create = function() {
   this.createLeaderSelectWindow();
 };
 
-Scene_Squads.prototype.createHelpWindow = function() {
+Scene_Squads.prototype.createHelpWindow = function () {
   const rect = this.helpWindowRect();
   this._helpWindow = new Window_Help(rect);
   this._helpWindow.setText("Assign party members to lead squads of the same troop type.\nLeaders provide stat bonuses based on their stats (+8%).");
   this.addWindow(this._helpWindow);
 };
 
-Scene_Squads.prototype.helpWindowRect = function() {
+Scene_Squads.prototype.helpWindowRect = function () {
   const wx = 0;
   const wy = 0;
   const ww = Graphics.boxWidth;
@@ -1305,7 +1305,7 @@ Scene_Squads.prototype.helpWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Squads.prototype.createSquadListWindow = function() {
+Scene_Squads.prototype.createSquadListWindow = function () {
   const rect = this.squadListWindowRect();
   this._squadListWindow = new Window_SquadList(rect);
   this._squadListWindow.setHelpWindow(this._helpWindow);
@@ -1316,7 +1316,7 @@ Scene_Squads.prototype.createSquadListWindow = function() {
   this.addWindow(this._squadListWindow);
 };
 
-Scene_Squads.prototype.squadListWindowRect = function() {
+Scene_Squads.prototype.squadListWindowRect = function () {
   const wx = 0;
   const wy = this._helpWindow.y + this._helpWindow.height;
   const ww = Math.floor(Graphics.boxWidth * 0.8);
@@ -1324,7 +1324,7 @@ Scene_Squads.prototype.squadListWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Squads.prototype.createLeaderSelectWindow = function() {
+Scene_Squads.prototype.createLeaderSelectWindow = function () {
   const rect = this.leaderSelectWindowRect();
   this._leaderSelectWindow = new Window_LeaderSelect(rect);
   this._leaderSelectWindow.setHandler("ok", this.onLeaderOk.bind(this));
@@ -1334,7 +1334,7 @@ Scene_Squads.prototype.createLeaderSelectWindow = function() {
   this.addWindow(this._leaderSelectWindow);
 };
 
-Scene_Squads.prototype.leaderSelectWindowRect = function() {
+Scene_Squads.prototype.leaderSelectWindowRect = function () {
   const wx = Math.floor(Graphics.boxWidth * 0.8);
   const wy = this._helpWindow.y + this._helpWindow.height;
   const ww = Graphics.boxWidth - wx;
@@ -1342,14 +1342,14 @@ Scene_Squads.prototype.leaderSelectWindowRect = function() {
   return new Rectangle(wx, wy, ww, wh);
 };
 
-Scene_Squads.prototype.onSquadOk = function() {
+Scene_Squads.prototype.onSquadOk = function () {
   this._leaderSelectWindow.setSquad(this._squadListWindow.item());
   this._leaderSelectWindow.show();
   this._leaderSelectWindow.activate();
   this._leaderSelectWindow.select(0);
 };
 
-Scene_Squads.prototype.onLeaderOk = function() {
+Scene_Squads.prototype.onLeaderOk = function () {
   const squad = this._squadListWindow.item();
   const leader = this._leaderSelectWindow.item();
 
@@ -1366,7 +1366,7 @@ Scene_Squads.prototype.onLeaderOk = function() {
   this._leaderSelectWindow.activate();
 };
 
-Scene_Squads.prototype.onLeaderCancel = function() {
+Scene_Squads.prototype.onLeaderCancel = function () {
   this._leaderSelectWindow.hide();
   this._leaderSelectWindow.deactivate();
   this._squadListWindow.activate();
@@ -1383,25 +1383,25 @@ function Window_SquadList() {
 Window_SquadList.prototype = Object.create(Window_Selectable.prototype);
 Window_SquadList.prototype.constructor = Window_SquadList;
 
-Window_SquadList.prototype.initialize = function(rect) {
+Window_SquadList.prototype.initialize = function (rect) {
   Window_Selectable.prototype.initialize.call(this, rect);
   this._data = [];
   this.refresh();
 };
 
-Window_SquadList.prototype.maxItems = function() {
+Window_SquadList.prototype.maxItems = function () {
   return this._data ? this._data.length : 0;
 };
 
-Window_SquadList.prototype.item = function() {
+Window_SquadList.prototype.item = function () {
   return this._data[this.index()];
 };
 
-Window_SquadList.prototype.makeItemList = function() {
+Window_SquadList.prototype.makeItemList = function () {
   this._data = $gameArmy.getSquads();
 };
 
-Window_SquadList.prototype.drawItem = function(index) {
+Window_SquadList.prototype.drawItem = function (index) {
   const squad = this._data[index];
   if (!squad) return;
 
@@ -1432,12 +1432,12 @@ Window_SquadList.prototype.drawItem = function(index) {
   }
 };
 
-Window_SquadList.prototype.refresh = function() {
+Window_SquadList.prototype.refresh = function () {
   this.makeItemList();
   Window_Selectable.prototype.refresh.call(this);
 };
 
-Window_SquadList.prototype.updateHelp = function() {
+Window_SquadList.prototype.updateHelp = function () {
   const squad = this.item();
   if (squad) {
     let text = `Squad: ${squad.name} (${squad.troopIds.length} troops)\n`;
@@ -1466,27 +1466,27 @@ function Window_LeaderSelect() {
 Window_LeaderSelect.prototype = Object.create(Window_Selectable.prototype);
 Window_LeaderSelect.prototype.constructor = Window_LeaderSelect;
 
-Window_LeaderSelect.prototype.initialize = function(rect) {
+Window_LeaderSelect.prototype.initialize = function (rect) {
   Window_Selectable.prototype.initialize.call(this, rect);
   this._data = [];
   this._squad = null;
   this.refresh();
 };
 
-Window_LeaderSelect.prototype.setSquad = function(squad) {
+Window_LeaderSelect.prototype.setSquad = function (squad) {
   this._squad = squad;
   this.refresh();
 };
 
-Window_LeaderSelect.prototype.maxItems = function() {
+Window_LeaderSelect.prototype.maxItems = function () {
   return this._data ? this._data.length : 0;
 };
 
-Window_LeaderSelect.prototype.item = function() {
+Window_LeaderSelect.prototype.item = function () {
   return this._data[this.index()];
 };
 
-Window_LeaderSelect.prototype.makeItemList = function() {
+Window_LeaderSelect.prototype.makeItemList = function () {
   this._data = [];
 
   if (!this._squad) return;
@@ -1503,7 +1503,7 @@ Window_LeaderSelect.prototype.makeItemList = function() {
   }
 };
 
-Window_LeaderSelect.prototype.drawItem = function(index) {
+Window_LeaderSelect.prototype.drawItem = function (index) {
   const item = this._data[index];
   if (!item) return;
 
@@ -1531,12 +1531,12 @@ Window_LeaderSelect.prototype.drawItem = function(index) {
   }
 };
 
-Window_LeaderSelect.prototype.refresh = function() {
+Window_LeaderSelect.prototype.refresh = function () {
   this.makeItemList();
   Window_Selectable.prototype.refresh.call(this);
 };
 
-Window_LeaderSelect.prototype.isCurrentItemEnabled = function() {
+Window_LeaderSelect.prototype.isCurrentItemEnabled = function () {
   const item = this.item();
   if (!item) return false;
 

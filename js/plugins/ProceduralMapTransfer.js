@@ -93,10 +93,11 @@
    * Sprite_BorderArrow - Animated directional arrow sprite, styled like RentSystem.js
    */
   class Sprite_BorderArrow extends Sprite {
-    constructor(mapX, mapY, arrowChar) {
+    constructor(mapX, mapY, arrowChar, color = '#ffff66') {
       super();
       this._mapX = mapX;
       this._mapY = mapY;
+      this._color = color;
       this._rotAngle = this._angleFromChar(arrowChar);
       this.createBitmap();
       this.anchor.set(0.5, 0.5);
@@ -122,7 +123,7 @@
       const aw = 32, ah = 22;
       const bitmap = new Bitmap(aw, ah);
       const ctx = bitmap.context;
-      ctx.fillStyle = '#ffff66';
+      ctx.fillStyle = this._color;
       ctx.strokeStyle = '#000000';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
@@ -522,6 +523,10 @@
           if (y === height - 1 && $gameMap.isValid(x, height - 2))
             passable = passable || $gameMap.isPassable(x, height - 2, 2);
           if (!passable) continue;
+          if (this.terrainTag(x, y) === 4) continue;
+          // Check if the border tile itself is passable (not a wall)
+          if (!this.isPassable(x, y, 2) && !this.isPassable(x, y, 4) && 
+              !this.isPassable(x, y, 6) && !this.isPassable(x, y, 8)) continue;
 
           const directions = [];
 
@@ -554,7 +559,7 @@
     this.clearProcGenBorderArrows();
 
     for (const border of borderTiles) {
-      const sprite = new Sprite_BorderArrow(border.x, border.y, border.arrow);
+      const sprite = new Sprite_BorderArrow(border.x, border.y, border.arrow, '#66ff66');
       SceneManager._scene._spriteset.addChild(sprite);
       procGenBorderArrows.push(sprite);
     }
@@ -598,9 +603,6 @@
     const px = this.x;
     const py = this.y;
 
-    let nearest = null;
-    let nearestDist = Infinity;
-
     for (const event of $gameMap.events()) {
       if (!event || !$dataMap.events[event._eventId]) continue;
       const name = $dataMap.events[event._eventId].name || "";
@@ -608,61 +610,59 @@
 
       const ex = event.x;
       const ey = event.y;
-      const dist = Math.abs(px - ex) + Math.abs(py - ey);
-      if (dist > 2) continue;
-      if (dist < nearestDist) {
-        nearestDist = dist;
-        nearest = event;
-      }
-    }
+      const dx = Math.abs(px - ex);
+      const dy = Math.abs(py - ey);
+      if (dx > 2 || dy > 2) continue;
+      if (dx === 0 && dy === 0) continue;
 
-    if (!nearest) return;
-    if (nearestDist === 0) return;
+      const mapWidth = $gameMap.width();
+      const mapHeight = $gameMap.height();
 
-    const ex = nearest.x;
-    const ey = nearest.y;
-    const mapWidth = $gameMap.width();
-    const mapHeight = $gameMap.height();
+      const onWestEdge  = ex === 0;
+      const onEastEdge  = ex === mapWidth - 1;
+      const onNorthEdge = ey === 0;
+      const onSouthEdge = ey === mapHeight - 1;
+      const isOnEdge = onWestEdge || onEastEdge || onNorthEdge || onSouthEdge;
 
-    const onWestEdge  = ex === 0;
-    const onEastEdge  = ex === mapWidth - 1;
-    const onNorthEdge = ey === 0;
-    const onSouthEdge = ey === mapHeight - 1;
-    const isOnEdge = onWestEdge || onEastEdge || onNorthEdge || onSouthEdge;
-
-    let ax, ay, char;
-    if (isOnEdge) {
-      // Draw arrow on the edge tile itself, pointing outward
-      ax = ex;
-      ay = ey;
-      if (onWestEdge)       char = "\u2190"; // ←
-      else if (onEastEdge)  char = "\u2192"; // →
-      else if (onNorthEdge) char = "\u2191"; // ↑
-      else                  char = "\u2193"; // ↓
-    } else {
-      const dx = px - ex;
-      const dy = py - ey;
-      if (Math.abs(dx) >= Math.abs(dy)) {
-        ax = ex + (dx > 0 ? 1 : -1);
-        ay = ey;
-        char = dx > 0 ? "\u2190" : "\u2192"; // ← or →
-      } else {
+      let ax, ay, char;
+      if (isOnEdge) {
+        // Draw arrow on the edge tile itself, pointing outward
         ax = ex;
-        ay = ey + (dy > 0 ? 1 : -1);
-        char = dy > 0 ? "\u2191" : "\u2193"; // ↑ or ↓
+        ay = ey;
+        if (onWestEdge)       char = "\u2190"; // ←
+        else if (onEastEdge)  char = "\u2192"; // →
+        else if (onNorthEdge) char = "\u2191"; // ↑
+        else                  char = "\u2193"; // ↓
+      } else {
+        const dx = px - ex;
+        const dy = py - ey;
+        if (Math.abs(dx) >= Math.abs(dy)) {
+          ax = ex + (dx > 0 ? 1 : -1);
+          ay = ey;
+          char = dx > 0 ? "\u2190" : "\u2192"; // ← or →
+        } else {
+          ax = ex;
+          ay = ey + (dy > 0 ? 1 : -1);
+          char = dy > 0 ? "\u2191" : "\u2193"; // ↑ or ↓
+        }
+
+        if (!$gameMap.isValid(ax, ay)) continue;
+        // Skip if the arrow tile is blocked (player can't walk there)
+        const passDir = Math.abs(dx) >= Math.abs(dy)
+          ? (dx > 0 ? 6 : 4)
+          : (dy > 0 ? 2 : 8);
+        if (!$gameMap.isPassable(ex, ey, passDir)) continue;
       }
 
-      if (!$gameMap.isValid(ax, ay)) return;
-      // Skip if the arrow tile is blocked (player can't walk there)
-      const passDir = Math.abs(dx) >= Math.abs(dy)
-        ? (dx > 0 ? 6 : 4)
-        : (dy > 0 ? 2 : 8);
-      if (!$gameMap.isPassable(ex, ey, passDir)) return;
-    }
+      // Never draw arrows on unpassable tiles or if their terrain tag is 4
+      if ($gameMap.terrainTag(ax, ay) === 4) continue;
+      if (!$gameMap.isPassable(ax, ay, 2) && !$gameMap.isPassable(ax, ay, 4) && 
+          !$gameMap.isPassable(ax, ay, 6) && !$gameMap.isPassable(ax, ay, 8)) continue;
 
-    const sprite = new Sprite_BorderArrow(ax, ay, char);
-    SceneManager._scene._spriteset.addChild(sprite);
-    teleportEventArrows.push(sprite);
+      const sprite = new Sprite_BorderArrow(ax, ay, char);
+      SceneManager._scene._spriteset.addChild(sprite);
+      teleportEventArrows.push(sprite);
+    }
   };
 
   Game_Player.prototype.clearTeleportEventArrows = function() {

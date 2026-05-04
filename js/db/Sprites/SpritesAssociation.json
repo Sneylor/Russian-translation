@@ -1,0 +1,2700 @@
+{
+  "!$Chests2": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "!Door1": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "!Flame": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "!Other1": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "!Other2": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$BigMonster1": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_1012": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_1363": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_1702": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_1895": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_375": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_496": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_55": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_608": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Char_730": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Creatures": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Sink": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "$Treadmill": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Actor1": [
+    "WarSniper",
+    "UniversityStudent",
+    "DJ",
+    "ArchivistArmorer",
+    "Jogger",
+    "Witch1",
+    "ElvenArcher",
+    "ArmorDiver"
+  ],
+  "Actor1RMVX": [
+    "Mage",
+    "Ranger",
+    "Partygoer",
+    "Revolutionary",
+    "Jeweler",
+    "Journalist",
+    "WastelandKnight",
+    "WarPilot"
+  ],
+  "Actor2": [
+    "ElvenBarbarian",
+    "SunCultist",
+    "Stylist",
+    "ElvenEnchantress",
+    "PirateHacker",
+    "TechnoBarbarian",
+    "Page",
+    "ValiantKnight"
+  ],
+  "Actor2RMVX": [
+    "ElvenGuard",
+    "ElvenVeteran",
+    "Princess",
+    "PizzaRider",
+    "SchoolTeacher",
+    "ScienceTeacher",
+    "ArmsTerader",
+    "Astrologist"
+  ],
+  "Actor3": [
+    "Botanist",
+    "CharmingPrince",
+    "GeniusGeneral",
+    "Astrologist",
+    "Ninja",
+    "CyberWitch",
+    "Infiltrator",
+    "Gunman"
+  ],
+  "Actor3RMVX": [
+    "DJ",
+    "WarWitch",
+    "WarSniper",
+    "WastelandThinkerer",
+    "ElvenScout",
+    "ElvenSinger",
+    "ElvenSwordsman",
+    "Catboy"
+  ],
+  "All": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Animals01Color": [
+    "CatButton",
+    "DogTail",
+    "AvianNoble",
+    "7",
+    "InsectoidBee",
+    "7",
+    "7",
+    "7"
+  ],
+  "Animals01": [
+    "CatButton",
+    "DogTail",
+    "AvianNoble",
+    "7",
+    "InsectoidBee",
+    "7",
+    "7",
+    "7"
+  ],
+  "GrayAnimals01": [
+    "CatButton",
+    "DogTail",
+    "AvianNoble",
+    "7",
+    "InsectoidBee",
+    "7",
+    "7",
+    "7"
+  ],
+  "Archivist": [
+    "Archeologist",
+    "Archivist",
+    "SnobStylist",
+    "Pinman",
+    "Spacer",
+    "SpaceMiner",
+    "Strangelove",
+    "TarotWitch"
+  ],
+  "Characters_ghosts_48x48": [
+    "VoidAstronaut",
+    "VoidAbstracter",
+    "VoidAstronaut",
+    "VoidAstronaut",
+    "VoidAstronaut",
+    "7",
+    "7",
+    "7"
+  ],
+  "Character_1_16x16": [
+    "GnomeExplorer",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Character_1_48x48": [
+    "ElvenScout",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Character_2_48x48": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Character_3_48x48": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Character_5_48x48": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Character_static_48x48": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Chefs_48x48": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Dungeon_HeroMan1": [
+    "CarPilot",
+    "CarPilot",
+    "CarPilot",
+    "CarPilot",
+    "CarPilot",
+    "CarPilot",
+    "CarPilot",
+    "CarPilot"
+  ],
+  "Dungeon_HeroMan1Attack": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Dungeon_Monsters1": [
+    "GoblinJester",
+    "GoblinKnight",
+    "GoblinCourier",
+    "GoblinRecruit",
+    "GoblinCleric",
+    "Lich",
+    "Lich"
+  ],
+  "Dungeon_Monsters2": [
+    "OrcBrawler",
+    "GoblinArtist",
+    "7",
+    "7",
+    "VoidSpawn",
+    "VoidSpawn",
+    "7",
+    "8"
+  ],
+  "Dungeon_MushroomMan": [
+    "VoidSpawn",
+    "2",
+    "3",
+    "4",
+    "5",
+    "7",
+    "7",
+    "7"
+  ],
+  "Dungeon_Slimes1": [
+    "Slime",
+    "Slime",
+    "Slime",
+    "Slime",
+    "Slime",
+    "Slime",
+    "Slime",
+    "Slime"
+  ],
+  "emPath": [
+    "Em",
+    "Em",
+    "Em",
+    "ConspiracyTheorist",
+    "Em",
+    "Em",
+    "AdventurerStreamer",
+    "Astrologist"
+  ],
+  "Evil01": [
+    "OrcWarrior",
+    "Lich",
+    "VoidAbstracter",
+    "7",
+    "7",
+    "GoblinRaider",
+    "BotExplorer",
+    "Ninja"
+  ],
+  "Evil01Color": [
+    "WanderingKnight",
+    "Lich",
+    "Slime",
+    "VoidPerson",
+    "GoblinRecruit",
+    "BotSpacer",
+    "BotScientist"
+  ],
+  "Fantasy_Characters1": [
+    "CarPilot",
+    "Bubba",
+    "DrivingInstructor",
+    "Mage",
+    "Witch1",
+    "WarWitch",
+    "Innkeeper",
+    "HighCommand"
+  ],
+  "Fantasy_Characters2": [
+    "Librarian",
+    "TravelingSalesman",
+    "Sage",
+    "WastelandThinkerer",
+    "Librarian",
+    "7",
+    "7",
+    "RoyalPage"
+  ],
+  "Fantasy_Characters3": [
+    "ElvenBotanic",
+    "SchoolTeacher",
+    "Scarf",
+    "SushiCook",
+    "NobleGuard",
+    "ElvenJeweler",
+    "ElvenGuard",
+    "ElvenEnchantress"
+  ],
+  "Fantasy_Characters4": [
+    "Coroner",
+    "NobleScout",
+    "Stablemaster",
+    "SwordInstructor",
+    "RoyalPage",
+    "TribeArcher",
+    "StreetShopkeeper",
+    "RoyalChef"
+  ],
+  "Fantasy_Character_Base": [
+    "Wrestler",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Fantasy_Rabbits": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "FarmAnimals01RM": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "FarmAnimals02RM": [
+    "Horse",
+    "Horse",
+    "Horse",
+    "Horse",
+    "Horse",
+    "Horse",
+    "Horse",
+    "Horse"
+  ],
+  "FarmCharacters01RM": [
+    "ArcticWorker",
+    "GeniusGeneral",
+    "Crew",
+    "Nurse2",
+    "Scientist",
+    "Trader",
+    "Fisherman",
+    "Hairdresser"
+  ],
+  "GrayEvil01": [
+    "OrcWarrior",
+    "Lich",
+    "VoidAstronaut",
+    "Slime",
+    "VoidHorror",
+    "GoblinRaider",
+    "BotExplorer",
+    "Ninja"
+  ],
+  "GrayHeroes01": [
+    "SewerExplorer",
+    "PunkCultist",
+    "PirateHacker",
+    "PirateHacker",
+    "MonkMystic",
+    "Hairdresser",
+    "Mage",
+    "Astrologist"
+  ],
+  "GrayHeroes02": [
+    "Priest",
+    "Nun",
+    "ElvenShopkeeper",
+    "ElvenWarlock",
+    "Coroner",
+    "ClonedGuy",
+    "7",
+    "7"
+  ],
+  "GrayNPCs01": [
+    "PeasantWarrior",
+    "Lawyer",
+    "Inquisitor",
+    "BioScientist",
+    "ElvenStylist",
+    "BanditLeader",
+    "Scientist",
+    "Reporter"
+  ],
+  "GrayNPCs02": [
+    "King",
+    "Queen",
+    "Page",
+    "NobleHeir",
+    "NobleGuard",
+    "Scarf",
+    "Maid",
+    "LeatherDaddy"
+  ],
+  "GrayNPCs03": [
+    "CityScavenger",
+    "GoblinJester",
+    "Guardian",
+    "Guerrilla",
+    "SpecialForces",
+    "Mastermind",
+    "PirateAdventurer",
+    "Journalist"
+  ],
+  "Heroes01": [
+    "OrcStudent",
+    "OrcBartender",
+    "OrcMercenary",
+    "OrcAdventurer",
+    "OrcMonk",
+    "OrcSecretary",
+    "ORcBibliotecary",
+    "OrcSamurai"
+  ],
+  "Heroes01Color": [
+    "Scarf",
+    "Jeweler",
+    "Guerrilla",
+    "Revolutionary",
+    "SpacerMonk",
+    "Announcer",
+    "Archeologist",
+    "Astrologist"
+  ],
+  "Heroes02": [
+    "OrcJester",
+    "OrcNun",
+    "OrcTrader",
+    "OrcVestal",
+    "OrcVampire",
+    "OrcNomad",
+    "7"
+  ],
+  "Heroes02Color": [
+    "Priest",
+    "Nun",
+    "ExoticBard",
+    "ElvenGuard",
+    "Coroner",
+    "Medic",
+    "7",
+    "7"
+  ],
+  "mer_8_3": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "mer_8_chars3": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "mer_8_shadow_3": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "mer_human_3": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Monsterpack": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Monsterpack2": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Monsters02": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "MV_Graveyard_Zombies_Skeleton": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "New_Characters": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "New_Characters_2": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "New_Characters_3": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "New_Characters_4": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "NPCs01": [
+    "GoblinPeaesant",
+    "GoblinPeasant",
+    "GoblinFisherman",
+    "GoblinNoblewoman",
+    "GoblinArchmage",
+    "OrcExplorer",
+    "GoblinMerchant",
+    "GoblinBarman"
+  ],
+  "NPCs01Color": [
+    "Fisherman",
+    "BioCadet",
+    "Translator",
+    "Backpacker",
+    "GnomeExplorer",
+    "Librarian",
+    "Employee",
+    "FastfoodWorker"
+  ],
+  "NPCs02": [
+    "GoblinShogun",
+    "GoblinWitch",
+    "GoblinJester",
+    "GoblinMerchant",
+    "GoblinRecruit",
+    "GoblinMerchant",
+    "GoblinMatriarch",
+    "OrcBrawler"
+  ],
+  "NPCs02Color": [
+    "King",
+    "Queen",
+    "Page",
+    "NobleHeir",
+    "NobleGuard",
+    "Scarf",
+    "Maid",
+    "LeatherDaddy"
+  ],
+  "NPCs03": [
+    "ElvenBotanic",
+    "ElvenStylist",
+    "ElvenArchmage",
+    "OrcTrader",
+    "OrcWarrior",
+    "OrcPeasant",
+    "OrcSamurai",
+    "OrcBartender"
+  ],
+  "NPCs03Color": [
+    "Catboy",
+    "GnomeExplorer",
+    "Archivist",
+    "Pirate",
+    "Operator",
+    "Librarian",
+    "Tracker",
+    "Mafia"
+  ],
+  "Occult_Characters": [
+    "Trucker",
+    "ExoticMerchant",
+    "Employee",
+    "Scientist",
+    "ExoticBard",
+    "OrcTrader",
+    "Archivist",
+    "Astrologist"
+  ],
+  "Occult_Enemies": [
+    "OrcMonk",
+    "BioWarrior",
+    "OrcPunk",
+    "OrcVampire",
+    "BotMage",
+    "BotActor",
+    "Enchantress",
+    "Enchantress"
+  ],
+  "Occult_Golem": [
+    "BotMage",
+    "BotMage",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Occult_Mech": [
+    "BotMage",
+    "BotMage",
+    "BotMage",
+    "BotMage",
+    "BotMage",
+    "7",
+    "7",
+    "7"
+  ],
+  "Old_Characters 48x48": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Others": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "People1": [
+    "OrcStudent",
+    "OrcBartender",
+    "OrcMercenary",
+    "OrcAdventurer",
+    "OrcMonk",
+    "OrcSecretary",
+    "ORcBibliotecary",
+    "OrcSamurai"
+  ],
+  "People2": [
+    "OrcStudent",
+    "OrcBartender",
+    "OrcMercenary",
+    "OrcAdventurer",
+    "OrcMonk",
+    "OrcSecretary",
+    "ORcBibliotecary",
+    "OrcSamurai"
+  ],
+  "People3": [
+    "OrcStudent",
+    "OrcBartender",
+    "OrcMercenary",
+    "OrcAdventurer",
+    "OrcMonk",
+    "OrcSecretary",
+    "ORcBibliotecary",
+    "OrcSamurai"
+  ],
+  "Police": [
+    "RoyalGuard",
+    "ElvenGuard",
+    "GoblinGuard",
+    "OttomanGuard",
+    "ElvenGuardian",
+    "ArchivistGuard",
+    "DesertGuard",
+    "OttomanGuard"
+  ],
+  "School01RM": [
+    "Priest",
+    "Pro",
+    "Hitman",
+    "HippieMusician",
+    "Employee",
+    "Gunman",
+    "JungleExplorer",
+    "Announcer"
+  ],
+  "School01RM-GB": [
+    "OrcExplorer",
+    "OrcMercenary",
+    "OrcSwordsman",
+    "OrcRogue",
+    "OrcCook",
+    "OrcWorker",
+    "OrcSeer",
+    "OrcSecretary"
+  ],
+  "School01RM-Gray": [
+    "Priest",
+    "Pro",
+    "Hitman",
+    "HippieMusician",
+    "Employee",
+    "Gunman",
+    "JungleExplorer",
+    "Announcer"
+  ],
+  "Skab/!$KillerBot": [
+    "KillerBot"
+  ],
+  "Skab/!$Actor": [
+    "Actor"
+  ],
+  "Skab/!$AdventurerStreamer": [
+    "AdventurerStreamer"
+  ],
+  "Skab/!$AirlinePilot": [
+    "AirlinePilot"
+  ],
+  "Skab/!$AlienDargos": [
+    "AlienDargos"
+  ],
+  "Skab/!$AlienGrey": [
+    "AlienGrey"
+  ],
+  "Skab/!$AlienMindmaster": [
+    "AlienMindmaster"
+  ],
+  "Skab/!$AlienMystic": [
+    "AlienMystic"
+  ],
+  "Skab/!$AlienTrucker": [
+    "AlienTrucker"
+  ],
+  "Skab/!$AlienXori": [
+    "AlienXori"
+  ],
+  "Skab/!$AlpineGuide": [
+    "AlpineGuide"
+  ],
+  "Skab/!$Anarchist": [
+    "Anarchist"
+  ],
+  "Skab/!$AnarchistSamurai": [
+    "AnarchistSamurai"
+  ],
+  "Skab/!$AncientWitch": [
+    "AncientWitch"
+  ],
+  "Skab/!$AndroidArchpriest": [
+    "AndroidArchpriest"
+  ],
+  "Skab/!$AndroidBrainrot": [
+    "AndroidBrainrot"
+  ],
+  "Skab/!$AndroidCEO": [
+    "AndroidCEO"
+  ],
+  "Skab/!$AndroidDancer": [
+    "AndroidDancer"
+  ],
+  "Skab/!$AndroidEmotion": [
+    "AndroidEmotion"
+  ],
+  "Skab/!$AndroidExperiment": [
+    "AndroidExperiment"
+  ],
+  "Skab/!$AndroidFailure": [
+    "AndroidFailure"
+  ],
+  "Skab/!$AndroidFish": [
+    "AndroidFish"
+  ],
+  "Skab/!$AndroidHero": [
+    "AndroidHero"
+  ],
+  "Skab/!$AndroidInquisitor": [
+    "AndroidInquisitor"
+  ],
+  "Skab/!$AndroidJournalist": [
+    "AndroidJournalist"
+  ],
+  "Skab/!$AndroidOffice": [
+    "AndroidOffice"
+  ],
+  "Skab/!$AndroidPsychologist": [
+    "AndroidPsychologist"
+  ],
+  "Skab/!$AndroidPunk": [
+    "AndroidPunk"
+  ],
+  "Skab/!$AndroidSerial": [
+    "AndroidSerial"
+  ],
+  "Skab/!$AndroidTriangle": [
+    "AndroidTriangle"
+  ],
+  "Skab/!$AndroidVoid": [
+    "AndroidVoid"
+  ],
+  "Skab/!$AndroidWardroid": [
+    "AndroidWardroid"
+  ],
+  "Skab/!$AndroidWorker": [
+    "AndroidWorker"
+  ],
+  "Skab/!$Announcer": [
+    "Announcer"
+  ],
+  "Skab/!$Archeologist": [
+    "Archeologist"
+  ],
+  "Skab/!$Archer": [
+    "Archer"
+  ],
+  "Skab/!$Archivist": [
+    "Archivist"
+  ],
+  "Skab/!$ArchivistArmorer": [
+    "ArchivistArmorer"
+  ],
+  "Skab/!$ArchivistBackpacker": [
+    "ArchivistBackpacker"
+  ],
+  "Skab/!$ArchivistDiver": [
+    "ArchivistDiver"
+  ],
+  "Skab/!$ArchivistDJ": [
+    "ArchivistDJ"
+  ],
+  "Skab/!$ArchivistGuard": [
+    "ArchivistGuard"
+  ],
+  "Skab/!$ArchivistLibrarian": [
+    "ArchivistLibrarian"
+  ],
+  "Skab/!$ArchivistNinja": [
+    "ArchivistNinja"
+  ],
+  "Skab/!$ArchivistPilot": [
+    "ArchivistPilot"
+  ],
+  "Skab/!$ArchivistPunk": [
+    "ArchivistPunk"
+  ],
+  "Skab/!$ArchivistRecruit": [
+    "ArchivistRecruit"
+  ],
+  "Skab/!$ArchivistScavenger": [
+    "ArchivistScavenger"
+  ],
+  "Skab/!$ArchivistScout": [
+    "ArchivistScout"
+  ],
+  "Skab/!$ArchivistStrategist": [
+    "ArchivistStrategist"
+  ],
+  "Skab/!$ArchPriest": [
+    "ArchPriest"
+  ],
+  "Skab/!$ArcticWorker": [
+    "ArcticWorker"
+  ],
+  "Skab/!$ArmorDiver": [
+    "ArmorDiver"
+  ],
+  "Skab/!$ArmorGuardian": [
+    "ArmorGuardian"
+  ],
+  "Skab/!$ArmsTerader": [
+    "ArmsTerader"
+  ],
+  "Skab/!$Astrologist": [
+    "Astrologist"
+  ],
+  "Skab/!$Astronaut1": [
+    "Astronaut1"
+  ],
+  "Skab/!$Astronomer": [
+    "Astronomer"
+  ],
+  "Skab/!$AugmentedSniper": [
+    "AugmentedSniper"
+  ],
+  "Skab/!$AvianCommando": [
+    "AvianCommando"
+  ],
+  "Skab/!$AvianNoble": [
+    "AvianNoble"
+  ],
+  "Skab/!$Backpacker": [
+    "Backpacker"
+  ],
+  "Skab/!$BackwoodsPunk": [
+    "BackwoodsPunk"
+  ],
+  "Skab/!$BanditLeader": [
+    "BanditLeader"
+  ],
+  "Skab/!$Banker": [
+    "Banker"
+  ],
+  "Skab/!$Biker": [
+    "Biker"
+  ],
+  "Skab/!$BikerPunk": [
+    "BikerPunk"
+  ],
+  "Skab/!$BikerSkull": [
+    "BikerSkull"
+  ],
+  "Skab/!$Billionaire": [
+    "Billionaire"
+  ],
+  "Skab/!$BioCadet": [
+    "BioCadet"
+  ],
+  "Skab/!$BiologistOld": [
+    "BiologistOld"
+  ],
+  "Skab/!$BioPunk": [
+    "BioPunk"
+  ],
+  "Skab/!$BioScientist": [
+    "BioScientist"
+  ],
+  "Skab/!$BioslaveCoded": [
+    "BioslaveCoded"
+  ],
+  "Skab/!$BioSmith": [
+    "BioSmith"
+  ],
+  "Skab/!$Biosuit": [
+    "Biosuit"
+  ],
+  "Skab/!$BioWarrior": [
+    "BioWarrior"
+  ],
+  "Skab/!$Blacksmith": [
+    "Blacksmith"
+  ],
+  "Skab/!$BorderControl": [
+    "BorderControl"
+  ],
+  "Skab/!$BotActor": [
+    "BotActor"
+  ],
+  "Skab/!$Botanist": [
+    "Botanist"
+  ],
+  "Skab/!$BotAssistant": [
+    "BotAssistant"
+  ],
+  "Skab/!$BotBritannia": [
+    "BotBritannia"
+  ],
+  "Skab/!$BotCEO": [
+    "BotCEO"
+  ],
+  "Skab/!$BotDJ": [
+    "BotDJ"
+  ],
+  "Skab/!$BotEducator": [
+    "BotEducator"
+  ],
+  "Skab/!$BotEmbarassed": [
+    "BotEmbarassed"
+  ],
+  "Skab/!$BotExplorer": [
+    "BotExplorer"
+  ],
+  "Skab/!$BotGuardian": [
+    "BotGuardian"
+  ],
+  "Skab/!$BotIlluminated": [
+    "BotIlluminated"
+  ],
+  "Skab/!$BotJournalist": [
+    "BotJournalist"
+  ],
+  "Skab/!$BotLCD": [
+    "BotLCD"
+  ],
+  "Skab/!$BotMage": [
+    "BotMage"
+  ],
+  "Skab/!$BotManifestation": [
+    "BotManifestation"
+  ],
+  "Skab/!$BotParty": [
+    "BotParty"
+  ],
+  "Skab/!$BotProjection": [
+    "BotProjection"
+  ],
+  "Skab/!$BotSamurai": [
+    "BotSamurai"
+  ],
+  "Skab/!$BotScientist": [
+    "BotScientist"
+  ],
+  "Skab/!$BotSpaceman": [
+    "BotSpaceman"
+  ],
+  "Skab/!$BotSpacer": [
+    "BotSpacer"
+  ],
+  "Skab/!$BotStellar": [
+    "BotStellar"
+  ],
+  "Skab/!$Bouncer": [
+    "Bouncer"
+  ],
+  "Skab/!$BrainSurgeon": [
+    "BrainSurgeon"
+  ],
+  "Skab/!$Bubba": [
+    "Bubba"
+  ],
+  "Skab/!$Businessman": [
+    "Businessman"
+  ],
+  "Skab/!$Butcher": [
+    "Butcher"
+  ],
+  "Skab/!$Butler": [
+    "Butler"
+  ],
+  "Skab/!$Cardinal": [
+    "Cardinal"
+  ],
+  "Skab/!$CarPilot": [
+    "CarPilot"
+  ],
+  "Skab/!$CastleGuard": [
+    "CastleGuard"
+  ],
+  "Skab/!$Catboy": [
+    "Catboy"
+  ],
+  "Skab/!$CatButton": [
+    "CatButton"
+  ],
+  "Skab/!$CatCommando": [
+    "CatCommando"
+  ],
+  "Skab/!$CatCourier": [
+    "CatCourier"
+  ],
+  "Skab/!$CatGuy": [
+    "CatGuy"
+  ],
+  "Skab/!$Catman": [
+    "Catman"
+  ],
+  "Skab/!$CEO": [
+    "CEO"
+  ],
+  "Skab/!$CharmingPrince": [
+    "CharmingPrince"
+  ],
+  "Skab/!$Chief": [
+    "Chief"
+  ],
+  "Skab/!$CityBackpacker": [
+    "CityBackpacker"
+  ],
+  "Skab/!$CityCop": [
+    "CityCop"
+  ],
+  "Skab/!$CityDJ": [
+    "CityDJ"
+  ],
+  "Skab/!$CityInventor": [
+    "CityInventor"
+  ],
+  "Skab/!$CityMage": [
+    "CityMage"
+  ],
+  "Skab/!$CityScavenger": [
+    "CityScavenger"
+  ],
+  "Skab/!$Cleaner": [
+    "Cleaner"
+  ],
+  "Skab/!$ClonedGuy": [
+    "ClonedGuy"
+  ],
+  "Skab/!$Colonel": [
+    "Colonel"
+  ],
+  "Skab/!$CombatMedic": [
+    "CombatMedic"
+  ],
+  "Skab/!$Commodore": [
+    "Commodore"
+  ],
+  "Skab/!$ConspiracyTheorist": [
+    "ConspiracyTheorist"
+  ],
+  "Skab/!$Coroner": [
+    "Coroner"
+  ],
+  "Skab/!$CreepyJester": [
+    "CreepyJester"
+  ],
+  "Skab/!$Crew": [
+    "Crew"
+  ],
+  "Skab/!$Criminal": [
+    "Criminal"
+  ],
+  "Skab/!$Cultist": [
+    "Cultist"
+  ],
+  "Skab/!$CyberNinja": [
+    "CyberNinja"
+  ],
+  "Skab/!$CyberPaesant": [
+    "CyberPaesant"
+  ],
+  "Skab/!$CyberSamurai": [
+    "CyberSamurai"
+  ],
+  "Skab/!$CyberWitch": [
+    "CyberWitch"
+  ],
+  "Skab/!$CyborgActivist": [
+    "CyborgActivist"
+  ],
+  "Skab/!$DarkPriestess": [
+    "DarkPriestess"
+  ],
+  "Skab/!$DataAnalyst": [
+    "DataAnalyst"
+  ],
+  "Skab/!$DazedSpacer": [
+    "DazedSpacer"
+  ],
+  "Skab/!$Dealer": [
+    "Dealer"
+  ],
+  "Skab/!$DecrepitGuard": [
+    "DecrepitGuard"
+  ],
+  "Skab/!$DeepOne": [
+    "DeepOne"
+  ],
+  "Skab/!$Demigod": [
+    "Demigod"
+  ],
+  "Skab/!$DesertGuard": [
+    "DesertGuard"
+  ],
+  "Skab/!$DesertNomad": [
+    "DesertNomad"
+  ],
+  "Skab/!$DesertPunk": [
+    "DesertPunk"
+  ],
+  "Skab/!$DesertTrader": [
+    "DesertTrader"
+  ],
+  "Skab/!$Detective": [
+    "Detective"
+  ],
+  "Skab/!$DimensionalExplorer": [
+    "DimensionalExplorer"
+  ],
+  "Skab/!$DisembodiedHead": [
+    "DisembodiedHead"
+  ],
+  "Skab/!$DJ": [
+    "DJ"
+  ],
+  "Skab/!$Doctor2": [
+    "Doctor2"
+  ],
+  "Skab/!$DogTail": [
+    "DogTail"
+  ],
+  "Skab/!$Doppelganger": [
+    "Doppelganger"
+  ],
+  "Skab/!$DrillSergeant": [
+    "DrillSergeant"
+  ],
+  "Skab/!$DrillSergeant7": [
+    "DrillSergeant7"
+  ],
+  "Skab/!$DrivingInstructor": [
+    "DrivingInstructor"
+  ],
+  "Skab/!$DrugDealer": [
+    "DrugDealer"
+  ],
+  "Skab/!$DwarvenSmith": [
+    "DwarvenSmith"
+  ],
+  "Skab/!$DwarvenThinkerer": [
+    "DwarvenThinkerer"
+  ],
+  "Skab/!$EggSoldier": [
+    "EggSoldier"
+  ],
+  "Skab/!$ElvenArcher": [
+    "ElvenArcher"
+  ],
+  "Skab/!$ElvenArchmage": [
+    "ElvenArchmage"
+  ],
+  "Skab/!$ElvenArtist": [
+    "ElvenArtist"
+  ],
+  "Skab/!$ElvenBarbarian": [
+    "ElvenBarbarian"
+  ],
+  "Skab/!$ElvenBotanic": [
+    "ElvenBotanic"
+  ],
+  "Skab/!$ElvenBrawler": [
+    "ElvenBrawler"
+  ],
+  "Skab/!$ElvenCleric": [
+    "ElvenCleric"
+  ],
+  "Skab/!$ElvenCommando": [
+    "ElvenCommando"
+  ],
+  "Skab/!$ElvenCrossbowman": [
+    "ElvenCrossbowman"
+  ],
+  "Skab/!$ElvenDeathlord": [
+    "ElvenDeathlord"
+  ],
+  "Skab/!$ElvenDiplomat1": [
+    "ElvenDiplomat1"
+  ],
+  "Skab/!$ElvenDiplomat2": [
+    "ElvenDiplomat2"
+  ],
+  "Skab/!$ElvenEnchantress": [
+    "ElvenEnchantress"
+  ],
+  "Skab/!$ElvenGhoul": [
+    "ElvenGhoul"
+  ],
+  "Skab/!$ElvenGuard": [
+    "ElvenGuard"
+  ],
+  "Skab/!$ElvenGuardian": [
+    "ElvenGuardian"
+  ],
+  "Skab/!$ElvenHolywarrior": [
+    "ElvenHolywarrior"
+  ],
+  "Skab/!$ElvenJester": [
+    "ElvenJester"
+  ],
+  "Skab/!$ElvenJeweler": [
+    "ElvenJeweler"
+  ],
+  "Skab/!$ElvenKnight": [
+    "ElvenKnight"
+  ],
+  "Skab/!$ElvenMadman": [
+    "ElvenMadman"
+  ],
+  "Skab/!$ElvenModel": [
+    "ElvenModel"
+  ],
+  "Skab/!$ElvenMonk": [
+    "ElvenMonk"
+  ],
+  "Skab/!$ElvenNinja": [
+    "ElvenNinja"
+  ],
+  "Skab/!$ElvenNoble": [
+    "ElvenNoble"
+  ],
+  "Skab/!$ElvenNomad": [
+    "ElvenNomad"
+  ],
+  "Skab/!$ElvenOperasinger": [
+    "ElvenOperasinger"
+  ],
+  "Skab/!$ElvenPikeman": [
+    "ElvenPikeman"
+  ],
+  "Skab/!$ElvenPirate": [
+    "ElvenPirate"
+  ],
+  "Skab/!$ElvenPoet": [
+    "ElvenPoet"
+  ],
+  "Skab/!$ElvenRecruit": [
+    "ElvenRecruit"
+  ],
+  "Skab/!$ElvenRogue": [
+    "ElvenRogue"
+  ],
+  "Skab/!$ElvenSamurai": [
+    "ElvenSamurai"
+  ],
+  "Skab/!$ElvenScout": [
+    "ElvenScout"
+  ],
+  "Skab/!$ElvenSellsword": [
+    "ElvenSellsword"
+  ],
+  "Skab/!$ElvenShopkeeper": [
+    "ElvenShopkeeper"
+  ],
+  "Skab/!$ElvenSinger": [
+    "ElvenSinger"
+  ],
+  "Skab/!$ElvenSpacer": [
+    "ElvenSpacer"
+  ],
+  "Skab/!$ElvenSpellsword": [
+    "ElvenSpellsword"
+  ],
+  "Skab/!$ElvenStylist": [
+    "ElvenStylist"
+  ],
+  "Skab/!$ElvenSwordmaster": [
+    "ElvenSwordmaster"
+  ],
+  "Skab/!$ElvenSwordsman": [
+    "ElvenSwordsman"
+  ],
+  "Skab/!$ElvenTrader": [
+    "ElvenTrader"
+  ],
+  "Skab/!$ElvenTraveler": [
+    "ElvenTraveler"
+  ],
+  "Skab/!$ElvenVampire": [
+    "ElvenVampire"
+  ],
+  "Skab/!$ElvenVeteran": [
+    "ElvenVeteran"
+  ],
+  "Skab/!$ElvenWarlock": [
+    "ElvenWarlock"
+  ],
+  "Skab/!$Em": [
+    "Em"
+  ],
+  "Skab/!$Employee": [
+    "Employee"
+  ],
+  "Skab/!$Enchantress": [
+    "Enchantress"
+  ],
+  "Skab/!$Engineer": [
+    "Engineer"
+  ],
+  "Skab/!$EvenSpellblade": [
+    "EvenSpellblade"
+  ],
+  "Skab/!$ExoticBard": [
+    "ExoticBard"
+  ],
+  "Skab/!$ExoticMerchant": [
+    "ExoticMerchant"
+  ],
+  "Skab/!$ExoticTrader": [
+    "ExoticTrader"
+  ],
+  "Skab/!$FactoryWorker": [
+    "FactoryWorker"
+  ],
+  "Skab/!$FairyCEO": [
+    "FairyCEO"
+  ],
+  "Skab/!$Farmacist": [
+    "Farmacist"
+  ],
+  "Skab/!$Farmer": [
+    "Farmer"
+  ],
+  "Skab/!$FastfoodWorker": [
+    "FastfoodWorker"
+  ],
+  "Skab/!$FieldAgent": [
+    "FieldAgent"
+  ],
+  "Skab/!$Fisherman": [
+    "Fisherman"
+  ],
+  "Skab/!$FootSoldier": [
+    "FootSoldier"
+  ],
+  "Skab/!$ForestRanger": [
+    "ForestRanger"
+  ],
+  "Skab/!$FortuneSoldier": [
+    "FortuneSoldier"
+  ],
+  "Skab/!$FortuneTeller": [
+    "FortuneTeller"
+  ],
+  "Skab/!$Gambler": [
+    "Gambler"
+  ],
+  "Skab/!$General": [
+    "General"
+  ],
+  "Skab/!$Genetist": [
+    "Genetist"
+  ],
+  "Skab/!$GeniusGeneral": [
+    "GeniusGeneral"
+  ],
+  "Skab/!$Gladiator": [
+    "Gladiator"
+  ],
+  "Skab/!$GnomeExplorer": [
+    "GnomeExplorer"
+  ],
+  "Skab/!$GoblinArchmage": [
+    "GoblinArchmage"
+  ],
+  "Skab/!$GoblinArtist": [
+    "GoblinArtist"
+  ],
+  "Skab/!$GoblinBard": [
+    "GoblinBard"
+  ],
+  "Skab/!$GoblinBarman": [
+    "GoblinBarman"
+  ],
+  "Skab/!$GoblinCleric": [
+    "GoblinCleric"
+  ],
+  "Skab/!$GoblinCourier": [
+    "GoblinCourier"
+  ],
+  "Skab/!$GoblinDiplomat": [
+    "GoblinDiplomat"
+  ],
+  "Skab/!$GoblinEccentric": [
+    "GoblinEccentric"
+  ],
+  "Skab/!$GoblinFisherman": [
+    "GoblinFisherman"
+  ],
+  "Skab/!$GoblinGuard": [
+    "GoblinGuard"
+  ],
+  "Skab/!$GoblinHacker": [
+    "GoblinHacker"
+  ],
+  "Skab/!$GoblinIllusionist": [
+    "GoblinIllusionist"
+  ],
+  "Skab/!$GoblinJester": [
+    "GoblinJester"
+  ],
+  "Skab/!$GoblinKnight": [
+    "GoblinKnight"
+  ],
+  "Skab/!$GoblinMatriarch": [
+    "GoblinMatriarch"
+  ],
+  "Skab/!$GoblinMerchant": [
+    "GoblinMerchant"
+  ],
+  "Skab/!$GoblinNoblewoman": [
+    "GoblinNoblewoman"
+  ],
+  "Skab/!$GoblinNun": [
+    "GoblinNun"
+  ],
+  "Skab/!$GoblinPeaesant": [
+    "GoblinPeaesant"
+  ],
+  "Skab/!$GoblinPeasant": [
+    "GoblinPeasant"
+  ],
+  "Skab/!$GoblinPirate": [
+    "GoblinPirate"
+  ],
+  "Skab/!$GoblinRaider": [
+    "GoblinRaider"
+  ],
+  "Skab/!$GoblinRecruit": [
+    "GoblinRecruit"
+  ],
+  "Skab/!$GoblinShogun": [
+    "GoblinShogun"
+  ],
+  "Skab/!$GoblinWitch": [
+    "GoblinWitch"
+  ],
+  "Skab/!$Goddess": [
+    "Goddess"
+  ],
+  "Skab/!$GoldTrader": [
+    "GoldTrader"
+  ],
+  "Skab/!$Guard": [
+    "Guard"
+  ],
+  "Skab/!$Guardian": [
+    "Guardian"
+  ],
+  "Skab/!$Guerrilla": [
+    "Guerrilla"
+  ],
+  "Skab/!$GuerrillaWarrior": [
+    "GuerrillaWarrior"
+  ],
+  "Skab/!$Gunman": [
+    "Gunman"
+  ],
+  "Skab/!$GymInstructor": [
+    "GymInstructor"
+  ],
+  "Skab/!$Hairdresser": [
+    "Hairdresser"
+  ],
+  "Skab/!$HighCommand": [
+    "HighCommand"
+  ],
+  "Skab/!$Hillbilly": [
+    "Hillbilly"
+  ],
+  "Skab/!$Hippie": [
+    "Hippie"
+  ],
+  "Skab/!$HippieMusician": [
+    "HippieMusician"
+  ],
+  "Skab/!$Hitman": [
+    "Hitman"
+  ],
+  "Skab/!$HornedKnight": [
+    "HornedKnight"
+  ],
+  "Skab/!$Horse": [
+    "Horse"
+  ],
+  "Skab/!$Hunter": [
+    "Hunter"
+  ],
+  "Skab/!$HypernetExplorer": [
+    "HypernetExplorer"
+  ],
+  "Skab/!$HypernetFanatic": [
+    "HypernetFanatic"
+  ],
+  "Skab/!$Infiltrator": [
+    "Infiltrator"
+  ],
+  "Skab/!$Innkeeper": [
+    "Innkeeper"
+  ],
+  "Skab/!$Inquisitor": [
+    "Inquisitor"
+  ],
+  "Skab/!$InsectoidBee": [
+    "InsectoidBee"
+  ],
+  "Skab/!$InsectoidScavenger": [
+    "InsectoidScavenger"
+  ],
+  "Skab/!$InsectoidSpacer": [
+    "InsectoidSpacer"
+  ],
+  "Skab/!$Instructor": [
+    "Instructor"
+  ],
+  "Skab/!$Inventor": [
+    "Inventor"
+  ],
+  "Skab/!$Jester": [
+    "Jester"
+  ],
+  "Skab/!$JesterDiplomat": [
+    "JesterDiplomat"
+  ],
+  "Skab/!$Jeweler": [
+    "Jeweler"
+  ],
+  "Skab/!$Jogger": [
+    "Jogger"
+  ],
+  "Skab/!$Journalist": [
+    "Journalist"
+  ],
+  "Skab/!$Judge": [
+    "Judge"
+  ],
+  "Skab/!$JungleExplorer": [
+    "JungleExplorer"
+  ],
+  "Skab/!$King": [
+    "King"
+  ],
+  "Skab/!$KoboldAssassin": [
+    "KoboldAssassin"
+  ],
+  "Skab/!$KoboldPunk": [
+    "KoboldPunk"
+  ],
+  "Skab/!$LabRat": [
+    "LabRat"
+  ],
+  "Skab/!$Lawyer": [
+    "Lawyer"
+  ],
+  "Skab/!$LeatherDaddy": [
+    "LeatherDaddy"
+  ],
+  "Skab/!$Librarian": [
+    "Librarian"
+  ],
+  "Skab/!$Lich": [
+    "Lich"
+  ],
+  "Skab/!$Lobotomy": [
+    "Lobotomy"
+  ],
+  "Skab/!$LobotomyWarrior": [
+    "LobotomyWarrior"
+  ],
+  "Skab/!$Madman": [
+    "Madman"
+  ],
+  "Skab/!$Mafia": [
+    "Mafia"
+  ],
+  "Skab/!$Mage": [
+    "Mage"
+  ],
+  "Skab/!$MageSage": [
+    "MageSage"
+  ],
+  "Skab/!$Maid": [
+    "Maid"
+  ],
+  "Skab/!$MailGuard": [
+    "MailGuard"
+  ],
+  "Skab/!$Manager": [
+    "Manager"
+  ],
+  "Skab/!$Mannequin": [
+    "Mannequin"
+  ],
+  "Skab/!$Marine": [
+    "Marine"
+  ],
+  "Skab/!$Mastermind": [
+    "Mastermind"
+  ],
+  "Skab/!$Matchmaker": [
+    "Matchmaker"
+  ],
+  "Skab/!$Mechanic": [
+    "Mechanic"
+  ],
+  "Skab/!$Medic": [
+    "Medic"
+  ],
+  "Skab/!$MercenarySoldier": [
+    "MercenarySoldier"
+  ],
+  "Skab/!$MetroPunk": [
+    "MetroPunk"
+  ],
+  "Skab/!$MilitaryAdvisor": [
+    "MilitaryAdvisor"
+  ],
+  "Skab/!$Miner": [
+    "Miner"
+  ],
+  "Skab/!$MonkeyDoctor": [
+    "MonkeyDoctor"
+  ],
+  "Skab/!$MonkMystic": [
+    "MonkMystic"
+  ],
+  "Skab/!$MoonCadet": [
+    "MoonCadet"
+  ],
+  "Skab/!$MoonCultist": [
+    "MoonCultist"
+  ],
+  "Skab/!$MotherNun": [
+    "MotherNun"
+  ],
+  "Skab/!$Mummy": [
+    "Mummy"
+  ],
+  "Skab/!$Musician": [
+    "Musician"
+  ],
+  "Skab/!$Mystic": [
+    "Mystic"
+  ],
+  "Skab/!$Netrunner": [
+    "Netrunner"
+  ],
+  "Skab/!$Ninja": [
+    "Ninja"
+  ],
+  "Skab/!$NobleGuard": [
+    "NobleGuard"
+  ],
+  "Skab/!$NobleHeir": [
+    "NobleHeir"
+  ],
+  "Skab/!$NobleKnight": [
+    "NobleKnight"
+  ],
+  "Skab/!$NobleScout": [
+    "NobleScout"
+  ],
+  "Skab/!$Noblewoman": [
+    "Noblewoman"
+  ],
+  "Skab/!$NuclearWorker": [
+    "NuclearWorker"
+  ],
+  "Skab/!$Nun": [
+    "Nun"
+  ],
+  "Skab/!$Nurse2": [
+    "Nurse2"
+  ],
+  "Skab/!$OldChef": [
+    "OldChef"
+  ],
+  "Skab/!$OldCommander": [
+    "OldCommander"
+  ],
+  "Skab/!$OldGladiator": [
+    "OldGladiator"
+  ],
+  "Skab/!$OldPatient": [
+    "OldPatient"
+  ],
+  "Skab/!$OperaSInger": [
+    "OperaSInger"
+  ],
+  "Skab/!$Operator": [
+    "Operator"
+  ],
+  "Skab/!$OPSec": [
+    "OPSec"
+  ],
+  "Skab/!$Optic": [
+    "Optic"
+  ],
+  "Skab/!$Oracle": [
+    "Oracle"
+  ],
+  "Skab/!$OrcAdventurer": [
+    "OrcAdventurer"
+  ],
+  "Skab/!$OrcBartender": [
+    "OrcBartender"
+  ],
+  "Skab/!$ORcBibliotecary": [
+    "ORcBibliotecary"
+  ],
+  "Skab/!$OrcBrawler": [
+    "OrcBrawler"
+  ],
+  "Skab/!$OrcClown": [
+    "OrcClown"
+  ],
+  "Skab/!$OrcCook": [
+    "OrcCook"
+  ],
+  "Skab/!$OrcCriminal": [
+    "OrcCriminal"
+  ],
+  "Skab/!$OrcExplorer": [
+    "OrcExplorer"
+  ],
+  "Skab/!$OrcJester": [
+    "OrcJester"
+  ],
+  "Skab/!$OrcMercenary": [
+    "OrcMercenary"
+  ],
+  "Skab/!$OrcMonk": [
+    "OrcMonk"
+  ],
+  "Skab/!$OrcNomad": [
+    "OrcNomad"
+  ],
+  "Skab/!$OrcNun": [
+    "OrcNun"
+  ],
+  "Skab/!$OrcPeasant": [
+    "OrcPeasant"
+  ],
+  "Skab/!$OrcPunk": [
+    "OrcPunk"
+  ],
+  "Skab/!$OrcRogue": [
+    "OrcRogue"
+  ],
+  "Skab/!$OrcSamurai": [
+    "OrcSamurai"
+  ],
+  "Skab/!$OrcSecretary": [
+    "OrcSecretary"
+  ],
+  "Skab/!$OrcSeer": [
+    "OrcSeer"
+  ],
+  "Skab/!$OrcStudent": [
+    "OrcStudent"
+  ],
+  "Skab/!$OrcSwordsman": [
+    "OrcSwordsman"
+  ],
+  "Skab/!$OrcTrader": [
+    "OrcTrader"
+  ],
+  "Skab/!$OrcVampire": [
+    "OrcVampire"
+  ],
+  "Skab/!$OrcVestal": [
+    "OrcVestal"
+  ],
+  "Skab/!$OrcVeteran": [
+    "OrcVeteran"
+  ],
+  "Skab/!$OrcWarrior": [
+    "OrcWarrior"
+  ],
+  "Skab/!$OrcWorker": [
+    "OrcWorker"
+  ],
+  "Skab/!$OttomanGuard": [
+    "OttomanGuard"
+  ],
+  "Skab/!$Page": [
+    "Page"
+  ],
+  "Skab/!$Paleontologist": [
+    "Paleontologist"
+  ],
+  "Skab/!$Paramedic": [
+    "Paramedic"
+  ],
+  "Skab/!$Paramedic2": [
+    "Paramedic2"
+  ],
+  "Skab/!$Paratrooper": [
+    "Paratrooper"
+  ],
+  "Skab/!$Partygoer": [
+    "Partygoer"
+  ],
+  "Skab/!$Patient": [
+    "Patient"
+  ],
+  "Skab/!$PeasantWarrior": [
+    "PeasantWarrior"
+  ],
+  "Skab/!$Pensioner": [
+    "Pensioner"
+  ],
+  "Skab/!$Pilot": [
+    "Pilot"
+  ],
+  "Skab/!$Pinman": [
+    "Pinman"
+  ],
+  "Skab/!$Pirate": [
+    "Pirate"
+  ],
+  "Skab/!$PirateAdventurer": [
+    "PirateAdventurer"
+  ],
+  "Skab/!$PirateHacker": [
+    "PirateHacker"
+  ],
+  "Skab/!$PirateSage": [
+    "PirateSage"
+  ],
+  "Skab/!$PizzaRider": [
+    "PizzaRider"
+  ],
+  "Skab/!$Porcupine": [
+    "Porcupine"
+  ],
+  "Skab/!$Priest": [
+    "Priest"
+  ],
+  "Skab/!$Priestess": [
+    "Priestess"
+  ],
+  "Skab/!$PrimaryDoctor": [
+    "PrimaryDoctor"
+  ],
+  "Skab/!$Prince": [
+    "Prince"
+  ],
+  "Skab/!$Princess": [
+    "Princess"
+  ],
+  "Skab/!$Pro": [
+    "Pro"
+  ],
+  "Skab/!$PSIWarrior": [
+    "PSIWarrior"
+  ],
+  "Skab/!$PunkCultist": [
+    "PunkCultist"
+  ],
+  "Skab/!$PunkGirl": [
+    "PunkGirl"
+  ],
+  "Skab/!$Queen": [
+    "Queen"
+  ],
+  "Skab/!$Ranger": [
+    "Ranger"
+  ],
+  "Skab/!$Rebreather": [
+    "Rebreather"
+  ],
+  "Skab/!$Recon": [
+    "Recon"
+  ],
+  "Skab/!$Recruit": [
+    "Recruit"
+  ],
+  "Skab/!$Regent": [
+    "Regent"
+  ],
+  "Skab/!$Repoman": [
+    "Repoman"
+  ],
+  "Skab/!$Reporter": [
+    "Reporter"
+  ],
+  "Skab/!$ReptilianCommando": [
+    "ReptilianCommando"
+  ],
+  "Skab/!$ReptilianMonk": [
+    "ReptilianMonk"
+  ],
+  "Skab/!$Revolutionary": [
+    "Revolutionary"
+  ],
+  "Skab/!$RevolutionaryCommando": [
+    "RevolutionaryCommando"
+  ],
+  "Skab/!$Ritualist": [
+    "Ritualist"
+  ],
+  "Skab/!$Robber": [
+    "Robber"
+  ],
+  "Skab/!$RoborProtector": [
+    "RoborProtector"
+  ],
+  "Skab/!$RogueBlacksmith": [
+    "RogueBlacksmith"
+  ],
+  "Skab/!$Ronin": [
+    "Ronin"
+  ],
+  "Skab/!$RoyalChef": [
+    "RoyalChef"
+  ],
+  "Skab/!$RoyalGuard": [
+    "RoyalGuard"
+  ],
+  "Skab/!$RoyalJester": [
+    "RoyalJester"
+  ],
+  "Skab/!$RoyalPage": [
+    "RoyalPage"
+  ],
+  "Skab/!$Sage": [
+    "Sage"
+  ],
+  "Skab/!$Samurai": [
+    "Samurai"
+  ],
+  "Skab/!$Scarf": [
+    "Scarf"
+  ],
+  "Skab/!$Scavenger": [
+    "Scavenger"
+  ],
+  "Skab/!$ScavengerSOldier": [
+    "ScavengerSOldier"
+  ],
+  "Skab/!$SchoolTeacher": [
+    "SchoolTeacher"
+  ],
+  "Skab/!$ScienceTeacher": [
+    "ScienceTeacher"
+  ],
+  "Skab/!$Scientist": [
+    "Scientist"
+  ],
+  "Skab/!$Scout": [
+    "Scout"
+  ],
+  "Skab/!$ScubaDiver": [
+    "ScubaDiver"
+  ],
+  "Skab/!$ScubaRepairer": [
+    "ScubaRepairer"
+  ],
+  "Skab/!$SealedCadet": [
+    "SealedCadet"
+  ],
+  "Skab/!$Secretary": [
+    "Secretary"
+  ],
+  "Skab/!$Selene": [
+    "Selene"
+  ],
+  "Skab/!$Sergeant": [
+    "Sergeant"
+  ],
+  "Skab/!$SewerExplorer": [
+    "SewerExplorer"
+  ],
+  "Skab/!$SewerPaesant": [
+    "SewerPaesant"
+  ],
+  "Skab/!$ShadyCultist": [
+    "ShadyCultist"
+  ],
+  "Skab/!$Shogun": [
+    "Shogun"
+  ],
+  "Skab/!$Skeleton": [
+    "Skeleton"
+  ],
+  "Skab/!$Slime": [
+    "Slime"
+  ],
+  "Skab/!$Sniper": [
+    "Sniper"
+  ],
+  "Skab/!$SnobStylist": [
+    "SnobStylist"
+  ],
+  "Skab/!$SoldierCadet": [
+    "SoldierCadet"
+  ],
+  "Skab/!$SpaceCadet": [
+    "SpaceCadet"
+  ],
+  "Skab/!$SpaceExplorer": [
+    "SpaceExplorer"
+  ],
+  "Skab/!$SpaceMiner": [
+    "SpaceMiner"
+  ],
+  "Skab/!$Spacer": [
+    "Spacer"
+  ],
+  "Skab/!$SpacerAdventurer": [
+    "SpacerAdventurer"
+  ],
+  "Skab/!$SpacerGeneral": [
+    "SpacerGeneral"
+  ],
+  "Skab/!$SpacerKnight": [
+    "SpacerKnight"
+  ],
+  "Skab/!$SpacerMechanic": [
+    "SpacerMechanic"
+  ],
+  "Skab/!$SpacerMonk": [
+    "SpacerMonk"
+  ],
+  "Skab/!$SpacerOldman": [
+    "SpacerOldman"
+  ],
+  "Skab/!$SpacerPilot": [
+    "SpacerPilot"
+  ],
+  "Skab/!$SpacerSalesman": [
+    "SpacerSalesman"
+  ],
+  "Skab/!$SpacerScientist": [
+    "SpacerScientist"
+  ],
+  "Skab/!$SpacerTrooper": [
+    "SpacerTrooper"
+  ],
+  "Skab/!$SpecialForces": [
+    "SpecialForces"
+  ],
+  "Skab/!$Spellcaster": [
+    "Spellcaster"
+  ],
+  "Skab/!$Spiritist": [
+    "Spiritist"
+  ],
+  "Skab/!$Stablemaster": [
+    "Stablemaster"
+  ],
+  "Skab/!$StoicGuard": [
+    "StoicGuard"
+  ],
+  "Skab/!$Strangelove": [
+    "Strangelove"
+  ],
+  "Skab/!$StreetExplorer": [
+    "StreetExplorer"
+  ],
+  "Skab/!$StreetInventor": [
+    "StreetInventor"
+  ],
+  "Skab/!$StreetMage": [
+    "StreetMage"
+  ],
+  "Skab/!$StreetMonk": [
+    "StreetMonk"
+  ],
+  "Skab/!$StreetSamurai": [
+    "StreetSamurai"
+  ],
+  "Skab/!$StreetSeer": [
+    "StreetSeer"
+  ],
+  "Skab/!$StreetShopkeeper": [
+    "StreetShopkeeper"
+  ],
+  "Skab/!$StreetSoldier": [
+    "StreetSoldier"
+  ],
+  "Skab/!$StreetWarrior": [
+    "StreetWarrior"
+  ],
+  "Skab/!$Stylist": [
+    "Stylist"
+  ],
+  "Skab/!$SunCultist": [
+    "SunCultist"
+  ],
+  "Skab/!$Superhero": [
+    "Superhero"
+  ],
+  "Skab/!$Surgeon": [
+    "Surgeon"
+  ],
+  "Skab/!$SurvivalGuide": [
+    "SurvivalGuide"
+  ],
+  "Skab/!$Survivalist": [
+    "Survivalist"
+  ],
+  "Skab/!$Survivor": [
+    "Survivor"
+  ],
+  "Skab/!$SushiCook": [
+    "SushiCook"
+  ],
+  "Skab/!$SwordInstructor": [
+    "SwordInstructor"
+  ],
+  "Skab/!$TarotWitch": [
+    "TarotWitch"
+  ],
+  "Skab/!$TavernCook": [
+    "TavernCook"
+  ],
+  "Skab/!$TaxiDriver": [
+    "TaxiDriver"
+  ],
+  "Skab/!$TaxiDriver2": [
+    "TaxiDriver2"
+  ],
+  "Skab/!$Techmaster": [
+    "Techmaster"
+  ],
+  "Skab/!$TechnoBarbarian": [
+    "TechnoBarbarian"
+  ],
+  "Skab/!$TecnoGeneral": [
+    "TecnoGeneral"
+  ],
+  "Skab/!$TestSubject": [
+    "TestSubject"
+  ],
+  "Skab/!$TicketMaster": [
+    "TicketMaster"
+  ],
+  "Skab/!$TowerController": [
+    "TowerController"
+  ],
+  "Skab/!$Towner": [
+    "Towner"
+  ],
+  "Skab/!$ToxicScavenger": [
+    "ToxicScavenger"
+  ],
+  "Skab/!$Tracker": [
+    "Tracker"
+  ],
+  "Skab/!$Trader": [
+    "Trader"
+  ],
+  "Skab/!$Trainer": [
+    "Trainer"
+  ],
+  "Skab/!$Translator": [
+    "Translator"
+  ],
+  "Skab/!$TravelingBard": [
+    "TravelingBard"
+  ],
+  "Skab/!$TravelingSalesman": [
+    "TravelingSalesman"
+  ],
+  "Skab/!$TribalChief": [
+    "TribalChief"
+  ],
+  "Skab/!$TribeArcher": [
+    "TribeArcher"
+  ],
+  "Skab/!$TribePunk": [
+    "TribePunk"
+  ],
+  "Skab/!$Trucker": [
+    "Trucker"
+  ],
+  "Skab/!$TruckerShopkeeper": [
+    "TruckerShopkeeper"
+  ],
+  "Skab/!$TruckerWanderer": [
+    "TruckerWanderer"
+  ],
+  "Skab/!$TwoFaced": [
+    "TwoFaced"
+  ],
+  "Skab/!$UniversityStudent": [
+    "UniversityStudent"
+  ],
+  "Skab/!$ValiantKnight": [
+    "ValiantKnight"
+  ],
+  "Skab/!$VentureSoldier": [
+    "VentureSoldier"
+  ],
+  "Skab/!$Vestal": [
+    "Vestal"
+  ],
+  "Skab/!$VillageChief": [
+    "VillageChief"
+  ],
+  "Skab/!$VillageIdiot": [
+    "VillageIdiot"
+  ],
+  "Skab/!$VillageSmith": [
+    "VillageSmith"
+  ],
+  "Skab/!$VillageSpiritist": [
+    "VillageSpiritist"
+  ],
+  "Skab/!$VillageTavernkeeper": [
+    "VillageTavernkeeper"
+  ],
+  "Skab/!$VoidAbstracter": [
+    "VoidAbstracter"
+  ],
+  "Skab/!$VoidAstronaut": [
+    "VoidAstronaut"
+  ],
+  "Skab/!$VoidCalamari": [
+    "VoidCalamari"
+  ],
+  "Skab/!$VoidHorror": [
+    "VoidHorror"
+  ],
+  "Skab/!$VoidPerson": [
+    "VoidPerson"
+  ],
+  "Skab/!$VoidScreamer": [
+    "VoidScreamer"
+  ],
+  "Skab/!$VoidSpacer": [
+    "VoidSpacer"
+  ],
+  "Skab/!$VoidSpawn": [
+    "VoidSpawn"
+  ],
+  "Skab/!$VoidWorm": [
+    "VoidWorm"
+  ],
+  "Skab/!$Volunteer": [
+    "Volunteer"
+  ],
+  "Skab/!$VRExplorer": [
+    "VRExplorer"
+  ],
+  "Skab/!$Vyking": [
+    "Vyking"
+  ],
+  "Skab/!$WanderingKnight": [
+    "WanderingKnight"
+  ],
+  "Skab/!$WanderingSwordsman": [
+    "WanderingSwordsman"
+  ],
+  "Skab/!$WarCadet": [
+    "WarCadet"
+  ],
+  "Skab/!$WarEngineer": [
+    "WarEngineer"
+  ],
+  "Skab/!$WarFanatic": [
+    "WarFanatic"
+  ],
+  "Skab/!$WarGeneral": [
+    "WarGeneral"
+  ],
+  "Skab/!$WarInventor": [
+    "WarInventor"
+  ],
+  "Skab/!$WarJournalist": [
+    "WarJournalist"
+  ],
+  "Skab/!$WarMage": [
+    "WarMage"
+  ],
+  "Skab/!$WarManager": [
+    "WarManager"
+  ],
+  "Skab/!$WarPilot": [
+    "WarPilot"
+  ],
+  "Skab/!$WarSniper": [
+    "WarSniper"
+  ],
+  "Skab/!$WarVeteran": [
+    "WarVeteran"
+  ],
+  "Skab/!$WarWitch": [
+    "WarWitch"
+  ],
+  "Skab/!$WastelandAssassin1": [
+    "WastelandAssassin1"
+  ],
+  "Skab/!$WastelandAssassin2": [
+    "WastelandAssassin2"
+  ],
+  "Skab/!$WastelandCitizen": [
+    "WastelandCitizen"
+  ],
+  "Skab/!$WastelandDJ": [
+    "WastelandDJ"
+  ],
+  "Skab/!$WastelandKnight": [
+    "WastelandKnight"
+  ],
+  "Skab/!$WastelandMage": [
+    "WastelandMage"
+  ],
+  "Skab/!$Wastelandman": [
+    "Wastelandman"
+  ],
+  "Skab/!$WastelandModel": [
+    "WastelandModel"
+  ],
+  "Skab/!$WastelandNible": [
+    "WastelandNible"
+  ],
+  "Skab/!$WastelandParamedic": [
+    "WastelandParamedic"
+  ],
+  "Skab/!$WastelandPilot": [
+    "WastelandPilot"
+  ],
+  "Skab/!$WastelandThinkerer": [
+    "WastelandThinkerer"
+  ],
+  "Skab/!$WasterKnight": [
+    "WasterKnight"
+  ],
+  "Skab/!$WasterlandYogi": [
+    "WasterlandYogi"
+  ],
+  "Skab/!$Welder": [
+    "Welder"
+  ],
+  "Skab/!$WildArcher": [
+    "WildArcher"
+  ],
+  "Skab/!$Wiseman": [
+    "Wiseman"
+  ],
+  "Skab/!$Witch1": [
+    "Witch1"
+  ],
+  "Skab/!$Witch2": [
+    "Witch2"
+  ],
+  "Skab/!$Witch3": [
+    "Witch3"
+  ],
+  "Skab/!$Witch4": [
+    "Witch4"
+  ],
+  "Skab/!$WoodArcher": [
+    "WoodArcher"
+  ],
+  "Skab/!$Woodworker": [
+    "Woodworker"
+  ],
+  "Skab/!$Wrestler": [
+    "Wrestler"
+  ],
+  "Skab/!$Yogi": [
+    "Yogi"
+  ],
+  "Skab/!$emtest2": [
+    "Em"
+  ],
+  "SpriteBase": [
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7",
+    "7"
+  ],
+  "Static_Characters_npcs": [
+    "7",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+  ]
+}

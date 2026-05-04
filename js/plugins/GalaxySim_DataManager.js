@@ -8,7 +8,7 @@
  * GalaxySim Data Manager Module
  * ============================================================================
  * This module handles all star system data management:
- * - Loading hardcoded systems from GalaxySimDB
+ * - Loading hardcoded systems from DataManager
  * - Procedural system generation
  * - Player ship position and travel logic
  * - System queries and distance calculations
@@ -16,7 +16,7 @@
  * LOAD ORDER: Must load AFTER GalaxySim_Math.js
  *
  * DEPENDENCIES:
- * - GalaxySimDB.js
+ * - DataManager.js
  * - GalaxySim_Math.js
  */
 
@@ -28,20 +28,17 @@
     throw new Error("GalaxySim_DataManager requires GalaxySim_Math to be loaded first");
   }
 
-  if (!window.GalaxyData) {
-    throw new Error("GalaxySim_DataManager requires GalaxySimDB to be loaded first");
-  }
 
   // Import from Math module
   const { RandomGenerator, MAP_RADIUS, SYSTEM_DENSITY, KLY_TO_LY,
-          GALAXY_TYPE_SPIRAL, GALAXY_TYPE_ELLIPTICAL, GALAXY_TYPE_IRREGULAR,
-          GALAXY_TYPE_DWARF_SPHEROIDAL } = window.GalaxySim.Math;
+    GALAXY_TYPE_SPIRAL, GALAXY_TYPE_ELLIPTICAL, GALAXY_TYPE_IRREGULAR,
+    GALAXY_TYPE_DWARF_SPHEROIDAL } = window.GalaxySim.Math;
   const { STAR_COLORS, PLANET_COLORS } = window.GalaxySim.Math;
 
   // Import from GalaxyData
-  const STAR_TYPES = window.GalaxyData.STAR_TYPES;
-  const PLANET_TYPES = window.GalaxyData.PLANET_TYPES;
-  const SYSTEMS = window.GalaxyData.SYSTEMS;
+  const STAR_TYPES = window.GalaxySim.StarTypes;
+  const PLANET_TYPES = window.GalaxySim.PlanetTypes;
+  const SYSTEMS = window.GalaxySim.Systems;
 
   // ============================================================================
   // Procedural Name Generators
@@ -360,7 +357,7 @@
       const angle = planet.phase || 0;
 
       const isEccentric = planet.type === "rogue" || planet.type === "comet" ||
-                          planet.type === "short_period_comet" || planet.type === "long_period_comet";
+        planet.type === "short_period_comet" || planet.type === "long_period_comet";
 
       let planetX, planetY;
 
@@ -501,7 +498,7 @@
       const planetOrbitRadius = planet.orbitRadius || 1;
 
       const isEccentric = planet.type === "rogue" || planet.type === "comet" ||
-                          planet.type === "short_period_comet" || planet.type === "long_period_comet";
+        planet.type === "short_period_comet" || planet.type === "long_period_comet";
 
       let planetX, planetY;
 
@@ -542,7 +539,7 @@
           const planetOrbitRadius = planet.orbitRadius || 1;
 
           const isEccentric = planet.type === "rogue" || planet.type === "comet" ||
-                              planet.type === "short_period_comet" || planet.type === "long_period_comet";
+            planet.type === "short_period_comet" || planet.type === "long_period_comet";
 
           let planetX, planetY;
 

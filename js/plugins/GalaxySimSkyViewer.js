@@ -87,10 +87,10 @@
     const MAX_ZOOM = 5.0;
     const BASE_SCALE = 1;
     const DEFAULT_ZOOM = 1;
-    const WESTERN_CONSTELLATIONS = window.GalaxyData?.WESTERN_CONSTELLATIONS || {};
-    const CHINESE_CONSTELLATIONS = window.GalaxyData?.CHINESE_CONSTELLATIONS || {};
+    const WESTERN_CONSTELLATIONS = window.GalaxySim?.WesternConstellations || {};
+    const CHINESE_CONSTELLATIONS = window.GalaxySim?.ChineseConstellations || {};
 
-    
+
     // --- Sprite_StarMap Class ---
     // This is our custom PIXI container for the whole display.
 
@@ -161,7 +161,7 @@
             this.addChild(this._westernButton, this._chineseButton);
             this._updateButtonActiveState();
         }
-        
+
         _createButton(text, x, y, callback) {
             const button = new PIXI.Container();
             button.x = x;
@@ -174,8 +174,8 @@
             bg.drawRoundedRect(0, 0, 100, 40, 8);
             bg.endFill();
             button.addChild(bg);
-            
-            button._buttonBackground = bg; 
+
+            button._buttonBackground = bg;
 
             const label = new PIXI.Text(text, {
                 fontFamily: "Arial",
@@ -187,7 +187,7 @@
             label.x = 50;
             label.y = 20;
             button.addChild(label);
-            
+
             button.on("pointerdown", callback);
             return button;
         }
@@ -211,19 +211,19 @@
         _createTelescopeOverlay() {
             const radius = Math.min(this.width, this.height) * 0.45;
             const overlay = new PIXI.Graphics();
-            
+
             overlay.beginFill(0x000000, 1.0);
             // Draw the outer rectangle
             overlay.drawRect(0, 0, this.width, this.height);
-            
+
             // Cut out the center
             overlay.beginHole();
             overlay.drawCircle(this.width / 2, this.height / 2, radius);
             overlay.endHole();
-            
+
             overlay.endFill();
             overlay.zIndex = 5; // Above sky, below buttons
-            
+
             this.addChild(overlay);
 
             // Add a decorative ring
@@ -259,7 +259,7 @@
                 const newPos = event.data.global;
                 const dx = newPos.x - this._dragStart.x;
                 const dy = newPos.y - this._dragStart.y;
-                
+
                 this._skyContainer.x = this._skyStart.x + dx;
                 this._skyContainer.y = this._skyStart.y + dy;
             }
@@ -293,7 +293,7 @@
                 this._skyContainer.y = (this.height / 2) - (constellation.center.y * totalZoom);
             }
         }
-        
+
         _updateButtonActiveState() {
             if (this._currentView === 'western') {
                 this._redrawButtonBackground(this._westernButton, 0x6666FF); // Active
@@ -424,7 +424,7 @@
         _updateZoom() {
             const wheelDelta = TouchInput.wheelY;
             if (wheelDelta !== 0) {
-                const delta = wheelDelta > 0 ? 0.9 : 1.1; 
+                const delta = wheelDelta > 0 ? 0.9 : 1.1;
                 // Zoom towards mouse cursor
                 this._applyZoomMultiplicative(delta, TouchInput.x, TouchInput.y);
             }
@@ -475,7 +475,7 @@
                 }
             }
         }
-        
+
         _updateHover() {
             if (!this._skyContainer || !this._hoverNameText) return;
             const touchPos = new PIXI.Point(TouchInput.x, TouchInput.y);
@@ -519,7 +519,7 @@
             scene._starMapActive = true;
             // Pass the flag to the constructor
             const starMap = new Sprite_StarMap(isTelescope);
-            scene._starMap = starMap; 
+            scene._starMap = starMap;
             scene.addChild(starMap);
         }
     });
@@ -527,7 +527,7 @@
     // --- Scene_Map Hook ---
 
     const _Scene_Map_update = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         if (this._starMapActive && this._starMap) {
             this._starMap.update();
             TouchInput.update();

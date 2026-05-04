@@ -155,24 +155,24 @@ function Scene_ArmyBattle() {
 Scene_ArmyBattle.prototype = Object.create(Scene_Base.prototype);
 Scene_ArmyBattle.prototype.constructor = Scene_ArmyBattle;
 
-Scene_ArmyBattle.prototype.initialize = function() {
+Scene_ArmyBattle.prototype.initialize = function () {
   Scene_Base.prototype.initialize.call(this);
   this._battleEnded = false;
   this._battleResult = null;
 };
 
-Scene_ArmyBattle.prototype.create = function() {
+Scene_ArmyBattle.prototype.create = function () {
   Scene_Base.prototype.create.call(this);
   this.createBattleView();
 };
 
-Scene_ArmyBattle.prototype.createBattleView = function() {
+Scene_ArmyBattle.prototype.createBattleView = function () {
   this._battleView = new ArmyBattleField();
   this.addChild(this._battleView);
   this._battleView.startBattle();
 };
 
-Scene_ArmyBattle.prototype.update = function() {
+Scene_ArmyBattle.prototype.update = function () {
   Scene_Base.prototype.update.call(this);
 
   if (this._battleView && this._battleView.isBattleEnded()) {
@@ -184,7 +184,7 @@ Scene_ArmyBattle.prototype.update = function() {
   }
 };
 
-Scene_ArmyBattle.prototype.endBattle = function() {
+Scene_ArmyBattle.prototype.endBattle = function () {
   // Wait a moment before transitioning
   setTimeout(() => {
     if (this._battleResult === "victory") {
@@ -232,7 +232,7 @@ function ArmyBattleField() {
 ArmyBattleField.prototype = Object.create(PIXI.Container.prototype);
 ArmyBattleField.prototype.constructor = ArmyBattleField;
 
-ArmyBattleField.prototype.initialize = function() {
+ArmyBattleField.prototype.initialize = function () {
   PIXI.Container.call(this);
 
   // Calculate battlefield size based on troop counts
@@ -256,7 +256,7 @@ ArmyBattleField.prototype.initialize = function() {
   this._lastTouchY = 0;
 };
 
-ArmyBattleField.prototype._calculateBattlefieldSize = function() {
+ArmyBattleField.prototype._calculateBattlefieldSize = function () {
   // Count total troops
   const playerTroopCount = $gameParty.members().length + $gameArmy.getTroopCount();
   const enemyArmy = $gameTemp._battleEnemyArmy;
@@ -289,7 +289,7 @@ ArmyBattleField.prototype._calculateBattlefieldSize = function() {
   console.log(`[ArmyBattle] Battlefield size: ${width}x${height}`);
 };
 
-ArmyBattleField.prototype._getBiomeColor = function() {
+ArmyBattleField.prototype._getBiomeColor = function () {
   // Default color (dark green field)
   let defaultColor = 0x2d5016;
 
@@ -317,8 +317,8 @@ ArmyBattleField.prototype._getBiomeColor = function() {
     console.log(`[ArmyBattle] Current biome: ${biomeName}`);
 
     // Look up biome in WorldGen database
-    if (biomeName && biomeName !== "Unknown" && window.WorldGen && window.WorldGen.BIOMES) {
-      const biome = window.WorldGen.BIOMES.find(b => b.name === biomeName);
+    if (biomeName && biomeName !== "Unknown" && window.WorldGen && window.WorldGen.Biomes) {
+      const biome = window.WorldGen.Biomes.find(b => b.name === biomeName);
       if (biome && biome.color) {
         // Convert hex color string to numeric (e.g., "#191970" -> 0x191970)
         const colorHex = biome.color.replace("#", "0x");
@@ -335,7 +335,7 @@ ArmyBattleField.prototype._getBiomeColor = function() {
   return defaultColor;
 };
 
-ArmyBattleField.prototype._setupBattlefield = function() {
+ArmyBattleField.prototype._setupBattlefield = function () {
   const width = this._battleWidth;
   const height = this._battleHeight;
 
@@ -373,7 +373,7 @@ ArmyBattleField.prototype._setupBattlefield = function() {
   this._createCounterText();
 };
 
-ArmyBattleField.prototype._createCounterText = function() {
+ArmyBattleField.prototype._createCounterText = function () {
   const width = this._battleWidth;
   const height = this._battleHeight;
 
@@ -448,7 +448,7 @@ ArmyBattleField.prototype._createCounterText = function() {
   this._createInfoScreen();
 };
 
-ArmyBattleField.prototype._createCommanderAbilitiesPanel = function() {
+ArmyBattleField.prototype._createCommanderAbilitiesPanel = function () {
   const width = this._battleWidth;
 
   // Commander abilities (cooldown in seconds)
@@ -476,7 +476,7 @@ ArmyBattleField.prototype._createCommanderAbilitiesPanel = function() {
   }
 };
 
-ArmyBattleField.prototype._createInfoScreen = function() {
+ArmyBattleField.prototype._createInfoScreen = function () {
   // Create info screen container (right sidebar)
   this._infoScreen = new PIXI.Container();
   this._infoScreen.visible = true; // Always visible
@@ -533,7 +533,7 @@ ArmyBattleField.prototype._createInfoScreen = function() {
   this._sidebarWidth = sidebarWidth;
 };
 
-ArmyBattleField.prototype.startBattle = function() {
+ArmyBattleField.prototype.startBattle = function () {
   this._setupPlayerArmy();
   this._setupEnemyArmy();
   this._updateCounters();
@@ -545,7 +545,7 @@ ArmyBattleField.prototype.startBattle = function() {
   this._battleActive = true;
 };
 
-ArmyBattleField.prototype._setupPlayerArmy = function() {
+ArmyBattleField.prototype._setupPlayerArmy = function () {
   const width = this._battleWidth;
   const height = this._battleHeight;
 
@@ -582,14 +582,14 @@ ArmyBattleField.prototype._setupPlayerArmy = function() {
 };
 
 // Helper to group array by key
-ArmyBattleField.prototype._groupBy = function(xs, key) {
-  return xs.reduce(function(rv, x) {
+ArmyBattleField.prototype._groupBy = function (xs, key) {
+  return xs.reduce(function (rv, x) {
     (rv[x[key]] = rv[x[key]] || []).push(x);
     return rv;
   }, {});
 };
 
-ArmyBattleField.prototype._setupEnemyArmy = function() {
+ArmyBattleField.prototype._setupEnemyArmy = function () {
   const enemyArmy = $gameTemp._battleEnemyArmy;
   if (!enemyArmy) {
     console.warn('[ArmyBattle] No enemy army found!');
@@ -647,7 +647,7 @@ ArmyBattleField.prototype._setupEnemyArmy = function() {
 
   console.log(`[ArmyBattle] Enemy army deployed: ${this._enemyUnits.length} units in enemy zone (${enemyZoneStart}-${enemyZoneEnd})`);
 };
-ArmyBattleField.prototype._applyTacticalFormation = function(troops, centerX, centerY, color, isPlayer, type) {
+ArmyBattleField.prototype._applyTacticalFormation = function (troops, centerX, centerY, color, isPlayer, type) {
   const spacing = 10;
   const count = troops.length;
 
@@ -655,76 +655,76 @@ ArmyBattleField.prototype._applyTacticalFormation = function(troops, centerX, ce
     let relX = 0;
     let relY = 0;
 
-      switch (type) {
-          case "Wedge":
-              const rowW = Math.floor(Math.sqrt(i * 2));
-              relY = rowW * spacing * (isPlayer ? 1 : -1);
-              relX = (i - (rowW * (rowW + 1)) / 2) * spacing - (rowW * spacing) / 2;
-              break;
+    switch (type) {
+      case "Wedge":
+        const rowW = Math.floor(Math.sqrt(i * 2));
+        relY = rowW * spacing * (isPlayer ? 1 : -1);
+        relX = (i - (rowW * (rowW + 1)) / 2) * spacing - (rowW * spacing) / 2;
+        break;
 
-          case "Line":
-              relX = (i - count / 2) * spacing;
-              relY = 0;
-              break;
+      case "Line":
+        relX = (i - count / 2) * spacing;
+        relY = 0;
+        break;
 
-          case "Double":
-              relX = (Math.floor(i / 2) - count / 4) * spacing;
-              relY = (i % 2) * spacing * (isPlayer ? 1 : -1);
-              break;
+      case "Double":
+        relX = (Math.floor(i / 2) - count / 4) * spacing;
+        relY = (i % 2) * spacing * (isPlayer ? 1 : -1);
+        break;
 
-          case "Phalanx": // Tight rectangular block
-              const pWidth = Math.ceil(Math.sqrt(count) * 1.5);
-              relX = (i % pWidth - pWidth / 2) * (spacing * 0.7);
-              relY = Math.floor(i / pWidth) * (spacing * 0.7) * (isPlayer ? 1 : -1);
-              break;
+      case "Phalanx": // Tight rectangular block
+        const pWidth = Math.ceil(Math.sqrt(count) * 1.5);
+        relX = (i % pWidth - pWidth / 2) * (spacing * 0.7);
+        relY = Math.floor(i / pWidth) * (spacing * 0.7) * (isPlayer ? 1 : -1);
+        break;
 
-          case "Circle":
-              const radius = (count * spacing) / (2 * Math.PI);
-              const angle = (i / count) * Math.PI * 2;
-              relX = Math.cos(angle) * radius;
-              relY = Math.sin(angle) * radius;
-              break;
+      case "Circle":
+        const radius = (count * spacing) / (2 * Math.PI);
+        const angle = (i / count) * Math.PI * 2;
+        relX = Math.cos(angle) * radius;
+        relY = Math.sin(angle) * radius;
+        break;
 
-          case "Scattered":
-              relX = (Math.random() - 0.5) * count * spacing;
-              relY = (Math.random() - 0.5) * 40;
-              break;
+      case "Scattered":
+        relX = (Math.random() - 0.5) * count * spacing;
+        relY = (Math.random() - 0.5) * 40;
+        break;
 
-          case "Box": // Hollow square
-              const side = Math.ceil(count / 4);
-              if (i < side) { relX = i * spacing; relY = 0; }
-              else if (i < side * 2) { relX = side * spacing; relY = (i - side) * spacing; }
-              else if (i < side * 3) { relX = (side * 3 - i) * spacing; relY = side * spacing; }
-              else { relX = 0; relY = (side * 4 - i) * spacing; }
-              relX -= (side * spacing) / 2;
-              break;
+      case "Box": // Hollow square
+        const side = Math.ceil(count / 4);
+        if (i < side) { relX = i * spacing; relY = 0; }
+        else if (i < side * 2) { relX = side * spacing; relY = (i - side) * spacing; }
+        else if (i < side * 3) { relX = (side * 3 - i) * spacing; relY = side * spacing; }
+        else { relX = 0; relY = (side * 4 - i) * spacing; }
+        relX -= (side * spacing) / 2;
+        break;
 
-          case "Crescent":
-              const cAngle = (i / count - 0.5) * Math.PI;
-              relX = Math.sin(cAngle) * (count * spacing / 2);
-              relY = Math.cos(cAngle) * 30 * (isPlayer ? 1 : -1);
-              break;
+      case "Crescent":
+        const cAngle = (i / count - 0.5) * Math.PI;
+        relX = Math.sin(cAngle) * (count * spacing / 2);
+        relY = Math.cos(cAngle) * 30 * (isPlayer ? 1 : -1);
+        break;
 
-          case "Column":
-              relX = 0;
-              relY = i * spacing * (isPlayer ? 1 : -1);
-              break;
-      }
+      case "Column":
+        relX = 0;
+        relY = i * spacing * (isPlayer ? 1 : -1);
+        break;
+    }
 
-      const unit = this._createUnit(troop, centerX + relX, centerY + relY, color, isPlayer);
-      if (isPlayer) this._playerUnits.push(unit); else this._enemyUnits.push(unit);
-      this._contentContainer.addChild(unit.sprite);
+    const unit = this._createUnit(troop, centerX + relX, centerY + relY, color, isPlayer);
+    if (isPlayer) this._playerUnits.push(unit); else this._enemyUnits.push(unit);
+    this._contentContainer.addChild(unit.sprite);
 
-      // Only add name label for the first unit of the squad
-      if (i === 0) {
-        this._contentContainer.addChild(unit.nameLabel);
-        // Mark this as the squad's label holder
-        unit.isSquadLabelHolder = true;
-      }
+    // Only add name label for the first unit of the squad
+    if (i === 0) {
+      this._contentContainer.addChild(unit.nameLabel);
+      // Mark this as the squad's label holder
+      unit.isSquadLabelHolder = true;
+    }
   });
 };
 
-ArmyBattleField.prototype._createUnit = function(troop, x, y, color, isPlayer) {
+ArmyBattleField.prototype._createUnit = function (troop, x, y, color, isPlayer) {
   const dotSize = ArmyBattleView.Params.dotSize;
   const role = (troop.role || "close quarters").toLowerCase();
 
@@ -786,7 +786,7 @@ ArmyBattleField.prototype._createUnit = function(troop, x, y, color, isPlayer) {
   };
 };
 
-ArmyBattleField.prototype.update = function() {
+ArmyBattleField.prototype.update = function () {
   if (!this._battleActive) return;
 
   // Check for TAB key to toggle info screen visibility
@@ -824,7 +824,7 @@ ArmyBattleField.prototype.update = function() {
   }
 };
 
-ArmyBattleField.prototype._processInput = function() {
+ArmyBattleField.prototype._processInput = function () {
   // Handle mouse wheel zoom
   const wheelDelta = TouchInput.wheelY;
   if (wheelDelta !== 0) {
@@ -878,7 +878,7 @@ ArmyBattleField.prototype._processInput = function() {
   }
 };
 
-ArmyBattleField.prototype._applyViewportTransform = function() {
+ArmyBattleField.prototype._applyViewportTransform = function () {
   // Apply zoom and pan to content container
   this._contentContainer.scale.set(this._zoom, this._zoom);
   this._contentContainer.position.set(this._viewportX, this._viewportY);
@@ -889,7 +889,7 @@ ArmyBattleField.prototype._applyViewportTransform = function() {
   }
 };
 
-ArmyBattleField.prototype._updateUnits = function() {
+ArmyBattleField.prototype._updateUnits = function () {
   const speed = ArmyBattleView.Params.advanceSpeed;
   const baseAttackRange = ArmyBattleView.Params.attackRange;
 
@@ -1033,7 +1033,7 @@ ArmyBattleField.prototype._updateUnits = function() {
   }
 };
 
-ArmyBattleField.prototype._clampUnitPosition = function(unit) {
+ArmyBattleField.prototype._clampUnitPosition = function (unit) {
   // Clamp unit position to battlefield boundaries
   const margin = 20; // Keep units 20px away from edges
   const minX = margin;
@@ -1052,7 +1052,7 @@ ArmyBattleField.prototype._clampUnitPosition = function(unit) {
   }
 };
 
-ArmyBattleField.prototype._findNearestEnemy = function(unit, enemies) {
+ArmyBattleField.prototype._findNearestEnemy = function (unit, enemies) {
   let nearest = null;
   let nearestDist = Infinity;
 
@@ -1069,13 +1069,13 @@ ArmyBattleField.prototype._findNearestEnemy = function(unit, enemies) {
   return nearest;
 };
 
-ArmyBattleField.prototype._getDistance = function(x1, y1, x2, y2) {
+ArmyBattleField.prototype._getDistance = function (x1, y1, x2, y2) {
   const dx = x2 - x1;
   const dy = y2 - y1;
   return Math.sqrt(dx * dx + dy * dy);
 };
 
-ArmyBattleField.prototype._attackEnemy = function(attacker, defender) {
+ArmyBattleField.prototype._attackEnemy = function (attacker, defender) {
   // Cooldown system
   if (attacker.attackCooldown > 0) {
     attacker.attackCooldown--;
@@ -1151,7 +1151,7 @@ ArmyBattleField.prototype._attackEnemy = function(attacker, defender) {
   attacker.attackCooldown = 60;
 };
 
-ArmyBattleField.prototype._killUnit = function(unit) {
+ArmyBattleField.prototype._killUnit = function (unit) {
   const injuryChance = ArmyBattleView.Params.injuryChance;
   const isInjured = Math.random() * 100 < injuryChance;
 
@@ -1196,7 +1196,7 @@ ArmyBattleField.prototype._killUnit = function(unit) {
   }
 };
 
-ArmyBattleField.prototype._updateCounters = function() {
+ArmyBattleField.prototype._updateCounters = function () {
   const playerAlive = this._playerUnits.filter(u => u.isAlive).length;
   const enemyAlive = this._enemyUnits.filter(u => u.isAlive).length;
 
@@ -1204,7 +1204,7 @@ ArmyBattleField.prototype._updateCounters = function() {
   this._enemyCounterText.text = `Enemy Army: ${enemyAlive}`;
 };
 
-ArmyBattleField.prototype._checkBattleEnd = function() {
+ArmyBattleField.prototype._checkBattleEnd = function () {
   const playerAlive = this._playerUnits.filter(u => u.isAlive).length;
   const enemyAlive = this._enemyUnits.filter(u => u.isAlive).length;
 
@@ -1215,7 +1215,7 @@ ArmyBattleField.prototype._checkBattleEnd = function() {
   }
 };
 
-ArmyBattleField.prototype._endBattle = function(result) {
+ArmyBattleField.prototype._endBattle = function (result) {
   this._battleActive = false;
   this._battleEnded = true;
   this._battleResult = result;
@@ -1226,11 +1226,11 @@ ArmyBattleField.prototype._endBattle = function(result) {
   this._resultText.visible = true;
 };
 
-ArmyBattleField.prototype.isBattleEnded = function() {
+ArmyBattleField.prototype.isBattleEnded = function () {
   return this._battleEnded;
 };
 
-ArmyBattleField.prototype.getBattleResult = function() {
+ArmyBattleField.prototype.getBattleResult = function () {
   return this._battleResult;
 };
 
@@ -1238,7 +1238,7 @@ ArmyBattleField.prototype.getBattleResult = function() {
 // Combat Mechanics - Flanking, Projectiles, Particles, Routing
 //=============================================================================
 
-ArmyBattleField.prototype._checkFlanking = function(attacker, defender) {
+ArmyBattleField.prototype._checkFlanking = function (attacker, defender) {
   // Calculate angle from defender to attacker
   const angle = Math.atan2(attacker.sprite.y - defender.sprite.y, attacker.sprite.x - defender.sprite.x);
 
@@ -1253,7 +1253,7 @@ ArmyBattleField.prototype._checkFlanking = function(attacker, defender) {
   return angleDiff > Math.PI / 2;
 };
 
-ArmyBattleField.prototype._fireProjectile = function(attacker, defender) {
+ArmyBattleField.prototype._fireProjectile = function (attacker, defender) {
   const projectile = {
     sprite: new PIXI.Graphics(),
     x: attacker.sprite.x,
@@ -1278,7 +1278,7 @@ ArmyBattleField.prototype._fireProjectile = function(attacker, defender) {
   this._effectsContainer.addChild(projectile.sprite);
 };
 
-ArmyBattleField.prototype._updateProjectiles = function() {
+ArmyBattleField.prototype._updateProjectiles = function () {
   for (let i = this._projectiles.length - 1; i >= 0; i--) {
     const proj = this._projectiles[i];
 
@@ -1338,7 +1338,7 @@ ArmyBattleField.prototype._updateProjectiles = function() {
   }
 };
 
-ArmyBattleField.prototype._createParticle = function(x, y, color, text) {
+ArmyBattleField.prototype._createParticle = function (x, y, color, text) {
   const particle = {
     sprite: new PIXI.Text(text || "", {
       fontFamily: "Arial",
@@ -1361,7 +1361,7 @@ ArmyBattleField.prototype._createParticle = function(x, y, color, text) {
   this._effectsContainer.addChild(particle.sprite);
 };
 
-ArmyBattleField.prototype._updateParticles = function() {
+ArmyBattleField.prototype._updateParticles = function () {
   for (let i = this._particles.length - 1; i >= 0; i--) {
     const particle = this._particles[i];
 
@@ -1377,7 +1377,7 @@ ArmyBattleField.prototype._updateParticles = function() {
   }
 };
 
-ArmyBattleField.prototype._updateRoutingUnit = function(unit) {
+ArmyBattleField.prototype._updateRoutingUnit = function (unit) {
   // Routing units flee towards their starting edge
   const fleeDirection = unit.isPlayer ? 1 : -1; // Player flees down, enemy flees up
   const speed = ArmyBattleView.Params.advanceSpeed * 1.5; // Flee faster
@@ -1406,7 +1406,7 @@ ArmyBattleField.prototype._updateRoutingUnit = function(unit) {
 // Commander Abilities System
 //=============================================================================
 
-ArmyBattleField.prototype._processCommanderAbilities = function() {
+ArmyBattleField.prototype._processCommanderAbilities = function () {
   // Decrease cooldowns
   for (const ability of this._commanderAbilities) {
     if (ability.currentCooldown > 0) {
@@ -1437,13 +1437,13 @@ ArmyBattleField.prototype._processCommanderAbilities = function() {
   }
 };
 
-ArmyBattleField.prototype._checkKeyPress = function(key) {
+ArmyBattleField.prototype._checkKeyPress = function (key) {
   // Manual keyboard check using Input._currentState
   const keyCode = key.charCodeAt(0);
   return Input._currentState[String.fromCharCode(keyCode).toUpperCase()];
 };
 
-ArmyBattleField.prototype._activateAbility = function(ability) {
+ArmyBattleField.prototype._activateAbility = function (ability) {
   console.log(`[ArmyBattle] Activating ability: ${ability.name}`);
 
   switch (ability.effect) {
@@ -1459,7 +1459,7 @@ ArmyBattleField.prototype._activateAbility = function(ability) {
   }
 };
 
-ArmyBattleField.prototype._rallyTroops = function() {
+ArmyBattleField.prototype._rallyTroops = function () {
   // Restore morale to routing units
   let ralliedCount = 0;
   for (const unit of this._playerUnits) {
@@ -1482,7 +1482,7 @@ ArmyBattleField.prototype._rallyTroops = function() {
   );
 };
 
-ArmyBattleField.prototype._healSquad = function() {
+ArmyBattleField.prototype._healSquad = function () {
   // Heal all player units
   let healedCount = 0;
   for (const unit of this._playerUnits) {
@@ -1502,7 +1502,7 @@ ArmyBattleField.prototype._healSquad = function() {
   );
 };
 
-ArmyBattleField.prototype._inspireTroops = function() {
+ArmyBattleField.prototype._inspireTroops = function () {
   // Grant temporary damage and morale boost
   for (const unit of this._playerUnits) {
     if (unit.isAlive) {
@@ -1529,7 +1529,7 @@ ArmyBattleField.prototype._inspireTroops = function() {
   }, 10000);
 };
 
-ArmyBattleField.prototype._updateAbilityCooldowns = function() {
+ArmyBattleField.prototype._updateAbilityCooldowns = function () {
   for (let i = 0; i < this._commanderAbilities.length; i++) {
     const ability = this._commanderAbilities[i];
     const text = this._abilityTexts[i];
@@ -1548,7 +1548,7 @@ ArmyBattleField.prototype._updateAbilityCooldowns = function() {
 // Info Screen System
 //=============================================================================
 
-ArmyBattleField.prototype._refreshInfoScreen = function() {
+ArmyBattleField.prototype._refreshInfoScreen = function () {
   // Clear existing squad displays
   this._infoPlayerSquads.removeChildren();
   this._infoEnemySquads.removeChildren();
@@ -1625,7 +1625,7 @@ ArmyBattleField.prototype._refreshInfoScreen = function() {
   this._refreshCommandPanel();
 };
 
-ArmyBattleField.prototype._groupUnitsBySquad = function(units) {
+ArmyBattleField.prototype._groupUnitsBySquad = function (units) {
   const squads = {};
   for (const unit of units) {
     const squadName = unit.troop.name;
@@ -1637,7 +1637,7 @@ ArmyBattleField.prototype._groupUnitsBySquad = function(units) {
   return squads;
 };
 
-ArmyBattleField.prototype._selectSquad = function(squadName, units, isPlayer) {
+ArmyBattleField.prototype._selectSquad = function (squadName, units, isPlayer) {
   if (!isPlayer) return; // Can only select player squads
 
   this._selectedSquad = { name: squadName, units: units };
@@ -1645,7 +1645,7 @@ ArmyBattleField.prototype._selectSquad = function(squadName, units, isPlayer) {
   console.log(`[ArmyBattle] Selected squad: ${squadName}`);
 };
 
-ArmyBattleField.prototype._refreshCommandPanel = function() {
+ArmyBattleField.prototype._refreshCommandPanel = function () {
   this._infoCommandPanel.removeChildren();
 
   if (!this._selectedSquad) {
@@ -1699,7 +1699,7 @@ ArmyBattleField.prototype._refreshCommandPanel = function() {
   }
 };
 
-ArmyBattleField.prototype._executeSquadCommand = function(action) {
+ArmyBattleField.prototype._executeSquadCommand = function (action) {
   if (!this._selectedSquad) return;
 
   const units = this._selectedSquad.units.filter(u => u.isAlive);

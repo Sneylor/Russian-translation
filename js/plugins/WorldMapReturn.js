@@ -87,7 +87,7 @@
 
 (() => {
     'use strict';
-    
+
     const pluginName = 'WorldMapReturn';
     const worldMapId = 315;
     const procMapId = 636;
@@ -99,39 +99,39 @@
     const VAR_DEST_MAP = 45;
     const VAR_PROC_ACTIVE = 90;
     const VAR_PROC_INSIDE = 91;
-    
+
     // Border arrow sprites storage
     let borderArrowSprites = [];
-    
+
     // Plugin Commands
     PluginManager.registerCommand(pluginName, 'ReturnToWorldMap', args => {
         returnToWorldMap();
     });
-    
-    PluginManager.registerCommand(pluginName, 'SaveWorldMapPosition', function(args) {
+
+    PluginManager.registerCommand(pluginName, 'SaveWorldMapPosition', function (args) {
         saveWorldMapPosition(this);
     });
-    
+
     PluginManager.registerCommand(pluginName, 'SetWorldMapCoordinates', args => {
         setWorldMapCoordinates(parseInt(args.x), parseInt(args.y));
     });
-    
+
     // Function to return to world map
     function returnToWorldMap() {
         const savedX = $gameVariables.value(VAR_WORLD_X) || 0;
         const savedY = $gameVariables.value(VAR_WORLD_Y) || 0;
-        
+
         if (savedX === 0 && savedY === 0) {
             return;
         }
-        
+
         // Set destination map for tracking
         $gameVariables.setValue(VAR_DEST_MAP, worldMapId);
-        
+
         // Perform transfer
         $gamePlayer.reserveTransfer(worldMapId, savedX, savedY, 0, 0);
     }
-    
+
     // Function to save world map position
     function saveWorldMapPosition(eventContext) {
         if ($gameMap.mapId() === worldMapId) {
@@ -151,24 +151,24 @@
             $gameVariables.setValue(VAR_WORLD_Y, posY);
         }
     }
-    
+
     // Function to manually set world map coordinates
     function setWorldMapCoordinates(x, y) {
         if (isNaN(x) || isNaN(y)) {
             return;
         }
-        
+
         if (x < 0 || y < 0) {
             return;
         }
-        
+
         $gameVariables.setValue(VAR_WORLD_X, x);
         $gameVariables.setValue(VAR_WORLD_Y, y);
     }
-    
+
     // Override performTransfer to handle position saving and effects
     const _Game_Player_performTransfer = Game_Player.prototype.performTransfer;
-    Game_Player.prototype.performTransfer = function() {
+    Game_Player.prototype.performTransfer = function () {
         const currentMapId = $gameMap.mapId();
         const destinationMapId = this._newMapId;
 
@@ -189,21 +189,21 @@
         // Call original method
         _Game_Player_performTransfer.call(this);
     };
-    
+
     // Override map setup for border tags and interior handling
     const _Game_Map_setup = Game_Map.prototype.setup;
-    Game_Map.prototype.setup = function(mapId) {
+    Game_Map.prototype.setup = function (mapId) {
         _Game_Map_setup.call(this, mapId);
-        
+
         // Setup border tags
         this.setupBorderTags();
-        
+
         // Handle interior tint if coming from world map
         const previousMapId = $gameVariables.value(VAR_DEST_MAP);
         if (previousMapId === worldMapId || $gamePlayer._transferring) {
-            const lastMapId = $gamePlayer._transferring ? 
+            const lastMapId = $gamePlayer._transferring ?
                 ($gamePlayer._oldMapId || previousMapId) : previousMapId;
-                
+
             if (lastMapId === worldMapId && mapId !== worldMapId) {
                 if ($dataMap && $dataMap.note && $dataMap.note.match(/<Interior>/i)) {
                     $gameScreen.startTint([0, 0, 0, 0], 0);
@@ -211,9 +211,9 @@
             }
         }
     };
-    
+
     // Setup border teleportation tags
-    Game_Map.prototype.setupBorderTags = function() {
+    Game_Map.prototype.setupBorderTags = function () {
         this._borderDestination = null;
         this._coordsDest = null; // Coordinates for exploration
         this._worldmapDirections = null; // Allowed directions for Worldmap tag (null = disabled, empty array = all directions)
@@ -268,15 +268,15 @@
             };
         }
     };
-    
+
     // Check if tile is a border
-    Game_Map.prototype.isBorderTile = function(x, y) {
-        return x === 0 || y === 0 || 
-               x === this.width() - 1 || y === this.height() - 1;
+    Game_Map.prototype.isBorderTile = function (x, y) {
+        return x === 0 || y === 0 ||
+            x === this.width() - 1 || y === this.height() - 1;
     };
-    
+
     // Check if a border tile is enabled for teleportation
-    Game_Map.prototype.isBorderTileEnabled = function(x, y) {
+    Game_Map.prototype.isBorderTileEnabled = function (x, y) {
         if (!this.isBorderTile(x, y)) return false;
 
         // Border is enabled if we have a border destination or Coords coordinates
@@ -284,36 +284,36 @@
     };
 
     // Check if border directions match allowed worldmap directions
-    Game_Map.prototype.isBorderDirectionAllowed = function(directions) {
+    Game_Map.prototype.isBorderDirectionAllowed = function (directions) {
         // If no Worldmap tag is set, popup is disabled
         if (this._worldmapDirections === null) return false;
 
         // Check if any of the border directions match allowed directions
         return directions.some(dir => this._worldmapDirections.includes(dir));
     };
-    
+
     // Get border direction for a tile
-    Game_Map.prototype.getBorderDirection = function(x, y) {
+    Game_Map.prototype.getBorderDirection = function (x, y) {
         const directions = [];
-        
+
         if (x === 0) directions.push('west');
         if (x === this.width() - 1) directions.push('east');
         if (y === 0) directions.push('north');
         if (y === this.height() - 1) directions.push('south');
-        
+
         return directions;
     };
-    
+
     // Check if a border tile is passable (the tile itself, not movement from it)
-    Game_Map.prototype.isBorderTilePassable = function(x, y) {
+    Game_Map.prototype.isBorderTilePassable = function (x, y) {
         // Check if the tile itself is passable from any direction
         // We check all 4 directions to see if the player can stand on this tile
         return this.isPassable(x, y, 2) || // down
-               this.isPassable(x, y, 4) || // left  
-               this.isPassable(x, y, 6) || // right
-               this.isPassable(x, y, 8);   // up
+            this.isPassable(x, y, 4) || // left  
+            this.isPassable(x, y, 6) || // right
+            this.isPassable(x, y, 8);   // up
     };
-    
+
     // Get arrow character for direction
     function getArrowForDirection(directions) {
         if (directions.length === 1) {
@@ -332,9 +332,9 @@
         }
         return '•'; // Fallback
     }
-    
+
     // Check if player is near border tiles
-    Game_Map.prototype.getNearbyBorderTiles = function(playerX, playerY) {
+    Game_Map.prototype.getNearbyBorderTiles = function (playerX, playerY) {
         const nearbyBorders = [];
 
         for (let dx = -BORDER_DETECTION_RANGE; dx <= BORDER_DETECTION_RANGE; dx++) {
@@ -372,10 +372,10 @@
 
         return nearbyBorders;
     };
-    
+
     // Update player to check for border teleports and update arrows
     const _Game_Player_update = Game_Player.prototype.update;
-    Game_Player.prototype.update = function(sceneActive) {
+    Game_Player.prototype.update = function (sceneActive) {
         const wasMoving = this.isMoving();
         _Game_Player_update.call(this, sceneActive);
 
@@ -391,9 +391,9 @@
             }
         }
     };
-    
+
     // Check and perform border teleportation
-    Game_Player.prototype.checkBorderTeleport = function() {
+    Game_Player.prototype.checkBorderTeleport = function () {
         const x = this.x;
         const y = this.y;
         const currentMapId = $gameMap.mapId();
@@ -502,7 +502,7 @@
     };
 
     // Convert border directions to exit direction code (2=down, 4=left, 6=right, 8=up)
-    Game_Player.prototype.getExitDirection = function(directions) {
+    Game_Player.prototype.getExitDirection = function (directions) {
         // Determine primary exit direction based on border position
         if (directions.includes('south')) return 2;
         if (directions.includes('west')) return 4;
@@ -510,15 +510,15 @@
         if (directions.includes('north')) return 8;
         return 0; // Default
     };
-    
+
     // Update border arrows display
-    Game_Player.prototype.updateBorderArrows = function() {
+    Game_Player.prototype.updateBorderArrows = function () {
         const currentMapId = $gameMap.mapId();
 
         // Show arrows on procedural map or maps with border destinations
         const shouldShowArrows = (currentMapId === procMapId && $gameVariables.value(VAR_PROC_INSIDE) === 1) ||
-                                 $gameMap._borderDestination ||
-                                 $gameMap._coordsDest;
+            $gameMap._borderDestination ||
+            $gameMap._coordsDest;
 
         if (!shouldShowArrows) {
             this.clearBorderArrows();
@@ -528,24 +528,24 @@
         const nearbyBorders = $gameMap.getNearbyBorderTiles(this.x, this.y);
         this.displayBorderArrows(nearbyBorders);
     };
-    
+
     // Display border arrows
-    Game_Player.prototype.displayBorderArrows = function(borderTiles) {
+    Game_Player.prototype.displayBorderArrows = function (borderTiles) {
         this.clearBorderArrows();
-        
+
         if (!SceneManager._scene || !SceneManager._scene._spriteset) return;
-        
+
         const spriteset = SceneManager._scene._spriteset;
-        
+
         borderTiles.forEach(border => {
             const sprite = new Sprite_BorderArrow(border.x, border.y, border.arrow);
             spriteset._baseSprite.addChild(sprite);
             borderArrowSprites.push(sprite);
         });
     };
-    
+
     // Clear all border arrows
-    Game_Player.prototype.clearBorderArrows = function() {
+    Game_Player.prototype.clearBorderArrows = function () {
         borderArrowSprites.forEach(sprite => {
             if (sprite.parent) {
                 sprite.parent.removeChild(sprite);
@@ -555,12 +555,12 @@
     };
 
     // Show border choice window (Return to World Map or Explore)
-    Game_Player.prototype.showBorderChoice = function(directions) {
+    Game_Player.prototype.showBorderChoice = function (directions) {
         if (SceneManager._scene && SceneManager._scene._borderChoiceWindow) {
             SceneManager._scene.openBorderChoice(directions);
         }
     };
-    
+
     // Border Arrow Sprite Class — shared from ProceduralMapTransfer.js (window.Sprite_BorderArrow)
 
     // Border Choice Window Class
@@ -589,7 +589,7 @@
             const rect = this.itemLineRect(index);
             let text = '';
 
-            switch(index) {
+            switch (index) {
                 case 0:
                     text = 'World Map';
                     break;
@@ -632,7 +632,7 @@
         }
 
         currentSymbol() {
-            switch(this.index()) {
+            switch (this.index()) {
                 case 0:
                     return 'returnToWorldMap';
                 case 1:
@@ -645,7 +645,7 @@
 
     // Clear arrows when changing maps and apply procedural map tileset
     const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
-    Scene_Map.prototype.onMapLoaded = function() {
+    Scene_Map.prototype.onMapLoaded = function () {
         _Scene_Map_onMapLoaded.call(this);
         if ($gamePlayer) {
             $gamePlayer.clearBorderArrows();
@@ -656,10 +656,10 @@
             $gameSystem.applyProceduralMapTileset();
         }
     };
-    
+
     // Initialize arrow update tracking
     const _Game_Player_initialize = Game_Player.prototype.initialize;
-    Game_Player.prototype.initialize = function() {
+    Game_Player.prototype.initialize = function () {
         _Game_Player_initialize.call(this);
         this._lastArrowUpdateX = -1;
         this._lastArrowUpdateY = -1;
@@ -688,7 +688,7 @@
             const rect = this.itemLineRect(index);
             let text = '';
 
-            switch(index) {
+            switch (index) {
                 case 0:
                     text = 'Stop Travel';
                     break;
@@ -711,7 +711,7 @@
         }
 
         currentSymbol() {
-            switch(this.index()) {
+            switch (this.index()) {
                 case 0:
                     return 'stopTravel';
                 case 1:
@@ -733,13 +733,13 @@
 
     // Scene_Map extension for travel decision window
     const _Scene_Map_createAllWindows_original = Scene_Map.prototype.createAllWindows;
-    Scene_Map.prototype.createAllWindows = function() {
+    Scene_Map.prototype.createAllWindows = function () {
         _Scene_Map_createAllWindows_original.call(this);
         this.createTravelDecisionWindow();
         this.createBorderChoiceWindow();
     };
 
-    Scene_Map.prototype.createTravelDecisionWindow = function() {
+    Scene_Map.prototype.createTravelDecisionWindow = function () {
         const rect = new Rectangle(
             Graphics.boxWidth / 2 - 150,
             Graphics.boxHeight / 2 - 100,
@@ -755,7 +755,7 @@
         this.addWindow(this._travelDecisionWindow);
     };
 
-    Scene_Map.prototype.openTravelDecision = function() {
+    Scene_Map.prototype.openTravelDecision = function () {
         this._travelDecisionWindow.select(1); // Default to "Continue"
         this._travelDecisionWindow.refresh();
         this._travelDecisionWindow.show();
@@ -763,12 +763,12 @@
         Input.clear(); // Consume the menu input
     };
 
-    Scene_Map.prototype.closeTravelDecision = function() {
+    Scene_Map.prototype.closeTravelDecision = function () {
         this._travelDecisionWindow.hide();
         this._travelDecisionWindow.deactivate();
     };
 
-    Scene_Map.prototype.onTravelDecision = function() {
+    Scene_Map.prototype.onTravelDecision = function () {
         const symbol = this._travelDecisionWindow.currentSymbol();
 
         if (symbol === 'stopTravel') {
@@ -780,7 +780,7 @@
         }
     };
 
-    Scene_Map.prototype.createBorderChoiceWindow = function() {
+    Scene_Map.prototype.createBorderChoiceWindow = function () {
         // Calculate proper size for exactly 3 options
         // Height formula: (lineHeight * numRows) + (padding * 2)
         // Standard lineHeight = 36, padding = 12
@@ -799,7 +799,7 @@
         this.addWindow(this._borderChoiceWindow);
     };
 
-    Scene_Map.prototype.openBorderChoice = function(directions) {
+    Scene_Map.prototype.openBorderChoice = function (directions) {
         this._borderChoiceWindow.setDirections(directions);
         this._borderChoiceWindow.select(0);
         this._borderChoiceWindow.refresh();
@@ -808,14 +808,14 @@
         Input.clear(); // Consume input
     };
 
-    Scene_Map.prototype.closeBorderChoice = function() {
+    Scene_Map.prototype.closeBorderChoice = function () {
         this._borderChoiceWindow.hide();
         this._borderChoiceWindow.deactivate();
         // Don't reset _borderChoiceShown here - let it stay true so window doesn't
         // re-trigger while player is still on border. It will reset when player moves off border.
     };
 
-    Scene_Map.prototype.onBorderChoice = function() {
+    Scene_Map.prototype.onBorderChoice = function () {
         const symbol = this._borderChoiceWindow.currentSymbol();
         const directions = this._borderChoiceWindow._directions;
 
@@ -833,7 +833,7 @@
         }
     };
 
-    Scene_Map.prototype.returnToWorldMap = function(directions) {
+    Scene_Map.prototype.returnToWorldMap = function (directions) {
         // Get the destination from OldEurope tag
         const borderDest = this.getBorderDestinationForDirections(directions);
 
@@ -844,7 +844,7 @@
         }
     };
 
-    Scene_Map.prototype.exploreProcedural = function(directions) {
+    Scene_Map.prototype.exploreProcedural = function (directions) {
         // Get the border destination (world coordinates from Coords tag)
         const borderDest = this.getBorderDestinationForDirections(directions);
 
@@ -907,7 +907,7 @@
         }
     };
 
-    Scene_Map.prototype.getBorderDestinationForDirections = function(directions) {
+    Scene_Map.prototype.getBorderDestinationForDirections = function (directions) {
         // Find the Coords destination for the current border
 
         // Use Coords if available
@@ -929,7 +929,7 @@
 
     // Intercept OK/interact button on world map when facing a tile with no events
     const _Game_Player_triggerButtonAction = Game_Player.prototype.triggerButtonAction;
-    Game_Player.prototype.triggerButtonAction = function() {
+    Game_Player.prototype.triggerButtonAction = function () {
         if ($gameMap.mapId() === worldMapId && Input.isTriggered('ok')) {
             const x2 = $gameMap.roundXWithDirection(this.x, this.direction());
             const y2 = $gameMap.roundYWithDirection(this.y, this.direction());
@@ -951,7 +951,7 @@
 
     // Override Game_Player.canMove to block movement when border choice window is open
     const _Game_Player_canMove = Game_Player.prototype.canMove;
-    Game_Player.prototype.canMove = function() {
+    Game_Player.prototype.canMove = function () {
         // Block movement if travel decision window is active
         if (SceneManager._scene && SceneManager._scene._travelDecisionWindow &&
             SceneManager._scene._travelDecisionWindow.active) {
@@ -969,7 +969,7 @@
 
     // Override updateCallMenu to allow normal menu on world/procedural maps
     const _Scene_Map_updateCallMenu = Scene_Map.prototype.updateCallMenu;
-    Scene_Map.prototype.updateCallMenu = function() {
+    Scene_Map.prototype.updateCallMenu = function () {
         // Normal menu behavior for all maps (including world and procedural)
         _Scene_Map_updateCallMenu.call(this);
     };
@@ -977,7 +977,7 @@
 
     // Override Window_MenuCommand to add Stop/World map options
     const _Window_MenuCommand_makeCommandList = Window_MenuCommand.prototype.makeCommandList;
-    Window_MenuCommand.prototype.makeCommandList = function() {
+    Window_MenuCommand.prototype.makeCommandList = function () {
         _Window_MenuCommand_makeCommandList.call(this);
 
         // Add "Stop" option on world map (315) as second item
@@ -997,10 +997,10 @@
         }
     };
 
-    // Function to get NON_PROCEDURAL_COORDINATES from ProceduralMapDB
+    // Function to get NonProceduralCoordinates from ProceduralMapDB
     function getWorldMapCoordinates() {
-        if (window.WorldGen && window.WorldGen.NON_PROCEDURAL_COORDINATES) {
-            return window.WorldGen.NON_PROCEDURAL_COORDINATES;
+        if (window.WorldGen && window.WorldGen.NonProceduralCoordinates) {
+            return window.WorldGen.NonProceduralCoordinates;
         }
         // Fallback if not loaded yet
         return {};
@@ -1008,14 +1008,14 @@
 
     // Handle World map and Stop command selection
     const _Scene_Menu_createCommandWindow = Scene_Menu.prototype.createCommandWindow;
-    Scene_Menu.prototype.createCommandWindow = function() {
+    Scene_Menu.prototype.createCommandWindow = function () {
         _Scene_Menu_createCommandWindow.call(this);
 
         this._commandWindow.setHandler('worldMap', this.commandWorldMap.bind(this));
         this._commandWindow.setHandler('stop', this.commandStop.bind(this));
     };
 
-    Scene_Menu.prototype.commandWorldMap = function() {
+    Scene_Menu.prototype.commandWorldMap = function () {
         // Check if current map is tagged as Interior
         if ($dataMap && $dataMap.note && $dataMap.note.match(/<Interior>/i)) {
             // Play buzzer sound and do nothing
@@ -1118,7 +1118,7 @@
         }
     }
 
-    Scene_Menu.prototype.commandStop = function() {
+    Scene_Menu.prototype.commandStop = function () {
         performStopTravel();
         SceneManager.pop();
     };

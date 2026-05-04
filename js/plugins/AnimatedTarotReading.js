@@ -57,7 +57,7 @@
  * @default That reading didn't resonate with me at all...\nMaybe the spirits weren't speaking clearly today.
  * 
  */
-const { TarotMeanings } = window.ProstheticsData;
+const { TarotMeanings } = window.Items;
 
 (() => {
     'use strict';
@@ -65,7 +65,7 @@ const { TarotMeanings } = window.ProstheticsData;
     const pluginName = 'AnimatedTarotReading';
 
     // Tarot card meanings database
- 
+
 
     // Plugin Commands
     PluginManager.registerCommand(pluginName, 'openTarot', args => {
@@ -85,7 +85,7 @@ const { TarotMeanings } = window.ProstheticsData;
     });
 
     // Scene_Tarot
-    class Scene_Tarot extends Scene_MenuBase  {
+    class Scene_Tarot extends Scene_MenuBase {
         create() {
             super.create();
             this._cards = [];
@@ -177,7 +177,7 @@ const { TarotMeanings } = window.ProstheticsData;
             this._spreadWindow.contents.clear();
             const positions = ['past', 'present', 'future'];
             const spacing = (this._spreadWindow.width - 32) / 3;
-            
+
             positions.forEach((pos, index) => {
                 const x = spacing * index + spacing / 2 - 50;
                 const text = this.getLocalizedText(pos);
@@ -187,14 +187,14 @@ const { TarotMeanings } = window.ProstheticsData;
 
         shuffleAndDealCards() {
             // Generate array of card numbers (1-22)
-            const allCards = Array.from({length: 22}, (_, i) => i + 1);
-            
+            const allCards = Array.from({ length: 22 }, (_, i) => i + 1);
+
             // Shuffle cards
             for (let i = allCards.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [allCards[i], allCards[j]] = [allCards[j], allCards[i]];
             }
-            
+
             // Select 3 cards with random orientations
             for (let i = 0; i < 3; i++) {
                 this._selectedCards.push({
@@ -202,7 +202,7 @@ const { TarotMeanings } = window.ProstheticsData;
                     isReversed: Math.random() < 0.5
                 });
             }
-            
+
             // Create card sprites
             this.createCardSprites();
         }
@@ -211,17 +211,17 @@ const { TarotMeanings } = window.ProstheticsData;
             const spacing = (this._spreadWindow.width - 32) / 3;
             const cardWidth = 120;
             const cardHeight = 180;
-            
+
             for (let i = 0; i < 3; i++) {
                 const x = this._spreadWindow.x + spacing * i + spacing / 2 - cardWidth / 2;
                 const y = this._spreadWindow.y + 80;
-                
+
                 // Card back sprite
                 const cardBack = new Sprite();
                 cardBack.bitmap = new Bitmap(cardWidth, cardHeight);
                 cardBack.bitmap.fillAll('#1a1a2e');
                 cardBack.bitmap.strokeRect(0, 0, cardWidth, cardHeight, '#eee', 2);
-                
+
                 // Draw decorative pattern on card back
                 const ctx = cardBack.bitmap.context;
                 ctx.save();
@@ -241,22 +241,22 @@ const { TarotMeanings } = window.ProstheticsData;
                 }
                 ctx.restore();
                 cardBack.bitmap.baseTexture.update();
-                
+
                 cardBack.x = x;
                 cardBack.y = y;
                 cardBack.anchor.x = 0.5;
                 cardBack.anchor.y = 0.5;
                 cardBack.x += cardWidth / 2;
                 cardBack.y += cardHeight / 2;
-                
+
                 // Card front sprite (initially hidden)
                 const cardFront = new Sprite();
                 const cardData = this._selectedCards[i];
-                
+
                 // Load the arcana image
-                const filename = `img/arcana/${cardData.number-1}`;
+                const filename = `img/arcana/${cardData.number - 1}`;
                 cardFront.bitmap = ImageManager.loadBitmap('', filename);
-                
+
                 cardFront.x = x;
                 cardFront.y = y;
                 cardFront.anchor.x = 0.5;
@@ -264,33 +264,33 @@ const { TarotMeanings } = window.ProstheticsData;
                 cardFront.x += cardWidth / 2;
                 cardFront.y += cardHeight / 2;
                 cardFront.visible = false;
-                
+
                 // Apply reversed rotation if needed
                 if (cardData.isReversed) {
                     cardFront.rotation = Math.PI;
                 }
-                
+
                 // Set up bitmap load handling
                 cardFront.bitmap.addLoadListener(() => {
                     cardFront.scale.x = cardWidth / cardFront.bitmap.width;
                     cardFront.scale.y = cardHeight / cardFront.bitmap.height;
                 });
-                
+
                 this._cardSprites.push({
                     back: cardBack,
                     front: cardFront,
                     index: i,
                     isFlipped: false
                 });
-                
+
                 this.addChild(cardBack);
                 this.addChild(cardFront);
-                
+
                 // Make cards interactive
                 cardBack.interactive = true;
                 cardBack.buttonMode = true;
                 cardBack.addListener('pointertap', () => this.onCardClick(i));
-                
+
                 // Add hover effect
                 cardBack.addListener('pointerover', () => {
                     if (!this._isAnimating && !this._cardSprites[i].isFlipped) {
@@ -298,7 +298,7 @@ const { TarotMeanings } = window.ProstheticsData;
                         cardBack.scale.y = 1.05;
                     }
                 });
-                
+
                 cardBack.addListener('pointerout', () => {
                     if (!this._isAnimating && !this._cardSprites[i].isFlipped) {
                         cardBack.scale.x = 1;
@@ -310,7 +310,7 @@ const { TarotMeanings } = window.ProstheticsData;
 
         onCardClick(index) {
             if (this._isAnimating || this._cardSprites[index].isFlipped) return;
-            
+
             this._isAnimating = true;
             this.flipCard(index);
         }
@@ -319,12 +319,12 @@ const { TarotMeanings } = window.ProstheticsData;
             const card = this._cardSprites[index];
             const duration = 20; // frames
             let frame = 0;
-            
+
             const flip = () => {
                 frame++;
                 const progress = frame / duration;
                 const angle = progress * Math.PI;
-                
+
                 // First half - shrink card back
                 if (progress <= 0.5) {
                     card.back.scale.x = Math.cos(angle);
@@ -336,24 +336,24 @@ const { TarotMeanings } = window.ProstheticsData;
                     }
                     card.front.scale.x = Math.abs(Math.cos(angle)) * (120 / card.front.bitmap.width);
                 }
-                
+
                 if (frame >= duration) {
                     card.isFlipped = true;
                     this._isRevealed[index] = true;
                     this._isAnimating = false;
                     this.showCardMeaning(index);
-                    
+
                     // Check if all cards are revealed
                     if (this._isRevealed.every(r => r)) {
                         this._instructionWindow.contents.clear();
-                        this._instructionWindow.drawText(this.getLocalizedText('complete'), 0, 0, 
+                        this._instructionWindow.drawText(this.getLocalizedText('complete'), 0, 0,
                             this._instructionWindow.width - 32, 'center');
                     }
                 } else {
                     requestAnimationFrame(flip);
                 }
             };
-            
+
             flip();
         }
 
@@ -363,21 +363,21 @@ const { TarotMeanings } = window.ProstheticsData;
             const meanings = TarotMeanings[lang][card.number];
             const pool = card.isReversed ? meanings.reversed : meanings.upright;
             const meaning = pool[Math.floor(Math.random() * pool.length)];
-            
+
             this._meaningWindow.contents.clear();
             this._meaningWindow.show();
-            
+
             // Draw card name
             const cardName = this.getCardName(card.number);
             const orientation = card.isReversed ? this.getLocalizedText('reversed') : this.getLocalizedText('upright');
             this._meaningWindow.changeTextColor(ColorManager.systemColor());
-            this._meaningWindow.drawText(`${cardName} (${orientation})`, 0, 0, 
+            this._meaningWindow.drawText(`${cardName} (${orientation})`, 0, 0,
                 this._meaningWindow.width - 32, 'center');
-            
+
             // Draw meaning
             this._meaningWindow.changeTextColor(ColorManager.normalColor());
             this._meaningWindow.drawTextAutomatically(meaning, 0, 40, this._meaningWindow.width - 32);
-            
+
             // Hide after delay
             setTimeout(() => {
                 this._meaningWindow.hide();
@@ -434,7 +434,7 @@ const { TarotMeanings } = window.ProstheticsData;
 
         update() {
             super.update();
-            
+
             if (Input.isTriggered('cancel') || TouchInput.isCancelled()) {
                 this.popScene();
             }
@@ -442,16 +442,16 @@ const { TarotMeanings } = window.ProstheticsData;
     }
 
     // Window extensions for text wrapping
-    Window_Base.prototype.drawTextAutomatically = function(text, x, y, maxWidth) {
+    Window_Base.prototype.drawTextAutomatically = function (text, x, y, maxWidth) {
         const textState = this.createTextState(text, x, y, maxWidth);
         const words = text.split(' ');
         let line = '';
         let currentY = y;
-        
+
         for (let i = 0; i < words.length; i++) {
             const testLine = line + words[i] + ' ';
             const metrics = this.textWidth(testLine);
-            
+
             if (metrics > maxWidth && line !== '') {
                 this.drawText(line.trim(), x, currentY, maxWidth);
                 line = words[i] + ' ';
@@ -460,7 +460,7 @@ const { TarotMeanings } = window.ProstheticsData;
                 line = testLine;
             }
         }
-        
+
         this.drawText(line.trim(), x, currentY, maxWidth);
     };
 
@@ -567,12 +567,12 @@ const { TarotMeanings } = window.ProstheticsData;
 
         shuffleAndDealCards() {
             // Generate and shuffle cards
-            const allCards = Array.from({length: 22}, (_, i) => i + 1);
+            const allCards = Array.from({ length: 22 }, (_, i) => i + 1);
             for (let i = allCards.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [allCards[i], allCards[j]] = [allCards[j], allCards[i]];
             }
-            
+
             // Select 3 cards
             for (let i = 0; i < 3; i++) {
                 this._selectedCards.push({
@@ -580,28 +580,28 @@ const { TarotMeanings } = window.ProstheticsData;
                     isReversed: Math.random() < 0.5
                 });
             }
-            
+
             // Show first card
             this.showCurrentCard();
         }
 
         showCurrentCard() {
             const card = this._selectedCards[this._currentCardIndex];
-            
+
             // Create card sprite
             const cardSprite = new Sprite();
             const filename = `img/arcana/${card.number}.png`;
             cardSprite.bitmap = ImageManager.loadBitmap('', filename);
-            
+
             cardSprite.anchor.x = 0.5;
             cardSprite.anchor.y = 0.5;
             cardSprite.x = this._cardWindow.x + this._cardWindow.width / 2;
             cardSprite.y = this._cardWindow.y + this._cardWindow.height / 2 - 20;
-            
+
             if (card.isReversed) {
                 cardSprite.rotation = Math.PI;
             }
-            
+
             cardSprite.bitmap.addLoadListener(() => {
                 const maxWidth = 160;
                 const maxHeight = 240;
@@ -610,7 +610,7 @@ const { TarotMeanings } = window.ProstheticsData;
                 const scale = Math.min(scaleX, scaleY);
                 cardSprite.scale.x = scale;
                 cardSprite.scale.y = scale;
-                
+
                 // Fade in animation
                 cardSprite.opacity = 0;
                 const fadeIn = () => {
@@ -623,10 +623,10 @@ const { TarotMeanings } = window.ProstheticsData;
                 };
                 fadeIn();
             });
-            
+
             this.addChild(cardSprite);
             this._currentCardSprite = cardSprite;
-            
+
             // Update card name
             this._cardWindow.contents.clear();
             const cardName = this.getCardName(card.number);
@@ -641,16 +641,16 @@ const { TarotMeanings } = window.ProstheticsData;
             const lang = ConfigManager.language === 'it' ? 'it' : 'en';
             const meanings = TarotMeanings[lang][card.number];
             const pool = card.isReversed ? meanings.reversed : meanings.upright;
-            
+
             // Get correct meaning
             const correctIndex = Math.floor(Math.random() * pool.length);
             const correctMeaning = pool[correctIndex];
             this._correctMeanings.push(correctMeaning);
-            
+
             // Get two wrong meanings from other cards
             const wrongMeanings = [];
             const usedCards = [card.number];
-            
+
             while (wrongMeanings.length < 2) {
                 const randomCard = Math.floor(Math.random() * 22) + 1;
                 if (!usedCards.includes(randomCard)) {
@@ -661,17 +661,17 @@ const { TarotMeanings } = window.ProstheticsData;
                     wrongMeanings.push(wrongMeaning);
                 }
             }
-            
+
             // Shuffle choices
             this._choices = [correctMeaning, ...wrongMeanings];
             for (let i = this._choices.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [this._choices[i], this._choices[j]] = [this._choices[j], this._choices[i]];
             }
-            
+
             // Store correct answer index
             this._correctAnswerIndex = this._choices.indexOf(correctMeaning);
-            
+
             // Setup choice window
             this._choiceWindow.clearCommandList();
             this._choices.forEach((choice, index) => {
@@ -679,12 +679,12 @@ const { TarotMeanings } = window.ProstheticsData;
                 const truncated = choice.length > 80 ? choice.substring(0, 77) + '...' : choice;
                 this._choiceWindow.addCommand(truncated, 'choice' + index);
             });
-            
+
             // Set handlers
             this._choices.forEach((_, index) => {
                 this._choiceWindow.setHandler('choice' + index, () => this.onChoiceSelect(index));
             });
-            
+
             this._choiceWindow.refresh();
             this._choiceWindow.show();
             this._choiceWindow.activate();
@@ -694,7 +694,7 @@ const { TarotMeanings } = window.ProstheticsData;
         onChoiceSelect(index) {
             this._choiceWindow.deactivate();
             this._choiceWindow.hide();
-            
+
             // Check if correct
             if (index === this._correctAnswerIndex) {
                 this._correctAnswers++;
@@ -702,7 +702,7 @@ const { TarotMeanings } = window.ProstheticsData;
             } else {
                 SoundManager.playBuzzer();
             }
-            
+
             // Move to next card or end
             this._currentCardIndex++;
             if (this._currentCardIndex < 3) {
@@ -739,18 +739,18 @@ const { TarotMeanings } = window.ProstheticsData;
             } else {
                 message = this._npcData.poorMessage;
             }
-            
+
             // Store message for display after scene ends
             $gameMessage.setBackground(0);
             $gameMessage.setPositionType(2);
-            
+
             // Compatibility wrapper
             window.skipLocalization = true;
             message.split('\n').forEach(line => {
                 $gameMessage.add(line);
             });
             window.skipLocalization = false;
-            
+
             // Return to map
             this.popScene();
         }
@@ -801,7 +801,7 @@ const { TarotMeanings } = window.ProstheticsData;
 
         update() {
             super.update();
-            
+
             if (Input.isTriggered('cancel') || TouchInput.isCancelled()) {
                 if (!this._choiceWindow.active) {
                     this.popScene();

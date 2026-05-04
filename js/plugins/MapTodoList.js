@@ -33,7 +33,7 @@
  * You can change which switch controls the tutorial system by editing
  * the TUTORIAL_SWITCH_ID constant in the code (default: 75).
  * 
- * Edit the TODO_LISTS object in the code to configure your to-do lists.
+ * Edit the TodoList object in the code to configure your to-do lists.
  * Format:
  * "ListKey": {
  * title: { en: "English Title", it: "Italian Title" },
@@ -164,10 +164,10 @@
 
 (() => {
     'use strict';
-    
+
     const pluginName = "MapTodoList";
     const parameters = PluginManager.parameters(pluginName);
-    const { TODO_LISTS } = window.HelpData;
+    const { TodoList } = window.Messages;
 
     // Helper function to parse multilingual parameters
     function parseMultilingualParam(paramString, defaultValue) {
@@ -189,9 +189,9 @@
         incompleteTaskColor: Number(parameters['incompleteTaskColor']) || 0,
         showImages: parameters['showImages'] !== 'false',
         imageHeight: Number(parameters['imageHeight']) || 100,
-        tutorialOptionText: parseMultilingualParam(parameters['tutorialOptionText'], {en: "Map hints", it: "Suggerimenti nella mappa"}),
-        tutorialOnText: parseMultilingualParam(parameters['tutorialOnText'], {en: "ON", it: "ATTIVI"}),
-        tutorialOffText: parseMultilingualParam(parameters['tutorialOffText'], {en: "OFF", it: "DISATTIVI"})
+        tutorialOptionText: parseMultilingualParam(parameters['tutorialOptionText'], { en: "Map hints", it: "Suggerimenti nella mappa" }),
+        tutorialOnText: parseMultilingualParam(parameters['tutorialOnText'], { en: "ON", it: "ATTIVI" }),
+        tutorialOffText: parseMultilingualParam(parameters['tutorialOffText'], { en: "OFF", it: "DISATTIVI" })
     };
 
     // CONFIGURATION: Change this to use a different switch for the tutorial system
@@ -210,7 +210,7 @@
     // ControlTagParser - Parse and display control tags based on input method
     //=========================================================================
     const ControlTagParser = {
-        getCurrentInputMethod: function() {
+        getCurrentInputMethod: function () {
             // Check if gamepad/controller input is being used
             const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
             for (let i = 0; i < gamepads.length; i++) {
@@ -238,7 +238,7 @@
             return _detectedInputMethod;
         },
 
-        parseControlText: function(text) {
+        parseControlText: function (text) {
             const inputMethod = this.getCurrentInputMethod();
 
             // Pattern: <keyboard: ... > <controller: ... >
@@ -263,17 +263,17 @@
         _showingTodoList: false, // false = showing hint, true = showing todo list
         _completedLists: new Set(), // Track which lists have been completed
 
-        initialize: function() {
+        initialize: function () {
             this._currentList = null;
             this._showingTodoList = false;
             this._completedLists = new Set();
             // Don't reset _detectedInputMethod on initialize - it persists until reload
         },
 
-        updateForMap: function(mapId) {
+        updateForMap: function (mapId) {
             // Find if this map has a todo list
-            for (const key in TODO_LISTS) {
-                if (TODO_LISTS[key].maps.includes(mapId)) {
+            for (const key in TodoList) {
+                if (TodoList[key].maps.includes(mapId)) {
                     this._currentList = key;
                     return;
                 }
@@ -282,36 +282,36 @@
             this._currentList = null;
         },
 
-        getCurrentList: function() {
+        getCurrentList: function () {
             return this._currentList;
         },
 
-        getCurrentListData: function() {
-            return this._currentList ? TODO_LISTS[this._currentList] : null;
+        getCurrentListData: function () {
+            return this._currentList ? TodoList[this._currentList] : null;
         },
 
-        isTutorialActive: function() {
+        isTutorialActive: function () {
             return $gameSwitches && $gameSwitches.value(TUTORIAL_SWITCH_ID);
         },
 
-        isShowingTodoList: function() {
+        isShowingTodoList: function () {
             return this._showingTodoList;
         },
 
-        isShowingHint: function() {
+        isShowingHint: function () {
             return !this._showingTodoList;
         },
 
         // Check if current map has a todo list configured
-        hasListForCurrentMap: function() {
+        hasListForCurrentMap: function () {
             return this._currentList !== null;
         },
 
         // Check if all tasks in the current list are completed
-        isCurrentListComplete: function() {
+        isCurrentListComplete: function () {
             if (!this._currentList) return false;
 
-            const listData = TODO_LISTS[this._currentList];
+            const listData = TodoList[this._currentList];
             if (!listData || !listData.tasks) return false;
 
             // Check if all tasks have their switches ON
@@ -321,45 +321,45 @@
         },
 
         // Mark a list as completed (so icon doesn't show again)
-        markListAsCompleted: function(listKey) {
+        markListAsCompleted: function (listKey) {
             this._completedLists.add(listKey);
         },
 
         // Check if a list has been marked as completed
-        isListCompleted: function(listKey) {
+        isListCompleted: function (listKey) {
             return this._completedLists.has(listKey);
         },
 
-        toggle: function() {
+        toggle: function () {
             // Allow toggle if there's a list for this map (regardless of tutorial switch)
             if (this.hasListForCurrentMap()) {
                 this._showingTodoList = !this._showingTodoList;
             }
         },
 
-        show: function() {
+        show: function () {
             // Allow showing if there's a list for this map (regardless of tutorial switch)
             if (this.hasListForCurrentMap()) {
                 this._showingTodoList = true;
             }
         },
 
-        hide: function() {
+        hide: function () {
             // Allow hiding if there's a list for this map (regardless of tutorial switch)
             if (this.hasListForCurrentMap()) {
                 this._showingTodoList = false;
             }
         },
 
-        manuallyChangeList: function(listKey) {
-            if (TODO_LISTS[listKey]) {
+        manuallyChangeList: function (listKey) {
+            if (TodoList[listKey]) {
                 this._currentList = listKey;
                 return true;
             }
             return false;
         },
 
-        syncStateWithSwitch: function() {
+        syncStateWithSwitch: function () {
             // On game load, default to showing hint (not todo list)
             this._showingTodoList = false;
         }
@@ -389,7 +389,7 @@
 
         update() {
             super.update();
-            
+
             // Check if pause menu is open (menu scene is active)
             const menuOpen = SceneManager._scene && SceneManager._scene.constructor.name === 'Scene_Menu';
 
@@ -411,8 +411,8 @@
 
             // Normal operation - determine visibility
             const shouldBeVisible = TodoListManager.isShowingTodoList() &&
-                                   TodoListManager.hasListForCurrentMap();
-            
+                TodoListManager.hasListForCurrentMap();
+
             // Apply visibility state
             this.visible = shouldBeVisible;
 
@@ -454,7 +454,7 @@
             const listKey = TodoListManager.getCurrentList();
             if (!listKey) return;
 
-            const listData = TODO_LISTS[listKey];
+            const listData = TodoList[listKey];
             if (!listData) return;
 
             const lang = ConfigManager.language || 'en';
@@ -531,11 +531,11 @@
             // Restore previous fill style
             bitmap._context.fillStyle = previousFillStyle;
         }
-        
+
         loadAndDisplayImage(imageName) {
             const bitmap = ImageManager.loadPicture(imageName);
             this._imageSprite = new Sprite(bitmap);
-            
+
             bitmap.addLoadListener(() => {
                 const scale = Math.min(
                     this.contents.width / bitmap.width,
@@ -546,14 +546,14 @@
                 this._imageSprite.x = (this.contents.width - bitmap.width * scale) / 2;
                 this._imageSprite.y = 0;
             });
-            
+
             this.addChild(this._imageSprite);
         }
-        
+
         lineHeight() {
             return config.fontSize + 8;
         }
-        
+
         standardFontSize() {
             return config.fontSize;
         }
@@ -625,7 +625,7 @@
 
         update() {
             super.update();
-            
+
             // Check if pause menu is open (menu scene is active)
             const menuOpen = SceneManager._scene && SceneManager._scene.constructor.name === 'Scene_Menu';
 
@@ -648,9 +648,9 @@
             // Normal operation - determine visibility
             const currentList = TodoListManager.getCurrentList();
             const shouldBeVisible = TodoListManager.hasListForCurrentMap() &&
-                                   TodoListManager.isShowingHint() &&
-                                   !TodoListManager.isListCompleted(currentList);
-            
+                TodoListManager.isShowingHint() &&
+                !TodoListManager.isListCompleted(currentList);
+
             // Apply visibility state
             this.visible = shouldBeVisible;
 
@@ -757,24 +757,24 @@
     // Window_Options - Add tutorial option
     //=========================================================================
     const _Window_Options_makeCommandList = Window_Options.prototype.makeCommandList;
-    Window_Options.prototype.makeCommandList = function() {
+    Window_Options.prototype.makeCommandList = function () {
         _Window_Options_makeCommandList.call(this);
         this.addTutorialOptions();
     };
 
-    Window_Options.prototype.addTutorialOptions = function() {
+    Window_Options.prototype.addTutorialOptions = function () {
         const lang = ConfigManager.language || 'en';
         const tutorialText = config.tutorialOptionText[lang] || config.tutorialOptionText.en;
         this.addCommand(tutorialText, 'tutorial');
     };
 
     const _Window_Options_statusText = Window_Options.prototype.statusText;
-    Window_Options.prototype.statusText = function(index) {
+    Window_Options.prototype.statusText = function (index) {
         const symbol = this.commandSymbol(index);
         if (symbol === 'tutorial') {
             const lang = ConfigManager.language || 'en';
             const value = this.getConfigValue(symbol);
-            return value 
+            return value
                 ? (config.tutorialOnText[lang] || config.tutorialOnText.en)
                 : (config.tutorialOffText[lang] || config.tutorialOffText.en);
         }
@@ -782,7 +782,7 @@
     };
 
     const _Window_Options_booleanStatusText = Window_Options.prototype.booleanStatusText;
-    Window_Options.prototype.booleanStatusText = function(value) {
+    Window_Options.prototype.booleanStatusText = function (value) {
         return _Window_Options_booleanStatusText.call(this, value);
     };
 
@@ -790,14 +790,14 @@
     // ConfigManager - Handle tutorial option
     //=========================================================================
     const _ConfigManager_makeData = ConfigManager.makeData;
-    ConfigManager.makeData = function() {
+    ConfigManager.makeData = function () {
         const config = _ConfigManager_makeData.call(this);
         config.tutorial = this.tutorial;
         return config;
     };
 
     const _ConfigManager_applyData = ConfigManager.applyData;
-    ConfigManager.applyData = function(config) {
+    ConfigManager.applyData = function (config) {
         _ConfigManager_applyData.call(this, config);
         this.tutorial = this.readFlag(config, 'tutorial', false); // Default OFF
         // Sync tutorial option with the tutorial switch
@@ -810,7 +810,7 @@
 
     // Intercept when tutorial option changes
     const _Window_Options_changeValue = Window_Options.prototype.changeValue;
-    Window_Options.prototype.changeValue = function(symbol, value) {
+    Window_Options.prototype.changeValue = function (symbol, value) {
         _Window_Options_changeValue.call(this, symbol, value);
         if (symbol === 'tutorial') {
             // Update the tutorial switch when tutorial option changes
@@ -841,13 +841,13 @@
     // Scene_Map Integration
     //=========================================================================
     const _Scene_Map_start = Scene_Map.prototype.start;
-    Scene_Map.prototype.start = function() {
+    Scene_Map.prototype.start = function () {
         _Scene_Map_start.call(this);
         this.createTodoListWindow();
         this.createTodoHintWindow();
     };
 
-    Scene_Map.prototype.createTodoListWindow = function() {
+    Scene_Map.prototype.createTodoListWindow = function () {
         if (!this._todoListWindow) {
             this._todoListWindow = new Window_TodoList();
             // Add to the windowLayer (standard windows)
@@ -857,7 +857,7 @@
         }
     };
 
-    Scene_Map.prototype.createTodoHintWindow = function() {
+    Scene_Map.prototype.createTodoHintWindow = function () {
         if (!this._todoHintWindow) {
             this._todoHintWindow = new Window_TodoHint();
             // Add to the windowLayer (standard windows)
@@ -868,12 +868,12 @@
     };
 
     const _Scene_Map_update = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         _Scene_Map_update.call(this);
         this.updateTodoListToggle();
     };
 
-    Scene_Map.prototype.updateTodoListToggle = function() {
+    Scene_Map.prototype.updateTodoListToggle = function () {
         // Toggle between hint and todo list with H key or gamepad R1 button
         let shouldToggle = false;
 
@@ -921,7 +921,7 @@
     // Scene_Map - Ensure window persists on map change
     //=========================================================================
     const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
-    Scene_Map.prototype.onMapLoaded = function() {
+    Scene_Map.prototype.onMapLoaded = function () {
         _Scene_Map_onMapLoaded.call(this);
         if (this._todoListWindow) {
             this._todoListWindow.refresh();
@@ -935,7 +935,7 @@
     // Game_Map - Update list when map changes
     //=========================================================================
     const _Game_Map_setup = Game_Map.prototype.setup;
-    Game_Map.prototype.setup = function(mapId) {
+    Game_Map.prototype.setup = function (mapId) {
         _Game_Map_setup.call(this, mapId);
         TodoListManager.updateForMap(mapId);
     };
@@ -944,28 +944,28 @@
     // DataManager - Initialize on game start/load
     //=========================================================================
     const _DataManager_createGameObjects = DataManager.createGameObjects;
-    DataManager.createGameObjects = function() {
+    DataManager.createGameObjects = function () {
         _DataManager_createGameObjects.call(this);
         TodoListManager.initialize();
     };
 
     const _DataManager_setupNewGame = DataManager.setupNewGame;
-    DataManager.setupNewGame = function() {
+    DataManager.setupNewGame = function () {
         _DataManager_setupNewGame.call(this);
         TodoListManager.initialize();
         // Set tutorial switch based on tutorial config (default OFF)
         $gameSwitches.setValue(TUTORIAL_SWITCH_ID, ConfigManager.tutorial || false);
-        
+
         // Initialize to show hint by default (not todo list)
         TodoListManager.syncStateWithSwitch();
-        
+
         if ($gameMap) {
             TodoListManager.updateForMap($gameMap.mapId());
         }
     };
 
     const _DataManager_loadGame = DataManager.loadGame;
-    DataManager.loadGame = function(savefileId) {
+    DataManager.loadGame = function (savefileId) {
         const result = _DataManager_loadGame.call(this, savefileId);
         if (result) {
             TodoListManager.initialize();
@@ -976,7 +976,7 @@
 
             // Initialize to show hint by default (not todo list)
             TodoListManager.syncStateWithSwitch();
-            
+
             if ($gameMap) {
                 TodoListManager.updateForMap($gameMap.mapId());
             }
@@ -1027,19 +1027,19 @@
     });
 
     // Debug command to manually show list (F8 console)
-    window.showTodoList = function(listKey) {
-        if (TODO_LISTS[listKey]) {
+    window.showTodoList = function (listKey) {
+        if (TodoList[listKey]) {
             TodoListManager.manuallyChangeList(listKey);
             if (SceneManager._scene._todoListWindow) {
                 SceneManager._scene._todoListWindow.refresh();
             }
             console.log(`Manually activated: ${listKey}`);
         } else {
-            console.log(`List "${listKey}" not found. Available:`, Object.keys(TODO_LISTS));
+            console.log(`List "${listKey}" not found. Available:`, Object.keys(TodoList));
         }
     };
 
-    window.hideTodoList = function() {
+    window.hideTodoList = function () {
         TodoListManager.hide();
         if (SceneManager._scene._todoListWindow) {
             SceneManager._scene._todoListWindow.refresh();
@@ -1050,7 +1050,7 @@
         console.log("TodoList hidden (showing hint)");
     };
 
-    window.toggleTodoList = function() {
+    window.toggleTodoList = function () {
         TodoListManager.toggle();
         if (SceneManager._scene._todoListWindow) {
             SceneManager._scene._todoListWindow.refresh();
@@ -1062,11 +1062,11 @@
     };
 
     // Expose window methods for other plugins
-    window.getTodoListWindow = function() {
+    window.getTodoListWindow = function () {
         return SceneManager._scene ? SceneManager._scene._todoListWindow : null;
     };
 
-    window.showTodoListWindow = function() {
+    window.showTodoListWindow = function () {
         const todoWindow = window.getTodoListWindow();
         if (todoWindow) {
             todoWindow.showTodoList();
@@ -1074,7 +1074,7 @@
         }
     };
 
-    window.hideTodoListWindow = function() {
+    window.hideTodoListWindow = function () {
         const todoWindow = window.getTodoListWindow();
         if (todoWindow) {
             todoWindow.hideTodoList();
@@ -1082,7 +1082,7 @@
         }
     };
 
-    window.toggleTodoListWindow = function() {
+    window.toggleTodoListWindow = function () {
         const todoWindow = window.getTodoListWindow();
         if (todoWindow) {
             todoWindow.toggleTodoListVisibility();
@@ -1090,5 +1090,5 @@
         }
     };
 
- 
+
 })();

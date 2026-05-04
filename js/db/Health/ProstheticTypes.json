@@ -1,0 +1,804 @@
+{
+  "TESTES": {
+    "name_en": "Testes",
+    "name_int": "",
+    "name_it": "Testicoli",
+    "cost": 10000,
+    "effects": {}
+  },
+  "UTERUS": {
+    "name_en": "Uterus",
+    "name_int": "",
+    "name_it": "Utero",
+    "cost": 10000,
+    "effects": {}
+  },
+  "OVIDUCT": {
+    "name_en": "Oviduct",
+    "name_int": "",
+    "name_it": "Ovidotto",
+    "cost": 10000,
+    "effects": {}
+  },
+  "SPORE_GLAND": {
+    "name_en": "Sporangium",
+    "name_int": "",
+    "name_it": "Sporangio",
+    "cost": 10000,
+    "effects": {}
+  },
+  "MITOSIS_GLAND": {
+    "name_en": "Mitosis Gland",
+    "name_int": "",
+    "name_it": "Ghiandola Mitotica",
+    "cost": 100000,
+    "effects": {}
+  },
+  "CRYSTAL_CORTEX": {
+    "name_en": "Crystal Mind Cortex",
+    "name_int": "",
+    "name_it": "Corteccia Mentale Cristallina",
+    "type": "magical",
+    "effects": {
+      "3": 8,
+      "4": 5
+    },
+    "skill": null,
+    "cost": 130000
+  },
+  "NEURAL_IMPLANT": {
+    "name_en": "Neural Processing Implant",
+    "name_int": "",
+    "name_it": "Impianto Processore Neurale",
+    "type": "technological",
+    "effects": {
+      "2": 3,
+      "3": 6
+    },
+    "skill": null,
+    "cost": 90000
+  },
+  "ANCIENT_WISDOM_ORB": {
+    "name_en": "Ancient Wisdom Orb",
+    "name_int": "",
+    "name_it": "Orbe dell'Antica Saggezza",
+    "type": "magical",
+    "effects": {
+      "1": 15,
+      "3": 12
+    },
+    "skill": null,
+    "cost": 270000
+  },
+  "SKULL_REINFORCEMENT": {
+    "name_en": "Dwarven Skull Plating",
+    "name_int": "",
+    "name_it": "Corazza Cranica Nanica",
+    "type": "biological",
+    "effects": {
+      "0": 20,
+      "5": 8
+    },
+    "skill": null,
+    "cost": 280000
+  },
+  "HAWKS_EYE": {
+    "name_en": "Hawk's Eye Implant",
+    "name_int": "",
+    "name_it": "Impianto Occhio di Falco",
+    "type": "biological",
+    "effects": {
+      "2": 4,
+      "6": 3
+    },
+    "skill": null,
+    "cost": 70000
+  },
+  "CYBER_OPTICS": {
+    "name_en": "Cyber Optics Suite",
+    "name_int": "",
+    "name_it": "Suite Ottica Cibernetica",
+    "type": "technological",
+    "effects": {
+      "2": 7,
+      "6": 2
+    },
+    "skill": null,
+    "cost": 90000
+  },
+  "VOID_SIGHT": {
+    "name_en": "Void Sight Lens",
+    "name_int": "",
+    "name_it": "Lente della Vista del Vuoto",
+    "type": "magical",
+    "effects": {
+      "3": 3,
+      "4": 6
+    },
+    "skill": null,
+    "cost": 90000
+  },
+  "DRAGONS_GAZE": {
+    "name_en": "Dragon's Gaze",
+    "name_int": "",
+    "name_it": "Sguardo del Drago",
+    "type": "magical",
+    "effects": {
+      "2": 2,
+      "4": 8
+    },
+    "skill": null,
+    "cost": 100000
+  },
+  "TELESCOPIC_EYE": {
+    "name_en": "Telescopic Eye Mechanism",
+    "name_int": "",
+    "name_it": "Meccanismo Oculare Telescopico",
+    "type": "technological",
+    "skill": null,
+    "effects": {
+      "2": 6,
+      "3": 2
+    },
+    "cost": 80000
+  },
+  "SCENT_TRACKER": {
+    "name_en": "Beast Scent Tracker",
+    "name_int": "",
+    "name_it": "Tracciatore di Odori Bestiale",
+    "type": "biological",
+    "skill": null,
+    "effects": {
+      "6": 5,
+      "7": 3
+    },
+    "cost": 80000
+  },
+  "CHEMICAL_SENSOR": {
+    "name_en": "Chemical Analysis Sensor",
+    "name_int": "",
+    "name_it": "Sensore di Analisi Chimica",
+    "type": "technological",
+    "skill": null,
+    "effects": {
+      "3": 4,
+      "5": 3
+    },
+    "cost": 700000
+  },
+  "ELVEN_HEARING": {
+    "name_en": "Elven Hearing Enhancement",
+    "name_int": "",
+    "name_it": "Potenziamento Uditivo Elfico",
+    "type": "biological",
+    "skill": null,
+    "effects": {
+      "3": 2,
+      "6": 4
+    },
+    "cost": 600000
+  },
+  "SONIC_DAMPENERS": {
+    "name_en": "Sonic Dampening System",
+    "name_int": "",
+    "name_it": "Sistema di Attenuazione Sonica",
+    "type": "technological",
+    "effects": {
+      "0": 10,
+      "5": 6
+    },
+    "cost": 160000
+  },
+  "ASTRAL_RECEPTORS": {
+    "name_en": "Astral Sound Receptors",
+    "name_int": "",
+    "name_it": "Recettori del Suono Astrale",
+    "type": "magical",
+    "skill": null,
+    "effects": {
+      "1": 12,
+      "4": 5
+    },
+    "cost": 170000
+  },
+  "VAMPIRIC_FANGS": {
+    "name_en": "Vampiric Regeneration Fangs",
+    "name_int": "",
+    "name_it": "Zanne Rigenerative Vampiriche",
+    "type": "biological",
+    "effects": {
+      "0": 25,
+      "2": 3
+    },
+    "skill": null,
+    "cost": 280000
+  },
+  "SILVER_TONGUE": {
+    "name_en": "Silver Tongue Implant",
+    "name_int": "",
+    "name_it": "Impianto Lingua d'Argento",
+    "type": "magical",
+    "effects": {
+      "3": 4,
+      "7": 8
+    },
+    "skill": null,
+    "cost": 120000
+  },
+  "VENOM_GLANDS": {
+    "name_en": "Serpent Venom Glands",
+    "name_int": "",
+    "name_it": "Ghiandole Velenifere Serpentine",
+    "type": "biological",
+    "effects": {
+      "2": 6,
+      "6": 2
+    },
+    "skill": null,
+    "cost": 80000
+  },
+  "ADAMANTINE_TEETH": {
+    "name_en": "Adamantine Teeth Set",
+    "name_int": "",
+    "name_it": "Dentatura Adamantina",
+    "type": "technological",
+    "effects": {
+      "2": 5,
+      "5": 4
+    },
+    "cost": 90000,
+    "skill": null
+  },
+  "CRYSTAL_FANGS": {
+    "name_en": "Mana Crystal Fangs",
+    "name_int": "",
+    "name_it": "Zanne di Cristallo Magico",
+    "type": "magical",
+    "effects": {
+      "1": 8,
+      "4": 7
+    },
+    "cost": 150000,
+    "skill": null
+  },
+  "IRON_RIBCAGE": {
+    "name_en": "Dwarven Iron Ribcage",
+    "name_int": "",
+    "name_it": "Gabbia Toracica di Ferro Nanesca",
+    "type": "biological",
+    "effects": {
+      "0": 30,
+      "5": 12
+    },
+    "cost": 420000,
+    "skill": null
+  },
+  "STEAM_BOILER": {
+    "name_en": "Steam Power Boiler",
+    "name_int": "",
+    "name_it": "Caldaia a Vapore",
+    "type": "technological",
+    "effects": {
+      "2": 8,
+      "6": 6
+    },
+    "cost": 140000,
+    "skill": null
+  },
+  "ARCANE_SHARD": {
+    "name_en": "Arcane Energy Core",
+    "name_int": "",
+    "name_it": "Nucleo di Energia Arcana",
+    "type": "magical",
+    "effects": {
+      "1": 25,
+      "4": 10
+    },
+    "cost": 350000,
+    "skill": null
+  },
+  "LIVING_ARMOR": {
+    "name_en": "Living Symbiotic Armor",
+    "name_int": "",
+    "name_it": "Armatura Simbiotica Vivente",
+    "type": "biological",
+    "effects": {
+      "0": 40,
+      "5": 15
+    },
+    "cost": 550000,
+    "skill": null
+  },
+  "PHOENIX_HEART": {
+    "name_en": "Phoenix Fire Heart",
+    "name_int": "",
+    "name_it": "Cuore di Fuoco di Fenice",
+    "type": "magical",
+    "effects": {
+      "0": 35,
+      "4": 12
+    },
+    "cost": 470000,
+    "skill": null
+  },
+  "MECHANICAL_HEART": {
+    "name_en": "Clockwork Heart Engine",
+    "name_int": "",
+    "name_it": "Cuore Meccanico a Orologeria",
+    "type": "technological",
+    "effects": {
+      "2": 5,
+      "6": 8
+    },
+    "cost": 130000,
+    "skill": null
+  },
+  "DRAGON_HEART": {
+    "name_en": "Ancient Dragon Heart",
+    "name_int": "",
+    "name_it": "Cuore di Drago Antico",
+    "type": "biological",
+    "effects": {
+      "0": 50,
+      "5": 8
+    },
+    "cost": 580000,
+    "skill": null
+  },
+  "AQUATIC_GILLS": {
+    "name_en": "Aquatic Breathing Gills",
+    "name_int": "",
+    "name_it": "Branchie Respiratorie Acquatiche",
+    "type": "biological",
+    "effects": {
+      "0": 15,
+      "6": 6
+    },
+    "cost": 210000,
+    "skill": null
+  },
+  "AIR_FILTRATION": {
+    "name_en": "Advanced Air Filtration",
+    "name_int": "",
+    "name_it": "Sistema di Filtrazione Avanzato",
+    "type": "technological",
+    "effects": {
+      "5": 8,
+      "6": 3
+    },
+    "cost": 110000,
+    "skill": null
+  },
+  "ELEMENTAL_LUNGS": {
+    "name_en": "Elemental Essence Lungs",
+    "name_int": "",
+    "name_it": "Polmoni dell'Essenza Elementale",
+    "type": "magical",
+    "effects": {
+      "1": 20,
+      "4": 8
+    },
+    "cost": 280000,
+    "skill": null
+  },
+  "ALCHEMICAL_PROCESSOR": {
+    "name_en": "Alchemical Processing Unit",
+    "name_int": "",
+    "name_it": "Unit\u00e0 di Elaborazione Alchemica",
+    "type": "magical",
+    "effects": {
+      "3": 6,
+      "5": 5
+    },
+    "cost": 110000,
+    "skill": null
+  },
+  "TOXIN_FILTER": {
+    "name_en": "Bio-Toxin Filter System",
+    "name_int": "",
+    "name_it": "Sistema Filtrante Bio-Tossine",
+    "type": "biological",
+    "effects": {
+      "0": 20,
+      "5": 10
+    },
+    "cost": 300000,
+    "skill": null
+  },
+  "DRACONIC_FURNACE": {
+    "name_en": "Draconic Flame Furnace",
+    "name_int": "",
+    "name_it": "Fornace Draconiche delle Fiamme",
+    "type": "magical",
+    "effects": {
+      "2": 4,
+      "4": 9
+    },
+    "cost": 130000,
+    "skill": null
+  },
+  "NUTRIENT_SYNTHESIZER": {
+    "name_en": "Nutrient Synthesis Chamber",
+    "name_int": "",
+    "name_it": "Camera di Sintesi Nutritiva",
+    "type": "technological",
+    "effects": {
+      "0": 30,
+      "6": 4
+    },
+    "cost": 340000,
+    "skill": null
+  },
+  "MECHANICAL_ARM": {
+    "name_en": "Steam-Powered Mechanical Arm",
+    "name_int": "",
+    "name_it": "Braccio Meccanico a Vapore",
+    "type": "technological",
+    "effects": {
+      "2": 12,
+      "5": 3
+    },
+    "cost": 150000,
+    "skill": null
+  },
+  "ASTRAL_LIMB": {
+    "name_en": "Astral Projection Limb",
+    "name_int": "",
+    "name_it": "Arto di Proiezione Astrale",
+    "type": "magical",
+    "effects": {
+      "4": 10,
+      "6": 5
+    },
+    "cost": 150000,
+    "skill": null
+  },
+  "GOLEM_ARM": {
+    "name_en": "Stone Golem Arm",
+    "name_int": "",
+    "name_it": "Braccio di Golem di Pietra",
+    "type": "biological",
+    "effects": {
+      "2": 8,
+      "5": 8
+    },
+    "cost": 160000,
+    "skill": null
+  },
+  "LIGHTNING_CONDUCTOR": {
+    "name_en": "Lightning Conductor Arm",
+    "name_int": "",
+    "name_it": "Braccio Conduttore di Fulmini",
+    "type": "magical",
+    "effects": {
+      "2": 3,
+      "4": 12
+    },
+    "cost": 150000,
+    "skill": null
+  },
+  "TITAN_LIMB": {
+    "name_en": "Titanium Reinforced Limb",
+    "name_int": "",
+    "name_it": "Arto Rinforzato al Titanio",
+    "type": "technological",
+    "effects": {
+      "2": 15,
+      "5": 5
+    },
+    "cost": 200000,
+    "skill": null
+  },
+  "BLADE_FINGERS": {
+    "name_en": "Retractable Blade Fingers",
+    "name_int": "",
+    "name_it": "Dita Lama Retrattili",
+    "type": "technological",
+    "effects": {
+      "2": 10,
+      "6": 4
+    },
+    "cost": 140000,
+    "skill": null
+  },
+  "MANA_CRYSTALS": {
+    "name_en": "Embedded Mana Crystals",
+    "name_int": "",
+    "name_it": "Cristalli di Mana Incorporati",
+    "type": "magical",
+    "effects": {
+      "1": 15,
+      "4": 8
+    },
+    "cost": 230000,
+    "skill": null
+  },
+  "GRAPPLING_HOOKS": {
+    "name_en": "Mechanical Grappling Hooks",
+    "name_int": "",
+    "name_it": "Rampini Meccanici",
+    "type": "technological",
+    "effects": {
+      "2": 4,
+      "6": 8
+    },
+    "cost": 120000,
+    "skill": null
+  },
+  "LIVING_VINES": {
+    "name_en": "Living Vine Extensions",
+    "name_int": "",
+    "name_it": "Estensioni di Viti Viventi",
+    "type": "biological",
+    "effects": {
+      "2": 6,
+      "6": 6
+    },
+    "cost": 120000,
+    "skill": null
+  },
+  "SPIRIT_CHANNELERS": {
+    "name_en": "Spirit Channeling Palms",
+    "name_int": "",
+    "name_it": "Palmi Incanalatori di Spiriti",
+    "type": "magical",
+    "effects": {
+      "3": 3,
+      "4": 12
+    },
+    "cost": 150000,
+    "skill": null
+  },
+  "LOCK_PICKS": {
+    "name_en": "Integrated Lock Picks",
+    "name_int": "",
+    "name_it": "Grimaldelli Integrati",
+    "type": "technological",
+    "effects": {
+      "3": 2,
+      "6": 6
+    },
+    "cost": 800000,
+    "skill": null
+  },
+  "POISON_NEEDLES": {
+    "name_en": "Poison Needle Tips",
+    "name_int": "",
+    "name_it": "Punte ad Ago Velenose",
+    "type": "biological",
+    "effects": {
+      "2": 8,
+      "6": 3
+    },
+    "cost": 110000,
+    "skill": null
+  },
+  "RUNIC_INSCRIPTIONS": {
+    "name_en": "Runic Power Inscriptions",
+    "name_int": "",
+    "name_it": "Iscrizioni Runiche di Potere",
+    "type": "magical",
+    "effects": {
+      "1": 10,
+      "4": 6
+    },
+    "cost": 160000,
+    "skill": null
+  },
+  "AQUATIC_FINS": {
+    "name_en": "Installable Aquatic Fins",
+    "name_int": "",
+    "name_it": "Pinne Acquatiche Installabili",
+    "type": "biological",
+    "effects": {
+      "0": 5,
+      "6": 8
+    },
+    "cost": 130000,
+    "skill": null
+  },
+  "MICRO_TOOLS": {
+    "name_en": "Micro-Tool Array",
+    "name_int": "",
+    "name_it": "Array di Micro-Strumenti",
+    "type": "technological",
+    "effects": {
+      "3": 5,
+      "6": 3
+    },
+    "cost": 80000,
+    "skill": null
+  },
+  "SPRING_COILS": {
+    "name_en": "Spring-Loaded Coil Legs",
+    "name_int": "",
+    "name_it": "Gambe a Molla Caricata",
+    "type": "technological",
+    "effects": {
+      "2": 3,
+      "6": 12
+    },
+    "cost": 150000,
+    "skill": null
+  },
+  "TREE_TRUNK": {
+    "name_en": "Living Tree Trunk Leg",
+    "name_int": "",
+    "name_it": "Gamba Tronco d'Albero Vivente",
+    "type": "biological",
+    "effects": {
+      "0": 25,
+      "5": 10
+    },
+    "cost": 350000,
+    "skill": null
+  },
+  "SHADOW_WALKER": {
+    "name_en": "Shadow Walker Limb",
+    "name_int": "",
+    "name_it": "Arto del Camminatore d'Ombra",
+    "type": "magical",
+    "effects": {
+      "4": 5,
+      "6": 10
+    },
+    "cost": 150000,
+    "skill": null
+  },
+  "HYDRAULIC_PISTONS": {
+    "name_en": "Hydraulic Piston System",
+    "name_int": "",
+    "name_it": "Sistema a Pistoni Idraulici",
+    "type": "technological",
+    "effects": {
+      "2": 8,
+      "6": 8
+    },
+    "cost": 160000,
+    "skill": null
+  },
+  "ELEMENTAL_STRIDE": {
+    "name_en": "Elemental Stride Enhancer",
+    "name_int": "",
+    "name_it": "Potenziatore del Passo Elementale",
+    "type": "magical",
+    "effects": {
+      "4": 8,
+      "6": 8
+    },
+    "cost": 160000,
+    "skill": null
+  },
+  "MAGNETIC_SOLES": {
+    "name_en": "Magnetic Grip Soles",
+    "name_int": "",
+    "name_it": "Suole a Presa Magnetica",
+    "type": "technological",
+    "effects": {
+      "5": 4,
+      "6": 6
+    },
+    "cost": 100000,
+    "skill": null
+  },
+  "BEAST_CLAWS": {
+    "name_en": "Retractable Beast Claws",
+    "name_int": "",
+    "name_it": "Artigli Bestiali Retrattili",
+    "type": "biological",
+    "effects": {
+      "2": 8,
+      "6": 4
+    },
+    "cost": 120000,
+    "skill": null
+  },
+  "HOVER_PADS": {
+    "name_en": "Anti-Gravity Hover Pads",
+    "name_int": "",
+    "name_it": "Cuscinetti Antigravitazionali",
+    "type": "magical",
+    "effects": {
+      "4": 3,
+      "6": 10
+    },
+    "cost": 130000,
+    "skill": null
+  },
+  "SHOCK_ABSORBERS": {
+    "name_en": "Kinetic Shock Absorbers",
+    "name_int": "",
+    "name_it": "Ammortizzatori Cinetici",
+    "type": "technological",
+    "effects": {
+      "5": 8,
+      "6": 5
+    },
+    "cost": 130000,
+    "skill": null
+  },
+  "CLIMBING_SPIKES": {
+    "name_en": "Climbing Spike Array",
+    "name_int": "",
+    "name_it": "Array di Ramponi",
+    "type": "technological",
+    "effects": {
+      "2": 2,
+      "6": 4
+    },
+    "cost": 60000,
+    "skill": null
+  },
+  "BALANCE_GYROS": {
+    "name_en": "Micro-Balance Gyroscopes",
+    "name_int": "",
+    "name_it": "Giroscopi Micro-Equilibrio",
+    "type": "technological",
+    "effects": {
+      "5": 2,
+      "6": 5
+    },
+    "cost": 70000,
+    "skill": null
+  },
+  "EARTH_SENSE": {
+    "name_en": "Earth Tremor Sensors",
+    "name_int": "",
+    "name_it": "Sensori Sismici Terrestri",
+    "type": "magical",
+    "effects": {
+      "3": 4,
+      "6": 3
+    },
+    "cost": 70000,
+    "skill": null
+  },
+  "BLOOD_PURIFIER": {
+    "name_en": "Advanced Blood Purifier",
+    "name_int": "",
+    "name_it": "Purificatore Sanguigno Avanzato",
+    "type": "technological",
+    "effects": {
+      "0": 15,
+      "5": 6
+    },
+    "cost": 210000,
+    "skill": null
+  },
+  "ESSENCE_FILTER": {
+    "name_en": "Magical Essence Filter",
+    "name_int": "",
+    "name_it": "Filtro dell'Essenza Magica",
+    "type": "magical",
+    "effects": {
+      "1": 18,
+      "4": 3
+    },
+    "cost": 210000,
+    "skill": null
+  },
+  "NUTRIENT_EXTRACTOR": {
+    "name_en": "Nutrient Extraction Matrix",
+    "name_int": "",
+    "name_it": "Matrice di Estrazione Nutritiva",
+    "type": "biological",
+    "effects": {
+      "0": 35,
+      "5": 6
+    },
+    "cost": 410000,
+    "skill": null
+  },
+  "MANA_CONVERTER": {
+    "name_en": "Mana Conversion Coils",
+    "name_int": "",
+    "name_it": "Bobine di Conversione Magica",
+    "type": "magical",
+    "effects": {
+      "1": 25,
+      "3": 5
+    },
+    "cost": 300000,
+    "skill": null
+  }
+}

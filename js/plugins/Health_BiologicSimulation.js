@@ -75,7 +75,7 @@
     return days;
   }
 
-  const { BRAIN_REGIONS,PersonalityData } = window.ProstheticsData;
+  const { BrainRegions, PersonalityData } = window.Health;
 
   Scene_BiologicSimulation.prototype = Object.create(Scene_MenuBase.prototype);
   Scene_BiologicSimulation.prototype.constructor = Scene_BiologicSimulation;
@@ -762,8 +762,8 @@
           virus.type === "Pathogenic"
             ? this.textColor(2)
             : virus.type === "Beneficial"
-            ? this.textColor(3)
-            : this.normalColor();
+              ? this.textColor(3)
+              : this.normalColor();
 
         this.drawText(virus.name + ":", 20, y, 200);
         this.changeTextColor(typeColor);
@@ -799,8 +799,8 @@
           bacteria.type === "Pathogenic"
             ? this.textColor(2)
             : bacteria.type === "Beneficial"
-            ? this.textColor(3)
-            : this.normalColor();
+              ? this.textColor(3)
+              : this.normalColor();
 
         this.drawText(bacteria.name + ":", 20, y, 200);
         this.changeTextColor(typeColor);
@@ -869,18 +869,18 @@
     }
   };
   var _Game_Interpreter_pluginCommand_pregnancy =
-  Game_Interpreter.prototype.pluginCommand;
-Game_Interpreter.prototype.pluginCommand = function (command, args) {
-  _Game_Interpreter_pluginCommand_pregnancy.call(this, command, args);
+    Game_Interpreter.prototype.pluginCommand;
+  Game_Interpreter.prototype.pluginCommand = function (command, args) {
+    _Game_Interpreter_pluginCommand_pregnancy.call(this, command, args);
 
-  if (command === "MakePregnant") {
-    Window_BiologicSimulation.makePregnant();
-  }
+    if (command === "MakePregnant") {
+      Window_BiologicSimulation.makePregnant();
+    }
 
-  if (command === "ShortenPregnancy") {
-    Window_BiologicSimulation.shortenPregnancy();
-  }
-};
+    if (command === "ShortenPregnancy") {
+      Window_BiologicSimulation.shortenPregnancy();
+    }
+  };
   var _Game_Interpreter_pluginCommand_biologic =
     Game_Interpreter.prototype.pluginCommand;
   Game_Interpreter.prototype.pluginCommand = function (command, args) {
@@ -909,7 +909,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       }
     );
   }
-  
+
   PluginManager.registerCommand(
     "Health_BiologicSimulation",
     "ShortenPregnancy",
@@ -1396,8 +1396,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
   };
 
   Window_BiologicSimulation.prototype.initializeBrainActivity = function (bio) {
-    // Deep copy the BRAIN_REGIONS data to avoid modifying the global constant
-    var regions = JSON.parse(JSON.stringify(BRAIN_REGIONS));
+    // Deep copy the BrainRegions data to avoid modifying the global constant
+    var regions = JSON.parse(JSON.stringify(BrainRegions));
 
     // Apply personality modifiers
     var personality = bio.personality;
@@ -1601,8 +1601,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         this._actor.name()
       );
       var personality = this._actor._biologicData.personality;
-    var vitalMods = personality.modifiers?.vitals || {};
-    var hormoneMods = personality.modifiers?.hormones || {};
+      var vitalMods = personality.modifiers?.vitals || {};
+      var hormoneMods = personality.modifiers?.hormones || {};
       // Initialize vital signs
       var baseHP = this._actor.mhp;
       var baseMP = this._actor.mmp;
@@ -1670,28 +1670,28 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       );
 
       this.updateLeyVeinsFromDamage();
-      
+
     }
   };
   Window_BiologicSimulation.prototype.initializeUterusData = function () {
     if (!this._actor._uterusData) {
       var pregnancyType = $gameVariables.value(87) || 0;
-          // If male (pregnancyType === 0), initialize testes data instead
-          if (pregnancyType === 0) {
-            if (!this._actor.testesData) {
-                var bio = this._actor._biologicData;
-                this._actor.testesData = {
-                    spermCount: 200000000 + Math.floor(Math.random() * 300000000),
-                    spermMotility: 50 + Math.random() * 30,
-                    spermMorphology: 4 + Math.random() * 10,
-                    testosteroneProduction: bio.hormones.testosterone,
-                    fertilityRate: 0,
-                    dailySpermProduction: 0,
-                    lastUpdate: convertGameDateToTimestamp(getGameDateFromVariable())
-                };
-            }
-            return; // Exit early for male
+      // If male (pregnancyType === 0), initialize testes data instead
+      if (pregnancyType === 0) {
+        if (!this._actor.testesData) {
+          var bio = this._actor._biologicData;
+          this._actor.testesData = {
+            spermCount: 200000000 + Math.floor(Math.random() * 300000000),
+            spermMotility: 50 + Math.random() * 30,
+            spermMorphology: 4 + Math.random() * 10,
+            testosteroneProduction: bio.hormones.testosterone,
+            fertilityRate: 0,
+            dailySpermProduction: 0,
+            lastUpdate: convertGameDateToTimestamp(getGameDateFromVariable())
+          };
         }
+        return; // Exit early for male
+      }
       this._actor._uterusData = {
         pregnancyType: pregnancyType, // 0=testicles, 1=uterus, 2=oviparous, 3=plant, 4=mitosis
         isPregnant: false,
@@ -1720,16 +1720,16 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         birthReady: false,
       };
     }
-    
+
     // Always sync with variable 87
     this._actor._uterusData.pregnancyType = $gameVariables.value(87) || 0;
   };
   Window_BiologicSimulation.prototype.updatePregnancy = function () {
     if (!this._actor._uterusData) return;
-  
+
     var uterus = this._actor._uterusData;
     var pregnancyType = $gameVariables.value(87) || 0;
-  
+
     if (!uterus.isPregnant) {
       // Update ovulation cycle for uterus type when not pregnant
       if (pregnancyType === 1) {
@@ -1737,7 +1737,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       }
       return;
     }
-  
+
     if (uterus.conceptionDate) {
       var now = convertGameDateToTimestamp(getGameDateFromVariable());
       var elapsed = now - uterus.conceptionDate;  // elapsed is in days
@@ -1788,7 +1788,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       }
     }
   };
-  
+
   Window_BiologicSimulation.prototype.updateFetusData = function () {
     var age = this._actor._uterusData.gestationalAge;
     var fetus = {
@@ -1799,7 +1799,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       weight: "",
       developments: [],
     };
-  
+
     if (age < 14) {
       // Weeks 0-2
       fetus.stage = "Fertilization & Implantation";
@@ -1875,83 +1875,83 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         "Fully developed organs",
       ];
     }
-  
+
     this._actor._uterusData.fetus = fetus;
   };
-  
+
   Window_BiologicSimulation.prototype.applyPregnancyEffects = function () {
     if (!this._actor._biologicData) return;
-  
+
     var bio = this._actor._biologicData;
     var age = this._actor._uterusData.gestationalAge;
     var trimester = age < 84 ? 1 : age < 196 ? 2 : 3;
-  
+
     // Heart rate increases during pregnancy
     bio.vitalSigns.heartRate += 10 + trimester * 5;
-  
+
     // Blood pressure changes
     if (trimester === 1 || trimester === 2) {
       bio.vitalSigns.bloodPressure.systolic -= 5;
     } else {
       bio.vitalSigns.bloodPressure.systolic += 10;
     }
-  
+
     // Slightly elevated body temperature
     bio.vitalSigns.bodyTemperature += 0.3;
-  
+
     // Dramatic hormone changes
     bio.hormones.progesterone = 20 + trimester * 5;
     bio.hormones.estrogen = 300 + (age / 270) * 300;
-  
+
     // Increased caloric needs
     bio.vitalSigns.nutrients.calories -= 5 * trimester;
     bio.vitalSigns.nutrients.protein -= 2 * trimester;
   };
   Window_BiologicSimulation.prototype.applyOviparousEffects = function () {
     if (!this._actor._biologicData) return;
-    
+
     var bio = this._actor._biologicData;
     var development = this._actor._uterusData.eggDevelopment;
-    
+
     // Increased metabolic rate
     bio.vitalSigns.heartRate += 5 + (development / 100) * 10;
     bio.vitalSigns.bodyTemperature += 0.5;
-    
+
     // Increased calcium needs for shell formation
     bio.vitalSigns.nutrients.protein -= 3;
     bio.vitalSigns.nutrients.calories -= 10;
   };
-  
+
   Window_BiologicSimulation.prototype.applyPlantEffects = function () {
     if (!this._actor._biologicData) return;
-    
+
     var bio = this._actor._biologicData;
     var development = this._actor._uterusData.seedDevelopment;
-    
+
     // Increased photosynthesis-like activity
     bio.vitalSigns.oxygenSaturation += 2;
     bio.vitalSigns.bodyTemperature -= 0.3; // Cooler
-    
+
     // Need more water and nutrients
     bio.vitalSigns.nutrients.water -= 5;
     bio.vitalSigns.nutrients.carbs -= 2;
   };
-  
+
   Window_BiologicSimulation.prototype.applyMitosisEffects = function () {
     if (!this._actor._biologicData) return;
-    
+
     var bio = this._actor._biologicData;
     var development = this._actor._uterusData.mitosisDevelopment;
-    
+
     // Extreme cellular activity
     bio.vitalSigns.heartRate += 15 + (development / 100) * 25;
     bio.vitalSigns.bodyTemperature += 1.0 + (development / 100) * 0.5;
-    
+
     if (bio.cellularActivity) {
       bio.cellularActivity.cellsForming *= 2.0 + (development / 100);
       bio.cellularActivity.mitosisRate *= 3.0;
     }
-    
+
     // High energy demands
     bio.vitalSigns.nutrients.calories -= 15;
     bio.vitalSigns.nutrients.protein -= 5;
@@ -1960,14 +1960,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
   Window_BiologicSimulation.prototype.applyPregnancyStatuses = function () {
     var age = this._actor._uterusData.gestationalAge;
     var trimester = age < 84 ? 1 : age < 196 ? 2 : 3;
-  
+
     // First trimester: 40% chance of nausea
     if (trimester === 1 && Math.random() < 0.4) {
       if (!this._actor.isStateAffected(41)) {
         this._actor.addState(41); // Nausea
       }
     }
-  
+
     // Random hot/cold flashes (20% chance)
     if (Math.random() < 0.2) {
       if (Math.random() < 0.5) {
@@ -1981,7 +1981,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       }
     }
   };
-  
+
   Window_BiologicSimulation.prototype.updateOvulationCycle = function () {
     var now = convertGameDateToTimestamp(getGameDateFromVariable());
     var uterus = this._actor._uterusData;
@@ -2005,7 +2005,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     ovulation.fertile =
       ovulation.dayInCycle >= 12 && ovulation.dayInCycle <= 16;
   };
-  
+
   Window_BiologicSimulation.prototype.giveBirth = function () {
     var uterus = this._actor._uterusData;
     uterus.isPregnant = false;
@@ -2024,14 +2024,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     uterus.gestationalAge = 0;
     uterus.eggDevelopment = 0;
     uterus.birthReady = true;
-    
+
     var message = getTranslatedText(
       "Eggs ready to lay! You have " + uterus.eggsToLay + " egg(s).",
       "Uova pronte da deporre! Hai " + uterus.eggsToLay + " uovo/a."
     );
     $gameMessage.add(message);
   };
-  
+
   Window_BiologicSimulation.prototype.produceSeed = function () {
     var uterus = this._actor._uterusData;
     uterus.seedsReady += 1;
@@ -2042,14 +2042,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     uterus.gestationalAge = 0;
     uterus.seedDevelopment = 0;
     // Keep isPregnant = true so it continues producing
-    
+
     var message = getTranslatedText(
       "Seed produced! Total seeds ready: " + uterus.seedsReady,
       "Seme prodotto! Totale semi pronti: " + uterus.seedsReady
     );
     $gameMessage.add(message);
   };
-  
+
   Window_BiologicSimulation.prototype.completeMitosis = function () {
     var uterus = this._actor._uterusData;
     uterus.isPregnant = false;
@@ -2058,7 +2058,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     uterus.gestationalAge = 0;
     uterus.mitosisDevelopment = 0;
     uterus.birthReady = true;
-    
+
     var message = getTranslatedText(
       "Mitosis complete! A perfect clone has been created.",
       "Mitosi completa! Un clone perfetto à¨ stato creato."
@@ -2071,19 +2071,19 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     var pregnancyType = $gameVariables.value(87) || 0;
     var y = startY;
     var lineHeight = this.lineHeight();
-  
+
     if (pregnancyType === -1) {
       this.changeTextColor(this.textColor(18));
       this.drawText(getTranslatedText("No reproductive system present", "Nessun sistema riproduttivo presente"), 6, y, 400);
       this.resetTextColor();
       return;
     }
-  
-  if (pregnancyType === 0) {
+
+    if (pregnancyType === 0) {
       // Display Testes information
       this.drawTestes(y, lineHeight);
       return;
-  }
+    }
 
     // Ensure uterus data is initialized
     if (!uterus) {
@@ -2101,7 +2101,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       }
       return;
     }
-  
+
     var typeNames = [
       { en: "None", it: "Nessuno" },
       { en: "Mammalian (Uterus)", it: "Mammifero (Utero)" },
@@ -2109,7 +2109,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       { en: "Plant-based (Seed production)", it: "Vegetale (Semi)" },
       { en: "Mitosis (Cell division)", it: "Mitosi (Divisione cellulare)" }
     ];
-    
+
     this.changeTextColor(this.systemColor());
     this.drawText(
       getTranslatedText("Type:", "Tipo:"),
@@ -2119,19 +2119,19 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     );
     this.resetTextColor();
     this.changeTextColor(this.textColor(3));
-    if(pregnancyType < 0 || pregnancyType > 4  ){
+    if (pregnancyType < 0 || pregnancyType > 4) {
       pregnancyType = 0;
     }
     var typeName = getTranslatedText(typeNames[pregnancyType].en, typeNames[pregnancyType].it);
     this.drawText(typeName, 250, y, 400);
     this.resetTextColor();
     y += lineHeight * 2;
-  
+
     if (uterus.isPregnant) {
       // === PREGNANCY MODE ===
       this.changeTextColor(this.textColor(3));
       var statusText = "";
-      
+
       switch (pregnancyType) {
         case 1:
           statusText = getTranslatedText("PREGNANCY IN PROGRESS", "GRAVIDANZA IN CORSO");
@@ -2146,11 +2146,11 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           statusText = getTranslatedText("MITOSIS IN PROGRESS", "MITOSI IN CORSO");
           break;
       }
-      
+
       this.drawText(statusText, 6, y, 400);
       this.resetTextColor();
       y += lineHeight * 2;
-  
+
       // Display based on type
       switch (pregnancyType) {
         case 1: // Uterus - existing code
@@ -2160,7 +2160,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           var hours = Math.floor((totalSeconds % 86400) / 3600);
           var minutes = Math.floor((totalSeconds % 3600) / 60);
           var seconds = totalSeconds % 60;
-  
+
           this.changeTextColor(this.systemColor());
           this.drawText(
             getTranslatedText("Time Until Birth:", "Tempo alla Nascita:"),
@@ -2178,25 +2178,25 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           var ageText = getTranslatedText(
             "Gestational Age: " + uterus.gestationalAge + " days (" + Math.floor(uterus.gestationalAge / 7) + " weeks)",
             "Età  Gestazionale: " + uterus.gestationalAge + " giorni (" + Math.floor(uterus.gestationalAge / 7) + " settimane)"
           );
           this.drawText(ageText, 6, y, 500);
           y += lineHeight;
-  
+
           var trimester =
             uterus.gestationalAge < 84
               ? getTranslatedText("First Trimester", "Primo Trimestre")
               : uterus.gestationalAge < 196
-              ? getTranslatedText("Second Trimester", "Secondo Trimestre")
-              : getTranslatedText("Third Trimester", "Terzo Trimestre");
+                ? getTranslatedText("Second Trimester", "Secondo Trimestre")
+                : getTranslatedText("Third Trimester", "Terzo Trimestre");
           this.changeTextColor(this.textColor(6));
           this.drawText(trimester, 6, y, 300);
           this.resetTextColor();
           y += lineHeight * 2;
-  
+
           // Fetus information
           if (uterus.fetus) {
             this.changeTextColor(this.systemColor());
@@ -2208,24 +2208,24 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             );
             this.resetTextColor();
             y += lineHeight;
-  
+
             this.changeTextColor(this.textColor(3));
             this.drawText("Stage: " + uterus.fetus.stage, 20, y, 500);
             this.resetTextColor();
             y += lineHeight;
-  
+
             this.drawText("Week: " + uterus.fetus.week, 20, y, 300);
             y += lineHeight;
-  
+
             this.drawText("Size: " + uterus.fetus.size, 20, y, 300);
             this.drawText("Weight: " + uterus.fetus.weight, 300, y, 200);
             y += lineHeight * 2;
-  
+
             this.changeTextColor(this.textColor(6));
             this.drawText(uterus.fetus.description, 20, y, 550);
             this.resetTextColor();
             y += lineHeight * 2;
-  
+
             this.changeTextColor(this.systemColor());
             this.drawText(
               getTranslatedText("Current Developments:", "Sviluppi Attuali:"),
@@ -2235,14 +2235,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             );
             this.resetTextColor();
             y += lineHeight;
-  
+
             for (var i = 0; i < uterus.fetus.developments.length; i++) {
               this.drawText("• " + uterus.fetus.developments[i], 20, y, 550);
               y += lineHeight;
             }
           }
           break;
-  
+
         case 2: // Oviparous
           this.changeTextColor(this.systemColor());
           this.drawText(
@@ -2253,7 +2253,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           this.changeTextColor(this.textColor(3));
           this.drawText(
             getTranslatedText("Progress: ", "Progresso: ") + uterus.eggDevelopment.toFixed(1) + "%",
@@ -2263,7 +2263,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           var eggsCount = Math.floor((uterus.eggDevelopment / 25)) + 1;
           eggsCount = Math.min(4, eggsCount);
           this.drawText(
@@ -2273,7 +2273,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             300
           );
           y += lineHeight * 2;
-  
+
           this.changeTextColor(this.systemColor());
           this.drawText(
             getTranslatedText("Development Stage:", "Stadio di Sviluppo:"),
@@ -2283,7 +2283,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           var eggStage = "";
           var eggDesc = "";
           if (uterus.eggDevelopment < 25) {
@@ -2299,46 +2299,46 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             eggStage = getTranslatedText("Ready to Lay", "Pronto per Deposizione");
             eggDesc = getTranslatedText("Eggs fully formed and ready for laying", "Uova completamente formate e pronte");
           }
-  
+
           this.changeTextColor(this.textColor(6));
           this.drawText(eggStage, 20, y, 300);
           this.resetTextColor();
           y += lineHeight;
-  
+
           this.drawText(eggDesc, 20, y, 550);
           y += lineHeight;
           break;
-  
+
         case 3: // Plant seeds
         case 3: // Plant
-        this.changeTextColor(this.systemColor());
-        this.drawText(
-          getTranslatedText("Seed Storage:", "Deposito Semi:"),
-          6,
-          y,
-          200
-        );
-        this.resetTextColor();
-        y += lineHeight;
-      
-        this.changeTextColor(this.textColor(3));
-        this.drawText(
-          getTranslatedText("Seeds Available: ", "Semi Disponibili: ") + uterus.seedsReady,
-          20,
-          y,
-          400
-        );
-        this.resetTextColor();
-        y += lineHeight;
-      
-        this.drawText(
-          getTranslatedText("Ready to generate new seed", "Pronta per generare nuovo seme"),
-          20,
-          y,
-          400
-        );
-        break;
-  
+          this.changeTextColor(this.systemColor());
+          this.drawText(
+            getTranslatedText("Seed Storage:", "Deposito Semi:"),
+            6,
+            y,
+            200
+          );
+          this.resetTextColor();
+          y += lineHeight;
+
+          this.changeTextColor(this.textColor(3));
+          this.drawText(
+            getTranslatedText("Seeds Available: ", "Semi Disponibili: ") + uterus.seedsReady,
+            20,
+            y,
+            400
+          );
+          this.resetTextColor();
+          y += lineHeight;
+
+          this.drawText(
+            getTranslatedText("Ready to generate new seed", "Pronta per generare nuovo seme"),
+            20,
+            y,
+            400
+          );
+          break;
+
         case 4: // Mitosis
           this.changeTextColor(this.systemColor());
           this.drawText(
@@ -2349,7 +2349,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           this.changeTextColor(this.textColor(3));
           this.drawText(
             getTranslatedText("Progress: ", "Progresso: ") + uterus.mitosisDevelopment.toFixed(1) + "%",
@@ -2359,7 +2359,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           var minutesRemaining = Math.ceil(((100 - uterus.mitosisDevelopment) / 100) * 60);
           this.drawText(
             getTranslatedText("Time Remaining: ~", "Tempo Rimanente: ~") + minutesRemaining + getTranslatedText(" minutes", " minuti"),
@@ -2368,7 +2368,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             300
           );
           y += lineHeight * 2;
-  
+
           this.changeTextColor(this.systemColor());
           this.drawText(
             getTranslatedText("Division Phase:", "Fase di Divisione:"),
@@ -2378,7 +2378,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           var mitosisStage = "";
           var mitosisDesc = "";
           if (uterus.mitosisDevelopment < 20) {
@@ -2397,12 +2397,12 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             mitosisStage = getTranslatedText("Telophase & Cytokinesis", "Telofase e Citocinesi");
             mitosisDesc = getTranslatedText("Cells dividing into two identical copies", "Cellule si dividono in due copie identiche");
           }
-  
+
           this.changeTextColor(this.textColor(6));
           this.drawText(mitosisStage, 20, y, 300);
           this.resetTextColor();
           y += lineHeight;
-  
+
           this.drawText(mitosisDesc, 20, y, 550);
           y += lineHeight;
           break;
@@ -2418,7 +2418,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       );
       this.resetTextColor();
       y += lineHeight;
-  
+
       this.drawText(
         getTranslatedText("Status: Not pregnant", "Stato: Non incinta"),
         20,
@@ -2426,7 +2426,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         300
       );
       y += lineHeight * 2;
-  
+
       // Type-specific idle information
       switch (pregnancyType) {
         case 1: // Uterus
@@ -2440,14 +2440,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           var cycleText = getTranslatedText(
             "Day " + ovulation.dayInCycle + " of " + ovulation.cycleLength,
             "Giorno " + ovulation.dayInCycle + " di " + ovulation.cycleLength
           );
           this.drawText(cycleText, 20, y, 300);
           y += lineHeight;
-  
+
           var fertileStatus = ovulation.fertile
             ? getTranslatedText("Fertile Window", "Finestra Fertile")
             : getTranslatedText("Not Fertile", "Non Fertile");
@@ -2456,14 +2456,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           this.drawText("Status: " + fertileStatus, 20, y, 300);
           this.resetTextColor();
           y += lineHeight;
-  
+
           var nextOvText = getTranslatedText(
             "Next Ovulation: Day " + ovulation.ovulationDay,
             "Prossima Ovulazione: Giorno " + ovulation.ovulationDay
           );
           this.drawText(nextOvText, 20, y, 300);
           y += lineHeight * 2;
-  
+
           this.changeTextColor(this.systemColor());
           this.drawText(
             getTranslatedText("Egg Reserve:", "Riserva Ovociti:"),
@@ -2473,14 +2473,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           var eggText = getTranslatedText(
             "Remaining Eggs: " + uterus.eggCount.toLocaleString(),
             "Ovociti Rimanenti: " + uterus.eggCount.toLocaleString()
           );
           this.drawText(eggText, 20, y, 400);
           break;
-  
+
         case 2: // Oviparous
           this.changeTextColor(this.systemColor());
           this.drawText(
@@ -2491,7 +2491,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           if (uterus.eggsToLay > 0) {
             this.changeTextColor(this.textColor(3));
             this.drawText(
@@ -2510,7 +2510,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             );
           }
           break;
-  
+
         case 3: // Plant
           this.changeTextColor(this.systemColor());
           this.drawText(
@@ -2521,7 +2521,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           this.changeTextColor(this.textColor(3));
           this.drawText(
             getTranslatedText("Seeds Available: ", "Semi Disponibili: ") + uterus.seedsReady,
@@ -2531,7 +2531,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           this.drawText(
             getTranslatedText("Ready to generate new seed", "Pronta per generare nuovo seme"),
             20,
@@ -2539,7 +2539,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             400
           );
           break;
-  
+
         case 4: // Mitosis
           this.changeTextColor(this.systemColor());
           this.drawText(
@@ -2550,7 +2550,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           );
           this.resetTextColor();
           y += lineHeight;
-  
+
           this.drawText(
             getTranslatedText("Ready for cellular division", "Pronta per divisione cellulare"),
             20,
@@ -2558,7 +2558,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
             400
           );
           y += lineHeight;
-  
+
           this.drawText(
             getTranslatedText("Process takes approximately 1 hour", "Il processo richiede circa 1 ora"),
             20,
@@ -2583,41 +2583,41 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       return 150 + Math.floor(Math.random() * 400); // 150-550 ng/dL
     }
   };
-  Window_BiologicSimulation.prototype.drawTestes = function(startY, lineHeight) {
+  Window_BiologicSimulation.prototype.drawTestes = function (startY, lineHeight) {
     var y = startY;
     var bio = this._actor._biologicData;
-    
+
     // Initialize testes data if it doesn't exist
     if (!this._actor.testesData) {
-        this._actor.testesData = {
-            spermCount: 200000000 + Math.floor(Math.random() * 300000000), // 200-500 million per mL
-            spermMotility: 50 + Math.random() * 30, // 50-80% (WHO normal: >40%)
-            spermMorphology: 4 + Math.random() * 10, // 4-14% normal forms (WHO: >4%)
-            testosteroneProduction: bio.hormones.testosterone,
-            fertilityRate: 0,
-            dailySpermProduction: 0,
-            lastUpdate: Date.now()
-        };
+      this._actor.testesData = {
+        spermCount: 200000000 + Math.floor(Math.random() * 300000000), // 200-500 million per mL
+        spermMotility: 50 + Math.random() * 30, // 50-80% (WHO normal: >40%)
+        spermMorphology: 4 + Math.random() * 10, // 4-14% normal forms (WHO: >4%)
+        testosteroneProduction: bio.hormones.testosterone,
+        fertilityRate: 0,
+        dailySpermProduction: 0,
+        lastUpdate: Date.now()
+      };
     }
-    
+
     var testes = this._actor.testesData;
-    
+
     // Update testes data based on hormones and health
     var now = Date.now();
     if (now - testes.lastUpdate > 3600000) { // Update every hour
-        testes.testosteroneProduction = bio.hormones.testosterone;
-        testes.lastUpdate = now;
+      testes.testosteroneProduction = bio.hormones.testosterone;
+      testes.lastUpdate = now;
     }
-    
+
     // Calculate fertility rate based on sperm parameters
     var motilityScore = (testes.spermMotility / 80) * 100;
     var morphologyScore = (testes.spermMorphology / 14) * 100;
     var countScore = Math.min(100, (testes.spermCount / 500000000) * 100);
     testes.fertilityRate = ((motilityScore + morphologyScore + countScore) / 3).toFixed(1);
-    
+
     // Daily sperm production (millions)
     testes.dailySpermProduction = Math.floor((testes.testosteroneProduction / 500) * 100); // Based on testosterone
-    
+
     // Display section title
     this.changeTextColor(this.systemColor());
     this.drawText(getTranslatedText("Type", "Tipo"), 6, y, 200);
@@ -2626,101 +2626,101 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     this.drawText(getTranslatedText("(Testes)", "(Testicoli)"), 250, y, 400);
     this.resetTextColor();
     y += lineHeight * 2;
-    
+
     // Sperm Production Section
     this.changeTextColor(this.systemColor());
     this.drawText(getTranslatedText("Sperm Production", "Produzione Spermatozoi"), 6, y, 200);
     this.resetTextColor();
     y += lineHeight;
-    
+
     // Sperm Count
     this.drawText(getTranslatedText("Sperm Count: ", "Conta Spermatozoi: ") + testes.spermCount.toLocaleString() + " /mL", 20, y, 450);
     y += lineHeight;
-    
-    var countStatus = testes.spermCount >= 15000000 ? 
-        getTranslatedText("Normal", "Normale") : 
-        getTranslatedText("Low (Oligospermia)", "Basso (Oligospermia)");
+
+    var countStatus = testes.spermCount >= 15000000 ?
+      getTranslatedText("Normal", "Normale") :
+      getTranslatedText("Low (Oligospermia)", "Basso (Oligospermia)");
     var countColor = testes.spermCount >= 15000000 ? this.textColor(3) : this.textColor(2);
     this.changeTextColor(countColor);
     this.drawText(getTranslatedText("Status: ", "Stato: ") + countStatus, 20, y, 450);
     this.resetTextColor();
     y += lineHeight * 2;
-    
+
     // Sperm Motility
     this.drawText(getTranslatedText("Sperm Motility: ", "Motilità Spermatica: ") + testes.spermMotility.toFixed(1) + "%", 20, y, 450);
     y += lineHeight;
-    
-    var motilityStatus = testes.spermMotility >= 40 ? 
-        getTranslatedText("Normal", "Normale") : 
-        getTranslatedText("Low (Asthenospermia)", "Basso (Astenospermia)");
+
+    var motilityStatus = testes.spermMotility >= 40 ?
+      getTranslatedText("Normal", "Normale") :
+      getTranslatedText("Low (Asthenospermia)", "Basso (Astenospermia)");
     var motilityColor = testes.spermMotility >= 40 ? this.textColor(3) : this.textColor(18);
     this.changeTextColor(motilityColor);
     this.drawText(getTranslatedText("Status: ", "Stato: ") + motilityStatus, 20, y, 450);
     this.resetTextColor();
     y += lineHeight * 2;
-    
+
     // Sperm Morphology
     this.drawText(getTranslatedText("Normal Morphology: ", "Morfologia Normale: ") + testes.spermMorphology.toFixed(1) + "%", 20, y, 450);
     y += lineHeight;
-    
-    var morphologyStatus = testes.spermMorphology >= 4 ? 
-        getTranslatedText("Normal", "Normale") : 
-        getTranslatedText("Low (Teratospermia)", "Basso (Teratospermia)");
+
+    var morphologyStatus = testes.spermMorphology >= 4 ?
+      getTranslatedText("Normal", "Normale") :
+      getTranslatedText("Low (Teratospermia)", "Basso (Teratospermia)");
     var morphologyColor = testes.spermMorphology >= 4 ? this.textColor(3) : this.textColor(18);
     this.changeTextColor(morphologyColor);
     this.drawText(getTranslatedText("Status: ", "Stato: ") + morphologyStatus, 20, y, 450);
     this.resetTextColor();
     y += lineHeight * 2;
-    
+
     // Daily Production
     this.changeTextColor(this.systemColor());
     this.drawText(getTranslatedText("Daily Sperm Production", "Produzione Giornaliera"), 6, y, 300);
     this.resetTextColor();
     y += lineHeight;
-    
+
     this.drawText(testes.dailySpermProduction.toLocaleString() + getTranslatedText(" million sperm cells", " milioni di spermatozoi"), 20, y, 450);
     y += lineHeight * 2;
-    
+
     // Fertility Rate
     this.changeTextColor(this.systemColor());
     this.drawText(getTranslatedText("Overall Fertility Rate", "Tasso di Fertilità Generale"), 6, y, 300);
     this.resetTextColor();
     y += lineHeight;
-    
-    var fertilityColor = testes.fertilityRate >= 70 ? this.textColor(3) : 
-                         testes.fertilityRate >= 50 ? this.textColor(18) : this.textColor(2);
+
+    var fertilityColor = testes.fertilityRate >= 70 ? this.textColor(3) :
+      testes.fertilityRate >= 50 ? this.textColor(18) : this.textColor(2);
     this.changeTextColor(fertilityColor);
     this.drawText(testes.fertilityRate + "%", 20, y, 200);
     this.resetTextColor();
     y += lineHeight;
-    
-    var fertilityStatus = testes.fertilityRate >= 70 ? 
-        getTranslatedText("High fertility", "Fertilità alta") :
-        testes.fertilityRate >= 50 ? 
+
+    var fertilityStatus = testes.fertilityRate >= 70 ?
+      getTranslatedText("High fertility", "Fertilità alta") :
+      testes.fertilityRate >= 50 ?
         getTranslatedText("Moderate fertility", "Fertilità moderata") :
         getTranslatedText("Low fertility", "Fertilità bassa");
     this.changeTextColor(this.textColor(6));
     this.drawText(fertilityStatus, 20, y, 450);
     this.resetTextColor();
     y += lineHeight * 2;
-    
+
     // Testosterone Production
     this.changeTextColor(this.systemColor());
     this.drawText(getTranslatedText("Testosterone Production", "Produzione Testosterone"), 6, y, 300);
     this.resetTextColor();
     y += lineHeight;
-    
+
     this.drawText(Math.floor(testes.testosteroneProduction) + " ng/dL", 20, y, 300);
     y += lineHeight;
-    
-    var testStatus = testes.testosteroneProduction >= 300 ? 
-        getTranslatedText("Normal range", "Range normale") : 
-        getTranslatedText("Below normal (Hypogonadism)", "Sotto il normale (Ipogonadismo)");
+
+    var testStatus = testes.testosteroneProduction >= 300 ?
+      getTranslatedText("Normal range", "Range normale") :
+      getTranslatedText("Below normal (Hypogonadism)", "Sotto il normale (Ipogonadismo)");
     var testColor = testes.testosteroneProduction >= 300 ? this.textColor(3) : this.textColor(2);
     this.changeTextColor(testColor);
     this.drawText(testStatus, 20, y, 450);
     this.resetTextColor();
-};
+  };
 
   Window_BiologicSimulation.prototype.getInitialEstrogen = function (gender) {
     if (gender === 0) {
@@ -2908,8 +2908,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       var message =
         ConfigManager.language === "it"
           ? "I tuoi ormoni hanno causato un cambio di genere in " +
-            genderName +
-            "!"
+          genderName +
+          "!"
           : "Your hormones have caused a gender change to " + genderName + "!";
       $gameMessage.add(message);
     }
@@ -2928,7 +2928,7 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     var visibleAreaBottom = startY + contentHeight;
     var useTranslation = ConfigManager.language === "it";
 
-    var { ProstheticTypes } = window.ProstheticsData || {};
+    var { ProstheticTypes } = window.Health || {};
 
     // Build list: body part augments (archetype parts with skillId or statEffect)
     // plus prosthetic implants
@@ -3017,8 +3017,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
   };
 
   function getParamNameLocal(paramId) {
-    var en = ["Max HP","Max MP","STR","Hit Rate","INT","COS","DEX","PSI"];
-    var it = ["PV Max","PM Max","FOR","Precisione","INT","COS","DES","PSI"];
+    var en = ["Max HP", "Max MP", "STR", "Hit Rate", "INT", "COS", "DEX", "PSI"];
+    var it = ["PV Max", "PM Max", "FOR", "Precisione", "INT", "COS", "DES", "PSI"];
     return (ConfigManager.language === "it" ? it : en)[paramId] || "Stat";
   }
 
@@ -3278,8 +3278,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.heartRate < 60
           ? "Bradycardia"
           : data.heartRate > 100
-          ? "Tachycardia"
-          : "Normal";
+            ? "Tachycardia"
+            : "Normal";
       var hrColor =
         data.heartRate < 60 || data.heartRate > 100
           ? this.textColor(18)
@@ -3293,9 +3293,9 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
     if (isLineVisible(y)) {
       this.drawText(
         "Blood Pressure: " +
-          Math.floor(data.bloodPressure.systolic) +
-          "/" +
-          Math.floor(data.bloodPressure.diastolic),
+        Math.floor(data.bloodPressure.systolic) +
+        "/" +
+        Math.floor(data.bloodPressure.diastolic),
         20,
         y,
         300
@@ -3304,8 +3304,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.bloodPressure.systolic > 140
           ? "Hypertension"
           : data.bloodPressure.systolic < 90
-          ? "Hypotension"
-          : "Normal";
+            ? "Hypotension"
+            : "Normal";
       var bpColor =
         bpStatus !== "Normal" ? this.textColor(18) : this.textColor(3);
       this.changeTextColor(bpColor);
@@ -3325,8 +3325,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.bodyTemperature > 37.5
           ? "Fever"
           : data.bodyTemperature < 36.0
-          ? "Hypothermia"
-          : "Normal";
+            ? "Hypothermia"
+            : "Normal";
       var tempColor =
         tempStatus !== "Normal" ? this.textColor(18) : this.textColor(3);
       this.changeTextColor(tempColor);
@@ -3362,14 +3362,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.cortisol > 25
           ? "High Stress"
           : data.cortisol < 10
-          ? "Low"
-          : "Normal";
+            ? "Low"
+            : "Normal";
       var cortisolColor =
         cortisolStatus === "High Stress"
           ? this.textColor(2)
           : cortisolStatus === "Low"
-          ? this.textColor(18)
-          : this.textColor(3);
+            ? this.textColor(18)
+            : this.textColor(3);
       this.changeTextColor(cortisolColor);
       this.drawText("(" + cortisolStatus + ")", 450, y, 150);
       this.resetTextColor();
@@ -3443,8 +3443,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         hydrationPercent < 70
           ? "Dehydrated"
           : hydrationPercent > 100
-          ? "Overhydrated"
-          : "Normal";
+            ? "Overhydrated"
+            : "Normal";
       var hydrationColor =
         hydrationStatus !== "Normal" ? this.textColor(18) : this.textColor(3);
       this.changeTextColor(hydrationColor);
@@ -3473,14 +3473,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           cellular.cellsForming > 120000
             ? "High"
             : cellular.cellsForming < 80000
-            ? "Low"
-            : "Normal";
+              ? "Low"
+              : "Normal";
         var formationColor =
           formationRate === "Low"
             ? this.textColor(18)
             : formationRate === "High"
-            ? this.textColor(3)
-            : this.normalColor();
+              ? this.textColor(3)
+              : this.normalColor();
         this.changeTextColor(formationColor);
         this.drawText("(" + formationRate + ")", 450, y, 150);
         this.resetTextColor();
@@ -3498,14 +3498,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
           cellular.cellsDying > 100000
             ? "High"
             : cellular.cellsDying < 60000
-            ? "Low"
-            : "Normal";
+              ? "Low"
+              : "Normal";
         var deathColor =
           deathRate === "High"
             ? this.textColor(2)
             : deathRate === "Low"
-            ? this.textColor(3)
-            : this.normalColor();
+              ? this.textColor(3)
+              : this.normalColor();
         this.changeTextColor(deathColor);
         this.drawText("(" + deathRate + ")", 450, y, 150);
         this.resetTextColor();
@@ -3515,8 +3515,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
       if (isLineVisible(y)) {
         this.drawText(
           "Net Cell Change: " +
-            (cellular.cellsForming - cellular.cellsDying).toLocaleString() +
-            "/sec",
+          (cellular.cellsForming - cellular.cellsDying).toLocaleString() +
+          "/sec",
           20,
           y,
           400
@@ -3574,14 +3574,14 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.nutrients.calories < 1500
           ? "Deficit"
           : data.nutrients.calories > 2500
-          ? "Surplus"
-          : "Normal";
+            ? "Surplus"
+            : "Normal";
       var calColor =
         calStatus === "Deficit"
           ? this.textColor(2)
           : calStatus === "Surplus"
-          ? this.textColor(18)
-          : this.textColor(3);
+            ? this.textColor(18)
+            : this.textColor(3);
       this.changeTextColor(calColor);
       this.drawText("(" + calStatus + ")", 270, y, 150);
       this.resetTextColor();
@@ -3599,8 +3599,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.nutrients.protein < 40
           ? "Low"
           : data.nutrients.protein > 100
-          ? "High"
-          : "Normal";
+            ? "High"
+            : "Normal";
       var proteinColor =
         proteinStatus !== "Normal" ? this.textColor(18) : this.textColor(3);
       this.changeTextColor(proteinColor);
@@ -3620,8 +3620,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.nutrients.carbs < 150
           ? "Low"
           : data.nutrients.carbs > 350
-          ? "High"
-          : "Normal";
+            ? "High"
+            : "Normal";
       var carbColor =
         carbStatus !== "Normal" ? this.textColor(18) : this.textColor(3);
       this.changeTextColor(carbColor);
@@ -3641,8 +3641,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.nutrients.fats < 40
           ? "Low"
           : data.nutrients.fats > 120
-          ? "High"
-          : "Normal";
+            ? "High"
+            : "Normal";
       var fatColor =
         fatStatus !== "Normal" ? this.textColor(18) : this.textColor(3);
       this.changeTextColor(fatColor);
@@ -3662,8 +3662,8 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
         data.nutrients.water < 1800
           ? "Low"
           : data.nutrients.water > 3000
-          ? "High"
-          : "Normal";
+            ? "High"
+            : "Normal";
       var waterColor =
         waterStatus !== "Normal" ? this.textColor(18) : this.textColor(3);
       this.changeTextColor(waterColor);
@@ -3743,66 +3743,66 @@ Game_Interpreter.prototype.pluginCommand = function (command, args) {
   };
 
   // Generate thought based on biological and brain state
-// Generate thought based on biological and brain state
-Window_BiologicSimulation.prototype.generateRandomThought = function () {
-  var useItalian = ConfigManager.language === "it";
-  var actor = this._actor;
-  if (!actor || !actor._biologicData) {
-    return useItalian ? "Voto vuoto" : "Empty void";
-  }
-
-  var bio = actor._biologicData;
-  var personality = bio.personality;
-
-  // --- PERSONALITY THOUGHT INJECTION ---
-  // 25% chance to pull a thought from the personality list
-  if (
-    personality &&
-    personality.thoughts &&
-    Math.random() < 0.25 // 25% chance
-  ) {
-    var lang = useItalian ? "it" : "en";
-    var thoughts = personality.thoughts[lang] || personality.thoughts["en"];
-    if (thoughts && thoughts.length > 0) {
-      return thoughts[Math.floor(Math.random() * thoughts.length)];
+  // Generate thought based on biological and brain state
+  Window_BiologicSimulation.prototype.generateRandomThought = function () {
+    var useItalian = ConfigManager.language === "it";
+    var actor = this._actor;
+    if (!actor || !actor._biologicData) {
+      return useItalian ? "Voto vuoto" : "Empty void";
     }
-  }
-  // --- END INJECTION ---
 
-  var hp = actor.hp;
-  var maxHp = actor.mhp;
-  var mp = actor.mp;
-  var maxMp = actor.mmp;
-  var hunger = $gameVariables.value(54) || 50; // 0-100
-  var sleep = $gameVariables.value(55) || 50; // 0-100
-  var tp = actor.tp || 0;
-  var maxTp = actor.maxTp() || 100;
-  var apPercent = (tp / maxTp) * 100;
+    var bio = actor._biologicData;
+    var personality = bio.personality;
 
-  var hpPercent = (hp / maxHp) * 100;
-  var mpPercent = (mp / maxMp) * 100;
+    // --- PERSONALITY THOUGHT INJECTION ---
+    // 25% chance to pull a thought from the personality list
+    if (
+      personality &&
+      personality.thoughts &&
+      Math.random() < 0.25 // 25% chance
+    ) {
+      var lang = useItalian ? "it" : "en";
+      var thoughts = personality.thoughts[lang] || personality.thoughts["en"];
+      if (thoughts && thoughts.length > 0) {
+        return thoughts[Math.floor(Math.random() * thoughts.length)];
+      }
+    }
+    // --- END INJECTION ---
 
-  var heartRate = bio.vitalSigns.heartRate || 60;
-  var temperature = bio.vitalSigns.bodyTemperature || 37;
-  var cortisol = bio.vitalSigns.cortisol || 15;
-  var adrenaline = bio.hormones.adrenaline || 20;
+    var hp = actor.hp;
+    var maxHp = actor.mhp;
+    var mp = actor.mp;
+    var maxMp = actor.mmp;
+    var hunger = $gameVariables.value(54) || 50; // 0-100
+    var sleep = $gameVariables.value(55) || 50; // 0-100
+    var tp = actor.tp || 0;
+    var maxTp = actor.maxTp() || 100;
+    var apPercent = (tp / maxTp) * 100;
 
-  // Determine primary biological state
-  var primaryState = this.determinePrimaryBiologicalState(
-    hpPercent,
-    mpPercent,
-    hunger,
-    sleep,
-    apPercent,
-    heartRate,
-    temperature,
-    cortisol,
-    adrenaline
-  );
+    var hpPercent = (hp / maxHp) * 100;
+    var mpPercent = (mp / maxMp) * 100;
 
-  // Generate thoughts based on the primary state
-  return this.generateThoughtFromState(primaryState, useItalian, actor, bio);
-};
+    var heartRate = bio.vitalSigns.heartRate || 60;
+    var temperature = bio.vitalSigns.bodyTemperature || 37;
+    var cortisol = bio.vitalSigns.cortisol || 15;
+    var adrenaline = bio.hormones.adrenaline || 20;
+
+    // Determine primary biological state
+    var primaryState = this.determinePrimaryBiologicalState(
+      hpPercent,
+      mpPercent,
+      hunger,
+      sleep,
+      apPercent,
+      heartRate,
+      temperature,
+      cortisol,
+      adrenaline
+    );
+
+    // Generate thoughts based on the primary state
+    return this.generateThoughtFromState(primaryState, useItalian, actor, bio);
+  };
 
   // Determine the primary biological/mental state
   Window_BiologicSimulation.prototype.determinePrimaryBiologicalState = function (
@@ -3858,394 +3858,394 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
       case "dying":
         thoughts = useItalian
           ? [
-              "Sente la morte che si avvicina...",
-              "Vede la luce del tunnel",
-              "Il dolore scompare in un freddo dolce",
-              "L'ultimo respiro... è vicino",
-              "Percepisce il confine tra essere e non-essere",
-              "Ricorda tutte le vite che potevano essere",
-              "Il mondo si dissolve lentamente",
-            ]
+            "Sente la morte che si avvicina...",
+            "Vede la luce del tunnel",
+            "Il dolore scompare in un freddo dolce",
+            "L'ultimo respiro... è vicino",
+            "Percepisce il confine tra essere e non-essere",
+            "Ricorda tutte le vite che potevano essere",
+            "Il mondo si dissolve lentamente",
+          ]
           : [
-              "Feels death approaching...",
-              "Sees the light at the tunnel's end",
-              "Pain fades into sweet cold",
-              "The final breath... is near",
-              "Perceives the boundary between being and non-being",
-              "Remembers all the lives that could have been",
-              "The world dissolves slowly",
-            ];
+            "Feels death approaching...",
+            "Sees the light at the tunnel's end",
+            "Pain fades into sweet cold",
+            "The final breath... is near",
+            "Perceives the boundary between being and non-being",
+            "Remembers all the lives that could have been",
+            "The world dissolves slowly",
+          ];
         break;
 
       case "wounded":
         thoughts = useItalian
           ? [
-              "Ogni cellula grida di dolore",
-              "Vuole che il dolore finisca",
-              "Pensa alla guarigione con disperazione",
-              "Il corpo si lamenta dei danni",
-              "Sente le ferite bruciare",
-              "Immagina pozioni che guariscono",
-              "La sofferenza oscura il pensiero",
-            ]
+            "Ogni cellula grida di dolore",
+            "Vuole che il dolore finisca",
+            "Pensa alla guarigione con disperazione",
+            "Il corpo si lamenta dei danni",
+            "Sente le ferite bruciare",
+            "Immagina pozioni che guariscono",
+            "La sofferenza oscura il pensiero",
+          ]
           : [
-              "Every cell screams in pain",
-              "Wants the pain to end",
-              "Desperately thinks of healing",
-              "The body protests its injuries",
-              "Feels wounds burning",
-              "Imagines healing potions",
-              "Suffering clouds all thought",
-            ];
+            "Every cell screams in pain",
+            "Wants the pain to end",
+            "Desperately thinks of healing",
+            "The body protests its injuries",
+            "Feels wounds burning",
+            "Imagines healing potions",
+            "Suffering clouds all thought",
+          ];
         break;
 
       case "starving":
         thoughts = useItalian
           ? [
-              "La fame domina ogni pensiero",
-              "Desidera cibo disperatamente",
-              "Lo stomaco grida di fame",
-              "Immagina i sapori di qualsiasi cosa",
-              "La mente si offusca dalla malnutrizione",
-              "Ogni risorsa del corpo è consumata",
-              "Ricorda il sapore del cibo",
-            ]
+            "La fame domina ogni pensiero",
+            "Desidera cibo disperatamente",
+            "Lo stomaco grida di fame",
+            "Immagina i sapori di qualsiasi cosa",
+            "La mente si offusca dalla malnutrizione",
+            "Ogni risorsa del corpo è consumata",
+            "Ricorda il sapore del cibo",
+          ]
           : [
-              "Hunger dominates every thought",
-              "Desperately desires food",
-              "The stomach cries out",
-              "Imagines the taste of anything",
-              "Mind clouds with malnutrition",
-              "Every body resource is depleted",
-              "Remembers the taste of food",
-            ];
+            "Hunger dominates every thought",
+            "Desperately desires food",
+            "The stomach cries out",
+            "Imagines the taste of anything",
+            "Mind clouds with malnutrition",
+            "Every body resource is depleted",
+            "Remembers the taste of food",
+          ];
         break;
 
       case "exhausted":
         thoughts = useItalian
           ? [
-              "La fatica appesantisce ogni muscolo",
-              "Gli occhi si chiudono da soli",
-              "Sogna di sonno profondo",
-              "Il cervello funziona al minimo",
-              "Ogni movimento è una lotta",
-              "Vuole solo dormire",
-              "Il corpo non risponde più",
-            ]
+            "La fatica appesantisce ogni muscolo",
+            "Gli occhi si chiudono da soli",
+            "Sogna di sonno profondo",
+            "Il cervello funziona al minimo",
+            "Ogni movimento è una lotta",
+            "Vuole solo dormire",
+            "Il corpo non risponde più",
+          ]
           : [
-              "Fatigue weighs every muscle",
-              "Eyes close on their own",
-              "Dreams of deep sleep",
-              "Brain operates at minimum",
-              "Every movement is a struggle",
-              "Just wants to sleep",
-              "Body no longer responds",
-            ];
+            "Fatigue weighs every muscle",
+            "Eyes close on their own",
+            "Dreams of deep sleep",
+            "Brain operates at minimum",
+            "Every movement is a struggle",
+            "Just wants to sleep",
+            "Body no longer responds",
+          ];
         break;
 
       case "fevering":
         thoughts = useItalian
           ? [
-              "Il fuoco brucia all'interno",
-              "La febbre distorce la realtà",
-              "Vede immagini caotiche",
-              "Il corpo è una fornace",
-              "Pensa in modo confuso e delirante",
-              "Sente l'infezione che consuma",
-              "Sudore e brividi simultanei",
-            ]
+            "Il fuoco brucia all'interno",
+            "La febbre distorce la realtà",
+            "Vede immagini caotiche",
+            "Il corpo è una fornace",
+            "Pensa in modo confuso e delirante",
+            "Sente l'infezione che consuma",
+            "Sudore e brividi simultanei",
+          ]
           : [
-              "Fire burns from within",
-              "Fever distorts reality",
-              "Sees chaotic images",
-              "Body is a furnace",
-              "Thinks deliriously and confused",
-              "Feels infection consuming",
-              "Sweat and chills simultaneously",
-            ];
+            "Fire burns from within",
+            "Fever distorts reality",
+            "Sees chaotic images",
+            "Body is a furnace",
+            "Thinks deliriously and confused",
+            "Feels infection consuming",
+            "Sweat and chills simultaneously",
+          ];
         break;
 
       case "freezing":
         thoughts = useItalian
           ? [
-              "Il freddo congela i pensieri",
-              "I muscoli non obbediscono",
-              "Ricorda il calore come una reliquia",
-              "La mente diventa lenta e pesante",
-              "Ogni movimento è agonia",
-              "Desidera disperatamente il fuoco",
-              "La morte bianca si avvicina",
-            ]
+            "Il freddo congela i pensieri",
+            "I muscoli non obbediscono",
+            "Ricorda il calore come una reliquia",
+            "La mente diventa lenta e pesante",
+            "Ogni movimento è agonia",
+            "Desidera disperatamente il fuoco",
+            "La morte bianca si avvicina",
+          ]
           : [
-              "Cold freezes thoughts",
-              "Muscles won't obey",
-              "Remembers warmth as ancient memory",
-              "Mind becomes slow and heavy",
-              "Every movement is agony",
-              "Desperately desires fire",
-              "White death approaches",
-            ];
+            "Cold freezes thoughts",
+            "Muscles won't obey",
+            "Remembers warmth as ancient memory",
+            "Mind becomes slow and heavy",
+            "Every movement is agony",
+            "Desperately desires fire",
+            "White death approaches",
+          ];
         break;
 
       case "berserking":
         thoughts = useItalian
           ? [
-              "La furia prende il controllo!",
-              "Vede rosso, sente solo rabbia",
-              "Il corpo si muove da solo",
-              "Ogni nemico è una bestia da distruggere",
-              "L'istinto domina la ragione completamente",
-              "Vuole solo combattere e vincere",
-              "Sente la forza che esplode",
-            ]
+            "La furia prende il controllo!",
+            "Vede rosso, sente solo rabbia",
+            "Il corpo si muove da solo",
+            "Ogni nemico è una bestia da distruggere",
+            "L'istinto domina la ragione completamente",
+            "Vuole solo combattere e vincere",
+            "Sente la forza che esplode",
+          ]
           : [
-              "Rage takes control!",
-              "Sees red, feels only anger",
-              "Body moves on its own",
-              "Every enemy is a beast to destroy",
-              "Instinct completely dominates reason",
-              "Only wants to fight and win",
-              "Feels explosive strength",
-            ];
+            "Rage takes control!",
+            "Sees red, feels only anger",
+            "Body moves on its own",
+            "Every enemy is a beast to destroy",
+            "Instinct completely dominates reason",
+            "Only wants to fight and win",
+            "Feels explosive strength",
+          ];
         break;
 
       case "energized":
         thoughts = useItalian
           ? [
-              "Sente la vitalità che scorre",
-              "Pronto a qualsiasi sfida",
-              "Il corpo è leggero e forte",
-              "La mente è acuta e veloce",
-              "Tutto sembra possibile",
-              "Vuole agire e conquistare",
-              "L'energia è pura e intensa",
-            ]
+            "Sente la vitalità che scorre",
+            "Pronto a qualsiasi sfida",
+            "Il corpo è leggero e forte",
+            "La mente è acuta e veloce",
+            "Tutto sembra possibile",
+            "Vuole agire e conquistare",
+            "L'energia è pura e intensa",
+          ]
           : [
-              "Feels vitality flowing",
-              "Ready for any challenge",
-              "Body is light and strong",
-              "Mind is sharp and quick",
-              "Everything seems possible",
-              "Wants to act and conquer",
-              "Energy is pure and intense",
-            ];
+            "Feels vitality flowing",
+            "Ready for any challenge",
+            "Body is light and strong",
+            "Mind is sharp and quick",
+            "Everything seems possible",
+            "Wants to act and conquer",
+            "Energy is pure and intense",
+          ];
         break;
 
       case "panicked":
         thoughts = useItalian
           ? [
-              "Il panico stringe la gola",
-              "Non riesce a respirare normalmente",
-              "La mente corre fuori controllo",
-              "Vede minacce ovunque",
-              "Vuole scappare da tutto",
-              "Il cuore batte impazzito",
-              "La realtà si distorce dalla paura",
-            ]
+            "Il panico stringe la gola",
+            "Non riesce a respirare normalmente",
+            "La mente corre fuori controllo",
+            "Vede minacce ovunque",
+            "Vuole scappare da tutto",
+            "Il cuore batte impazzito",
+            "La realtà si distorce dalla paura",
+          ]
           : [
-              "Panic grips the throat",
-              "Can't breathe normally",
-              "Mind races out of control",
-              "Sees threats everywhere",
-              "Wants to flee from everything",
-              "Heart beats wildly",
-              "Reality distorts from fear",
-            ];
+            "Panic grips the throat",
+            "Can't breathe normally",
+            "Mind races out of control",
+            "Sees threats everywhere",
+            "Wants to flee from everything",
+            "Heart beats wildly",
+            "Reality distorts from fear",
+          ];
         break;
 
       case "adrenaline_rush":
         thoughts = useItalian
           ? [
-              "L'adrenalina accelera ogni senso",
-              "Il tempo sembra rallentare",
-              "Percezioni amplificate all'estremo",
-              "Vuole azione adesso",
-              "Sente il potere nel corpo",
-              "Ogni muscolo vibra di energia",
-              "È il momento di brillare",
-            ]
+            "L'adrenalina accelera ogni senso",
+            "Il tempo sembra rallentare",
+            "Percezioni amplificate all'estremo",
+            "Vuole azione adesso",
+            "Sente il potere nel corpo",
+            "Ogni muscolo vibra di energia",
+            "È il momento di brillare",
+          ]
           : [
-              "Adrenaline accelerates every sense",
-              "Time seems to slow",
-              "Perceptions amplified to extreme",
-              "Wants action now",
-              "Feels power in body",
-              "Every muscle vibrates with energy",
-              "This is the moment to shine",
-            ];
+            "Adrenaline accelerates every sense",
+            "Time seems to slow",
+            "Perceptions amplified to extreme",
+            "Wants action now",
+            "Feels power in body",
+            "Every muscle vibrates with energy",
+            "This is the moment to shine",
+          ];
         break;
 
       case "hungry":
         thoughts = useItalian
           ? [
-              "La fame è costante e crescente",
-              "Lo stomaco protesta continuamente",
-              "Pensa a qualsiasi cosa commestibile",
-              "La concentrazione è difficile",
-              "Vuole mangiare prima di agire",
-              "La fame debilita la volontà",
-              "Ricorda gli ultimi pasti con nostalgia",
-            ]
+            "La fame è costante e crescente",
+            "Lo stomaco protesta continuamente",
+            "Pensa a qualsiasi cosa commestibile",
+            "La concentrazione è difficile",
+            "Vuole mangiare prima di agire",
+            "La fame debilita la volontà",
+            "Ricorda gli ultimi pasti con nostalgia",
+          ]
           : [
-              "Hunger is constant and growing",
-              "Stomach protests continuously",
-              "Thinks of anything edible",
-              "Concentration is difficult",
-              "Wants to eat before acting",
-              "Hunger weakens willpower",
-              "Remembers last meals with longing",
-            ];
+            "Hunger is constant and growing",
+            "Stomach protests continuously",
+            "Thinks of anything edible",
+            "Concentration is difficult",
+            "Wants to eat before acting",
+            "Hunger weakens willpower",
+            "Remembers last meals with longing",
+          ];
         break;
 
       case "drowsy":
         thoughts = useItalian
           ? [
-              "Gli occhi sono pesanti",
-              "La mente annebbiata dal sonno",
-              "Fatica a stare sveglio",
-              "Immagina di addormentarsi",
-              "Ogni movimento è lento e difficile",
-              "Vuole un posto confortevole",
-              "Il sonno richiama irresistibilmente",
-            ]
+            "Gli occhi sono pesanti",
+            "La mente annebbiata dal sonno",
+            "Fatica a stare sveglio",
+            "Immagina di addormentarsi",
+            "Ogni movimento è lento e difficile",
+            "Vuole un posto confortevole",
+            "Il sonno richiama irresistibilmente",
+          ]
           : [
-              "Eyes are heavy",
-              "Mind clouded with sleep",
-              "Struggles to stay awake",
-              "Imagines falling asleep",
-              "Every movement is slow and hard",
-              "Wants a comfortable place",
-              "Sleep calls irresistibly",
-            ];
+            "Eyes are heavy",
+            "Mind clouded with sleep",
+            "Struggles to stay awake",
+            "Imagines falling asleep",
+            "Every movement is slow and hard",
+            "Wants a comfortable place",
+            "Sleep calls irresistibly",
+          ];
         break;
 
       case "exhausted_ap":
         thoughts = useItalian
           ? [
-              "L'energia combattiva è esaurita",
-              "Non ha più forza per agire",
-              "Il corpo rifiuta di combattere",
-              "Vuole solo riposare",
-              "La fatica da battaglia è totale",
-              "Non riuscirebbe a colpire una mosca",
-              "Spera in una tregua",
-            ]
+            "L'energia combattiva è esaurita",
+            "Non ha più forza per agire",
+            "Il corpo rifiuta di combattere",
+            "Vuole solo riposare",
+            "La fatica da battaglia è totale",
+            "Non riuscirebbe a colpire una mosca",
+            "Spera in una tregua",
+          ]
           : [
-              "Fighting energy is exhausted",
-              "No longer has strength to act",
-              "Body refuses to fight",
-              "Just wants to rest",
-              "Battle fatigue is total",
-              "Couldn't hit a fly",
-              "Hopes for a truce",
-            ];
+            "Fighting energy is exhausted",
+            "No longer has strength to act",
+            "Body refuses to fight",
+            "Just wants to rest",
+            "Battle fatigue is total",
+            "Couldn't hit a fly",
+            "Hopes for a truce",
+          ];
         break;
 
       case "mana_depleted":
         thoughts = useItalian
           ? [
-              "L'energia magica è scomparsa",
-              "Non può lanciare più incantesimi",
-              "Sente il vuoto della magia",
-              "Vuole ricaricarsi magicamente",
-              "Il collegamento con la magia è reciso",
-              "Si sente impotente",
-              "Spera di recuperare il mana",
-            ]
+            "L'energia magica è scomparsa",
+            "Non può lanciare più incantesimi",
+            "Sente il vuoto della magia",
+            "Vuole ricaricarsi magicamente",
+            "Il collegamento con la magia è reciso",
+            "Si sente impotente",
+            "Spera di recuperare il mana",
+          ]
           : [
-              "Magical energy is gone",
-              "Can't cast spells anymore",
-              "Feels the void of magic",
-              "Wants to recharge magically",
-              "Connection to magic is severed",
-              "Feels powerless",
-              "Hopes to recover mana",
-            ];
+            "Magical energy is gone",
+            "Can't cast spells anymore",
+            "Feels the void of magic",
+            "Wants to recharge magically",
+            "Connection to magic is severed",
+            "Feels powerless",
+            "Hopes to recover mana",
+          ];
         break;
 
       case "excellent":
         thoughts = useItalian
           ? [
-              "Tutto scorre perfettamente",
-              "Corpo e mente sono in armonia",
-              "Si sente invincibile",
-              "La vita è bella e carica di possibilità",
-              "Ogni cellula vibra di vitalità",
-              "Questo è il momento di grandi cose",
-              "La felicità è pura e profonda",
-            ]
+            "Tutto scorre perfettamente",
+            "Corpo e mente sono in armonia",
+            "Si sente invincibile",
+            "La vita è bella e carica di possibilità",
+            "Ogni cellula vibra di vitalità",
+            "Questo è il momento di grandi cose",
+            "La felicità è pura e profonda",
+          ]
           : [
-              "Everything flows perfectly",
-              "Body and mind are in harmony",
-              "Feels invincible",
-              "Life is beautiful and full of possibilities",
-              "Every cell vibrates with vitality",
-              "This is the moment for great things",
-              "Happiness is pure and deep",
-            ];
+            "Everything flows perfectly",
+            "Body and mind are in harmony",
+            "Feels invincible",
+            "Life is beautiful and full of possibilities",
+            "Every cell vibrates with vitality",
+            "This is the moment for great things",
+            "Happiness is pure and deep",
+          ];
         break;
 
       case "confident":
         thoughts = useItalian
           ? [
-              "La fiducia è assoluta",
-              "Crede in sé completamente",
-              "Niente sembra impossibile",
-              "Il potere scorre nelle vene",
-              "È il momento di agire",
-              "La vittoria è dentro di sé",
-              "La paura non ha luogo qui",
-            ]
+            "La fiducia è assoluta",
+            "Crede in sé completamente",
+            "Niente sembra impossibile",
+            "Il potere scorre nelle vene",
+            "È il momento di agire",
+            "La vittoria è dentro di sé",
+            "La paura non ha luogo qui",
+          ]
           : [
-              "Confidence is absolute",
-              "Believes in itself completely",
-              "Nothing seems impossible",
-              "Power flows through veins",
-              "This is the moment to act",
-              "Victory is within",
-              "Fear has no place here",
-            ];
+            "Confidence is absolute",
+            "Believes in itself completely",
+            "Nothing seems impossible",
+            "Power flows through veins",
+            "This is the moment to act",
+            "Victory is within",
+            "Fear has no place here",
+          ];
         break;
 
       case "well_rested":
         thoughts = useItalian
           ? [
-              "La mente è fresca e consapevole",
-              "Il corpo è leggero e pronto",
-              "Tutto sembra più chiaro",
-              "La pazienza e la saggezza ritornano",
-              "Sente la serenità",
-              "È pronto per nuove avventure",
-              "La speranza è vivida",
-            ]
+            "La mente è fresca e consapevole",
+            "Il corpo è leggero e pronto",
+            "Tutto sembra più chiaro",
+            "La pazienza e la saggezza ritornano",
+            "Sente la serenità",
+            "È pronto per nuove avventure",
+            "La speranza è vivida",
+          ]
           : [
-              "Mind is fresh and aware",
-              "Body is light and ready",
-              "Everything seems clearer",
-              "Patience and wisdom return",
-              "Feels serenity",
-              "Ready for new adventures",
-              "Hope is vivid",
-            ];
+            "Mind is fresh and aware",
+            "Body is light and ready",
+            "Everything seems clearer",
+            "Patience and wisdom return",
+            "Feels serenity",
+            "Ready for new adventures",
+            "Hope is vivid",
+          ];
         break;
 
       case "neutral":
       default:
         thoughts = useItalian
           ? [
-              "Lo stato è neutrale e stabile",
-              "La mente vaga lentamente",
-              "Esiste in uno stato di consapevolezza",
-              "Nulla richiede attenzione urgente",
-              "Semplicemente... è",
-            ]
+            "Lo stato è neutrale e stabile",
+            "La mente vaga lentamente",
+            "Esiste in uno stato di consapevolezza",
+            "Nulla richiede attenzione urgente",
+            "Semplicemente... è",
+          ]
           : [
-              "State is neutral and stable",
-              "Mind wanders slowly",
-              "Exists in a state of awareness",
-              "Nothing requires urgent attention",
-              "Simply... is",
-            ];
+            "State is neutral and stable",
+            "Mind wanders slowly",
+            "Exists in a state of awareness",
+            "Nothing requires urgent attention",
+            "Simply... is",
+          ];
         break;
     }
 
@@ -4264,23 +4264,23 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
   ) {
     var abstract = useItalian
       ? [
-          "Percepisce le ombre della coscienza",
-          "Dialoga con la propria anima",
-          "Sente l'eco dell'universo",
-          "Contempla il significato del momento",
-          "Riflette sulla natura del dolore",
-          "Comprende una verità dimenticata",
-          "Sente il filo della connessione",
-        ]
+        "Percepisce le ombre della coscienza",
+        "Dialoga con la propria anima",
+        "Sente l'eco dell'universo",
+        "Contempla il significato del momento",
+        "Riflette sulla natura del dolore",
+        "Comprende una verità dimenticata",
+        "Sente il filo della connessione",
+      ]
       : [
-          "Perceives shadows of consciousness",
-          "Dialogues with own soul",
-          "Feels the echo of the universe",
-          "Contemplates the meaning of the moment",
-          "Reflects on the nature of pain",
-          "Understands a forgotten truth",
-          "Feels the thread of connection",
-        ];
+        "Perceives shadows of consciousness",
+        "Dialogues with own soul",
+        "Feels the echo of the universe",
+        "Contemplates the meaning of the moment",
+        "Reflects on the nature of pain",
+        "Understands a forgotten truth",
+        "Feels the thread of connection",
+      ];
 
     return abstract;
   };
@@ -4605,9 +4605,9 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
         for (var nt in region.neurotransmitters) {
           ntArray.push(
             nt.charAt(0).toUpperCase() +
-              nt.slice(1) +
-              ": " +
-              Math.floor(region.neurotransmitters[nt])
+            nt.slice(1) +
+            ": " +
+            Math.floor(region.neurotransmitters[nt])
           );
         }
         ntText += ntArray.join(", ");
@@ -4879,8 +4879,8 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
           virus.type === "Pathogenic"
             ? this.textColor(2)
             : virus.type === "Beneficial"
-            ? this.textColor(3)
-            : this.normalColor();
+              ? this.textColor(3)
+              : this.normalColor();
 
         this.drawText(virus.name + ":", 20, y, 200);
         this.changeTextColor(typeColor);
@@ -4921,8 +4921,8 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
           bacteria.type === "Pathogenic"
             ? this.textColor(2)
             : bacteria.type === "Beneficial"
-            ? this.textColor(3)
-            : this.normalColor();
+              ? this.textColor(3)
+              : this.normalColor();
 
         this.drawText(bacteria.name + ":", 20, y, 200);
         this.changeTextColor(typeColor);
@@ -4982,14 +4982,14 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
     // ── Column headers ────────────────────────────────────────────────────────
     this.contents.fontSize = 16;
     this.changeTextColor(this.systemColor());
-    var hPart  = useIt ? "Parte" : "Body Part";
-    var hFlow  = useIt ? "Flusso Mana" : "Mana Flow";
-    var hHP    = useIt ? "PV%" : "HP%";
-    var hAct   = useIt ? "Attività" : "Activity";
-    this.drawText(hPart,  6,   y, 140);
-    this.drawText(hFlow,  150, y, 190);
-    this.drawText(hHP,    348, y,  52);
-    this.drawText(hAct,   408, y,  80);
+    var hPart = useIt ? "Parte" : "Body Part";
+    var hFlow = useIt ? "Flusso Mana" : "Mana Flow";
+    var hHP = useIt ? "PV%" : "HP%";
+    var hAct = useIt ? "Attività" : "Activity";
+    this.drawText(hPart, 6, y, 140);
+    this.drawText(hFlow, 150, y, 190);
+    this.drawText(hHP, 348, y, 52);
+    this.drawText(hAct, 408, y, 80);
     this.resetTextColor();
     this.resetFontSettings();
     y += Math.floor(lh * 0.9);
@@ -4999,7 +4999,7 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
     // ── Body part rows ────────────────────────────────────────────────────────
     if (!bodyParts) return;
 
-    var numParts    = Object.keys(bodyParts).length;
+    var numParts = Object.keys(bodyParts).length;
     var healthyCount = 0;
     for (var k in bodyParts) { if (!bodyParts[k].damaged) healthyCount++; }
 
@@ -5014,7 +5014,7 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
 
     for (var partKey in bodyParts) {
       var part = bodyParts[partKey];
-      var mer  = data.meridians[partKey];
+      var mer = data.meridians[partKey];
       if (!mer) continue;
 
       var hpRatio = part.maxHp > 0 ? part.currentHp / part.maxHp : 0;
@@ -5144,110 +5144,110 @@ Window_BiologicSimulation.prototype.generateRandomThought = function () {
       Window_Base.prototype.changeTextColor.call(this, color);
     }
   };
-// Static methods for pregnancy plugin commands
+  // Static methods for pregnancy plugin commands
 
-Window_BiologicSimulation.makePregnant = function() {
-  var actor = $gameParty.members()[0];
-  if (!actor) return;
-  
-  var pregnancyType = $gameVariables.value(87) || 0;
-  
-  // Check if reproduction is possible
-  if (pregnancyType === 0) {
-    var message = getTranslatedText(
-      "No reproductive system available. Set Variable 87 first.",
-      "Nessun sistema riproduttivo disponibile. Imposta prima la Variabile 87."
-    );
+  Window_BiologicSimulation.makePregnant = function () {
+    var actor = $gameParty.members()[0];
+    if (!actor) return;
+
+    var pregnancyType = $gameVariables.value(87) || 0;
+
+    // Check if reproduction is possible
+    if (pregnancyType === 0) {
+      var message = getTranslatedText(
+        "No reproductive system available. Set Variable 87 first.",
+        "Nessun sistema riproduttivo disponibile. Imposta prima la Variabile 87."
+      );
+      $gameMessage.add(message);
+      return;
+    }
+    // Initialize uterus data if it doesn't exist
+    if (!actor._uterusData) {
+      actor._uterusData = {
+        pregnancyType: pregnancyType,
+        isPregnant: false,
+        conceptionDate: null,
+        dueDate: null,
+        gestationalAge: 0,
+        fetus: null,
+        ovulationCycle: {
+          dayInCycle: Math.floor(Math.random() * 28) + 1,
+          cycleLength: 28,
+          ovulationDay: 14,
+          fertile: false,
+        },
+        eggCount: 300000 + Math.floor(Math.random() * 200000),
+        eggDevelopment: 0,
+        eggsToLay: 0,
+        seedDevelopment: 0,
+        seedsReady: 0,
+        mitosisDevelopment: 0,
+        lastStatusCheck: Date.now(),
+        lastCycleUpdate: Date.now(),
+        birthReady: false,
+      };
+    }
+
+    var uterus = actor._uterusData;
+
+    // Check if already pregnant
+    if (uterus.isPregnant) {
+      var message = getTranslatedText(
+        "Already in reproductive process!",
+        "Già  in processo riproduttivo!"
+      );
+      $gameMessage.add(message);
+      return;
+    }
+
+    // Make pregnant based on type using game date
+    var currentGameDate = convertGameDateToTimestamp(getGameDateFromVariable());
+    uterus.isPregnant = true;
+    uterus.conceptionDate = currentGameDate;
+    uterus.gestationalAge = 0;
+    uterus.lastStatusCheck = currentGameDate;
+
+    var message = "";
+
+    switch (pregnancyType) {
+      case 1: // Uterus
+        uterus.dueDate = currentGameDate + 270; // 270 game days
+        message = getTranslatedText(
+          "Pregnancy initiated! Due in 270 days.",
+          "Gravidanza iniziata! Parto previsto tra 270 giorni."
+        );
+        break;
+
+      case 2: // Oviparous
+        uterus.dueDate = currentGameDate + 270; // 270 game days (same duration)
+        uterus.eggDevelopment = 0;
+        message = getTranslatedText(
+          "Egg development initiated! 1-4 eggs will be ready in 270 days.",
+          "Sviluppo uova iniziato! 1-4 uova saranno pronte tra 270 giorni."
+        );
+        break;
+
+      case 3: // Plant seeds
+        uterus.dueDate = currentGameDate + 7; // 7 game days (1 week)
+        uterus.seedDevelopment = 0;
+        message = getTranslatedText(
+          "Seed generation initiated! Seed will be ready in 7 days.",
+          "Generazione seme iniziata! Seme sarà pronto tra 7 giorni."
+        );
+        break;
+
+      case 4: // Mitosis
+        uterus.dueDate = currentGameDate + 1; // 1 game day
+        uterus.mitosisDevelopment = 0;
+        message = getTranslatedText(
+          "Mitosis initiated! Cell division will complete in 1 day.",
+          "Mitosi iniziata! Divisione cellulare completerà in 1 giorno."
+        );
+        break;
+    }
+
     $gameMessage.add(message);
-    return;
-  }
-// Initialize uterus data if it doesn't exist
-if (!actor._uterusData) {
-  actor._uterusData = {
-    pregnancyType: pregnancyType,
-    isPregnant: false,
-    conceptionDate: null,
-    dueDate: null,
-    gestationalAge: 0,
-    fetus: null,
-    ovulationCycle: {
-      dayInCycle: Math.floor(Math.random() * 28) + 1,
-      cycleLength: 28,
-      ovulationDay: 14,
-      fertile: false,
-    },
-    eggCount: 300000 + Math.floor(Math.random() * 200000),
-    eggDevelopment: 0,
-    eggsToLay: 0,
-    seedDevelopment: 0,
-    seedsReady: 0,
-    mitosisDevelopment: 0,
-    lastStatusCheck: Date.now(),
-    lastCycleUpdate: Date.now(),
-    birthReady: false,
   };
-}
-
-var uterus = actor._uterusData;
-
-// Check if already pregnant
-if (uterus.isPregnant) {
-  var message = getTranslatedText(
-    "Already in reproductive process!",
-    "Già  in processo riproduttivo!"
-  );
-  $gameMessage.add(message);
-  return;
-}
-
-// Make pregnant based on type using game date
-var currentGameDate = convertGameDateToTimestamp(getGameDateFromVariable());
-uterus.isPregnant = true;
-uterus.conceptionDate = currentGameDate;
-uterus.gestationalAge = 0;
-uterus.lastStatusCheck = currentGameDate;
-
-var message = "";
-
-switch (pregnancyType) {
-  case 1: // Uterus
-    uterus.dueDate = currentGameDate + 270; // 270 game days
-    message = getTranslatedText(
-      "Pregnancy initiated! Due in 270 days.",
-      "Gravidanza iniziata! Parto previsto tra 270 giorni."
-    );
-    break;
-
-  case 2: // Oviparous
-    uterus.dueDate = currentGameDate + 270; // 270 game days (same duration)
-    uterus.eggDevelopment = 0;
-    message = getTranslatedText(
-      "Egg development initiated! 1-4 eggs will be ready in 270 days.",
-      "Sviluppo uova iniziato! 1-4 uova saranno pronte tra 270 giorni."
-    );
-    break;
-
-  case 3: // Plant seeds
-    uterus.dueDate = currentGameDate + 7; // 7 game days (1 week)
-    uterus.seedDevelopment = 0;
-    message = getTranslatedText(
-      "Seed generation initiated! Seed will be ready in 7 days.",
-      "Generazione seme iniziata! Seme sarà pronto tra 7 giorni."
-    );
-    break;
-
-  case 4: // Mitosis
-    uterus.dueDate = currentGameDate + 1; // 1 game day
-    uterus.mitosisDevelopment = 0;
-    message = getTranslatedText(
-      "Mitosis initiated! Cell division will complete in 1 day.",
-      "Mitosi iniziata! Divisione cellulare completerà in 1 giorno."
-    );
-    break;
-}
-
-$gameMessage.add(message);
-};
 
 
 
@@ -5259,15 +5259,15 @@ $gameMessage.add(message);
 
 
 
-var _Game_Interpreter_pluginCommand_pregnancy =
-  Game_Interpreter.prototype.pluginCommand;
-  Window_BiologicSimulation.shortenPregnancy = function() {
+  var _Game_Interpreter_pluginCommand_pregnancy =
+    Game_Interpreter.prototype.pluginCommand;
+  Window_BiologicSimulation.shortenPregnancy = function () {
     var actor = $gameParty.members()[0];
     if (!actor || !actor._uterusData) return;
-    
+
     var uterus = actor._uterusData;
     var pregnancyType = $gameVariables.value(87) || 0;
-    
+
     if (!uterus.isPregnant) {
       var message = getTranslatedText(
         "Not currently in reproductive process.",
@@ -5276,7 +5276,7 @@ var _Game_Interpreter_pluginCommand_pregnancy =
       $gameMessage.add(message);
       return;
     }
-    
+
     // Reduce by 30 game days (1 month) for all types
     var thirtyGameDays = 30;
     uterus.conceptionDate -= thirtyGameDays;
@@ -5286,10 +5286,10 @@ var _Game_Interpreter_pluginCommand_pregnancy =
     var now = convertGameDateToTimestamp(getGameDateFromVariable());
     var elapsed = now - uterus.conceptionDate;  // elapsed is in days
     uterus.gestationalAge = Math.floor(elapsed);
-    
+
     var message = "";
     var shouldComplete = false;
-    
+
     switch (pregnancyType) {
       case 1: // Uterus
         if (uterus.gestationalAge >= 270) {
@@ -5306,11 +5306,11 @@ var _Game_Interpreter_pluginCommand_pregnancy =
           );
         }
         break;
-        
+
       case 2: // Oviparous
         var totalMinutes = Math.floor(elapsed / (1000 * 60));
         uterus.eggDevelopment = Math.min(100, (totalMinutes / (270 * 24 * 60)) * 100);
-        
+
         if (uterus.eggDevelopment >= 100) {
           shouldComplete = true;
           message = getTranslatedText(
@@ -5324,11 +5324,11 @@ var _Game_Interpreter_pluginCommand_pregnancy =
           );
         }
         break;
-        
+
       case 3: // Plant seeds
         var totalHours = Math.floor(elapsed / (1000 * 60 * 60));
         uterus.seedDevelopment = Math.min(100, (totalHours / (7 * 24)) * 100);
-        
+
         if (uterus.seedDevelopment >= 100) {
           shouldComplete = true;
           message = getTranslatedText(
@@ -5343,11 +5343,11 @@ var _Game_Interpreter_pluginCommand_pregnancy =
           );
         }
         break;
-        
+
       case 4: // Mitosis
         var totalMinutes = Math.floor(elapsed / (1000 * 60));
         uterus.mitosisDevelopment = Math.min(100, (totalMinutes / 60) * 100);
-        
+
         if (uterus.mitosisDevelopment >= 100) {
           shouldComplete = true;
           message = getTranslatedText(
@@ -5363,16 +5363,16 @@ var _Game_Interpreter_pluginCommand_pregnancy =
         }
         break;
     }
-    
+
     $gameMessage.add(message);
   };
-  Window_BiologicSimulation.birthSeed = function() {
+  Window_BiologicSimulation.birthSeed = function () {
     var actor = $gameParty.members()[0];
     if (!actor || !actor._uterusData) return;
-    
+
     var uterus = actor._uterusData;
     var pregnancyType = $gameVariables.value(87) || 0;
-    
+
     if (pregnancyType !== 3) {
       var message = getTranslatedText(
         "This command only works for plant-type reproduction.",
@@ -5381,7 +5381,7 @@ var _Game_Interpreter_pluginCommand_pregnancy =
       $gameMessage.add(message);
       return;
     }
-    
+
     if (uterus.seedsReady <= 0) {
       var message = getTranslatedText(
         "No seeds available to plant.",
@@ -5390,39 +5390,39 @@ var _Game_Interpreter_pluginCommand_pregnancy =
       $gameMessage.add(message);
       return;
     }
-    
+
     // Remove one seed from stockpile
     uterus.seedsReady -= 1;
-    
+
     var message = getTranslatedText(
       "Seed planted! Remaining seeds: " + uterus.seedsReady,
       "Seme piantato! Semi rimanenti: " + uterus.seedsReady
     );
     $gameMessage.add(message);
-    
+
     // Trigger birth event
     $gameTemp.reserveCommonEvent(139);
   };
   var _Game_Interpreter_pluginCommand_birthSeed =
-  Game_Interpreter.prototype.pluginCommand;
-Game_Interpreter.prototype.pluginCommand = function (command, args) {
-  _Game_Interpreter_pluginCommand_birthSeed.call(this, command, args);
+    Game_Interpreter.prototype.pluginCommand;
+  Game_Interpreter.prototype.pluginCommand = function (command, args) {
+    _Game_Interpreter_pluginCommand_birthSeed.call(this, command, args);
 
-  if (command === "BirthSeed") {
-    Window_BiologicSimulation.birthSeed();
-  }
-};
-
-// For MZ
-if (Utils.RPGMAKER_NAME === "MZ") {
-  PluginManager.registerCommand(
-    "Health_BiologicSimulation",
-    "BirthSeed",
-    (args) => {
+    if (command === "BirthSeed") {
       Window_BiologicSimulation.birthSeed();
     }
-  );
-}
+  };
+
+  // For MZ
+  if (Utils.RPGMAKER_NAME === "MZ") {
+    PluginManager.registerCommand(
+      "Health_BiologicSimulation",
+      "BirthSeed",
+      (args) => {
+        Window_BiologicSimulation.birthSeed();
+      }
+    );
+  }
   // Add compatibility methods for MV if running in MZ
   if (Utils.RPGMAKER_NAME === "MZ") {
     if (!Window_BiologicSimulation.prototype.drawActorName) {

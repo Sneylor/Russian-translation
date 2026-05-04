@@ -215,7 +215,7 @@
   // --- COUNTRY DATA ---
   // For organization, it's best to move this to its own JS file (e.g., countries.js)
   // and include it in your project.
-  const { Countries } = window.Countries;
+  const { Countries } = window.WorldGen;
 
   const defaultCountry = Countries.find((c) => c.id === 102);
 
@@ -373,7 +373,7 @@
 
     // Stable weighted shuffle — preferred tiles first, then randomize within each tier
     const preferred = tiles.filter(t => t.priority === 1).sort(() => Math.random() - 0.5);
-    const rest      = tiles.filter(t => t.priority !== 1).sort(() => Math.random() - 0.5);
+    const rest = tiles.filter(t => t.priority !== 1).sort(() => Math.random() - 0.5);
     _cachedValidTiles = preferred.concat(rest);
     _cachedValidTilesMapId = currentMapId;
     return _cachedValidTiles;
@@ -407,12 +407,16 @@
 
     // Create Game_Event instance
     const puddleEvent = new Game_Event($gameMap.mapId(), nextId);
+    puddleEvent._isWeatherPuddle = true; // Mark as puddle
     puddleEvent.locate(x, y);
     puddleEvent.refresh();
 
     // Freeze the event so it costs nothing per frame:
     // no auto-triggers, no movement, no condition checks.
-    puddleEvent.update = function() {};
+    // However, we MUST allow the Fog of War transition to update so they regain color.
+    puddleEvent.update = function () {
+      if (this.updateFogOfWarTransition) this.updateFogOfWarTransition();
+    };
 
     // Add to map's event list
     $gameMap._events[nextId] = puddleEvent;
@@ -651,6 +655,11 @@
       // Puddle system
       this._lastPuddleSpawnTime = 0;
 
+      // Weather Stability System
+      this._weatherStabilityTimer = 0; // Real-world time when weather can change
+      this._lastWeatherChangeGameTime = 0; // In-game total minutes when weather last changed
+      this._lockedWeatherType = WeatherTypes.NONE; // The weather that is currently locked by the timer
+
       this.initialize();
     }
 
@@ -853,6 +862,23 @@
 
       const hourChanged = this.currentHour !== newHour;
       if (hourChanged) {
+        // Check for in-game time jumps of 4+ hours
+        const currentMinutes = $gameVariables.value(114) || 0;
+        const gameTimeDiff = Math.abs(
+          currentMinutes - (this._lastWeatherChangeGameTime || 0)
+        );
+
+        if (gameTimeDiff >= 240) {
+          if (enableTimeDebug) {
+            console.log(
+              `[Weather] In-game time jumped by ${Math.floor(
+                gameTimeDiff / 60
+              )} hours. Triggering weather change.`
+            );
+          }
+          this.changeWeather(true);
+        }
+
         const oldHour = this.currentHour;
         this.currentHour = newHour;
 
@@ -867,8 +893,7 @@
 
         if (enableTimeDebug) {
           console.log(
-            `Time synchronized to: ${
-              this.currentHour
+            `Time synchronized to: ${this.currentHour
             }:00 (from Variable 113: ${$gameVariables.value(113)})`
           );
         }
@@ -893,14 +918,54 @@
       return this.seed / 0x7fffffff;
     }
 
-    changeWeather() {
+    changeWeather(force = false) {
+      const now = Date.now();
+      const currentMinutes = $gameVariables.value(114) || 0;
+
+      // Skip determining NEW weather if stability timer is active and it's not a forced change (like a large time jump)
+      if (
+        !force &&
+        this._weatherStabilityTimer &&
+        now < this._weatherStabilityTimer
+      ) {
+        const gameTimeDiff = Math.abs(
+          currentMinutes - (this._lastWeatherChangeGameTime || 0)
+        );
+        if (gameTimeDiff < 240) {
+          if (enableTimeDebug) {
+            console.log(
+              `[Weather] Stability active. Restoring locked weather: ${this._lockedWeatherType}. (Real: ${Math.ceil(
+                (this._weatherStabilityTimer - now) / 60000
+              )}m left, Game: ${Math.ceil((240 - gameTimeDiff) / 60)}h left)`
+            );
+          }
+          // IMPORTANT: Always call setWeather to ensure visuals are correct (e.g. after exiting interior)
+          this.setWeather(this._lockedWeatherType || WeatherTypes.NONE);
+          return;
+        }
+      }
+
       const gameDate = getGameDateFromVariable();
       this.dayOfYear = getGameDayOfYearFromVariable();
       this.currentHour = gameDate.hours;
       this.seed = this.dayOfYear * 24 + this.currentHour;
 
       const newWeather = this.determineWeather();
+      this._lockedWeatherType = newWeather; // Lock the new choice
       this.setWeather(newWeather);
+
+      // Set new stability duration (5-10 real-world minutes)
+      const stabilityMinutes = 5 + Math.random() * 5;
+      this._weatherStabilityTimer = now + stabilityMinutes * 60 * 1000;
+      this._lastWeatherChangeGameTime = currentMinutes;
+
+      if (enableTimeDebug) {
+        console.log(
+          `[Weather] Weather set to: ${newWeather}. Stability active for ${stabilityMinutes.toFixed(
+            1
+          )} real minutes.`
+        );
+      }
     }
 
     determineWeather() {
@@ -1014,7 +1079,7 @@
             biomeTemperature =
               biomeNightTemp +
               (biomeDayTemp - biomeNightTemp) *
-                Math.sin((progress * Math.PI) / 2);
+              Math.sin((progress * Math.PI) / 2);
           } else {
             // Nighttime - use night temperature
             let nightProgress;
@@ -1030,7 +1095,7 @@
             biomeTemperature =
               (biomeDayTemp + biomeNightTemp) / 2 +
               (biomeNightTemp - (biomeDayTemp + biomeNightTemp) / 2) *
-                Math.sin((nightProgress * Math.PI) / 2);
+              Math.sin((nightProgress * Math.PI) / 2);
           }
 
           // Calculate median between country temperature and biome temperature
@@ -1058,8 +1123,7 @@
           console.log(`- Base calc: ${baseTemperature.toFixed(2)}°C`);
           console.log(`- Country: ${this.currentCountry.country}`);
           console.log(
-            `- Weather: ${this.getWeatherName()} (${
-              WeatherTemperatureEffects[this.currentWeatherType] || 0
+            `- Weather: ${this.getWeatherName()} (${WeatherTemperatureEffects[this.currentWeatherType] || 0
             }°C)`
           );
         }
@@ -1330,7 +1394,7 @@
         } else if (isNewMap && Math.random() * 100 < weatherChangeChance) {
           this.changeWeather();
         } else {
-          this.setWeather(this.currentWeatherType); // re-apply current weather
+          this.setWeather(this._lockedWeatherType || this.currentWeatherType); // re-apply current or locked weather
         }
 
         // MUSH AUDIO ENGINE - Trigger BGS update when entering exterior map
@@ -1356,7 +1420,12 @@
     forceRandomChange() {
       const types = Object.values(WeatherTypes);
       const newWeather = types[Math.floor(Math.random() * types.length)];
+      this._lockedWeatherType = newWeather; // Lock the manually forced weather
       this.setWeather(newWeather);
+
+      // Reset stability timers when manually forcing weather
+      this._weatherStabilityTimer = Date.now() + (5 + Math.random() * 5) * 60000;
+      this._lastWeatherChangeGameTime = $gameVariables.value(114) || 0;
     }
 
     forceTimeUpdate() {
@@ -1378,7 +1447,7 @@
         return;
       }
 
-      const rainSounds = ['rain-calming', 'rain-calming2', 'rain-gentle', 'rain-light','rain-liquid','rain-shower'];
+      const rainSounds = ['rain-calming', 'rain-calming2', 'rain-gentle', 'rain-light', 'rain-liquid', 'rain-shower'];
       const randomRain = rainSounds[Math.floor(Math.random() * rainSounds.length)];
 
       const bgsSetting = {
@@ -1402,7 +1471,7 @@
 
       // Don't play night BGS if it's raining (rain has priority)
       if (this.currentWeatherType === WeatherTypes.RAIN ||
-          this.currentWeatherType === WeatherTypes.STORM) {
+        this.currentWeatherType === WeatherTypes.STORM) {
         return;
       }
 
@@ -1424,7 +1493,7 @@
         // Check if a night BGS is already playing on channel 4
         const currentBgs = AudioManager.getBgsFromChannel(4);
         if (currentBgs && currentBgs.name &&
-            (currentBgs.name.includes('night') || currentBgs.name.includes('cricket'))) {
+          (currentBgs.name.includes('night') || currentBgs.name.includes('cricket'))) {
           // Already playing a night sound, don't change it
           return;
         }
@@ -1482,7 +1551,7 @@
 
       // Priority 1: Rain BGS
       if (this.currentWeatherType === WeatherTypes.RAIN ||
-          this.currentWeatherType === WeatherTypes.STORM) {
+        this.currentWeatherType === WeatherTypes.STORM) {
         this.playRandomRainBgs();
         return;
       }
@@ -1586,7 +1655,7 @@
       if (this.isInterior) return;
 
       $gameParty.members().forEach((actor) => {
-       // this.removeWeatherEffects(actor);
+        // this.removeWeatherEffects(actor);
         switch (this.currentWeatherType) {
           case WeatherTypes.RAIN:
             actor.addState(StatusEffects.RAIN);
@@ -1612,6 +1681,13 @@
     }
 
     update() {
+      // Periodic update of time and weather (handles hour changes and time jumps)
+      const gameDate = getGameDateFromVariable();
+      if (this._lastUpdateMinute !== gameDate.minutes) {
+        this._lastUpdateMinute = gameDate.minutes;
+        this.updateTimeAndWeather();
+      }
+
       // Original functionality
       this.updateTimeOfDayTint();
 
@@ -1799,15 +1875,16 @@
       const puddleCount = $gameSystem._weatherPuddles.length;
 
       for (const eventId of $gameSystem._weatherPuddles) {
-        // Remove from game map
-        if ($gameMap && $gameMap._events && $gameMap._events[eventId]) {
-          $gameMap._events[eventId].erase();
+        const ev = $gameMap && $gameMap._events && $gameMap._events[eventId];
+        // Only erase and remove if it's actually a puddle event we created
+        if (ev && ev._isWeatherPuddle) {
+          ev.erase();
           delete $gameMap._events[eventId];
-        }
 
-        // Remove from data map
-        if ($dataMap && $dataMap.events && $dataMap.events[eventId]) {
-          delete $dataMap.events[eventId];
+          // Also remove from data map since it was dynamically added
+          if ($dataMap && $dataMap.events && $dataMap.events[eventId]) {
+            delete $dataMap.events[eventId];
+          }
         }
       }
 
@@ -1867,6 +1944,12 @@
         $gameWeather._lastCheckedRegionId = -1;
       if ($gameWeather._lastPuddleSpawnTime === undefined)
         $gameWeather._lastPuddleSpawnTime = 0;
+      if ($gameWeather._weatherStabilityTimer === undefined)
+        $gameWeather._weatherStabilityTimer = 0;
+      if ($gameWeather._lastWeatherChangeGameTime === undefined)
+        $gameWeather._lastWeatherChangeGameTime = 0;
+      if ($gameWeather._lockedWeatherType === undefined)
+        $gameWeather._lockedWeatherType = $gameWeather.currentWeatherType || WeatherTypes.NONE;
 
       // Regenerate dynamic tints with the proper method
       $gameWeather.dynamicTints = [];
@@ -1886,9 +1969,13 @@
   Scene_Map.prototype.onMapLoaded = function () {
     _Scene_Map_onMapLoaded.call(this);
     if ($gameWeather) {
-      // Always clear stale puddle references when the map loads.
-      // For menu/battle returns, Scene_Map.start() will restore them from _weatherBackup.
-      $gameWeather.clearPuddles();
+      // If it's a transfer, just empty the array - old map's dynamic events are already gone.
+      // If it's not a transfer (menu/battle return), clearPuddles handles safe removal.
+      if (this._transfer) {
+        $gameSystem._weatherPuddles = [];
+      } else {
+        $gameWeather.clearPuddles();
+      }
       $gameWeather.updateTimeAndWeather();
       // Only allow random weather re-roll on genuine map transfers
       $gameWeather.checkMapTags(!!this._transfer);
@@ -1995,8 +2082,8 @@
       this.config = config;
       this.reset();
     }
-    reset() {}
-    update() {}
+    reset() { }
+    update() { }
   }
   class Weather_CustomLayer extends PIXI.Container {
     constructor() {

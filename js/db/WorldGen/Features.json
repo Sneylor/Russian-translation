@@ -1,0 +1,1767 @@
+[
+  {
+    "name": "Grass",
+    "terrain": true,
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "Sidewalk",
+    "layer": 0,
+    "ascii": "\u2593"
+  },
+  {
+    "name": "Road",
+    "layer": 0,
+    "ascii": "\u2593"
+  },
+  {
+    "name": "GrassDark",
+    "terrain": true,
+    "layer": 0,
+    "ascii": "-"
+  },
+  {
+    "name": "Sand",
+    "layer": 0,
+    "ascii": "\u230a"
+  },
+  {
+    "name": "Snow",
+    "terrain": true,
+    "layer": 0,
+    "ascii": "\u2744"
+  },
+  {
+    "name": "Stone",
+    "layer": 0,
+    "ascii": "\u25aa"
+  },
+  {
+    "name": "Swamp",
+    "layer": 0,
+    "ascii": "\u2248"
+  },
+  {
+    "name": "Lava",
+    "layer": 0,
+    "ascii": "\u2593"
+  },
+  {
+    "name": "Tundra",
+    "layer": 0,
+    "ascii": "\u2248"
+  },
+  {
+    "name": "Ash",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "Badland",
+    "layer": 0,
+    "ascii": "\u2592"
+  },
+  {
+    "name": "Permafrost",
+    "layer": 0,
+    "ascii": "\u2744"
+  },
+  {
+    "name": "Glacier",
+    "layer": 0,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "CaveCeiling",
+    "layer": 0,
+    "ascii": "\u2593"
+  },
+  {
+    "name": "CaveFloor",
+    "terrain": true,
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "Road",
+    "terrain": true,
+    "layer": 1,
+    "ascii": "\u2550"
+  },
+  {
+    "name": "Water",
+    "layer": 1,
+    "ascii": "~"
+  },
+  {
+    "name": "River",
+    "layer": 1,
+    "ascii": "\u2193"
+  },
+  {
+    "name": "Mountain",
+    "layer": 1,
+    "ascii": "\u25b2"
+  },
+  {
+    "name": "Cliff",
+    "layer": 1,
+    "ascii": "\u2310"
+  },
+  {
+    "name": "Ocean",
+    "layer": 1,
+    "ascii": "\u2248"
+  },
+  {
+    "name": "Lake",
+    "layer": 1,
+    "ascii": "\u24c1"
+  },
+  {
+    "name": "Pond",
+    "layer": 1,
+    "ascii": "\u24de"
+  },
+  {
+    "name": "Beach",
+    "layer": 1,
+    "ascii": "\u230a"
+  },
+  {
+    "name": "Dune",
+    "layer": 1,
+    "ascii": "\u11c2"
+  },
+  {
+    "name": "Waterfall",
+    "layer": 1,
+    "ascii": "\u2193"
+  },
+  {
+    "name": "Rapids",
+    "layer": 1,
+    "ascii": "\u223f"
+  },
+  {
+    "name": "Brook",
+    "layer": 1,
+    "ascii": "\u2193"
+  },
+  {
+    "name": "Spring",
+    "layer": 1,
+    "ascii": "\u273f"
+  },
+  {
+    "name": "Marsh",
+    "layer": 1,
+    "ascii": "\u224b"
+  },
+  {
+    "name": "Bog",
+    "layer": 1,
+    "ascii": "\u25ca"
+  },
+  {
+    "name": "IceBlock",
+    "layer": 1,
+    "ascii": "\u2588"
+  },
+  {
+    "name": "IceSpike",
+    "layer": 1,
+    "ascii": "\u26a1"
+  },
+  {
+    "name": "Crevasse",
+    "layer": 1,
+    "ascii": "\u223f"
+  },
+  {
+    "name": "Crater",
+    "layer": 1,
+    "ascii": "\u24b8"
+  },
+  {
+    "name": "Geothermal",
+    "layer": 2,
+    "ascii": "\u25c9"
+  },
+  {
+    "name": "Sulfur",
+    "layer": 2,
+    "ascii": "\u2724"
+  },
+  {
+    "name": "Ember",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Magma",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Bridge",
+    "layer": 2,
+    "ascii": "\u2550"
+  },
+  {
+    "name": "Tree",
+    "layer": 2,
+    "ascii": "\u2660"
+  },
+  {
+    "name": "Rock",
+    "layer": 2,
+    "ascii": "\u25cf"
+  },
+  {
+    "name": "Bush",
+    "layer": 2,
+    "ascii": "\u03c6"
+  },
+  {
+    "name": "Flower",
+    "layer": 2,
+    "ascii": "\u273f"
+  },
+  {
+    "name": "Fence",
+    "layer": 2,
+    "ascii": "\u2551"
+  },
+  {
+    "name": "House",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "Well",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "Building",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "Tower",
+    "layer": 2,
+    "ascii": "\u27eb"
+  },
+  {
+    "name": "Gate",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "Wall",
+    "layer": 2,
+    "ascii": "\u2588"
+  },
+  {
+    "name": "Door",
+    "layer": 2,
+    "ascii": "\u229f"
+  },
+  {
+    "name": "Window",
+    "layer": 2,
+    "ascii": "\u25a1"
+  },
+  {
+    "name": "Roof",
+    "layer": 2,
+    "ascii": "\u2322"
+  },
+  {
+    "name": "Lamp",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Statue",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "Fountain",
+    "layer": 2,
+    "ascii": "\u27d0"
+  },
+  {
+    "name": "Bench",
+    "layer": 2,
+    "ascii": "\u2261"
+  },
+  {
+    "name": "Cart",
+    "layer": 2,
+    "ascii": "\u229f"
+  },
+  {
+    "name": "Barrel",
+    "layer": 2,
+    "ascii": "\u03bf"
+  },
+  {
+    "name": "Crate",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "Chimney",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "Pipe",
+    "layer": 2,
+    "ascii": "\u2551"
+  },
+  {
+    "name": "Arch",
+    "layer": 2,
+    "ascii": "\u2322"
+  },
+  {
+    "name": "Column",
+    "layer": 2,
+    "ascii": "\u2551"
+  },
+  {
+    "name": "Crystal",
+    "layer": 2,
+    "ascii": "*"
+  },
+  {
+    "name": "Portal",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "Rune",
+    "layer": 2,
+    "ascii": "\u203b"
+  },
+  {
+    "name": "Glow",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "Aura",
+    "layer": 2,
+    "ascii": "\u24d0"
+  },
+  {
+    "name": "Orb",
+    "layer": 2,
+    "ascii": "\u25c9"
+  },
+  {
+    "name": "Shrine",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Monument",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "SpellCircle",
+    "layer": 2,
+    "ascii": "\u2299"
+  },
+  {
+    "name": "ArcaneRuin",
+    "layer": 2,
+    "ascii": "\u203b"
+  },
+  {
+    "name": "MysticStone",
+    "layer": 2,
+    "ascii": "*"
+  },
+  {
+    "name": "Shadow",
+    "layer": 2,
+    "ascii": "\u2591"
+  },
+  {
+    "name": "Badland",
+    "layer": 2,
+    "ascii": "\u2591"
+  },
+  {
+    "name": "Ether",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Spectral",
+    "layer": 2,
+    "ascii": "\u25ca"
+  },
+  {
+    "name": "Spirit",
+    "layer": 2,
+    "ascii": "\u2727"
+  },
+  {
+    "name": "Divine",
+    "layer": 2,
+    "ascii": "\u2726"
+  },
+  {
+    "name": "Cursed",
+    "layer": 2,
+    "ascii": "\u2620"
+  },
+  {
+    "name": "Sacred",
+    "layer": 2,
+    "ascii": "\u2726"
+  },
+  {
+    "name": "MineShaft",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "Ore",
+    "layer": 2,
+    "ascii": "\u25a0"
+  },
+  {
+    "name": "Gem",
+    "layer": 2,
+    "ascii": "*"
+  },
+  {
+    "name": "Torch",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "Ladder",
+    "layer": 2,
+    "ascii": "\u22ee"
+  },
+  {
+    "name": "Wooden",
+    "layer": 2,
+    "ascii": "\u2228"
+  },
+  {
+    "name": "Chain",
+    "layer": 2,
+    "ascii": "\u221e"
+  },
+  {
+    "name": "Skull",
+    "layer": 2,
+    "ascii": "\u2620"
+  },
+  {
+    "name": "Bones",
+    "layer": 2,
+    "ascii": "\u2573"
+  },
+  {
+    "name": "Grave",
+    "layer": 2,
+    "ascii": "\u27d8"
+  },
+  {
+    "name": "Coffin",
+    "layer": 2,
+    "ascii": "\u229f"
+  },
+  {
+    "name": "Tomb",
+    "layer": 2,
+    "ascii": "\u27d8"
+  },
+  {
+    "name": "Sarcophagus",
+    "layer": 2,
+    "ascii": "\u27d8"
+  },
+  {
+    "name": "Pillar",
+    "layer": 2,
+    "ascii": "\u2551"
+  },
+  {
+    "name": "Rubble",
+    "layer": 2,
+    "ascii": "\u2591"
+  },
+  {
+    "name": "Deposit",
+    "layer": 2,
+    "ascii": "\u25a0"
+  },
+  {
+    "name": "Palm",
+    "layer": 2,
+    "ascii": "\u2660"
+  },
+  {
+    "name": "Cactus",
+    "layer": 2,
+    "ascii": "\u26a1"
+  },
+  {
+    "name": "Mushroom",
+    "layer": 2,
+    "ascii": "\u25d5"
+  },
+  {
+    "name": "Moss",
+    "layer": 2,
+    "ascii": "\u2591"
+  },
+  {
+    "name": "Vine",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Bamboo",
+    "layer": 2,
+    "ascii": "\u27ea"
+  },
+  {
+    "name": "Mangrove",
+    "layer": 2,
+    "ascii": "\u25bc"
+  },
+  {
+    "name": "RockDesert",
+    "layer": 2,
+    "ascii": "\u25bc"
+  },
+  {
+    "name": "Kelp",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Seaweed",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Coral",
+    "layer": 2,
+    "ascii": "\u2234"
+  },
+  {
+    "name": "Shrub",
+    "layer": 2,
+    "ascii": "\u03c6"
+  },
+  {
+    "name": "Sprout",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Herb",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Crop",
+    "layer": 2,
+    "ascii": "\u27ea"
+  },
+  {
+    "name": "Weed",
+    "layer": 2,
+    "ascii": "\u03c6"
+  },
+  {
+    "name": "TreeIce",
+    "layer": 2,
+    "ascii": "\u2660"
+  },
+  {
+    "name": "FlowerIce",
+    "layer": 2,
+    "ascii": "\u273f"
+  },
+  {
+    "name": "PebbleIce",
+    "layer": 2,
+    "ascii": "\u25cf"
+  },
+  {
+    "name": "RockIce",
+    "layer": 2,
+    "ascii": "\u25cf"
+  },
+  {
+    "name": "WeedIce",
+    "layer": 2,
+    "ascii": "\u03c6"
+  },
+  {
+    "name": "PlantIce",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "LogIce",
+    "layer": 2,
+    "ascii": "\u2228"
+  },
+  {
+    "name": "BarrelIce",
+    "layer": 2,
+    "ascii": "\u03bf"
+  },
+  {
+    "name": "BucketIce",
+    "layer": 2,
+    "ascii": "\u03bf"
+  },
+  {
+    "name": "CampfireIce",
+    "layer": 2,
+    "ascii": "\u25c9"
+  },
+  {
+    "name": "ChimneyIce",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "CrateIce",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "GraveIce",
+    "layer": 2,
+    "ascii": "\u27d8"
+  },
+  {
+    "name": "HayIce",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "HouseIce",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "LeavesIce",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "MoorIce",
+    "layer": 2,
+    "ascii": "\u2248"
+  },
+  {
+    "name": "ScarecrowIce",
+    "layer": 2,
+    "ascii": "\u2310"
+  },
+  {
+    "name": "SignPostIce",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "SpringIce",
+    "layer": 2,
+    "ascii": "\u273f"
+  },
+  {
+    "name": "VaseIce",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "WellIce",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "WindowIce",
+    "layer": 2,
+    "ascii": "\u25a1"
+  },
+  {
+    "name": "WoodIce",
+    "layer": 2,
+    "ascii": "\u2228"
+  },
+  {
+    "name": "Ice",
+    "layer": 0,
+    "ascii": "\u2744"
+  },
+  {
+    "name": "IceRock",
+    "layer": 1,
+    "ascii": "\u25cf"
+  },
+  {
+    "name": "Thorn",
+    "layer": 2,
+    "ascii": "\u26a1"
+  },
+  {
+    "name": "Thistle",
+    "layer": 2,
+    "ascii": "\u26a1"
+  },
+  {
+    "name": "Fern",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Lichen",
+    "layer": 2,
+    "ascii": "\u2591"
+  },
+  {
+    "name": "Ivy",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Clover",
+    "layer": 2,
+    "ascii": "\u27e1"
+  },
+  {
+    "name": "Wheat",
+    "layer": 2,
+    "ascii": "\u27ea"
+  },
+  {
+    "name": "Corn",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "Sunflower",
+    "layer": 2,
+    "ascii": "\u25d5"
+  },
+  {
+    "name": "Lily",
+    "layer": 2,
+    "ascii": "\u2740"
+  },
+  {
+    "name": "Rose",
+    "layer": 2,
+    "ascii": "\u2740"
+  },
+  {
+    "name": "Oasis",
+    "layer": 2,
+    "ascii": "\u25ef"
+  },
+  {
+    "name": "Island",
+    "layer": 2,
+    "ascii": "\u230a"
+  },
+  {
+    "name": "Geyser",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "Whirlpool",
+    "layer": 2,
+    "ascii": "\u229c"
+  },
+  {
+    "name": "Lagoon",
+    "layer": 2,
+    "ascii": "\u25ef"
+  },
+  {
+    "name": "Sedge",
+    "layer": 2,
+    "ascii": "\u25d0"
+  },
+  {
+    "name": "Cattail",
+    "layer": 2,
+    "ascii": "\u27ea"
+  },
+  {
+    "name": "Driftwood",
+    "layer": 2,
+    "ascii": "\u2228"
+  },
+  {
+    "name": "Cottage",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "Manor",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "Castle",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Church",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Temple",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Ruin",
+    "layer": 2,
+    "ascii": "\u2591"
+  },
+  {
+    "name": "Windmill",
+    "layer": 2,
+    "ascii": "\u27eb"
+  },
+  {
+    "name": "Aqueduct",
+    "layer": 2,
+    "ascii": "\u2550"
+  },
+  {
+    "name": "Fortress",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Prison",
+    "layer": 2,
+    "ascii": "\u27eb"
+  },
+  {
+    "name": "Factory",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "Warehouse",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "Tavern",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "Inn",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "Blacksmith",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "Altar",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Podium",
+    "layer": 2,
+    "ascii": "\u27d8"
+  },
+  {
+    "name": "Decoration",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Sign",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "Banner",
+    "layer": 2,
+    "ascii": "\u25c7"
+  },
+  {
+    "name": "Flag",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Scarecrow",
+    "layer": 2,
+    "ascii": "\u2310"
+  },
+  {
+    "name": "Lantern",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Candle",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Cauldron",
+    "layer": 2,
+    "ascii": "\u03bf"
+  },
+  {
+    "name": "Alchemy",
+    "layer": 2,
+    "ascii": "\u2297"
+  },
+  {
+    "name": "Workbench",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "Anvil",
+    "layer": 2,
+    "ascii": "\u22a5"
+  },
+  {
+    "name": "Furnace",
+    "layer": 2,
+    "ascii": "\u2606"
+  },
+  {
+    "name": "CraftStation",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "SummonCircle",
+    "layer": 2,
+    "ascii": "\u2299"
+  },
+  {
+    "name": "ManaSource",
+    "layer": 2,
+    "ascii": "\u2726"
+  },
+  {
+    "name": "PowerNode",
+    "layer": 2,
+    "ascii": "\u25c9"
+  },
+  {
+    "name": "SkeletonBonus",
+    "layer": 2,
+    "ascii": "\u2620"
+  },
+  {
+    "name": "GhostTrap",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "SpiderWeb",
+    "layer": 2,
+    "ascii": "\u221e"
+  },
+  {
+    "name": "Hive",
+    "layer": 2,
+    "ascii": "\u24d7"
+  },
+  {
+    "name": "Nest",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "Lair",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "DragonsLair",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "MonsterNest",
+    "layer": 2,
+    "ascii": "\u25ce"
+  },
+  {
+    "name": "TrapArea",
+    "layer": 2,
+    "ascii": "\u2297"
+  },
+  {
+    "name": "BeastDen",
+    "layer": 2,
+    "ascii": "\u2302"
+  },
+  {
+    "name": "MetalPanel",
+    "layer": 2,
+    "ascii": "\u25ac"
+  },
+  {
+    "name": "Circuit",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "Robot",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Tech",
+    "layer": 2,
+    "ascii": "\u229e"
+  },
+  {
+    "name": "Antenna",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "Transmitter",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "Reactor",
+    "layer": 2,
+    "ascii": "\u25c9"
+  },
+  {
+    "name": "AlienStructure",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "SpaceDebris",
+    "layer": 2,
+    "ascii": "\u2235"
+  },
+  {
+    "name": "Spacecraft",
+    "layer": 2,
+    "ascii": "\u2295"
+  },
+  {
+    "name": "Holo",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "Neon",
+    "layer": 2,
+    "ascii": "\u273f"
+  },
+  {
+    "name": "Hologram",
+    "layer": 2,
+    "ascii": "\u25c6"
+  },
+  {
+    "name": "CodePattern",
+    "layer": 2,
+    "ascii": "\u25a1"
+  },
+  {
+    "name": "QuantumField",
+    "layer": 2,
+    "ascii": "\u2297"
+  },
+  {
+    "name": "Void",
+    "layer": 2,
+    "ascii": "\u25cf"
+  },
+  {
+    "name": "Stalactite",
+    "layer": 2,
+    "ascii": "\u2193"
+  },
+  {
+    "name": "Stalagmite",
+    "layer": 2,
+    "ascii": "\u2191"
+  },
+  {
+    "name": "Elevator",
+    "layer": 2,
+    "ascii": "\u2551"
+  },
+  {
+    "name": "A5 0",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 1",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 2",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 3",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 4",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 5",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 6",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 7",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 8",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 9",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 10",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 11",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 12",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 13",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 14",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 15",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 16",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 17",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 18",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 19",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 20",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 21",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 22",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 23",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 24",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 25",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 26",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 27",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 28",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 29",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 30",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 31",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 32",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 33",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 34",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 35",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 36",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 37",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 38",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 39",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 40",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 41",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 42",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 43",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 44",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 45",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 46",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 47",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 48",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 49",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 50",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 51",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 52",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 53",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 54",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 55",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 56",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 57",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 58",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 59",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 60",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 61",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 62",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 63",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 64",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 65",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 66",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 67",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 68",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 69",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 70",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 71",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 72",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 73",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 74",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 75",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 76",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 77",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 78",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 79",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 80",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 81",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 82",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 83",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 84",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 85",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 86",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 87",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 88",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 89",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 90",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 91",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 92",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 93",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 94",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 95",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 96",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 97",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 98",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 99",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 100",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 101",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 102",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 103",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 104",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 105",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 106",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 107",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 108",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 109",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 110",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 111",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 112",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 113",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 114",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 115",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 116",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 117",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 118",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 119",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 120",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 121",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 122",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 123",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 124",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 125",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 126",
+    "layer": 0,
+    "ascii": "\u00b7"
+  },
+  {
+    "name": "A5 127",
+    "layer": 0,
+    "ascii": "\u00b7"
+  }
+]

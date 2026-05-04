@@ -20,7 +20,7 @@
  * - In Description: Press Cancel to return to Arguments window
  * - In Arguments: Press Cancel to return to main menu
  *
- * To customize help topics, edit the HELP_TOPICS array in the plugin code.
+ * To customize help topics, edit the HelpTopics array in the plugin code.
  *
  * Terms of Use:
  * Free for commercial and non-commercial use.
@@ -28,13 +28,14 @@
 
 (() => {
   "use strict";
-  const { HELP_TOPICS, TODO_LISTS } = window.HelpData;
+  const HelpTopics = (window.Messages && window.Messages.HelpTopics) ? window.Messages.HelpTopics : [];
+  const TodoList = (window.Messages && window.Messages.TodoList) ? window.Messages.TodoList : {};
 
   //=============================================================================
   // ControlTagParser - Parse and display control tags based on input method
   //=============================================================================
   const ControlTagParser = {
-    getCurrentInputMethod: function() {
+    getCurrentInputMethod: function () {
       // Check if gamepad/controller input was recently used
       const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
       for (let i = 0; i < gamepads.length; i++) {
@@ -57,7 +58,7 @@
       return 'keyboard';
     },
 
-    parseControlText: function(text) {
+    parseControlText: function (text) {
       const inputMethod = this.getCurrentInputMethod();
 
       // Pattern: <keyboard: ... > <controller: ... >
@@ -76,7 +77,8 @@
 
   // Add sorting function
   function sortTopics(topics) {
-    return topics.slice().sort((a, b) => {
+    if (!topics) return [];
+    return topics.filter(t => t && t.title).sort((a, b) => {
       const titleA = a.title.toLowerCase();
       const titleB = b.title.toLowerCase();
       return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
@@ -85,7 +87,9 @@
 
   // Filter out topics with type "lore", "state", or "element" for general help
   function filterTopicsForGeneralHelp(topics) {
+    if (!topics) return [];
     return topics.filter(topic => {
+      if (!topic) return false;
       // Exclude items with type "lore", "state", or "element"
       if (topic.type && (topic.type === "lore" || topic.type === "state" || topic.type === "element")) {
         return false;
@@ -101,7 +105,7 @@
     const url = 'data/' + filename;
     xhr.open('GET', url);
     xhr.overrideMimeType('application/json');
-    xhr.onload = function() {
+    xhr.onload = function () {
       if (xhr.status < 400) {
         const data = JSON.parse(xhr.responseText);
         callback(data.displayName || null);
@@ -109,13 +113,13 @@
         callback(null);
       }
     };
-    xhr.onerror = function() {
+    xhr.onerror = function () {
       callback(null);
     };
     xhr.send();
   }
 
-  const sortedTopics = sortTopics(filterTopicsForGeneralHelp(HELP_TOPICS));
+  const sortedTopics = sortTopics(filterTopicsForGeneralHelp(HelpTopics));
 
   //=============================================================================
   // Add Help Command to Main Menu
@@ -306,14 +310,14 @@
   };
 
   Scene_TodoListDisplay.prototype.getAllTodos = function () {
-    // This will be populated by referencing the TODO_LISTS from MapTodoList
+    // This will be populated by referencing the TodoList from MapTodoList
     // We collect all todos from all lists in order, grouped by maps with headers
     const allTodos = [];
     this._seenSwitchIds = new Set();
     this._pendingDisplayNameRequests = 0;
 
-    if (typeof window !== "undefined" && TODO_LISTS) {
-      const todoLists = TODO_LISTS;
+    if (typeof window !== "undefined" && TodoList) {
+      const todoLists = TodoList;
       for (const listKey in todoLists) {
         const listData = todoLists[listKey];
         if (listData && listData.tasks && listData.maps && listData.maps.length > 0) {
@@ -337,8 +341,8 @@
 
           // Load the display name asynchronously
           this._pendingDisplayNameRequests++;
-          (function(scene, header, mapId) {
-            getMapDisplayName(mapId, function(displayName) {
+          (function (scene, header, mapId) {
+            getMapDisplayName(mapId, function (displayName) {
               if (displayName) {
                 header.mapDisplayName = displayName;
               }
@@ -428,7 +432,7 @@
     this._itemHeights = [];
     for (let i = 0; i < this._allTodos.length; i++) {
       const item = this._allTodos[i];
-      
+
       // Check if this is a header
       if (item.isHeader) {
         // Headers take up one line height + some padding
@@ -649,7 +653,7 @@
   };
 
   Window_HelpArgumentsFiltered.prototype.getFilteredTopics = function () {
-    return HELP_TOPICS.filter(topic => {
+    return HelpTopics.filter(topic => {
       if (!topic.type) return false;
       return topic.type === this._filterType;
     });

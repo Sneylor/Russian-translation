@@ -1,0 +1,26 @@
+{
+  "success": [
+    "Scambi qualche parola con il nemico.",
+    "Il nemico sembra ascoltarti.",
+    "Hai una breve conversazione.",
+    "Il nemico appare interessato a parlare."
+  ],
+  "fail": [
+    "Il nemico ti ignora.",
+    "Il nemico non vuole parlare.",
+    "Le tue parole cadono nel vuoto."
+  ],
+  "insult": [
+    "Il nemico diventa furioso!",
+    "Il tuo insulto fa arrabbiare il nemico!",
+    "La furia del nemico cresce!"
+  ],
+  "joinSuccess": [
+    "Il nemico accetta di unirsi al gruppo!",
+    "Il nemico decide di seguirti!"
+  ],
+  "joinFail": [
+    "Il nemico non \u00e8 abbastanza amichevole per unirsi.",
+    "Il nemico rifiuta la tua offerta."
+  ]
+}

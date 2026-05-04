@@ -67,7 +67,7 @@
     .map((id) => parseInt(id.trim()));
   const actorId = parseInt(parameters["actorId"]) || 1;
   const allowDeselect = parameters["allowDeselect"] === "true";
-  const { Traits } = window.ProstheticsData;
+  const { Traits } = window.Health;
 
   // Translation system
 
@@ -156,10 +156,10 @@
     }
     return value;
   };
-// Add this helper function near the top with other helpers
-const getParamDisplayName = (paramKey) => {
+  // Add this helper function near the top with other helpers
+  const getParamDisplayName = (paramKey) => {
     const useTranslation = ConfigManager.language === "it";
-    
+
     const displayNames = {
       hp: { en: "HP", it: "HP" },
       mp: { en: "MP", it: "MP" },
@@ -171,7 +171,7 @@ const getParamDisplayName = (paramKey) => {
       luk: { en: "PSI", it: "PSI" },
       eva: { en: "EVA", it: "EVA" }  // Added evasion
     };
-    
+
     return displayNames[paramKey][useTranslation ? "it" : "en"];
   };
   //-----------------------------------------------------------------------------
@@ -199,7 +199,7 @@ const getParamDisplayName = (paramKey) => {
       this.resetSwitches();
       this.resetActorTraits(); // Add this line
     }
-    
+
     resetActorTraits() {
       const targetId = Scene_TraitSelector._targetActorId || actorId;
       const actor = $gameActors.actor(targetId);
@@ -393,158 +393,158 @@ const getParamDisplayName = (paramKey) => {
     }
 
     applyTraits() {
-        const targetId = Scene_TraitSelector._targetActorId || actorId;
-        const actor = $gameActors.actor(targetId);
+      const targetId = Scene_TraitSelector._targetActorId || actorId;
+      const actor = $gameActors.actor(targetId);
 
-        if (!actor) {
-          console.error(`Actor with ID ${targetId} not found!`);
-          return;
-        }
-
-        // Store selected traits on the actor
-        if (!actor._selectedTraits) {
-          actor._selectedTraits = [];
-        }
-        actor._selectedTraits = this._selectedTraits.slice(); // Copy array
-
-        this._selectedTraits.forEach((trait) => {
-          Object.keys(trait.positive).forEach((param) => {
-            this.addParam(actor, param, trait.positive[param]);
-          });
-          Object.keys(trait.negative).forEach((param) => {
-            this.addParam(actor, param, trait.negative[param]);
-          });
-
-          trait.skills.forEach((skillId) => {
-            if ($dataSkills[skillId]) {
-              actor.learnSkill(skillId);
-            }
-          });
-
-          trait.items.forEach((itemId) => {
-            if ($dataItems[itemId]) {
-              $gameParty.gainItem($dataItems[itemId], 1);
-            }
-          });
-
-          trait.equipment.forEach((itemId) => {
-            if ($dataWeapons[itemId]) {
-              $gameParty.gainItem($dataWeapons[itemId], 1);
-            } else if ($dataArmors[itemId]) {
-              $gameParty.gainItem($dataArmors[itemId], 1);
-            }
-          });
-
-          trait.switches.forEach((switchId) => {
-            $gameSwitches.setValue(switchId, true);
-          });
-        });
-
-        actor.refresh();
+      if (!actor) {
+        console.error(`Actor with ID ${targetId} not found!`);
+        return;
       }
 
-      // New method to apply traits by ID array (for use by other plugins like ClassSelector)
-      applyTraitsByIds(traitIds, targetActorId = null) {
-        const targetId = targetActorId || actorId;
-        const actor = $gameActors.actor(targetId);
+      // Store selected traits on the actor
+      if (!actor._selectedTraits) {
+        actor._selectedTraits = [];
+      }
+      actor._selectedTraits = this._selectedTraits.slice(); // Copy array
 
-        if (!actor) {
-          console.error(`Actor with ID ${targetId} not found!`);
-          return;
-        }
+      this._selectedTraits.forEach((trait) => {
+        Object.keys(trait.positive).forEach((param) => {
+          this.addParam(actor, param, trait.positive[param]);
+        });
+        Object.keys(trait.negative).forEach((param) => {
+          this.addParam(actor, param, trait.negative[param]);
+        });
 
-        if (!traitIds || traitIds.length === 0) {
-          console.warn('No trait IDs provided');
-          return;
-        }
-
-        // Get the Traits array from ProstheticsData
-        const TraitsArray = window.ProstheticsData && window.ProstheticsData.Traits;
-        if (!TraitsArray) {
-          console.error('Traits array not found. Is DB.js loaded?');
-          return;
-        }
-
-        // Store selected traits on the actor
-        if (!actor._selectedTraits) {
-          actor._selectedTraits = [];
-        }
-
-        const selectedTraits = [];
-
-        // Collect trait objects by ID
-        traitIds.forEach((traitId) => {
-          const trait = TraitsArray.find((t) => t.id === traitId);
-          if (trait) {
-            selectedTraits.push(trait);
-          } else {
-            console.warn(`Trait with ID ${traitId} not found in TraitSelector data`);
+        trait.skills.forEach((skillId) => {
+          if ($dataSkills[skillId]) {
+            actor.learnSkill(skillId);
           }
         });
 
-        // Apply each selected trait
-        selectedTraits.forEach((trait) => {
-          // Apply positive bonuses
-          Object.keys(trait.positive || {}).forEach((param) => {
-            this.addParam(actor, param, trait.positive[param]);
-          });
-
-          // Apply negative bonuses
-          Object.keys(trait.negative || {}).forEach((param) => {
-            this.addParam(actor, param, trait.negative[param]);
-          });
-
-          // Learn skills
-          (trait.skills || []).forEach((skillId) => {
-            if ($dataSkills[skillId]) {
-              actor.learnSkill(skillId);
-            }
-          });
-
-          // Add items
-          (trait.items || []).forEach((itemId) => {
-            if ($dataItems[itemId]) {
-              $gameParty.gainItem($dataItems[itemId], 1);
-            }
-          });
-
-          // Add equipment
-          (trait.equipment || []).forEach((itemId) => {
-            if ($dataWeapons[itemId]) {
-              $gameParty.gainItem($dataWeapons[itemId], 1);
-            } else if ($dataArmors[itemId]) {
-              $gameParty.gainItem($dataArmors[itemId], 1);
-            }
-          });
-
-          // Set switches
-          (trait.switches || []).forEach((switchId) => {
-            $gameSwitches.setValue(switchId, true);
-          });
+        trait.items.forEach((itemId) => {
+          if ($dataItems[itemId]) {
+            $gameParty.gainItem($dataItems[itemId], 1);
+          }
         });
 
-        // Store selected traits and refresh
-        actor._selectedTraits = selectedTraits;
-        actor.refresh();
+        trait.equipment.forEach((itemId) => {
+          if ($dataWeapons[itemId]) {
+            $gameParty.gainItem($dataWeapons[itemId], 1);
+          } else if ($dataArmors[itemId]) {
+            $gameParty.gainItem($dataArmors[itemId], 1);
+          }
+        });
 
-        console.log(
-          `Applied ${selectedTraits.length} trait(s) to actor ${targetId}: ${selectedTraits
-            .map((t) => t.name.en)
-            .join(', ')}`
-        );
+        trait.switches.forEach((switchId) => {
+          $gameSwitches.setValue(switchId, true);
+        });
+      });
+
+      actor.refresh();
+    }
+
+    // New method to apply traits by ID array (for use by other plugins like ClassSelector)
+    applyTraitsByIds(traitIds, targetActorId = null) {
+      const targetId = targetActorId || actorId;
+      const actor = $gameActors.actor(targetId);
+
+      if (!actor) {
+        console.error(`Actor with ID ${targetId} not found!`);
+        return;
       }
 
+      if (!traitIds || traitIds.length === 0) {
+        console.warn('No trait IDs provided');
+        return;
+      }
+
+      // Get the Traits array from ProstheticsData
+      const TraitsArray = window.Health && window.Health.Traits;
+      if (!TraitsArray) {
+        console.error('Traits array not found. Is DB.js loaded?');
+        return;
+      }
+
+      // Store selected traits on the actor
+      if (!actor._selectedTraits) {
+        actor._selectedTraits = [];
+      }
+
+      const selectedTraits = [];
+
+      // Collect trait objects by ID
+      traitIds.forEach((traitId) => {
+        const trait = TraitsArray.find((t) => t.id === traitId);
+        if (trait) {
+          selectedTraits.push(trait);
+        } else {
+          console.warn(`Trait with ID ${traitId} not found in TraitSelector data`);
+        }
+      });
+
+      // Apply each selected trait
+      selectedTraits.forEach((trait) => {
+        // Apply positive bonuses
+        Object.keys(trait.positive || {}).forEach((param) => {
+          this.addParam(actor, param, trait.positive[param]);
+        });
+
+        // Apply negative bonuses
+        Object.keys(trait.negative || {}).forEach((param) => {
+          this.addParam(actor, param, trait.negative[param]);
+        });
+
+        // Learn skills
+        (trait.skills || []).forEach((skillId) => {
+          if ($dataSkills[skillId]) {
+            actor.learnSkill(skillId);
+          }
+        });
+
+        // Add items
+        (trait.items || []).forEach((itemId) => {
+          if ($dataItems[itemId]) {
+            $gameParty.gainItem($dataItems[itemId], 1);
+          }
+        });
+
+        // Add equipment
+        (trait.equipment || []).forEach((itemId) => {
+          if ($dataWeapons[itemId]) {
+            $gameParty.gainItem($dataWeapons[itemId], 1);
+          } else if ($dataArmors[itemId]) {
+            $gameParty.gainItem($dataArmors[itemId], 1);
+          }
+        });
+
+        // Set switches
+        (trait.switches || []).forEach((switchId) => {
+          $gameSwitches.setValue(switchId, true);
+        });
+      });
+
+      // Store selected traits and refresh
+      actor._selectedTraits = selectedTraits;
+      actor.refresh();
+
+      console.log(
+        `Applied ${selectedTraits.length} trait(s) to actor ${targetId}: ${selectedTraits
+          .map((t) => t.name.en)
+          .join(', ')}`
+      );
+    }
+
     addParam(actor, paramName, value) {
-  const paramMap = {
-    hp: 0,      // Max HP (unchanged)
-    mp: 1,      // Max MP (unchanged)
-    atk: 2,     // STR (was atk)
-    def: 3,     // CON (was def)
-    mat: 4,     // INT (was mat)
-    mdf: 5,     // SAG (was mdf)
-    agi: 6,     // DES (was agi)
-    luk: 7,     // PSI (was luk)
-  };
+      const paramMap = {
+        hp: 0,      // Max HP (unchanged)
+        mp: 1,      // Max MP (unchanged)
+        atk: 2,     // STR (was atk)
+        def: 3,     // CON (was def)
+        mat: 4,     // INT (was mat)
+        mdf: 5,     // SAG (was mdf)
+        agi: 6,     // DES (was agi)
+        luk: 7,     // PSI (was luk)
+      };
 
       const paramId = paramMap[paramName];
       if (typeof paramId === "number") {
@@ -637,27 +637,27 @@ const getParamDisplayName = (paramKey) => {
     }
 
     updateHelp() {
-        const trait = this.item();
-        if (trait) {
-          let helpText = `${getTraitText(trait, "description")}\n`;
-      
-          const positiveStats = Object.keys(trait.positive).map(
-            (key) => `${getParamDisplayName(key)}+${trait.positive[key]}`  // Changed this line
-          );
-          const negativeStats = Object.keys(trait.negative).map(
-            (key) => `${getParamDisplayName(key)}${trait.negative[key]}`  // Changed this line
-          );
-      
-          if (positiveStats.length > 0) {
-            helpText += `${t("benefits")} ${positiveStats.join(", ")}\n`;
-          }
-          if (negativeStats.length > 0) {
-            helpText += `${t("drawbacks")} ${negativeStats.join(", ")}`;
-          }
-      
-          this._helpWindow.setText(helpText);
+      const trait = this.item();
+      if (trait) {
+        let helpText = `${getTraitText(trait, "description")}\n`;
+
+        const positiveStats = Object.keys(trait.positive).map(
+          (key) => `${getParamDisplayName(key)}+${trait.positive[key]}`  // Changed this line
+        );
+        const negativeStats = Object.keys(trait.negative).map(
+          (key) => `${getParamDisplayName(key)}${trait.negative[key]}`  // Changed this line
+        );
+
+        if (positiveStats.length > 0) {
+          helpText += `${t("benefits")} ${positiveStats.join(", ")}\n`;
         }
+        if (negativeStats.length > 0) {
+          helpText += `${t("drawbacks")} ${negativeStats.join(", ")}`;
+        }
+
+        this._helpWindow.setText(helpText);
       }
+    }
   }
 
   //-----------------------------------------------------------------------------
@@ -740,13 +740,13 @@ const getParamDisplayName = (paramKey) => {
         });
 
         Object.keys(totals).forEach((key) => {
-            const value = totals[key];
-            const sign = value > 0 ? "+" : "";
-            this._bonusLines.push({
-              text: `  ${getParamDisplayName(key)}: ${sign}${value}`,  // Changed this line
-              value: value,
-            });
+          const value = totals[key];
+          const sign = value > 0 ? "+" : "";
+          this._bonusLines.push({
+            text: `  ${getParamDisplayName(key)}: ${sign}${value}`,  // Changed this line
+            value: value,
           });
+        });
       }
 
       // Add actual selectable commands
@@ -823,7 +823,7 @@ const getParamDisplayName = (paramKey) => {
       return Math.floor(this.innerHeight / this.lineHeight() - bonusLines);
     }
   }
-// Add this after the existing plugin command registration (around line 113)
+  // Add this after the existing plugin command registration (around line 113)
 
   // Helper function to randomize traits for a specific actor
   function randomizeTraitsForActor(targetActorId = null) {
@@ -837,17 +837,17 @@ const getParamDisplayName = (paramKey) => {
     while (selectedTraits.length < 4 && availableTraits.length > 0) {
       const randomIndex = Math.floor(Math.random() * availableTraits.length);
       const trait = availableTraits[randomIndex];
-      
+
       // Check if this trait is compatible with already selected traits
-      const isCompatible = !selectedTraits.some(selected => 
-        trait.incompatible.includes(selected.id) || 
+      const isCompatible = !selectedTraits.some(selected =>
+        trait.incompatible.includes(selected.id) ||
         selected.incompatible.includes(trait.id)
       );
-      
+
       if (isCompatible) {
         selectedTraits.push(trait);
       }
-      
+
       // Remove this trait from available pool regardless
       availableTraits.splice(randomIndex, 1);
     }
@@ -859,17 +859,17 @@ const getParamDisplayName = (paramKey) => {
       console.error(`Actor with ID ${targetId} not found!`);
       return;
     }
-    
+
     // Reset actor traits first
     actor._paramPlus = [0, 0, 0, 0, 0, 0, 0, 0];
     actor._selectedTraits = [];
-    
+
     // Apply each selected trait
     selectedTraits.forEach((trait) => {
       // Apply positive bonuses
       Object.keys(trait.positive).forEach((param) => {
         const paramMap = {
-          hp: 0, mp: 1, atk: 2, def: 3, 
+          hp: 0, mp: 1, atk: 2, def: 3,
           mat: 4, mdf: 5, agi: 6, luk: 7
         };
         const paramId = paramMap[param];
@@ -877,11 +877,11 @@ const getParamDisplayName = (paramKey) => {
           actor._paramPlus[paramId] = (actor._paramPlus[paramId] || 0) + trait.positive[param];
         }
       });
-      
+
       // Apply negative bonuses
       Object.keys(trait.negative).forEach((param) => {
         const paramMap = {
-          hp: 0, mp: 1, atk: 2, def: 3, 
+          hp: 0, mp: 1, atk: 2, def: 3,
           mat: 4, mdf: 5, agi: 6, luk: 7
         };
         const paramId = paramMap[param];
@@ -889,21 +889,21 @@ const getParamDisplayName = (paramKey) => {
           actor._paramPlus[paramId] = (actor._paramPlus[paramId] || 0) + trait.negative[param];
         }
       });
-      
+
       // Learn skills
       trait.skills.forEach((skillId) => {
         if ($dataSkills[skillId]) {
           actor.learnSkill(skillId);
         }
       });
-      
+
       // Add items
       trait.items.forEach((itemId) => {
         if ($dataItems[itemId]) {
           $gameParty.gainItem($dataItems[itemId], 1);
         }
       });
-      
+
       // Add equipment
       trait.equipment.forEach((itemId) => {
         if ($dataWeapons[itemId]) {
@@ -912,13 +912,13 @@ const getParamDisplayName = (paramKey) => {
           $gameParty.gainItem($dataArmors[itemId], 1);
         }
       });
-      
+
       // Set switches
       trait.switches.forEach((switchId) => {
         $gameSwitches.setValue(switchId, true);
       });
     });
-    
+
     // Store selected traits
     actor._selectedTraits = selectedTraits;
     actor.refresh();

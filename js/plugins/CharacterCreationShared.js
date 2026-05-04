@@ -234,7 +234,7 @@
 
     // Fallback: manual trait application if TraitSelector not available
     console.warn('TraitSelector plugin not fully loaded, using fallback trait application');
-    const TraitsArray = window.ProstheticsData && window.ProstheticsData.Traits;
+    const TraitsArray = window.Health && window.Health.Traits;
     if (!TraitsArray) {
       console.error('Cannot apply traits: TraitSelector/DB not loaded');
       return;

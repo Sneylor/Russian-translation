@@ -1,0 +1,477 @@
+{
+  "HEAD": {
+    "name": "Head",
+    "name_int": "",
+    "name_it": "Testa",
+    "hp": 30,
+    "vital": true,
+    "canLose": false,
+    "childParts": [
+      "BRAIN",
+      "LEFT_EYE",
+      "RIGHT_EYE",
+      "NOSE",
+      "LEFT_EAR",
+      "RIGHT_EAR",
+      "MOUTH"
+    ],
+    "statEffect": {
+      "param": 0,
+      "amount": -10
+    },
+    "damageMsg": "skull was fractured",
+    "damagemsg_int": "",
+    "msg_it": "cranio fratturato"
+  },
+  "BRAIN": {
+    "name": "Brain",
+    "name_int": "",
+    "name_it": "Cervello",
+    "hp": 20,
+    "vital": true,
+    "canLose": false,
+    "statEffect": {
+      "param": 3,
+      "amount": -15
+    },
+    "damageMsg": "brain was concussed",
+    "damagemsg_int": "",
+    "msg_it": "concussione cerebrale"
+  },
+  "LEFT_EYE": {
+    "name": "Left Eye",
+    "name_int": "",
+    "name_it": "Occhio sinistro",
+    "hp": 10,
+    "vital": false,
+    "canLose": false,
+    "statEffect": {
+      "param": 2,
+      "amount": -5
+    },
+    "damageMsg": "left eye was swollen shut",
+    "damagemsg_int": "",
+    "msg_it": "occhio sinistro gonfio"
+  },
+  "RIGHT_EYE": {
+    "name": "Right Eye",
+    "name_int": "",
+    "name_it": "Occhio destro",
+    "hp": 10,
+    "vital": false,
+    "canLose": false,
+    "statEffect": {
+      "param": 2,
+      "amount": -5
+    },
+    "damageMsg": "right eye was swollen shut",
+    "damagemsg_int": "",
+    "msg_it": "occhio destro gonfio"
+  },
+  "NOSE": {
+    "name": "Nose",
+    "name_int": "",
+    "name_it": "Naso",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "damageMsg": "nose was broken",
+    "damagemsg_int": "",
+    "msg_it": "naso rotto"
+  },
+  "LEFT_EAR": {
+    "name": "Left Ear",
+    "name_int": "",
+    "name_it": "Orecchio sinistro",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "damageMsg": "left ear is ringing",
+    "damagemsg_int": "",
+    "msg_it": "orecchio sinistro che fischia"
+  },
+  "RIGHT_EAR": {
+    "name": "Right Ear",
+    "name_int": "",
+    "name_it": "Orecchio destro",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "damageMsg": "right ear is ringing",
+    "damagemsg_int": "",
+    "msg_it": "orecchio destro che fischia"
+  },
+  "MOUTH": {
+    "name": "Mouth",
+    "name_int": "",
+    "name_it": "Bocca",
+    "hp": 8,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "TEETH"
+    ],
+    "damageMsg": "jaw was dislocated",
+    "damagemsg_int": "",
+    "msg_it": "mascella lussata"
+  },
+  "TEETH": {
+    "name": "Teeth",
+    "name_int": "",
+    "name_it": "Denti",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "multiple": true,
+    "damageMsg": "teeth were knocked out",
+    "damagemsg_int": "",
+    "msg_it": "denti divelti"
+  },
+  "GENITALS": {
+    "name": "Genitals",
+    "name_int": "",
+    "name_it": "Genitali",
+    "hp": 40,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "GENITALS"
+    ],
+    "statEffect": {
+      "param": 0,
+      "amount": -15
+    },
+    "damageMsg": "genitals damaged",
+    "damagemsg_int": "",
+    "msg_it": "genitali danneggiati"
+  },
+  "TORSO": {
+    "name": "Torso",
+    "name_int": "",
+    "name_it": "Torace",
+    "hp": 40,
+    "vital": true,
+    "canLose": false,
+    "childParts": [
+      "HEART",
+      "LEFT_LUNG",
+      "RIGHT_LUNG",
+      "LIVER",
+      "STOMACH",
+      "SPLEEN",
+      "INTESTINES"
+    ],
+    "statEffect": {
+      "param": 0,
+      "amount": -15
+    },
+    "damageMsg": "ribs were broken",
+    "damagemsg_int": "",
+    "msg_it": "costole rotte"
+  },
+  "HEART": {
+    "name": "Heart",
+    "name_int": "",
+    "name_it": "Cuore",
+    "hp": 25,
+    "vital": true,
+    "canLose": false,
+    "statEffect": {
+      "param": 6,
+      "amount": -10
+    },
+    "damageMsg": "heart was damaged",
+    "damagemsg_int": "",
+    "msg_it": "cuore danneggiato"
+  },
+  "LEFT_LUNG": {
+    "name": "Left Lung",
+    "name_int": "",
+    "name_it": "Polmone sinistro",
+    "hp": 20,
+    "vital": true,
+    "canLose": false,
+    "statEffect": {
+      "param": 6,
+      "amount": -5
+    },
+    "damageMsg": "left lung collapsed",
+    "damagemsg_int": "",
+    "msg_it": "polmone sinistro collassato"
+  },
+  "RIGHT_LUNG": {
+    "name": "Right Lung",
+    "name_int": "",
+    "name_it": "Polmone destro",
+    "hp": 20,
+    "vital": true,
+    "canLose": false,
+    "statEffect": {
+      "param": 6,
+      "amount": -5
+    },
+    "damageMsg": "right lung collapsed",
+    "damagemsg_int": "",
+    "msg_it": "polmone destro collassato"
+  },
+  "LIVER": {
+    "name": "Liver",
+    "name_int": "",
+    "name_it": "Fegato",
+    "hp": 15,
+    "vital": true,
+    "canLose": false,
+    "statEffect": {
+      "param": 1,
+      "amount": -5
+    },
+    "damageMsg": "liver was lacerated",
+    "damagemsg_int": "",
+    "msg_it": "fegato lacerato"
+  },
+  "STOMACH": {
+    "name": "Stomach",
+    "name_int": "",
+    "name_it": "Stomaco",
+    "hp": 15,
+    "vital": true,
+    "canLose": false,
+    "statEffect": {
+      "param": 7,
+      "amount": -5
+    },
+    "damageMsg": "stomach was ruptured",
+    "damagemsg_int": "",
+    "msg_it": "stomaco lacerato"
+  },
+  "SPLEEN": {
+    "name": "Spleen",
+    "name_int": "",
+    "name_it": "Milza",
+    "hp": 10,
+    "vital": false,
+    "canLose": false,
+    "damageMsg": "spleen was ruptured",
+    "damagemsg_int": "",
+    "msg_it": "milza lacerata"
+  },
+  "INTESTINES": {
+    "name": "Intestines",
+    "name_int": "",
+    "name_it": "Intestino",
+    "hp": 20,
+    "vital": true,
+    "canLose": false,
+    "statEffect": {
+      "param": 5,
+      "amount": -5
+    },
+    "damageMsg": "intestines were perforated",
+    "damagemsg_int": "",
+    "msg_it": "intestino perforato"
+  },
+  "LEFT_ARM": {
+    "name": "Left Arm",
+    "name_int": "",
+    "name_it": "Braccio sinistro",
+    "hp": 20,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "LEFT_HAND"
+    ],
+    "equipSlot": "leftHand",
+    "statEffect": {
+      "param": 2,
+      "amount": -5
+    },
+    "damageMsg": "left arm was damaged",
+    "damagemsg_int": "",
+    "msg_it": "braccio sinistro danneggiato"
+  },
+  "LEFT_HAND": {
+    "name": "Left Hand",
+    "name_int": "",
+    "name_it": "Mano sinistra",
+    "hp": 10,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "LEFT_FINGERS"
+    ],
+    "equipSlot": "leftHand",
+    "statEffect": {
+      "param": 2,
+      "amount": -5
+    },
+    "damageMsg": "left hand was mangled",
+    "damagemsg_int": "",
+    "msg_it": "mano sinistra mutilata"
+  },
+  "LEFT_FINGERS": {
+    "name": "Left Fingers",
+    "name_int": "",
+    "name_it": "Dita della mano sinistra",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "multiple": true,
+    "statEffect": {
+      "param": 2,
+      "amount": -2
+    },
+    "damageMsg": "left fingers were broken",
+    "damagemsg_int": "",
+    "msg_it": "dita sinistre rotte"
+  },
+  "RIGHT_ARM": {
+    "name": "Right Arm",
+    "name_int": "",
+    "name_it": "Braccio destro",
+    "hp": 20,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "RIGHT_HAND"
+    ],
+    "equipSlot": "rightHand",
+    "statEffect": {
+      "param": 2,
+      "amount": -8
+    },
+    "damageMsg": "right arm was damaged",
+    "damagemsg_int": "",
+    "msg_it": "braccio destro danneggiato"
+  },
+  "RIGHT_HAND": {
+    "name": "Right Hand",
+    "name_int": "",
+    "name_it": "Mano destra",
+    "hp": 10,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "RIGHT_FINGERS"
+    ],
+    "equipSlot": "rightHand",
+    "statEffect": {
+      "param": 2,
+      "amount": -5
+    },
+    "damageMsg": "right hand was mangled",
+    "damagemsg_int": "",
+    "msg_it": "mano destra mutilata"
+  },
+  "RIGHT_FINGERS": {
+    "name": "Right Fingers",
+    "name_int": "",
+    "name_it": "Dita della mano destra",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "multiple": true,
+    "statEffect": {
+      "param": 2,
+      "amount": -3
+    },
+    "damageMsg": "right fingers were broken",
+    "damagemsg_int": "",
+    "msg_it": "dita destre rotte"
+  },
+  "LEFT_LEG": {
+    "name": "Left Leg",
+    "name_int": "",
+    "name_it": "Gamba sinistra",
+    "hp": 25,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "LEFT_FOOT"
+    ],
+    "statEffect": {
+      "param": 6,
+      "amount": -10
+    },
+    "damageMsg": "left leg was damaged",
+    "damagemsg_int": "",
+    "msg_it": "gamba sinistra danneggiata"
+  },
+  "LEFT_FOOT": {
+    "name": "Left Foot",
+    "name_int": "",
+    "name_it": "Piede sinistro",
+    "hp": 10,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "LEFT_TOES"
+    ],
+    "statEffect": {
+      "param": 6,
+      "amount": -5
+    },
+    "damageMsg": "left foot was damaged",
+    "damagemsg_int": "",
+    "msg_it": "piede sinistro danneggiato"
+  },
+  "LEFT_TOES": {
+    "name": "Left Toes",
+    "name_int": "",
+    "name_it": "Dita del piede sinistro",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "multiple": true,
+    "damageMsg": "left toes were crushed",
+    "damagemsg_int": "",
+    "msg_it": "dita del piede sinistro schiacciate"
+  },
+  "RIGHT_LEG": {
+    "name": "Right Leg",
+    "name_int": "",
+    "name_it": "Gamba destra",
+    "hp": 25,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "RIGHT_FOOT"
+    ],
+    "statEffect": {
+      "param": 6,
+      "amount": -10
+    },
+    "damageMsg": "right leg was damaged",
+    "damagemsg_int": "",
+    "msg_it": "gamba destra danneggiata"
+  },
+  "RIGHT_FOOT": {
+    "name": "Right Foot",
+    "name_int": "",
+    "name_it": "Piede destro",
+    "hp": 10,
+    "vital": false,
+    "canLose": false,
+    "childParts": [
+      "RIGHT_TOES"
+    ],
+    "statEffect": {
+      "param": 6,
+      "amount": -5
+    },
+    "damageMsg": "right foot was damaged",
+    "damagemsg_int": "",
+    "msg_it": "piede destro danneggiato"
+  },
+  "RIGHT_TOES": {
+    "name": "Right Toes",
+    "name_int": "",
+    "name_it": "Dita del piede destro",
+    "hp": 5,
+    "vital": false,
+    "canLose": false,
+    "multiple": true,
+    "damageMsg": "right toes were crushed",
+    "damagemsg_int": "",
+    "msg_it": "dita del piede destro schiacciate"
+  }
+}

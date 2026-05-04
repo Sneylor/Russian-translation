@@ -106,7 +106,7 @@
 
   // Define body parts structure
   const { BodyParts } =
-    window.ProstheticsData;
+    window.Health;
   // Centralized UI Translations
   const UI_TRANSLATIONS = {
     healthStatusMenu: { en: "Health Status", it: "Status Salute" },
@@ -196,7 +196,7 @@
       actor._bodyParts = {};
       actor._statModifiers = {};
 
-      const { EnemyArchetypes } = window.ProstheticsData;
+      const { EnemyArchetypes } = window.Health;
       const humanoid = EnemyArchetypes && EnemyArchetypes.Humanoid;
       const sourceParts = humanoid ? humanoid.parts : {};
 
@@ -241,17 +241,17 @@
   // Change actor's archetype to a different body structure
   function changeArchetype(actor, archetypeName) {
     if (!actor) return false;
-    
+
     // Get EnemyArchetypes from ProstheticsData
-    const { EnemyArchetypes } = window.ProstheticsData;
-    
+    const { EnemyArchetypes } = window.Health;
+
     if (!EnemyArchetypes || !EnemyArchetypes[archetypeName]) {
       console.warn(`Archetype "${archetypeName}" not found in EnemyArchetypes`);
       return false;
     }
-    
+
     const archetype = EnemyArchetypes[archetypeName];
-    
+
     // Clear existing stat modifiers
     if (actor._statModifiers) {
       for (const param in actor._statModifiers) {
@@ -260,18 +260,18 @@
     } else {
       actor._statModifiers = {};
     }
-    
+
     // Initialize new body parts from archetype
     actor._bodyParts = {};
     actor._currentArchetype = archetypeName;
-    
+
     for (const partKey in archetype.parts) {
       const archetypePart = archetype.parts[partKey];
       const hpPercentage = archetypePart.hpPercent / 100;
-      
+
       actor._bodyParts[partKey] = {
-        name: ConfigManager.language === "it" && archetypePart.name_it 
-          ? archetypePart.name_it 
+        name: ConfigManager.language === "it" && archetypePart.name_it
+          ? archetypePart.name_it
           : archetypePart.name,
         maxHp: Math.round(actor.mhp * hpPercentage),
         currentHp: Math.round(actor.mhp * hpPercentage),
@@ -286,7 +286,7 @@
         appliedStatEffect: false,
       };
     }
-    
+
     // Update HitLocations to match archetype
     if (archetype.hitLocations) {
       HitLocations = {};
@@ -297,7 +297,7 @@
         };
       }
     }
-    
+
     // Set game variable for reproduction based on actor ID
     // Actor 1 = Variable 87, Actor 2 = Variable 115, Actor 3 = Variable 116
     if ($gameVariables) {
@@ -413,7 +413,7 @@
   // Apply stat effect for a fully damaged part
   function applyStatEffect(actor, partKey) {
     var part = actor._bodyParts[partKey];
-    
+
     if (part.appliedStatEffect || !part.statEffect) return;
 
     // Apply the stat effect from the part's statEffect property
@@ -762,7 +762,7 @@
   };
 
   // Draw player switcher indicator showing current actor and navigation hint
-  Window_HealthStatus.prototype.drawPlayerSwitcher = function(x, y) {
+  Window_HealthStatus.prototype.drawPlayerSwitcher = function (x, y) {
     var width = this.contentsWidth();
     var partySize = $gameParty.members().length;
 
@@ -980,7 +980,7 @@
   };
 
   // Handle left/right input for switching between party members
-  Window_HealthStatus.prototype.processPlayerSwitch = function() {
+  Window_HealthStatus.prototype.processPlayerSwitch = function () {
     if (!this.isOpenAndActive()) return;
 
     var partySize = $gameParty.members().length;
@@ -993,7 +993,7 @@
     }
   };
 
-  Window_HealthStatus.prototype.switchToNextActor = function() {
+  Window_HealthStatus.prototype.switchToNextActor = function () {
     var partySize = $gameParty.members().length;
     this._currentActorIndex = (this._currentActorIndex + 1) % partySize;
     SoundManager.playCursor();
@@ -1002,7 +1002,7 @@
     this.refresh();
   };
 
-  Window_HealthStatus.prototype.switchToPreviousActor = function() {
+  Window_HealthStatus.prototype.switchToPreviousActor = function () {
     var partySize = $gameParty.members().length;
     this._currentActorIndex = (this._currentActorIndex - 1 + partySize) % partySize;
     SoundManager.playCursor();
@@ -1334,7 +1334,7 @@
 
     // Check for limb damage logs - only when body parts are fully damaged
     if ($gameTemp.limbDamageLog && target.isActor() &&
-        (target.actorId() === 1 || target.actorId() === 2 || target.actorId() === 3)) {
+      (target.actorId() === 1 || target.actorId() === 2 || target.actorId() === 3)) {
       var log = $gameTemp.limbDamageLog;
 
       // Show specific damage message and stat effect if applied
@@ -1343,25 +1343,25 @@
           this.push(
             "addText",
             log.name +
-              " " +
-              log.damageMsg +
-              ", " +
-              log.paramName +
-              " " +
-              log.amount +
-              "!"
+            " " +
+            log.damageMsg +
+            ", " +
+            log.paramName +
+            " " +
+            log.amount +
+            "!"
           );
         } else {
           this.push(
             "addText",
             log.name +
-              "'s " +
-              log.damageMsg +
-              ", " +
-              log.paramName +
-              " " +
-              log.amount +
-              "!"
+            "'s " +
+            log.damageMsg +
+            ", " +
+            log.paramName +
+            " " +
+            log.amount +
+            "!"
           );
         }
       } else {
@@ -1426,7 +1426,7 @@
             // Variable 87 already set by changeArchetype
           } else if (actorId === 2) {
             // Set variable 115 for player 2
-            const { EnemyArchetypes } = window.ProstheticsData;
+            const { EnemyArchetypes } = window.Health;
             const archetype = EnemyArchetypes[archetypeName];
             if (archetype && $gameVariables) {
               var reproductionValue = archetype.reproduction !== undefined ? archetype.reproduction : 0;
@@ -1434,7 +1434,7 @@
             }
           } else if (actorId === 3) {
             // Set variable 116 for player 3
-            const { EnemyArchetypes } = window.ProstheticsData;
+            const { EnemyArchetypes } = window.Health;
             const archetype = EnemyArchetypes[archetypeName];
             if (archetype && $gameVariables) {
               var reproductionValue = archetype.reproduction !== undefined ? archetype.reproduction : 0;

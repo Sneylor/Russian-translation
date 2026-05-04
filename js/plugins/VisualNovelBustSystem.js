@@ -111,9 +111,9 @@
  * @desc Name of the image file in busts/All folder (without extension).
 
  */
-(function() {
+(function () {
     "use strict";
-    
+
     const PLUGIN_NAME = "VisualNovelBustSystem";
     const parameters = PluginManager.parameters(PLUGIN_NAME);
     const showCharacterNames = parameters['showCharacterNames'] === 'true';
@@ -138,7 +138,7 @@
     const fadeInDuration = 12;
     const fadeOutDuration = 12;
     const choiceOffset = 140;
-    const { SPRITES_ASSOCIATION } = window.Sprites;
+    const { SpritesAssociation } = window.Sprites;
 
     // Resolution detection helper
     function isWidescreen() {
@@ -249,7 +249,7 @@
             this.batchDialogueMode = false;
             this.nameIsVisible = false;
             this.bustIsVisible = false;
-            
+
             this.activeEventId = null;
             this.lastKnownEventId = null;
             this.hideScheduled = false;
@@ -331,42 +331,42 @@
             } catch (err) {
                 console.warn("Error checking event comments for bust name:", err);
             }
-            if (SPRITES_ASSOCIATION[spritesheetName] && SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-                const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+            if (SpritesAssociation[spritesheetName] && SpritesAssociation[spritesheetName][characterIndex]) {
+                const bustName = SpritesAssociation[spritesheetName][characterIndex];
                 return `busts/${bustName}`;
             }
             return `busts/7`;
 
-/*
-            // Player 1 (Actor 1) special handling
-            if (actorId === 1) {
-                // Priority 2: Check Variable 109 (Player 1 bust name)
-                const player1BustName = $gameVariables.value(109);
-                if (player1BustName && player1BustName !== "") {
-                    return `busts/${player1BustName}`;
-                }
-
-                // Priority 3: If Switch 77 is ON, use Variable 106 for monster form
-                if ($gameSwitches.value(77)) {
-                    const player1MonsterName = $gameVariables.value(106);
-                    if (player1MonsterName && player1MonsterName !== "") {
-                        return `monsters/${player1MonsterName}`;
-                    }
-                }
-
-                // Priority 4: Fall back to SPRITES_ASSOCIATION
+            /*
+                        // Player 1 (Actor 1) special handling
+                        if (actorId === 1) {
+                            // Priority 2: Check Variable 109 (Player 1 bust name)
+                            const player1BustName = $gameVariables.value(109);
+                            if (player1BustName && player1BustName !== "") {
+                                return `busts/${player1BustName}`;
+                            }
             
-                return `busts/7`;
-            }
-
-            // Players 2 & 3: Use SPRITES_ASSOCIATION based on sprite
-            if (SPRITES_ASSOCIATION[spritesheetName] && SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-                const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
-                return `busts/${bustName}`;
-            }
-
-            // Fallback if sprite not found in association
-            return `busts/7`;*/
+                            // Priority 3: If Switch 77 is ON, use Variable 106 for monster form
+                            if ($gameSwitches.value(77)) {
+                                const player1MonsterName = $gameVariables.value(106);
+                                if (player1MonsterName && player1MonsterName !== "") {
+                                    return `monsters/${player1MonsterName}`;
+                                }
+                            }
+            
+                            // Priority 4: Fall back to SpritesAssociation
+                        
+                            return `busts/7`;
+                        }
+            
+                        // Players 2 & 3: Use SpritesAssociation based on sprite
+                        if (SpritesAssociation[spritesheetName] && SpritesAssociation[spritesheetName][characterIndex]) {
+                            const bustName = SpritesAssociation[spritesheetName][characterIndex];
+                            return `busts/${bustName}`;
+                        }
+            
+                        // Fallback if sprite not found in association
+                        return `busts/7`;*/
         }
 
         getBustNameFromEventComment() {
@@ -424,8 +424,8 @@
                 eventName.toLowerCase().includes('party2')) {
                 return 2;
             } else if (eventName.toLowerCase().includes('actor3') ||
-                       eventName.toLowerCase().includes('member3') ||
-                       eventName.toLowerCase().includes('party3')) {
+                eventName.toLowerCase().includes('member3') ||
+                eventName.toLowerCase().includes('party3')) {
                 return 3;
             }
 
@@ -487,27 +487,27 @@
         shouldShowBustAndName() {
             const interpreter = $gameMap._interpreter;
             if (!interpreter || !interpreter._eventId) return false;
-            
+
             const gameEvent = $gameMap.event(interpreter._eventId);
             if (!gameEvent) return false;
-            
+
             const eventName = gameEvent.event().name;
-            
+
             if (eventName && (eventName.startsWith("EV") || eventName.startsWith("Treasure") || eventName.startsWith("Random"))) {
                 return false;
             }
-            
+
             const page = gameEvent.event().pages.find(p => gameEvent.meetsConditions(p));
             if (!page || !page.image) return false;
-            
+
             if (!page.image.characterName || page.image.characterName === "" || page.image.characterName === "none") {
                 return false;
             }
-            
+
             if (page.image.characterName.toLowerCase().includes("objects/") || page.image.characterName.toLowerCase().startsWith("objects")) {
                 return false;
             }
-            
+
             return true;
         }
 
@@ -581,7 +581,7 @@
 
                 this.activeEventId = 'custom';
                 this.hideScheduled = false;
-            } catch(err) {
+            } catch (err) {
                 console.warn("Failed to load custom bust image:", path, "using fallback", err);
                 if (fallbackImage) {
                     this.characterBust.bitmap = fallbackImage;
@@ -677,7 +677,7 @@
 
                     this.slideIn();
                     this.bustIsVisible = true;
-                } catch(err) {
+                } catch (err) {
                     console.warn("Failed to load bust image:", path, "using fallback", err);
                     if (fallbackImage) {
                         this.characterBust.bitmap = fallbackImage;
@@ -707,12 +707,12 @@
 
         hideBusts() {
             if (this.characterBust.parent) this.slideOut();
-            
+
             if (showCharacterNames && this.nameWindow) {
                 this.nameWindow.hideName();
                 this.nameIsVisible = false;
             }
-            
+
             this.currentCharacterKey = null;
             this.batchDialogueMode = false;
             this.bustIsVisible = false;
@@ -757,10 +757,10 @@
 
         onResolutionChange() {
             this.updateBustHiddenPosition();
-            
+
             // Update Y position as well
             this.characterBust.y = this.getBustY();
-            
+
             if (this.characterBust.parent) {
                 if (this.characterBust._slideDuration > 0) {
                     this.characterBust._slideTarget = this.characterBust._targetX;
@@ -768,7 +768,7 @@
                     this.characterBust.x = this.characterBust._targetX;
                 }
             }
-            
+
             if (this.nameWindow) {
                 this.nameWindow.updatePosition();
             }
@@ -792,7 +792,7 @@
                 const delta = (s._slideTarget - s.x) / s._slideDuration;
                 s.x += delta;
                 s._slideDuration -= 1;
-                
+
                 if (s._slideType === 'in') {
                     s.opacity = bustOpacity * (1 - s._slideDuration / fadeInDuration);
                 } else if (s._slideType === 'out') {
@@ -811,12 +811,12 @@
             if (this.bustIsVisible && !this.batchDialogueMode) {
                 const messageWindowClosed = this.isMessageWindowClosed();
                 const eventEnded = this.hasEventEnded();
-                
+
                 if (messageWindowClosed && eventEnded && !this.hideScheduled) {
                     this.hideScheduled = true;
                     this.hideBusts();
                 }
-                
+
                 if (!messageWindowClosed && this.isStillInActiveEvent()) {
                     this.hideScheduled = false;
                 }
@@ -826,23 +826,23 @@
 
     // Scene setup
     const _Scene_Map_start = Scene_Map.prototype.start;
-    Scene_Map.prototype.start = function() {
+    Scene_Map.prototype.start = function () {
         _Scene_Map_start.call(this);
         this._bustManager = new BustManager();
         this._bustManager.initialize();
     };
 
     const _Scene_Map_update = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         _Scene_Map_update.call(this);
         if (this._bustManager) this._bustManager.update();
     };
 
     // Hook into resolution changes
     const _Graphics_resize = Graphics.resize;
-    Graphics.resize = function(width, height) {
+    Graphics.resize = function (width, height) {
         _Graphics_resize.call(this, width, height);
-        
+
         const scene = SceneManager._scene;
         if (scene && scene._bustManager) {
             scene._bustManager.onResolutionChange();
@@ -851,14 +851,14 @@
 
     // Auto-show on message start
     const _Window_Message_startMessage = Window_Message.prototype.startMessage;
-    Window_Message.prototype.startMessage = function() {
+    Window_Message.prototype.startMessage = function () {
         _Window_Message_startMessage.call(this);
         const scene = SceneManager._scene;
         if (scene && scene._bustManager) scene._bustManager.showBusts();
     };
 
     const _Window_Message_terminateMessage = Window_Message.prototype.terminateMessage;
-    Window_Message.prototype.terminateMessage = function() {
+    Window_Message.prototype.terminateMessage = function () {
         _Window_Message_terminateMessage.call(this);
         const scene = SceneManager._scene;
         if (scene && scene._bustManager && scene._bustManager.shouldAutoHide()) {
@@ -867,16 +867,16 @@
     };
 
     const _Window_ChoiceList_updatePlacement = Window_ChoiceList.prototype.updatePlacement;
-    Window_ChoiceList.prototype.updatePlacement = function() {
+    Window_ChoiceList.prototype.updatePlacement = function () {
         _Window_ChoiceList_updatePlacement.call(this);
 
         const scene = SceneManager._scene;
         if (scene && scene._bustManager && scene._bustManager.isBustVisible()) {
             // Check if the displayed bust is NOT the default fallback image (busts/7)
             const isDefaultBust = scene._bustManager.currentCharacterKey === null ||
-                                  (scene._bustManager.characterBust.bitmap &&
-                                   scene._bustManager.characterBust.bitmap._url &&
-                                   scene._bustManager.characterBust.bitmap._url.includes('busts/7'));
+                (scene._bustManager.characterBust.bitmap &&
+                    scene._bustManager.characterBust.bitmap._url &&
+                    scene._bustManager.characterBust.bitmap._url.includes('busts/7'));
 
             // Only shift choice window if it's a custom bust (not the default)
             if (!isDefaultBust) {
@@ -888,7 +888,7 @@
     };
 
     const _Window_ChoiceList_open = Window_ChoiceList.prototype.open;
-    Window_ChoiceList.prototype.open = function() {
+    Window_ChoiceList.prototype.open = function () {
         _Window_ChoiceList_open.call(this);
         const scene = SceneManager._scene;
         if (scene && scene._bustManager && scene._bustManager.nameWindow) {
@@ -897,7 +897,7 @@
     };
 
     const _Window_ChoiceList_close = Window_ChoiceList.prototype.close;
-    Window_ChoiceList.prototype.close = function() {
+    Window_ChoiceList.prototype.close = function () {
         _Window_ChoiceList_close.call(this);
         const scene = SceneManager._scene;
         if (scene && scene._bustManager && scene._bustManager.isBustVisible() && scene._bustManager.nameIsVisible) {
@@ -906,7 +906,7 @@
     };
 
     const _Window_ChoiceList_processCancel = Window_ChoiceList.prototype.processCancel;
-    Window_ChoiceList.prototype.processCancel = function() {
+    Window_ChoiceList.prototype.processCancel = function () {
         _Window_ChoiceList_processCancel.call(this);
         const scene = SceneManager._scene;
         if (scene && scene._bustManager && scene._bustManager.isBustVisible() && scene._bustManager.nameIsVisible) {
@@ -915,7 +915,7 @@
     };
 
     const _Window_ChoiceList_processOk = Window_ChoiceList.prototype.processOk;
-    Window_ChoiceList.prototype.processOk = function() {
+    Window_ChoiceList.prototype.processOk = function () {
         _Window_ChoiceList_processOk.call(this);
         const scene = SceneManager._scene;
         if (scene && scene._bustManager && scene._bustManager.isBustVisible() && scene._bustManager.nameIsVisible) {
@@ -928,7 +928,7 @@
     function overrideMessageWindowRect(SceneClass) {
         const _orig = SceneClass.prototype.messageWindowRect;
         if (!_orig) return;
-        SceneClass.prototype.messageWindowRect = function() {
+        SceneClass.prototype.messageWindowRect = function () {
             const rect = _orig.call(this);
             rect.width = MESSAGE_WINDOW_WIDTH;
             rect.x = Math.floor((Graphics.boxWidth - MESSAGE_WINDOW_WIDTH) / 2);
@@ -943,7 +943,7 @@
         const scene = SceneManager._scene;
         if (scene && scene._bustManager) scene._bustManager.showBusts();
     });
-    
+
     PluginManager.registerCommand(PLUGIN_NAME, "hideBusts", () => {
         const scene = SceneManager._scene;
         if (scene && scene._bustManager) scene._bustManager.hideBusts();
@@ -969,5 +969,5 @@
             scene._bustManager.showCustomBust(args.imageName, args.characterName);
         }
     });
-    
+
 })();

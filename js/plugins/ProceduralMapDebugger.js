@@ -94,13 +94,13 @@
   const DEBUG_MAP_ID = 1410;
 
   // Get biomes and features from WorldGen
-  const { BIOMES, FEATURES, HARDCODED_BIOME_OVERRIDES } = window.WorldGen || { BIOMES: [], FEATURES: [], HARDCODED_BIOME_OVERRIDES: {} };
+  const { Biomes, Features, HardcodedBiomeOverrides } = window.WorldGen || { Biomes: [], Features: [], HardcodedBiomeOverrides: {} };
 
   /**
    * Get biome object by name
    */
   function getBiomeByName(biomeName) {
-    for (const biome of BIOMES) {
+    for (const biome of Biomes) {
       if (biome.name === biomeName) {
         return biome;
       }
@@ -355,7 +355,7 @@
 
 
   /**
-   * Get biome name for world tile using biomeIds from BIOMES array
+   * Get biome name for world tile using biomeIds from Biomes array
    */
   function getBiomeForWorldTile(worldTileId) {
     const progressiveId = getTileIdToProgressiveId(worldTileId);
@@ -363,8 +363,8 @@
       return 'Fields';
     }
 
-    // Look through BIOMES to find matching biome by biomeIds
-    for (const biome of BIOMES) {
+    // Look through Biomes to find matching biome by biomeIds
+    for (const biome of Biomes) {
       if (biome.biomeIds && biome.biomeIds.includes(progressiveId)) {
         return biome.name;
       }
@@ -479,8 +479,8 @@
    */
   function getHardcodedBiomeOverrideInfo(worldX, worldY) {
     const key = `${worldX},${worldY}`;
-    if (HARDCODED_BIOME_OVERRIDES && HARDCODED_BIOME_OVERRIDES[key]) {
-      const override = HARDCODED_BIOME_OVERRIDES[key];
+    if (HardcodedBiomeOverrides && HardcodedBiomeOverrides[key]) {
+      const override = HardcodedBiomeOverrides[key];
       return {
         biome: override.biome,
         roadDirection: override.roadDirection || null,
@@ -672,7 +672,7 @@
 
       // Draw each visible tile
       const mapId = $gameMap.mapId();
-      const isDebugMap = (mapId === DEBUG_MAP_ID|| mapId === PROC_MAP_ID);
+      const isDebugMap = (mapId === DEBUG_MAP_ID || mapId === PROC_MAP_ID);
 
       for (let mapX = startX; mapX < endX && mapX < mapWidth; mapX++) {
         for (let mapY = startY; mapY < endY && mapY < mapHeight; mapY++) {
@@ -762,12 +762,12 @@
   }
 
 
-//=============================================================================
+  //=============================================================================
   // Scene_Map Hooks
   //=============================================================================
   // Inject debug overlay sprite into the map scene
   //=============================================================================
-  
+
   /**
    * Get all child maps of a parent map ID
    */
@@ -809,7 +809,7 @@
    * Hook into Scene_Map to add debug overlay sprite
    */
   const _Scene_Map_createSpriteset = Scene_Map.prototype.createSpriteset;
-  Scene_Map.prototype.createSpriteset = function() {
+  Scene_Map.prototype.createSpriteset = function () {
     _Scene_Map_createSpriteset.call(this);
 
     if (ACTIVE && DISPLAY_ON_SCREEN) {
@@ -825,7 +825,7 @@
    * Hook into scene termination to clean up
    */
   const _Scene_Map_terminate = Scene_Map.prototype.terminate;
-  Scene_Map.prototype.terminate = function() {
+  Scene_Map.prototype.terminate = function () {
     _Scene_Map_terminate.call(this);
 
     // Clear the cache when the map scene ends

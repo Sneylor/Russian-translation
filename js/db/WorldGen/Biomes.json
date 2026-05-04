@@ -1,0 +1,5166 @@
+[
+  {
+    "name": "Abandoned",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#696969",
+    "prefabs": [
+      [
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "creepy-dungeon-ambience"
+    ],
+    "bgs": [
+      "creepy-dungeon-ambience"
+    ],
+    "dayTemperature": 15,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 0.4
+      },
+      {
+        "name": "DungeonFloor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Debris",
+        "density": 1.5
+      },
+      {
+        "name": "WindowBroken",
+        "density": 0.8
+      },
+      {
+        "name": "Crate",
+        "density": 0.6
+      },
+      {
+        "name": "Torch",
+        "density": 0.4
+      },
+      {
+        "name": "Skull",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "AbandonedInside",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#4a4a4a",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "room-empty",
+      "room-low",
+      "hallway"
+    ],
+    "bgs": [
+      "room-ambience",
+      "room-ambience2",
+      "room-empty"
+    ],
+    "dayTemperature": 12,
+    "nightTemperature": 8,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "TableBroken",
+        "density": 0.8
+      },
+      {
+        "name": "StoolBroken",
+        "density": 0.6
+      },
+      {
+        "name": "Crate",
+        "density": 0.7
+      },
+      {
+        "name": "Debris",
+        "density": 1
+      },
+      {
+        "name": "VaseBroken",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Abstract",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#9932cc",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "glitch-sounds"
+    ],
+    "bgs": [
+      "glitch-sounds"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Crystal",
+        "density": 1.5
+      },
+      {
+        "name": "Orb",
+        "density": 0.8
+      },
+      {
+        "name": "Marble",
+        "density": 1
+      },
+      {
+        "name": "Water",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "AlienPlanet",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#8a2be2",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "glitch-sounds"
+    ],
+    "bgs": [
+      "glitch-sounds"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Crystal",
+        "density": 1.2
+      },
+      {
+        "name": "Rock",
+        "density": 1
+      },
+      {
+        "name": "Crater",
+        "density": 0.8
+      },
+      {
+        "name": "Tech",
+        "density": 0.5
+      },
+      {
+        "name": "Tentacle",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Arena",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#b22222",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "night-ambience",
+      "night-ambience2",
+      "night-ambience3"
+    ],
+    "bgs": [
+      "People2",
+      "gym-ambience"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 15,
+    "NPCPool": 0,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Column",
+        "density": 0.6
+      },
+      {
+        "name": "Statue",
+        "density": 0.3
+      },
+      {
+        "name": "Fence",
+        "density": 0.8
+      },
+      {
+        "name": "Torch",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "Badlands",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#a0522d",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "winchester-wind-ambience"
+    ],
+    "bgs": [
+      "wind-in-the-desert-countryside"
+    ],
+    "dayTemperature": 32,
+    "nightTemperature": 20,
+    "biomeIds": [
+      384
+    ],
+    "features": [
+      {
+        "name": "Badland",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "RockDesert",
+        "density": 2
+      },
+      {
+        "name": "Crack",
+        "density": 1
+      },
+      {
+        "name": "Pebble",
+        "density": 1.5
+      }
+    ]
+  },
+  {
+    "name": "Bamboo",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#4f7942",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets"
+    ],
+    "bgs": [
+      "bamboo-creaking-in-wind"
+    ],
+    "dayTemperature": 25,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "Plant",
+        "density": 2
+      },
+      {
+        "name": "Water",
+        "density": 0.5
+      },
+      {
+        "name": "Rock",
+        "density": 0.4
+      },
+      {
+        "name": "Bush",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "Beach",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#f0e68c",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "CaveFlooded",
+    "bgsNight": [
+      "gentle-waves-quiet-beach",
+      "ocean-night",
+      "ocean-night2"
+    ],
+    "bgs": [
+      "gentle-waves-quiet-beach",
+      "ocean-waves",
+      "waves-and-seagulls"
+    ],
+    "dayTemperature": 28,
+    "nightTemperature": 22,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Beach",
+        "density": 3
+      },
+      {
+        "name": "Water",
+        "density": 1.5
+      },
+      {
+        "name": "Palm",
+        "density": 0.8
+      },
+      {
+        "name": "Seashell",
+        "density": 0.6
+      },
+      {
+        "name": "Log",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Canyon",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#cd853f",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "winchester-wind-ambience"
+    ],
+    "bgs": [
+      "mountain-wind"
+    ],
+    "dayTemperature": 30,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Rock",
+        "density": 2.5
+      },
+      {
+        "name": "Cliff",
+        "density": 1.5
+      },
+      {
+        "name": "Crack",
+        "density": 0.8
+      },
+      {
+        "name": "Pebble",
+        "density": 1
+      },
+      {
+        "name": "Cave",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Castle",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#778899",
+    "prefabs": [],
+    "specialBiomes": [],
+    "biomeIds": [
+      229,
+      230,
+      237,
+      238
+    ],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "night-ambience",
+      "night-ambience2",
+      "night-tone"
+    ],
+    "bgs": [
+      "winchester-wind-ambience",
+      "mountain-wind",
+      "old-wood-creaking-building"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 12,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "StoneBlock",
+        "density": 2
+      },
+      {
+        "name": "Column",
+        "density": 0.8
+      },
+      {
+        "name": "Torch",
+        "density": 0.6
+      },
+      {
+        "name": "Banner",
+        "density": 0.4
+      },
+      {
+        "name": "Statue",
+        "density": 0.3
+      },
+      {
+        "name": "Fountain",
+        "density": 0.2
+      }
+    ]
+  },
+  {
+    "name": "CastleInside",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#8b4513",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "room-big",
+      "hallway",
+      "night-tone"
+    ],
+    "bgs": [
+      "room-ambience",
+      "room-big",
+      "hallwat-ambience"
+    ],
+    "dayTemperature": 15,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Carpet",
+        "density": 1
+      },
+      {
+        "name": "Column",
+        "density": 0.7
+      },
+      {
+        "name": "Throne",
+        "density": 0.2
+      },
+      {
+        "name": "Banner",
+        "density": 0.5
+      },
+      {
+        "name": "Torch",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Cave",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#3d3d3d",
+    "prefabs": [
+      [
+        256,
+        257,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "ce-cavern-looped",
+      "cave-deep",
+      "cave-wind"
+    ],
+    "bgs": [
+      "ce-cavern-looped",
+      "cave",
+      "cave-dripping"
+    ],
+    "dayTemperature": 12,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Rock",
+        "density": 1.5
+      },
+      {
+        "name": "Stalattite",
+        "density": 0.8
+      },
+      {
+        "name": "Stalagmite",
+        "density": 0.8
+      },
+      {
+        "name": "Crystal",
+        "density": 0.4
+      },
+      {
+        "name": "Crack",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "CaveFlooded",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#005b96",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "water-dripping-in-cave"
+    ],
+    "bgs": [
+      "water-dripping-in-cave"
+    ],
+    "dayTemperature": 10,
+    "nightTemperature": 8,
+    "features": [
+      {
+        "name": "Water",
+        "terrain": true,
+        "density": 20
+      },
+      {
+        "name": "Stalattite",
+        "density": 0.6
+      },
+      {
+        "name": "Stalagmite",
+        "density": 0.6
+      },
+      {
+        "name": "SeaPlant",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "CaveIce",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#afeeee",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "CaveIce",
+    "bgsNight": [
+      "wind-blizzard",
+      "wind-blizzard2",
+      "wind-arctic"
+    ],
+    "bgs": [
+      "cold-wind-loop",
+      "wind-icelake",
+      "cave-wind"
+    ],
+    "dayTemperature": -5,
+    "nightTemperature": -10,
+    "features": [
+      {
+        "name": "Ice",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "IceRock",
+        "density": 1.5
+      },
+      {
+        "name": "Stalattite",
+        "density": 0.8
+      },
+      {
+        "name": "Stalagmite",
+        "density": 0.8
+      },
+      {
+        "name": "Crystal",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "ChurchInside",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#daa520",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "room-ambience",
+      "room-big",
+      "night-tone"
+    ],
+    "bgs": [
+      "church-room-tone",
+      "room-big",
+      "room-ambience2"
+    ],
+    "dayTemperature": 14,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Column",
+        "density": 0.8
+      },
+      {
+        "name": "Carpet",
+        "density": 0.6
+      },
+      {
+        "name": "Torch",
+        "density": 0.5
+      },
+      {
+        "name": "Banner",
+        "density": 0.4
+      },
+      {
+        "name": "Book",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "City",
+    "hasNPC": true,
+    "tilesetId": 303,
+    "color": "#708090",
+    "biomeIds": [
+      514,
+      515,
+      589,
+      522,
+      403,
+      408,
+      409,
+      416,
+      501,
+      424,
+      425,
+      432,
+      433,
+      394,
+      395,
+      184,
+      185,
+      177,
+      176,
+      523,
+      434,
+      435,
+      426,
+      427,
+      410,
+      411,
+      418,
+      419,
+      412,
+      414,
+      420,
+      421
+    ],
+    "prefabs": [
+      [
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Sewer",
+    "bgsNight": [
+      "city-night",
+      "city-night2",
+      "city-night3",
+      "city-night4",
+      "city-night5",
+      "city-night6",
+      "city-night7"
+    ],
+    "bgs": [
+      "city-ambience",
+      "city-ambience2",
+      "city-soundscape",
+      "city-soundscape2"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2
+      }
+    ]
+  },
+  {
+    "name": "CityDesert",
+    "hasNPC": true,
+    "tilesetId": 303,
+    "color": "#edc9af",
+    "biomeIds": [
+      428,
+      429,
+      436,
+      437
+    ],
+    "prefabs": [
+      [
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Sewer",
+    "bgsNight": [
+      "city-night",
+      "city-night2",
+      "desert-ambience"
+    ],
+    "bgs": [
+      "city-ambience",
+      "city-soundscape",
+      "desert-ambient-loop"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Beach",
+        "terrain": true,
+        "density": 2
+      }
+    ]
+  },
+  {
+    "name": "CityIce",
+    "hasNPC": true,
+    "tilesetId": 303,
+    "color": "#f0f8ff",
+    "biomeIds": [
+      148,
+      149,
+      156,
+      157,
+      144,
+      145,
+      152,
+      153,
+      178,
+      179,
+      186,
+      187
+    ],
+    "prefabs": [
+      [
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Sewer",
+    "bgsNight": [
+      "city-night",
+      "city-night2",
+      "cold-wind-loop"
+    ],
+    "bgs": [
+      "city-ambience2",
+      "city-soundscape",
+      "wind-soft"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      }
+    ]
+  },
+  {
+    "name": "Burg",
+    "hasNPC": true,
+    "tilesetId": 303,
+    "color": "#bebebe",
+    "biomeIds": [
+      180,
+      188,
+      189,
+      181,
+      114,
+      115,
+      122,
+      123,
+      118,
+      119,
+      126,
+      127
+    ],
+    "prefabs": [
+      [
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Sewer",
+    "bgsNight": [
+      "city-night",
+      "city-night2",
+      "village-night"
+    ],
+    "bgs": [
+      "People2",
+      "city-soundscape",
+      "village-at-morning"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2
+      }
+    ]
+  },
+  {
+    "name": "BurgDesert",
+    "hasNPC": true,
+    "tilesetId": 303,
+    "color": "#f4a460",
+    "biomeIds": [
+      116,
+      117,
+      125,
+      125
+    ],
+    "prefabs": [
+      [
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Sewer",
+    "bgsNight": [
+      "desert-ambience",
+      "desert-monolit",
+      "village-night"
+    ],
+    "bgs": [
+      "People2",
+      "desert-ambient-loop",
+      "village-at-morning"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Beach",
+        "terrain": true,
+        "density": 2
+      }
+    ]
+  },
+  {
+    "name": "BurgIce",
+    "hasNPC": true,
+    "tilesetId": 303,
+    "color": "#e0ffff",
+    "biomeIds": [],
+    "prefabs": [
+      [
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Sewer",
+    "bgsNight": [
+      "cold-wind-loop",
+      "wind-soft",
+      "village-night2"
+    ],
+    "bgs": [
+      "People2",
+      "wind-soft2",
+      "village-at-morning"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      }
+    ]
+  },
+  {
+    "name": "Crypt",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#2f4f4f",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "creepy-dungeon-ambience"
+    ],
+    "bgs": [
+      "creepy-dungeon-ambience"
+    ],
+    "dayTemperature": 8,
+    "nightTemperature": 6,
+    "features": [
+      {
+        "name": "DungeonFloor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Grave",
+        "density": 1.2
+      },
+      {
+        "name": "Skull",
+        "density": 0.8
+      },
+      {
+        "name": "Bones",
+        "density": 1
+      },
+      {
+        "name": "Torch",
+        "density": 0.4
+      },
+      {
+        "name": "Chain",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Crystals",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#00ced1",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "night-crickets2"
+    ],
+    "bgs": [
+      "ce-cracking",
+      "cave",
+      "cave-temple"
+    ],
+    "dayTemperature": 16,
+    "nightTemperature": 12,
+    "features": [
+      {
+        "name": "Crystal",
+        "density": 3
+      },
+      {
+        "name": "Orb",
+        "density": 0.6
+      },
+      {
+        "name": "Rock",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "Desert",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#ffd700",
+    "prefabs": [
+      [
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "desert-ambience",
+      "desert-monolit"
+    ],
+    "bgs": [
+      "desert-ambient-loop",
+      "desert",
+      "desert2"
+    ],
+    "dayTemperature": 35,
+    "nightTemperature": 15,
+    "NPCPool": 0,
+    "biomeIds": [
+      521,
+      513,
+      520,
+      512,
+      518,
+      524,
+      517,
+      525,
+      526
+    ],
+    "features": [
+      {
+        "name": "Beach",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "RockDesert",
+        "density": 3
+      },
+      {
+        "name": "Cactus",
+        "density": 0.8
+      },
+      {
+        "name": "Pebble",
+        "density": 1
+      },
+      {
+        "name": "Skull",
+        "density": 0.02
+      }
+    ]
+  },
+  {
+    "name": "MountainDesert",
+    "lockTravel": true,
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#deb887",
+    "prefabs": [],
+    "biomeIds": [
+      483,
+      493,
+      482,
+      490,
+      489,
+      492,
+      495,
+      486
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "desert-ambience",
+      "desert-monolit",
+      "mountain-wind"
+    ],
+    "bgs": [
+      "desert-simple",
+      "desert2",
+      "mountain-ambience"
+    ],
+    "dayTemperature": 28,
+    "nightTemperature": 12,
+    "features": [
+      {
+        "name": "Stone",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Beach",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "RockDesert",
+        "density": 2
+      }
+    ]
+  },
+  {
+    "name": "Digital",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#00ff00",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "glitch-sounds"
+    ],
+    "bgs": [
+      "glitch-sounds"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Tech",
+        "density": 2
+      },
+      {
+        "name": "Gear",
+        "density": 1
+      },
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "Crystal",
+        "density": 0.5
+      },
+      {
+        "name": "Orb",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Docks",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#8b4513",
+    "prefabs": [],
+    "biomeIds": [
+      509
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "ocean-night",
+      "ocean-night2",
+      "gentle-waves-quiet-beach"
+    ],
+    "bgs": [
+      "waves-and-seagulls",
+      "ocean-waves",
+      "lake-waves"
+    ],
+    "dayTemperature": 16,
+    "nightTemperature": 12,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Wood",
+        "density": 2
+      },
+      {
+        "name": "Water",
+        "density": 1.5
+      },
+      {
+        "name": "Crate",
+        "density": 1
+      },
+      {
+        "name": "Sack",
+        "density": 0.6
+      },
+      {
+        "name": "Pole",
+        "density": 0.5
+      },
+      {
+        "name": "Lamp",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Dreamscape",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#ffc0cb",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "dream2"
+    ],
+    "bgs": [
+      "dream2"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "Crystal",
+        "density": 1
+      },
+      {
+        "name": "Water",
+        "density": 0.8
+      },
+      {
+        "name": "Orb",
+        "density": 0.6
+      },
+      {
+        "name": "Flower",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "Dungeon",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#483d8b",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "dungeon-ambiance"
+    ],
+    "bgs": [
+      "dungeon-ambiance"
+    ],
+    "dayTemperature": 10,
+    "nightTemperature": 8,
+    "features": [
+      {
+        "name": "DungeonFloor",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "Torch",
+        "density": 0.8
+      },
+      {
+        "name": "Skull",
+        "density": 0.5
+      },
+      {
+        "name": "Bones",
+        "density": 0.7
+      },
+      {
+        "name": "Chain",
+        "density": 0.4
+      },
+      {
+        "name": "Debris",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Eldritch",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#4b0082",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "horror",
+      "abyss-ambience",
+      "abyss-ambience2"
+    ],
+    "bgs": [
+      "horror",
+      "drone",
+      "unknown-noise"
+    ],
+    "dayTemperature": 14,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Tentacle",
+        "density": 1.2
+      },
+      {
+        "name": "Pentagram",
+        "density": 0.4
+      },
+      {
+        "name": "Skull",
+        "density": 0.6
+      },
+      {
+        "name": "Orb",
+        "density": 0.5
+      },
+      {
+        "name": "Blood",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Factory",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#a9a9a9",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "industrial-ambience",
+      "industrial-machinery",
+      "factory-buzz"
+    ],
+    "bgs": [
+      "industrial-ambience",
+      "industrial-machinery",
+      "factory-buzz"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Gear",
+        "density": 1.2
+      },
+      {
+        "name": "Crate",
+        "density": 0.8
+      },
+      {
+        "name": "Chimney",
+        "density": 0.4
+      },
+      {
+        "name": "Tech",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "FactoryInside",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#808080",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "industrial-machinery",
+      "industrial-compressor",
+      "ventilation"
+    ],
+    "bgs": [
+      "industrial-machinery",
+      "industrial-compressor",
+      "ventilation"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Gear",
+        "density": 1.5
+      },
+      {
+        "name": "Crate",
+        "density": 1
+      },
+      {
+        "name": "Stove",
+        "density": 0.4
+      },
+      {
+        "name": "Tech",
+        "density": 0.8
+      },
+      {
+        "name": "Lamp",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "Fairy",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#ff00ff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "nightingale"
+    ],
+    "bgs": [
+      "forest-birds-ambient-seamless-loop",
+      "forest-birds",
+      "birds"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Flower",
+        "density": 2
+      },
+      {
+        "name": "Mushroom",
+        "density": 1.2
+      },
+      {
+        "name": "Crystal",
+        "density": 0.6
+      },
+      {
+        "name": "Orb",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Farm",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#556b2f",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "country-crickets"
+    ],
+    "bgs": [
+      "farm1",
+      "farm2",
+      "farm3",
+      "farm4"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "TilledSoil",
+        "density": 2
+      },
+      {
+        "name": "Hay",
+        "density": 1
+      },
+      {
+        "name": "Fence",
+        "density": 0.8
+      },
+      {
+        "name": "Scarecrow",
+        "density": 0.3
+      },
+      {
+        "name": "Fruit",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Fields",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#90ee90",
+    "prefabs": [
+      [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      [
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "country-crickets"
+    ],
+    "bgs": [
+      "field_tallgrass",
+      "openfield_grass_rustlinginsects-",
+      "grass_field_insectbed"
+    ],
+    "dayTemperature": 25,
+    "nightTemperature": 16,
+    "biomeIds": [
+      256,
+      371,
+      288
+    ],
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 3
+      },
+      {
+        "name": "Flower",
+        "density": 1
+      },
+      {
+        "name": "Weed",
+        "density": 0.8
+      },
+      {
+        "name": "Tree",
+        "density": 0.04
+      }
+    ]
+  },
+  {
+    "name": "Meadows",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#32cd32",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets2",
+      "country-crickets"
+    ],
+    "bgs": [
+      "openfield_grass_rustlinginsects-",
+      "grass_field_insectbed",
+      "nature-summer"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 15,
+    "NPCPool": 0,
+    "biomeIds": [
+      278,
+      283,
+      274,
+      331,
+      324,
+      276,
+      272,
+      287,
+      281,
+      284,
+      273,
+      286,
+      280,
+      277,
+      285
+    ],
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 3.5
+      },
+      {
+        "name": "GrassDark",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Flower",
+        "density": 1.5
+      }
+    ]
+  },
+  {
+    "name": "Forest",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#228b22",
+    "prefabs": [],
+    "specialBiomes": [
+      "SpiritWoods"
+    ],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "forest-night",
+      "forest-night2",
+      "forest-night3"
+    ],
+    "bgs": [
+      "forest-ambient-loop",
+      "forest-birds",
+      "forest-birds-ambient-seamless-loop"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 14,
+    "biomeIds": [
+      337,
+      343,
+      350,
+      323,
+      322,
+      327,
+      331,
+      327,
+      332,
+      341,
+      351,
+      339,
+      342,
+      348,
+      338,
+      344,
+      345,
+      336,
+      333,
+      346,
+      334,
+      347,
+      349,
+      335,
+      330,
+      321,
+      325,
+      326,
+      320,
+      332,
+      328,
+      329
+    ],
+    "features": [
+      {
+        "name": "GrassDark",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 0.3
+      },
+      {
+        "name": "Tree",
+        "density": 1.5
+      },
+      {
+        "name": "Bush",
+        "density": 1
+      },
+      {
+        "name": "Mushroom",
+        "density": 0.5
+      },
+      {
+        "name": "Leaves",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "ForestTropical",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#006400",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "jungle-night",
+      "crickets5",
+      "frogs-croaking-at-night"
+    ],
+    "bgs": [
+      "jungle-sounds-background-ambience-1",
+      "forest-birds",
+      "nature-summer"
+    ],
+    "dayTemperature": 28,
+    "nightTemperature": 22,
+    "biomeIds": [
+      590,
+      580,
+      584,
+      576,
+      581,
+      585,
+      586,
+      582,
+      583,
+      587,
+      588,
+      579,
+      577,
+      591,
+      578
+    ],
+    "features": [
+      {
+        "name": "Beach",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Palm",
+        "density": 0.8
+      },
+      {
+        "name": "Plant",
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "ForestIce",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#add8e6",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "wind-blizzard",
+      "wind-blizzard2",
+      "cold-wind-loop"
+    ],
+    "bgs": [
+      "cold-wind-loop",
+      "wind-soft",
+      "snowing"
+    ],
+    "dayTemperature": -8,
+    "nightTemperature": -12,
+    "biomeIds": [
+      703,
+      704,
+      714,
+      715,
+      711,
+      709,
+      705,
+      710,
+      713,
+      712,
+      716,
+      718,
+      719,
+      717
+    ],
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "TreeIce",
+        "density": 1.5
+      },
+      {
+        "name": "FlowerIce",
+        "density": 1.5
+      }
+    ]
+  },
+  {
+    "name": "Graveyard",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#2e8b57",
+    "prefabs": [],
+    "specialBiomes": [],
+    "biomeIds": [
+      508,
+      500
+    ],
+    "lowerLayer": "Crypt",
+    "bgsNight": [
+      "dark-graveyard",
+      "wind-cemetary",
+      "night-ambience"
+    ],
+    "bgs": [
+      "wind-cemetary",
+      "wind-soft",
+      "crickets5"
+    ],
+    "dayTemperature": 16,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Grave",
+        "density": 1
+      },
+      {
+        "name": "Skull",
+        "density": 0.05
+      },
+      {
+        "name": "Bones",
+        "density": 0.04
+      },
+      {
+        "name": "Tree",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Heaven",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#fffafa",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "dream2",
+      "female-choir",
+      "temple-chanting"
+    ],
+    "bgs": [
+      "dream2",
+      "female-choir",
+      "temple-mantra"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 20,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Marble",
+        "density": 2
+      },
+      {
+        "name": "Column",
+        "density": 0.8
+      },
+      {
+        "name": "Statue",
+        "density": 0.5
+      },
+      {
+        "name": "Fountain",
+        "density": 0.3
+      },
+      {
+        "name": "Orb",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Hell",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#8b0000",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "lava-loop-1",
+      "lava-loop-2",
+      "lava-loop-3"
+    ],
+    "bgs": [
+      "lava-loop-1",
+      "lava-loop-2",
+      "lava-loop-3"
+    ],
+    "dayTemperature": 40,
+    "nightTemperature": 35,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Rock",
+        "density": 2
+      },
+      {
+        "name": "Skull",
+        "density": 1
+      },
+      {
+        "name": "Bones",
+        "density": 0.8
+      },
+      {
+        "name": "Chain",
+        "density": 0.6
+      },
+      {
+        "name": "Pentagram",
+        "density": 0.3
+      },
+      {
+        "name": "Crack",
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Highlands",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#5f9ea0",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "night-crickets",
+      "crickets5",
+      "night-ambience"
+    ],
+    "bgs": [
+      "mountain-wind",
+      "mountain-ambience",
+      "grass-wind"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Rock",
+        "density": 1.5
+      },
+      {
+        "name": "Cliff",
+        "density": 1
+      },
+      {
+        "name": "Bush",
+        "density": 0.6
+      },
+      {
+        "name": "Pebble",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "Highway",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#333333",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-ambience"
+    ],
+    "bgs": [
+      "highway-distant",
+      "cars-passing",
+      "bus"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 3
+      },
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Sign",
+        "density": 0.5
+      },
+      {
+        "name": "SignPost",
+        "density": 0.4
+      },
+      {
+        "name": "Fence",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Houses",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#ffebcd",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "village-night",
+      "village-night2",
+      "night-countryside"
+    ],
+    "bgs": [
+      "People2",
+      "suburb-soundscape",
+      "village-at-morning"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 15,
+    "NPCPool": 0,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "House",
+        "density": 1.5
+      },
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Fence",
+        "density": 0.8
+      },
+      {
+        "name": "Flower",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "Ice",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#ffffff",
+    "prefabs": [
+      [
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186
+      ],
+      [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73
+      ]
+    ],
+    "specialBiomes": [
+      "Crystals"
+    ],
+    "lowerLayer": "CaveIce",
+    "bgsNight": [
+      "wind-blizzard",
+      "wind-blizzard2",
+      "wind-arctic"
+    ],
+    "bgs": [
+      "cold-wind-loop",
+      "wind-icelake",
+      "snowing"
+    ],
+    "dayTemperature": -8,
+    "nightTemperature": -15,
+    "biomeIds": [
+      642,
+      645,
+      640,
+      653,
+      649,
+      646,
+      641,
+      652,
+      651
+    ],
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "PebbleIce",
+        "density": 1.5
+      },
+      {
+        "name": "RockIce",
+        "density": 1
+      },
+      {
+        "name": "FlowerIce",
+        "density": 0.4
+      },
+      {
+        "name": "WeedIce",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Snow",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#faffff",
+    "prefabs": [
+      [
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186
+      ]
+    ],
+    "specialBiomes": [
+      "Crystals"
+    ],
+    "lowerLayer": "CaveIce",
+    "bgsNight": [
+      "wind-blizzard",
+      "wind-blizzard2",
+      "wind-arctic"
+    ],
+    "bgs": [
+      "snowing",
+      "wind-soft",
+      "wind-soft2"
+    ],
+    "dayTemperature": -8,
+    "nightTemperature": -15,
+    "biomeIds": [
+      642,
+      645,
+      640,
+      653,
+      649,
+      646,
+      641,
+      652,
+      651
+    ],
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "FlowerIce",
+        "density": 0.4
+      },
+      {
+        "name": "WeedIce",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Jungle",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#008000",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "jungle-night",
+      "crickets5",
+      "frogs-croaking-at-night"
+    ],
+    "bgs": [
+      "jungle-sounds-background-ambience-1",
+      "forest-birds",
+      "nature-summer"
+    ],
+    "dayTemperature": 30,
+    "nightTemperature": 24,
+    "features": [
+      {
+        "name": "GrassDark",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Tree",
+        "density": 2
+      },
+      {
+        "name": "Vine",
+        "density": 1.5
+      },
+      {
+        "name": "Plant",
+        "density": 1.2
+      },
+      {
+        "name": "Mushroom",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Laboratory",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#e0e0e0",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "room-scifi",
+      "ventilation",
+      "hum-loop"
+    ],
+    "bgs": [
+      "room-scifi",
+      "room-computer",
+      "ventilation"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Tech",
+        "density": 1.5
+      },
+      {
+        "name": "Gear",
+        "density": 0.8
+      },
+      {
+        "name": "Table",
+        "density": 0.5
+      },
+      {
+        "name": "Shelf",
+        "density": 0.4
+      },
+      {
+        "name": "Vase",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Lair",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#4b3621",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "dungeon_ambient_1"
+    ],
+    "bgs": [
+      "dungeon_ambient_1"
+    ],
+    "dayTemperature": 14,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "Bones",
+        "density": 1.5
+      },
+      {
+        "name": "Skull",
+        "density": 0.8
+      },
+      {
+        "name": "Rock",
+        "density": 1
+      },
+      {
+        "name": "Gold",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Lake",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#1e90ff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "lake-waves",
+      "night-ambience",
+      "crickets5"
+    ],
+    "bgs": [
+      "lake-waves",
+      "water-stream",
+      "water-stream2"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "Water",
+        "density": 3
+      },
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Lilypad",
+        "density": 0.8
+      },
+      {
+        "name": "SeaPlant",
+        "density": 0.5
+      },
+      {
+        "name": "Rock",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Landfill",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#556b2f",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "landfill"
+    ],
+    "bgs": [
+      "landfill"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Debris",
+        "density": 2.5
+      },
+      {
+        "name": "Trash",
+        "density": 2
+      },
+      {
+        "name": "Crate",
+        "density": 0.8
+      },
+      {
+        "name": "Oil",
+        "density": 0.5
+      },
+      {
+        "name": "Gear",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Limbo",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#d3d3d3",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "drone",
+      "hum-loop",
+      "unknown-noise"
+    ],
+    "bgs": [
+      "drone",
+      "hum-loop",
+      "room-tone-4"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "Orb",
+        "density": 0.8
+      },
+      {
+        "name": "Crystal",
+        "density": 0.5
+      },
+      {
+        "name": "Crack",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Mangrove",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#20b2aa",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "frogs-croaking-at-night",
+      "night-swamp",
+      "crickets5"
+    ],
+    "bgs": [
+      "forest-swamp",
+      "swamp-woods",
+      "water-creek"
+    ],
+    "dayTemperature": 28,
+    "nightTemperature": 22,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Water",
+        "density": 2
+      },
+      {
+        "name": "Tree",
+        "density": 1.5
+      },
+      {
+        "name": "Vine",
+        "density": 1
+      },
+      {
+        "name": "Plant",
+        "density": 0.8
+      },
+      {
+        "name": "SeaPlant",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Metro",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#36454f",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "train",
+      "train-station",
+      "night-city"
+    ],
+    "bgs": [
+      "train",
+      "train-station",
+      "train-freight"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "House",
+        "density": 1.5
+      },
+      {
+        "name": "Lamp",
+        "density": 1
+      },
+      {
+        "name": "Fence",
+        "density": 0.6
+      },
+      {
+        "name": "Sign",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "Mines",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#2b1b17",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "old-mine-ambience",
+      "cave-deep",
+      "rumbling-underground"
+    ],
+    "bgs": [
+      "old-mine-ambience",
+      "cave-dripping",
+      "rumbling-underground"
+    ],
+    "dayTemperature": 12,
+    "nightTemperature": 10,
+    "features": [
+      {
+        "name": "RailNS",
+        "density": 1
+      },
+      {
+        "name": "RailEOStart",
+        "density": 0.3
+      },
+      {
+        "name": "Torch",
+        "density": 0.6
+      },
+      {
+        "name": "Crate",
+        "density": 0.5
+      },
+      {
+        "name": "Ladder",
+        "density": 0.4
+      },
+      {
+        "name": "Gold",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Misc",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#808000",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "night-ambience"
+    ],
+    "bgs": [
+      "Wind5",
+      "wind-soft",
+      "grass-wind"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 15,
+    "NPCPool": 0,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Rock",
+        "density": 1
+      },
+      {
+        "name": "Tree",
+        "density": 0.8
+      },
+      {
+        "name": "Bush",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Mountain",
+    "lockTravel": true,
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#696969",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "CaveIce",
+    "bgsNight": [
+      "night-crickets",
+      "mountain-wind",
+      "night-ambience"
+    ],
+    "bgs": [
+      "mountain-wind",
+      "mountain-ambience",
+      "montain-ambience2"
+    ],
+    "dayTemperature": 8,
+    "nightTemperature": -2,
+    "biomeIds": [
+      352,
+      361,
+      352,
+      358,
+      361,
+      353,
+      354,
+      359,
+      383,
+      380,
+      282,
+      481,
+      480,
+      369,
+      376,
+      381,
+      379,
+      373,
+      481,
+      291,
+      377,
+      374,
+      370,
+      363,
+      375,
+      366,
+      368,
+      290,
+      364,
+      360,
+      357,
+      365,
+      382
+    ],
+    "features": [
+      {
+        "name": "Stone",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Moss",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Rock",
+        "density": 2.5
+      },
+      {
+        "name": "Pebble",
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "MountainIce",
+    "lockTravel": true,
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#f0ffff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "CaveIce",
+    "bgsNight": [
+      "wind-blizzard",
+      "wind-blizzard2",
+      "wind-arctic"
+    ],
+    "bgs": [
+      "cold-wind-loop",
+      "mountain-wind",
+      "wind-icelake"
+    ],
+    "dayTemperature": -12,
+    "nightTemperature": -18,
+    "biomeIds": [
+      294,
+      664,
+      758,
+      763,
+      658,
+      766,
+      767,
+      662,
+      761,
+      668,
+      667,
+      661,
+      665,
+      657,
+      656,
+      669,
+      295,
+      757,
+      760,
+      765,
+      764,
+      753,
+      752
+    ],
+    "features": [
+      {
+        "name": "Stone",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "RockIce",
+        "density": 2.5
+      },
+      {
+        "name": "PebbleIce",
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Mushroom",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#9370db",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "forest-night",
+      "forest-night2",
+      "crickets5"
+    ],
+    "bgs": [
+      "forest-ambient-loop",
+      "forest-swamp",
+      "nature-summer"
+    ],
+    "dayTemperature": 16,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "Mushroom",
+        "density": 3
+      },
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "Plant",
+        "density": 0.8
+      },
+      {
+        "name": "Tree",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "Ocean",
+    "lockTravel": true,
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#0000ff",
+    "prefabs": [
+      [
+        215,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "SeaBed",
+    "bgsNight": [
+      "ocean-night",
+      "ocean-night2"
+    ],
+    "bgs": [
+      "ocean-waves",
+      "ocean2",
+      "ocean3"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 16,
+    "biomeIds": [
+      0,
+      3,
+      18,
+      21,
+      1,
+      10,
+      29,
+      25,
+      22,
+      24,
+      16,
+      8,
+      17,
+      28,
+      12,
+      13,
+      11,
+      7,
+      5,
+      6,
+      9,
+      2
+    ],
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Water",
+        "density": 4
+      }
+    ]
+  },
+  {
+    "name": "Office",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#f5f5f5",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "room-office",
+      "room-office2",
+      "room-ambience"
+    ],
+    "bgs": [
+      "room-office",
+      "room-office2",
+      "room-computer"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Table",
+        "density": 1
+      },
+      {
+        "name": "Chair",
+        "density": 0.8
+      },
+      {
+        "name": "Shelf",
+        "density": 0.6
+      },
+      {
+        "name": "Book",
+        "density": 0.4
+      },
+      {
+        "name": "Lamp",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "OmegaTower",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#191970",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "Wind5",
+      "wind-soft",
+      "hum-loop"
+    ],
+    "bgs": [
+      "Wind5",
+      "wind-soft2",
+      "room-scifi"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Tech",
+        "density": 1.5
+      },
+      {
+        "name": "Gear",
+        "density": 1
+      },
+      {
+        "name": "StairsUp",
+        "density": 0.3
+      },
+      {
+        "name": "StairsDown",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Park",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#7cfc00",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "night-ambience"
+    ],
+    "bgs": [
+      "thrushes-tits-city-dawn",
+      "park-central",
+      "park-morning",
+      "park-rome"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "Tree",
+        "density": 1
+      },
+      {
+        "name": "Flower",
+        "density": 1
+      },
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 0.8
+      },
+      {
+        "name": "Lamp",
+        "density": 0.4
+      },
+      {
+        "name": "Fountain",
+        "density": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Permafrost",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#e6e6fa",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "CaveIce",
+    "bgsNight": [
+      "wind-blizzard",
+      "wind-arctic",
+      "cold-wind-loop"
+    ],
+    "bgs": [
+      "cold-wind-loop",
+      "wind-soft",
+      "wind-icelake"
+    ],
+    "dayTemperature": -15,
+    "nightTemperature": -20,
+    "features": [
+      {
+        "name": "Ice",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "RockIce",
+        "density": 1.5
+      },
+      {
+        "name": "IceRock",
+        "density": 1
+      },
+      {
+        "name": "MoorIce",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "River",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#00bfff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "RiverBank",
+    "bgsNight": [
+      "water-river",
+      "water-river2",
+      "night-ambience"
+    ],
+    "bgs": [
+      "water-river",
+      "water-river2",
+      "water-stream"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 12,
+    "biomeIds": [],
+    "features": [
+      {
+        "name": "Rock",
+        "density": 0.5
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 2.5
+      }
+    ]
+  },
+  {
+    "name": "River vertical",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#00bfff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "RiverBank",
+    "bgsNight": [
+      "water-river",
+      "water-river2",
+      "night-ambience"
+    ],
+    "bgs": [
+      "water-river",
+      "water-river2",
+      "water-stream"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [
+      141,
+      138
+    ],
+    "features": [
+      {
+        "name": "Rock",
+        "density": 0.5
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 2.5
+      }
+    ]
+  },
+  {
+    "name": "River horizontal",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#00bfff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "RiverBank",
+    "bgsNight": [
+      "water-river",
+      "water-river2",
+      "night-ambience"
+    ],
+    "bgs": [
+      "water-river",
+      "water-river2",
+      "water-stream"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [
+      139,
+      142,
+      135,
+      140,
+      143
+    ],
+    "features": [
+      {
+        "name": "Rock",
+        "density": 0.5
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 2.5
+      }
+    ]
+  },
+  {
+    "name": "River cross",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#00bfff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "RiverBank",
+    "bgsNight": [
+      "water-river",
+      "water-river2",
+      "night-ambience"
+    ],
+    "bgs": [
+      "water-river",
+      "water-river2",
+      "water-stream"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [
+      133
+    ],
+    "features": [
+      {
+        "name": "Rock",
+        "density": 0.5
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 2.5
+      }
+    ]
+  },
+  {
+    "name": "RiverBank",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#20b2aa",
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "water-river",
+      "water-creek",
+      "night-crickets"
+    ],
+    "bgs": [
+      "water-river",
+      "water-creek",
+      "water-stream-birds"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 15,
+    "NPCPool": 0,
+    "features": [
+      {
+        "name": "Water",
+        "density": 2
+      },
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Rock",
+        "density": 0.6
+      },
+      {
+        "name": "Plant",
+        "density": 0.5
+      },
+      {
+        "name": "Bridge",
+        "density": 0.2
+      }
+    ]
+  },
+  {
+    "name": "Road",
+    "hasNPC": false,
+    "tilesetId": 301,
+    "color": "#444444",
+    "prefabs": [
+      [
+        283,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "cars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Ruins",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#bdb76b",
+    "prefabs": [],
+    "biomeIds": [
+      172,
+      164,
+      165,
+      169,
+      161,
+      173
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "night-crickets",
+      "crickets5",
+      "night-ambience"
+    ],
+    "bgs": [
+      "winchester-wind-ambience",
+      "wind-soft",
+      "old-wood-creaking-building"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "StoneBlock",
+        "density": 1.5
+      },
+      {
+        "name": "ColumnBroken",
+        "density": 1
+      },
+      {
+        "name": "Debris",
+        "density": 1.2
+      },
+      {
+        "name": "Crack",
+        "density": 0.8
+      },
+      {
+        "name": "Vine",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "SaltFlats",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#fafafa",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "desert-ambience",
+      "desert-monolit",
+      "wind-cemetary"
+    ],
+    "bgs": [
+      "wind-in-the-desert-countryside",
+      "desert-simple",
+      "wind-soft"
+    ],
+    "dayTemperature": 35,
+    "nightTemperature": 20,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Pebble",
+        "density": 2
+      },
+      {
+        "name": "Rock",
+        "density": 1
+      },
+      {
+        "name": "Crystal",
+        "density": 0.6
+      },
+      {
+        "name": "Water",
+        "density": 0.4
+      },
+      {
+        "name": "Crack",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "Savannah",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#e9967a",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "country-crickets"
+    ],
+    "bgs": [
+      "grass_field_insectbed",
+      "openfield_grass_rustlinginsects-",
+      "nature-summer"
+    ],
+    "dayTemperature": 32,
+    "nightTemperature": 22,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "Tree",
+        "density": 0.5
+      },
+      {
+        "name": "Rock",
+        "density": 0.4
+      },
+      {
+        "name": "Bush",
+        "density": 0.6
+      },
+      {
+        "name": "Weed",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "SeaBed",
+    "hasNPC": false,
+    "tilesetId": 302,
+    "color": "#191970",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "abyss-ambience",
+      "abyss-ambience2"
+    ],
+    "bgs": [
+      "abyss-ambience",
+      "abyss-ambience2"
+    ],
+    "dayTemperature": 8,
+    "nightTemperature": 6,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Kelp",
+        "density": 2
+      },
+      {
+        "name": "Coral",
+        "density": 1.5
+      },
+      {
+        "name": "Rock",
+        "density": 0.1
+      },
+      {
+        "name": "Seashell",
+        "density": 0.1
+      },
+      {
+        "name": "Star",
+        "density": 0.1
+      },
+      {
+        "name": "Ostrich",
+        "density": 0.1
+      },
+      {
+        "name": "Anvil",
+        "density": 0.05
+      },
+      {
+        "name": "Vase",
+        "density": 0.05
+      },
+      {
+        "name": "Debris",
+        "density": 0.05
+      }
+    ]
+  },
+  {
+    "name": "Sewer",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#2e3b23",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "sewer-drain",
+      "sewer-drain2",
+      "sewer-water"
+    ],
+    "bgs": [
+      "sewer-drain",
+      "sewer-pipe",
+      "sewers-pipe",
+      "sewer-north"
+    ],
+    "dayTemperature": 16,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "DungeonFloor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Water",
+        "density": 1.5
+      },
+      {
+        "name": "Ladder",
+        "density": 0.4
+      },
+      {
+        "name": "Torch",
+        "density": 0.5
+      },
+      {
+        "name": "Debris",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Space",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#000000",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "",
+    "bgsNight": [
+      "spaceship",
+      "drone",
+      "hum-loop"
+    ],
+    "bgs": [
+      "spaceship",
+      "drone",
+      "room-scifi"
+    ],
+    "dayTemperature": 10,
+    "nightTemperature": 5,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Tech",
+        "density": 1
+      },
+      {
+        "name": "Crystal",
+        "density": 0.5
+      },
+      {
+        "name": "Debris",
+        "density": 0.6
+      },
+      {
+        "name": "Crater",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Spacecenter",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#f8f8ff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "",
+    "bgsNight": [
+      "room-scifi",
+      "ventilation",
+      "hum-loop"
+    ],
+    "bgs": [
+      "room-scifi",
+      "room-computer",
+      "industrial-machinery"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "Floor",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Tech",
+        "density": 2
+      },
+      {
+        "name": "Gear",
+        "density": 1
+      },
+      {
+        "name": "Lamp",
+        "density": 0.6
+      },
+      {
+        "name": "Table",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "SpiritWoods",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#00fa9a",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "frogs-croaking-at-night",
+      "night-swamp",
+      "forest-night"
+    ],
+    "bgs": [
+      "forest-swamp",
+      "swamp-woods",
+      "lost-valley"
+    ],
+    "dayTemperature": 18,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Tree",
+        "density": 1.5
+      },
+      {
+        "name": "Orb",
+        "density": 0.8
+      },
+      {
+        "name": "Flower",
+        "density": 3
+      },
+      {
+        "name": "Mushroom",
+        "density": 0.6
+      },
+      {
+        "name": "Crystal",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Steppe",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#bdb76b",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "crickets5",
+      "night-crickets",
+      "country-crickets"
+    ],
+    "bgs": [
+      "openfield_grass_rustlinginsects-",
+      "grass_field_insectbed",
+      "grass-wind"
+    ],
+    "dayTemperature": 28,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "Rock",
+        "density": 0.8
+      },
+      {
+        "name": "Bush",
+        "density": 0.6
+      },
+      {
+        "name": "Weed",
+        "density": 0.8
+      },
+      {
+        "name": "Pebble",
+        "density": 0.5
+      }
+    ]
+  },
+  {
+    "name": "Swamp",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#2f4f2f",
+    "biomeIds": [
+      75,
+      77,
+      79
+    ],
+    "prefabs": [
+      [
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        213
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "FloodedCave",
+    "bgsNight": [
+      "frogs-croaking-at-night",
+      "night-swamp",
+      "countryside-swamp9"
+    ],
+    "bgs": [
+      "swamp-woods",
+      "forest-swamp",
+      "countryside-swamp9"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "GrassDark",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "TreeSwamp",
+        "density": 2
+      },
+      {
+        "name": "Lilypad",
+        "density": 1
+      },
+      {
+        "name": "Vine",
+        "density": 1
+      },
+      {
+        "name": "Skull",
+        "density": 1
+      },
+      {
+        "name": "Mushroom",
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Taiga",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#004b49",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "woods-night",
+      "wind-soft",
+      "cold-wind-loop"
+    ],
+    "bgs": [
+      "forest-ambient-loop",
+      "forest-birds",
+      "wind-soft2"
+    ],
+    "dayTemperature": 10,
+    "nightTemperature": -5,
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Ice",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "TreeIce",
+        "density": 1.5
+      },
+      {
+        "name": "Bush",
+        "density": 0.5
+      },
+      {
+        "name": "RockIce",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "Temple",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#cd7f32",
+    "prefabs": [],
+    "specialBiomes": [],
+    "biomeIds": [
+      166,
+      167
+    ],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "temple-shadow",
+      "night-ambience",
+      "cave-temple"
+    ],
+    "bgs": [
+      "temple-exterior",
+      "temple-birds",
+      "cave-temple2"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "StoneBlock",
+        "density": 2
+      },
+      {
+        "name": "Column",
+        "density": 1
+      },
+      {
+        "name": "Statue",
+        "density": 0.5
+      },
+      {
+        "name": "Torch",
+        "density": 0.6
+      },
+      {
+        "name": "Banner",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "TempleShinto",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#ff4500",
+    "prefabs": [],
+    "biomeIds": [
+      201
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "temple-shadow",
+      "night-ambience",
+      "night-crickets"
+    ],
+    "bgs": [
+      "temple-exterior",
+      "temple-birds",
+      "temple-chanting"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "StoneBlock",
+        "density": 2
+      },
+      {
+        "name": "Column",
+        "density": 0.8
+      },
+      {
+        "name": "Statue",
+        "density": 0.4
+      },
+      {
+        "name": "Lamp",
+        "density": 0.6
+      },
+      {
+        "name": "Vase",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Train",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#b22222",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "train",
+      "train-station",
+      "night-city"
+    ],
+    "bgs": [
+      "train",
+      "train-station",
+      "train-freight"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 16,
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "RailNS",
+        "density": 1.5
+      },
+      {
+        "name": "RailEOStart",
+        "density": 0.3
+      },
+      {
+        "name": "Sign",
+        "density": 0.5
+      },
+      {
+        "name": "Lamp",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Tundra",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#b0c4de",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "wind-blizzard",
+      "wind-arctic",
+      "wind-blizzard2"
+    ],
+    "bgs": [
+      "cold-wind-loop",
+      "wind-soft",
+      "snowing"
+    ],
+    "dayTemperature": -10,
+    "nightTemperature": -15,
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "Ice",
+        "terrain": true,
+        "density": 2.5
+      },
+      {
+        "name": "RockIce",
+        "density": 1
+      },
+      {
+        "name": "MoorIce",
+        "density": 1
+      },
+      {
+        "name": "PebbleIce",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "Underdark",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#1a1110",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "cave-deep",
+      "abyss-ambience",
+      "cave-forgotten"
+    ],
+    "bgs": [
+      "cave-deep",
+      "cave-monsters",
+      "abyss-ambience2"
+    ],
+    "dayTemperature": 10,
+    "nightTemperature": 8,
+    "features": [
+      {
+        "name": "Crystal",
+        "density": 1.2
+      },
+      {
+        "name": "Mushroom",
+        "density": 1
+      },
+      {
+        "name": "Stalattite",
+        "density": 0.6
+      },
+      {
+        "name": "Stalagmite",
+        "density": 0.6
+      }
+    ]
+  },
+  {
+    "name": "Villa",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#ffdead",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Crypt",
+    "bgsNight": [
+      "village-night",
+      "village-night2",
+      "night-countryside"
+    ],
+    "bgs": [
+      "thrushes-tits-city-dawn",
+      "birds",
+      "backyard"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "House",
+        "density": 1
+      },
+      {
+        "name": "Fountain",
+        "density": 0.4
+      },
+      {
+        "name": "Flower",
+        "density": 1
+      },
+      {
+        "name": "Statue",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Village",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#f5deb3",
+    "prefabs": [
+      [
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "village-night",
+      "village-night2"
+    ],
+    "bgs": [
+      "village-at-morning",
+      "People2",
+      "backyard"
+    ],
+    "dayTemperature": 22,
+    "nightTemperature": 15,
+    "NPCPool": 0,
+    "biomeIds": [
+      196,
+      197,
+      202,
+      192,
+      193,
+      194,
+      195,
+      200
+    ],
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Tree",
+        "density": 0.2
+      },
+      {
+        "name": "Flower",
+        "density": 0.2
+      },
+      {
+        "name": "Weed",
+        "density": 0.2
+      }
+    ]
+  },
+  {
+    "name": "VillageIce",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#e0f2f1",
+    "biomeIds": [
+      210,
+      211,
+      204
+    ],
+    "prefabs": [
+      [
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "village-night",
+      "village-night2",
+      "cold-wind-loop"
+    ],
+    "bgs": [
+      "village-at-morning",
+      "wind-soft",
+      "People2"
+    ],
+    "dayTemperature": -5,
+    "nightTemperature": -10,
+    "features": [
+      {
+        "name": "Snow",
+        "terrain": true,
+        "density": 2
+      },
+      {
+        "name": "PebbleIce",
+        "density": 1.5
+      },
+      {
+        "name": "RockIce",
+        "density": 1
+      },
+      {
+        "name": "FlowerIce",
+        "density": 0.4
+      },
+      {
+        "name": "WeedIce",
+        "density": 0.4
+      }
+    ]
+  },
+  {
+    "name": "VillageMountain",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#bc8f8f",
+    "biomeIds": [
+      203,
+      247
+    ],
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "village-night",
+      "village-night2",
+      "mountain-wind"
+    ],
+    "bgs": [
+      "village-at-morning",
+      "mountain-ambience",
+      "backyard"
+    ],
+    "dayTemperature": 16,
+    "nightTemperature": 8,
+    "features": [
+      {
+        "name": "Rock",
+        "terrain": true,
+        "density": 1.5
+      }
+    ]
+  },
+  {
+    "name": "VillageDesert",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#fdf5e6",
+    "prefabs": [
+      [
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93
+      ]
+    ],
+    "specialBiomes": [],
+    "biomeIds": [
+      222,
+      218,
+      219,
+      216,
+      217
+    ],
+    "lowerLayer": "Dungeon",
+    "bgsNight": [
+      "village-night",
+      "village-night2",
+      "desert-ambience"
+    ],
+    "bgs": [
+      "village-at-morning",
+      "desert-ambient-loop",
+      "People2"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 20,
+    "features": [
+      {
+        "name": "Beach",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "RockDesert",
+        "density": 3
+      },
+      {
+        "name": "Cactus",
+        "density": 0.8
+      },
+      {
+        "name": "Pebble",
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "VillageRiver",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#87cefa",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "CaveFlooded",
+    "bgsNight": [
+      "village-night",
+      "village-night2",
+      "water-creek"
+    ],
+    "bgs": [
+      "village-at-morning",
+      "water-river",
+      "backyard"
+    ],
+    "dayTemperature": 20,
+    "nightTemperature": 14,
+    "features": [
+      {
+        "name": "GrassDark",
+        "terrain": true,
+        "density": 1.5
+      },
+      {
+        "name": "Mud",
+        "terrain": true,
+        "density": 1.5
+      }
+    ]
+  },
+  {
+    "name": "VillageSea",
+    "hasNPC": true,
+    "tilesetId": 300,
+    "color": "#e0ffff",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "CaveFlooded",
+    "bgsNight": [
+      "village-night",
+      "village-night2",
+      "ocean-night"
+    ],
+    "bgs": [
+      "village-at-morning",
+      "waves-and-seagulls",
+      "ocean-waves"
+    ],
+    "dayTemperature": 24,
+    "nightTemperature": 18,
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Beach",
+        "density": 2
+      },
+      {
+        "name": "Water",
+        "density": 1.5
+      },
+      {
+        "name": "House",
+        "density": 1
+      },
+      {
+        "name": "Palm",
+        "density": 0.6
+      },
+      {
+        "name": "Seashell",
+        "density": 0.3
+      }
+    ]
+  },
+  {
+    "name": "Volcano",
+    "lockTravel": true,
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#ff0000",
+    "prefabs": [
+      [
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281
+      ]
+    ],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "lava-loop-1",
+      "lava-loop-2",
+      "lava-loop-3"
+    ],
+    "bgs": [
+      "lava-loop-1",
+      "lava-loop-2",
+      "lava-loop-3"
+    ],
+    "dayTemperature": 38,
+    "nightTemperature": 30,
+    "biomeIds": [
+      208,
+      209,
+      304,
+      305,
+      296,
+      296,
+      289
+    ],
+    "features": [
+      {
+        "name": "Grass",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "Rock",
+        "density": 2
+      },
+      {
+        "name": "Crater",
+        "density": 1.2
+      },
+      {
+        "name": "Crack",
+        "density": 1
+      },
+      {
+        "name": "Debris",
+        "density": 0.8
+      }
+    ]
+  },
+  {
+    "name": "Road vertical",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#444444",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "pcars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [
+      600,
+      602,
+      606,
+      604,
+      599
+    ],
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Road horizontal",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#444444",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "cars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [
+      603,
+      598,
+      601,
+      605,
+      607
+    ],
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Road cross",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#444444",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "cars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [
+      597
+    ],
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Road t-up",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#444444",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "cars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [],
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Road t-down",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#444444",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "cars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [],
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Road t-left",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#444444",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "cars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [],
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  },
+  {
+    "name": "Road t-right",
+    "hasNPC": false,
+    "tilesetId": 300,
+    "color": "#444444",
+    "prefabs": [],
+    "specialBiomes": [],
+    "lowerLayer": "Cave",
+    "bgsNight": [
+      "bus-night",
+      "highway-distant",
+      "night-crickets"
+    ],
+    "bgs": [
+      "Wind5",
+      "highway-distant",
+      "cars-passing"
+    ],
+    "dayTemperature": 26,
+    "nightTemperature": 16,
+    "biomeIds": [],
+    "features": [
+      {
+        "name": "Road",
+        "terrain": true,
+        "density": 1
+      },
+      {
+        "name": "DashedLine",
+        "terrain": true,
+        "density": 1
+      }
+    ]
+  }
+]

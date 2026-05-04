@@ -1,9 +1,9 @@
 /*:
  * @target MZ
- * @plugindesc Custom Bust Face System v1.2.0 (SPRITES_ASSOCIATION support)
+ * @plugindesc Custom Bust Face System v1.2.0 (SpritesAssociation support)
  * @author Omni-Lex
  * @version 1.2.0
- * @description Replaces default face system with custom bust images. Uses SPRITES_ASSOCIATION mapping from DB.js for automatic bust lookup. Supports monster battler images from variables 106-109.
+ * @description Replaces default face system with custom bust images. Uses SpritesAssociation mapping from DB.js for automatic bust lookup. Supports monster battler images from variables 106-109.
  *
  * @help CustomBustFaceSystem.js
  *
@@ -11,7 +11,7 @@
  * bust system that automatically maps character sprites to bust images.
  *
  * AUTOMATIC SPRITE-TO-BUST MAPPING:
- * The system uses SPRITES_ASSOCIATION from DB.js to automatically map character
+ * The system uses SpritesAssociation from DB.js to automatically map character
  * spritesheet names to bust image names. Each bust image should be 64x64 pixels.
  *
  * Bust images are loaded from: /img/faces/{bust_name}.png
@@ -35,7 +35,7 @@
  * LOADING PRIORITY FOR EACH ACTOR:
  * 1. Bust name from Variable (109/117/118)
  * 2. If creature switch (77/78/79) is ON: Battler path from Variable (106/107/108)
- * 3. SPRITES_ASSOCIATION bust mapping (from character sprite sheet name)
+ * 3. SpritesAssociation bust mapping (from character sprite sheet name)
  * 4. Fallback: default bust "7"
  *
  * No plugin parameters required. Works automatically once DB.js is loaded.
@@ -45,11 +45,11 @@
 
 (() => {
     'use strict';
-    
+
     // Store original methods
     const _Window_Base_drawActorFace = Window_Base.prototype.drawActorFace;
     const _Window_StatusBase_drawActorFace = Window_StatusBase.prototype.drawActorFace;
-    const { SPRITES_ASSOCIATION } = window.Sprites;
+    const { SpritesAssociation } = window.Sprites;
 
     // Helper function to get bust image path
     function getBustImagePath(actor) {
@@ -77,13 +77,13 @@
                 }
             }
 
-            // Priority 3: Fall back to SPRITES_ASSOCIATION
-            if (characterName && window.Sprites && SPRITES_ASSOCIATION) {
+            // Priority 3: Fall back to SpritesAssociation
+            if (characterName && window.Sprites && SpritesAssociation) {
                 const spritesheetName = characterName.split('.')[0];
 
-                if (SPRITES_ASSOCIATION[spritesheetName] &&
-                    SPRITES_ASSOCIATION[spritesheetName][spriteIndex]) {
-                    const bustName = SPRITES_ASSOCIATION[spritesheetName][spriteIndex];
+                if (SpritesAssociation[spritesheetName] &&
+                    SpritesAssociation[spritesheetName][spriteIndex]) {
+                    const bustName = SpritesAssociation[spritesheetName][spriteIndex];
                     return `img/faces/${bustName}`;
                 }
             }
@@ -107,13 +107,13 @@
                 }
             }
 
-            // Priority 3: Fall back to SPRITES_ASSOCIATION
-            if (characterName && window.Sprites && SPRITES_ASSOCIATION) {
+            // Priority 3: Fall back to SpritesAssociation
+            if (characterName && window.Sprites && SpritesAssociation) {
                 const spritesheetName = characterName.split('.')[0];
 
-                if (SPRITES_ASSOCIATION[spritesheetName] &&
-                    SPRITES_ASSOCIATION[spritesheetName][spriteIndex]) {
-                    const bustName = SPRITES_ASSOCIATION[spritesheetName][spriteIndex];
+                if (SpritesAssociation[spritesheetName] &&
+                    SpritesAssociation[spritesheetName][spriteIndex]) {
+                    const bustName = SpritesAssociation[spritesheetName][spriteIndex];
                     return `img/faces/${bustName}`;
                 }
             }
@@ -137,13 +137,13 @@
                 }
             }
 
-            // Priority 3: Fall back to SPRITES_ASSOCIATION
-            if (characterName && window.Sprites && SPRITES_ASSOCIATION) {
+            // Priority 3: Fall back to SpritesAssociation
+            if (characterName && window.Sprites && SpritesAssociation) {
                 const spritesheetName = characterName.split('.')[0];
 
-                if (SPRITES_ASSOCIATION[spritesheetName] &&
-                    SPRITES_ASSOCIATION[spritesheetName][spriteIndex]) {
-                    const bustName = SPRITES_ASSOCIATION[spritesheetName][spriteIndex];
+                if (SpritesAssociation[spritesheetName] &&
+                    SpritesAssociation[spritesheetName][spriteIndex]) {
+                    const bustName = SpritesAssociation[spritesheetName][spriteIndex];
                     return `img/faces/${bustName}`;
                 }
             }
@@ -151,13 +151,13 @@
             return `img/faces/7`;
         }
 
-        // Fallback to SPRITES_ASSOCIATION for any other actors
-        if (characterName && window.Sprites && SPRITES_ASSOCIATION) {
+        // Fallback to SpritesAssociation for any other actors
+        if (characterName && window.Sprites && SpritesAssociation) {
             const spritesheetName = characterName.split('.')[0];
 
-            if (SPRITES_ASSOCIATION[spritesheetName] &&
-                SPRITES_ASSOCIATION[spritesheetName][spriteIndex]) {
-                const bustName = SPRITES_ASSOCIATION[spritesheetName][spriteIndex];
+            if (SpritesAssociation[spritesheetName] &&
+                SpritesAssociation[spritesheetName][spriteIndex]) {
+                const bustName = SpritesAssociation[spritesheetName][spriteIndex];
                 return `img/faces/${bustName}`;
             }
         }
@@ -165,7 +165,7 @@
         // Fallback to default bust path structure
         return `img/faces/7`;
     }
-    
+
     // Helper function to create a blank bitmap
     function createBlankBitmap(width, height) {
         const canvas = document.createElement('canvas');
@@ -176,7 +176,7 @@
         bitmap._context = canvas.getContext('2d');
         return bitmap;
     }
-    
+
     // Helper function to load and draw bust image with blank fallback
     function drawBustImage(bitmap, actor, x, y, width, height) {
         const bustPath = getBustImagePath(actor);
@@ -211,7 +211,7 @@
 
         return true;
     }
-    
+
     // Helper function to draw bust image to canvas
     function drawBustToCanvas(bitmap, sourceBitmap, x, y, width, height, shouldCrop = true) {
         try {
@@ -260,9 +260,9 @@
             // Don't throw error, just log it
         }
     }
-    
+
     // Override Window_Base drawActorFace method
-    Window_Base.prototype.drawActorFace = function(actor, x, y, width, height) {
+    Window_Base.prototype.drawActorFace = function (actor, x, y, width, height) {
         width = width || ImageManager.faceWidth;
         height = height || ImageManager.faceHeight;
 
@@ -271,31 +271,31 @@
     };
 
     // Override Window_StatusBase drawActorFace method (for status screens)
-    Window_StatusBase.prototype.drawActorFace = function(actor, x, y, width, height) {
+    Window_StatusBase.prototype.drawActorFace = function (actor, x, y, width, height) {
         width = width || ImageManager.faceWidth;
         height = height || ImageManager.faceHeight;
 
         // Use our bust system with blank fallback
         drawBustImage(this.contents, actor, x, y, width, height);
     };
-    
+
     // Override ImageManager.loadFace to prevent loading default faces when using busts
     const _ImageManager_loadFace = ImageManager.loadFace;
-    ImageManager.loadFace = function(filename) {
+    ImageManager.loadFace = function (filename) {
         // Check if we're trying to load a face for an actor that should use busts
         // This is a bit tricky since we don't have direct actor context here
         // We'll let the original method handle it and rely on our drawActorFace overrides
         return _ImageManager_loadFace.call(this, filename);
     };
-    
+
     // Helper method to preload bust images (optional, for performance)
     function preloadBustImages() {
         try {
-            // Preload from SPRITES_ASSOCIATION if available
-            if (window.Sprites && SPRITES_ASSOCIATION) {
-                Object.keys(SPRITES_ASSOCIATION).forEach(spritesheetName => {
+            // Preload from SpritesAssociation if available
+            if (window.Sprites && SpritesAssociation) {
+                Object.keys(SpritesAssociation).forEach(spritesheetName => {
                     try {
-                        const bustIndices = SPRITES_ASSOCIATION[spritesheetName];
+                        const bustIndices = SpritesAssociation[spritesheetName];
                         Object.keys(bustIndices).forEach(index => {
                             const bustName = bustIndices[index];
                             const path = `img/faces/${bustName}`;
@@ -324,25 +324,25 @@
             console.log('CustomBustFaceSystem: Error in preloadBustImages, continuing anyway');
         }
     }
-    
+
     // Preload bust images when the game starts
     const _Scene_Boot_start = Scene_Boot.prototype.start;
-    Scene_Boot.prototype.start = function() {
+    Scene_Boot.prototype.start = function () {
         _Scene_Boot_start.call(this);
         preloadBustImages();
     };
-    
 
-    
+
+
 
     // Handle character graphic changes
     const _Game_Actor_setCharacterImage = Game_Actor.prototype.setCharacterImage;
-    Game_Actor.prototype.setCharacterImage = function(characterName, characterIndex) {
+    Game_Actor.prototype.setCharacterImage = function (characterName, characterIndex) {
         _Game_Actor_setCharacterImage.call(this, characterName, characterIndex);
-        
+
         // Update our stored values
         this._characterName = characterName;
         this._characterIndex = characterIndex;
     };
-    
+
 })();

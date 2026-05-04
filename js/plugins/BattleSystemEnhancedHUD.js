@@ -34,7 +34,7 @@
   const statDisplayHeight = 18; // Increased height for stat display
   const isMobileDevice = Utils.isMobileDevice(); // Detect if running on mobile
   const useMobileOptimization = false; // Set to true to force optimization even on desktop
-  const { SPRITES_ASSOCIATION } = window.Sprites;
+  const { SpritesAssociation } = window.Sprites;
 
   // Battle UI fixes parameters
   const helpWindowHeightBonus = Number(
@@ -126,7 +126,7 @@
     return tags;
   }
 
-  // Helper function to get bust image path using SPRITES_ASSOCIATION
+  // Helper function to get bust image path using SpritesAssociation
   function getBustImagePath(actor) {
     if (!actor) return null;
 
@@ -149,14 +149,14 @@
         }
       }
 
-      // Priority 3: Fall back to SPRITES_ASSOCIATION
-      if (characterName && window.Sprites && SPRITES_ASSOCIATION) {
+      // Priority 3: Fall back to SpritesAssociation
+      if (characterName && window.Sprites && SpritesAssociation) {
         const spritesheetName = characterName.split('.')[0];
         const characterIndex = actor.characterIndex();
 
-        if (SPRITES_ASSOCIATION[spritesheetName] &&
-            SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-          const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+        if (SpritesAssociation[spritesheetName] &&
+          SpritesAssociation[spritesheetName][characterIndex]) {
+          const bustName = SpritesAssociation[spritesheetName][characterIndex];
           return "img/faces/" + bustName;
         }
       }
@@ -164,14 +164,14 @@
       return "img/faces/7";
     }
 
-    // Players 2 & 3: Use SPRITES_ASSOCIATION based on sprite
-    if (characterName && window.Sprites && SPRITES_ASSOCIATION) {
+    // Players 2 & 3: Use SpritesAssociation based on sprite
+    if (characterName && window.Sprites && SpritesAssociation) {
       const spritesheetName = characterName.split('.')[0];
       const characterIndex = actor.characterIndex();
 
-      if (SPRITES_ASSOCIATION[spritesheetName] &&
-          SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-        const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+      if (SpritesAssociation[spritesheetName] &&
+        SpritesAssociation[spritesheetName][characterIndex]) {
+        const bustName = SpritesAssociation[spritesheetName][characterIndex];
         return "img/faces/" + bustName;
       }
     }
@@ -242,23 +242,23 @@
 
   // Optional: Adjust item name display to use full width
   const _Window_BattleItem_drawItemName =
-  Window_BattleItem.prototype.drawItemName;
-Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
-  if (item) {
-    const iconY = y + (this.lineHeight() - ImageManager.iconHeight) / 2;
-    const textMargin = ImageManager.iconWidth + 4;
-    const itemWidth = width || this.innerWidth - textMargin;
+    Window_BattleItem.prototype.drawItemName;
+  Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
+    if (item) {
+      const iconY = y + (this.lineHeight() - ImageManager.iconHeight) / 2;
+      const textMargin = ImageManager.iconWidth + 4;
+      const itemWidth = width || this.innerWidth - textMargin;
 
-    this.resetTextColor();
-    this.drawIcon(item.iconIndex, x, iconY);
-    
-    // Draw item name
-    this.drawText(item.name, x + textMargin, y, itemWidth - textMargin - 28);
-    
-    // Draw item quantity
-    this.drawItemNumber(item, x, y, itemWidth);
-  }
-};
+      this.resetTextColor();
+      this.drawIcon(item.iconIndex, x, iconY);
+
+      // Draw item name
+      this.drawText(item.name, x + textMargin, y, itemWidth - textMargin - 28);
+
+      // Draw item quantity
+      this.drawItemNumber(item, x, y, itemWidth);
+    }
+  };
 
   // Make sure regular item windows (outside battle) keep their normal behavior
   const _Window_ItemList_maxCols = Window_ItemList.prototype.maxCols;
@@ -305,7 +305,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
 
     if (isSimpleDisplay) {
       const ar = getAspectRatio();
-      this._playerCardWidth  = customWidth  || (ar === '16:9' ? 400 : 280);
+      this._playerCardWidth = customWidth || (ar === '16:9' ? 400 : 280);
       this._playerCardHeight = customHeight || 190;
       this._wavePhase = 0;
       this.createSimpleDisplayBackground();
@@ -331,23 +331,23 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       this._damageChunkHp = battler.hp;
       this._animationCount = 0;
       this._wavePhase = 0;
-  
+
       // Create TP Orb first so it appears behind other elements
       this.createTPOrb();
       this.refresh();
       this.createDamageOverlay();
-  
+
       // CHANGED: Add stat display for ALL characters (not just actor 1)
       this.createStatDisplay();
     }
   };
-  
-  Sprite_TekkenBar.prototype.createDamageFlashOverlay = function() {
+
+  Sprite_TekkenBar.prototype.createDamageFlashOverlay = function () {
     if (!this._shouldUseBust) return;
 
     this._damageFlashSprite = new Sprite();
 
-    const flashWidth  = this._playerCardWidth  || 160;
+    const flashWidth = this._playerCardWidth || 160;
     const flashHeight = this._playerCardHeight || 190;
     this._damageFlashSprite.bitmap = new Bitmap(flashWidth, flashHeight);
     this._damageFlashSprite.x = -playerBarX;
@@ -371,10 +371,10 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       barWidth * 1.5,
       statDisplayHeight * 6
     );
-  
+
     // Position at the top center of the screen
     const xCenterOffset = 20; // Adjust this value to move left/right from center
-  
+
     if (this._isPlayer) {
       this._statDisplay.x = 40; // Slightly left of center
       this._statDisplay.y = 75; // Top of screen with some padding
@@ -382,17 +382,17 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       this._statDisplay.x = Graphics.width / 2 + xCenterOffset + 30; // Slightly right of center
       this._statDisplay.y = 75; // Top of screen with some padding
     }
-  
+
     // Make sure the sprite is added to the scene, not as a child of the bar
     if (SceneManager._scene) {
       SceneManager._scene.addChild(this._statDisplay);
     } else {
       this.addChild(this._statDisplay);
     }
-  
+
     // Set visibility
     this._statDisplay.visible = true;
-  
+
     // Store UNBUFFED base stats using paramBase instead of param
     this._baseStats = {
       atk: this._battler.paramBase(2), // Attack (unbuffed)
@@ -402,27 +402,27 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       agi: this._battler.paramBase(6), // Agility (unbuffed)
       luk: this._battler.paramBase(7), // Luck (unbuffed)
     };
-  
+
     // Initialize states hash
     this._lastStatesHash = this._battler
       .states()
       .map((s) => s.id)
       .join(",");
-  
+
     // Call refresh to display initial buffs/debuffs
     this.refreshStatDisplay();
   };
 
   Sprite_TekkenBar.prototype.refreshStatDisplay = function () {
     if (!this._statDisplay || !this._battler) return;
-  
+
     const bitmap = this._statDisplay.bitmap;
     bitmap.clear();
     bitmap.fontFace = $gameSystem.mainFontFace();
     bitmap.fontSize = 24;
     bitmap.outlineColor = "black";
     bitmap.outlineWidth = 3;
-  
+
     let params = [
       { id: 2, name: "STR", base: this._baseStats.atk },
       { id: 3, name: "CON", base: this._baseStats.def },
@@ -441,7 +441,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         { id: 7, name: "PSI", base: this._baseStats.luk },
       ];
     }
-  
+
     // Collect all stat diffs (only stats, no statuses)
     const statParts = params.reduce((arr, p) => {
       const current = this._battler.param(p.id);
@@ -453,10 +453,10 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       }
       return arr;
     }, []);
-  
+
     // Collect status tags
     const statusTags = getStatusTags(this._battler);
-  
+
     // Initialize cycling timers if not already set
     if (this._statCycleTimer === undefined) {
       this._statCycleTimer = 0;
@@ -466,11 +466,11 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       this._statusCycleTimer = 0;
       this._statusCycleIndex = 0;
     }
-  
+
     const lineHeight = 24;
     let xPosition = 0;
     let hasContent = false;
-  
+
     // Handle stat display
     if (statParts.length > 0) {
       // Cycle through stats (change every 120 frames = 2 seconds)
@@ -479,12 +479,12 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         this._statCycleTimer = 0;
         this._statCycleIndex = (this._statCycleIndex + 1) % statParts.length;
       }
-  
+
       // Make sure index is valid
       if (this._statCycleIndex >= statParts.length) {
         this._statCycleIndex = 0;
       }
-  
+
       // Draw only the current stat if it exists
       const currentPart = statParts[this._statCycleIndex];
       if (currentPart) {
@@ -495,7 +495,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         hasContent = true;
       }
     }
-  
+
     // Handle status display (on the same line, after stats)
     if (statusTags.length > 0) {
       // Cycle through statuses (change every 120 frames = 2 seconds)
@@ -504,12 +504,12 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         this._statusCycleTimer = 0;
         this._statusCycleIndex = (this._statusCycleIndex + 1) % statusTags.length;
       }
-  
+
       // Make sure index is valid
       if (this._statusCycleIndex >= statusTags.length) {
         this._statusCycleIndex = 0;
       }
-  
+
       // Draw only the current status if it exists
       const currentStatus = statusTags[this._statusCycleIndex];
       if (currentStatus) {
@@ -519,7 +519,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         hasContent = true;
       }
     }
-  
+
     this._statDisplay.visible = hasContent;
   };
   Sprite_TekkenBar.prototype.setCurrentSkill = function (skill) {
@@ -589,23 +589,23 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
     if (!this._battler) {
       return;
     }
-  
+
     // Always update gradient animations for a live feeling
     this.updateGradientAnimation();
-  
+
     // Handle simple display for all player actors
     const isSimpleDisplay =
       this._isPlayer &&
       this._battler.actorId &&
       (this._battler.actorId() === 1 || this._battler.actorId() === 2 || this._battler.actorId() === 3);
-  
+
     if (isSimpleDisplay) {
       // NEW: Animate the background pattern
       if (this._backgroundPattern) {
         this._backgroundPattern.origin.x += 0.5;
         this._backgroundPattern.origin.y += 0.25;
       }
-  
+
       const b = this._battler;
 
       // Damage chunk + flash tracking
@@ -659,7 +659,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       }
       return;
     }
-  
+
     const b = this._battler;
     if (b.hp < this._lastHp) {
       this._damageChunkHp = this._displayHp;
@@ -670,7 +670,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       this._damageChunkHp = b.hp;
       this.updateDamageOverlay();
     }
-  
+
     if (this._damageChunkHp > this._displayHp) {
       this._damageChunkHp = Math.max(
         this._displayHp,
@@ -678,7 +678,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       );
       this.updateDamageOverlay();
     }
-  
+
     // Check for deck count changes when switch 45 is active
     let deckCountChanged = false;
     if ($gameSwitches.value(45) && this._isPlayer) {
@@ -688,7 +688,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         this._lastDeckCount = currentDeckCount;
       }
     }
-  
+
     // Only refresh if values have changed
     if (
       b.hp !== this._lastHp ||
@@ -699,19 +699,19 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       deckCountChanged
     ) {
       this.refresh();
-  
+
       // Only refresh TP orb if TP has changed or deck count changed
       if (this._tpOrb && (b.tp !== this._lastTp || deckCountChanged)) {
         this.refreshTPOrb();
       }
-  
+
       this._lastHp = b.hp;
       this._lastMaxHp = b.mhp;
       this._lastMp = b.mp;
       this._lastMaxMp = b.mmp;
       this._lastTp = b.tp;
     }
-  
+
     // CHANGED: Check for stat changes or states for ALL characters (not just actor 1)
     if (this._statDisplay && this._battler) {
       // Reduce frequency of stat updates on mobile
@@ -723,33 +723,33 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         let statsChanged = false;
         let statesChanged = false;
         let lastStatesHash = this._lastStatesHash || "";
-  
+
         // Create a hash of current states to check for changes
         let currentStatesHash = this._battler
           .states()
           .map((state) => state.id)
           .sort()
           .join(",");
-  
+
         // Check if states have changed
         if (currentStatesHash !== lastStatesHash) {
           statesChanged = true;
           this._lastStatesHash = currentStatesHash;
         }
-  
+
         // Check if stats have changed
         for (const paramId of params) {
           const current = this._battler.param(paramId);
           const base =
             this._baseStats[
-              ["atk", "def", "mat", "mdf", "agi", "luk"][paramId - 2]
+            ["atk", "def", "mat", "mdf", "agi", "luk"][paramId - 2]
             ];
           if (current !== base) {
             statsChanged = true;
             break;
           }
         }
-  
+
         // Refresh display if either stats or states changed
         if (statsChanged || statesChanged) {
           this.refreshStatDisplay();
@@ -772,19 +772,25 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       }
     }
 
-    // Refresh is now needed to see the moving gradient
+    // Refresh only if values changed or it's been at least 2 frames (for performance)
     const isSimpleDisplay =
       this._isPlayer &&
       this._battler &&
       this._battler.actorId &&
       (this._battler.actorId() === 1 || this._battler.actorId() === 2 || this._battler.actorId() === 3);
+
+    this._refreshCounter = (this._refreshCounter || 0) + 1;
+    const shouldRefreshGradient = this._refreshCounter % 2 === 0;
+
     if (!isSimpleDisplay) {
-      this.refresh();
-      if (this._tpOrb) {
-        this.refreshTPOrb();
+      if (shouldRefreshGradient) {
+        this.refresh();
+        if (this._tpOrb) {
+          this.refreshTPOrb();
+        }
       }
     } else {
-      if (this._playerTpOrb) {
+      if (this._playerTpOrb && shouldRefreshGradient) {
         this.refreshPlayerTPOrb();
       }
     }
@@ -821,10 +827,10 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
     if (!this._battler || !this._tpOrb) {
       return;
     }
-  
+
     const b = this._battler;
     let displayValue, maxValue, rate;
-    
+
     // Check if switch 45 is active and this is a player
     if ($gameSwitches.value(45) && this._isPlayer) {
       // Use deck count instead of TP
@@ -837,19 +843,19 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       maxValue = 99;
       rate = displayValue / maxValue;
     }
-  
+
     const bitmap = this._tpOrb.bitmap;
     const radius = tpOrbSize / 2;
     const center = radius;
-  
+
     bitmap.clear();
     bitmap.drawCircle(center, center, radius, "#333333");
     bitmap.drawCircle(center, center, radius - 2, "#222222");
     const liquidHeight = Math.floor((tpOrbSize - 4) * rate);
-  
+
     const ctx = bitmap.context;
     const gradientFactor = (Math.sin(this._gradientPhase) + 1) / 2;
-  
+
     if (liquidHeight > 0) {
       // Check if using mobile optimization
       if (isMobileDevice || useMobileOptimization) {
@@ -858,7 +864,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         ctx.beginPath();
         ctx.arc(center, center, radius - 2, 0, Math.PI * 2, false);
         ctx.clip();
-  
+
         // Create a simple gradient
         const orbGradient = ctx.createLinearGradient(
           0,
@@ -868,7 +874,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         );
         orbGradient.addColorStop(0, tpColor1);
         orbGradient.addColorStop(1, tpColor2);
-  
+
         // Draw a simple rectangle instead of wave pattern
         ctx.fillStyle = orbGradient;
         ctx.fillRect(0, tpOrbSize - liquidHeight, tpOrbSize, liquidHeight);
@@ -886,7 +892,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         orbGradient.addColorStop(0, tpColor1);
         orbGradient.addColorStop(0.5 + gradientFactor * 0.5, tpColor2);
         orbGradient.addColorStop(1, tpColor1);
-  
+
         ctx.save();
         ctx.beginPath();
         ctx.arc(center, center, radius - 2, 0, Math.PI * 2, false);
@@ -894,7 +900,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         ctx.beginPath();
         ctx.moveTo(0, tpOrbSize);
         ctx.lineTo(0, tpOrbSize - liquidHeight);
-  
+
         // This loop is expensive on mobile
         for (let x = 0; x <= tpOrbSize; x += 1) {
           const y =
@@ -903,11 +909,11 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
             Math.sin(
               (x / tpOrbSize) * Math.PI * waveFrequency + this._wavePhase
             ) *
-              waveAmplitude *
-              rate;
+            waveAmplitude *
+            rate;
           ctx.lineTo(x, y);
         }
-  
+
         ctx.lineTo(tpOrbSize, tpOrbSize);
         ctx.closePath();
         ctx.fillStyle = orbGradient;
@@ -915,11 +921,11 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         ctx.restore();
       }
     }
-  
+
     // Display the value
     bitmap.fontSize = 16;
     bitmap.textColor = "#ffffff";
-    
+
     if ($gameSwitches.value(45) && this._isPlayer) {
       // Show deck count
       bitmap.drawText(Math.floor(displayValue), 0, center - 8, tpOrbSize, 16, "center");
@@ -937,7 +943,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         bitmap.drawText(Math.floor(b.tp), 0, center - 8, tpOrbSize, 16, "center");
       }
     }
-  
+
     // Add highlight effect (simplified for mobile)
     if (!(isMobileDevice || useMobileOptimization)) {
       ctx.save();
@@ -965,10 +971,10 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       ctx.fill();
       ctx.restore();
     }
-  
+
     bitmap._baseTexture.update();
   };
-  
+
   Sprite_TekkenBar.prototype.refresh = function () {
     if (!this._battler) {
       return;
@@ -977,12 +983,12 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
     const b = this._battler;
     const hpRate = this._displayHp / Math.max(1, b.mhp);
     this.bitmap.clear();
-  
+
     // NEW: Animated gradient logic
     const gradientWidth = w * 1.5;
     const scrollX = w * 0.5 * Math.sin(this._gradientPhase);
     const gradientOffset = w / 2 - scrollX;
-  
+
     const ctx = this.bitmap.context;
     if (this._isPlayer) {
       ctx.beginPath();
@@ -1003,7 +1009,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       ctx.lineTo(0, barHeight);
       ctx.closePath();
       ctx.stroke();
-  
+
       // NEW: Apply the moving gradient
       const playerGradient = ctx.createLinearGradient(
         gradientOffset - gradientWidth / 2,
@@ -1014,7 +1020,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       playerGradient.addColorStop(0, playerHPColor2);
       playerGradient.addColorStop(0.5, playerHPColor1);
       playerGradient.addColorStop(1, playerHPColor2);
-  
+
       const hpWidth = (w - borderThickness * 2) * hpRate;
       const hpX = w - hpWidth - borderThickness;
       if (hpWidth > 0) {
@@ -1033,7 +1039,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         ctx.fillRect(0, 0, w, barHeight); // Fill the clipped area
         ctx.restore();
       }
-  
+
       // Only draw MP bar if switch 45 is NOT active or this is not a player
       if (!$gameSwitches.value(45)) {
         const mpY = barHeight + 5;
@@ -1048,7 +1054,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         ctx.closePath();
         ctx.fillStyle = "#111";
         ctx.fill();
-  
+
         // NEW: Apply moving gradient to MP bar
         const mpGradient = ctx.createLinearGradient(
           gradientOffset - gradientWidth / 2,
@@ -1059,10 +1065,10 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         mpGradient.addColorStop(0, mpBarColor2);
         mpGradient.addColorStop(0.5, mpBarColor1);
         mpGradient.addColorStop(1, mpBarColor2);
-  
+
         if (mpRate > 0) {
           const mpWidth = (w - 4) * mpRate;
-  
+
           ctx.save();
           ctx.beginPath();
           ctx.moveTo(2, mpY + 2);
@@ -1074,7 +1080,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
           ctx.fillStyle = mpGradient;
           ctx.fillRect(0, mpY, w, mpHeight);
           ctx.restore();
-  
+
           // MP Flash logic (unchanged)
           if (this._mpFlashAmount > 0 && this._mpFlashState) {
             const mpFlashRate = this._mpFlashAmount / Math.max(1, b.mmp);
@@ -1119,7 +1125,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       ctx.lineTo(angleSize, barHeight);
       ctx.closePath();
       ctx.stroke();
-  
+
       // NEW: Apply moving gradient to Enemy HP
       const enemyGradient = ctx.createLinearGradient(
         gradientOffset - gradientWidth / 2,
@@ -1130,7 +1136,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       enemyGradient.addColorStop(0, enemyHPColor2);
       enemyGradient.addColorStop(0.5, enemyHPColor1);
       enemyGradient.addColorStop(1, enemyHPColor2);
-  
+
       const hpWidth = (w - borderThickness * 2) * hpRate;
       if (hpWidth > 0) {
         ctx.save();
@@ -1151,7 +1157,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
         ctx.fillRect(borderThickness, borderThickness, rightX - borderThickness, hiH);
         ctx.restore();
       }
-  
+
       const mpY = barHeight + 5;
       const mpHeight = barHeight / 2;
       const mpRate = b.mp / Math.max(1, b.mmp);
@@ -1164,7 +1170,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       ctx.closePath();
       ctx.fillStyle = "#111";
       ctx.fill();
-  
+
       // NEW: Apply moving gradient to Enemy MP
       const mpGradient = ctx.createLinearGradient(
         gradientOffset - gradientWidth / 2,
@@ -1175,7 +1181,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       mpGradient.addColorStop(0, mpBarColor2);
       mpGradient.addColorStop(0.5, mpBarColor1);
       mpGradient.addColorStop(1, mpBarColor2);
-  
+
       if (mpRate > 0) {
         const mpWidth = (w - 4) * mpRate;
         ctx.save();
@@ -1207,59 +1213,55 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       const nameWithLevel = b.name() + actorLevel;
       this.bitmap.fontSize = 12;
       this.bitmap.drawText(nameWithLevel, 0, -3, w - 20, barHeight, "right");
-      
-  }
-   else {
+
+    }
+    else {
       const level = getEnemyLevel(b);
       const nameText = level
         ? `${window.translateText(b.name())} ${level}`
         : window.translateText(b.name());
-  
+
       this.bitmap.fontSize = 12;
       this.bitmap.fontBold = true;
       this.bitmap.fontFace = $gameSystem.mainFontFace();
-  
+
       const maxWidth = w - 30;
       const textWidth = this.bitmap.measureTextWidth(nameText);
-  
+
       if (textWidth > maxWidth) {
-        if (this._scaledTextSprite) {
-          this.removeChild(this._scaledTextSprite);
-        }
-  
-        this._scaledTextSprite = new Sprite();
-        this._scaledTextSprite.bitmap = new Bitmap(textWidth + 20, barHeight);
-        this._scaledTextSprite.bitmap.fontSize = 12;
-        this._scaledTextSprite.bitmap.fontBold = true;
-        this._scaledTextSprite.bitmap.fontFace = $gameSystem.mainFontFace();
-        this._scaledTextSprite.bitmap.textColor = "#ffffff";
-  
-        this._scaledTextSprite.bitmap.drawText(
-          nameText,
-          10,
-          0,
-          textWidth + 10,
-          barHeight,
-          "left"
-        );
-  
-        const scaleFactor = maxWidth / textWidth;
-  
-        this._scaledTextSprite.scale.x = scaleFactor;
-        this._scaledTextSprite.scale.y = 1;
-  
-        this._scaledTextSprite.x = 15;
-        this._scaledTextSprite.y = 0;
-  
-        this.addChild(this._scaledTextSprite);
-      } else {
-        if (this._scaledTextSprite) {
-          this.removeChild(this._scaledTextSprite);
-          this._scaledTextSprite = null;
+        if (!this._scaledTextSprite) {
+          this._scaledTextSprite = new Sprite();
+          this._scaledTextSprite.bitmap = new Bitmap(textWidth + 20, barHeight);
+          this.addChild(this._scaledTextSprite);
+        } else if (this._scaledTextSprite.bitmap.width < textWidth + 20) {
+          this._scaledTextSprite.bitmap.resize(textWidth + 20, barHeight);
         }
 
-        this.bitmap.drawText(nameText, 15, 0, w - 15, barHeight, "left");
+        if (this._lastDrawnNameText !== nameText) {
+          const sBitmap = this._scaledTextSprite.bitmap;
+          sBitmap.clear();
+          sBitmap.fontSize = 12;
+          sBitmap.fontBold = true;
+          sBitmap.fontFace = $gameSystem.mainFontFace();
+          sBitmap.textColor = "#ffffff";
+          sBitmap.drawText(nameText, 10, 0, textWidth + 10, barHeight, "left");
+          this._lastDrawnNameText = nameText;
+        }
+
+        const scaleFactor = maxWidth / textWidth;
+        this._scaledTextSprite.scale.x = scaleFactor;
+        this._scaledTextSprite.scale.y = 1;
+        this._scaledTextSprite.x = 15;
+        this._scaledTextSprite.y = 0;
+        this._scaledTextSprite.visible = true;
+      } else {
+        if (this._scaledTextSprite) {
+          this._scaledTextSprite.visible = false;
+        }
       }
+
+      this.bitmap.drawText(nameText, 15, 0, w - 15, barHeight, "left");
+    }
 
       // HP numbers right-aligned on HP bar
       const hpBarRate = b.hp / Math.max(1, b.mhp);
@@ -1280,7 +1282,6 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       this.bitmap.fontBold = false;
       this.bitmap.textColor = mpBarColor1;
       this.bitmap.drawText(`${b.mp}`, 0, mpNumBarY, w - 5, mpNumH, "right");
-    }
   };
   const _Window_SkillList_drawSkillCost =
     Window_SkillList.prototype.drawSkillCost;
@@ -1363,7 +1364,7 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
       }
     }
   };
-  Window_Selectable.prototype.drawItemBackground = function (index) {};
+  Window_Selectable.prototype.drawItemBackground = function (index) { };
   const _Window_SkillList_drawItem = Window_SkillList.prototype.drawItem;
   Window_SkillList.prototype.drawItem = function (index) {
     if (this._actor) {
@@ -1402,115 +1403,115 @@ Window_BattleItem.prototype.drawItemName = function (item, x, y, width) {
     _Scene_Battle_createDisplayObjects.call(this);
     this.createTekkenHealthBars();
   };
-Scene_Battle.prototype.createTekkenHealthBars = function () {
-  this._tekkenHealthBarSprites = [];
+  Scene_Battle.prototype.createTekkenHealthBars = function () {
+    this._tekkenHealthBarSprites = [];
 
-  // Get responsive positions based on current resolution
-  const positions = getResponsiveBarPositions();
-  const aspectRatio = getAspectRatio();
+    // Get responsive positions based on current resolution
+    const positions = getResponsiveBarPositions();
+    const aspectRatio = getAspectRatio();
 
-  const partyMembers = $gameParty.battleMembers();
+    const partyMembers = $gameParty.battleMembers();
 
-  // Create Player Bars - stacked vertically at top left
-  const PCARD_W = aspectRatio === '16:9' ? 396 : 275;
-  const PCARD_H = 110;
-  const PCARD_SPACING = 0;
-  const PCARD_TOP = 10;
-  const PCARD_LEFT = 10;
+    // Create Player Bars - stacked vertically at top left
+    const PCARD_W = aspectRatio === '16:9' ? 396 : 275;
+    const PCARD_H = 110;
+    const PCARD_SPACING = 0;
+    const PCARD_TOP = 10;
+    const PCARD_LEFT = 10;
 
-  for (let i = 0; i < partyMembers.length; i += 1) {
-    const actor = partyMembers[i];
-    const sprite = new Sprite_TekkenBar(actor, true, PCARD_W, PCARD_H);
+    for (let i = 0; i < partyMembers.length; i += 1) {
+      const actor = partyMembers[i];
+      const sprite = new Sprite_TekkenBar(actor, true, PCARD_W, PCARD_H);
 
-    // cards stacked downward from top left; sprite.y is card bottom edge
-    sprite.x = PCARD_LEFT + playerBarX;
-    sprite.y = PCARD_TOP + PCARD_H + i * (PCARD_H + PCARD_SPACING);
+      // cards stacked downward from top left; sprite.y is card bottom edge
+      sprite.x = PCARD_LEFT + playerBarX;
+      sprite.y = PCARD_TOP + PCARD_H + i * (PCARD_H + PCARD_SPACING);
 
-    this.addChild(sprite);
-    this._tekkenHealthBarSprites.push(sprite);
-  }
-
-  // Reserve/inactive party members shown below active ones
-  const activeMemberIds = new Set(partyMembers.map(a => a.actorId()));
-  const inactiveMembers = $gameParty.members().filter(a => !activeMemberIds.has(a.actorId()));
-  for (let i = 0; i < inactiveMembers.length; i++) {
-    const actor = inactiveMembers[i];
-    const sprite = new Sprite_TekkenBar(actor, true, PCARD_W, PCARD_H, true);
-    sprite.x = PCARD_LEFT + playerBarX;
-    sprite.y = PCARD_TOP + PCARD_H + (partyMembers.length + i) * (PCARD_H + PCARD_SPACING);
-    this.addChild(sprite);
-    this._tekkenHealthBarSprites.push(sprite);
-  }
-
-  // Create Enemy Bars - right-aligned
-  const enemyRightX = Graphics.width - enemyLargeBarWidth - 80;
-  for (let i = 0; i < $gameTroop.members().length; i += 1) {
-    const enemy = $gameTroop.members()[i];
-    if (enemy.isAlive()) {
-      const sprite = new Sprite_TekkenBar(enemy, false, enemyLargeBarWidth);
-      sprite.x = enemyRightX;
-      sprite.y = positions.barsY + i * barSpacing;
       this.addChild(sprite);
       this._tekkenHealthBarSprites.push(sprite);
     }
-  }
-};
 
-
-
-
-Scene_Battle.prototype.createEnemyHPSprite = function(enemy) {
-  const sprite = new Sprite();
-  sprite._enemy = enemy;
-  sprite._lastHp = enemy.hp;
-  
-  sprite.bitmap = new Bitmap(200, 30);
-  sprite.bitmap.fontFace = $gameSystem.mainFontFace();
-  sprite.bitmap.fontSize = 18;
-  sprite.bitmap.fontBold = true;
-  sprite.bitmap.outlineColor = "black";
-  sprite.bitmap.outlineWidth = 3;
-  
-  // Position under the enemy battler with resolution awareness
-  const enemySprite = this._spriteset._enemySprites.find(s => s._battler === enemy);
-  if (enemySprite) {
-    sprite.x = enemySprite.x - 100;
-    sprite.y = enemySprite.y + enemySprite.height / 2 - 200;
-  }
-  
-  sprite.update = function() {
-    Sprite.prototype.update.call(this);
-    
-    if (!this._enemy || !this._enemy.isAlive()) {
-      this.visible = false;
-      return;
+    // Reserve/inactive party members shown below active ones
+    const activeMemberIds = new Set(partyMembers.map(a => a.actorId()));
+    const inactiveMembers = $gameParty.members().filter(a => !activeMemberIds.has(a.actorId()));
+    for (let i = 0; i < inactiveMembers.length; i++) {
+      const actor = inactiveMembers[i];
+      const sprite = new Sprite_TekkenBar(actor, true, PCARD_W, PCARD_H, true);
+      sprite.x = PCARD_LEFT + playerBarX;
+      sprite.y = PCARD_TOP + PCARD_H + (partyMembers.length + i) * (PCARD_H + PCARD_SPACING);
+      this.addChild(sprite);
+      this._tekkenHealthBarSprites.push(sprite);
     }
-    
-    if (this._enemy.hp !== this._lastHp) {
-      this.refreshHP();
-      this._lastHp = this._enemy.hp;
+
+    // Create Enemy Bars - right-aligned
+    const enemyRightX = Graphics.width - enemyLargeBarWidth - 80;
+    for (let i = 0; i < $gameTroop.members().length; i += 1) {
+      const enemy = $gameTroop.members()[i];
+      if (enemy.isAlive()) {
+        const sprite = new Sprite_TekkenBar(enemy, false, enemyLargeBarWidth);
+        sprite.x = enemyRightX;
+        sprite.y = positions.barsY + i * barSpacing;
+        this.addChild(sprite);
+        this._tekkenHealthBarSprites.push(sprite);
+      }
     }
   };
-  
-  sprite.refreshHP = function() {
-    this.bitmap.clear();
-    
-    const hp = this._enemy.hp;
-    const maxHp = this._enemy.mhp;
-    const hpRate = hp / Math.max(1, maxHp);
-    
-    let color = "#ffffff";
-    if (hpRate <= 0.25) color = "#ff4444";
-    else if (hpRate <= 0.5) color = "#ffff00";
-    else if (hpRate <= 0.75) color = "#ffaa00";
-    
-    this.bitmap.textColor = color;
-    this.bitmap.drawText(`${hp}`, 0, 0, 200, 30, "center");
+
+
+
+
+  Scene_Battle.prototype.createEnemyHPSprite = function (enemy) {
+    const sprite = new Sprite();
+    sprite._enemy = enemy;
+    sprite._lastHp = enemy.hp;
+
+    sprite.bitmap = new Bitmap(200, 30);
+    sprite.bitmap.fontFace = $gameSystem.mainFontFace();
+    sprite.bitmap.fontSize = 18;
+    sprite.bitmap.fontBold = true;
+    sprite.bitmap.outlineColor = "black";
+    sprite.bitmap.outlineWidth = 3;
+
+    // Position under the enemy battler with resolution awareness
+    const enemySprite = this._spriteset._enemySprites.find(s => s._battler === enemy);
+    if (enemySprite) {
+      sprite.x = enemySprite.x - 100;
+      sprite.y = enemySprite.y + enemySprite.height / 2 - 200;
+    }
+
+    sprite.update = function () {
+      Sprite.prototype.update.call(this);
+
+      if (!this._enemy || !this._enemy.isAlive()) {
+        this.visible = false;
+        return;
+      }
+
+      if (this._enemy.hp !== this._lastHp) {
+        this.refreshHP();
+        this._lastHp = this._enemy.hp;
+      }
+    };
+
+    sprite.refreshHP = function () {
+      this.bitmap.clear();
+
+      const hp = this._enemy.hp;
+      const maxHp = this._enemy.mhp;
+      const hpRate = hp / Math.max(1, maxHp);
+
+      let color = "#ffffff";
+      if (hpRate <= 0.25) color = "#ff4444";
+      else if (hpRate <= 0.5) color = "#ffff00";
+      else if (hpRate <= 0.75) color = "#ffaa00";
+
+      this.bitmap.textColor = color;
+      this.bitmap.drawText(`${hp}`, 0, 0, 200, 30, "center");
+    };
+
+    sprite.refreshHP();
+    return sprite;
   };
-  
-  sprite.refreshHP();
-  return sprite;
-};
 
   const _Scene_Battle_update = Scene_Battle.prototype.update;
   Scene_Battle.prototype.update = function () {
@@ -1612,11 +1613,11 @@ Scene_Battle.prototype.createEnemyHPSprite = function(enemy) {
   };
 
 
-// Add the helper method for individual skill commands
-Window_ActorCommand.prototype.addSkillCommand = function(skillTypeId) {
-  const name = $dataSystem.skillTypes[skillTypeId];
-  this.addCommand(name, "skill", true, skillTypeId);
-};
+  // Add the helper method for individual skill commands
+  Window_ActorCommand.prototype.addSkillCommand = function (skillTypeId) {
+    const name = $dataSystem.skillTypes[skillTypeId];
+    this.addCommand(name, "skill", true, skillTypeId);
+  };
   const _Scene_Battle_terminate = Scene_Battle.prototype.terminate;
   Scene_Battle.prototype.terminate = function () {
     _Scene_Battle_terminate.call(this);
@@ -1644,47 +1645,47 @@ Window_ActorCommand.prototype.addSkillCommand = function(skillTypeId) {
 
   // NEW: This function creates the animated background for Actors 2 & 3
   // MODIFIED: This function creates the animated background for Actors 2 & 3
-// MODIFIED: This function creates the animated background for Actors 2 & 3
-Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
-  // 1. Create the bitmap that will hold our square pattern
-  const patternBitmap = new Bitmap(128, 128);
-  const size = 16;
-  const darkGold = "#3b3100";
-  const black = "#0a0a0a";
+  // MODIFIED: This function creates the animated background for Actors 2 & 3
+  Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
+    // 1. Create the bitmap that will hold our square pattern
+    const patternBitmap = new Bitmap(128, 128);
+    const size = 16;
+    const darkGold = "#3b3100";
+    const black = "#0a0a0a";
 
-  // 2. Fill the bitmap with the pattern
-  for (let y = 0; y < patternBitmap.height; y += size) {
-    for (let x = 0; x < patternBitmap.width; x += size) {
-      const color = ((x + y) / size) % 2 === 0 ? darkGold : black;
-      patternBitmap.fillRect(x, y, size, size, color);
+    // 2. Fill the bitmap with the pattern
+    for (let y = 0; y < patternBitmap.height; y += size) {
+      for (let x = 0; x < patternBitmap.width; x += size) {
+        const color = ((x + y) / size) % 2 === 0 ? darkGold : black;
+        patternBitmap.fillRect(x, y, size, size, color);
+      }
     }
-  }
 
-  // 3. Create the TilingSprite for the moving background with reduced width
-  const barGfxWidth = 240; // CHANGED: Reduced from 290 to 240 (70px narrower)
-  const barGfxHeight = 68; // Height remains the same
-  this._backgroundPattern = new TilingSprite(patternBitmap);
-  
-  // CHANGED: Position much closer to left edge (was -playerBarX, now 5 pixels from left)
-  this._backgroundPattern.move(
-    5, // Very close to left border instead of -playerBarX
-    -barGfxHeight / 2,
-    barGfxWidth,
-    barGfxHeight
-  );
-  this._backgroundPattern.opacity = 128; // Make the pattern itself semi-transparent
-  this.addChild(this._backgroundPattern);
+    // 3. Create the TilingSprite for the moving background with reduced width
+    const barGfxWidth = 240; // CHANGED: Reduced from 290 to 240 (70px narrower)
+    const barGfxHeight = 68; // Height remains the same
+    this._backgroundPattern = new TilingSprite(patternBitmap);
 
-  // 4. Create the semi-transparent overlay to darken the pattern
-  const overlayBitmap = new Bitmap(barGfxWidth, barGfxHeight);
-  overlayBitmap.fillAll("rgba(0, 0, 0, 0.6)"); // 60% black overlay
-  this._backgroundOverlay = new Sprite(overlayBitmap);
-  
-  // CHANGED: Position overlay to match the pattern position
-  this._backgroundOverlay.x = 5; // Match the pattern position
-  this._backgroundOverlay.y = -barGfxHeight / 2;
-  this.addChild(this._backgroundOverlay);
-};
+    // CHANGED: Position much closer to left edge (was -playerBarX, now 5 pixels from left)
+    this._backgroundPattern.move(
+      5, // Very close to left border instead of -playerBarX
+      -barGfxHeight / 2,
+      barGfxWidth,
+      barGfxHeight
+    );
+    this._backgroundPattern.opacity = 128; // Make the pattern itself semi-transparent
+    this.addChild(this._backgroundPattern);
+
+    // 4. Create the semi-transparent overlay to darken the pattern
+    const overlayBitmap = new Bitmap(barGfxWidth, barGfxHeight);
+    overlayBitmap.fillAll("rgba(0, 0, 0, 0.6)"); // 60% black overlay
+    this._backgroundOverlay = new Sprite(overlayBitmap);
+
+    // CHANGED: Position overlay to match the pattern position
+    this._backgroundOverlay.x = 5; // Match the pattern position
+    this._backgroundOverlay.y = -barGfxHeight / 2;
+    this.addChild(this._backgroundOverlay);
+  };
   // MODIFIED: This now creates card-style layout for party members - aspect ratio aware
   Sprite_TekkenBar.prototype.createSimpleStatusDisplay = function () {
     this._simpleStatusDisplay = new Sprite();
@@ -1697,7 +1698,7 @@ Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
     this._simpleStatusDisplay.x = -playerBarX;
     this._simpleStatusDisplay.y = yOffset;
     this.addChild(this._simpleStatusDisplay);
-  
+
     // Store battler's initial state for comparison
     this._lastHp = this._battler.hp;
     this._lastMaxHp = this._battler.mhp;
@@ -1710,7 +1711,7 @@ Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
       .join(",");
     this._displayHp = this._battler.hp;
     this._damageChunkHp = this._battler.hp;
-  
+
     // Load bust image
     this._bustImage = null;
     this._shouldUseBust =
@@ -1720,7 +1721,7 @@ Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
     if (this._shouldUseBust) {
       const fallbackImage = ImageManager.loadBitmap('img/faces/', '7');
 
-      // Get bust image path using SPRITES_ASSOCIATION (supports Variables 106-109)
+      // Get bust image path using SpritesAssociation (supports Variables 106-109)
       const bustPath = getBustImagePath(this._battler);
 
       if (bustPath) {
@@ -1767,492 +1768,492 @@ Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
         });
       }
     }
-  
+
     this.refreshSimpleStatus();
   };
-  Sprite_TekkenBar.prototype.triggerDamageFlash = function() {
+  Sprite_TekkenBar.prototype.triggerDamageFlash = function () {
     if (!this._damageFlashSprite) return;
-    
+
     this._damageFlashTimer = 20; // 20 frames of flash
-    
+
     // Create red overlay
     const bitmap = this._damageFlashSprite.bitmap;
     bitmap.clear();
     bitmap.fillAll("#ff0000"); // Red color
-    
+
     this._damageFlashSprite.visible = true;
     this._damageFlashSprite.opacity = 200;
   };
   // MODIFIED: This now only draws the text and bust image
-// MODIFIED: This function creates the animated background for Actors 2 & 3 - covers info/bars area
-Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
-  // Checkerboard tile bitmap
-  const patternBitmap = new Bitmap(128, 128);
-  const size = 16;
-  const colorA = "#002a2a";
-  const colorB = "#060e0e";
-  for (let y = 0; y < patternBitmap.height; y += size) {
-    for (let x = 0; x < patternBitmap.width; x += size) {
-      patternBitmap.fillRect(x, y, size, size, ((x + y) / size) % 2 === 0 ? colorA : colorB);
+  // MODIFIED: This function creates the animated background for Actors 2 & 3 - covers info/bars area
+  Sprite_TekkenBar.prototype.createSimpleDisplayBackground = function () {
+    // Checkerboard tile bitmap
+    const patternBitmap = new Bitmap(128, 128);
+    const size = 16;
+    const colorA = "#002a2a";
+    const colorB = "#060e0e";
+    for (let y = 0; y < patternBitmap.height; y += size) {
+      for (let x = 0; x < patternBitmap.width; x += size) {
+        patternBitmap.fillRect(x, y, size, size, ((x + y) / size) % 2 === 0 ? colorA : colorB);
+      }
     }
-  }
 
-  // Cover the full card width (including face column)
-  const cardW = this._playerCardWidth || 160;
-  const cardH = this._playerCardHeight || 190;
-  const bgH   = cardH;
-  const bgX   = -playerBarX;
-  const bgW   = cardW;
-  const bgY   = -cardH;
+    // Cover the full card width (including face column)
+    const cardW = this._playerCardWidth || 160;
+    const cardH = this._playerCardHeight || 190;
+    const bgH = cardH;
+    const bgX = -playerBarX;
+    const bgW = cardW;
+    const bgY = -cardH;
 
-  if (this._isInactiveMember) {
-    // Plain solid dark background for reserve/inactive members
-    const plainBitmap = new Bitmap(bgW, bgH);
-    plainBitmap.fillRect(0, 0, bgW, bgH, "#000000");
-    this._backgroundPattern = new Sprite(plainBitmap);
-    this._backgroundPattern.x = bgX;
-    this._backgroundPattern.y = bgY;
-    this._backgroundPattern.opacity = 255;
+    if (this._isInactiveMember) {
+      // Plain solid dark background for reserve/inactive members
+      const plainBitmap = new Bitmap(bgW, bgH);
+      plainBitmap.fillRect(0, 0, bgW, bgH, "#000000");
+      this._backgroundPattern = new Sprite(plainBitmap);
+      this._backgroundPattern.x = bgX;
+      this._backgroundPattern.y = bgY;
+      this._backgroundPattern.opacity = 255;
+      this.addChild(this._backgroundPattern);
+      return;
+    }
+
+    // Solid base background always visible for non-inactive members
+    const solidBitmap = new Bitmap(bgW, bgH);
+    solidBitmap.fillRect(0, 0, bgW, bgH, "#000000");
+    this._solidBackground = new Sprite(solidBitmap);
+    this._solidBackground.opacity = 160;
+    this._solidBackground.x = bgX;
+    this._solidBackground.y = bgY;
+    this.addChild(this._solidBackground);
+
+    this._backgroundPattern = new TilingSprite(patternBitmap);
+    this._backgroundPattern.move(bgX, bgY, bgW, bgH);
+    this._backgroundPattern.opacity = 200;
     this.addChild(this._backgroundPattern);
-    return;
-  }
 
-  // Solid base background always visible for non-inactive members
-  const solidBitmap = new Bitmap(bgW, bgH);
-  solidBitmap.fillRect(0, 0, bgW, bgH, "#000000");
-  this._solidBackground = new Sprite(solidBitmap);
-  this._solidBackground.opacity = 160;
-  this._solidBackground.x = bgX;
-  this._solidBackground.y = bgY;
-  this.addChild(this._solidBackground);
+    const overlayBitmap = new Bitmap(bgW, bgH);
+    overlayBitmap.fillAll("rgba(0,0,0,0.35)");
+    this._backgroundOverlay = new Sprite(overlayBitmap);
+    this._backgroundOverlay.x = bgX;
+    this._backgroundOverlay.y = bgY;
+    this.addChild(this._backgroundOverlay);
+  };
 
-  this._backgroundPattern = new TilingSprite(patternBitmap);
-  this._backgroundPattern.move(bgX, bgY, bgW, bgH);
-  this._backgroundPattern.opacity = 200;
-  this.addChild(this._backgroundPattern);
+  // MODIFIED: This now just creates the foreground elements for the simple display
+  // MODIFIED: This now just creates the foreground elements for the simple display
+  Sprite_TekkenBar.prototype.refreshSimpleStatus = function () {
+    if (!this._simpleStatusDisplay || !this._battler) return;
+    const bitmap = this._simpleStatusDisplay.bitmap;
+    bitmap.clear();
+    const b = this._battler;
+    const name = b.name();
+    const hp = b.hp;
 
-  const overlayBitmap = new Bitmap(bgW, bgH);
-  overlayBitmap.fillAll("rgba(0,0,0,0.35)");
-  this._backgroundOverlay = new Sprite(overlayBitmap);
-  this._backgroundOverlay.x = bgX;
-  this._backgroundOverlay.y = bgY;
-  this.addChild(this._backgroundOverlay);
-};
+    bitmap.fontFace = $gameSystem.mainFontFace();
+    bitmap.fontSize = 22; // Slightly smaller font for better fit
+    bitmap.fontBold = true;
+    bitmap.outlineColor = "black";
+    bitmap.outlineWidth = 4; // Bolder outline for readability
+    const lineHeight = 24;
 
-// MODIFIED: This now just creates the foreground elements for the simple display
-// MODIFIED: This now just creates the foreground elements for the simple display
-Sprite_TekkenBar.prototype.refreshSimpleStatus = function () {
-  if (!this._simpleStatusDisplay || !this._battler) return;
-  const bitmap = this._simpleStatusDisplay.bitmap;
-  bitmap.clear();
-  const b = this._battler;
-  const name = b.name();
-  const hp = b.hp;
+    // Positioning constants
+    const barHeight = 68;
+    const totalAreaHeight = this._simpleStatusDisplay.bitmap.height;
+    const startY = (totalAreaHeight - barHeight) / 2; // Start drawing within the vertical center
 
-  bitmap.fontFace = $gameSystem.mainFontFace();
-  bitmap.fontSize = 22; // Slightly smaller font for better fit
-  bitmap.fontBold = true;
-  bitmap.outlineColor = "black";
-  bitmap.outlineWidth = 4; // Bolder outline for readability
-  const lineHeight = 24;
+    // CHANGED: Start drawing at the very edge (compensate for negative x position)
+    let x = 5; // Small padding from the actual screen edge
 
-  // Positioning constants
-  const barHeight = 68;
-  const totalAreaHeight = this._simpleStatusDisplay.bitmap.height;
-  const startY = (totalAreaHeight - barHeight) / 2; // Start drawing within the vertical center
-  
-  // CHANGED: Start drawing at the very edge (compensate for negative x position)
-  let x = 5; // Small padding from the actual screen edge
+    if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
+      // Calculate bust dimensions: new size is 889x1200, scale to fit in available space
+      // Available width is approximately 160px for the bust to leave room for stats
+      const maxBustWidth = 160;
+      const bustAspectRatio = this._bustImage.width / this._bustImage.height; // 889/1200 ≈ 0.74
+      let bustWidth = maxBustWidth;
+      let bustHeight = Math.round(maxBustWidth / bustAspectRatio); // Scale height proportionally
 
-  if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
-    // Calculate bust dimensions: new size is 889x1200, scale to fit in available space
-    // Available width is approximately 160px for the bust to leave room for stats
-    const maxBustWidth = 160;
-    const bustAspectRatio = this._bustImage.width / this._bustImage.height; // 889/1200 ≈ 0.74
-    let bustWidth = maxBustWidth;
-    let bustHeight = Math.round(maxBustWidth / bustAspectRatio); // Scale height proportionally
+      // Cap height to not exceed total bitmap height
+      const maxBustHeight = totalAreaHeight - 4;
+      if (bustHeight > maxBustHeight) {
+        bustHeight = maxBustHeight;
+        bustWidth = Math.round(bustHeight * bustAspectRatio);
+      }
 
-    // Cap height to not exceed total bitmap height
-    const maxBustHeight = totalAreaHeight - 4;
-    if (bustHeight > maxBustHeight) {
-      bustHeight = maxBustHeight;
-      bustWidth = Math.round(bustHeight * bustAspectRatio);
-    }
+      const bustY = startY + (barHeight - bustHeight) / 2; // Center bust vertically in the bar
+      bitmap.blt(
+        this._bustImage,
+        0,
+        0,
+        this._bustImage.width,
+        this._bustImage.height,
+        x,
+        bustY,
+        bustWidth,
+        bustHeight
+      );
 
-    const bustY = startY + (barHeight - bustHeight) / 2; // Center bust vertically in the bar
-    bitmap.blt(
-      this._bustImage,
-      0,
-      0,
-      this._bustImage.width,
-      this._bustImage.height,
-      x,
-      bustY,
-      bustWidth,
-      bustHeight
-    );
+      // Position stats to the right of the bust
+      const statX = x + bustWidth + 15;
 
-    // Position stats to the right of the bust
-    const statX = x + bustWidth + 15;
+      // Calculate vertical positions for text to be centered
+      const nameY = startY + 8;
+      const hpY = nameY + lineHeight + 2;
 
-    // Calculate vertical positions for text to be centered
-    const nameY = startY + 8;
-    const hpY = nameY + lineHeight + 2;
-
-    // Draw character name
-    bitmap.textColor = "#ffffff";
-    bitmap.drawText(
-      name,
-      statX,
-      nameY,
-      bitmap.width - statX,
-      lineHeight,
-      "left"
-    );
-
-    // Draw HP
-    const hpRate = hp / Math.max(1, b.mhp);
-    let hpNumberColor = "#ffffff";
-    if (hpRate <= 0.25) hpNumberColor = "#ff0000"; // Critical
-    else if (hpRate <= 0.5) hpNumberColor = "#ffff00"; // Low
-
-    bitmap.textColor = hpNumberColor;
-    const hpText = `${hp}/${b.mhp}`;
-    bitmap.drawText(
-      hpText,
-      statX,
-      hpY,
-      bitmap.width - statX,
-      lineHeight,
-      "left"
-    );
-
-    // Draw "HP" label next to the number
-    const hpTextWidth = bitmap.measureTextWidth(hpText);
-    bitmap.textColor = playerHPColor1;
-    bitmap.drawText(
-      " HP",
-      statX + hpTextWidth,
-      hpY,
-      bitmap.width - (statX + hpTextWidth),
-      lineHeight,
-      "left"
-    );
-
-    // Draw status tags on the far right
-    const statusTags = getStatusTags(this._battler);
-    if (statusTags.length > 0) {
-      const statusX = statX + 130;
-      const tagsText = statusTags.join(" ");
-      bitmap.textColor = "#ffdd99";
+      // Draw character name
+      bitmap.textColor = "#ffffff";
       bitmap.drawText(
-        `[${tagsText}]`,
-        statusX,
+        name,
+        statX,
         nameY,
-        bitmap.width - statusX,
+        bitmap.width - statX,
+        lineHeight,
+        "left"
+      );
+
+      // Draw HP
+      const hpRate = hp / Math.max(1, b.mhp);
+      let hpNumberColor = "#ffffff";
+      if (hpRate <= 0.25) hpNumberColor = "#ff0000"; // Critical
+      else if (hpRate <= 0.5) hpNumberColor = "#ffff00"; // Low
+
+      bitmap.textColor = hpNumberColor;
+      const hpText = `${hp}/${b.mhp}`;
+      bitmap.drawText(
+        hpText,
+        statX,
+        hpY,
+        bitmap.width - statX,
+        lineHeight,
+        "left"
+      );
+
+      // Draw "HP" label next to the number
+      const hpTextWidth = bitmap.measureTextWidth(hpText);
+      bitmap.textColor = playerHPColor1;
+      bitmap.drawText(
+        " HP",
+        statX + hpTextWidth,
+        hpY,
+        bitmap.width - (statX + hpTextWidth),
+        lineHeight,
+        "left"
+      );
+
+      // Draw status tags on the far right
+      const statusTags = getStatusTags(this._battler);
+      if (statusTags.length > 0) {
+        const statusX = statX + 130;
+        const tagsText = statusTags.join(" ");
+        bitmap.textColor = "#ffdd99";
+        bitmap.drawText(
+          `[${tagsText}]`,
+          statusX,
+          nameY,
+          bitmap.width - statusX,
+          lineHeight,
+          "left"
+        );
+      }
+    } else {
+      // Fallback if no bust is available
+      bitmap.textColor = "#ffffff";
+      bitmap.drawText(
+        name,
+        x,
+        startY + barHeight / 2 - lineHeight / 2,
+        bitmap.width,
         lineHeight,
         "left"
       );
     }
-  } else {
-    // Fallback if no bust is available
-    bitmap.textColor = "#ffffff";
-    bitmap.drawText(
-      name,
-      x,
-      startY + barHeight / 2 - lineHeight / 2,
-      bitmap.width,
-      lineHeight,
-      "left"
-    );
-  }
 
-  bitmap._baseTexture.update();
-};
-
-Sprite_TekkenBar.prototype.refreshSimpleStatus = function () {
-  if (!this._simpleStatusDisplay || !this._battler) return;
-  const bitmap = this._simpleStatusDisplay.bitmap;
-  bitmap.clear();
-  const b   = this._battler;
-  const W   = bitmap.width;
-  const H   = bitmap.height;
-  const ctx = bitmap.context;
-  const pad = 6;
-
-  // Face column on the left; orb sits right after face, bars start after orb
-  const FACE_W    = 110;
-  const GAP       = 8;
-  const ORB_GAP   = 4;
-  const barAreaX  = FACE_W + GAP + tpOrbSize + ORB_GAP;
-  const barW      = W - barAreaX - pad;
-
-  // Colors
-  const HP_COLOR  = "#ff3333";  const HP_BRIGHT = "#ff8888";  const HP_DARK   = "#660000";
-  const MP_COLOR  = "#3399ff";  const MP_BRIGHT = "#88ccff";  const MP_DARK   = "#003388";
-  const AP_COLOR  = "#ffcc00";  const AP_BRIGHT = "#ffee77";  const AP_DARK   = "#664400";
-
-  // Portrait – left column, cover-fit vertically
-  if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
-    const img = this._bustImage;
-    const imgAR = img.width / img.height;
-    let bw = FACE_W, bh = Math.round(FACE_W / imgAR);
-    if (bh > H) { bh = H; bw = Math.round(H * imgAR); }
-    bitmap.blt(img, 0, 0, img.width, img.height, 0, 0, bw, bh);
-  }
-
-  // Dead overlay
-  if (!b.isAlive()) bitmap.fillRect(0, 0, W, H, "rgba(0,0,0,0.6)");
-
-  bitmap.fontFace     = $gameSystem.mainFontFace();
-  bitmap.outlineColor = "#000000";
-  bitmap.outlineWidth = 3;
-
-  // Character name – top of bar column
-  bitmap.fontSize = 10;
-  bitmap.fontBold  = false;
-  bitmap.textColor = "#dddddd";
-  bitmap.drawText(b.name(), barAreaX, 4, barW, 12, "left");
-
-  let curY = 26;
-
-  // Draws one stat row: label | number | angled gradient bar | optional depletion chunk
-  // numBelow=true: draws bar first, then number underneath
-  const drawRow = (label, value, color, bright, dark, numColor, rate, numH, barH, trackColor, chunkRate = 0, numBelow = false) => {
-    if (!numBelow) {
-      bitmap.fontSize  = numH >= 18 ? 16 : numH >= 16 ? 15 : 14;
-      bitmap.fontBold  = true;
-      bitmap.textColor = numColor;
-      bitmap.drawText(String(value), barAreaX, curY, barW, numH, "right");
-      curY += numH + 2;
-    }
-    const ang    = barH + 2;
-    const fillW  = Math.round(barW * Math.max(0, Math.min(1, rate)));
-    const chunkW = Math.round(barW * Math.max(0, Math.min(1, chunkRate)));
-    // Track
-    ctx.fillStyle = trackColor;
-    ctx.beginPath();
-    ctx.moveTo(barAreaX,              curY);
-    ctx.lineTo(barAreaX + barW,       curY);
-    ctx.lineTo(barAreaX + barW - ang, curY + barH);
-    ctx.lineTo(barAreaX - ang,        curY + barH);
-    ctx.closePath();
-    ctx.fill();
-    // Depletion chunk (white trailing section)
-    if (chunkW > fillW) {
-      ctx.fillStyle = damageColor;
-      ctx.beginPath();
-      ctx.moveTo(barAreaX + fillW,         curY);
-      ctx.lineTo(barAreaX + chunkW,        curY);
-      ctx.lineTo(barAreaX + chunkW - ang,  curY + barH);
-      ctx.lineTo(barAreaX + fillW  - ang,  curY + barH);
-      ctx.closePath();
-      ctx.fill();
-    }
-    // Fill with horizontal gradient
-    if (fillW > 0) {
-      const grad = ctx.createLinearGradient(barAreaX, 0, barAreaX + barW, 0);
-      grad.addColorStop(0,   dark);
-      grad.addColorStop(0.3, color);
-      grad.addColorStop(0.65, bright);
-      grad.addColorStop(1,   dark);
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.moveTo(barAreaX,               curY);
-      ctx.lineTo(barAreaX + fillW,       curY);
-      ctx.lineTo(barAreaX + fillW - ang, curY + barH);
-      ctx.lineTo(barAreaX - ang,         curY + barH);
-      ctx.closePath();
-      ctx.fill();
-      // Shine strip
-      const hiH   = Math.max(1, Math.floor(barH / 2));
-      const hiAng = Math.floor(ang / 2);
-      ctx.save();
-      ctx.globalAlpha = 0.28;
-      ctx.fillStyle = "#ffffff";
-      ctx.beginPath();
-      ctx.moveTo(barAreaX,                 curY);
-      ctx.lineTo(barAreaX + fillW,         curY);
-      ctx.lineTo(barAreaX + fillW - hiAng, curY + hiH);
-      ctx.lineTo(barAreaX - hiAng,         curY + hiH);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
-    curY += barH + (numBelow ? 2 : 4);
-    if (numBelow) {
-      bitmap.fontSize  = numH >= 18 ? 16 : numH >= 16 ? 15 : 14;
-      bitmap.fontBold  = true;
-      bitmap.textColor = numColor;
-      bitmap.drawText(String(value), barAreaX, curY, barW, numH, "right");
-      curY += numH + 4;
-    }
+    bitmap._baseTexture.update();
   };
 
-  // HP
-  const hpDisplayRate = (this._displayHp   || b.hp) / Math.max(1, b.mhp);
-  const hpChunkRate   = (this._damageChunkHp || b.hp) / Math.max(1, b.mhp);
-  const hpRate = b.hp / Math.max(1, b.mhp);
-  let hpNumColor = "#ffffff";
-  if (hpRate <= 0.25) hpNumColor = "#ff4444";
-  else if (hpRate <= 0.5) hpNumColor = "#ffff00";
-  drawRow("HP", b.hp, HP_COLOR, HP_BRIGHT, HP_DARK, hpNumColor, hpDisplayRate, 20, 10, "rgba(100,0,0,0.4)", hpChunkRate);
+  Sprite_TekkenBar.prototype.refreshSimpleStatus = function () {
+    if (!this._simpleStatusDisplay || !this._battler) return;
+    const bitmap = this._simpleStatusDisplay.bitmap;
+    bitmap.clear();
+    const b = this._battler;
+    const W = bitmap.width;
+    const H = bitmap.height;
+    const ctx = bitmap.context;
+    const pad = 6;
 
-  // MP – bar drawn close below HP bar, number below MP bar
-  drawRow("MP", b.mp, MP_COLOR, MP_BRIGHT, MP_DARK, "#ffffff", b.mp / Math.max(1, b.mmp), 18, 10, "rgba(0,40,110,0.4)", 0, true);
+    // Face column on the left; orb sits right after face, bars start after orb
+    const FACE_W = 110;
+    const GAP = 8;
+    const ORB_GAP = 4;
+    const barAreaX = FACE_W + GAP + tpOrbSize + ORB_GAP;
+    const barW = W - barAreaX - pad;
 
-  bitmap._baseTexture.update();
-};
+    // Colors
+    const HP_COLOR = "#ff3333"; const HP_BRIGHT = "#ff8888"; const HP_DARK = "#660000";
+    const MP_COLOR = "#3399ff"; const MP_BRIGHT = "#88ccff"; const MP_DARK = "#003388";
+    const AP_COLOR = "#ffcc00"; const AP_BRIGHT = "#ffee77"; const AP_DARK = "#664400";
 
-// (legacy stubs kept for compatibility)
-Sprite_TekkenBar.prototype._drawVerticalCard = function (bitmap, b, cardWidth, cardHeight) {
-  const name = b.name();
-  const hp = b.hp;
-  const mp = b.mp;
-  const tp = b.tp;
-
-  // ===== TOP SECTION: Name and Level =====
-  const nameY = 6;
-  bitmap.fontSize = 14;
-  bitmap.fontBold = true;
-  bitmap.textColor = "#ffffff";
-  const actorLevel = b.level ? ` L.${b.level}` : "";
-  const nameWithLevel = name + actorLevel;
-  bitmap.drawText(nameWithLevel, 10, nameY, cardWidth - 20, 18, "center");
-
-  // ===== DIVIDER =====
-  const divider1Y = 27;
-  bitmap.fillRect(10, divider1Y, cardWidth - 20, 1, "#444444");
-
-  // ===== MIDDLE SECTION: Bust Image =====
-  if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
-    const imageAreaY = 32;
-    const imageAreaHeight = 135;
-
-    const maxBustWidth = cardWidth - 20;
-    const maxBustHeight = imageAreaHeight - 10;
-    const bustAspectRatio = this._bustImage.width / this._bustImage.height;
-
-    let bustWidth = maxBustWidth;
-    let bustHeight = Math.round(maxBustWidth / bustAspectRatio);
-
-    if (bustHeight > maxBustHeight) {
-      bustHeight = maxBustHeight;
-      bustWidth = Math.round(bustHeight * bustAspectRatio);
+    // Portrait – left column, cover-fit vertically
+    if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
+      const img = this._bustImage;
+      const imgAR = img.width / img.height;
+      let bw = FACE_W, bh = Math.round(FACE_W / imgAR);
+      if (bh > H) { bh = H; bw = Math.round(H * imgAR); }
+      bitmap.blt(img, 0, 0, img.width, img.height, 0, 0, bw, bh);
     }
 
-    const bustX = Math.floor((cardWidth - bustWidth) / 2);
-    const bustY = imageAreaY + Math.floor((imageAreaHeight - bustHeight) / 2);
+    // Dead overlay
+    if (!b.isAlive()) bitmap.fillRect(0, 0, W, H, "rgba(0,0,0,0.6)");
 
-    bitmap.blt(
-      this._bustImage,
-      0,
-      0,
-      this._bustImage.width,
-      this._bustImage.height,
-      bustX,
-      bustY,
-      bustWidth,
-      bustHeight
-    );
-  }
+    bitmap.fontFace = $gameSystem.mainFontFace();
+    bitmap.outlineColor = "#000000";
+    bitmap.outlineWidth = 3;
 
-  // ===== DIVIDER 2 =====
-  const divider2Y = 172;
-  bitmap.fillRect(10, divider2Y, cardWidth - 20, 1, "#444444");
+    // Character name – top of bar column
+    bitmap.fontSize = 10;
+    bitmap.fontBold = false;
+    bitmap.textColor = "#dddddd";
+    bitmap.drawText(b.name(), barAreaX, 4, barW, 12, "left");
 
-  // ===== BOTTOM SECTION: Stats Numbers Only =====
-  const statsStartY = 180;
-  bitmap.fontSize = 12;
-  bitmap.fontBold = true;
+    let curY = 26;
 
-  // HP
-  const hpRate = hp / Math.max(1, b.mhp);
-  let hpColor = "#00ff00";
-  if (hpRate <= 0.25) hpColor = "#ff0000";
-  else if (hpRate <= 0.5) hpColor = "#ffff00";
+    // Draws one stat row: label | number | angled gradient bar | optional depletion chunk
+    // numBelow=true: draws bar first, then number underneath
+    const drawRow = (label, value, color, bright, dark, numColor, rate, numH, barH, trackColor, chunkRate = 0, numBelow = false) => {
+      if (!numBelow) {
+        bitmap.fontSize = numH >= 18 ? 16 : numH >= 16 ? 15 : 14;
+        bitmap.fontBold = true;
+        bitmap.textColor = numColor;
+        bitmap.drawText(String(value), barAreaX, curY, barW, numH, "right");
+        curY += numH + 2;
+      }
+      const ang = barH + 2;
+      const fillW = Math.round(barW * Math.max(0, Math.min(1, rate)));
+      const chunkW = Math.round(barW * Math.max(0, Math.min(1, chunkRate)));
+      // Track
+      ctx.fillStyle = trackColor;
+      ctx.beginPath();
+      ctx.moveTo(barAreaX, curY);
+      ctx.lineTo(barAreaX + barW, curY);
+      ctx.lineTo(barAreaX + barW - ang, curY + barH);
+      ctx.lineTo(barAreaX - ang, curY + barH);
+      ctx.closePath();
+      ctx.fill();
+      // Depletion chunk (white trailing section)
+      if (chunkW > fillW) {
+        ctx.fillStyle = damageColor;
+        ctx.beginPath();
+        ctx.moveTo(barAreaX + fillW, curY);
+        ctx.lineTo(barAreaX + chunkW, curY);
+        ctx.lineTo(barAreaX + chunkW - ang, curY + barH);
+        ctx.lineTo(barAreaX + fillW - ang, curY + barH);
+        ctx.closePath();
+        ctx.fill();
+      }
+      // Fill with horizontal gradient
+      if (fillW > 0) {
+        const grad = ctx.createLinearGradient(barAreaX, 0, barAreaX + barW, 0);
+        grad.addColorStop(0, dark);
+        grad.addColorStop(0.3, color);
+        grad.addColorStop(0.65, bright);
+        grad.addColorStop(1, dark);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.moveTo(barAreaX, curY);
+        ctx.lineTo(barAreaX + fillW, curY);
+        ctx.lineTo(barAreaX + fillW - ang, curY + barH);
+        ctx.lineTo(barAreaX - ang, curY + barH);
+        ctx.closePath();
+        ctx.fill();
+        // Shine strip
+        const hiH = Math.max(1, Math.floor(barH / 2));
+        const hiAng = Math.floor(ang / 2);
+        ctx.save();
+        ctx.globalAlpha = 0.28;
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.moveTo(barAreaX, curY);
+        ctx.lineTo(barAreaX + fillW, curY);
+        ctx.lineTo(barAreaX + fillW - hiAng, curY + hiH);
+        ctx.lineTo(barAreaX - hiAng, curY + hiH);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+      curY += barH + (numBelow ? 2 : 4);
+      if (numBelow) {
+        bitmap.fontSize = numH >= 18 ? 16 : numH >= 16 ? 15 : 14;
+        bitmap.fontBold = true;
+        bitmap.textColor = numColor;
+        bitmap.drawText(String(value), barAreaX, curY, barW, numH, "right");
+        curY += numH + 4;
+      }
+    };
 
-  bitmap.textColor = hpColor;
-  const hpText = `${hp} HP`;
-  bitmap.drawText(hpText, 12, statsStartY, cardWidth - 24, 18, "left");
+    // HP
+    const hpDisplayRate = (this._displayHp || b.hp) / Math.max(1, b.mhp);
+    const hpChunkRate = (this._damageChunkHp || b.hp) / Math.max(1, b.mhp);
+    const hpRate = b.hp / Math.max(1, b.mhp);
+    let hpNumColor = "#ffffff";
+    if (hpRate <= 0.25) hpNumColor = "#ff4444";
+    else if (hpRate <= 0.5) hpNumColor = "#ffff00";
+    drawRow("HP", b.hp, HP_COLOR, HP_BRIGHT, HP_DARK, hpNumColor, hpDisplayRate, 20, 10, "rgba(100,0,0,0.4)", hpChunkRate);
 
-  // MP
-  bitmap.textColor = mpBarColor1;
-  const mpText = `${mp} MP`;
-  bitmap.drawText(mpText, 12, statsStartY + 28, cardWidth - 24, 18, "left");
+    // MP – bar drawn close below HP bar, number below MP bar
+    drawRow("MP", b.mp, MP_COLOR, MP_BRIGHT, MP_DARK, "#ffffff", b.mp / Math.max(1, b.mmp), 18, 10, "rgba(0,40,110,0.4)", 0, true);
 
-  // TP
-  bitmap.textColor = tpColor1;
-  const tpText = `${Math.floor(tp)} AP`;
-  bitmap.drawText(tpText, 12, statsStartY + 54, cardWidth - 24, 18, "left");
-};
+    bitmap._baseTexture.update();
+  };
 
-// HELPER: Draw horizontal rectangle layout for 4:3 aspect ratio
-Sprite_TekkenBar.prototype._drawHorizontalCard = function (bitmap, b, cardWidth, cardHeight) {
-  const name = b.name();
-  const hp = b.hp;
-  const mp = b.mp;
-  const tp = b.tp;
+  // (legacy stubs kept for compatibility)
+  Sprite_TekkenBar.prototype._drawVerticalCard = function (bitmap, b, cardWidth, cardHeight) {
+    const name = b.name();
+    const hp = b.hp;
+    const mp = b.mp;
+    const tp = b.tp;
 
-  // Face on the left side
-  const faceSize = cardHeight - 12;
-  if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
-    const bustAspectRatio = this._bustImage.width / this._bustImage.height;
-    let bustWidth = faceSreize;
-    let bustHeight = Math.round(faceSize / bustAspectRatio);
+    // ===== TOP SECTION: Name and Level =====
+    const nameY = 6;
+    bitmap.fontSize = 14;
+    bitmap.fontBold = true;
+    bitmap.textColor = "#ffffff";
+    const actorLevel = b.level ? ` L.${b.level}` : "";
+    const nameWithLevel = name + actorLevel;
+    bitmap.drawText(nameWithLevel, 10, nameY, cardWidth - 20, 18, "center");
 
-    if (bustHeight > faceSize) {
-      bustHeight = faceSize;
-      bustWidth = Math.round(faceSize * bustAspectRatio);
+    // ===== DIVIDER =====
+    const divider1Y = 27;
+    bitmap.fillRect(10, divider1Y, cardWidth - 20, 1, "#444444");
+
+    // ===== MIDDLE SECTION: Bust Image =====
+    if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
+      const imageAreaY = 32;
+      const imageAreaHeight = 135;
+
+      const maxBustWidth = cardWidth - 20;
+      const maxBustHeight = imageAreaHeight - 10;
+      const bustAspectRatio = this._bustImage.width / this._bustImage.height;
+
+      let bustWidth = maxBustWidth;
+      let bustHeight = Math.round(maxBustWidth / bustAspectRatio);
+
+      if (bustHeight > maxBustHeight) {
+        bustHeight = maxBustHeight;
+        bustWidth = Math.round(bustHeight * bustAspectRatio);
+      }
+
+      const bustX = Math.floor((cardWidth - bustWidth) / 2);
+      const bustY = imageAreaY + Math.floor((imageAreaHeight - bustHeight) / 2);
+
+      bitmap.blt(
+        this._bustImage,
+        0,
+        0,
+        this._bustImage.width,
+        this._bustImage.height,
+        bustX,
+        bustY,
+        bustWidth,
+        bustHeight
+      );
     }
 
-    const bustX = 6 + Math.floor((faceSize - bustWidth) / 2);
-    const bustY = 6 + Math.floor((faceSize - bustHeight) / 2);
+    // ===== DIVIDER 2 =====
+    const divider2Y = 172;
+    bitmap.fillRect(10, divider2Y, cardWidth - 20, 1, "#444444");
 
-    bitmap.blt(
-      this._bustImage,
-      0,
-      0,
-      this._bustImage.width,
-      this._bustImage.height,
-      bustX,
-      bustY,
-      bustWidth,
-      bustHeight
-    );
-  }
+    // ===== BOTTOM SECTION: Stats Numbers Only =====
+    const statsStartY = 180;
+    bitmap.fontSize = 12;
+    bitmap.fontBold = true;
 
-  // Stats on the right side
-  const statsX = faceSize + 15;
-  const statsStartY = 8;
+    // HP
+    const hpRate = hp / Math.max(1, b.mhp);
+    let hpColor = "#00ff00";
+    if (hpRate <= 0.25) hpColor = "#ff0000";
+    else if (hpRate <= 0.5) hpColor = "#ffff00";
 
-  // Name and Level
-  bitmap.fontSize = 13;
-  bitmap.fontBold = true;
-  bitmap.textColor = "#ffffff";
-  const actorLevel = b.level ? ` L.${b.level}` : "";
-  const nameWithLevel = name + actorLevel;
-  bitmap.drawText(nameWithLevel, statsX, statsStartY, cardWidth - statsX - 10, 16, "left");
+    bitmap.textColor = hpColor;
+    const hpText = `${hp} HP`;
+    bitmap.drawText(hpText, 12, statsStartY, cardWidth - 24, 18, "left");
 
-  // HP
-  const hpRate = hp / Math.max(1, b.mhp);
-  let hpColor = "#00ff00";
-  if (hpRate <= 0.25) hpColor = "#ff0000";
-  else if (hpRate <= 0.5) hpColor = "#ffff00";
+    // MP
+    bitmap.textColor = mpBarColor1;
+    const mpText = `${mp} MP`;
+    bitmap.drawText(mpText, 12, statsStartY + 28, cardWidth - 24, 18, "left");
 
-  bitmap.fontSize = 11;
-  bitmap.textColor = hpColor;
-  const hpText = `${hp} HP`;
-  bitmap.drawText(hpText, statsX, statsStartY + 28, cardWidth - statsX - 10, 14, "left");
+    // TP
+    bitmap.textColor = tpColor1;
+    const tpText = `${Math.floor(tp)} AP`;
+    bitmap.drawText(tpText, 12, statsStartY + 54, cardWidth - 24, 18, "left");
+  };
 
-  // MP
-  bitmap.textColor = mpBarColor1;
-  const mpText = `${mp} MP`;
-  bitmap.drawText(mpText, statsX, statsStartY + 50, cardWidth - statsX - 10, 14, "left");
+  // HELPER: Draw horizontal rectangle layout for 4:3 aspect ratio
+  Sprite_TekkenBar.prototype._drawHorizontalCard = function (bitmap, b, cardWidth, cardHeight) {
+    const name = b.name();
+    const hp = b.hp;
+    const mp = b.mp;
+    const tp = b.tp;
 
-  // TP
-  bitmap.textColor = tpColor1;
-  const tpText = `${Math.floor(tp)} AP`;
-  bitmap.drawText(tpText, statsX, statsStartY + 72, cardWidth - statsX - 10, 14, "left");
-};
+    // Face on the left side
+    const faceSize = cardHeight - 12;
+    if (this._shouldUseBust && this._bustImage && this._bustImage.isReady()) {
+      const bustAspectRatio = this._bustImage.width / this._bustImage.height;
+      let bustWidth = faceSreize;
+      let bustHeight = Math.round(faceSize / bustAspectRatio);
+
+      if (bustHeight > faceSize) {
+        bustHeight = faceSize;
+        bustWidth = Math.round(faceSize * bustAspectRatio);
+      }
+
+      const bustX = 6 + Math.floor((faceSize - bustWidth) / 2);
+      const bustY = 6 + Math.floor((faceSize - bustHeight) / 2);
+
+      bitmap.blt(
+        this._bustImage,
+        0,
+        0,
+        this._bustImage.width,
+        this._bustImage.height,
+        bustX,
+        bustY,
+        bustWidth,
+        bustHeight
+      );
+    }
+
+    // Stats on the right side
+    const statsX = faceSize + 15;
+    const statsStartY = 8;
+
+    // Name and Level
+    bitmap.fontSize = 13;
+    bitmap.fontBold = true;
+    bitmap.textColor = "#ffffff";
+    const actorLevel = b.level ? ` L.${b.level}` : "";
+    const nameWithLevel = name + actorLevel;
+    bitmap.drawText(nameWithLevel, statsX, statsStartY, cardWidth - statsX - 10, 16, "left");
+
+    // HP
+    const hpRate = hp / Math.max(1, b.mhp);
+    let hpColor = "#00ff00";
+    if (hpRate <= 0.25) hpColor = "#ff0000";
+    else if (hpRate <= 0.5) hpColor = "#ffff00";
+
+    bitmap.fontSize = 11;
+    bitmap.textColor = hpColor;
+    const hpText = `${hp} HP`;
+    bitmap.drawText(hpText, statsX, statsStartY + 28, cardWidth - statsX - 10, 14, "left");
+
+    // MP
+    bitmap.textColor = mpBarColor1;
+    const mpText = `${mp} MP`;
+    bitmap.drawText(mpText, statsX, statsStartY + 50, cardWidth - statsX - 10, 14, "left");
+
+    // TP
+    bitmap.textColor = tpColor1;
+    const tpText = `${Math.floor(tp)} AP`;
+    bitmap.drawText(tpText, statsX, statsStartY + 72, cardWidth - statsX - 10, 14, "left");
+  };
 })();

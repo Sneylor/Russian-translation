@@ -1136,6 +1136,7 @@
     }
 
     function scanEventPuzzleComments(event) {
+        if (!event || typeof event.event !== 'function' || !event.event()) return;
         const page = event.page && event.page();
         if (!page || !page.list) return;
         const id = event.eventId();

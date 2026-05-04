@@ -43,10 +43,10 @@
 
   const { isWaterBiome } = BeachGen;
 
-  // Get BIOMES from ProceduralMapDB
+  // Get Biomes from ProceduralMapDB
   function getBiomes() {
-    if (window.WorldGen && window.WorldGen.BIOMES) {
-      return window.WorldGen.BIOMES;
+    if (window.WorldGen && window.WorldGen.Biomes) {
+      return window.WorldGen.Biomes;
     }
     return [];
   }
@@ -55,7 +55,7 @@
   const PROC_MAP_HEIGHT = 128;
   const PROC_MAP_ID = 636; // Procedural map ID
   const GRID_UNIT = 8; // Base grid unit
-  
+
   // OPTIMIZATION: In-memory cache for map data to avoid disk reads
   const prefabCache = new Map();
 
@@ -63,8 +63,8 @@
    * Get biome by name
    */
   function getBiomeByName(biomeName) {
-    const BIOMES = getBiomes();
-    return BIOMES.find(b => b.name === biomeName);
+    const Biomes = getBiomes();
+    return Biomes.find(b => b.name === biomeName);
   }
 
   /**
@@ -107,11 +107,11 @@
     const satWidth = width + 1;
     const satHeight = height + 1;
     const sat = new Int32Array(satWidth * satHeight).fill(0);
-    
+
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         const isOccupied = occupiedMapData[y * width + x] === 1 ? 1 : 0;
-        
+
         // Formula: SAT[y+1][x+1] = pixel + Left + Top - TopLeft
         const left = sat[(y + 1) * satWidth + x];
         const top = sat[y * satWidth + (x + 1)];
@@ -174,7 +174,7 @@
    * SAT allows us to check a rectangular area for roads in 4 lookups instead of W*H lookups.
    * Also checks for water tile overlap (unless in Ocean biome).
    */
-function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satData, SPACING, waterSatData) {
+  function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satData, SPACING, waterSatData) {
     // 1. Bounds Check
     if (x < 0 || y < 0 || x + prefabWidth > PROC_MAP_WIDTH || y + prefabHeight > PROC_MAP_HEIGHT) {
       return false;
@@ -215,21 +215,21 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
     // 3. Strict Prefab Overlap Check (AABB)
     if (occupiedAreas && occupiedAreas.length > 0) {
       const spacing = SPACING !== undefined ? SPACING : 1;
-      
+
       for (let i = 0; i < occupiedAreas.length; i++) {
         const other = occupiedAreas[i];
-        
+
         // Check if the two rectangles overlap (including spacing buffer)
         // We add spacing to both sides of the check to ensure a clear gap
         const noOverlap = (
-            x >= other.x + other.width + spacing ||    // To the right
-            x + prefabWidth + spacing <= other.x ||    // To the left
-            y >= other.y + other.height + spacing ||   // Below
-            y + prefabHeight + spacing <= other.y      // Above
+          x >= other.x + other.width + spacing ||    // To the right
+          x + prefabWidth + spacing <= other.x ||    // To the left
+          y >= other.y + other.height + spacing ||   // Below
+          y + prefabHeight + spacing <= other.y      // Above
         );
 
         if (!noOverlap) {
-            return false; // Collision detected
+          return false; // Collision detected
         }
       }
     }
@@ -249,9 +249,9 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
     const positions = [];
     const isCity = biomeName && biomeName.toLowerCase().includes("city");
     const isVillage = biomeName && biomeName.toLowerCase().includes("village");
-    
+
     // STRICT SPACING: Ensure at least 1 tile gap between all prefabs
-    const SPACING = 1; 
+    const SPACING = 1;
     const allPlacedRects = [];
 
     // Village biomes use placement hints from structure generator
@@ -344,7 +344,7 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
           for (const corner of corners) {
             // Constrain to map bounds
             if (corner.x < 0 || corner.y < 0) continue;
-            
+
             // Constrain corner logic to be relatively close to the lot
             const cx = Math.max(lot.x - 2, Math.min(corner.x, lot.x + lot.w - prefab.width + 2));
             const cy = Math.max(lot.y - 2, Math.min(corner.y, lot.y + lot.h - prefab.height + 2));
@@ -391,7 +391,7 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
         if (gridWidth > gridUnitsWide && gridHeight > gridUnitsTall) {
           const gridX = Math.floor(rng() * (gridWidth - gridUnitsWide));
           const gridY = Math.floor(rng() * (gridHeight - gridUnitsTall));
-          
+
           if (sectorOccupied[gridY * gridWidth + gridX] === 1) continue;
 
           const tileX = gridX * GRID_UNIT;
@@ -399,13 +399,13 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
 
           // Pass 0 as spacing here if needed, but safer to use SPACING (1)
           if (canPlacePrefabAt(tileX, tileY, size.width, size.height, allPlacedRects, satData, SPACING, waterSatData)) {
-            
+
             for (let gy = gridY; gy < gridY + gridUnitsTall; gy++) {
-               for (let gx = gridX; gx < gridX + gridUnitsWide; gx++) {
-                 if(gy < gridHeight && gx < gridWidth) {
-                   sectorOccupied[gy * gridWidth + gx] = 1;
-                 }
-               }
+              for (let gx = gridX; gx < gridX + gridUnitsWide; gx++) {
+                if (gy < gridHeight && gx < gridWidth) {
+                  sectorOccupied[gy * gridWidth + gx] = 1;
+                }
+              }
             }
 
             positions.push({
@@ -443,7 +443,7 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
     const prefabHeight = prefabMap.height;
 
     if (position.x + prefabWidth > PROC_MAP_WIDTH ||
-        position.y + prefabHeight > PROC_MAP_HEIGHT) {
+      position.y + prefabHeight > PROC_MAP_HEIGHT) {
       return;
     }
 
@@ -513,7 +513,7 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
     // RNG Setup
     const coordSeed = (worldCoords.x * 73856093) ^ (worldCoords.y * 19349663);
     const biomeSeed = biomeName.charCodeAt(0) * 73856093 ^
-                      biomeName.charCodeAt(Math.min(1, biomeName.length - 1)) * 19349663;
+      biomeName.charCodeAt(Math.min(1, biomeName.length - 1)) * 19349663;
     const seed = coordSeed ^ biomeSeed;
     const rng = createSeededRandom(seed);
 
@@ -540,7 +540,7 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
 
       if (prefabMap) {
         if (prefabMap.width > 0 && prefabMap.height > 0 &&
-            prefabMap.width <= PROC_MAP_WIDTH && prefabMap.height <= PROC_MAP_HEIGHT) {
+          prefabMap.width <= PROC_MAP_WIDTH && prefabMap.height <= PROC_MAP_HEIGHT) {
           prefabsWithSizes.push({
             mapId: prefabMapId,
             width: prefabMap.width,
@@ -562,53 +562,53 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
     let satData = null;
 
     if (shouldCheckRoads) {
-        // Optimization: Use Int8Array for lower memory footprint
-        const occupiedMapData = new Int8Array(PROC_MAP_WIDTH * PROC_MAP_HEIGHT);
-        const roadTileIds = new Set();
+      // Optimization: Use Int8Array for lower memory footprint
+      const occupiedMapData = new Int8Array(PROC_MAP_WIDTH * PROC_MAP_HEIGHT);
+      const roadTileIds = new Set();
 
-        // Identify tiles (Logic preserved)
-        const tilesetIds = biome.tilesetIds || [biome.tilesetId];
-        try {
-          const Cache = window.ProcGenUtils && window.ProcGenUtils.Cache;
-          if (Cache) {
-            for (const tilesetId of tilesetIds) {
-              try {
-                const features = Cache.getTilesetFeatures(tilesetId);
-                if (features) {
-                  for (const [name, featureList] of Object.entries(features)) {
-                    const lowerName = name.toLowerCase();
-                    if (lowerName.includes("road") || lowerName.includes("dashed")) {
-                      if (Array.isArray(featureList)) {
-                        featureList.forEach(v => {
-                          if (v.type === "single") {
-                            roadTileIds.add(v.tileId);
-                          } else if (v.type === "multi" && v.tiles) {
-                            v.tiles.forEach(row => row.forEach(id => roadTileIds.add(id)));
-                          }
-                        });
-                      }
+      // Identify tiles (Logic preserved)
+      const tilesetIds = biome.tilesetIds || [biome.tilesetId];
+      try {
+        const Cache = window.ProcGenUtils && window.ProcGenUtils.Cache;
+        if (Cache) {
+          for (const tilesetId of tilesetIds) {
+            try {
+              const features = Cache.getTilesetFeatures(tilesetId);
+              if (features) {
+                for (const [name, featureList] of Object.entries(features)) {
+                  const lowerName = name.toLowerCase();
+                  if (lowerName.includes("road") || lowerName.includes("dashed")) {
+                    if (Array.isArray(featureList)) {
+                      featureList.forEach(v => {
+                        if (v.type === "single") {
+                          roadTileIds.add(v.tileId);
+                        } else if (v.type === "multi" && v.tiles) {
+                          v.tiles.forEach(row => row.forEach(id => roadTileIds.add(id)));
+                        }
+                      });
                     }
                   }
                 }
-              } catch (e) {}
-            }
+              }
+            } catch (e) { }
           }
-        } catch (e) {}
-
-        // OPTIMIZED ROAD SCANNING LOOP
-        const layerSize = PROC_MAP_WIDTH * PROC_MAP_HEIGHT;
-        for (let i = 0; i < layerSize; i++) {
-            // Check Layer 0, 1, 2, 3 directly
-            if (roadTileIds.has(mapData[i]) || 
-                roadTileIds.has(mapData[i + layerSize]) || 
-                roadTileIds.has(mapData[i + layerSize * 2]) || 
-                roadTileIds.has(mapData[i + layerSize * 3])) {
-                occupiedMapData[i] = 1;
-            }
         }
+      } catch (e) { }
 
-        // Build the Summed Area Table (SAT)
-        satData = buildSummedAreaTable(occupiedMapData, PROC_MAP_WIDTH, PROC_MAP_HEIGHT);
+      // OPTIMIZED ROAD SCANNING LOOP
+      const layerSize = PROC_MAP_WIDTH * PROC_MAP_HEIGHT;
+      for (let i = 0; i < layerSize; i++) {
+        // Check Layer 0, 1, 2, 3 directly
+        if (roadTileIds.has(mapData[i]) ||
+          roadTileIds.has(mapData[i + layerSize]) ||
+          roadTileIds.has(mapData[i + layerSize * 2]) ||
+          roadTileIds.has(mapData[i + layerSize * 3])) {
+          occupiedMapData[i] = 1;
+        }
+      }
+
+      // Build the Summed Area Table (SAT)
+      satData = buildSummedAreaTable(occupiedMapData, PROC_MAP_WIDTH, PROC_MAP_HEIGHT);
     }
 
     // --- CONDITIONAL WATER DETECTION ---
@@ -617,54 +617,54 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
     let waterSatData = null;
 
     if (!isOceanBiome) {
-        // Optimization: Use Int8Array for lower memory footprint
-        const waterOccupiedMapData = new Int8Array(PROC_MAP_WIDTH * PROC_MAP_HEIGHT);
-        const waterTileIds = new Set();
+      // Optimization: Use Int8Array for lower memory footprint
+      const waterOccupiedMapData = new Int8Array(PROC_MAP_WIDTH * PROC_MAP_HEIGHT);
+      const waterTileIds = new Set();
 
-        // Identify water tiles
-        const tilesetIds = biome.tilesetIds || [biome.tilesetId];
-        try {
-          const Cache = window.ProcGenUtils && window.ProcGenUtils.Cache;
-          if (Cache) {
-            for (const tilesetId of tilesetIds) {
-              try {
-                const features = Cache.getTilesetFeatures(tilesetId);
-                if (features) {
-                  for (const [name, featureList] of Object.entries(features)) {
-                    const lowerName = name.toLowerCase();
-                    // Check for water-related features
-                    if (lowerName.includes("water") || lowerName.includes("ocean") || lowerName.includes("beach")) {
-                      if (Array.isArray(featureList)) {
-                        featureList.forEach(v => {
-                          if (v.type === "single") {
-                            waterTileIds.add(v.tileId);
-                          } else if (v.type === "multi" && v.tiles) {
-                            v.tiles.forEach(row => row.forEach(id => waterTileIds.add(id)));
-                          }
-                        });
-                      }
+      // Identify water tiles
+      const tilesetIds = biome.tilesetIds || [biome.tilesetId];
+      try {
+        const Cache = window.ProcGenUtils && window.ProcGenUtils.Cache;
+        if (Cache) {
+          for (const tilesetId of tilesetIds) {
+            try {
+              const features = Cache.getTilesetFeatures(tilesetId);
+              if (features) {
+                for (const [name, featureList] of Object.entries(features)) {
+                  const lowerName = name.toLowerCase();
+                  // Check for water-related features
+                  if (lowerName.includes("water") || lowerName.includes("ocean") || lowerName.includes("beach")) {
+                    if (Array.isArray(featureList)) {
+                      featureList.forEach(v => {
+                        if (v.type === "single") {
+                          waterTileIds.add(v.tileId);
+                        } else if (v.type === "multi" && v.tiles) {
+                          v.tiles.forEach(row => row.forEach(id => waterTileIds.add(id)));
+                        }
+                      });
                     }
                   }
                 }
-              } catch (e) {}
-            }
+              }
+            } catch (e) { }
           }
-        } catch (e) {}
-
-        // OPTIMIZED WATER SCANNING LOOP
-        const layerSize = PROC_MAP_WIDTH * PROC_MAP_HEIGHT;
-        for (let i = 0; i < layerSize; i++) {
-            // Check Layer 0, 1, 2, 3 directly
-            if (waterTileIds.has(mapData[i]) ||
-                waterTileIds.has(mapData[i + layerSize]) ||
-                waterTileIds.has(mapData[i + layerSize * 2]) ||
-                waterTileIds.has(mapData[i + layerSize * 3])) {
-                waterOccupiedMapData[i] = 1;
-            }
         }
+      } catch (e) { }
 
-        // Build the Summed Area Table (SAT) for water
-        waterSatData = buildSummedAreaTable(waterOccupiedMapData, PROC_MAP_WIDTH, PROC_MAP_HEIGHT);
+      // OPTIMIZED WATER SCANNING LOOP
+      const layerSize = PROC_MAP_WIDTH * PROC_MAP_HEIGHT;
+      for (let i = 0; i < layerSize; i++) {
+        // Check Layer 0, 1, 2, 3 directly
+        if (waterTileIds.has(mapData[i]) ||
+          waterTileIds.has(mapData[i + layerSize]) ||
+          waterTileIds.has(mapData[i + layerSize * 2]) ||
+          waterTileIds.has(mapData[i + layerSize * 3])) {
+          waterOccupiedMapData[i] = 1;
+        }
+      }
+
+      // Build the Summed Area Table (SAT) for water
+      waterSatData = buildSummedAreaTable(waterOccupiedMapData, PROC_MAP_WIDTH, PROC_MAP_HEIGHT);
     }
 
     const blockHints = allOtherData?.blockHints;
@@ -693,10 +693,10 @@ function canPlacePrefabAt(x, y, prefabWidth, prefabHeight, occupiedAreas, satDat
                 allFeatures[name] = allFeatures[name].concat(tiles);
               }
             }
-          } catch (e) {}
+          } catch (e) { }
         }
       }
-    } catch (e) {}
+    } catch (e) { }
 
     const nonTerrainTileIds = hasFeatures ? getNonTerrainFeatureTileIds(biome, allFeatures) : [];
 

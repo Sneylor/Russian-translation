@@ -48,13 +48,13 @@
 
     // Alias Game_Map.setup to calculate the median level on map load.
     const _Game_Map_setup = Game_Map.prototype.setup;
-    Game_Map.prototype.setup = function(mapId) {
+    Game_Map.prototype.setup = function (mapId) {
         _Game_Map_setup.call(this, mapId);
         this.calculateMedianEncounterLevel();
     };
 
     // Add a new method to Game_Map to perform the calculation.
-    Game_Map.prototype.calculateMedianEncounterLevel = function() {
+    Game_Map.prototype.calculateMedianEncounterLevel = function () {
         this._medianEncounterLevel = null;
         const encounterList = this.encounterList();
         if (!encounterList || encounterList.length === 0) {
@@ -95,7 +95,7 @@
     };
 
     // Helper method to get the map name without numeric prefix
-    Game_Map.prototype.getCleanMapName = function() {
+    Game_Map.prototype.getCleanMapName = function () {
         const mapInfo = $dataMapInfos[this._mapId];
         if (!mapInfo || !mapInfo.name) {
             return '';
@@ -106,7 +106,7 @@
 
     // Alias Game_Map.displayName to append the calculated level.
     const _Game_Map_displayName = Game_Map.prototype.displayName;
-    Game_Map.prototype.displayName = function() {
+    Game_Map.prototype.displayName = function () {
         let mapName = _Game_Map_displayName.call(this);
 
         // If display name is empty, fallback to cleaned map name
@@ -115,12 +115,12 @@
         }
 
         // Check for hardcoded biome name overrides for procedural maps
-        if (window.WorldGen && window.WorldGen.HARDCODED_BIOME_NAMES) {
+        if (window.WorldGen && window.WorldGen.HardcodedBiomeNames) {
             const procGenData = $gameSystem._procGenData;
             if (procGenData && procGenData.originX !== undefined && procGenData.originY !== undefined) {
                 const coordKey = `${procGenData.originX},${procGenData.originY}`;
-                if (window.WorldGen.HARDCODED_BIOME_NAMES[coordKey]) {
-                    mapName = window.WorldGen.HARDCODED_BIOME_NAMES[coordKey];
+                if (window.WorldGen.HardcodedBiomeNames[coordKey]) {
+                    mapName = window.WorldGen.HardcodedBiomeNames[coordKey];
                 }
             }
         }
@@ -138,7 +138,7 @@
     // Override the map name window creation to use our custom window.
 
     const _Scene_Map_createMapNameWindow = Scene_Map.prototype.createMapNameWindow;
-    Scene_Map.prototype.createMapNameWindow = function() {
+    Scene_Map.prototype.createMapNameWindow = function () {
         // Use our custom window instead of the default one
         const rect = this.mapNameWindowRect();
         this._mapNameWindow = new Window_MapNameWithBorder(rect);
@@ -185,24 +185,24 @@
                 const bitmap = new Bitmap(1, 1);
                 bitmap.fontSize = this.contents.fontSize;
                 const textWidth = bitmap.measureTextWidth(text);
-                
+
                 // Measure a sample word to get average word width
                 const sampleWordWidth = bitmap.measureTextWidth("Sample");
                 bitmap.destroy();
-                
+
                 // Calculate new window dimensions: add space for one extra word
                 const padding = this.padding * 2;
                 const oneWordSpace = sampleWordWidth + 100; // One word + spacing
                 const newWidth = textWidth + padding + oneWordSpace;
                 const x = 20;
-                
+
                 // Resize the window
                 this.move(x, this.y, newWidth, this.height);
-                
+
                 // CRITICAL: Recreate contents bitmap after resizing
                 this.createContents();
             }
-            
+
             // Now refresh to draw the text
             this.refresh();
             this._showCount = 150;

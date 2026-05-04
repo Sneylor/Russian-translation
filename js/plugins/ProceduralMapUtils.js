@@ -49,7 +49,7 @@
   const PROC_MAP_HEIGHT = 128;
   const DEBUG_MODE = Utils.isOptionValid("test");
   const BORDER_DETECTION_RANGE = 3;
-  const { BIOMES, NON_PROCEDURAL_COORDINATES } =
+  const { Biomes, NonProceduralCoordinates } =
     window.WorldGen;
 
   // ===== PERFORMANCE CACHE =====
@@ -201,7 +201,7 @@
   // ===== BIOME LOOKUP FUNCTIONS =====
 
   /**
-   * Get biome for tile position on world map using biomeIds from BIOMES
+   * Get biome for tile position on world map using biomeIds from Biomes
    */
   function getBiomeForWorldTile(worldTileId) {
     const progressiveId = getTileIdToProgressiveId(worldTileId);
@@ -209,7 +209,7 @@
       return "Fields";
     }
 
-    for (const biome of BIOMES) {
+    for (const biome of Biomes) {
       if (biome.biomeIds && biome.biomeIds.includes(progressiveId)) {
         return biome.name;
       }
@@ -219,7 +219,7 @@
   }
 
   /**
-   * Get road direction from world tile using biomeIds from BIOMES
+   * Get road direction from world tile using biomeIds from Biomes
    */
   function getRoadDirectionFromWorldTile(worldTileId) {
     const progressiveId = getTileIdToProgressiveId(worldTileId);
@@ -228,7 +228,7 @@
       return null;
     }
 
-    for (const biome of BIOMES) {
+    for (const biome of Biomes) {
       if (biome.biomeIds && biome.biomeIds.includes(progressiveId) && biome.name.startsWith("Road ")) {
         const direction = biome.name.substring(5).toLowerCase();
         return direction;
@@ -244,7 +244,7 @@
   function getBiomeByName(biomeName) {
     if (!Cache.biomeNameCache[biomeName]) {
       Cache.biomeNameCache[biomeName] =
-        BIOMES.find((b) => b.name === biomeName) || null;
+        Biomes.find((b) => b.name === biomeName) || null;
     }
     return Cache.biomeNameCache[biomeName];
   }
@@ -392,7 +392,7 @@
    */
   function getNonProceduralDestination(worldX, worldY, exitDirection) {
     for (const [key, location] of Object.entries(
-      NON_PROCEDURAL_COORDINATES
+      NonProceduralCoordinates
     )) {
       // Check if worldX, worldY matches ANY coordinate pair in the array
       const foundCoord = location.coords.some(
@@ -443,7 +443,7 @@
     return (
       1.0 -
       ((noise * (noise * noise * 15731 + 789221) + 1376312589) & 0x7fffffff) /
-        1073741824.0
+      1073741824.0
     );
   }
 
@@ -791,8 +791,8 @@
 
           // Skip water tiles, beach tiles, and path tiles
           if (!isWaterTileId(baseTile, waterTileSet) &&
-              !(beachCoordinates && beachCoordinates.has(`${x},${y}`)) &&
-              !(pathTileSet && pathTileSet.has(baseTile))) {
+            !(beachCoordinates && beachCoordinates.has(`${x},${y}`)) &&
+            !(pathTileSet && pathTileSet.has(baseTile))) {
             const variant = getRandomFeatureVariant(featureVariants, rng);
 
             if (variant) {
@@ -851,8 +851,8 @@
 
           // Skip water tiles, beach tiles, and path tiles
           if (!isWaterTileId(baseTile, waterTileSet) &&
-              !(beachCoordinates && beachCoordinates.has(`${x},${y}`)) &&
-              !(pathTileSet && pathTileSet.has(baseTile))) {
+            !(beachCoordinates && beachCoordinates.has(`${x},${y}`)) &&
+            !(pathTileSet && pathTileSet.has(baseTile))) {
             const variant = getRandomFeatureVariant(featureVariants, rng);
 
             if (variant) {
@@ -1877,7 +1877,7 @@
     const centerRange = 3; // 6x6 square = 3 tiles in each direction from center
 
     if (x >= centerX - centerRange && x <= centerX + centerRange &&
-        y >= centerY - centerRange && y <= centerY + centerRange) {
+      y >= centerY - centerRange && y <= centerY + centerRange) {
       return true;
     }
 
@@ -1998,7 +1998,7 @@
     const mapHeight = gameMap.height();
 
     // Initialize cache for all known biomes
-    for (const biome of BIOMES) {
+    for (const biome of Biomes) {
       cache[biome.name] = [];
     }
 

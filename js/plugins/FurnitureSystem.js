@@ -105,18 +105,18 @@
 
 (() => {
     'use strict';
-    
+
     const pluginName = 'FurnitureSystem';
     const parameters = PluginManager.parameters(pluginName);
     const TILE_SIZE = Number(parameters['tileSize'] || 48);
     const GRID_OPACITY = Number(parameters['gridOpacity'] || 128);
     const DISMANTLE_RETURN = Number(parameters['dismantleReturn'] || 0.75);
-    const { FURNITURE_DB } = window.FurnitureData;
+    const { Furniture } = window.Items;
 
     //=============================================================================
     // Material Definitions
     //=============================================================================
-    
+
     const MATERIALS = {
         565: { name: "Steel Ingot", icon: 95 },
         566: { name: "Titanium Ingot", icon: 96 },
@@ -146,20 +146,20 @@
     //=============================================================================
     // Furniture Database
     //=============================================================================
-    
-   
+
+
 
     //=============================================================================
     // Game System Extensions
     //=============================================================================
-    
+
     const _Game_System_initialize = Game_System.prototype.initialize;
-    Game_System.prototype.initialize = function() {
+    Game_System.prototype.initialize = function () {
         _Game_System_initialize.call(this);
         this.initFurnitureSystem();
     };
-    
-    Game_System.prototype.initFurnitureSystem = function() {
+
+    Game_System.prototype.initFurnitureSystem = function () {
         this._furnitureData = {
             maps: {},           // Furniture placed on each map
             inventory: {},      // Furniture in player's inventory
@@ -176,23 +176,23 @@
             placedFurnitureId: 0  // Unique ID counter for placed furniture
         };
     };
-    
-    Game_System.prototype.getFurnitureData = function() {
+
+    Game_System.prototype.getFurnitureData = function () {
         if (!this._furnitureData) {
             this.initFurnitureSystem();
         }
         return this._furnitureData;
     };
-    
-    Game_System.prototype.addFurniture = function(furnitureId, quantity = 1) {
+
+    Game_System.prototype.addFurniture = function (furnitureId, quantity = 1) {
         const data = this.getFurnitureData();
         if (!data.inventory[furnitureId]) {
             data.inventory[furnitureId] = 0;
         }
         data.inventory[furnitureId] += quantity;
     };
-    
-    Game_System.prototype.removeFurniture = function(furnitureId, quantity = 1) {
+
+    Game_System.prototype.removeFurniture = function (furnitureId, quantity = 1) {
         const data = this.getFurnitureData();
         if (data.inventory[furnitureId]) {
             data.inventory[furnitureId] -= quantity;
@@ -201,21 +201,21 @@
             }
         }
     };
-    
-    Game_System.prototype.hasFurniture = function(furnitureId, quantity = 1) {
+
+    Game_System.prototype.hasFurniture = function (furnitureId, quantity = 1) {
         const data = this.getFurnitureData();
         return data.inventory[furnitureId] && data.inventory[furnitureId] >= quantity;
     };
-    
-    Game_System.prototype.addMaterial = function(materialId, quantity = 1) {
+
+    Game_System.prototype.addMaterial = function (materialId, quantity = 1) {
         const data = this.getFurnitureData();
         if (!data.materials[materialId]) {
             data.materials[materialId] = 0;
         }
         data.materials[materialId] += quantity;
     };
-    
-    Game_System.prototype.removeMaterial = function(materialId, quantity = 1) {
+
+    Game_System.prototype.removeMaterial = function (materialId, quantity = 1) {
         const data = this.getFurnitureData();
         if (data.materials[materialId]) {
             data.materials[materialId] -= quantity;
@@ -224,16 +224,16 @@
             }
         }
     };
-    
-    Game_System.prototype.hasMaterial = function(materialId, quantity = 1) {
+
+    Game_System.prototype.hasMaterial = function (materialId, quantity = 1) {
         const data = this.getFurnitureData();
         return data.materials[materialId] && data.materials[materialId] >= quantity;
     };
-    
-    Game_System.prototype.canCraftFurniture = function(furnitureId) {
-        const furniture = FURNITURE_DB[furnitureId];
+
+    Game_System.prototype.canCraftFurniture = function (furnitureId) {
+        const furniture = Furniture[furnitureId];
         if (!furniture || !furniture.recipe) return false;
-        
+
         for (const [materialId, quantity] of Object.entries(furniture.recipe)) {
             if (!this.hasMaterial(materialId, quantity)) {
                 return false;
@@ -241,30 +241,30 @@
         }
         return true;
     };
-    
-    Game_System.prototype.craftFurniture = function(furnitureId) {
-        const furniture = FURNITURE_DB[furnitureId];
+
+    Game_System.prototype.craftFurniture = function (furnitureId) {
+        const furniture = Furniture[furnitureId];
         if (!this.canCraftFurniture(furnitureId)) return false;
-        
+
         // Remove materials
         for (const [materialId, quantity] of Object.entries(furniture.recipe)) {
             this.removeMaterial(materialId, quantity);
         }
-        
+
         // Add furniture
         this.addFurniture(furnitureId, 1);
         return true;
     };
-    
-    Game_System.prototype.dismantleFurniture = function(furnitureId) {
+
+    Game_System.prototype.dismantleFurniture = function (furnitureId) {
         if (!this.hasFurniture(furnitureId)) return false;
-        
-        const furniture = FURNITURE_DB[furnitureId];
+
+        const furniture = Furniture[furnitureId];
         if (!furniture || !furniture.recipe) return false;
-        
+
         // Remove furniture
         this.removeFurniture(furnitureId, 1);
-        
+
         // Return materials (based on dismantle return rate)
         for (const [materialId, quantity] of Object.entries(furniture.recipe)) {
             const returnQuantity = Math.floor(quantity * DISMANTLE_RETURN);
@@ -272,21 +272,21 @@
                 this.addMaterial(materialId, returnQuantity);
             }
         }
-        
+
         return true;
     };
-    
-    Game_System.prototype.unlockRecipe = function(furnitureId) {
+
+    Game_System.prototype.unlockRecipe = function (furnitureId) {
         // All recipes are unlocked by default - this function is now obsolete
         // Kept for backwards compatibility with existing plugin commands
     };
-    
-    Game_System.prototype.isRecipeUnlocked = function(furnitureId) {
+
+    Game_System.prototype.isRecipeUnlocked = function (furnitureId) {
         // All recipes are unlocked by default
         return true;
     };
-    
-    Game_System.prototype.placeFurniture = function(mapId, furnitureId, x, y, flipped = false) {
+
+    Game_System.prototype.placeFurniture = function (mapId, furnitureId, x, y, flipped = false) {
         const data = this.getFurnitureData();
         if (!data.maps[mapId]) {
             data.maps[mapId] = [];
@@ -304,11 +304,11 @@
         data.maps[mapId].push(placedFurniture);
         return placedFurniture;
     };
-    
-    Game_System.prototype.removePlacedFurniture = function(mapId, placedId) {
+
+    Game_System.prototype.removePlacedFurniture = function (mapId, placedId) {
         const data = this.getFurnitureData();
         if (!data.maps[mapId]) return null;
-        
+
         const index = data.maps[mapId].findIndex(f => f.id === placedId);
         if (index >= 0) {
             const furniture = data.maps[mapId][index];
@@ -317,8 +317,8 @@
         }
         return null;
     };
-    
-    Game_System.prototype.getMapFurniture = function(mapId) {
+
+    Game_System.prototype.getMapFurniture = function (mapId) {
         const data = this.getFurnitureData();
         return data.maps[mapId] || [];
     };
@@ -345,7 +345,7 @@
 
     // Get list of valid furniture for a category
     function getFurnitureByCategory(category) {
-        return Object.entries(FURNITURE_DB)
+        return Object.entries(Furniture)
             .filter(([id, data]) => data.category === category)
             .map(([id]) => id);
     }
@@ -362,9 +362,9 @@
         if (!$gameMap.isValid(x, y)) return false;
         // Walls block movement in all directions
         return !$gameMap.isPassable(x, y, 2) &&
-               !$gameMap.isPassable(x, y, 4) &&
-               !$gameMap.isPassable(x, y, 6) &&
-               !$gameMap.isPassable(x, y, 8);
+            !$gameMap.isPassable(x, y, 4) &&
+            !$gameMap.isPassable(x, y, 6) &&
+            !$gameMap.isPassable(x, y, 8);
     }
 
     // Find valid furniture placement positions
@@ -455,7 +455,7 @@
 
         // Check collision with other furniture
         for (const placed of furnitureList) {
-            const otherFurniture = FURNITURE_DB[placed.furnitureId];
+            const otherFurniture = Furniture[placed.furnitureId];
             if (!otherFurniture) continue;
 
             if (x < placed.x + otherFurniture.width &&
@@ -470,7 +470,7 @@
     }
 
     // Generate and place procedural furniture in current map based on seed
-    Game_System.prototype.generateProceduralFurniture = function(seed) {
+    Game_System.prototype.generateProceduralFurniture = function (seed) {
         const mapId = $gameMap.mapId();
         const validTiles = findValidFurnitureTiles();
 
@@ -495,7 +495,7 @@
 
             // Get random furniture from category
             const furnitureId = getSeededRandomFromArray(furnitureList, seed + i * 2000);
-            const furnitureData = FURNITURE_DB[furnitureId];
+            const furnitureData = Furniture[furnitureId];
 
             if (!furnitureData) {
                 i--;
@@ -522,7 +522,7 @@
     };
 
     // Generate house-appropriate furniture with specific requirements
-    Game_System.prototype.generateHouseFurniture = function(seed) {
+    Game_System.prototype.generateHouseFurniture = function (seed) {
         const mapId = $gameMap.mapId();
         const validTiles = findValidFurnitureTiles();
 
@@ -542,7 +542,7 @@
             for (let i = 0; i < count && placementAttempts < maxAttempts; i++) {
                 // Get random furniture from category
                 const furnitureId = getSeededRandomFromArray(furnitureList, seed + seedOffset + i * 2000);
-                const furnitureData = FURNITURE_DB[furnitureId];
+                const furnitureData = Furniture[furnitureId];
 
                 if (!furnitureData) continue;
 
@@ -598,7 +598,7 @@
     //=============================================================================
     // Sprite_Furniture
     //=============================================================================
-    
+
     class Sprite_Furniture extends Sprite {
         constructor(furnitureData, placedData) {
             super();
@@ -608,13 +608,13 @@
             this.loadBitmap();
             this.updatePosition();
         }
-        
+
         initMembers() {
             this._flipped = this._placedData.flipped || false;
             this.anchor.x = 0;
             this.anchor.y = 1; // Anchor at bottom for proper layering
         }
-        
+
         loadBitmap() {
             const width = this._furnitureData.width * TILE_SIZE;
             const height = this._furnitureData.height * TILE_SIZE;
@@ -686,7 +686,7 @@
                 'center'
             );
         }
-        
+
         updatePosition() {
             // Anchor furniture to map by accounting for camera scroll
             const tileWidth = $gameMap.tileWidth();
@@ -713,43 +713,43 @@
                 this.z = 3;
             }
         }
-        
+
         isInteractive() {
             return this._furnitureData.interactive;
         }
-        
+
         getFurnitureData() {
             return this._furnitureData;
         }
-        
+
         getPlacedData() {
             return this._placedData;
         }
-        
+
         setFlipped(flipped) {
             this._flipped = flipped;
             this._placedData.flipped = flipped;
             this.updatePosition();
         }
     }
-    
+
     //=============================================================================
     // Spriteset_Map Extensions
     //=============================================================================
-    
+
     const _Spriteset_Map_createLowerLayer = Spriteset_Map.prototype.createLowerLayer;
-    Spriteset_Map.prototype.createLowerLayer = function() {
+    Spriteset_Map.prototype.createLowerLayer = function () {
         _Spriteset_Map_createLowerLayer.call(this);
         this.createFurnitureSprites();
     };
-    
-    Spriteset_Map.prototype.createFurnitureSprites = function() {
+
+    Spriteset_Map.prototype.createFurnitureSprites = function () {
         this._furnitureSprites = [];
         const mapId = $gameMap.mapId();
         const furnitureList = $gameSystem.getMapFurniture(mapId);
-        
+
         furnitureList.forEach(placedData => {
-            const furnitureData = FURNITURE_DB[placedData.furnitureId];
+            const furnitureData = Furniture[placedData.furnitureId];
             if (furnitureData) {
                 const sprite = new Sprite_Furniture(furnitureData, placedData);
                 this._furnitureSprites.push(sprite);
@@ -757,9 +757,9 @@
             }
         });
     };
-    
-    Spriteset_Map.prototype.addFurnitureSprite = function(placedData) {
-        const furnitureData = FURNITURE_DB[placedData.furnitureId];
+
+    Spriteset_Map.prototype.addFurnitureSprite = function (placedData) {
+        const furnitureData = Furniture[placedData.furnitureId];
         if (furnitureData) {
             const sprite = new Sprite_Furniture(furnitureData, placedData);
             this._furnitureSprites.push(sprite);
@@ -768,23 +768,23 @@
         }
         return null;
     };
-    
-    Spriteset_Map.prototype.removeFurnitureSprite = function(placedId) {
+
+    Spriteset_Map.prototype.removeFurnitureSprite = function (placedId) {
         const index = this._furnitureSprites.findIndex(
             sprite => sprite.getPlacedData().id === placedId
         );
-        
+
         if (index >= 0) {
             const sprite = this._furnitureSprites[index];
             this._tilemap.removeChild(sprite);
             this._furnitureSprites.splice(index, 1);
         }
     };
-    
+
     //=============================================================================
     // Scene_FurnitureBuilder
     //=============================================================================
-    
+
     class Scene_FurnitureBuilder extends Scene_MenuBase {
         create() {
             super.create();
@@ -794,7 +794,7 @@
             this.createInventoryWindow();
             this.createCommandWindow();
         }
-        
+
         createCategoryWindow() {
             const rect = this.categoryWindowRect();
             this._categoryWindow = new Window_FurnitureCategory(rect);
@@ -802,7 +802,7 @@
             this._categoryWindow.setHandler('cancel', this.popScene.bind(this));
             this.addWindow(this._categoryWindow);
         }
-        
+
         categoryWindowRect() {
             const wx = 0;
             const wy = this.mainAreaTop();
@@ -810,7 +810,7 @@
             const wh = this.mainAreaHeight();
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         createRecipeWindow() {
             const rect = this.recipeWindowRect();
             this._recipeWindow = new Window_FurnitureRecipe(rect);
@@ -819,7 +819,7 @@
             this._categoryWindow.setRecipeWindow(this._recipeWindow);
             this.addWindow(this._recipeWindow);
         }
-        
+
         recipeWindowRect() {
             const wx = 240;
             const wy = this.mainAreaTop();
@@ -827,14 +827,14 @@
             const wh = 300;
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         createDetailWindow() {
             const rect = this.detailWindowRect();
             this._detailWindow = new Window_FurnitureDetail(rect);
             this._recipeWindow.setDetailWindow(this._detailWindow);
             this.addWindow(this._detailWindow);
         }
-        
+
         detailWindowRect() {
             const wx = 240;
             const wy = this.mainAreaTop() + 300;
@@ -842,13 +842,13 @@
             const wh = this.mainAreaHeight() - 300;
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         createInventoryWindow() {
             const rect = this.inventoryWindowRect();
             this._inventoryWindow = new Window_FurnitureInventory(rect);
             this.addWindow(this._inventoryWindow);
         }
-        
+
         inventoryWindowRect() {
             const wx = 240 + (Graphics.boxWidth - 240) / 2;
             const wy = this.mainAreaTop() + 300;
@@ -856,7 +856,7 @@
             const wh = this.mainAreaHeight() - 300;
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         createCommandWindow() {
             const rect = this.commandWindowRect();
             this._commandWindow = new Window_FurnitureCommand(rect);
@@ -868,7 +868,7 @@
             this._commandWindow.deactivate();
             this.addWindow(this._commandWindow);
         }
-        
+
         commandWindowRect() {
             const ww = 240;
             const wh = 160;
@@ -876,30 +876,30 @@
             const wy = (Graphics.boxHeight - wh) / 2;
             return new Rectangle(wx, wy, ww, wh);
         }
-        
+
         onCategoryOk() {
             this._recipeWindow.activate();
             this._recipeWindow.select(0);
         }
-        
+
         onRecipeCancel() {
             this._recipeWindow.deselect();
             this._categoryWindow.activate();
         }
-        
+
         onRecipeOk() {
             this._commandWindow.setFurniture(this._recipeWindow.item());
             this._commandWindow.show();
             this._commandWindow.activate();
             this._commandWindow.select(0);
         }
-        
+
         onCommandCancel() {
             this._commandWindow.hide();
             this._commandWindow.deactivate();
             this._recipeWindow.activate();
         }
-        
+
         commandCraft() {
             const furnitureId = this._commandWindow.getFurnitureId();
             if ($gameSystem.canCraftFurniture(furnitureId)) {
@@ -913,7 +913,7 @@
             }
             this.onCommandCancel();
         }
-        
+
         commandPlace() {
             const furnitureId = this._commandWindow.getFurnitureId();
             if ($gameSystem.hasFurniture(furnitureId)) {
@@ -925,7 +925,7 @@
             }
             this.onCommandCancel();
         }
-        
+
         commandDismantle() {
             const furnitureId = this._commandWindow.getFurnitureId();
             if ($gameSystem.hasFurniture(furnitureId)) {
@@ -940,11 +940,11 @@
             this.onCommandCancel();
         }
     }
-    
+
     //=============================================================================
     // Window Classes
     //=============================================================================
-    
+
     class Window_FurnitureCategory extends Window_Command {
         makeCommandList() {
             const categories = [
@@ -958,17 +958,17 @@
                 { name: 'Decoration', symbol: 'decoration' },
                 { name: 'Appliances', symbol: 'appliances' }
             ];
-            
+
             categories.forEach(cat => {
                 this.addCommand(cat.name, cat.symbol);
             });
         }
-        
+
         setRecipeWindow(recipeWindow) {
             this._recipeWindow = recipeWindow;
             this.update();
         }
-        
+
         update() {
             super.update();
             if (this._recipeWindow) {
@@ -976,7 +976,7 @@
             }
         }
     }
-    
+
     class Window_FurnitureRecipe extends Window_Selectable {
         initialize(rect) {
             super.initialize(rect);
@@ -984,15 +984,15 @@
             this._data = [];
             this.refresh();
         }
-        
+
         maxItems() {
             return this._data ? this._data.length : 0;
         }
-        
+
         item() {
             return this._data[this.index()];
         }
-        
+
         setCategory(category) {
             if (this._category !== category) {
                 this._category = category;
@@ -1001,11 +1001,11 @@
                 this.scrollTo(0, 0);
             }
         }
-        
+
         makeItemList() {
             this._data = [];
-            
-            for (const [id, furniture] of Object.entries(FURNITURE_DB)) {
+
+            for (const [id, furniture] of Object.entries(Furniture)) {
                 if (this._category === 'all' || furniture.category === this._category) {
                     if ($gameSystem.isRecipeUnlocked(id)) {
                         this._data.push({ id, ...furniture });
@@ -1013,107 +1013,107 @@
                 }
             }
         }
-        
+
         drawItem(index) {
             const item = this._data[index];
             if (item) {
                 const rect = this.itemLineRect(index);
-                
+
                 // Check if can craft
                 const canCraft = $gameSystem.canCraftFurniture(item.id);
                 const hasItem = $gameSystem.hasFurniture(item.id);
-                
+
                 if (!canCraft) {
                     this.changeTextColor(ColorManager.textColor(8)); // Gray
                 } else {
                     this.resetTextColor();
                 }
-                
+
                 // Draw name
                 this.drawText(item.name, rect.x, rect.y, rect.width - 120);
-                
+
                 // Draw owned quantity
                 if (hasItem) {
                     const qty = $gameSystem.getFurnitureData().inventory[item.id];
                     this.drawText(`Owned: ${qty}`, rect.x + rect.width - 120, rect.y, 120, 'right');
                 }
-                
+
                 this.resetTextColor();
             }
         }
-        
+
         setDetailWindow(detailWindow) {
             this._detailWindow = detailWindow;
         }
-        
+
         update() {
             super.update();
             if (this._detailWindow) {
                 this._detailWindow.setFurniture(this.item());
             }
         }
-        
+
         refresh() {
             this.makeItemList();
             super.refresh();
         }
     }
-    
+
     class Window_FurnitureDetail extends Window_Base {
         initialize(rect) {
             super.initialize(rect);
             this._furniture = null;
         }
-        
+
         setFurniture(furniture) {
             if (this._furniture !== furniture) {
                 this._furniture = furniture;
                 this.refresh();
             }
         }
-        
+
         refresh() {
             this.contents.clear();
-            
+
             if (!this._furniture) return;
-            
+
             let y = 0;
             const lineHeight = this.lineHeight();
-            
+
             // Name
             this.changeTextColor(ColorManager.systemColor());
             this.drawText(this._furniture.name, 0, y, this.innerWidth, 'center');
             y += lineHeight;
-            
+
             // Description
             this.resetTextColor();
             this.drawTextEx(this._furniture.description, 0, y, this.innerWidth);
             y += lineHeight * 2;
-            
+
             // Size
             this.changeTextColor(ColorManager.systemColor());
             this.drawText('Size:', 0, y, 100);
             this.resetTextColor();
             this.drawText(`${this._furniture.width}x${this._furniture.height}`, 100, y, 100);
             y += lineHeight;
-            
+
             // Recipe
             if (this._furniture.recipe) {
                 this.changeTextColor(ColorManager.systemColor());
                 this.drawText('Materials:', 0, y, this.innerWidth);
                 y += lineHeight;
-                
+
                 for (const [materialId, quantity] of Object.entries(this._furniture.recipe)) {
                     const material = MATERIALS[materialId];
                     const has = $gameSystem.hasMaterial(materialId, quantity);
                     const owned = $gameSystem.getFurnitureData().materials[materialId] || 0;
-                    
+
                     if (!has) {
                         this.changeTextColor(ColorManager.textColor(2)); // Red
                     } else {
                         this.resetTextColor();
                     }
-                    
+
                     this.drawText(`${material.name}:`, 12, y, 150);
                     this.drawText(`${owned}/${quantity}`, 162, y, 80, 'right');
                     y += lineHeight;
@@ -1121,31 +1121,31 @@
             }
         }
     }
-    
+
     class Window_FurnitureInventory extends Window_Base {
         initialize(rect) {
             super.initialize(rect);
             this.refresh();
         }
-        
+
         refresh() {
             this.contents.clear();
-            
+
             let y = 0;
             const lineHeight = this.lineHeight();
-            
+
             // Title
             this.changeTextColor(ColorManager.systemColor());
             this.drawText('Inventory', 0, y, this.innerWidth, 'center');
             y += lineHeight;
-            
+
             // Materials
             this.drawText('Materials:', 0, y, this.innerWidth);
             y += lineHeight;
-            
+
             const materials = $gameSystem.getFurnitureData().materials;
             let materialCount = 0;
-            
+
             for (const [id, quantity] of Object.entries(materials)) {
                 if (quantity > 0) {
                     const material = MATERIALS[id];
@@ -1154,7 +1154,7 @@
                     this.drawText(quantity, 162, y, 80, 'right');
                     y += lineHeight;
                     materialCount++;
-                    
+
                     if (materialCount >= 6) {
                         this.drawText('...', 12, y, 50);
                         break;
@@ -1163,73 +1163,73 @@
             }
         }
     }
-    
+
     class Window_FurnitureCommand extends Window_Command {
         initialize(rect) {
             super.initialize(rect);
             this._furnitureId = null;
         }
-        
+
         makeCommandList() {
             if (this._furnitureId) {
-                const furniture = FURNITURE_DB[this._furnitureId];
+                const furniture = Furniture[this._furnitureId];
                 const canCraft = $gameSystem.canCraftFurniture(this._furnitureId);
                 const hasItem = $gameSystem.hasFurniture(this._furnitureId);
-                
+
                 this.addCommand('Craft', 'craft', canCraft && furniture.recipe);
                 this.addCommand('Place', 'place', hasItem);
                 this.addCommand('Dismantle', 'dismantle', hasItem && furniture.recipe);
             }
         }
-        
+
         setFurniture(furniture) {
             this._furnitureId = furniture ? furniture.id : null;
             this.refresh();
         }
-        
+
         getFurnitureId() {
             return this._furnitureId;
         }
     }
-    
+
     //=============================================================================
     // Furniture Placement Mode
     //=============================================================================
-    
+
     class Sprite_FurniturePlacement extends Sprite {
         constructor(furnitureId) {
             super();
             this._furnitureId = furnitureId;
-            this._furnitureData = FURNITURE_DB[furnitureId];
+            this._furnitureData = Furniture[furnitureId];
             this._flipped = false;
             this._valid = false;
             this.createBitmap();
             this.updatePosition();
         }
-        
+
         createBitmap() {
             const width = this._furnitureData.width * TILE_SIZE;
             const height = this._furnitureData.height * TILE_SIZE;
-            
+
             this.bitmap = new Bitmap(width, height);
             this.anchor.x = 0;
             this.anchor.y = 0;
             this.opacity = 180;
-            
+
             this.updateBitmap();
         }
-        
+
         updateBitmap() {
             this.bitmap.clear();
-            
+
             const width = this._furnitureData.width * TILE_SIZE;
             const height = this._furnitureData.height * TILE_SIZE;
-            
+
             // Draw furniture preview
             const color = this._valid ? '#00FF00' : '#FF0000';
             this.bitmap.fillRect(0, 0, width, height, color);
             this.bitmap.strokeRect(0, 0, width, height, '#000000', 2);
-            
+
             // Draw name
             this.bitmap.fontSize = 12;
             this.bitmap.textColor = '#000000';
@@ -1239,19 +1239,19 @@
                 'center'
             );
         }
-        
+
         setPosition(x, y) {
             this.x = x * TILE_SIZE;
             this.y = y * TILE_SIZE;
         }
-        
+
         setValid(valid) {
             if (this._valid !== valid) {
                 this._valid = valid;
                 this.updateBitmap();
             }
         }
-        
+
         flip() {
             if (this._furnitureData.rotatable) {
                 this._flipped = !this._flipped;
@@ -1262,27 +1262,27 @@
         getFlipped() {
             return this._flipped;
         }
-        
+
         updatePosition() {
             // Update z-index
             this.z = 6; // Above everything
         }
     }
-    
+
     const _Scene_Map_create = Scene_Map.prototype.create;
-    Scene_Map.prototype.create = function() {
+    Scene_Map.prototype.create = function () {
         _Scene_Map_create.call(this);
         this.createPlacementMode();
     };
 
-    Scene_Map.prototype.createPlacementMode = function() {
+    Scene_Map.prototype.createPlacementMode = function () {
         this._placementSprite = null;
         this._placementGrid = null;
     };
 
     // Hook into onMapLoaded to generate procedural furniture for houses
     const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
-    Scene_Map.prototype.onMapLoaded = function() {
+    Scene_Map.prototype.onMapLoaded = function () {
         _Scene_Map_onMapLoaded.call(this);
 
         // Check if this is a house with TreasureRoomSystem integration
@@ -1294,32 +1294,32 @@
             }
         }
     };
-    
+
     const _Scene_Map_update = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         _Scene_Map_update.call(this);
-        
+
         if ($gameTemp.furniturePlacementMode) {
             this.updatePlacementMode();
         }
     };
-    
-    Scene_Map.prototype.updatePlacementMode = function() {
+
+    Scene_Map.prototype.updatePlacementMode = function () {
         if (!this._placementSprite) {
             this.enterPlacementMode($gameTemp.furniturePlacementMode);
         }
-        
+
         // Get grid position from mouse/touch
         const x = Math.floor(TouchInput.x / TILE_SIZE);
         const y = Math.floor(TouchInput.y / TILE_SIZE);
-        
+
         // Update sprite position
         this._placementSprite.setPosition(x, y);
-        
+
         // Check if position is valid
         const valid = this.isPlacementValid(x, y);
         this._placementSprite.setValid(valid);
-        
+
         // Handle input
         if (Input.isTriggered('ok') || TouchInput.isTriggered()) {
             if (valid) {
@@ -1333,67 +1333,67 @@
             this._placementSprite.flip();
         }
     };
-    
-    Scene_Map.prototype.enterPlacementMode = function(furnitureId) {
+
+    Scene_Map.prototype.enterPlacementMode = function (furnitureId) {
         // Create placement sprite
         this._placementSprite = new Sprite_FurniturePlacement(furnitureId);
         this._spriteset._tilemap.addChild(this._placementSprite);
-        
+
         // Create grid overlay
         this.createGridOverlay();
-        
+
         // Disable player movement
         $gameSystem.disableMenu();
         $gamePlayer.setMoveSpeed(0);
     };
-    
-    Scene_Map.prototype.exitPlacementMode = function() {
+
+    Scene_Map.prototype.exitPlacementMode = function () {
         // Remove placement sprite
         if (this._placementSprite) {
             this._spriteset._tilemap.removeChild(this._placementSprite);
             this._placementSprite = null;
         }
-        
+
         // Remove grid overlay
         if (this._placementGrid) {
             this._spriteset._tilemap.removeChild(this._placementGrid);
             this._placementGrid = null;
         }
-        
+
         // Clear placement mode
         $gameTemp.furniturePlacementMode = null;
-        
+
         // Re-enable player movement
         $gameSystem.enableMenu();
         $gamePlayer.setMoveSpeed(4);
     };
-    
-    Scene_Map.prototype.createGridOverlay = function() {
+
+    Scene_Map.prototype.createGridOverlay = function () {
         const width = $gameMap.width() * TILE_SIZE;
         const height = $gameMap.height() * TILE_SIZE;
-        
+
         this._placementGrid = new Sprite();
         this._placementGrid.bitmap = new Bitmap(width, height);
         this._placementGrid.opacity = GRID_OPACITY;
         this._placementGrid.z = 0;
-        
+
         // Draw grid
         for (let x = 0; x <= $gameMap.width(); x++) {
             const xPos = x * TILE_SIZE;
             this._placementGrid.bitmap.fillRect(xPos, 0, 1, height, '#FFFFFF');
         }
-        
+
         for (let y = 0; y <= $gameMap.height(); y++) {
             const yPos = y * TILE_SIZE;
             this._placementGrid.bitmap.fillRect(0, yPos, width, 1, '#FFFFFF');
         }
-        
+
         this._spriteset._tilemap.addChild(this._placementGrid);
     };
-    
-    Scene_Map.prototype.isPlacementValid = function(x, y) {
+
+    Scene_Map.prototype.isPlacementValid = function (x, y) {
         const furnitureId = $gameTemp.furniturePlacementMode;
-        const furniture = FURNITURE_DB[furnitureId];
+        const furniture = Furniture[furnitureId];
 
         if (!furniture) return false;
 
@@ -1462,7 +1462,7 @@
         // Check collision with other furniture
         const mapFurniture = $gameSystem.getMapFurniture($gameMap.mapId());
         for (const placed of mapFurniture) {
-            const otherFurniture = FURNITURE_DB[placed.furnitureId];
+            const otherFurniture = Furniture[placed.furnitureId];
             if (!otherFurniture) continue;
 
             // Check if rectangles overlap
@@ -1476,8 +1476,8 @@
 
         return true;
     };
-    
-    Scene_Map.prototype.placeFurniture = function(x, y) {
+
+    Scene_Map.prototype.placeFurniture = function (x, y) {
         const furnitureId = $gameTemp.furniturePlacementMode;
         const flipped = this._placementSprite.getFlipped();
 
@@ -1506,47 +1506,47 @@
             this.exitPlacementMode();
         }
     };
-    
+
     //=============================================================================
     // Plugin Commands
     //=============================================================================
-    
+
     PluginManager.registerCommand(pluginName, 'openBuilder', args => {
         SceneManager.push(Scene_FurnitureBuilder);
     });
-    
+
     PluginManager.registerCommand(pluginName, 'enterPlacementMode', args => {
         const furnitureId = args.furnitureId;
         if ($gameSystem.hasFurniture(furnitureId)) {
             $gameTemp.furniturePlacementMode = furnitureId;
         }
     });
-    
+
     PluginManager.registerCommand(pluginName, 'giveFurniture', args => {
         const furnitureId = args.furnitureId;
         const quantity = Number(args.quantity) || 1;
         $gameSystem.addFurniture(furnitureId, quantity);
     });
-    
+
     PluginManager.registerCommand(pluginName, 'giveMaterial', args => {
         const materialId = args.materialId;
         const quantity = Number(args.quantity) || 1;
         $gameSystem.addMaterial(materialId, quantity);
     });
-    
+
     PluginManager.registerCommand(pluginName, 'unlockRecipe', args => {
         const recipeId = args.recipeId;
         $gameSystem.unlockRecipe(recipeId);
     });
-    
+
     PluginManager.registerCommand(pluginName, 'removeAllFurniture', args => {
         const mapId = $gameMap.mapId();
         $gameSystem.getFurnitureData().maps[mapId] = [];
-        
+
         // Refresh the scene
         if (SceneManager._scene instanceof Scene_Map) {
             SceneManager.goto(Scene_Map);
         }
     });
-    
+
 })();

@@ -190,7 +190,7 @@
 
   } = DungeonGen;
 
-  const { BIOMES, FEATURES, HARDCODED_BIOME_OVERRIDES } =
+  const { Biomes, Features, HardcodedBiomeOverrides } =
     window.WorldGen;
 
   /**
@@ -202,7 +202,7 @@
    *   "worldX,worldY": { biome: "BiomeName", roadDirection: "..." (optional) }
    *
    * BIOME NAMES:
-   *   - Any biome defined in WorldGen.BIOMES (e.g., "Forest", "Mountain", "Ocean")
+   *   - Any biome defined in WorldGen.Biomes (e.g., "Forest", "Mountain", "Ocean")
    *   - "Road" for road biomes (when using roadDirection)
    *
    * ROAD DIRECTIONS (optional - only for Road biome):
@@ -241,7 +241,7 @@
   const FEATURE_ASCII = {};
   const FEATURE_LAYER_MAP = {};
 
-  for (const feature of FEATURES) {
+  for (const feature of Features) {
     FEATURE_LAYERS[feature.name] = feature.layer;
     FEATURE_ASCII[feature.name] = feature.ascii;
     if (!FEATURE_LAYER_MAP[feature.layer]) {
@@ -258,8 +258,8 @@
    */
   function getHardcodedBiomeOverride(worldX, worldY) {
     const key = `${worldX},${worldY}`;
-    if (HARDCODED_BIOME_OVERRIDES[key]) {
-      return HARDCODED_BIOME_OVERRIDES[key];
+    if (HardcodedBiomeOverrides[key]) {
+      return HardcodedBiomeOverrides[key];
     }
     return null;
   }
@@ -547,7 +547,7 @@
    * For terrain-only blending (features on layers 1-3 are preserved)
    * Skips blending on water and beach tiles to preserve coastlines
    */
-  function blendBiomesTerrainOnly(mapData, biome, adjacentBiomes, allFeatures, width, height, seed, rng, worldCoords = {x: 0, y: 0}, waterTiles = []) {
+  function blendBiomesTerrainOnly(mapData, biome, adjacentBiomes, allFeatures, width, height, seed, rng, worldCoords = { x: 0, y: 0 }, waterTiles = []) {
     if (!adjacentBiomes) return;
 
     // Don't blend Ocean biomes at all
@@ -665,7 +665,7 @@
    * Road biomes get terrain blending AND feature placement (B sheet features only)
    * Skips blending on water and beach tiles to preserve coastlines
    */
-  function blendBiomeBorders(mapData, biome, adjacentBiomes, allFeatures, width, height, seed, rng, worldCoords = {x: 0, y: 0}, waterTiles = []) {
+  function blendBiomeBorders(mapData, biome, adjacentBiomes, allFeatures, width, height, seed, rng, worldCoords = { x: 0, y: 0 }, waterTiles = []) {
     if (!adjacentBiomes) return;
 
     const blendScale = 0.02; // Perlin noise scale for smooth gradients
@@ -2352,11 +2352,11 @@
     blendBiomesTerrainOnly(mapData, biome, adjacentBiomes, allFeatures, width, height, seed, rng, worldCoords, actualWaterTilesArray);
 
     // Clear any features in forbidden zones (borders and center)
-    if ((biome.name !== "Ocean")&&(biome.name !== "Seabed")) {
+    if ((biome.name !== "Ocean") && (biome.name !== "Seabed")) {
       clearForbiddenZoneFeatures(mapData, width, height);
 
     }
-  
+
 
     const tileToFeature = createTileToFeatureMap(allFeatures);
     const asciiMap = generateAsciiVisualization(
@@ -2439,7 +2439,7 @@
     const mapWidth = $gameMap.width();
     const mapHeight = $gameMap.height();
 
-    for (const biome of BIOMES) {
+    for (const biome of Biomes) {
       cache[biome.name] = [];
     }
 
@@ -2463,7 +2463,7 @@
       (sum, arr) => sum + arr.length,
       0
     );
-    console.log(`[buildBiomeCoordinateCache] Built cache: scanned ${mapWidth}x${mapHeight}=${mapWidth*mapHeight} tiles, added ${coordsAdded} coordinates to ${Object.keys(cache).length} biomes`);
+    console.log(`[buildBiomeCoordinateCache] Built cache: scanned ${mapWidth}x${mapHeight}=${mapWidth * mapHeight} tiles, added ${coordsAdded} coordinates to ${Object.keys(cache).length} biomes`);
 
     // Log sample biomes in cache
     for (const [biomeName, coords] of Object.entries(cache)) {
@@ -2788,50 +2788,50 @@
   /**
    * Update visibility of GoDown and GoUp events based on underground state
    */
-/**
-   * Update visibility of GoDown, GoUp, and Chest events based on underground state
-   */
-function updateEventVisibility() {
-  const procGenData = $gameSystem._procGenData;
-  if (!procGenData) return;
+  /**
+     * Update visibility of GoDown, GoUp, and Chest events based on underground state
+     */
+  function updateEventVisibility() {
+    const procGenData = $gameSystem._procGenData;
+    if (!procGenData) return;
 
-  // Check if player is underground
-  const isUnderground = procGenData.biomeLayerStack && procGenData.biomeLayerStack.length > 0;
-  const chestNames = ["RandomItemChest", "RandomArmorChest", "RandomWeaponChest"];
+    // Check if player is underground
+    const isUnderground = procGenData.biomeLayerStack && procGenData.biomeLayerStack.length > 0;
+    const chestNames = ["RandomItemChest", "RandomArmorChest", "RandomWeaponChest"];
 
-  // Check if current biome is Ocean or Seabed (hide GoUp/GoDown events)
-  const currentBiome = procGenData.currentBiome || "";
-  const isWaterBiome = currentBiome === "Ocean" || currentBiome === "Seabed";
+    // Check if current biome is Ocean or Seabed (hide GoUp/GoDown events)
+    const currentBiome = procGenData.currentBiome || "";
+    const isWaterBiome = currentBiome === "Ocean" || currentBiome === "Seabed";
 
-  for (const event of $gameMap._events) {
-    if (!event || !$dataMap.events[event._eventId]) continue;
+    for (const event of $gameMap._events) {
+      if (!event || !$dataMap.events[event._eventId]) continue;
 
-    const eventName = $dataMap.events[event._eventId].name;
+      const eventName = $dataMap.events[event._eventId].name;
 
-    // Handle GoDown (Show Overground, Hide Underground or Water Biomes)
-    if (eventName === "GoDown") {
-      const shouldHide = isUnderground || isWaterBiome;
-      event.setOpacity(shouldHide ? 0 : 255);
-      // Also move off map if in water biome
-      if (isWaterBiome && (event.x !== 0 || event.y !== 0)) {
-        event.setPosition(0, 0);
+      // Handle GoDown (Show Overground, Hide Underground or Water Biomes)
+      if (eventName === "GoDown") {
+        const shouldHide = isUnderground || isWaterBiome;
+        event.setOpacity(shouldHide ? 0 : 255);
+        // Also move off map if in water biome
+        if (isWaterBiome && (event.x !== 0 || event.y !== 0)) {
+          event.setPosition(0, 0);
+        }
       }
-    }
-    // Handle GoUp (Hide Overground, Show Underground, Hide in Water Biomes)
-    else if (eventName === "GoUp") {
-      const shouldShow = isUnderground && !isWaterBiome;
-      event.setOpacity(shouldShow ? 255 : 0);
-      // Also move off map if in water biome
-      if (isWaterBiome && (event.x !== 0 || event.y !== 0)) {
-        event.setPosition(0, 0);
+      // Handle GoUp (Hide Overground, Show Underground, Hide in Water Biomes)
+      else if (eventName === "GoUp") {
+        const shouldShow = isUnderground && !isWaterBiome;
+        event.setOpacity(shouldShow ? 255 : 0);
+        // Also move off map if in water biome
+        if (isWaterBiome && (event.x !== 0 || event.y !== 0)) {
+          event.setPosition(0, 0);
+        }
       }
-    }
-    // Handle Chests (Hide Overground, Show Underground)
-    else if (chestNames.includes(eventName)) {
-      event.setOpacity(isUnderground ? 255 : 0);
+      // Handle Chests (Hide Overground, Show Underground)
+      else if (chestNames.includes(eventName)) {
+        event.setOpacity(isUnderground ? 255 : 0);
+      }
     }
   }
-}
   /**
    * Place the GoDown event at a seeded random position on the procedural map
    * If the tile is impassable, find the first passable tile nearby
@@ -3006,14 +3006,14 @@ function updateEventVisibility() {
 
           // Attempt to find a passable tile (try 15 times)
           for (let attempt = 0; attempt < 15; attempt++) {
-             // Generate random position inside map bounds (padding of 2)
+            // Generate random position inside map bounds (padding of 2)
             const tryX = Math.floor(seededRandom() * (PROC_MAP_WIDTH - 4)) + 2;
             const tryY = Math.floor(seededRandom() * (PROC_MAP_HEIGHT - 4)) + 2;
 
             // Check passability and ensure we aren't spawning on top of the player
-            if ($gameMap.isPassable(tryX, tryY, 2) && 
-                (tryX !== $gamePlayer.x || tryY !== $gamePlayer.y) &&
-                !$gameMap.eventsXy(tryX, tryY).length) { // Don't stack on other events
+            if ($gameMap.isPassable(tryX, tryY, 2) &&
+              (tryX !== $gamePlayer.x || tryY !== $gamePlayer.y) &&
+              !$gameMap.eventsXy(tryX, tryY).length) { // Don't stack on other events
               finalX = tryX;
               finalY = tryY;
               found = true;

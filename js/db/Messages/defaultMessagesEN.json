@@ -1,0 +1,26 @@
+{
+  "success": [
+    "You exchange some words with the enemy.",
+    "The enemy seems to listen to you.",
+    "You have a brief conversation.",
+    "The enemy appears interested in talking."
+  ],
+  "fail": [
+    "The enemy ignores you.",
+    "The enemy doesn't want to talk.",
+    "Your words fall on deaf ears."
+  ],
+  "insult": [
+    "The enemy becomes enraged!",
+    "Your insult angers the enemy!",
+    "The enemy's fury grows!"
+  ],
+  "joinSuccess": [
+    "The enemy agrees to join your party!",
+    "The enemy decides to follow you!"
+  ],
+  "joinFail": [
+    "The enemy isn't friendly enough to join.",
+    "The enemy declines your offer."
+  ]
+}

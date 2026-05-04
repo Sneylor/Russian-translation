@@ -183,15 +183,15 @@
 
 (() => {
     'use strict';
-    
+
     const pluginName = 'CrimeSystem';
     const parameters = PluginManager.parameters(pluginName);
     const bountyVariableId = parseInt(parameters['bountyVariable'] || 66);
     const displayDuration = parseInt(parameters['displayDuration'] || 180);
-    
+
     // Language check
     const useTranslation = ConfigManager.language === 'it';
-    const { PresetCrimes} = window.CrimeData;
+    const { PresetCrimes } = window.Messages;
 
     // Helper function to get game date from variable 113
     function getGameDateFromVariable() {
@@ -258,12 +258,12 @@
     const gettext = (key) => {
         return useTranslation ? TEXT.it[key] || TEXT.en[key] : TEXT.en[key];
     };
-    
+
     // Crime System Class
     class CrimeSystem {
         static initialize() {
             if (!$dataSystem.switches) return;
-            
+
             // Initialize crime data if not exists
             if (!$gameSystem._crimeData) {
                 $gameSystem._crimeData = {
@@ -271,38 +271,38 @@
                     totalBounty: 0
                 };
             }
-            
+
             // Initialize window.playerCrimes array
             if (!window.playerCrimes) {
                 window.playerCrimes = [];
             }
         }
-        
+
         static addCrime(crimeName, bountyAmount, crimeId = null) {
             this.initialize();
-            
+
             const crime = {
                 name: crimeName,
                 bounty: bountyAmount,
                 id: crimeId,
                 timestamp: getGameDateTimeString()
             };
-            
+
             $gameSystem._crimeData.crimes.push(crime);
             $gameSystem._crimeData.totalBounty += bountyAmount;
-            
+
             // Add crime ID to window.playerCrimes if provided
             if (crimeId) {
                 window.playerCrimes.push(crimeId);
             }
-            
+
             // Update bounty variable
             $dataSystem.switches && $gameVariables.setValue(bountyVariableId, $gameSystem._crimeData.totalBounty);
-            
+
             // Show crime notification
             this.showCrimeNotification(crimeName, bountyAmount);
         }
-        
+
         static addPresetCrime(crimeKey) {
             const crime = PresetCrimes[crimeKey];
             if (crime) {
@@ -315,7 +315,7 @@
 
             }
         }
-        
+
         static showPresetCrimes() {
             // Group crimes by category
             const categories = {};
@@ -325,9 +325,9 @@
                 }
                 categories[crime.category].push({ key, ...crime });
             }
-            
+
             let message = `\\C[3]${gettext('availableCrimes')}\\C[0]\n\n`;
-            
+
             for (const [category, crimes] of Object.entries(categories)) {
                 message += `\\C[1]${category}:\\C[0]\n`;
                 crimes.forEach(crime => {
@@ -341,19 +341,19 @@
             window.skipLocalization = false;
 
         }
-        
+
         static showCrimeNotification(crimeName, bountyAmount) {
             if (SceneManager._scene instanceof Scene_Map) {
                 SceneManager._scene.showCrimeNotification(crimeName, bountyAmount);
             }
         }
-        
+
         static showCrimeList() {
             this.initialize();
-            
+
             const crimeData = $gameSystem._crimeData;
             let message = `\\C[2]${gettext('crimeRecord')}\\C[0]\n\n`;
-            
+
             if (crimeData.crimes.length === 0) {
                 message += gettext('noCrimes');
             } else {
@@ -371,18 +371,18 @@
             window.skipLocalization = false;
 
         }
-        
+
         static clearBounty() {
             this.initialize();
-            
+
             $gameSystem._crimeData = {
                 crimes: [],
                 totalBounty: 0
             };
-            
+
             // Clear window.playerCrimes array
             window.playerCrimes = [];
-            
+
             // Reset bounty variable
             $dataSystem.switches && $gameVariables.setValue(bountyVariableId, 0);
             window.skipLocalization = true;
@@ -391,31 +391,31 @@
             window.skipLocalization = false;
 
         }
-        
+
         static goldToEuros(goldAmount) {
             const euros = (goldAmount / 1000) * 10;
             return euros.toFixed(2) + "€";
         }
-        
+
         static getTotalBounty() {
             this.initialize();
             return $gameSystem._crimeData.totalBounty || 0;
         }
-        
+
         static getPresetCrime(crimeKey) {
             return PresetCrimes[crimeKey] || null;
         }
-        
+
         static getAllPresetCrimes() {
             return PresetCrimes;
         }
-        
+
         static getPlayerCrimes() {
             this.initialize();
             return window.playerCrimes || [];
         }
     }
-    
+
     // Crime Notification Window
     class Window_CrimeNotification extends Window_Base {
         initialize() {
@@ -428,7 +428,7 @@
             this._bountyAmount = 0;
             this.hide();
         }
-        
+
         windowRect() {
             const width = 620;
             const height = 100;
@@ -436,19 +436,19 @@
             const y = 20;
             return new Rectangle(x, y, width, height);
         }
-        
+
         showCrime(crimeName, bountyAmount) {
             this._crimeName = crimeName;
             this._bountyAmount = bountyAmount;
             this._displayTimer = displayDuration;
             this.show();
             this.refresh();
-            
+
             // Fade in animation
             this.opacity = 0;
             this.contentsOpacity = 0;
             const fadeInDuration = 20;
-            
+
             for (let i = 0; i <= fadeInDuration; i++) {
                 setTimeout(() => {
                     this.opacity = (255 * i) / fadeInDuration;
@@ -456,85 +456,85 @@
                 }, i * 16);
             }
         }
-        
+
         refresh() {
             this.contents.clear();
             const totalBounty = CrimeSystem.getTotalBounty();
-            
+
             // Draw crime name
             this.changeTextColor(ColorManager.textColor(2));
             this.drawText(this._crimeName, 0, 0, this.contents.width, 'left');
-            
+
             // Draw bounty
             this.changeTextColor(ColorManager.textColor(3));
             const bountyText = CrimeSystem.goldToEuros(this._bountyAmount);
             this.drawText(bountyText, 0, 0, this.contents.width, 'right');
-            
+
             // Draw total bounty
             this.changeTextColor(ColorManager.normalColor());
             const totalText = `${gettext('total')}: ${CrimeSystem.goldToEuros(totalBounty)}`;
             this.drawText(totalText, 0, this.lineHeight(), this.contents.width, 'center');
         }
-        
+
         update() {
             super.update();
-            
+
             if (this._displayTimer > 0) {
                 this._displayTimer--;
-                
+
                 // Start fade out in last 30 frames
                 if (this._displayTimer <= 30) {
                     const fadeRatio = this._displayTimer / 30;
                     this.opacity = 255 * fadeRatio;
                     this.contentsOpacity = 255 * fadeRatio;
                 }
-                
+
                 if (this._displayTimer <= 0) {
                     this.hide();
                 }
             }
         }
     }
-    
+
     // Extend Scene_Map to handle crime notifications
     const _Scene_Map_createAllWindows = Scene_Map.prototype.createAllWindows;
-    Scene_Map.prototype.createAllWindows = function() {
+    Scene_Map.prototype.createAllWindows = function () {
         _Scene_Map_createAllWindows.call(this);
         this.createCrimeNotificationWindow();
     };
-    
-    Scene_Map.prototype.createCrimeNotificationWindow = function() {
+
+    Scene_Map.prototype.createCrimeNotificationWindow = function () {
         const rect = new Rectangle(0, 0, 0, 0);
         this._crimeNotificationWindow = new Window_CrimeNotification(rect);
         this.addWindow(this._crimeNotificationWindow);
     };
-    
-    Scene_Map.prototype.showCrimeNotification = function(crimeName, bountyAmount) {
+
+    Scene_Map.prototype.showCrimeNotification = function (crimeName, bountyAmount) {
         if (this._crimeNotificationWindow) {
             this._crimeNotificationWindow.showCrime(crimeName, bountyAmount);
         }
     };
-    
+
     // Plugin Commands
     PluginManager.registerCommand(pluginName, "addCrime", args => {
         const crimeName = String(args.crimeName);
         const bountyAmount = parseInt(args.bountyAmount);
         CrimeSystem.addCrime(crimeName, bountyAmount);
     });
-    
+
     PluginManager.registerCommand(pluginName, "addPresetCrime", args => {
         const crimeType = String(args.crimeType);
         CrimeSystem.addPresetCrime(crimeType);
     });
-    
+
     PluginManager.registerCommand(pluginName, "showPresetCrimes", args => {
         CrimeSystem.showPresetCrimes();
     });
-    
+
     PluginManager.registerCommand(pluginName, "showCrimeList", args => {
         CrimeSystem.showCrimeList();
     });
-    
+
     PluginManager.registerCommand(pluginName, "clearBounty", args => {
         CrimeSystem.clearBounty();
     });
@@ -546,16 +546,16 @@
     // Global access for script calls
     window.CrimeSystem = CrimeSystem;
     window.PresetCrimes = PresetCrimes;
-    
+
     // Initialize on new game or load game
     const _DataManager_createGameObjects = DataManager.createGameObjects;
-    DataManager.createGameObjects = function() {
+    DataManager.createGameObjects = function () {
         _DataManager_createGameObjects.call(this);
         CrimeSystem.initialize();
     };
-    
+
     const _DataManager_makeSaveContents = DataManager.makeSaveContents;
-    DataManager.makeSaveContents = function() {
+    DataManager.makeSaveContents = function () {
         const contents = _DataManager_makeSaveContents.call(this);
         CrimeSystem.initialize();
         return contents;

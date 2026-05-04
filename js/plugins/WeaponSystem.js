@@ -161,7 +161,7 @@
   const animationSpeed = 35; // Hardcoded movement animation speed
   const spriteFrameDuration = 130; // Hardcoded sprite frame duration (increased from 30 to 100ms)
   const debugMode = parameters["debugMode"] === "true";
-  const { MovementKeyFrame } = window.AnimationData;
+  const { MovementKeyFrame } = window.Sprites;
 
   // Debug logging helper
   const debugLog = (...args) => {
@@ -189,7 +189,7 @@
   };
 
   const getScaledWeaponY = () => {
-    const scale = getResolutionScale(); 
+    const scale = getResolutionScale();
     return Math.round(weaponSpriteY * scale.y);
   };
 
@@ -199,17 +199,17 @@
   };
   // Hardcoded shoosh sounds for weapon types
   const DEFAULT_WEAPON_SOUNDS = {
-    1: ["Swing1", "Swing2","Swing3","Swing4","Swing5","Swing6","Swing7","Swing8"], // Light
-    2: ["Swing1", "Swing2","Swing3","Swing4","Swing5","Swing6","Swing7","Swing8"], // Sword
-    3: ["Swing1", "Swing2","Swing3","Swing4","Swing5","Swing6","Swing7","Swing8"], // Heavy
-    4: ["Swing1", "Swing2","Swing3","Swing4","Swing5","Swing6","Swing7","Swing8"], //Axe
+    1: ["Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6", "Swing7", "Swing8"], // Light
+    2: ["Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6", "Swing7", "Swing8"], // Sword
+    3: ["Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6", "Swing7", "Swing8"], // Heavy
+    4: ["Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6", "Swing7", "Swing8"], //Axe
     5: ["Whip1", "Whip2", "Whip3", "Whip4"], //Whip
-    6: ["Swing1", "Swing2","Swing3","Swing4","Swing5","Swing6","Swing7","Swing8"], //Staff
+    6: ["Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6", "Swing7", "Swing8"], //Staff
     7: ["Bow"], //Bow
     8: ["Bow"], //Projectile
     9: ["Pistol1", "Pistol2", "Pistol3", "Pistol4", "Pistol5"], //Gun
-    10: ["Swing1", "Swing2","Swing3","Swing4","Swing5","Swing6","Swing7","Swing8"], //Claw
-    11: ["Punch1","Punch2","Punch3"] //Glove
+    10: ["Swing1", "Swing2", "Swing3", "Swing4", "Swing5", "Swing6", "Swing7", "Swing8"], //Claw
+    11: ["Punch1", "Punch2", "Punch3"] //Glove
   };
 
   // Static animation keyframes (no movement, just holds position)
@@ -736,7 +736,7 @@
   // Sprite and animation methods
   Game_Actor.prototype.getWeaponSpriteData = function () {
     const weapons = this.weapons();
-    
+
     // When unarmed, return Unarmed1 sprite with glove animation
     if (weapons.length === 0) {
       return {
@@ -747,7 +747,7 @@
     }
 
     const weapon = weapons[0];
-    
+
     // When equipped with gloves (weapon type 11), also use Unarmed1 sprite
     if (weapon && weapon.wtypeId === 11) {
       return {
@@ -887,47 +887,47 @@
   const _Window_BattleLog_startAction = Window_BattleLog.prototype.startAction;
   Window_BattleLog.prototype.startAction = function (subject, action, targets) {
     if (action && subject && subject.isActor()) {
-   
-if (action.isAttack()) {
-  this._lastAttacker = subject;
-  this._multiAttackHitCount = 0;
-  this._skillAnimations = null;
-  debugLog(`Tracking attacker: ${subject.name()}`);
-} else if (action.isSkill()) {
-  // Check if skill has Movement animations
-  const skill = action.item();
-  if (
-    skill &&
-    skill.weaponAnimations &&
-    skill.weaponAnimations.length > 0
-  ) {
-    // NEW: Check if weapon type should show animation for this skill
-    const weapons = subject.weapons();
-    const shouldShowAnimation = weapons.length > 0 && weapons[0] && 
-      ![7, 8, 9, 10, 11].includes(weapons[0].wtypeId);
-    
-    if (shouldShowAnimation) {
-      this._lastAttacker = subject;
-      this._multiAttackHitCount = 0;
-      this._skillAnimations = skill.weaponAnimations;
-      debugLog(
-        `Skill ${skill.name} has animations:`,
-        this._skillAnimations
-      );
-    } else {
-      this._lastAttacker = null;
-      this._multiAttackHitCount = 0;
-      this._skillAnimations = null;
-      debugLog(
-        `Skill ${skill.name} has animations but weapon type ${weapons[0]?.wtypeId} should not show them`
-      );
-    }
-  } else {
-    this._lastAttacker = null;
-    this._multiAttackHitCount = 0;
-    this._skillAnimations = null;
-  }
-} else if (action.isSkill()) {
+
+      if (action.isAttack()) {
+        this._lastAttacker = subject;
+        this._multiAttackHitCount = 0;
+        this._skillAnimations = null;
+        debugLog(`Tracking attacker: ${subject.name()}`);
+      } else if (action.isSkill()) {
+        // Check if skill has Movement animations
+        const skill = action.item();
+        if (
+          skill &&
+          skill.weaponAnimations &&
+          skill.weaponAnimations.length > 0
+        ) {
+          // NEW: Check if weapon type should show animation for this skill
+          const weapons = subject.weapons();
+          const shouldShowAnimation = weapons.length > 0 && weapons[0] &&
+            ![7, 8, 9, 10, 11].includes(weapons[0].wtypeId);
+
+          if (shouldShowAnimation) {
+            this._lastAttacker = subject;
+            this._multiAttackHitCount = 0;
+            this._skillAnimations = skill.weaponAnimations;
+            debugLog(
+              `Skill ${skill.name} has animations:`,
+              this._skillAnimations
+            );
+          } else {
+            this._lastAttacker = null;
+            this._multiAttackHitCount = 0;
+            this._skillAnimations = null;
+            debugLog(
+              `Skill ${skill.name} has animations but weapon type ${weapons[0]?.wtypeId} should not show them`
+            );
+          }
+        } else {
+          this._lastAttacker = null;
+          this._multiAttackHitCount = 0;
+          this._skillAnimations = null;
+        }
+      } else if (action.isSkill()) {
         // Check if skill has Movement animations
         const skill = action.item();
         if (
@@ -990,22 +990,22 @@ if (action.isAttack()) {
         );
       }
 
-    // Play sound on hit, or on miss/block/counter for ranged weapons (types 7, 8, 9)
-    const shouldPlaySound = target.result().isHit() || (() => {
-      const weapons = actor.weapons();
-      if (weapons.length === 0) return false;
-      const weapon = weapons[0];
-      return weapon && (weapon.wtypeId === 7 || weapon.wtypeId === 8 || weapon.wtypeId === 9);
-    })();
+      // Play sound on hit, or on miss/block/counter for ranged weapons (types 7, 8, 9)
+      const shouldPlaySound = target.result().isHit() || (() => {
+        const weapons = actor.weapons();
+        if (weapons.length === 0) return false;
+        const weapon = weapons[0];
+        return weapon && (weapon.wtypeId === 7 || weapon.wtypeId === 8 || weapon.wtypeId === 9);
+      })();
 
-    if (shouldPlaySound && !this._skillAnimations) {
-      const noMultiSound = actor.hasNoMultiAttackSound();
-      this._multiAttackHitCount = this._multiAttackHitCount || 0;
+      if (shouldPlaySound && !this._skillAnimations) {
+        const noMultiSound = actor.hasNoMultiAttackSound();
+        this._multiAttackHitCount = this._multiAttackHitCount || 0;
 
-      if (this._multiAttackHitCount === 0 || !noMultiSound) {
-        actor.playWeaponSound();
+        if (this._multiAttackHitCount === 0 || !noMultiSound) {
+          actor.playWeaponSound();
+        }
       }
-    }
 
       this._multiAttackHitCount = (this._multiAttackHitCount || 0) + 1;
     }
@@ -1124,37 +1124,37 @@ if (action.isAttack()) {
     this._lastAttacker = null;
     _Window_BattleLog_endAction.call(this, subject);
   };
-// Add this after the existing _Scene_Battle_start alias
-// Replace the existing _Scene_Battle_start alias
-const _Scene_Battle_start = Scene_Battle.prototype.start;
-Scene_Battle.prototype.start = function() {
+  // Add this after the existing _Scene_Battle_start alias
+  // Replace the existing _Scene_Battle_start alias
+  const _Scene_Battle_start = Scene_Battle.prototype.start;
+  Scene_Battle.prototype.start = function () {
     _Scene_Battle_start.call(this);
 
     // Clear any old weapon picture cache to prevent corruption
     if (ImageManager._weaponPictureCache) {
-        ImageManager._weaponPictureCache = {};
+      ImageManager._weaponPictureCache = {};
     }
 
     // Force weapon sprites to reinitialize when battle starts
     if (this._spriteset) {
-        // Clear all weapon sprites first to ensure clean state
-        if (this._spriteset._weaponSprite) {
-            this._spriteset._weaponSprite.clearWeapon();
-        }
-        if (this._spriteset._weaponSpriteLeft) {
-            this._spriteset._weaponSpriteLeft.clearWeapon();
-        }
+      // Clear all weapon sprites first to ensure clean state
+      if (this._spriteset._weaponSprite) {
+        this._spriteset._weaponSprite.clearWeapon();
+      }
+      if (this._spriteset._weaponSpriteLeft) {
+        this._spriteset._weaponSpriteLeft.clearWeapon();
+      }
 
-        // Now update with current equipment
-        this._spriteset.updateWeaponSprite();
+      // Now update with current equipment
+      this._spriteset.updateWeaponSprite();
 
-        // Ensure bullet gauge is set for first actor
-        const actor = $gameParty.battleMembers()[0];
-        if (actor && this._spriteset._bulletGauge) {
-            this._spriteset._bulletGauge.setActor(actor);
-        }
+      // Ensure bullet gauge is set for first actor
+      const actor = $gameParty.battleMembers()[0];
+      if (actor && this._spriteset._bulletGauge) {
+        this._spriteset._bulletGauge.setActor(actor);
+      }
     }
-};
+  };
   //=============================================================================
   // Sprite_WeaponFPS - FPS Weapon Display with Movement
   //=============================================================================
@@ -1263,7 +1263,7 @@ Scene_Battle.prototype.start = function() {
     this.loadWeaponSprite();
     this.visible = true;
     debugLog("Weapon sprite set:", weaponData);
-};
+  };
   Sprite_WeaponFPS.prototype.loadWeaponSprite = function () {
     if (this._weaponFrames.length > 0) {
       const frameName = this._weaponFrames[this._currentSpriteFrame];
@@ -1404,7 +1404,7 @@ Scene_Battle.prototype.start = function() {
           }
           return;
         }
-        
+
         // Check if left weapon is gloves (type 11) - use Thrust for jab
         if (leftWeapon.wtypeId === 11) {
           this._animationFrames = MovementKeyFrame["Thrust"];
@@ -1412,7 +1412,7 @@ Scene_Battle.prototype.start = function() {
           this._animating = true;
           this._currentFrame = 0;
           this._animationStartTime = Date.now();
-          
+
           // Start sprite frame animation if multi-frame weapon
           if (this._weaponFrames.length > 1) {
             this._isPlayingSpriteAnimation = true;
@@ -2122,26 +2122,59 @@ Scene_Battle.prototype.start = function() {
   Spriteset_Battle.prototype.createWeaponSprite = function () {
     this._weaponSprite = new Sprite_WeaponFPS(false); // Right hand
     this._weaponSpriteLeft = new Sprite_WeaponFPS(true); // Left hand (mirrored)
-    this._whipSprite = new Sprite_WhipWeapon();
-    this._flailSprite = new Sprite_FlailWeapon();
-    this._nunchakuSprite = new Sprite_NunchakuWeapon();
-    this._bowSprite = new Sprite_BowWeapon();
-    this._throwSprite = new Sprite_ThrowWeapon();
-    this._projectileSprite = new Sprite_Projectile();
     this._shieldSprite = new Sprite_ShieldFPS();
 
-    this.addChild(this._whipSprite);
-    this.addChild(this._flailSprite);
-    this.addChild(this._nunchakuSprite);
-    this.addChild(this._bowSprite);
     this.addChild(this._weaponSprite);
     this.addChild(this._weaponSpriteLeft);
-    this.addChild(this._throwSprite);
-    this.addChild(this._projectileSprite);
     this.addChild(this._shieldSprite);
 
     this.updateWeaponSprite();
   };
+
+  Spriteset_Battle.prototype.getSpecialWeaponSprite = function(type, isLeft = false) {
+    const key = isLeft ? `_${type}SpriteLeft` : `_${type}Sprite`;
+    if (!this[key]) {
+      switch(type) {
+        case 'whip': this[key] = new Sprite_WhipWeapon(); break;
+        case 'flail': this[key] = new Sprite_FlailWeapon(); break;
+        case 'nunchaku': this[key] = new Sprite_NunchakuWeapon(); break;
+        case 'bow': this[key] = new Sprite_BowWeapon(); break;
+        case 'throw': this[key] = new Sprite_ThrowWeapon(); break;
+        case 'projectile': this[key] = new Sprite_Projectile(); break;
+      }
+      if (this[key]) {
+        this.addChild(this[key]);
+        // Set mirrored if left hand
+        if (isLeft && this[key].setMirrored) this[key].setMirrored(true);
+      }
+    }
+    return this[key];
+  };
+
+  Spriteset_Battle.prototype.getCurrentBattleActor = function () {
+    return (
+      BattleManager.actor() ||
+      (BattleManager._subject && BattleManager._subject.isActor()
+        ? BattleManager._subject
+        : null) ||
+      $gameParty.battleMembers()[0]
+    );
+  };
+
+  Spriteset_Battle.prototype.clearAllSpecialWeapons = function () {
+    if (this._whipSprite) this._whipSprite.clear();
+    if (this._flailSprite) this._flailSprite.clear();
+    if (this._nunchakuSprite) this._nunchakuSprite.clear();
+    if (this._bowSprite) this._bowSprite.clear();
+    if (this._throwSprite) this._throwSprite.clear();
+  };
+
+  Spriteset_Battle.prototype.clearAllLeftHandSpecialWeapons = function () {
+    if (this._whipSpriteLeft) this._whipSpriteLeft.clear();
+    if (this._flailSpriteLeft) this._flailSpriteLeft.clear();
+    if (this._nunchakuSpriteLeft) this._nunchakuSpriteLeft.clear();
+  };
+
   Spriteset_Battle.prototype.createBulletGauge = function () {
     this._bulletGauge = new Sprite_BulletGauge();
     this.addChild(this._bulletGauge);
@@ -2150,10 +2183,7 @@ Scene_Battle.prototype.start = function() {
   Spriteset_Battle.prototype.updateWeaponSprite = function () {
     if (!this._weaponSprite) return;
 
-    const actor =
-      BattleManager.actor() ||
-      (BattleManager._subject && BattleManager._subject.isActor() ? BattleManager._subject : null) ||
-      $gameParty.battleMembers()[0];
+    const actor = this.getCurrentBattleActor();
     if (!actor) return;
 
     // Update shield first (always check)
@@ -2170,130 +2200,109 @@ Scene_Battle.prototype.start = function() {
       (weapons[0].wtypeId === 10);
     const shouldShowBothHands = isDualWielding || isClaws;
 
-    // Initialize left hand physics-based weapon sprites if they don't exist
-    if (!this._whipSpriteLeft) {
-      this._whipSpriteLeft = new Sprite_WhipWeapon();
-      this.addChild(this._whipSpriteLeft);
-    }
-    if (!this._flailSpriteLeft) {
-      this._flailSpriteLeft = new Sprite_FlailWeapon();
-      this.addChild(this._flailSpriteLeft);
-    }
-    if (!this._nunchakuSpriteLeft) {
-      this._nunchakuSpriteLeft = new Sprite_NunchakuWeapon();
-      this.addChild(this._nunchakuSpriteLeft);
-    }
 
-    // Helper function to clear all special weapon types
-    const clearAllSpecialWeapons = () => {
-      this._whipSprite.clear();
-      this._flailSprite.clear();
-      this._nunchakuSprite.clear();
-      this._bowSprite.clear();
-      this._throwSprite.clear();
-    };
 
-    // Helper function to clear all left hand special weapons
-    const clearAllLeftHandSpecialWeapons = () => {
-      if (this._whipSpriteLeft) this._whipSpriteLeft.clear();
-      if (this._flailSpriteLeft) this._flailSpriteLeft.clear();
-      if (this._nunchakuSpriteLeft) this._nunchakuSpriteLeft.clear();
-    };
+
 
     // Handle primary weapon (right hand) based on type
     if (actor.isWeaponThrow()) {
       this._weaponSprite.visible = false;
-      clearAllSpecialWeapons();
+      this.clearAllSpecialWeapons();
 
-      if (!this._throwSprite._visible) {
-        this._throwSprite.show();
+      const throwSprite = this.getSpecialWeaponSprite('throw');
+      if (throwSprite && !throwSprite._visible) {
+        throwSprite.show();
         const spriteData = actor.getWeaponSpriteData();
         if (spriteData && spriteData.sprite) {
-          this._throwSprite.setWeaponSprite(spriteData.sprite);
+          throwSprite.setWeaponSprite(spriteData.sprite);
         }
         const weight = actor.getWeaponWeight();
-        this._throwSprite.setWeight(weight);
+        throwSprite.setWeight(weight);
       }
     } else if (actor.isWeaponWhip()) {
       this._weaponSprite.visible = false;
-      this._flailSprite.clear();
-      this._nunchakuSprite.clear();
-      this._bowSprite.clear();
-      this._throwSprite.clear();
+      if (this._flailSprite) this._flailSprite.clear();
+      if (this._nunchakuSprite) this._nunchakuSprite.clear();
+      if (this._bowSprite) this._bowSprite.clear();
+      if (this._throwSprite) this._throwSprite.clear();
 
-      if (!this._whipSprite._visible) {
-        this._whipSprite.show();
+      const whipSprite = this.getSpecialWeaponSprite('whip');
+      if (whipSprite && !whipSprite._visible) {
+        whipSprite.show();
         const spriteData = actor.getWeaponSpriteData();
         if (spriteData && spriteData.sprite) {
-          this._whipSprite.setWhipSprite(spriteData.sprite);
+          whipSprite.setWhipSprite(spriteData.sprite);
         }
         const color = actor.getWeaponColor();
         if (color) {
-          this._whipSprite.setWhipColor(color);
+          whipSprite.setWhipColor(color);
         }
         if (weapons.length > 0 && weapons[0].segments) {
-          this._whipSprite.setSegmentCount(weapons[0].segments);
+          whipSprite.setSegmentCount(weapons[0].segments);
         }
       }
     } else if (actor.isWeaponFlail()) {
       this._weaponSprite.visible = false;
-      this._whipSprite.clear();
-      this._nunchakuSprite.clear();
-      this._bowSprite.clear();
-      this._throwSprite.clear();
+      if (this._whipSprite) this._whipSprite.clear();
+      if (this._nunchakuSprite) this._nunchakuSprite.clear();
+      if (this._bowSprite) this._bowSprite.clear();
+      if (this._throwSprite) this._throwSprite.clear();
 
-      if (!this._flailSprite._visible) {
-        this._flailSprite.show();
+      const flailSprite = this.getSpecialWeaponSprite('flail');
+      if (flailSprite && !flailSprite._visible) {
+        flailSprite.show();
         const spriteData = actor.getWeaponSpriteData();
         if (spriteData && spriteData.sprite) {
-          this._flailSprite.setFlailHead(spriteData.sprite);
+          flailSprite.setFlailHead(spriteData.sprite);
         }
         const color = actor.getWeaponColor();
         if (color) {
-          this._flailSprite.setChainColor(color);
+          flailSprite.setChainColor(color);
         }
         if (weapons.length > 0 && weapons[0].segments) {
-          this._flailSprite.setSegmentCount(weapons[0].segments);
+          flailSprite.setSegmentCount(weapons[0].segments);
         }
       }
     } else if (actor.isWeaponNunchaku()) {
       this._weaponSprite.visible = false;
-      this._whipSprite.clear();
-      this._flailSprite.clear();
-      this._bowSprite.clear();
-      this._throwSprite.clear();
+      if (this._whipSprite) this._whipSprite.clear();
+      if (this._flailSprite) this._flailSprite.clear();
+      if (this._bowSprite) this._bowSprite.clear();
+      if (this._throwSprite) this._throwSprite.clear();
 
-      if (!this._nunchakuSprite._visible) {
-        this._nunchakuSprite.show();
+      const nunchakuSprite = this.getSpecialWeaponSprite('nunchaku');
+      if (nunchakuSprite && !nunchakuSprite._visible) {
+        nunchakuSprite.show();
         const spriteData = actor.getWeaponSpriteData();
         if (spriteData && spriteData.sprite) {
-          this._nunchakuSprite.setNunchakuSprites(spriteData.sprite);
+          nunchakuSprite.setNunchakuSprites(spriteData.sprite);
         }
         const color = actor.getWeaponColor();
         if (color) {
-          this._nunchakuSprite.setChainColor(color);
+          nunchakuSprite.setChainColor(color);
         }
         if (weapons.length > 0 && weapons[0].segments) {
-          this._nunchakuSprite.setSegmentCount(weapons[0].segments);
+          nunchakuSprite.setSegmentCount(weapons[0].segments);
         }
       }
     } else if (actor.isWeaponBow()) {
       this._weaponSprite.visible = false;
-      this._whipSprite.clear();
-      this._flailSprite.clear();
-      this._nunchakuSprite.clear();
-      this._throwSprite.clear();
+      if (this._whipSprite) this._whipSprite.clear();
+      if (this._flailSprite) this._flailSprite.clear();
+      if (this._nunchakuSprite) this._nunchakuSprite.clear();
+      if (this._throwSprite) this._throwSprite.clear();
 
-      if (!this._bowSprite._visible) {
-        this._bowSprite.show();
+      const bowSprite = this.getSpecialWeaponSprite('bow');
+      if (bowSprite && !bowSprite._visible) {
+        bowSprite.show();
         const colors = actor.getBowColors();
         if (colors) {
-          this._bowSprite.setBowColors(colors.bow, colors.string);
+          bowSprite.setBowColors(colors.bow, colors.string);
         }
       }
     } else {
       // Standard weapons (swords, axes, etc.)
-      clearAllSpecialWeapons();
+      this.clearAllSpecialWeapons();
       this._weaponSprite.setWeapon(actor); // This will set visible = true if successful
     }
 
@@ -2302,44 +2311,45 @@ Scene_Battle.prototype.start = function() {
 
     // Clear left hand special weapons when not needed
     if (!isDualWielding || !weapons[1]) {
-      clearAllLeftHandSpecialWeapons();
+      this.clearAllLeftHandSpecialWeapons();
     }
 
-    
+
     // SPECIAL CASE: Hide left hand for gloves (weapon type 10)
     const isGloves = weapons.length > 0 && weapons[0] && weapons[0].wtypeId === 11;
     if (isGloves && !isDualWielding) {
       this._weaponSpriteLeft.visible = false;
-      clearAllLeftHandSpecialWeapons();
+      this.clearAllLeftHandSpecialWeapons();
     } else if (shouldShowBothHands) {
       // Check what type of weapon is in the left hand
       if (isDualWielding && weapons[1]) {
         // LEFT HAND WHIP
         if (weapons[1].isWhip) {
           this._weaponSpriteLeft.visible = false;
-          this._flailSpriteLeft.clear();
-          this._nunchakuSpriteLeft.clear();
+          if (this._flailSpriteLeft) this._flailSpriteLeft.clear();
+          if (this._nunchakuSpriteLeft) this._nunchakuSpriteLeft.clear();
 
-          if (!this._whipSpriteLeft._visible) {
+          const whipSpriteLeft = this.getSpecialWeaponSprite('whip', true);
+          if (whipSpriteLeft && !whipSpriteLeft._visible) {
             // Initialize left hand whip with mirrored position
-            this._whipSpriteLeft._startX = getScaledWeaponX(true);
-            this._whipSpriteLeft._startY = getScaledWeaponY();
-            this._whipSpriteLeft.initializeSegments();
-            this._whipSpriteLeft.show();
+            whipSpriteLeft._startX = getScaledWeaponX(true);
+            whipSpriteLeft._startY = getScaledWeaponY();
+            whipSpriteLeft.initializeSegments();
+            whipSpriteLeft.show();
 
             // Load sprite if available
             if (weapons[1].weaponSprite) {
-              this._whipSpriteLeft.setWhipSprite(weapons[1].weaponSprite);
+              whipSpriteLeft.setWhipSprite(weapons[1].weaponSprite);
             }
 
             // Set color if available
             if (weapons[1].whipColor) {
-              this._whipSpriteLeft.setWhipColor(weapons[1].whipColor);
+              whipSpriteLeft.setWhipColor(weapons[1].whipColor);
             }
 
             // Set segment count if available
             if (weapons[1].segments) {
-              this._whipSpriteLeft.setSegmentCount(weapons[1].segments);
+              whipSpriteLeft.setSegmentCount(weapons[1].segments);
             }
 
             debugLog(`Showing left hand whip: ${weapons[1].name}`);
@@ -2348,29 +2358,30 @@ Scene_Battle.prototype.start = function() {
         // LEFT HAND FLAIL
         else if (weapons[1].isFlail) {
           this._weaponSpriteLeft.visible = false;
-          this._whipSpriteLeft.clear();
-          this._nunchakuSpriteLeft.clear();
+          if (this._whipSpriteLeft) this._whipSpriteLeft.clear();
+          if (this._nunchakuSpriteLeft) this._nunchakuSpriteLeft.clear();
 
-          if (!this._flailSpriteLeft._visible) {
+          const flailSpriteLeft = this.getSpecialWeaponSprite('flail', true);
+          if (flailSpriteLeft && !flailSpriteLeft._visible) {
             // Initialize left hand flail with mirrored position
-            this._flailSpriteLeft._startX = getScaledWeaponX(true);
-            this._flailSpriteLeft._startY = getScaledWeaponY();
-            this._flailSpriteLeft.initializeSegments();
-            this._flailSpriteLeft.show();
+            flailSpriteLeft._startX = getScaledWeaponX(true);
+            flailSpriteLeft._startY = getScaledWeaponY();
+            flailSpriteLeft.initializeSegments();
+            flailSpriteLeft.show();
 
             // Load sprite if available
             if (weapons[1].weaponSprite) {
-              this._flailSpriteLeft.setFlailHead(weapons[1].weaponSprite);
+              flailSpriteLeft.setFlailHead(weapons[1].weaponSprite);
             }
 
             // Set color if available
             if (weapons[1].whipColor) {
-              this._flailSpriteLeft.setChainColor(weapons[1].whipColor);
+              flailSpriteLeft.setChainColor(weapons[1].whipColor);
             }
 
             // Set segment count if available
             if (weapons[1].segments) {
-              this._flailSpriteLeft.setSegmentCount(weapons[1].segments);
+              flailSpriteLeft.setSegmentCount(weapons[1].segments);
             }
 
             debugLog(`Showing left hand flail: ${weapons[1].name}`);
@@ -2379,31 +2390,32 @@ Scene_Battle.prototype.start = function() {
         // LEFT HAND NUNCHAKU
         else if (weapons[1].isNunchaku) {
           this._weaponSpriteLeft.visible = false;
-          this._whipSpriteLeft.clear();
-          this._flailSpriteLeft.clear();
+          if (this._whipSpriteLeft) this._whipSpriteLeft.clear();
+          if (this._flailSpriteLeft) this._flailSpriteLeft.clear();
 
-          if (!this._nunchakuSpriteLeft._visible) {
+          const nunchakuSpriteLeft = this.getSpecialWeaponSprite('nunchaku', true);
+          if (nunchakuSpriteLeft && !nunchakuSpriteLeft._visible) {
             // Initialize left hand nunchaku with mirrored position
-            this._nunchakuSpriteLeft._startX = getScaledWeaponX(true);
-            this._nunchakuSpriteLeft._startY = getScaledWeaponY();
-            this._nunchakuSpriteLeft.initializeSegments();
-            this._nunchakuSpriteLeft.show();
+            nunchakuSpriteLeft._startX = getScaledWeaponX(true);
+            nunchakuSpriteLeft._startY = getScaledWeaponY();
+            nunchakuSpriteLeft.initializeSegments();
+            nunchakuSpriteLeft.show();
 
             // Load sprite if available
             if (weapons[1].weaponSprite) {
-              this._nunchakuSpriteLeft.setNunchakuSprites(
+              nunchakuSpriteLeft.setNunchakuSprites(
                 weapons[1].weaponSprite
               );
             }
 
             // Set color if available
             if (weapons[1].whipColor) {
-              this._nunchakuSpriteLeft.setChainColor(weapons[1].whipColor);
+              nunchakuSpriteLeft.setChainColor(weapons[1].whipColor);
             }
 
             // Set segment count if available
             if (weapons[1].segments) {
-              this._nunchakuSpriteLeft.setSegmentCount(weapons[1].segments);
+              nunchakuSpriteLeft.setSegmentCount(weapons[1].segments);
             }
 
             debugLog(`Showing left hand nunchaku: ${weapons[1].name}`);
@@ -2411,7 +2423,7 @@ Scene_Battle.prototype.start = function() {
         }
         // NORMAL LEFT HAND WEAPON
         else {
-          clearAllLeftHandSpecialWeapons();
+          this.clearAllLeftHandSpecialWeapons();
 
           const leftWeaponData = {
             getWeaponSpriteData: function () {
@@ -2431,17 +2443,17 @@ Scene_Battle.prototype.start = function() {
           this._weaponSpriteLeft.setWeapon(leftWeaponData); // This will set visible = true if successful
           debugLog(`Showing left hand weapon: ${weapons[1].name}`);
         }
-      // Disabled: single claws/gloves no longer auto-show left hand
+        // Disabled: single claws/gloves no longer auto-show left hand
       } else if (false && isClawsOrGloves && !isDualWielding) {
       } else {
         // No valid left weapon
         this._weaponSpriteLeft.visible = false;
-        clearAllLeftHandSpecialWeapons();
+        this.clearAllLeftHandSpecialWeapons();
       }
     } else {
       // Not dual wielding or claws/gloves
       this._weaponSpriteLeft.visible = false;
-      clearAllLeftHandSpecialWeapons();
+      this.clearAllLeftHandSpecialWeapons();
     }
   };
   // Add helper method to find enemy sprite
@@ -2461,10 +2473,7 @@ Scene_Battle.prototype.start = function() {
     animationOverride = null,
     weaponIndex = 0
   ) {
-    const actor =
-      (BattleManager._subject && BattleManager._subject.isActor() ? BattleManager._subject : null) ||
-      BattleManager.actor() ||
-      $gameParty.battleMembers()[0];
+    const actor = this.getCurrentBattleActor();
     if (!actor) return;
 
     const weapons = actor.weapons();
@@ -2574,100 +2583,100 @@ Scene_Battle.prototype.start = function() {
     }
 
     // Handle left hand weapon animation (for dual wield or claws/gloves)
-if (shouldShowBothHands && this._weaponSpriteLeft) {
-  if (isLeftHand && weapons[1]) {
-    // This is the left hand's turn to animate
+    if (shouldShowBothHands && this._weaponSpriteLeft) {
+      if (isLeftHand && weapons[1]) {
+        // This is the left hand's turn to animate
 
-    // LEFT HAND WHIP
-    if (weapons[1].isWhip && this._whipSpriteLeft) {
-      const enemies = $gameTroop.aliveMembers();
-      if (enemies.length > 0) {
-        const target = enemies[0];
-        const targetSpriteEnemy = this.findTargetSprite(target);
-        if (targetSpriteEnemy) {
-          const targetX = targetSpriteEnemy.x;
-          const targetY =
-            targetSpriteEnemy.y - targetSpriteEnemy.height / 2;
-          this._whipSpriteLeft.crack(targetX, targetY);
-          debugLog(
-            "Left hand whip cracking towards enemy at",
-            targetX,
-            targetY
-          );
+        // LEFT HAND WHIP
+        if (weapons[1].isWhip && this._whipSpriteLeft) {
+          const enemies = $gameTroop.aliveMembers();
+          if (enemies.length > 0) {
+            const target = enemies[0];
+            const targetSpriteEnemy = this.findTargetSprite(target);
+            if (targetSpriteEnemy) {
+              const targetX = targetSpriteEnemy.x;
+              const targetY =
+                targetSpriteEnemy.y - targetSpriteEnemy.height / 2;
+              this._whipSpriteLeft.crack(targetX, targetY);
+              debugLog(
+                "Left hand whip cracking towards enemy at",
+                targetX,
+                targetY
+              );
+            }
+          }
+          return;
+        }
+        // LEFT HAND FLAIL
+        else if (weapons[1].isFlail && this._flailSpriteLeft) {
+          const enemies = $gameTroop.aliveMembers();
+          if (enemies.length > 0) {
+            const target = enemies[0];
+            const targetSpriteEnemy = this.findTargetSprite(target);
+            if (targetSpriteEnemy) {
+              const targetX = targetSpriteEnemy.x;
+              const targetY =
+                targetSpriteEnemy.y - targetSpriteEnemy.height / 2;
+              this._flailSpriteLeft.swing(targetX, targetY);
+              debugLog(
+                "Left hand flail swinging towards enemy at",
+                targetX,
+                targetY
+              );
+            }
+          }
+          return;
+        }
+        // LEFT HAND NUNCHAKU
+        else if (weapons[1].isNunchaku && this._nunchakuSpriteLeft) {
+          const enemies = $gameTroop.aliveMembers();
+          if (enemies.length > 0) {
+            const target = enemies[0];
+            const targetSpriteEnemy = this.findTargetSprite(target);
+            if (targetSpriteEnemy) {
+              const targetX = targetSpriteEnemy.x;
+              const targetY =
+                targetSpriteEnemy.y - targetSpriteEnemy.height / 2;
+              this._nunchakuSpriteLeft.swing(targetX, targetY);
+              debugLog(
+                "Left hand nunchaku swinging towards enemy at",
+                targetX,
+                targetY
+              );
+            }
+          }
+          return;
+        }
+        // NORMAL LEFT HAND WEAPON
+        else if (this._weaponSpriteLeft.visible) {
+          // NEW: Check if left hand weapon should use LEFT_HAND_SWING for skills
+          const shouldUseLeftHandSwing = ![7, 8, 9, 10, 11].includes(weapons[1].wtypeId);
+
+          if (shouldUseLeftHandSwing && animationOverride && animationOverride.length > 0) {
+            // For skills with movement, use LEFT_HAND_SWING for eligible weapon types
+            if (!this._weaponSpriteLeft._muzzleFlashOffset) {
+              this._weaponSpriteLeft._muzzleFlashOffset = { x: 0, y: 0 };
+            }
+            // Override to use LEFT_HAND_SWING regardless of skill's animation
+            this._weaponSpriteLeft._animationFrames = MovementKeyFrame["LEFT_HAND_SWING"];
+            this._weaponSpriteLeft._animating = true;
+            this._weaponSpriteLeft._currentFrame = 0;
+            this._weaponSpriteLeft._animationStartTime = Date.now();
+            debugLog(`Using LEFT_HAND_SWING for left hand weapon type ${weapons[1].wtypeId}`);
+          } else {
+            // Normal animation (for attacks or ineligible weapon types)
+            if (!this._weaponSpriteLeft._muzzleFlashOffset) {
+              this._weaponSpriteLeft._muzzleFlashOffset = { x: 0, y: 0 };
+            }
+            this._weaponSpriteLeft.playAttackAnimation(animationOverride);
+            debugLog(
+              `Playing animation for left hand weapon (index ${weaponIndex})`
+            );
+          }
         }
       }
-      return;
+      // Removed simultaneous animation for claws/gloves - now uses default sequential system
     }
-    // LEFT HAND FLAIL
-    else if (weapons[1].isFlail && this._flailSpriteLeft) {
-      const enemies = $gameTroop.aliveMembers();
-      if (enemies.length > 0) {
-        const target = enemies[0];
-        const targetSpriteEnemy = this.findTargetSprite(target);
-        if (targetSpriteEnemy) {
-          const targetX = targetSpriteEnemy.x;
-          const targetY =
-            targetSpriteEnemy.y - targetSpriteEnemy.height / 2;
-          this._flailSpriteLeft.swing(targetX, targetY);
-          debugLog(
-            "Left hand flail swinging towards enemy at",
-            targetX,
-            targetY
-          );
-        }
-      }
-      return;
-    }
-    // LEFT HAND NUNCHAKU
-    else if (weapons[1].isNunchaku && this._nunchakuSpriteLeft) {
-      const enemies = $gameTroop.aliveMembers();
-      if (enemies.length > 0) {
-        const target = enemies[0];
-        const targetSpriteEnemy = this.findTargetSprite(target);
-        if (targetSpriteEnemy) {
-          const targetX = targetSpriteEnemy.x;
-          const targetY =
-            targetSpriteEnemy.y - targetSpriteEnemy.height / 2;
-          this._nunchakuSpriteLeft.swing(targetX, targetY);
-          debugLog(
-            "Left hand nunchaku swinging towards enemy at",
-            targetX,
-            targetY
-          );
-        }
-      }
-      return;
-    }
-    // NORMAL LEFT HAND WEAPON
-    else if (this._weaponSpriteLeft.visible) {
-      // NEW: Check if left hand weapon should use LEFT_HAND_SWING for skills
-      const shouldUseLeftHandSwing = ![7, 8, 9, 10, 11].includes(weapons[1].wtypeId);
-      
-      if (shouldUseLeftHandSwing && animationOverride && animationOverride.length > 0) {
-        // For skills with movement, use LEFT_HAND_SWING for eligible weapon types
-        if (!this._weaponSpriteLeft._muzzleFlashOffset) {
-          this._weaponSpriteLeft._muzzleFlashOffset = { x: 0, y: 0 };
-        }
-        // Override to use LEFT_HAND_SWING regardless of skill's animation
-        this._weaponSpriteLeft._animationFrames = MovementKeyFrame["LEFT_HAND_SWING"];
-        this._weaponSpriteLeft._animating = true;
-        this._weaponSpriteLeft._currentFrame = 0;
-        this._weaponSpriteLeft._animationStartTime = Date.now();
-        debugLog(`Using LEFT_HAND_SWING for left hand weapon type ${weapons[1].wtypeId}`);
-      } else {
-        // Normal animation (for attacks or ineligible weapon types)
-        if (!this._weaponSpriteLeft._muzzleFlashOffset) {
-          this._weaponSpriteLeft._muzzleFlashOffset = { x: 0, y: 0 };
-        }
-        this._weaponSpriteLeft.playAttackAnimation(animationOverride);
-        debugLog(
-          `Playing animation for left hand weapon (index ${weaponIndex})`
-        );
-      }
-    }
-  }
-  // Removed simultaneous animation for claws/gloves - now uses default sequential system
-}
   };
   Spriteset_Battle.prototype.advanceWeaponSpriteFrame = function () {
     if (this._weaponSprite) {
@@ -2757,49 +2766,49 @@ if (shouldShowBothHands && this._weaponSpriteLeft) {
     }
   };
 
-// Replace the existing _Scene_Battle_terminate alias (around line 2825)
-// Replace the existing _Scene_Battle_terminate alias (around line 2825)
-const _Scene_Battle_terminate = Scene_Battle.prototype.terminate;
-Scene_Battle.prototype.terminate = function () {
+  // Replace the existing _Scene_Battle_terminate alias (around line 2825)
+  // Replace the existing _Scene_Battle_terminate alias (around line 2825)
+  const _Scene_Battle_terminate = Scene_Battle.prototype.terminate;
+  Scene_Battle.prototype.terminate = function () {
     _Scene_Battle_terminate.call(this);
 
     // Properly clear all weapon sprites when battle ends
     if (this._spriteset) {
-        if (this._spriteset._weaponSprite) {
-            this._spriteset._weaponSprite.clearWeapon();
-        }
-        if (this._spriteset._weaponSpriteLeft) {
-            this._spriteset._weaponSpriteLeft.clearWeapon();
-        }
-        if (this._spriteset._shieldSprite) {
-            this._spriteset._shieldSprite.clearShield();
-        }
-        if (this._spriteset._whipSprite) {
-            this._spriteset._whipSprite.clear();
-        }
-        if (this._spriteset._flailSprite) {
-            this._spriteset._flailSprite.clear();
-        }
-        if (this._spriteset._nunchakuSprite) {
-            this._spriteset._nunchakuSprite.clear();
-        }
-        if (this._spriteset._bowSprite) {
-            this._spriteset._bowSprite.clear();
-        }
-        if (this._spriteset._throwSprite) {
-            this._spriteset._throwSprite.clear();
-        }
-        if (this._spriteset._whipSpriteLeft) {
-            this._spriteset._whipSpriteLeft.clear();
-        }
-        if (this._spriteset._flailSpriteLeft) {
-            this._spriteset._flailSpriteLeft.clear();
-        }
-        if (this._spriteset._nunchakuSpriteLeft) {
-            this._spriteset._nunchakuSpriteLeft.clear();
-        }
+      if (this._spriteset._weaponSprite) {
+        this._spriteset._weaponSprite.clearWeapon();
+      }
+      if (this._spriteset._weaponSpriteLeft) {
+        this._spriteset._weaponSpriteLeft.clearWeapon();
+      }
+      if (this._spriteset._shieldSprite) {
+        this._spriteset._shieldSprite.clearShield();
+      }
+      if (this._spriteset._whipSprite) {
+        this._spriteset._whipSprite.clear();
+      }
+      if (this._spriteset._flailSprite) {
+        this._spriteset._flailSprite.clear();
+      }
+      if (this._spriteset._nunchakuSprite) {
+        this._spriteset._nunchakuSprite.clear();
+      }
+      if (this._spriteset._bowSprite) {
+        this._spriteset._bowSprite.clear();
+      }
+      if (this._spriteset._throwSprite) {
+        this._spriteset._throwSprite.clear();
+      }
+      if (this._spriteset._whipSpriteLeft) {
+        this._spriteset._whipSpriteLeft.clear();
+      }
+      if (this._spriteset._flailSpriteLeft) {
+        this._spriteset._flailSpriteLeft.clear();
+      }
+      if (this._spriteset._nunchakuSpriteLeft) {
+        this._spriteset._nunchakuSpriteLeft.clear();
+      }
     }
-};
+  };
   Sprite_WeaponFPS.prototype.destroy = function () {
     this.clearWeapon();
     Sprite.prototype.destroy.call(this);

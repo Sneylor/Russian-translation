@@ -141,111 +141,122 @@
     archetypeColors.forEach(ac => {
         colorMap[ac.archetype.toLowerCase()] = ac.color;
     });
+
+    // Texture Cache
+    let _bloodTextures = [];
+    let _stainTextures = [];
+
+    function createBloodTextures() {
+        if (_bloodTextures.length > 0) return;
+        
+        const renderer = Graphics.app.renderer;
+        const g = new PIXI.Graphics();
+        
+        // Particle textures (white for tinting)
+        g.beginFill(0xFFFFFF);
+        g.drawCircle(0, 0, 10);
+        g.endFill();
+        _bloodTextures.push(renderer.generateTexture(g));
+        
+        g.clear();
+        g.beginFill(0xFFFFFF);
+        g.drawEllipse(0, 0, 12, 8);
+        g.endFill();
+        _bloodTextures.push(renderer.generateTexture(g));
+
+        // Stain textures
+        g.clear();
+        g.beginFill(0xFFFFFF);
+        g.drawCircle(0, 0, 20);
+        g.endFill();
+        _stainTextures.push(renderer.generateTexture(g));
+
+        g.clear();
+        g.beginFill(0xFFFFFF);
+        g.drawEllipse(0, 0, 30, 20);
+        g.endFill();
+        _stainTextures.push(renderer.generateTexture(g));
+
+        g.clear();
+        g.beginFill(0xFFFFFF);
+        g.drawPolygon([-20, 0, -10, -20, 10, -10, 20, 0, 10, 20, -10, 10]);
+        g.endFill();
+        _stainTextures.push(renderer.generateTexture(g));
+    }
     
     //=============================================================================
     // BloodParticle
-    // Class for an individual blood particle.
+    // Class for an individual blood particle (Optimized with Sprites).
     //=============================================================================
-    class BloodParticle extends PIXI.Graphics {
-        constructor(color, x, y) {
+    class BloodParticle extends PIXI.Sprite {
+        constructor() {
             super();
-            this.bloodColor = parseInt(color.replace('#', '0x'));
+            this.anchor.set(0.5);
+        }
+
+        init(texture, color, x, y) {
+            this.texture = texture;
+            this.tint = parseInt(color.replace('#', '0x'));
             this.x = x;
             this.y = y;
+            this.alpha = 1;
             
-            // Randomize particle properties for a natural look
             const size = particleSize[0] + Math.random() * (particleSize[1] - particleSize[0]);
             const speed = initialSpeed[0] + Math.random() * (initialSpeed[1] - initialSpeed[0]);
             const angleRad = (Math.random() * spreadAngle - spreadAngle / 2 - 90) * Math.PI / 180;
             
             this.velocityX = Math.cos(angleRad) * speed;
             this.velocityY = Math.sin(angleRad) * speed;
-            this.size = size;
+            this.scale.set(size / 10);
             this.life = splatterDuration;
             this.maxLife = splatterDuration;
             this.gravity = gravityStrength;
-            
-            this.draw();
-        }
-        
-        draw() {
-            this.clear();
-            this.beginFill(this.bloodColor, this.alpha);
-            // Draw a varied shape for the droplet
-            if (Math.random() > 0.5) {
-                this.drawCircle(0, 0, this.size);
-            } else {
-                this.drawEllipse(0, 0, this.size * 1.2, this.size * 0.8);
-            }
-            this.endFill();
         }
         
         update() {
             this.life--;
             if (this.life <= 0) {
-                return false; // Signal that the particle has expired
+                return false;
             }
             
-            // Apply physics
             this.velocityY += this.gravity;
             this.x += this.velocityX;
             this.y += this.velocityY;
             
-            // Fade out over time
             this.alpha = this.life / this.maxLife;
             
-            // Simple air resistance
             this.velocityX *= 0.98;
             this.velocityY *= 0.98;
             
-            return true; // Signal that the particle is still active
+            return true;
         }
     }
     
     //=============================================================================
     // BloodStain
-    // Class for a persistent blood stain on the battlefield.
+    // Class for a persistent blood stain (Optimized with Sprites).
     //=============================================================================
-    class BloodStain extends PIXI.Graphics {
-        constructor(color, x, y) {
+    class BloodStain extends PIXI.Sprite {
+        constructor() {
             super();
-            this.bloodColor = parseInt(color.replace('#', '0x'));
+            this.anchor.set(0.5);
+        }
+
+        init(texture, color, x, y) {
+            this.texture = texture;
+            this.tint = parseInt(color.replace('#', '0x'));
             this.x = x + (Math.random() - 0.5) * 20;
             this.y = y + (Math.random() - 0.5) * 20;
             this.alpha = stainOpacity / 100;
-            
-            this.draw();
-        }
-        
-        draw() {
-            this.clear();
-            this.beginFill(this.bloodColor, 1);
-            
-            // Draw a random stain shape
-            const stainType = Math.floor(Math.random() * 3);
-            const size = 10 + Math.random() * 20;
-            
-            switch (stainType) {
-                case 0: // Circle
-                    this.drawCircle(0, 0, size);
-                    break;
-                case 1: // Ellipse
-                    this.drawEllipse(0, 0, size * 1.5, size);
-                    break;
-                case 2: // Irregular polygon
-                    this.drawPolygon([
-                        -size, 0, -size / 2, -size, size / 2, -size / 2,
-                        size, 0, size / 2, size, -size / 2, size / 2
-                    ]);
-                    break;
-            }
-            this.endFill();
+            this.rotation = Math.random() * Math.PI * 2;
+            const size = 0.5 + Math.random() * 1.5;
+            this.scale.set(size);
         }
     }
     
     //=============================================================================
     // BloodEffectManager
-    // Manages all blood particles and stains during battle.
+    // Manages all blood particles and stains during battle with pooling.
     //=============================================================================
     class BloodEffectManager {
         constructor() {
@@ -253,6 +264,12 @@
             this.stainContainer = new PIXI.Container();
             this.particles = [];
             this.stains = [];
+            this.particlePool = [];
+            this.stainPool = [];
+            this.maxStains = 60; // Reduced cap for persistent stains
+            this.maxParticles = 400; // Hard cap for active particles
+            this._lastSplatterFrame = 0;
+            this._splattersThisFrame = 0;
         }
         
         setup(parent) {
@@ -263,20 +280,60 @@
         }
         
         createSplatter(x, y, color, damageRatio = 1) {
-            const count = Math.floor(particleCount * Math.min(damageRatio, 1.5));
+            // Throttling: Check how many splatters happened this frame
+            const currentFrame = Graphics.frameCount;
+            if (this._lastSplatterFrame !== currentFrame) {
+                this._lastSplatterFrame = currentFrame;
+                this._splattersThisFrame = 0;
+            }
+            this._splattersThisFrame++;
+
+            // If too many splatters in one frame, skip or reduce
+            if (this._splattersThisFrame > 5) return; 
+
+            // Hard limit check
+            if (this.particles.length >= this.maxParticles) {
+                // Recycle some oldest particles early to make room, or just skip
+                const toRemove = Math.floor(this.maxParticles * 0.1);
+                for (let i = 0; i < toRemove; i++) {
+                    const p = this.particles.shift();
+                    if (p) {
+                        this.container.removeChild(p);
+                        this.particlePool.push(p);
+                    }
+                }
+            }
+
+            createBloodTextures();
+            
+            // Scaled count based on frame pressure
+            let count = Math.floor(particleCount * Math.min(damageRatio, 1.5));
+            if (this._splattersThisFrame > 2) count = Math.floor(count / 2);
             
             for (let i = 0; i < count; i++) {
-                const particle = new BloodParticle(color, x, y);
+                let particle = this.particlePool.pop();
+                if (!particle) {
+                    particle = new BloodParticle();
+                }
+                const texture = _bloodTextures[Math.floor(Math.random() * _bloodTextures.length)];
+                particle.init(texture, color, x, y);
                 this.container.addChild(particle);
                 this.particles.push(particle);
             }
             
-            // Create blood stains if enabled
-            if (enableBloodStains && Math.random() > 0.3) {
-                const stainCount = 1 + Math.floor(Math.random() * 3);
+            // Stains are even more expensive, let's be conservative
+            if (enableBloodStains && Math.random() > 0.5 && this._splattersThisFrame < 3) {
+                const stainCount = 1; // Only 1 stain per splatter when many are happening
                 for (let i = 0; i < stainCount; i++) {
-                    const stain = new BloodStain(color, x, y);
-                    this.stainContainer.addChild(stain);
+                    let stain;
+                    if (this.stains.length >= this.maxStains) {
+                        stain = this.stains.shift();
+                    } else {
+                        stain = this.stainPool.pop() || new BloodStain();
+                        this.stainContainer.addChild(stain);
+                    }
+                    const texture = _stainTextures[Math.floor(Math.random() * _stainTextures.length)];
+                    stain.init(texture, color, x, y);
                     this.stains.push(stain);
                 }
             }
@@ -284,23 +341,31 @@
         
         update() {
             for (let i = this.particles.length - 1; i >= 0; i--) {
-                if (!this.particles[i].update()) {
-                    this.container.removeChild(this.particles[i]);
+                const p = this.particles[i];
+                if (!p.update()) {
+                    this.container.removeChild(p);
                     this.particles.splice(i, 1);
+                    this.particlePool.push(p);
                 }
             }
         }
         
         clear() {
-            this.particles.forEach(p => this.container.removeChild(p));
-            this.stains.forEach(s => this.stainContainer.removeChild(s));
+            this.particles.forEach(p => {
+                this.container.removeChild(p);
+                this.particlePool.push(p);
+            });
+            this.stains.forEach(s => {
+                this.stainContainer.removeChild(s);
+                this.stainPool.push(s);
+            });
             this.particles = [];
             this.stains = [];
         }
     }
     
     //=============================================================================
-    // Plugin Integration with RPG Maker MZ Core Scripts
+    // Plugin Integration
     //=============================================================================
 
     const _Spriteset_Battle_createBattleback = Spriteset_Battle.prototype.createBattleback;
@@ -318,21 +383,12 @@
         }
     };
     
-    // NEW: Automatically determine if an action is magical
     Game_Action.prototype.isConsideredMagicForBloodEffect = function() {
-        if (!this.item()) {
-            return false;
-        }
-        // Check if the Hit Type is Magical Attack
-        if (this.isMagical()) {
-            return true;
-        }
-        // Check if the Skill Type is in the magic list from plugin parameters
+        if (!this.item()) return false;
+        if (this.isMagical()) return true;
         if (this.isSkill()) {
             const skillTypeId = this.item().stypeId;
-            if (magicSkillTypeIds.includes(skillTypeId)) {
-                return true;
-            }
+            if (magicSkillTypeIds.includes(skillTypeId)) return true;
         }
         return false;
     };
@@ -341,7 +397,6 @@
     Game_Enemy.prototype.performDamage = function() {
         _Game_Enemy_performDamage.call(this);
         const action = BattleManager._action;
-        // Trigger blood splatter if the action is not magical and the enemy is still alive
         if (action && !action.isConsideredMagicForBloodEffect() && this.isAlive()) {
             this.createBloodSplatter();
         }
@@ -360,9 +415,7 @@
     
     Game_Enemy.prototype.createBloodSplatter = function() {
         const spriteset = SceneManager._scene._spriteset;
-        if (!spriteset || !spriteset._bloodEffectManager) {
-            return;
-        }
+        if (!spriteset || !spriteset._bloodEffectManager) return;
         
         const sprite = spriteset.findTargetSprite(this);
         if (sprite) {
@@ -370,7 +423,6 @@
             const color = this.getBloodColor();
             const damageRatio = this.result().hpDamage / this.mhp;
             
-            // Position at enemy sprite center with some randomness
             const x = sprite.x;
             const y = sprite.y - sprite.height / 2;
             
@@ -387,3 +439,4 @@
     };
     
 })();
+

@@ -228,7 +228,7 @@ Utils.isOptionValid = function(name) {
     if (args.split("&").includes(name)) {
         return true;
     }
-    if (this.isNwjs() && nw.App.argv.length > 0) {
+    if (this.isNwjs() && typeof nw !== "undefined" && nw.App && nw.App.argv.length > 0) {
         return nw.App.argv[0].split("&").includes(name);
     }
     return false;
@@ -240,7 +240,11 @@ Utils.isOptionValid = function(name) {
  * @returns {boolean} True if the platform is NW.js.
  */
 Utils.isNwjs = function() {
-    return typeof require === "function" && typeof process === "object";
+    return (
+        typeof nw !== "undefined" &&
+        typeof require === "function" &&
+        typeof process === "object"
+    );
 };
 
 /**

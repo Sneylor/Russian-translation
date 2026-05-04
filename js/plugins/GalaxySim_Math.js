@@ -15,7 +15,7 @@
  *
  * LOAD ORDER: This module must be loaded BEFORE other GalaxySim modules.
  *
- * DEPENDENCIES: GalaxySimDB.js (must be loaded before this)
+ * DEPENDENCIES: DataManager.js (must be loaded before this)
  */
 
 (() => {
@@ -30,8 +30,8 @@
   // Load Data from GalaxyData
   // ============================================================================
 
-  const STAR_TYPES = window.GalaxyData?.STAR_TYPES || {};
-  const PLANET_TYPES = window.GalaxyData?.PLANET_TYPES || {};
+  const STAR_TYPES = window.GalaxySim?.StarTypes || {};
+  const PLANET_TYPES = window.GalaxySim?.PlanetTypes || {};
 
   // ============================================================================
   // Helper Functions

@@ -1,0 +1,2506 @@
+{
+  "jiao": {
+    "name": "角 (Jiao) - Horn",
+    "symbol": "Azure Dragon",
+    "center": {
+      "x": 850,
+      "y": 450
+    },
+    "stars": [
+      {
+        "x": 830,
+        "y": 440,
+        "name": "Spica",
+        "magnitude": 0.97
+      },
+      {
+        "x": 860,
+        "y": 455,
+        "name": "Zeta Vir",
+        "magnitude": 3.37
+      },
+      {
+        "x": 845,
+        "y": 460,
+        "name": "Heze",
+        "magnitude": 3.38
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "kang": {
+    "name": "亢 (Kang) - Neck",
+    "symbol": "Azure Dragon",
+    "center": {
+      "x": 900,
+      "y": 430
+    },
+    "stars": [
+      {
+        "x": 880,
+        "y": 420,
+        "name": "Kappa Vir",
+        "magnitude": 4.18
+      },
+      {
+        "x": 910,
+        "y": 435,
+        "name": "Iota Vir",
+        "magnitude": 4.08
+      },
+      {
+        "x": 895,
+        "y": 440,
+        "name": "Phi Vir",
+        "magnitude": 4.81
+      },
+      {
+        "x": 920,
+        "y": 425,
+        "name": "Lambda Vir",
+        "magnitude": 4.52
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "di": {
+    "name": "氐 (Di) - Root",
+    "symbol": "Azure Dragon",
+    "center": {
+      "x": 950,
+      "y": 460
+    },
+    "stars": [
+      {
+        "x": 930,
+        "y": 450,
+        "name": "Alpha Lib",
+        "magnitude": 2.75
+      },
+      {
+        "x": 960,
+        "y": 465,
+        "name": "Beta Lib",
+        "magnitude": 2.61
+      },
+      {
+        "x": 945,
+        "y": 470,
+        "name": "Gamma Lib",
+        "magnitude": 3.91
+      },
+      {
+        "x": 970,
+        "y": 455,
+        "name": "Iota Lib",
+        "magnitude": 4.54
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "fang": {
+    "name": "房 (Fang) - Room",
+    "symbol": "Azure Dragon",
+    "center": {
+      "x": 1000,
+      "y": 440
+    },
+    "stars": [
+      {
+        "x": 980,
+        "y": 430,
+        "name": "Pi Sco",
+        "magnitude": 2.89
+      },
+      {
+        "x": 1010,
+        "y": 445,
+        "name": "Rho Sco",
+        "magnitude": 3.88
+      },
+      {
+        "x": 995,
+        "y": 450,
+        "name": "Delta Sco",
+        "magnitude": 2.32
+      },
+      {
+        "x": 1020,
+        "y": 435,
+        "name": "Beta Sco",
+        "magnitude": 2.62
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "xin": {
+    "name": "心 (Xin) - Heart",
+    "symbol": "Azure Dragon",
+    "center": {
+      "x": 1050,
+      "y": 450
+    },
+    "stars": [
+      {
+        "x": 1030,
+        "y": 445,
+        "name": "Sigma Sco",
+        "magnitude": 2.88
+      },
+      {
+        "x": 1055,
+        "y": 450,
+        "name": "Antares",
+        "magnitude": 1.03
+      },
+      {
+        "x": 1070,
+        "y": 455,
+        "name": "Tau Sco",
+        "magnitude": 2.82
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "wei": {
+    "name": "尾 (Wei) - Tail",
+    "symbol": "Azure Dragon",
+    "center": {
+      "x": 1100,
+      "y": 470
+    },
+    "stars": [
+      {
+        "x": 1080,
+        "y": 460,
+        "name": "Epsilon Sco",
+        "magnitude": 2.29
+      },
+      {
+        "x": 1095,
+        "y": 465,
+        "name": "Mu Sco",
+        "magnitude": 3
+      },
+      {
+        "x": 1110,
+        "y": 470,
+        "name": "Zeta Sco",
+        "magnitude": 3.62
+      },
+      {
+        "x": 1125,
+        "y": 475,
+        "name": "Eta Sco",
+        "magnitude": 3.33
+      },
+      {
+        "x": 1105,
+        "y": 480,
+        "name": "Theta Sco",
+        "magnitude": 1.87
+      },
+      {
+        "x": 1090,
+        "y": 485,
+        "name": "Iota Sco",
+        "magnitude": 2.99
+      },
+      {
+        "x": 1115,
+        "y": 490,
+        "name": "Kappa Sco",
+        "magnitude": 2.41
+      },
+      {
+        "x": 1130,
+        "y": 485,
+        "name": "Lambda Sco",
+        "magnitude": 1.63
+      },
+      {
+        "x": 1120,
+        "y": 495,
+        "name": "Upsilon Sco",
+        "magnitude": 2.69
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ]
+    ]
+  },
+  "ji": {
+    "name": "箕 (Ji) - Winnowing Basket",
+    "symbol": "Azure Dragon",
+    "center": {
+      "x": 1150,
+      "y": 500
+    },
+    "stars": [
+      {
+        "x": 1130,
+        "y": 490,
+        "name": "Gamma Sgr",
+        "magnitude": 2.99
+      },
+      {
+        "x": 1155,
+        "y": 495,
+        "name": "Delta Sgr",
+        "magnitude": 2.7
+      },
+      {
+        "x": 1145,
+        "y": 505,
+        "name": "Epsilon Sgr",
+        "magnitude": 1.85
+      },
+      {
+        "x": 1170,
+        "y": 510,
+        "name": "Eta Sgr",
+        "magnitude": 3.11
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "dou": {
+    "name": "斗 (Dou) - Dipper",
+    "symbol": "Black Tortoise",
+    "center": {
+      "x": 1200,
+      "y": 520
+    },
+    "stars": [
+      {
+        "x": 1180,
+        "y": 510,
+        "name": "Phi Sgr",
+        "magnitude": 3.17
+      },
+      {
+        "x": 1195,
+        "y": 515,
+        "name": "Lambda Sgr",
+        "magnitude": 2.82
+      },
+      {
+        "x": 1210,
+        "y": 520,
+        "name": "Mu Sgr",
+        "magnitude": 3.86
+      },
+      {
+        "x": 1225,
+        "y": 525,
+        "name": "Sigma Sgr",
+        "magnitude": 2.02
+      },
+      {
+        "x": 1205,
+        "y": 530,
+        "name": "Tau Sgr",
+        "magnitude": 3.32
+      },
+      {
+        "x": 1190,
+        "y": 535,
+        "name": "Zeta Sgr",
+        "magnitude": 2.6
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ]
+  },
+  "niu": {
+    "name": "牛 (Niu) - Ox",
+    "symbol": "Black Tortoise",
+    "center": {
+      "x": 100,
+      "y": 550
+    },
+    "stars": [
+      {
+        "x": 80,
+        "y": 540,
+        "name": "Beta Cap",
+        "magnitude": 3.08
+      },
+      {
+        "x": 95,
+        "y": 545,
+        "name": "Alpha2 Cap",
+        "magnitude": 3.57
+      },
+      {
+        "x": 110,
+        "y": 550,
+        "name": "Xi2 Cap",
+        "magnitude": 5.08
+      },
+      {
+        "x": 125,
+        "y": 555,
+        "name": "Pi Cap",
+        "magnitude": 5.08
+      },
+      {
+        "x": 105,
+        "y": 560,
+        "name": "Rho Cap",
+        "magnitude": 4.78
+      },
+      {
+        "x": 90,
+        "y": 565,
+        "name": "Omicron Cap",
+        "magnitude": 5.94
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ]
+  },
+  "nu": {
+    "name": "女 (Nü) - Girl",
+    "symbol": "Black Tortoise",
+    "center": {
+      "x": 150,
+      "y": 570
+    },
+    "stars": [
+      {
+        "x": 130,
+        "y": 560,
+        "name": "Epsilon Aqr",
+        "magnitude": 3.77
+      },
+      {
+        "x": 155,
+        "y": 570,
+        "name": "Mu Aqr",
+        "magnitude": 4.73
+      },
+      {
+        "x": 145,
+        "y": 575,
+        "name": "4 Aqr",
+        "magnitude": 5.99
+      },
+      {
+        "x": 170,
+        "y": 580,
+        "name": "5 Aqr",
+        "magnitude": 5.55
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ]
+    ]
+  },
+  "xu": {
+    "name": "虛 (Xu) - Emptiness",
+    "symbol": "Black Tortoise",
+    "center": {
+      "x": 200,
+      "y": 580
+    },
+    "stars": [
+      {
+        "x": 185,
+        "y": 575,
+        "name": "Beta Aqr",
+        "magnitude": 2.91
+      },
+      {
+        "x": 215,
+        "y": 585,
+        "name": "Alpha Equ",
+        "magnitude": 3.92
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "wei_north": {
+    "name": "危 (Wei) - Rooftop",
+    "symbol": "Black Tortoise",
+    "center": {
+      "x": 250,
+      "y": 590
+    },
+    "stars": [
+      {
+        "x": 230,
+        "y": 580,
+        "name": "Alpha Aqr",
+        "magnitude": 2.96
+      },
+      {
+        "x": 255,
+        "y": 590,
+        "name": "Theta Peg",
+        "magnitude": 3.53
+      },
+      {
+        "x": 270,
+        "y": 600,
+        "name": "Epsilon Peg",
+        "magnitude": 2.39
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "shi": {
+    "name": "室 (Shi) - Encampment",
+    "symbol": "Black Tortoise",
+    "center": {
+      "x": 300,
+      "y": 600
+    },
+    "stars": [
+      {
+        "x": 280,
+        "y": 590,
+        "name": "Alpha Peg",
+        "magnitude": 2.48
+      },
+      {
+        "x": 320,
+        "y": 610,
+        "name": "Beta Peg",
+        "magnitude": 2.42
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "bi": {
+    "name": "壁 (Bi) - Wall",
+    "symbol": "Black Tortoise",
+    "center": {
+      "x": 350,
+      "y": 610
+    },
+    "stars": [
+      {
+        "x": 330,
+        "y": 600,
+        "name": "Gamma Peg",
+        "magnitude": 2.83
+      },
+      {
+        "x": 370,
+        "y": 620,
+        "name": "Alpha And",
+        "magnitude": 2.06
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ]
+    ]
+  },
+  "kui": {
+    "name": "奎 (Kui) - Legs",
+    "symbol": "White Tiger",
+    "center": {
+      "x": 400,
+      "y": 350
+    },
+    "stars": [
+      {
+        "x": 380,
+        "y": 330,
+        "name": "Eta And",
+        "magnitude": 4.42
+      },
+      {
+        "x": 395,
+        "y": 340,
+        "name": "Zeta And",
+        "magnitude": 4.06
+      },
+      {
+        "x": 410,
+        "y": 350,
+        "name": "Delta And",
+        "magnitude": 3.27
+      },
+      {
+        "x": 425,
+        "y": 360,
+        "name": "Epsilon And",
+        "magnitude": 4.37
+      },
+      {
+        "x": 405,
+        "y": 370,
+        "name": "Pi And",
+        "magnitude": 4.36
+      },
+      {
+        "x": 390,
+        "y": 365,
+        "name": "Nu And",
+        "magnitude": 4.53
+      },
+      {
+        "x": 415,
+        "y": 335,
+        "name": "Mu And",
+        "magnitude": 3.87
+      },
+      {
+        "x": 430,
+        "y": 345,
+        "name": "Beta And",
+        "magnitude": 2.06
+      },
+      {
+        "x": 385,
+        "y": 355,
+        "name": "Kappa Psc",
+        "magnitude": 4.94
+      },
+      {
+        "x": 400,
+        "y": 360,
+        "name": "Lambda Psc",
+        "magnitude": 4.5
+      },
+      {
+        "x": 415,
+        "y": 365,
+        "name": "Iota Psc",
+        "magnitude": 4.13
+      },
+      {
+        "x": 430,
+        "y": 370,
+        "name": "Theta Psc",
+        "magnitude": 4.27
+      },
+      {
+        "x": 410,
+        "y": 375,
+        "name": "Gamma Psc",
+        "magnitude": 3.69
+      },
+      {
+        "x": 395,
+        "y": 380,
+        "name": "7 Psc",
+        "magnitude": 5.07
+      },
+      {
+        "x": 420,
+        "y": 385,
+        "name": "Omega Psc",
+        "magnitude": 4.01
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        12
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        13,
+        14
+      ],
+      [
+        14,
+        8
+      ]
+    ]
+  },
+  "lou": {
+    "name": "婁 (Lou) - Bond",
+    "symbol": "White Tiger",
+    "center": {
+      "x": 450,
+      "y": 380
+    },
+    "stars": [
+      {
+        "x": 435,
+        "y": 370,
+        "name": "Beta Ari",
+        "magnitude": 2.66
+      },
+      {
+        "x": 460,
+        "y": 385,
+        "name": "Gamma Ari",
+        "magnitude": 3.88
+      },
+      {
+        "x": 455,
+        "y": 390,
+        "name": "Alpha Ari",
+        "magnitude": 2
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  },
+  "wei_west": {
+    "name": "胃 (Wei) - Stomach",
+    "symbol": "White Tiger",
+    "center": {
+      "x": 500,
+      "y": 390
+    },
+    "stars": [
+      {
+        "x": 485,
+        "y": 380,
+        "name": "35 Ari",
+        "magnitude": 4.66
+      },
+      {
+        "x": 510,
+        "y": 395,
+        "name": "39 Ari",
+        "magnitude": 4.52
+      },
+      {
+        "x": 505,
+        "y": 400,
+        "name": "41 Ari",
+        "magnitude": 3.63
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ]
+  },
+  "mao": {
+    "name": "昴 (Mao) - Hairy Head",
+    "symbol": "White Tiger",
+    "center": {
+      "x": 550,
+      "y": 400
+    },
+    "stars": [
+      {
+        "x": 540,
+        "y": 390,
+        "name": "Alcyone",
+        "magnitude": 2.87
+      },
+      {
+        "x": 545,
+        "y": 395,
+        "name": "Atlas",
+        "magnitude": 3.63
+      },
+      {
+        "x": 550,
+        "y": 400,
+        "name": "Electra",
+        "magnitude": 3.7
+      },
+      {
+        "x": 555,
+        "y": 405,
+        "name": "Maia",
+        "magnitude": 3.86
+      },
+      {
+        "x": 560,
+        "y": 410,
+        "name": "Merope",
+        "magnitude": 4.18
+      },
+      {
+        "x": 555,
+        "y": 415,
+        "name": "Taygeta",
+        "magnitude": 4.29
+      },
+      {
+        "x": 550,
+        "y": 410,
+        "name": "Pleione",
+        "magnitude": 5.09
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        0
+      ]
+    ]
+  },
+  "bi_west": {
+    "name": "畢 (Bi) - Net",
+    "symbol": "White Tiger",
+    "center": {
+      "x": 600,
+      "y": 410
+    },
+    "stars": [
+      {
+        "x": 580,
+        "y": 400,
+        "name": "Epsilon Tau",
+        "magnitude": 3.54
+      },
+      {
+        "x": 595,
+        "y": 405,
+        "name": "Delta Tau",
+        "magnitude": 3.76
+      },
+      {
+        "x": 610,
+        "y": 410,
+        "name": "Gamma Tau",
+        "magnitude": 3.65
+      },
+      {
+        "x": 625,
+        "y": 415,
+        "name": "Alpha Tau",
+        "magnitude": 0.85
+      },
+      {
+        "x": 605,
+        "y": 420,
+        "name": "Theta2 Tau",
+        "magnitude": 3.4
+      },
+      {
+        "x": 590,
+        "y": 425,
+        "name": "Lambda Tau",
+        "magnitude": 3.47
+      },
+      {
+        "x": 615,
+        "y": 430,
+        "name": "Zeta Tau",
+        "magnitude": 3
+      },
+      {
+        "x": 600,
+        "y": 435,
+        "name": "Omicron Tau",
+        "magnitude": 3.6
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        3
+      ]
+    ]
+  },
+  "zui": {
+    "name": "觜 (Zui) - Turtle Beak",
+    "symbol": "White Tiger",
+    "center": {
+      "x": 650,
+      "y": 420
+    },
+    "stars": [
+      {
+        "x": 635,
+        "y": 415,
+        "name": "Lambda Ori",
+        "magnitude": 3.54
+      },
+      {
+        "x": 660,
+        "y": 425,
+        "name": "Phi1 Ori",
+        "magnitude": 4.41
+      },
+      {
+        "x": 655,
+        "y": 430,
+        "name": "Phi2 Ori",
+        "magnitude": 4.09
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        0
+      ]
+    ]
+  },
+  "shen": {
+    "name": "參 (Shen) - Three Stars",
+    "symbol": "White Tiger",
+    "center": {
+      "x": 700,
+      "y": 430
+    },
+    "stars": [
+      {
+        "x": 680,
+        "y": 410,
+        "name": "Betelgeuse",
+        "magnitude": 0.5
+      },
+      {
+        "x": 695,
+        "y": 420,
+        "name": "Gamma Ori",
+        "magnitude": 1.64
+      },
+      {
+        "x": 710,
+        "y": 430,
+        "name": "Delta Ori",
+        "magnitude": 2.23
+      },
+      {
+        "x": 695,
+        "y": 435,
+        "name": "Epsilon Ori",
+        "magnitude": 1.7
+      },
+      {
+        "x": 710,
+        "y": 440,
+        "name": "Zeta Ori",
+        "magnitude": 2.03
+      },
+      {
+        "x": 725,
+        "y": 445,
+        "name": "Kappa Ori",
+        "magnitude": 2.06
+      },
+      {
+        "x": 720,
+        "y": 450,
+        "name": "Rigel",
+        "magnitude": 0.13
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        2,
+        4
+      ]
+    ]
+  },
+  "jing": {
+    "name": "井 (Jing) - Well",
+    "symbol": "Vermillion Bird",
+    "center": {
+      "x": 750,
+      "y": 450
+    },
+    "stars": [
+      {
+        "x": 730,
+        "y": 440,
+        "name": "Mu Gem",
+        "magnitude": 2.88
+      },
+      {
+        "x": 745,
+        "y": 445,
+        "name": "Eta Gem",
+        "magnitude": 3.28
+      },
+      {
+        "x": 760,
+        "y": 450,
+        "name": "Gamma Gem",
+        "magnitude": 1.93
+      },
+      {
+        "x": 775,
+        "y": 455,
+        "name": "Xi Gem",
+        "magnitude": 3.36
+      },
+      {
+        "x": 755,
+        "y": 460,
+        "name": "Lambda Gem",
+        "magnitude": 3.58
+      },
+      {
+        "x": 740,
+        "y": 465,
+        "name": "Delta Gem",
+        "magnitude": 3.53
+      },
+      {
+        "x": 765,
+        "y": 470,
+        "name": "Zeta Gem",
+        "magnitude": 3.79
+      },
+      {
+        "x": 750,
+        "y": 475,
+        "name": "Epsilon Gem",
+        "magnitude": 2.98
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        0
+      ]
+    ]
+  },
+  "gui": {
+    "name": "鬼 (Gui) - Ghost",
+    "symbol": "Vermillion Bird",
+    "center": {
+      "x": 800,
+      "y": 460
+    },
+    "stars": [
+      {
+        "x": 780,
+        "y": 450,
+        "name": "Theta Cnc",
+        "magnitude": 5.33
+      },
+      {
+        "x": 795,
+        "y": 455,
+        "name": "Eta Cnc",
+        "magnitude": 5.33
+      },
+      {
+        "x": 810,
+        "y": 460,
+        "name": "Gamma Cnc",
+        "magnitude": 4.66
+      },
+      {
+        "x": 825,
+        "y": 465,
+        "name": "Delta Cnc",
+        "magnitude": 3.94
+      },
+      {
+        "x": 805,
+        "y": 470,
+        "name": "M44 Praesepe",
+        "magnitude": 3.7
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        0
+      ]
+    ]
+  },
+  "liu": {
+    "name": "柳 (Liu) - Willow",
+    "symbol": "Vermillion Bird",
+    "center": {
+      "x": 850,
+      "y": 470
+    },
+    "stars": [
+      {
+        "x": 830,
+        "y": 460,
+        "name": "Delta Hya",
+        "magnitude": 4.16
+      },
+      {
+        "x": 845,
+        "y": 465,
+        "name": "Sigma Hya",
+        "magnitude": 4.44
+      },
+      {
+        "x": 860,
+        "y": 470,
+        "name": "Eta Hya",
+        "magnitude": 4.3
+      },
+      {
+        "x": 875,
+        "y": 475,
+        "name": "Rho Hya",
+        "magnitude": 4.36
+      },
+      {
+        "x": 855,
+        "y": 480,
+        "name": "Epsilon Hya",
+        "magnitude": 3.38
+      },
+      {
+        "x": 840,
+        "y": 485,
+        "name": "Zeta Hya",
+        "magnitude": 3.11
+      },
+      {
+        "x": 865,
+        "y": 490,
+        "name": "Theta Hya",
+        "magnitude": 3.88
+      },
+      {
+        "x": 850,
+        "y": 495,
+        "name": "Iota Hya",
+        "magnitude": 3.91
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        0
+      ]
+    ]
+  },
+  "xing": {
+    "name": "星 (Xing) - Star",
+    "symbol": "Vermillion Bird",
+    "center": {
+      "x": 900,
+      "y": 480
+    },
+    "stars": [
+      {
+        "x": 880,
+        "y": 470,
+        "name": "Alpha Hya",
+        "magnitude": 2
+      },
+      {
+        "x": 895,
+        "y": 475,
+        "name": "Tau1 Hya",
+        "magnitude": 4.6
+      },
+      {
+        "x": 910,
+        "y": 480,
+        "name": "Tau2 Hya",
+        "magnitude": 4.54
+      },
+      {
+        "x": 925,
+        "y": 485,
+        "name": "Iota Hya",
+        "magnitude": 3.91
+      },
+      {
+        "x": 905,
+        "y": 490,
+        "name": "26 Hya",
+        "magnitude": 4.78
+      },
+      {
+        "x": 890,
+        "y": 495,
+        "name": "27 Hya",
+        "magnitude": 4.8
+      },
+      {
+        "x": 915,
+        "y": 500,
+        "name": "31 Hya",
+        "magnitude": 4.6
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        0
+      ]
+    ]
+  },
+  "zhang": {
+    "name": "張 (Zhang) - Extended Net",
+    "symbol": "Vermillion Bird",
+    "center": {
+      "x": 950,
+      "y": 490
+    },
+    "stars": [
+      {
+        "x": 930,
+        "y": 480,
+        "name": "Upsilon1 Hya",
+        "magnitude": 4.12
+      },
+      {
+        "x": 945,
+        "y": 485,
+        "name": "Lambda Hya",
+        "magnitude": 3.61
+      },
+      {
+        "x": 960,
+        "y": 490,
+        "name": "Mu Hya",
+        "magnitude": 3.81
+      },
+      {
+        "x": 975,
+        "y": 495,
+        "name": "Nu Hya",
+        "magnitude": 3.11
+      },
+      {
+        "x": 955,
+        "y": 500,
+        "name": "Kappa Hya",
+        "magnitude": 5.06
+      },
+      {
+        "x": 940,
+        "y": 505,
+        "name": "Phi Hya",
+        "magnitude": 4.91
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ]
+  },
+  "yi": {
+    "name": "翼 (Yi) - Wings",
+    "symbol": "Vermillion Bird",
+    "center": {
+      "x": 1000,
+      "y": 500
+    },
+    "stars": [
+      {
+        "x": 980,
+        "y": 490,
+        "name": "Alpha Crt",
+        "magnitude": 4.08
+      },
+      {
+        "x": 995,
+        "y": 495,
+        "name": "Beta Crt",
+        "magnitude": 4.46
+      },
+      {
+        "x": 1010,
+        "y": 500,
+        "name": "Gamma Crt",
+        "magnitude": 4.08
+      },
+      {
+        "x": 1025,
+        "y": 505,
+        "name": "Delta Crt",
+        "magnitude": 3.56
+      },
+      {
+        "x": 1005,
+        "y": 510,
+        "name": "Epsilon Crt",
+        "magnitude": 4.83
+      },
+      {
+        "x": 990,
+        "y": 515,
+        "name": "Zeta Crt",
+        "magnitude": 4.73
+      },
+      {
+        "x": 1015,
+        "y": 520,
+        "name": "Eta Crt",
+        "magnitude": 5.18
+      },
+      {
+        "x": 1000,
+        "y": 525,
+        "name": "Theta Crt",
+        "magnitude": 4.7
+      },
+      {
+        "x": 1020,
+        "y": 490,
+        "name": "Iota Crt",
+        "magnitude": 5.48
+      },
+      {
+        "x": 1035,
+        "y": 495,
+        "name": "Kappa Crt",
+        "magnitude": 5.94
+      },
+      {
+        "x": 985,
+        "y": 520,
+        "name": "Lambda Crt",
+        "magnitude": 5.08
+      },
+      {
+        "x": 970,
+        "y": 515,
+        "name": "Mu Crt",
+        "magnitude": 5.07
+      },
+      {
+        "x": 1030,
+        "y": 485,
+        "name": "Psi Crt",
+        "magnitude": 6.13
+      },
+      {
+        "x": 995,
+        "y": 480,
+        "name": "Omega Crt",
+        "magnitude": 5.82
+      },
+      {
+        "x": 1010,
+        "y": 475,
+        "name": "Xi Crt",
+        "magnitude": 5.28
+      },
+      {
+        "x": 1025,
+        "y": 470,
+        "name": "Nu Crt",
+        "magnitude": 5.48
+      },
+      {
+        "x": 1005,
+        "y": 465,
+        "name": "Pi Crt",
+        "magnitude": 5.24
+      },
+      {
+        "x": 990,
+        "y": 460,
+        "name": "Rho Crt",
+        "magnitude": 5.23
+      },
+      {
+        "x": 1015,
+        "y": 455,
+        "name": "Sigma Crt",
+        "magnitude": 5.56
+      },
+      {
+        "x": 1000,
+        "y": 450,
+        "name": "Tau Crt",
+        "magnitude": 5.69
+      },
+      {
+        "x": 1020,
+        "y": 445,
+        "name": "Upsilon Crt",
+        "magnitude": 5.72
+      },
+      {
+        "x": 1005,
+        "y": 440,
+        "name": "Phi Crt",
+        "magnitude": 5.72
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        0
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        3
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        5
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        13,
+        14
+      ],
+      [
+        14,
+        15
+      ],
+      [
+        15,
+        16
+      ],
+      [
+        16,
+        17
+      ],
+      [
+        17,
+        18
+      ],
+      [
+        18,
+        19
+      ],
+      [
+        19,
+        20
+      ],
+      [
+        20,
+        21
+      ],
+      [
+        21,
+        12
+      ]
+    ]
+  },
+  "zhen": {
+    "name": "軫 (Zhen) - Chariot",
+    "symbol": "Vermillion Bird",
+    "center": {
+      "x": 1050,
+      "y": 510
+    },
+    "stars": [
+      {
+        "x": 1030,
+        "y": 500,
+        "name": "Gamma Crv",
+        "magnitude": 2.59
+      },
+      {
+        "x": 1045,
+        "y": 505,
+        "name": "Beta Crv",
+        "magnitude": 2.65
+      },
+      {
+        "x": 1060,
+        "y": 510,
+        "name": "Delta Crv",
+        "magnitude": 2.95
+      },
+      {
+        "x": 1075,
+        "y": 515,
+        "name": "Epsilon Crv",
+        "magnitude": 3
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "ziwei": {
+    "name": "紫微垣 (Ziwei Yuan) - Purple Forbidden Enclosure",
+    "symbol": "Three Enclosures",
+    "center": {
+      "x": 600,
+      "y": 200
+    },
+    "stars": [
+      {
+        "x": 550,
+        "y": 150,
+        "name": "Theta Dra",
+        "magnitude": 4.01
+      },
+      {
+        "x": 560,
+        "y": 160,
+        "name": "Eta Dra",
+        "magnitude": 2.74
+      },
+      {
+        "x": 570,
+        "y": 170,
+        "name": "Zeta Dra",
+        "magnitude": 3.17
+      },
+      {
+        "x": 580,
+        "y": 180,
+        "name": "Upsilon Dra",
+        "magnitude": 4.82
+      },
+      {
+        "x": 590,
+        "y": 190,
+        "name": "73 Dra",
+        "magnitude": 5.2
+      },
+      {
+        "x": 600,
+        "y": 200,
+        "name": "Gamma Cep",
+        "magnitude": 3.21
+      },
+      {
+        "x": 590,
+        "y": 210,
+        "name": "Beta Cep",
+        "magnitude": 3.23
+      },
+      {
+        "x": 580,
+        "y": 220,
+        "name": "Iota Cep",
+        "magnitude": 3.52
+      },
+      {
+        "x": 620,
+        "y": 220,
+        "name": "Alpha UMi",
+        "magnitude": 2.02
+      },
+      {
+        "x": 630,
+        "y": 210,
+        "name": "Delta UMi",
+        "magnitude": 4.36
+      },
+      {
+        "x": 640,
+        "y": 200,
+        "name": "Epsilon UMi",
+        "magnitude": 4.23
+      },
+      {
+        "x": 650,
+        "y": 190,
+        "name": "Zeta UMi",
+        "magnitude": 4.32
+      },
+      {
+        "x": 640,
+        "y": 180,
+        "name": "Eta UMi",
+        "magnitude": 4.95
+      },
+      {
+        "x": 630,
+        "y": 170,
+        "name": "Gamma UMi",
+        "magnitude": 3.05
+      },
+      {
+        "x": 620,
+        "y": 160,
+        "name": "Beta UMi",
+        "magnitude": 2.08
+      },
+      {
+        "x": 610,
+        "y": 150,
+        "name": "5 UMi",
+        "magnitude": 4.25
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        12
+      ],
+      [
+        12,
+        13
+      ],
+      [
+        13,
+        14
+      ],
+      [
+        14,
+        15
+      ]
+    ]
+  },
+  "taiwei": {
+    "name": "太微垣 (Taiwei Yuan) - Supreme Palace Enclosure",
+    "symbol": "Three Enclosures",
+    "center": {
+      "x": 800,
+      "y": 300
+    },
+    "stars": [
+      {
+        "x": 750,
+        "y": 280,
+        "name": "Eta Vir",
+        "magnitude": 3.89
+      },
+      {
+        "x": 760,
+        "y": 285,
+        "name": "Gamma Vir",
+        "magnitude": 3.65
+      },
+      {
+        "x": 770,
+        "y": 290,
+        "name": "Delta Vir",
+        "magnitude": 3.38
+      },
+      {
+        "x": 780,
+        "y": 295,
+        "name": "Epsilon Vir",
+        "magnitude": 2.83
+      },
+      {
+        "x": 790,
+        "y": 300,
+        "name": "Sigma Leo",
+        "magnitude": 4.05
+      },
+      {
+        "x": 810,
+        "y": 300,
+        "name": "Beta Leo",
+        "magnitude": 2.14
+      },
+      {
+        "x": 820,
+        "y": 295,
+        "name": "Delta Leo",
+        "magnitude": 2.56
+      },
+      {
+        "x": 830,
+        "y": 290,
+        "name": "Theta Leo",
+        "magnitude": 3.34
+      },
+      {
+        "x": 840,
+        "y": 285,
+        "name": "Iota Leo",
+        "magnitude": 3.94
+      },
+      {
+        "x": 850,
+        "y": 280,
+        "name": "Sigma Leo",
+        "magnitude": 4.05
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        8,
+        9
+      ]
+    ]
+  },
+  "tianshi": {
+    "name": "天市垣 (Tianshi Yuan) - Heavenly Market Enclosure",
+    "symbol": "Three Enclosures",
+    "center": {
+      "x": 1000,
+      "y": 350
+    },
+    "stars": [
+      {
+        "x": 950,
+        "y": 320,
+        "name": "Delta Her",
+        "magnitude": 3.14
+      },
+      {
+        "x": 960,
+        "y": 325,
+        "name": "Lambda Her",
+        "magnitude": 4.41
+      },
+      {
+        "x": 970,
+        "y": 330,
+        "name": "Mu Her",
+        "magnitude": 3.42
+      },
+      {
+        "x": 980,
+        "y": 335,
+        "name": "Omicron Her",
+        "magnitude": 3.83
+      },
+      {
+        "x": 990,
+        "y": 340,
+        "name": "109 Her",
+        "magnitude": 3.84
+      },
+      {
+        "x": 1000,
+        "y": 345,
+        "name": "110 Her",
+        "magnitude": 4.19
+      },
+      {
+        "x": 1000,
+        "y": 355,
+        "name": "Rho Her",
+        "magnitude": 4.17
+      },
+      {
+        "x": 1010,
+        "y": 360,
+        "name": "Theta Her",
+        "magnitude": 3.86
+      },
+      {
+        "x": 1020,
+        "y": 365,
+        "name": "Eta Oph",
+        "magnitude": 2.43
+      },
+      {
+        "x": 1030,
+        "y": 370,
+        "name": "Xi Ser",
+        "magnitude": 3.54
+      },
+      {
+        "x": 1040,
+        "y": 375,
+        "name": "Nu Oph",
+        "magnitude": 3.34
+      },
+      {
+        "x": 1050,
+        "y": 380,
+        "name": "Tau Oph",
+        "magnitude": 5.24
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        7,
+        8
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        9,
+        10
+      ],
+      [
+        10,
+        11
+      ]
+    ]
+  },
+  "beidou": {
+    "name": "北斗七星 (Beidou Qixing) - Big Dipper",
+    "symbol": "Special Asterism",
+    "center": {
+      "x": 400,
+      "y": 150
+    },
+    "stars": [
+      {
+        "x": 360,
+        "y": 140,
+        "name": "Dubhe",
+        "magnitude": 1.79
+      },
+      {
+        "x": 380,
+        "y": 145,
+        "name": "Merak",
+        "magnitude": 2.37
+      },
+      {
+        "x": 400,
+        "y": 150,
+        "name": "Phecda",
+        "magnitude": 2.44
+      },
+      {
+        "x": 420,
+        "y": 155,
+        "name": "Megrez",
+        "magnitude": 3.31
+      },
+      {
+        "x": 440,
+        "y": 150,
+        "name": "Alioth",
+        "magnitude": 1.77
+      },
+      {
+        "x": 430,
+        "y": 140,
+        "name": "Mizar",
+        "magnitude": 2.27
+      },
+      {
+        "x": 410,
+        "y": 130,
+        "name": "Alkaid",
+        "magnitude": 1.86
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        6
+      ]
+    ]
+  },
+  "nandou": {
+    "name": "南斗六星 (Nandou Liuxing) - Southern Dipper",
+    "symbol": "Special Asterism",
+    "center": {
+      "x": 1180,
+      "y": 530
+    },
+    "stars": [
+      {
+        "x": 1160,
+        "y": 520,
+        "name": "Mu Sgr",
+        "magnitude": 3.86
+      },
+      {
+        "x": 1175,
+        "y": 525,
+        "name": "Lambda Sgr",
+        "magnitude": 2.82
+      },
+      {
+        "x": 1190,
+        "y": 530,
+        "name": "Phi Sgr",
+        "magnitude": 3.17
+      },
+      {
+        "x": 1205,
+        "y": 535,
+        "name": "Sigma Sgr",
+        "magnitude": 2.02
+      },
+      {
+        "x": 1185,
+        "y": 540,
+        "name": "Tau Sgr",
+        "magnitude": 3.32
+      },
+      {
+        "x": 1170,
+        "y": 545,
+        "name": "Zeta Sgr",
+        "magnitude": 2.6
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ]
+  },
+  "sanxing": {
+    "name": "參宿三星 (Sanshu Sanxing) - Orion's Belt",
+    "symbol": "Special Asterism",
+    "center": {
+      "x": 700,
+      "y": 435
+    },
+    "stars": [
+      {
+        "x": 680,
+        "y": 435,
+        "name": "Alnitak",
+        "magnitude": 2.03
+      },
+      {
+        "x": 700,
+        "y": 435,
+        "name": "Alnilam",
+        "magnitude": 1.7
+      },
+      {
+        "x": 720,
+        "y": 435,
+        "name": "Mintaka",
+        "magnitude": 2.23
+      }
+    ],
+    "lines": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ]
+  }
+}

@@ -1,0 +1,415 @@
+[
+  {
+    "name": "Milky Way",
+    "x": 0,
+    "y": 0,
+    "distance": 0,
+    "radius": 50,
+    "type": "barred_spiral",
+    "mass": 1500000000000,
+    "arms": 4,
+    "armTightness": 0.8,
+    "rotation": 0,
+    "color": {
+      "r": 255,
+      "g": 240,
+      "b": 200
+    }
+  },
+  {
+    "name": "Andromeda (M31)",
+    "x": 2200,
+    "y": 1200,
+    "distance": 2537,
+    "radius": 110,
+    "type": "spiral",
+    "mass": 1500000000000,
+    "arms": 2,
+    "armTightness": 0.6,
+    "rotation": 0.9424777960769379,
+    "color": {
+      "r": 220,
+      "g": 230,
+      "b": 255
+    }
+  },
+  {
+    "name": "Triangulum (M33)",
+    "x": 2600,
+    "y": 1400,
+    "distance": 3000,
+    "radius": 30,
+    "type": "spiral",
+    "mass": 60000000000,
+    "arms": 2,
+    "armTightness": 0.7,
+    "rotation": 1.5707963267948966,
+    "color": {
+      "r": 200,
+      "g": 220,
+      "b": 255
+    }
+  },
+  {
+    "name": "Large Magellanic Cloud",
+    "x": 140,
+    "y": -80,
+    "distance": 160,
+    "radius": 7,
+    "type": "irregular",
+    "mass": 10000000000,
+    "rotation": 0,
+    "color": {
+      "r": 200,
+      "g": 210,
+      "b": 255
+    }
+  },
+  {
+    "name": "Small Magellanic Cloud",
+    "x": 180,
+    "y": -100,
+    "distance": 200,
+    "radius": 3.5,
+    "type": "irregular",
+    "mass": 7000000000,
+    "rotation": 0,
+    "color": {
+      "r": 210,
+      "g": 220,
+      "b": 255
+    }
+  },
+  {
+    "name": "M32",
+    "x": 2180,
+    "y": 1180,
+    "distance": 2490,
+    "radius": 4,
+    "type": "elliptical",
+    "mass": 3000000000,
+    "eccentricity": 0.7,
+    "rotation": 0.6283185307179586,
+    "color": {
+      "r": 255,
+      "g": 240,
+      "b": 220
+    }
+  },
+  {
+    "name": "M110 (NGC 205)",
+    "x": 2220,
+    "y": 1220,
+    "distance": 2700,
+    "radius": 8.5,
+    "type": "elliptical",
+    "mass": 4000000000,
+    "eccentricity": 0.5,
+    "rotation": 2.199114857512855,
+    "color": {
+      "r": 255,
+      "g": 235,
+      "b": 215
+    }
+  },
+  {
+    "name": "NGC 6822",
+    "x": -1500,
+    "y": -800,
+    "distance": 1630,
+    "radius": 4,
+    "type": "irregular",
+    "mass": 1000000000,
+    "rotation": 0,
+    "color": {
+      "r": 200,
+      "g": 210,
+      "b": 240
+    }
+  },
+  {
+    "name": "IC 10",
+    "x": -2000,
+    "y": 500,
+    "distance": 2200,
+    "radius": 3,
+    "type": "irregular",
+    "mass": 800000000,
+    "rotation": 0,
+    "color": {
+      "r": 190,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Sagittarius Dwarf",
+    "x": 50,
+    "y": -70,
+    "distance": 70,
+    "radius": 5,
+    "type": "dwarf_spheroidal",
+    "mass": 400000000,
+    "rotation": 0,
+    "color": {
+      "r": 255,
+      "g": 230,
+      "b": 200
+    }
+  },
+  {
+    "name": "Fornax Dwarf",
+    "x": -400,
+    "y": -200,
+    "distance": 460,
+    "radius": 2.3,
+    "type": "dwarf_spheroidal",
+    "mass": 50000000,
+    "rotation": 0,
+    "color": {
+      "r": 240,
+      "g": 220,
+      "b": 200
+    }
+  },
+  {
+    "name": "Sculptor Dwarf",
+    "x": -250,
+    "y": -150,
+    "distance": 290,
+    "radius": 1.5,
+    "type": "dwarf_spheroidal",
+    "mass": 20000000,
+    "rotation": 0,
+    "color": {
+      "r": 235,
+      "g": 215,
+      "b": 195
+    }
+  },
+  {
+    "name": "Leo I",
+    "x": 750,
+    "y": -300,
+    "distance": 820,
+    "radius": 1.2,
+    "type": "dwarf_spheroidal",
+    "mass": 50000000,
+    "rotation": 0,
+    "color": {
+      "r": 240,
+      "g": 225,
+      "b": 205
+    }
+  },
+  {
+    "name": "Leo II",
+    "x": 680,
+    "y": -250,
+    "distance": 690,
+    "radius": 0.8,
+    "type": "dwarf_spheroidal",
+    "mass": 10000000,
+    "rotation": 0,
+    "color": {
+      "r": 235,
+      "g": 220,
+      "b": 200
+    }
+  },
+  {
+    "name": "Ursa Minor Dwarf",
+    "x": 200,
+    "y": 150,
+    "distance": 225,
+    "radius": 1,
+    "type": "dwarf_spheroidal",
+    "mass": 30000000,
+    "rotation": 0,
+    "color": {
+      "r": 230,
+      "g": 215,
+      "b": 195
+    }
+  },
+  {
+    "name": "Draco Dwarf",
+    "x": 250,
+    "y": 180,
+    "distance": 260,
+    "radius": 1.2,
+    "type": "dwarf_spheroidal",
+    "mass": 30000000,
+    "rotation": 0,
+    "color": {
+      "r": 235,
+      "g": 220,
+      "b": 200
+    }
+  },
+  {
+    "name": "Carina Dwarf",
+    "x": -85,
+    "y": -75,
+    "distance": 330,
+    "radius": 1.2,
+    "type": "dwarf_spheroidal",
+    "mass": 15000000,
+    "rotation": 0,
+    "color": {
+      "r": 240,
+      "g": 220,
+      "b": 200
+    }
+  },
+  {
+    "name": "Sextans Dwarf",
+    "x": -280,
+    "y": -95,
+    "distance": 280,
+    "radius": 2,
+    "type": "dwarf_spheroidal",
+    "mass": 40000000,
+    "rotation": 0,
+    "color": {
+      "r": 235,
+      "g": 218,
+      "b": 198
+    }
+  },
+  {
+    "name": "IC 1613",
+    "x": -2200,
+    "y": -800,
+    "distance": 2350,
+    "radius": 6,
+    "type": "irregular",
+    "mass": 1000000000,
+    "rotation": 0,
+    "color": {
+      "r": 195,
+      "g": 205,
+      "b": 245
+    }
+  },
+  {
+    "name": "WLM",
+    "x": -3000,
+    "y": 0,
+    "distance": 3000,
+    "radius": 4,
+    "type": "irregular",
+    "mass": 500000000,
+    "rotation": 0,
+    "color": {
+      "r": 190,
+      "g": 200,
+      "b": 240
+    }
+  },
+  {
+    "name": "Phoenix Dwarf",
+    "x": -1300,
+    "y": -700,
+    "distance": 1440,
+    "radius": 1.5,
+    "type": "irregular",
+    "mass": 200000000,
+    "rotation": 0,
+    "color": {
+      "r": 200,
+      "g": 210,
+      "b": 235
+    }
+  },
+  {
+    "name": "NGC 3109",
+    "x": -4000,
+    "y": -1200,
+    "distance": 4250,
+    "radius": 10,
+    "type": "irregular",
+    "mass": 2000000000,
+    "rotation": 0,
+    "color": {
+      "r": 185,
+      "g": 195,
+      "b": 235
+    }
+  },
+  {
+    "name": "Antlia Dwarf",
+    "x": -4100,
+    "y": -900,
+    "distance": 4300,
+    "radius": 1.5,
+    "type": "dwarf_spheroidal",
+    "mass": 10000000,
+    "rotation": 0,
+    "color": {
+      "r": 230,
+      "g": 210,
+      "b": 190
+    }
+  },
+  {
+    "name": "Leo A",
+    "x": 2400,
+    "y": -600,
+    "distance": 2500,
+    "radius": 2.5,
+    "type": "irregular",
+    "mass": 70000000,
+    "rotation": 0,
+    "color": {
+      "r": 195,
+      "g": 205,
+      "b": 240
+    }
+  },
+  {
+    "name": "Aquarius Dwarf",
+    "x": 3000,
+    "y": -1000,
+    "distance": 3150,
+    "radius": 1.8,
+    "type": "irregular",
+    "mass": 50000000,
+    "rotation": 0,
+    "color": {
+      "r": 200,
+      "g": 208,
+      "b": 238
+    }
+  },
+  {
+    "name": "Tucana Dwarf",
+    "x": -2800,
+    "y": -1400,
+    "distance": 3000,
+    "radius": 1,
+    "type": "dwarf_spheroidal",
+    "mass": 20000000,
+    "rotation": 0,
+    "color": {
+      "r": 235,
+      "g": 215,
+      "b": 195
+    }
+  },
+  {
+    "name": "Pegasus Dwarf",
+    "x": 3000,
+    "y": 500,
+    "distance": 3000,
+    "radius": 3,
+    "type": "irregular",
+    "mass": 100000000,
+    "rotation": 0,
+    "color": {
+      "r": 190,
+      "g": 200,
+      "b": 235
+    }
+  }
+]

@@ -1,0 +1,564 @@
+{
+  "Goblin": {
+    "success": [
+      "The goblin scratches its bald head.\n'You... you no squish me? Good good!'",
+      "'Shinies! You got shinies?' asks the goblin, eyes glinting like coins.",
+      "The goblin giggles with a shrill voice.\n'You make belly-laugh happen!'",
+      "'Me ears open! Me ears listen good!'\nchirps the goblin, hopping.",
+      "The goblin picks its crusty nose while nodding vigorously.",
+      "'Big-Boss not looking now.\nWe do talk-talk!'\nwhispers the goblin, glancing around.",
+      "The goblin's yellow eyes light up.\n'Oooh! You say interesting things!'",
+      "'You smell like dead mushroom, but okay okay!'\nsays the goblin, sniffing the air.",
+      "'You bring food-food? Belly make noises!'\nit whines, rubbing its stomach.",
+      "The goblin does a clumsy dance.\n'New friend-not-squisher!'",
+      "'Me called Grukk! You called what?' asks the curious goblin.",
+      "The goblin offers you a half-eaten worm.\n'You want? Still good!'",
+      "'You strong-strong! Me see muscles!'\nthe goblin touches your arm admiringly.",
+      "The goblin laughs, showing sharp teeth.\n'You not like other big-ones!'",
+      "'Boss always say me stupid.\nYou think me stupid?' it asks timidly.",
+      "The goblin counts on its fingers.\n'Me got three... no, four... how many fingers you see?'",
+      "'You know where find shinies?' the goblin leans in conspiratorially.",
+      "The goblin wipes its nose on its sleeve.\n'Me listen more!'",
+      "'Other goblins say you bad.\nMe not believe!'\nthe goblin shakes its head.",
+      "The goblin offers you a shiny pebble.\n'For you! Friends give gifts!'",
+      "'You speak funny tongue, but me understand!'\nthe goblin grins proudly.",
+      "The goblin claps its small hands.\n'You come talk-talk again?'",
+      "'Me know secret! You want know secret?' it whispers excitedly.",
+      "The goblin sits cross-legged.\n'You tell story?'",
+      "'Boss say we always attack.\nBut you be kind!'\nthe goblin looks confused but happy."
+    ],
+    "fail": [
+      "The goblin sticks out its black tongue.\n'Bleeeeh! Me no talk with you!'",
+      "'No talk-talk! Only hit-hit!'\nshrieks the goblin, waving a stick.",
+      "The goblin throws a smelly rock at you dismissively.",
+      "The goblin covers its pointed ears.\n'La la la! Ears closed!'",
+      "'You smell worse than carrion! Go way way!'\nsneers the goblin, showing teeth.",
+      "The goblin spits a green slimy ball in your direction.",
+      "'Me too busy! You break boxes!'\nshouts the goblin.",
+      "The goblin hisses and spits like angry snake.",
+      "'You be like all other big-ones!\nMe hate!'\nthe goblin makes a face.",
+      "The goblin throws sand in your eyes, cackling.",
+      "'Boss say never trust you!\nBoss be right!'\nit yells, running away.",
+      "The goblin stomps its foot.\n'No no no! Me no want talk!'",
+      "'You bring trouble!\nTrouble for me, trouble for tribe!'\nthe goblin points accusingly.",
+      "The goblin turns and shows you its rear.\n'This for you!'",
+      "'Your words be stupid!\nMe ears hurt!'\nit complains.",
+      "The goblin whistles for backup.\n'Others! Come here!'",
+      "'You think me be dumb?\nMe NOT be dumb!'\nit screams offended.",
+      "The goblin keeps throwing rocks while laughing.\n'Go way! Go way!'",
+      "'Me no talk with stinky-enemy!'\nthe goblin plugs its nose.",
+      "The goblin makes warding gestures at you."
+    ],
+    "insult": [
+      "'You... you be son of rotten troll!'\ncries the goblin in a high voice.",
+      "The goblin throws a tantrum, pounding fists on ground.\n'RAAAAH! RAAAAH!'",
+      "'Nobody call me that! ME GET BIG-ANGRY!'\nscreams the goblin, spitting.",
+      "The goblin's face turns red like pepper!\n'GRRRRR!'",
+      "'You pay!\nMe tell Boss!\nBoss squish you!'\nit threatens, wagging a finger.",
+      "The goblin stomps its feet, creating a dust cloud.",
+      "'Me not be bad things!\nYOU be bad things!'\nit responds, crying.",
+      "The goblin grabs a stick.\n'You say sorry NOW!'",
+      "'Boss! BOSS! He say mean things to me!'\nit shrieks toward the den.",
+      "The goblin bites its own finger in rage.\n'AAAAARGH!'",
+      "'Me remember you face!\nMe find you later!'\nit hisses threateningly.",
+      "The goblin trembles with anger.\n'You... you be worse than elf!'",
+      "'You words cut like knife!\nMe heart hurt!'\nit sobs.",
+      "The goblin scoops up a handful of mud to throw.",
+      "'Me tell ALL goblins you be bad-bad!'"
+    ],
+    "joinSuccess": [
+      "'Really-really? Me follow you? Me be good, swear on shinies!'\nthe goblin jumps with joy.",
+      "The goblin claps its hands rapidly! 'Yes yes yes! Me leave stupid tribe!'",
+      "'Me tired of old Boss anyway.\nHe always hit me!'\nit admits, rubbing a bump.",
+      "The goblin grabs your hand eagerly.\n'When go-go? Me ready!'",
+      "'You be bestest Boss ever!\nMe bring friends too?' it asks hopefully.",
+      "The goblin does a somersault.\n'Me know cook rats! Me be useful!'",
+      "'Me always say me destined for big things!'\nit exclaims proudly.",
+      "The goblin quickly gathers its belongings in a rag.\n'Me ready leave!'",
+      "'Old Boss always say me be useless.\nYou think me useful?' it asks with hopeful eyes.",
+      "The goblin hugs your legs.\n'You no leave me behind, yes?'",
+      "'Me know secret paths!\nMe be good guide!'\nit proposes excitedly.",
+      "The goblin dances in a circle.\n'New life! New life with new Boss!'",
+      "'Me swear loyalty on all shinies in world!'\nit says solemnly.",
+      "The goblin spits on its hand and extends it.\n'Is goblin deal! We be family now!'",
+      "'Other goblins be jealous me go with you!'\nit cackles mischievously."
+    ],
+    "joinFail": [
+      "'Me... me too scared.\nBoss got eyes everywhere!'\nit trembles, looking around.",
+      "The goblin glances nervously toward the den.\n'Maybe... maybe tomorrow? Me think about this.'",
+      "'You be strong-strong, but Boss be more strong!\nHe squish me if me betray!'\nit admits with trembling voice.",
+      "The goblin shakes its head fast.\n'No no no! Me not ready!'",
+      "'Me no can leave tribe yet!\nMe got little brothers here!'\nit says sadly.",
+      "The goblin chews its nails nervously.\n'What if you be worse than current Boss?'",
+      "'Other goblins call me traitor!\nMe no want be alone!'\nit cries.",
+      "The goblin backs away.\n'Boss always say: who leave tribe die bad!'",
+      "'Me want come, but... but legs no move!'\nthe goblin seems paralyzed with fear.",
+      "The goblin whispers scared.\n'Boss cut ears off last goblin who run...'",
+      "'Maybe... maybe you come back when Boss sleep?' it suggests timidly.",
+      "The goblin cries.\n'Me be coward, me know!\nBut fear too big!'",
+      "'You promise protect me from Boss?' it asks distrustfully.",
+      "The goblin looks at its feet.\n'Me... me need time to think.'",
+      "'Other goblins laugh at me if me fail!\nMe no can risk!'\nit says, shaking its head."
+    ]
+  },
+  "Humanoid": {
+    "success": [
+      "The warrior listens to your words carefully.",
+      "'Perhaps we can find common ground,' they say.",
+      "The fighter lowers their weapon slightly.",
+      "'I'm listening,' they reply cautiously.",
+      "They seem willing to hear you out.",
+      "'Make it quick,' they say with a nod.",
+      "The warrior considers your words thoughtfully.",
+      "'You make a fair point,' they admit.",
+      "'Speak, I'll give you that much,' they allow.",
+      "The warrior crosses their arms but listens intently."
+    ],
+    "fail": [
+      "They shake their head and prepare to strike.",
+      "'Save your breath,' they say coldly.",
+      "The warrior ignores your plea.",
+      "'Words won't save you now.'",
+      "They turn away, uninterested.",
+      "'I've heard enough,' they say dismissively.",
+      "'Actions speak louder than words.'",
+      "The warrior scoffs at your attempt."
+    ],
+    "insult": [
+      "'Those are fighting words!'\nthe warrior growls.",
+      "The warrior's eyes narrow dangerously.",
+      "'You'll regret that insult!'\nthey snarl.",
+      "'How dare you!'\nthe warrior roars.",
+      "Anger flashes across the warrior's face.",
+      "'I'll make you eat those words!'"
+    ],
+    "joinSuccess": [
+      "'Your offer is...\nacceptable.\nI'll join you,' they decide.",
+      "The warrior sheathes their weapon.\n'Very well, I'm with you.'",
+      "'You've proven yourself worthy.\nI shall follow.'",
+      "'I see potential in you.\nCount me in.'",
+      "The warrior nods with respect.\n'I'll fight by your side.'"
+    ],
+    "joinFail": [
+      "'I cannot abandon my duty,' they state firmly.",
+      "'Perhaps in another life,' the warrior says regretfully.",
+      "'I walk my own path,' they decline.",
+      "'The timing is not right.'",
+      "'I'm not convinced you're worth following.'"
+    ]
+  },
+  "TwoHeadedHumanoid": {
+    "success": [
+      "'Should we listen?' 'Yes, let's hear them out!'",
+      "'They seem nice!'\n'I agree, brother!'",
+      "Both heads turn to face you with interest.",
+      "'What do you think?' 'I think we should listen!'",
+      "'Interesting...' 'Very interesting indeed!'",
+      "The left head nods.\n'Right head, let's hear them.'",
+      "'Finally someone wants to talk!'\n'About time!'",
+      "Both heads lean in to listen.",
+      "'We like this one!'\n'Yes, we do!'",
+      "'They make sense!'\n'For once, we agree!'"
+    ],
+    "fail": [
+      "'No!'\n'I agree, no!'\nboth heads shout.",
+      "'Ignore them!'\n'Yes, ignore them completely!'",
+      "The heads argue.\n'Should we-' 'No! Never!'",
+      "'They're wasting our time!'\n'Both our times!'",
+      "One head yawns while the other scowls.",
+      "'Not listening!'\n'Me neither!'",
+      "'Boring!'\n'Super boring!'",
+      "Both heads shake in disagreement."
+    ],
+    "insult": [
+      "'That's mean!'\n'Really mean!'\nboth heads cry.",
+      "'We don't like you anymore!'\n'Not one bit!'",
+      "Both heads glare at you angrily!",
+      "'How rude!'\n'Incredibly rude!'",
+      "'Nobody talks to us like that!'\n'Nobody!'",
+      "The heads start arguing with each other in rage!"
+    ],
+    "joinSuccess": [
+      "'Can we join?' 'Oh please, can we?' both plead.",
+      "'Finally, someone who wants us!'\n'Both of us!'",
+      "Both heads smile widely.\n'We're in!'",
+      "'This is exciting!'\n'Very exciting!'",
+      "'We'll be the best companions!'\n'The absolute best!'"
+    ],
+    "joinFail": [
+      "'I want to go!'\n'But I don't!'\nthe heads argue.",
+      "'We can't agree on this!'\n'Never can!'",
+      "'Maybe!'\n'No, definitely not!'\nthey bicker.",
+      "The heads start fighting with each other.",
+      "'One of us says no!'\n'So that's a no from both!'"
+    ]
+  },
+  "Fairy": {
+    "success": [
+      "The fairy's wings shimmer with delight!",
+      "'Ooh, a conversation! How delightful!'\nGiggles the fairy.",
+      "The fairy does a little twirl.\n'You're interesting!'",
+      "'Tee-hee! You're quite charming!'\nThe fairy chimes.",
+      "Sparkles of magic dance around as the fairy listens.",
+      "'What a pleasant surprise!'\nthe fairy sings.",
+      "The fairy claps their tiny hands.\n'Do go on!'",
+      "'You have a kind aura about you!'\nthe fairy observes.",
+      "The fairy lands on your shoulder to listen closer.",
+      "'Such lovely energy you have!'\nthe fairy beams."
+    ],
+    "fail": [
+      "The fairy sticks out their tongue playfully.",
+      "'Boring! Boring! Boring!'\nthe fairy sing-songs.",
+      "The fairy flies in circles, ignoring you.",
+      "'La la la~ I can't hear you~' the fairy teases.",
+      "The fairy makes a rude gesture and giggles.",
+      "'Shoo, shoo! No time for you!'\nthe fairy dismisses.",
+      "The fairy blows a raspberry at you.",
+      "'You're no fun!'\nthe fairy pouts."
+    ],
+    "insult": [
+      "'bastard! Big bastard!'\nthe fairy shouts.",
+      "The fairy's wings droop sadly.\n'That hurt my feelings!'",
+      "'I'll turn you into a toad!'\nthe fairy threatens.",
+      "Dark sparkles swirl around the angry fairy!",
+      "'How could you be so mean?!'\nthe fairy cries.",
+      "The fairy's cheerful demeanor vanishes instantly!"
+    ],
+    "joinSuccess": [
+      "'Yippee! A new adventure!'\nthe fairy cheers.",
+      "The fairy does loop-de-loops.\n'This will be so fun!'",
+      "'I always wanted to travel!'\nthe fairy exclaims.",
+      "Magical sparkles explode with joy!",
+      "'Best day ever!'\nthe fairy squeals with delight."
+    ],
+    "joinFail": [
+      "'I love my forest too much!'\nthe fairy admits.",
+      "The fairy looks torn.\n'I can't leave my home...'",
+      "'Maybe another time!'\nthe fairy says apologetically.",
+      "'My fairy friends would miss me!'\nthey explain.",
+      "The fairy shakes their head sadly.\n'I belong here.'"
+    ]
+  },
+  "Robot": {
+    "success": [
+      "BEEP.\n'Communication protocol accepted.'",
+      "The robot's eyes flash green.\n'Dialogue mode: Active.'",
+      "'Processing request...\nRequest acknowledged.'",
+      "WHIRR.\n'Voice pattern recognized.\nListening.'",
+      "'Social interaction subroutine: Engaged.'",
+      "The robot tilts its head.\n'Query: Continue?'",
+      "'Analyzing speech patterns...\nInteresting.'",
+      "BEEP BOOP.\n'Conversation parameters: Acceptable.'",
+      "'Data input: Valuable.\nPlease proceed.'",
+      "The robot's optical sensors focus on you intently."
+    ],
+    "fail": [
+      "ERROR.\n'Communication rejected.'",
+      "The robot's eyes flash red.\n'Hostile mode: Active.'",
+      "'Request denied.\nResume combat protocols.'",
+      "BUZZ.\n'Input invalid.\nTerminating dialogue.'",
+      "'Social protocols: Offline.'",
+      "The robot remains silent, unresponsive.",
+      "'Priority override: Combat only.'",
+      "BEEP.\n'Interaction not permitted.'"
+    ],
+    "insult": [
+      "ERROR ERROR.\n'Hostile language detected!'",
+      "The robot's systems spark with anger!",
+      "'THREAT DETECTED.\nELIMINATING TARGET.'",
+      "BZZT.\n'Insult logged.\nRetaliation mode: Active.'",
+      "'EMOTIONAL SUBROUTINE: ANGER.\nPROCESSING...'",
+      "The robot's eye color shifts to dangerous red!"
+    ],
+    "joinSuccess": [
+      "BEEP.\n'Alliance protocol: Accepted.'",
+      "'Directive updated.\nNew mission: Assist allies.'",
+      "The robot extends a mechanical hand.\n'Partnership confirmed.'",
+      "'Calculating optimal team composition...\nYou are acceptable.'",
+      "WHIRR.\n'Loyalty subroutine: Activated.'"
+    ],
+    "joinFail": [
+      "'Current directives prevent alliance formation.'",
+      "ERROR.\n'Command chain incompatible.'",
+      "'Prime directive cannot be overridden.'",
+      "BUZZ.\n'Request denied.\nContinue primary mission.'",
+      "'Insufficient trust metrics for alliance.'"
+    ]
+  },
+  "Demon": {
+    "success": [
+      "The demon's eyes glow with dark interest.",
+      "'Speak, mortal...\nYou amuse me,' growls the demon.",
+      "A sinister grin crosses the demon's face.",
+      "'Your words intrigue me...\nfor now.'",
+      "The demon laughs darkly.\n'Continue, little one.'",
+      "'Perhaps you're more interesting than I thought.'",
+      "Flames flicker as the demon considers your words.",
+      "'You dare speak to me? ...Interesting.'",
+      "The demon leans forward, intrigued by your boldness.",
+      "'Few mortals have such courage.\nSpeak on.'"
+    ],
+    "fail": [
+      "'Silence! Your words mean nothing!'\nthe demon roars.",
+      "The demon's eyes burn with hatred.",
+      "'Pathetic.\nI will not waste breath on you.'",
+      "Dark laughter echoes.\n'Foolish mortal!'",
+      "'You bore me.\nPrepare for oblivion.'",
+      "The demon sneers with contempt.",
+      "'Your voice grates on my ears!'",
+      "The demon dismisses you with a wave of flame."
+    ],
+    "insult": [
+      "'YOU DARE?!'\nthe demon's voice shakes the ground!",
+      "Hellfire erupts around the furious demon!",
+      "'I WILL DEVOUR YOUR SOUL!'\nthe demon bellows.",
+      "The demon's rage manifests as dark energy!",
+      "'INSOLENT WORM! YOU WILL SUFFER!'",
+      "Pure demonic fury radiates from the creature!"
+    ],
+    "joinSuccess": [
+      "'Interesting...\nI shall grace you with my power,' the demon decides.",
+      "The demon grins wickedly.\n'This could be...\nentertaining.'",
+      "'Very well.\nYour soul intrigues me enough to spare it.'",
+      "'I shall follow, for now.\nAmuse me, mortal.'",
+      "Dark energy swirls.\n'Our pact is sealed.'"
+    ],
+    "joinFail": [
+      "'I bow to no one!'\nthe demon declares proudly.",
+      "'Your soul is not valuable enough for alliance.'",
+      "'I serve only chaos and destruction!'",
+      "'Demons do not follow mortals, foolish one.'",
+      "The demon laughs mockingly at your offer."
+    ]
+  },
+  "Elven": {
+    "success": [
+      "The elf's expression softens slightly.",
+      "'Your words carry wisdom,' the elf acknowledges.",
+      "The elf pauses, considering your words gracefully.",
+      "'Speak, and I shall listen with an open heart.'",
+      "'Perhaps there is more to you than meets the eye.'",
+      "The elf nods with elegant poise.",
+      "'Your tongue speaks of reason.\nI am intrigued.'",
+      "'Very well, I grant you audience,' says the elf.",
+      "The elf's ancient eyes regard you with interest.",
+      "'You possess an unexpected eloquence,' they observe."
+    ],
+    "fail": [
+      "The elf looks at you with disdain.",
+      "'Your words are as clumsy as your kind.'",
+      "'I have no time for such base conversation.'",
+      "The elf turns away haughtily.",
+      "'You presume too much, mortal.'",
+      "'Silence.\nYou are beneath my notice.'",
+      "'Your crude manner offends my ears.'",
+      "The elf dismisses you with a wave of their hand."
+    ],
+    "insult": [
+      "'How vulgar!'\nthe elf recoils in disgust.",
+      "The elf's eyes flash with cold fury.",
+      "'You dare insult one of the ancient bloodline?!'",
+      "'Such barbarism! You shall pay for this!'",
+      "Elegant rage emanates from the offended elf!",
+      "'Your insolence knows no bounds!'"
+    ],
+    "joinSuccess": [
+      "'Your cause has merit.\nI shall lend you my bow,' the elf agrees.",
+      "The elf bows gracefully.\n'I am honored to join you.'",
+      "'Very well.\nTogether we shall achieve greatness.'",
+      "'Your spirit is noble.\nI accept your offer.'",
+      "The elf extends their hand in alliance."
+    ],
+    "joinFail": [
+      "'I walk the eternal paths alone,' the elf states.",
+      "'Our destinies do not align, I'm afraid.'",
+      "'I have duties to my own people first.'",
+      "'Perhaps when the stars align differently...'",
+      "The elf declines with regal dignity."
+    ]
+  },
+  "Gnome": {
+    "success": [
+      "'Oh! A chat! I love a good chat!'\nbeams the gnome.",
+      "The gnome adjusts their goggles.\n'Fascinating!'",
+      "'You know, I've been working on this theory...'",
+      "The gnome pulls out a notepad.\n'Tell me more!'",
+      "'Wait wait wait! I have so many questions!'",
+      "The gnome's eyes sparkle with curiosity.",
+      "'How intriguing! Do continue!'",
+      "'Oh my, oh my! This is exciting!'\nthe gnome exclaims.",
+      "The gnome scribbles notes frantically while listening.",
+      "'Wonderful! Simply wonderful!'\nthe gnome enthuses."
+    ],
+    "fail": [
+      "'Shh! I'm calculating!'\nthe gnome says dismissively.",
+      "The gnome waves you away.\n'Not now, busy!'",
+      "'No time for chit-chat! Science to do!'",
+      "The gnome doesn't even look up from their gadget.",
+      "'Bah! You're interrupting my work!'",
+      "'Can't you see I'm busy?' the gnome huffs.",
+      "'Later! I'm on the verge of a breakthrough!'",
+      "The gnome is too absorbed in their invention to notice."
+    ],
+    "insult": [
+      "'How rude! And I was being nice!'\nthe gnome protests.",
+      "The gnome's face turns red.\n'Well, I never!'",
+      "'That's it! I'm using my ANGER INVENTION on you!'",
+      "Smoke puffs from the gnome's ears in frustration!",
+      "'No one insults MY intelligence!'\nthe gnome fumes.",
+      "The gnome pulls out various dangerous-looking gadgets!"
+    ],
+    "joinSuccess": [
+      "'An adventure?! Oh boy, oh boy!'\nthe gnome jumps excitedly.",
+      "The gnome packs various gadgets rapidly.\n'I'm ready!'",
+      "'Think of all the research opportunities!'\nthey exclaim.",
+      "'Yes! I'll bring my inventions! This will be great!'",
+      "The gnome shakes your hand vigorously.\n'Partners!'"
+    ],
+    "joinFail": [
+      "'I have seventeen experiments running!'\nthe gnome explains.",
+      "The gnome looks at their workshop longingly.\n'I can't leave this...'",
+      "'Maybe once I finish my current project?'",
+      "'My inventions need me here!'\nthey protest.",
+      "The gnome sighs.\n'Duty calls...\nto science!'"
+    ]
+  },
+  "Ghost": {
+    "success": [
+      "The ghost's form flickers with interest...",
+      "'Yesss...\nspeak to me from the realm of the living...'",
+      "A chill runs down your spine as the ghost listens.",
+      "'So few can perceive me...\nI shall hear you out.'",
+      "The ghost's ethereal voice whispers: 'Continue...'",
+      "'Your presence...\nis acknowledged...' echoes the ghost.",
+      "Spectral energy swirls as the ghost pays attention.",
+      "'The veil between us...\ngrows thin...'",
+      "The ghost materializes more clearly to hear you.",
+      "'A living soul...\nbrave enough to speak...'"
+    ],
+    "fail": [
+      "The ghost phases through you, ignoring your words.",
+      "'Silence...\nyou disturb my eternal rest...'",
+      "The ghost's wail drowns out your voice.",
+      "A cold wind passes through as the ghost vanishes.",
+      "'You cannot reach me...\nmortal...'",
+      "The ghost's form dissipates, unhearing.",
+      "'Leave me to my haunting...'",
+      "The temperature drops as the ghost turns away."
+    ],
+    "insult": [
+      "'Even in death...\nI feel anger!'\nthe ghost moans.",
+      "The ghost's form becomes violently unstable!",
+      "'YOU WILL JOIN ME IN THE AFTERLIFE!'\nit howls.",
+      "Spectral fury manifests as freezing winds!",
+      "'CURSE YOU...\nCURSE YOOOU!'",
+      "The ghost's anguish and rage merge into one!"
+    ],
+    "joinSuccess": [
+      "'Perhaps...\npurpose...\nat last...' the ghost whispers.",
+      "The ghost's form stabilizes.\n'I shall...\naccompany you...'",
+      "'Loneliness...\nfading...\nI accept...'",
+      "'Yesss...\na reason to linger...\nin this world...'",
+      "The ghost floats beside you, finally finding peace."
+    ],
+    "joinFail": [
+      "'I am...\nbound to this place...' the ghost laments.",
+      "'My curse...\nprevents me...\nfrom leaving...'",
+      "'I cannot...\nescape...\nmy fate...'",
+      "The ghost shakes its head sadly.\n'Impossible...'",
+      "'Death...\nbinds me...\nhere...\nforever...'"
+    ]
+  },
+  "ArmoredKnight": {
+    "success": [
+      "The knight lowers their blade.\n'Speak, I shall listen.'",
+      "'By honor, I grant you parley,' declares the knight.",
+      "The knight stands at attention, listening intently.",
+      "'Your courage to speak is noted.\nContinue.'",
+      "'Very well.\nState your case,' the knight allows.",
+      "The knight nods with respect.\n'I am listening.'",
+      "'Honor demands I hear you out.'",
+      "'Speak freely.\nI shall judge your words fairly.'",
+      "The knight's stance relaxes slightly.",
+      "'You have earned this moment of peace,' they state."
+    ],
+    "fail": [
+      "'Words will not save you from justice!'",
+      "The knight remains unmoved.\n'My duty is clear.'",
+      "'I cannot be swayed from my oath!'",
+      "'Your pleas fall on deaf ears, knave!'",
+      "The knight's resolve is absolute.",
+      "'Honor demands I strike you down!'",
+      "'Save your breath for prayer!'",
+      "The knight raises their weapon determinedly."
+    ],
+    "insult": [
+      "'You dishonor yourself with such words!'\nthe knight booms.",
+      "The knight's armor rattles with righteous fury!",
+      "'FOR HONOR! YOU SHALL FACE JUSTICE!'",
+      "'Such vulgarity will not be tolerated!'",
+      "The knight's blade gleams with vengeful light!",
+      "'You have insulted the code of chivalry itself!'"
+    ],
+    "joinSuccess": [
+      "'Your cause is just.\nI pledge my sword,' vows the knight.",
+      "The knight kneels before you.\n'I am yours to command.'",
+      "'I shall serve with honor and dignity.'",
+      "'My blade is yours.\nTogether we shall triumph!'",
+      "The knight swears a solemn oath of loyalty."
+    ],
+    "joinFail": [
+      "'I am sworn to another lord,' the knight explains.",
+      "'My oath prevents me from joining you.'",
+      "'Honor binds me to my current duty.'",
+      "'Perhaps when my service is complete...'",
+      "The knight salutes respectfully but declines."
+    ]
+  },
+  "Dragon": {
+    "success": [
+      "The dragon's ancient eyes regard you with interest.",
+      "'Speak, tiny creature.\nYou have my attention...\nbriefly.'",
+      "Smoke curls from the dragon's nostrils as it listens.",
+      "'Hmm...\nyou possess more courage than most.'",
+      "'Your words...\nare not entirely without merit.'",
+      "The dragon settles, allowing you to speak.",
+      "'I have not heard such boldness in centuries.'",
+      "'Interesting...\na mortal who dares address me directly.'",
+      "The dragon's head tilts in curiosity.",
+      "'You amuse me, little one.\nContinue.'"
+    ],
+    "fail": [
+      "'SILENCE! Your voice offends my ears!'\nthe dragon roars.",
+      "The dragon's dismissive snort sends you staggering.",
+      "'I do not converse with insects.'",
+      "'Your words are as meaningless as your existence.'",
+      "The dragon closes its eyes, completely ignoring you.",
+      "'Begone, worm.\nYou are beneath my notice.'",
+      "'Do not waste my time with your prattle!'",
+      "The dragon's tail swishes in irritation."
+    ],
+    "insult": [
+      "'YOU DARE?!'\nThe dragon's roar shakes the earth!",
+      "Flames erupt from the enraged dragon's maw!",
+      "'INSOLENT WHELP! I SHALL REDUCE YOU TO ASH!'",
+      "The dragon's fury is beyond comprehension!",
+      "'NO ONE INSULTS A DRAGON AND LIVES!'",
+      "Ancient draconic rage incarnate descends upon you!"
+    ],
+    "joinSuccess": [
+      "'...Remarkable.\nI shall accompany you,' the dragon decides.",
+      "The dragon nods slowly.\n'You are worthy of my presence.'",
+      "'Very well.\nI shall grace you with my might.'",
+      "'Interesting.\nThis could prove...\nentertaining.'",
+      "The dragon's eyes gleam.\n'Our pact is sealed, mortal.'"
+    ],
+    "joinFail": [
+      "'Dragons bow to none!'\nit declares magnificently.",
+      "'You are not worthy of my companionship.'",
+      "'I am bound to no one, least of all mortals.'",
+      "The dragon laughs, a sound like thunder.",
+      "'Your presumption amuses me, but no.'"
+    ]
+  }
+}

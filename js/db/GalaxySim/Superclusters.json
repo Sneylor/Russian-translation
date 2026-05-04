@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Virgo Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": 0,
+    "y": 0,
+    "distance": 0,
+    "radius": 55,
+    "clusters": 100,
+    "mass": 1000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Hydra-Centaurus Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": 150,
+    "y": -80,
+    "distance": 170,
+    "radius": 60,
+    "clusters": 80,
+    "mass": 1000000000000000,
+    "color": {
+      "r": 255,
+      "g": 200,
+      "b": 180
+    }
+  },
+  {
+    "name": "Pavo-Indus Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": -120,
+    "y": -200,
+    "distance": 230,
+    "radius": 50,
+    "clusters": 60,
+    "mass": 800000000000000,
+    "color": {
+      "r": 200,
+      "g": 180,
+      "b": 255
+    }
+  },
+  {
+    "name": "Southern Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": -180,
+    "y": 100,
+    "distance": 200,
+    "radius": 45,
+    "clusters": 50,
+    "mass": 700000000000000,
+    "color": {
+      "r": 180,
+      "g": 255,
+      "b": 200
+    }
+  },
+  {
+    "name": "Antlia Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": 60,
+    "y": 120,
+    "distance": 130,
+    "radius": 40,
+    "clusters": 45,
+    "mass": 600000000000000,
+    "color": {
+      "r": 255,
+      "g": 220,
+      "b": 180
+    }
+  },
+  {
+    "name": "Centaurus Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": 180,
+    "y": -40,
+    "distance": 180,
+    "radius": 50,
+    "clusters": 70,
+    "mass": 900000000000000,
+    "color": {
+      "r": 200,
+      "g": 255,
+      "b": 220
+    }
+  },
+  {
+    "name": "Hydra Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": 240,
+    "y": 60,
+    "distance": 250,
+    "radius": 55,
+    "clusters": 65,
+    "mass": 800000000000000,
+    "color": {
+      "r": 220,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Fornax Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": -90,
+    "y": 150,
+    "distance": 180,
+    "radius": 35,
+    "clusters": 40,
+    "mass": 500000000000000,
+    "color": {
+      "r": 255,
+      "g": 180,
+      "b": 220
+    }
+  },
+  {
+    "name": "Norma Supercluster",
+    "partOf": "Laniakea Supercluster",
+    "x": 200,
+    "y": -120,
+    "distance": 230,
+    "radius": 45,
+    "clusters": 55,
+    "mass": 700000000000000,
+    "color": {
+      "r": 180,
+      "g": 220,
+      "b": 255
+    }
+  },
+  {
+    "name": "Great Attractor",
+    "partOf": "Laniakea Supercluster",
+    "distance": 220,
+    "x": 1133,
+    "y": -176,
+    "radius": null,
+    "clusters": 1,
+    "mass": 10000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Perseus-Pisces Supercluster",
+    "partOf": null,
+    "distance": 250,
+    "x": -192,
+    "y": 161,
+    "radius": 150,
+    "clusters": 60,
+    "mass": 10000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Coma Supercluster",
+    "partOf": null,
+    "distance": 300,
+    "x": 205,
+    "y": 220,
+    "radius": 100,
+    "clusters": 2,
+    "mass": 10000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Hercules Superclusters",
+    "partOf": null,
+    "distance": 500,
+    "x": 171,
+    "y": 469,
+    "radius": 300,
+    "clusters": 20,
+    "mass": 10000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Shapley Supercluster",
+    "partOf": null,
+    "distance": 650,
+    "x": 382,
+    "y": -526,
+    "radius": 120,
+    "clusters": 25,
+    "mass": 50000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Sculptor Supercluster",
+    "partOf": null,
+    "distance": 400,
+    "x": 0,
+    "y": -400,
+    "radius": 80,
+    "clusters": 10,
+    "mass": 5000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  },
+  {
+    "name": "Bootes Supercluster",
+    "partOf": null,
+    "distance": 1000,
+    "x": 342,
+    "y": 940,
+    "radius": 150,
+    "clusters": 12,
+    "mass": 10000000000000000,
+    "color": {
+      "r": 180,
+      "g": 200,
+      "b": 255
+    }
+  }
+]

@@ -133,7 +133,7 @@
   };
 
   Window_TrialCrimes.prototype.refresh = function () {
-    
+
     const useTranslation = ConfigManager.language === "it";
 
     this.contents.clear();
@@ -163,38 +163,38 @@
   Window_TrialBounty.prototype.constructor = Window_TrialBounty;
 
   Window_TrialBounty.prototype.initialize = function (bounty) {
-      this._bounty = bounty;
-      const width = this.windowWidth();
-      const height = this.windowHeight();
-      const x = Graphics.boxWidth - width - 9;
-      const y = 8;
-      Window_Base.prototype.initialize.call(this, new Rectangle(x, y, width, height));
-      this.refresh();
+    this._bounty = bounty;
+    const width = this.windowWidth();
+    const height = this.windowHeight();
+    const x = Graphics.boxWidth - width - 9;
+    const y = 8;
+    Window_Base.prototype.initialize.call(this, new Rectangle(x, y, width, height));
+    this.refresh();
   };
 
   Window_TrialBounty.prototype.windowWidth = function () {
-      return 340;
+    return 340;
   };
 
   Window_TrialBounty.prototype.windowHeight = function () {
-      return this.fittingHeight(1);
+    return this.fittingHeight(1);
   };
 
-  Window_TrialBounty.prototype.setBounty = function(bounty) {
-      if (this._bounty !== bounty) {
-          this._bounty = bounty;
-          this.refresh();
-      }
+  Window_TrialBounty.prototype.setBounty = function (bounty) {
+    if (this._bounty !== bounty) {
+      this._bounty = bounty;
+      this.refresh();
+    }
   };
 
   Window_TrialBounty.prototype.refresh = function () {
     const useTranslation = ConfigManager.language === "it";
 
-      this.contents.clear();
-      const bountyText = useTranslation ? "Taglia:" : "Bounty:";
-      const euros = (this._bounty / 100).toFixed(2) + "€";
-      const text = `${bountyText} ${euros}`;
-      this.drawText(text, 0, 0, this.contentsWidth(), 'left');
+    this.contents.clear();
+    const bountyText = useTranslation ? "Taglia:" : "Bounty:";
+    const euros = (this._bounty / 100).toFixed(2) + "€";
+    const text = `${bountyText} ${euros}`;
+    this.drawText(text, 0, 0, this.contentsWidth(), 'left');
   };
 
   //=============================================================================
@@ -297,7 +297,7 @@
 
       const message = messages[Math.floor(Math.random() * messages.length)];
       window.skipLocalization = true;
-      $gameMessage.setBackground(2);$gameMessage.add("\\C[3]" + message + "\\C[0]");
+      $gameMessage.setBackground(2); $gameMessage.add("\\C[3]" + message + "\\C[0]");
       window.skipLocalization = false;
 
       return new Promise((resolve) => {
@@ -351,7 +351,7 @@
   // Scene_Map - Update prison manager and handle prison start
   //=============================================================================
   const _Scene_Map_update = Scene_Map.prototype.update;
-  Scene_Map.prototype.update = function() {
+  Scene_Map.prototype.update = function () {
     _Scene_Map_update.call(this);
     if (window.prisonManager) {
       window.prisonManager.update();
@@ -359,9 +359,9 @@
   };
 
   const _Scene_Map_onMapLoaded = Scene_Map.prototype.onMapLoaded;
-  Scene_Map.prototype.onMapLoaded = function() {
+  Scene_Map.prototype.onMapLoaded = function () {
     _Scene_Map_onMapLoaded.call(this);
-    
+
     // Check if we need to start prison time
     if ($gameTemp._startPrisonOnLoad && $gameMap.mapId() === prisonMapId) {
       const bounty = $gameTemp._prisonBounty || $gameVariables.value(bountyVariableId);
@@ -404,13 +404,13 @@
     }
 
     _adjustChaos(amount) {
-        this.chaos += amount;
-        this.chaos = Math.max(0, Math.min(1, this.chaos));
+      this.chaos += amount;
+      this.chaos = Math.max(0, Math.min(1, this.chaos));
     }
 
     loadPlayerCrimes() {
       const playerCrimeKeys = window.playerCrimes || [];
-      const { PresetCrimes } = window.CrimeData || {};
+      const { PresetCrimes } = window.Messages || {};
 
       this.crimes = [];
       let totalBounty = 0;
@@ -453,74 +453,74 @@
 
       const accusations = useTranslation
         ? [
-            "aver rubato le nuvole dal cielo",
-            "aver disturbato il sonno delle formiche",
-            "aver pensato pensieri illegali",
-            "aver camminato troppo rumorosamente",
-            "aver guardato male una statua",
-            "aver respirato in modo sospetto",
-            "aver esistito senza permesso",
-            "aver sognato crimini",
-            "aver annusato l'aria pubblica",
-            "aver occupato spazio nell'universo",
-          ]
+          "aver rubato le nuvole dal cielo",
+          "aver disturbato il sonno delle formiche",
+          "aver pensato pensieri illegali",
+          "aver camminato troppo rumorosamente",
+          "aver guardato male una statua",
+          "aver respirato in modo sospetto",
+          "aver esistito senza permesso",
+          "aver sognato crimini",
+          "aver annusato l'aria pubblica",
+          "aver occupato spazio nell'universo",
+        ]
         : [
-            "stealing clouds from the sky",
-            "disturbing the sleep of ants",
-            "thinking illegal thoughts",
-            "walking too loudly",
-            "giving a statue dirty looks",
-            "breathing suspiciously",
-            "existing without permission",
-            "dreaming of crimes",
-            "sniffing public air",
-            "occupying space in the universe",
-          ];
+          "stealing clouds from the sky",
+          "disturbing the sleep of ants",
+          "thinking illegal thoughts",
+          "walking too loudly",
+          "giving a statue dirty looks",
+          "breathing suspiciously",
+          "existing without permission",
+          "dreaming of crimes",
+          "sniffing public air",
+          "occupying space in the universe",
+        ];
 
       return accusations[Math.floor(Math.random() * accusations.length)];
     }
 
     _createTrialUI() {
-        this._uiContainer = new PIXI.Container();
-        
-        const barWidth = 300;
-        const barHeight = 20;
-        const barX = (Graphics.boxWidth - barWidth) / 2;
-        const barY = 10;
-        
-        this._chaosBarBg = new Sprite(new Bitmap(barWidth, barHeight));
-        this._chaosBarBg.bitmap.fillAll('rgba(0, 0, 0, 0.6)');
-        this._chaosBarBg.x = barX;
-        this._chaosBarBg.y = barY;
+      this._uiContainer = new PIXI.Container();
 
-        this._chaosBarFg = new Sprite(new Bitmap(barWidth, barHeight));
-        this._chaosBarFg.bitmap.fillAll('#8A2BE2');
-        this._chaosBarFg.x = barX;
-        this._chaosBarFg.y = barY;
-        
-        this._crimesWindow = new Window_TrialCrimes(this.crimes);
-        this._bountyWindow = new Window_TrialBounty(this.bounty);
-        
-        this._uiContainer.addChild(this._chaosBarBg, this._chaosBarFg, this._crimesWindow, this._bountyWindow);
-        SceneManager._scene.addChild(this._uiContainer);
+      const barWidth = 300;
+      const barHeight = 20;
+      const barX = (Graphics.boxWidth - barWidth) / 2;
+      const barY = 10;
+
+      this._chaosBarBg = new Sprite(new Bitmap(barWidth, barHeight));
+      this._chaosBarBg.bitmap.fillAll('rgba(0, 0, 0, 0.6)');
+      this._chaosBarBg.x = barX;
+      this._chaosBarBg.y = barY;
+
+      this._chaosBarFg = new Sprite(new Bitmap(barWidth, barHeight));
+      this._chaosBarFg.bitmap.fillAll('#8A2BE2');
+      this._chaosBarFg.x = barX;
+      this._chaosBarFg.y = barY;
+
+      this._crimesWindow = new Window_TrialCrimes(this.crimes);
+      this._bountyWindow = new Window_TrialBounty(this.bounty);
+
+      this._uiContainer.addChild(this._chaosBarBg, this._chaosBarFg, this._crimesWindow, this._bountyWindow);
+      SceneManager._scene.addChild(this._uiContainer);
     }
 
     _updateTrialUI() {
-        if (!this._chaosBarFg) return;
-        const barWidth = 300;
-        this._chaosBarFg.width = barWidth * this.chaos;
+      if (!this._chaosBarFg) return;
+      const barWidth = 300;
+      this._chaosBarFg.width = barWidth * this.chaos;
     }
 
     _removeTrialUI() {
-        if (this._uiContainer) {
-            SceneManager._scene.removeChild(this._uiContainer);
-            this._uiContainer.destroy();
-            this._uiContainer = null;
-        }
-        if (this._updateInterval) {
-            clearInterval(this._updateInterval);
-            this._updateInterval = null;
-        }
+      if (this._uiContainer) {
+        SceneManager._scene.removeChild(this._uiContainer);
+        this._uiContainer.destroy();
+        this._uiContainer = null;
+      }
+      if (this._updateInterval) {
+        clearInterval(this._updateInterval);
+        this._updateInterval = null;
+      }
     }
 
     async startTrial() {
@@ -573,63 +573,63 @@
         "COSA?! ZERO?!\nNon hai NESSUNA taglia?!\n...Perché sei qui allora?!",
         "Aspetta aspetta aspetta...\nZERO euro di taglia?!\nChi ti ha mandato qui?!",
         "...\nSei serio?\nNESSUNA taglia?\nVattene! VIA!",
-        
+
         // Mad at player
         "MI STAI PRENDENDO IN GIRO?!\nNon hai fatto NIENTE di male?!\nChe tipo di criminale sei?!",
         "Zero taglia...\nZERO!\nMi hai fatto sprecare il mio tempo!\nFUORI!",
         "NON HO TEMPO PER INNOCENTI!\nVia! Via! VIA!\nE la prossima volta porta almeno\nqualche crimine decente!",
-        
+
         // Mad at herself
         "Come ho fatto a... aspetta...\nHo sbagliato persona?!\nNo no no, questo è imbarazzante...",
         "Io... la grande Eris...\nho convocato qualcuno con zero taglia?\nQuesta è umiliante!",
-        
+
         // Mad at system
         "Il SISTEMA mi ha mandato\nqualcuno INNOCENTE?!\nChe spreco di potere divino!",
         "Chi gestisce questo tribunale?!\nOh giusto, sono io...\nBeh, questo è imbarazzante.",
         "Le guardie mi hanno portato\nla PERSONA SBAGLIATA!\nTeste di rapa!\n...Aspetta, non ho guardie.",
-        
+
         // Chaotic/Confused
         "Zero? ZERO?!\nMa allora... perché...\nSai cosa? Non importa! Vai via!",
         "Hmm... nessuna taglia...\nForse sei TU quello innocente!\nO forse sono io quella colpevole!\nO forse... vai via, mi confondi!",
         "AHAHAHA! Zero taglia!\nÈ così ridicolo che è quasi perfetto!\n...No aspetta, è solo ridicolo. Vattene.",
-        
+
         // Philosophical
         "Nessuna taglia...\nSei l'essere più innocente che abbia mai visto...\nO il più grande criminale che non è stato ancora scoperto.\nNon voglio scoprirlo. Via!",
-        
+
       ] : [
         // Surprised
         "WHAT?! ZERO?!\nYou have NO bounty?!\n...Why are you even here?!",
         "Wait wait wait...\nZERO euros bounty?!\nWho sent you here?!",
         "...\nAre you serious?\nNO bounty?\nLeave! OUT!",
-        
+
         // Mad at player
         "ARE YOU MOCKING ME?!\nYou did NOTHING wrong?!\nWhat kind of criminal are you?!",
         "Zero bounty...\nZERO!\nYou made me waste my time!\nOUT!",
         "I DON'T HAVE TIME FOR INNOCENTS!\nGo! Go! GO!\nAnd next time bring at least\nsome decent crimes!",
-        
+
         // Mad at herself
         "How did I... wait...\nDid I get the wrong person?!\nNo no no, this is embarrassing...",
         "I... the great Eris...\nsummoned someone with zero bounty?\nThis is humiliating!",
-        
+
         // Mad at system
         "The SYSTEM sent me\nsomeone INNOCENT?!\nWhat a waste of divine power!",
         "Who runs this court?!\nOh right, I do...\nWell, this is awkward.",
         "The guards brought me\nthe WRONG PERSON!\nMorons!\n...Wait, I don't have guards.",
-        
+
         // Chaotic/Confused
         "Zero? ZERO?!\nBut then... why...\nYou know what? Whatever! Go away!",
         "Hmm... no bounty...\nMaybe YOU'RE the innocent one!\nOr maybe I'M the guilty one!\nOr maybe... leave, you confuse me!",
         "AHAHAHA! Zero bounty!\nIt's so ridiculous it's almost perfect!\n...No wait, it's just ridiculous. Leave.",
-        
+
         // Philosophical
         "No bounty...\nYou're either the most innocent being I've ever seen...\nOr the greatest criminal never caught.\nI don't want to find out. Go!",
       ];
 
       const rant = rants[Math.floor(Math.random() * rants.length)];
       window.skipLocalization = true;
-      $gameMessage.setBackground(2);$gameMessage.add(rant);
+      $gameMessage.setBackground(2); $gameMessage.add(rant);
       window.skipLocalization = false;
-      
+
       await this.waitForMessage();
 
       // Additional rant line sometimes
@@ -649,12 +649,12 @@
           "Forget it. Forget all of this.",
           "Don't tell ANYONE about this!",
         ];
-        
+
         const additional = additionalRants[Math.floor(Math.random() * additionalRants.length)];
         window.skipLocalization = true;
-        $gameMessage.setBackground(2);$gameMessage.add(additional);
+        $gameMessage.setBackground(2); $gameMessage.add(additional);
         window.skipLocalization = false;
-        
+
         await this.waitForMessage();
       }
 
@@ -683,7 +683,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       } else if (this.mood === "vindictive") {
@@ -698,7 +698,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       } else if (this.mood === "chaotic") {
@@ -713,7 +713,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       } else if (this.mood === "whimsical") {
@@ -728,7 +728,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       } else if (this.mood === "bored") {
@@ -743,7 +743,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       } else if (this.mood === "dramatic") {
@@ -758,7 +758,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       } else if (this.mood === "irritated") {
@@ -773,7 +773,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       } else {
@@ -789,7 +789,7 @@
         ];
         const chosen = openings[Math.floor(Math.random() * openings.length)];
         for (const line of chosen) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       }
@@ -809,7 +809,7 @@
           `${this.formatEuros(this.bounty)}! Not bad!`,
           `Ah yes, ${this.formatEuros(this.bounty)} debt to society.`
         ];
-        $gameMessage.setBackground(2);$gameMessage.add(bountyAnnouncements[Math.floor(Math.random() * bountyAnnouncements.length)]);
+        $gameMessage.setBackground(2); $gameMessage.add(bountyAnnouncements[Math.floor(Math.random() * bountyAnnouncements.length)]);
         await this.waitForMessage();
       }
 
@@ -821,21 +821,21 @@
 
       const immediate = useTranslation
         ? [
-            "Sai cosa? COLPEVOLE!\nVia di qui!",
-            "No, aspetta... INNOCENTE!\nAnzi no, COLPEVOLE!",
-            "Mi hai guardato male.\nPRIGIONE!",
-            "Hmm... la tua faccia non mi piace.\nCOLPEVOLE!",
-          ]
+          "Sai cosa? COLPEVOLE!\nVia di qui!",
+          "No, aspetta... INNOCENTE!\nAnzi no, COLPEVOLE!",
+          "Mi hai guardato male.\nPRIGIONE!",
+          "Hmm... la tua faccia non mi piace.\nCOLPEVOLE!",
+        ]
         : [
-            "You know what?\nGUILTY! Get out!",
-            "No, wait... INNOCENT!\nActually, GUILTY!",
-            "You looked at me wrong.\nPRISON!",
-            "Hmm... I don't like your face.\nGUILTY!",
-          ];
+          "You know what?\nGUILTY! Get out!",
+          "No, wait... INNOCENT!\nActually, GUILTY!",
+          "You looked at me wrong.\nPRISON!",
+          "Hmm... I don't like your face.\nGUILTY!",
+        ];
       window.skipLocalization = true;
 
-      $gameMessage.setBackground(2);$gameMessage.add(
-          immediate[Math.floor(Math.random() * immediate.length)]
+      $gameMessage.setBackground(2); $gameMessage.add(
+        immediate[Math.floor(Math.random() * immediate.length)]
       );
       window.skipLocalization = false;
 
@@ -862,7 +862,7 @@
 
       const intro = introductions[Math.floor(Math.random() * introductions.length)];
       for (const line of intro) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -878,7 +878,7 @@
 
       const question = pleaQuestions[Math.floor(Math.random() * pleaQuestions.length)];
       for (const line of question) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -901,7 +901,7 @@
       const useTranslation = ConfigManager.language === "it";
 
       window.skipLocalization = true;
-      
+
       const responses = {
         0: { // Guilty plea
           benevolent: useTranslation
@@ -987,9 +987,9 @@
 
       const moodResponses = responses[this.playerPlea];
       const response = moodResponses[this.mood] || moodResponses["chaotic"] || (useTranslation ? ["Hmm... interessante risposta."] : ["Hmm... interesting answer."]);
-      
+
       for (const line of response) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -997,36 +997,36 @@
     }
 
     async benevolentTrial() {
-        const useTranslation = ConfigManager.language === "it";
+      const useTranslation = ConfigManager.language === "it";
 
       window.skipLocalization = true;
-      
+
       const intro = useTranslation ? [
         "Vediamo...", "Oggi mi sento... comprensiva.", "Raro per me, lo so.", "Approfittiamone mentre dura!"
       ] : [
         "Let's see...", "Today I feel... understanding.", "Rare for me, I know.", "Let's take advantage while it lasts!"
       ];
-      
+
       for (const line of intro) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
       const questions = useTranslation
         ? [
-            ["Dimmi una cosa...", "Hai mai aiutato qualcuno?", "E intendo VERAMENTE aiutato.", "Non solo per sembrare buono."],
-            ["Sei pentito delle tue azioni?", "E non dirmi quello che pensi voglia sentire.", "Posso vedere attraverso le bugie.", "...La maggior parte del tempo."],
-            ["Facciamo un patto.", "Promettimi di essere buono.", "O almeno... meno cattivo?", "È tutto quello che chiedo. Oggi."],
-          ]
+          ["Dimmi una cosa...", "Hai mai aiutato qualcuno?", "E intendo VERAMENTE aiutato.", "Non solo per sembrare buono."],
+          ["Sei pentito delle tue azioni?", "E non dirmi quello che pensi voglia sentire.", "Posso vedere attraverso le bugie.", "...La maggior parte del tempo."],
+          ["Facciamo un patto.", "Promettimi di essere buono.", "O almeno... meno cattivo?", "È tutto quello che chiedo. Oggi."],
+        ]
         : [
-            ["Tell me something...", "Have you ever helped anyone?", "And I mean TRULY helped.", "Not just to look good."],
-            ["Do you regret your actions?", "And don't tell me what you think I want to hear.", "I can see through lies.", "...Most of the time."],
-            ["Let's make a deal.", "Promise me you'll be good.", "Or at least... less bad?", "That's all I ask. Today."],
-          ];
+          ["Tell me something...", "Have you ever helped anyone?", "And I mean TRULY helped.", "Not just to look good."],
+          ["Do you regret your actions?", "And don't tell me what you think I want to hear.", "I can see through lies.", "...Most of the time."],
+          ["Let's make a deal.", "Promise me you'll be good.", "Or at least... less bad?", "That's all I ask. Today."],
+        ];
 
       const chosen = questions[Math.floor(Math.random() * questions.length)];
       for (const line of chosen) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1059,7 +1059,7 @@
 
       const response = responses[playerChoice];
       for (const line of response) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1074,10 +1074,10 @@
           ["I see something in you...", "I don't know what it is.", "Maybe goodness? Potential?", "Or maybe I just see what I want to see."],
           ["Justice is strange.", "Sometimes mercy is more just than justice.", "Sometimes justice is pure cruelty.", "Divine philosophy. What a headache!"]
         ];
-        
+
         const musing = musings[Math.floor(Math.random() * musings.length)];
         for (const line of musing) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       }
@@ -1089,15 +1089,15 @@
       const useTranslation = ConfigManager.language === "it";
 
       window.skipLocalization = true;
-      
+
       const intro = useTranslation ? [
         "Bene bene bene...", "Guardiamoti meglio.", "Sì... vedo la colpa scritta su tutta la tua faccia.", "È praticamente luminosa!", "Come potrei NON vederla?"
       ] : [
         "Well well well...", "Let me look at you closely.", "Yes... I see guilt written all over your face.", "It's practically glowing!", "How could I NOT see it?"
       ];
-      
+
       for (const line of intro) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1108,19 +1108,19 @@
 
       const accusations = useTranslation
         ? [
-            [`Sei accusato di ${realCrime}!`, "E non negarlo!", "Ho le prove qui davanti a me!", "...Da qualche parte."],
-            [`${realCrime}!`, "Sì! Proprio quello!", "Pensavi di sfuggire?", "Pensavi fossi stupida?!", "Beh, sono molte cose, ma stupida NO!"],
-            [`Il crimine: ${realCrime}.`, "Orribile, vero?", "Disgustoso.", "Imperdonabile!", "...Probabilmente."]
-          ]
+          [`Sei accusato di ${realCrime}!`, "E non negarlo!", "Ho le prove qui davanti a me!", "...Da qualche parte."],
+          [`${realCrime}!`, "Sì! Proprio quello!", "Pensavi di sfuggire?", "Pensavi fossi stupida?!", "Beh, sono molte cose, ma stupida NO!"],
+          [`Il crimine: ${realCrime}.`, "Orribile, vero?", "Disgustoso.", "Imperdonabile!", "...Probabilmente."]
+        ]
         : [
-            [`You are accused of ${realCrime}!`, "And don't deny it!", "I have the evidence right here!", "...Somewhere."],
-            [`${realCrime}!`, "Yes! That one!", "Did you think you'd escape?", "Did you think I was stupid?!", "Well, I'm many things, but stupid is NOT one!"],
-            [`The crime: ${realCrime}.`, "Horrible, right?", "Disgusting.", "Unforgivable!", "...Probably."]
-          ];
+          [`You are accused of ${realCrime}!`, "And don't deny it!", "I have the evidence right here!", "...Somewhere."],
+          [`${realCrime}!`, "Yes! That one!", "Did you think you'd escape?", "Did you think I was stupid?!", "Well, I'm many things, but stupid is NOT one!"],
+          [`The crime: ${realCrime}.`, "Horrible, right?", "Disgusting.", "Unforgivable!", "...Probably."]
+        ];
 
       const chosenAccusation = accusations[Math.floor(Math.random() * accusations.length)];
       for (const line of chosenAccusation) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1131,7 +1131,7 @@
         ] : [
           `And furthermore!`, `${additionalCrime}!`, "Don't think I forgot about that!", "I NEVER forget!"
         ];
-        
+
         for (const line of additional) {
           $gameMessage.setBackground(2);
           $gameMessage.add(line);
@@ -1145,9 +1145,9 @@
         ] : [
           "And you know what?", "You've probably already planned other crimes!", "I can see it in your eyes!", "That 'I will commit crimes in the future' look!", "I know you!"
         ];
-        
+
         for (const line of futureCrimes) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       }
@@ -1164,7 +1164,7 @@
 
       const rant = rants[Math.floor(Math.random() * rants.length)];
       for (const line of rant) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1176,33 +1176,33 @@
       const useTranslation = ConfigManager.language === "it";
 
       window.skipLocalization = true;
-      
+
       const intro = useTranslation ? [
         "Okay okay okay!", "Sono ANNOIATA dei processi normali.", "Facciamo qualcosa di DIVERTENTE!", "Tipo... un gioco!", "Ti piacciono i giochi, vero? VERO?!"
       ] : [
         "Okay okay okay!", "I'm BORED of normal trials.", "Let's do something FUN!", "Like... a game!", "You like games, right? RIGHT?!"
       ];
-      
+
       for (const line of intro) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
       const games = useTranslation
         ? [
-            ["Giochiamo a indovina il numero!", "Sto pensando a un numero tra 1 e 1000!", "Se indovini, sei innocente!", "Se sbagli... beh...", "Dai, prova!"],
-            ["Facciamo così:", "Se riesci a farmi ridere...", "Proprio ridere davvero...", "Ti lascio andare!", "Anzi no, forse ti faccio andare in prigione!", "O forse ti libero!", "Chi lo sa! Questo è il divertimento!"],
-            ["Ooh, ho un'idea!", "Cantiamo una canzone insieme!", "Io canto la prima parte, tu la seconda!", "E se la canzone mi piace...", "Deciderò il tuo destino in base alle note!", "Perfetto, no?"]
-          ]
+          ["Giochiamo a indovina il numero!", "Sto pensando a un numero tra 1 e 1000!", "Se indovini, sei innocente!", "Se sbagli... beh...", "Dai, prova!"],
+          ["Facciamo così:", "Se riesci a farmi ridere...", "Proprio ridere davvero...", "Ti lascio andare!", "Anzi no, forse ti faccio andare in prigione!", "O forse ti libero!", "Chi lo sa! Questo è il divertimento!"],
+          ["Ooh, ho un'idea!", "Cantiamo una canzone insieme!", "Io canto la prima parte, tu la seconda!", "E se la canzone mi piace...", "Deciderò il tuo destino in base alle note!", "Perfetto, no?"]
+        ]
         : [
-            ["Let's play guess the number!", "I'm thinking of a number between 1 and 1000!", "If you guess it, you're innocent!", "If you're wrong... well...", "Come on, try!"],
-            ["Let's do this:", "If you can make me laugh...", "Really truly laugh...", "I'll let you go!", "Actually no, maybe I'll send you to prison!", "Or maybe I'll free you!", "Who knows! That's the fun part!"],
-            ["Ooh, I have an idea!", "Let's sing a song together!", "I'll sing the first part, you sing the second!", "And if I like the song...", "I'll decide your fate based on the notes!", "Perfect, right?"]
-          ];
+          ["Let's play guess the number!", "I'm thinking of a number between 1 and 1000!", "If you guess it, you're innocent!", "If you're wrong... well...", "Come on, try!"],
+          ["Let's do this:", "If you can make me laugh...", "Really truly laugh...", "I'll let you go!", "Actually no, maybe I'll send you to prison!", "Or maybe I'll free you!", "Who knows! That's the fun part!"],
+          ["Ooh, I have an idea!", "Let's sing a song together!", "I'll sing the first part, you sing the second!", "And if I like the song...", "I'll decide your fate based on the notes!", "Perfect, right?"]
+        ];
 
       const game = games[Math.floor(Math.random() * games.length)];
       for (const line of game) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1245,7 +1245,7 @@
 
       const reaction = reactions[playerChoice];
       for (const line of reaction) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1255,9 +1255,9 @@
         ] : [
           "You know what?", "I like you!", "I don't know why, but I do!", "Maybe it's your face.", "Or maybe I'm just in a good mood.", "Who can say!"
         ];
-        
+
         for (const line of extra) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       }
@@ -1269,33 +1269,33 @@
       const useTranslation = ConfigManager.language === "it";
 
       window.skipLocalization = true;
-      
+
       const intro = useTranslation ? [
         "*sbadiglio*", "Dio, un altro processo...", "Non ne posso più.", "Davvero, non ne posso più.", "Ma va bene, facciamolo."
       ] : [
         "*yawn*", "God, another trial...", "I can't take it anymore.", "Really, I just can't.", "But fine, let's do this."
       ];
-      
+
       for (const line of intro) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
       const bored = useTranslation
         ? [
-            ["Allora...", "Hai qualcosa da dire in tua difesa?", "Qualcosa di interessante?", "No, chi sto prendendo in giro.", "Niente è interessante."],
-            ["Senti, facciamo veloce.", "Ho cose migliori da fare.", "Come... non so...", "Fissare il soffitto.", "Contare i granelli di polvere.", "Qualsiasi cosa tranne questo."],
-            ["*sbadiglio di nuovo*", "Sei colpevole o innocente?", "Decidi in fretta.", "Non ho tutto il giorno.", "Anzi, tecnicamente sì, sono immortale.", "Ma preferisco non sprecare il mio tempo."]
-          ]
+          ["Allora...", "Hai qualcosa da dire in tua difesa?", "Qualcosa di interessante?", "No, chi sto prendendo in giro.", "Niente è interessante."],
+          ["Senti, facciamo veloce.", "Ho cose migliori da fare.", "Come... non so...", "Fissare il soffitto.", "Contare i granelli di polvere.", "Qualsiasi cosa tranne questo."],
+          ["*sbadiglio di nuovo*", "Sei colpevole o innocente?", "Decidi in fretta.", "Non ho tutto il giorno.", "Anzi, tecnicamente sì, sono immortale.", "Ma preferisco non sprecare il mio tempo."]
+        ]
         : [
-            ["So...", "Do you have anything to say in your defense?", "Something interesting?", "No, who am I kidding.", "Nothing is interesting."],
-            ["Look, let's make this quick.", "I have better things to do.", "Like... I don't know...", "Staring at the ceiling.", "Counting dust particles.", "Anything but this."],
-            ["*yawn again*", "Are you guilty or innocent?", "Decide quickly.", "I don't have all day.", "Actually, technically I do, I'm immortal.", "But I prefer not to waste my time."]
-          ];
+          ["So...", "Do you have anything to say in your defense?", "Something interesting?", "No, who am I kidding.", "Nothing is interesting."],
+          ["Look, let's make this quick.", "I have better things to do.", "Like... I don't know...", "Staring at the ceiling.", "Counting dust particles.", "Anything but this."],
+          ["*yawn again*", "Are you guilty or innocent?", "Decide quickly.", "I don't have all day.", "Actually, technically I do, I'm immortal.", "But I prefer not to waste my time."]
+        ];
 
       const chosen = bored[Math.floor(Math.random() * bored.length)];
       for (const line of chosen) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1341,7 +1341,7 @@
 
       const response = responses[playerChoice];
       for (const line of response) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1351,9 +1351,9 @@
         ] : [
           "You know what I miss?", "When I was the goddess of discord.", "That was fun.", "This? This is work.", "Boring work."
         ];
-        
+
         for (const line of complaint) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       }
@@ -1365,33 +1365,33 @@
       const useTranslation = ConfigManager.language === "it";
 
       window.skipLocalization = true;
-      
+
       const intro = useTranslation ? [
         "SILENZIO!", "*eco drammatica*", "LA CORTE DELLA DIVINA ERIS...", "È UFFICIALMENTE...", "IN SESSIONE!", "*tuono in lontananza*"
       ] : [
         "SILENCE!", "*dramatic echo*", "THE COURT OF DIVINE ERIS...", "IS OFFICIALLY...", "IN SESSION!", "*thunder in the distance*"
       ];
-      
+
       for (const line of intro) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
       const dramatic = useTranslation
         ? [
-            ["Oh, quello sono io il tuono.", "Effetti speciali divini!", "Costano una fortuna ma ne valgono la pena!", "DRAMMATICITÀ AL MASSIMO!"],
-            ["Benvenuto, mortale!", "In questo giorno che sarà ricordato...", "Nei secoli dei secoli...", "Per tutta l'eternità...", "O almeno fino a domani."],
-            ["LE STELLE STESSE TREMANO!", "IL FATO ASPETTA!", "GLI DÈI ANTICHI OSSERVANO!", "...Probabilmente.", "Non ho controllato."]
-          ]
+          ["Oh, quello sono io il tuono.", "Effetti speciali divini!", "Costano una fortuna ma ne valgono la pena!", "DRAMMATICITÀ AL MASSIMO!"],
+          ["Benvenuto, mortale!", "In questo giorno che sarà ricordato...", "Nei secoli dei secoli...", "Per tutta l'eternità...", "O almeno fino a domani."],
+          ["LE STELLE STESSE TREMANO!", "IL FATO ASPETTA!", "GLI DÈI ANTICHI OSSERVANO!", "...Probabilmente.", "Non ho controllato."]
+        ]
         : [
-            ["Oh, that's me with the thunder.", "Divine special effects!", "Cost a fortune but worth it!", "MAXIMUM DRAMA!"],
-            ["Welcome, mortal!", "On this day that shall be remembered...", "For centuries and centuries...", "For all eternity...", "Or at least until tomorrow."],
-            ["THE VERY STARS TREMBLE!", "FATE ITSELF WAITS!", "THE ANCIENT GODS WATCH!", "...Probably.", "I haven't checked."]
-          ];
+          ["Oh, that's me with the thunder.", "Divine special effects!", "Cost a fortune but worth it!", "MAXIMUM DRAMA!"],
+          ["Welcome, mortal!", "On this day that shall be remembered...", "For centuries and centuries...", "For all eternity...", "Or at least until tomorrow."],
+          ["THE VERY STARS TREMBLE!", "FATE ITSELF WAITS!", "THE ANCIENT GODS WATCH!", "...Probably.", "I haven't checked."]
+        ];
 
       const chosen = dramatic[Math.floor(Math.random() * dramatic.length)];
       for (const line of chosen) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1402,7 +1402,7 @@
       ];
 
       for (const line of proclamation) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1411,7 +1411,7 @@
         : ["AND NOW...", "Before I pronounce...", "THE VERDICT THAT SHALL ECHO THROUGH ETERNITY...", "THAT SHALL SHAKE THE FOUNDATIONS OF THE UNIVERSE...", "What say you?!"];
 
       for (const line of question) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1454,7 +1454,7 @@
 
       const response = responses[playerChoice];
       for (const line of response) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1464,9 +1464,9 @@
         ] : [
           "AND NOW...", "The moment you've all been waiting for...", "The climax of this epic trial...", "THE FINAL DECISION!", "...After this dramatic pause."
         ];
-        
+
         for (const line of finale) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       }
@@ -1486,7 +1486,7 @@
       ];
 
       for (const line of intro) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1498,9 +1498,9 @@
           const accusation = useTranslation
             ? [`Sei chiaramente colpevole di ${crime}!`, "È OVVIO!", "Come puoi negarlo?!", "Oh aspetta, non stavi negando nulla.", "Beh, troppo tardi ora!"]
             : [`You're clearly guilty of ${crime}!`, "It's OBVIOUS!", "How can you deny it?!", "Oh wait, you weren't denying anything.", "Well, too late now!"];
-          
+
           for (const line of accusation) {
-            $gameMessage.setBackground(2);$gameMessage.add(line);
+            $gameMessage.setBackground(2); $gameMessage.add(line);
             await this.waitForMessage();
           }
           break;
@@ -1508,19 +1508,19 @@
         case 1:
           const random = useTranslation
             ? [
-                ["Sai cosa?", "Parliamo del tempo invece!", "È bello oggi, vero?", "O forse piove?", "Non guardo mai fuori.", "Aspetta, siamo fuori?"],
-                ["Mi piacciono le farfalle.", "Tu?", "Sono così colorate!", "E volano!", "Proprio come... aspetta, cosa stavamo facendo?"],
-                ["Hai mai visto un drago che piange?", "Io sì.", "È bellissimo.", "E triste.", "Ma soprattutto bagnato.", "I draghi producono MOLTO liquido lacrimale."]
-              ]
+              ["Sai cosa?", "Parliamo del tempo invece!", "È bello oggi, vero?", "O forse piove?", "Non guardo mai fuori.", "Aspetta, siamo fuori?"],
+              ["Mi piacciono le farfalle.", "Tu?", "Sono così colorate!", "E volano!", "Proprio come... aspetta, cosa stavamo facendo?"],
+              ["Hai mai visto un drago che piange?", "Io sì.", "È bellissimo.", "E triste.", "Ma soprattutto bagnato.", "I draghi producono MOLTO liquido lacrimale."]
+            ]
             : [
-                ["You know what?", "Let's talk about the weather instead!", "It's nice today, right?", "Or maybe it's raining?", "I never look outside.", "Wait, are we outside?"],
-                ["I like butterflies.", "Do you?", "They're so colorful!", "And they fly!", "Just like... wait, what were we doing?"],
-                ["Have you ever seen a dragon cry?", "I have.", "It's beautiful.", "And sad.", "But mostly wet.", "Dragons produce A LOT of tears."]
-              ];
-          
+              ["You know what?", "Let's talk about the weather instead!", "It's nice today, right?", "Or maybe it's raining?", "I never look outside.", "Wait, are we outside?"],
+              ["I like butterflies.", "Do you?", "They're so colorful!", "And they fly!", "Just like... wait, what were we doing?"],
+              ["Have you ever seen a dragon cry?", "I have.", "It's beautiful.", "And sad.", "But mostly wet.", "Dragons produce A LOT of tears."]
+            ];
+
           const chosen = random[Math.floor(Math.random() * random.length)];
           for (const line of chosen) {
-            $gameMessage.setBackground(2);$gameMessage.add(line);
+            $gameMessage.setBackground(2); $gameMessage.add(line);
             await this.waitForMessage();
           }
           break;
@@ -1529,9 +1529,9 @@
           const forget = useTranslation
             ? ["Aspetta...", "Perché sei qui?", "No davvero, perché?", "Ah sì! Il processo!", "O era una festa?", "Sono confusa.", "Questo succede spesso."]
             : ["Wait...", "Why are you here?", "No really, why?", "Oh right! The trial!", "Or was it a party?", "I'm confused.", "This happens often."];
-          
+
           for (const line of forget) {
-            $gameMessage.setBackground(2);$gameMessage.add(line);
+            $gameMessage.setBackground(2); $gameMessage.add(line);
             await this.waitForMessage();
           }
           break;
@@ -1539,14 +1539,14 @@
         case 3:
           const argue = useTranslation
             ? [
-                "È colpevole!", "NO, aspetta!", "È innocente!", "Ma che dico?!", "Sono IO la colpevole!", "No aspetta, quello non ha senso!", "O forse sì?", "CHI LO SA!"
-              ]
+              "È colpevole!", "NO, aspetta!", "È innocente!", "Ma che dico?!", "Sono IO la colpevole!", "No aspetta, quello non ha senso!", "O forse sì?", "CHI LO SA!"
+            ]
             : [
-                "They're guilty!", "NO, wait!", "They're innocent!", "What am I saying?!", "I'M the guilty one!", "No wait, that doesn't make sense!", "Or does it?", "WHO KNOWS!"
-              ];
-          
+              "They're guilty!", "NO, wait!", "They're innocent!", "What am I saying?!", "I'M the guilty one!", "No wait, that doesn't make sense!", "Or does it?", "WHO KNOWS!"
+            ];
+
           for (const line of argue) {
-            $gameMessage.setBackground(2);$gameMessage.add(line);
+            $gameMessage.setBackground(2); $gameMessage.add(line);
             await this.waitForMessage();
           }
           break;
@@ -1554,14 +1554,14 @@
         case 4:
           const chaos = useTranslation
             ? [
-                "TUTTO È CAOS!", "Il caos è ordine!", "L'ordine è caos!", "Tu sei me!", "Io sono te!", "Noi siamo... pizza?", "No aspetta, quello non funziona.", "OPPURE SÌ!"
-              ]
+              "TUTTO È CAOS!", "Il caos è ordine!", "L'ordine è caos!", "Tu sei me!", "Io sono te!", "Noi siamo... pizza?", "No aspetta, quello non funziona.", "OPPURE SÌ!"
+            ]
             : [
-                "EVERYTHING IS CHAOS!", "Chaos is order!", "Order is chaos!", "You are me!", "I am you!", "We are... pizza?", "No wait, that doesn't work.", "OR DOES IT!"
-              ];
-          
+              "EVERYTHING IS CHAOS!", "Chaos is order!", "Order is chaos!", "You are me!", "I am you!", "We are... pizza?", "No wait, that doesn't work.", "OR DOES IT!"
+            ];
+
           for (const line of chaos) {
-            $gameMessage.setBackground(2);$gameMessage.add(line);
+            $gameMessage.setBackground(2); $gameMessage.add(line);
             await this.waitForMessage();
           }
           break;
@@ -1573,9 +1573,9 @@
         ] : [
           "Anyway...", "Where were we?", "Oh right, nowhere!", "As always!", "That's what matters!"
         ];
-        
+
         for (const line of extra) {
-          $gameMessage.setBackground(2);$gameMessage.add(line);
+          $gameMessage.setBackground(2); $gameMessage.add(line);
           await this.waitForMessage();
         }
       }
@@ -1596,8 +1596,8 @@
         } else if (this.mood === "vindictive") {
           guiltyChance += 0.3;
         } else if (this.mood === "whimsical" && this.playerPlea === 2) {
-            guiltyChance -= 0.2;
-        } 
+          guiltyChance -= 0.2;
+        }
 
         this.verdict = Math.random() < guiltyChance ? "guilty" : "innocent";
       }
@@ -1637,7 +1637,7 @@
 
       const drumroll = drumrolls[Math.floor(Math.random() * drumrolls.length)];
       for (const line of drumroll) {
-        $gameMessage.setBackground(2);$gameMessage.add(line);
+        $gameMessage.setBackground(2); $gameMessage.add(line);
         await this.waitForMessage();
       }
 
@@ -1658,7 +1658,7 @@
 
         const verdict = guiltyVerdicts[Math.floor(Math.random() * guiltyVerdicts.length)];
         for (const line of verdict) {
-          $gameMessage.setBackground(2);$gameMessage.add("\\C[2]" + line + "\\C[0]");
+          $gameMessage.setBackground(2); $gameMessage.add("\\C[2]" + line + "\\C[0]");
           await this.waitForMessage();
         }
 
@@ -1677,7 +1677,7 @@
 
           const extra = extras[Math.floor(Math.random() * extras.length)];
           for (const line of extra) {
-            $gameMessage.setBackground(2);$gameMessage.add(line);
+            $gameMessage.setBackground(2); $gameMessage.add(line);
             await this.waitForMessage();
           }
         }
@@ -1698,7 +1698,7 @@
 
         const verdict = innocentVerdicts[Math.floor(Math.random() * innocentVerdicts.length)];
         for (const line of verdict) {
-          $gameMessage.setBackground(2);$gameMessage.add("\\C[3]" + line + "\\C[0]");
+          $gameMessage.setBackground(2); $gameMessage.add("\\C[3]" + line + "\\C[0]");
           await this.waitForMessage();
         }
 
@@ -1717,7 +1717,7 @@
 
           const extra = extras[Math.floor(Math.random() * extras.length)];
           for (const line of extra) {
-            $gameMessage.setBackground(2);$gameMessage.add(line);
+            $gameMessage.setBackground(2); $gameMessage.add(line);
             await this.waitForMessage();
           }
         }
@@ -1727,15 +1727,15 @@
     }
 
     executeVerdict() {
-      
+
       this._removeTrialUI();
-      
+
       if (this.verdict === "guilty") {
         // Store bounty for prison manager
         const currentBounty = this.bounty;
-        
+
         $gamePlayer.reserveTransfer(prisonMapId, prisonX, prisonY, 2, 0);
-        
+
         // Use a flag to start prison time on next map load
         $gameTemp._startPrisonOnLoad = true;
         $gameTemp._prisonBounty = currentBounty;
@@ -1745,7 +1745,7 @@
           window.playerCrimes = [];
         }
         $gameVariables.setValue(bountyVariableId, 0);
-        
+
         const mapId = $gameVariables.value(returnMapVariable) || 1;
         const x = $gameVariables.value(returnXVariable) || 0;
         const y = $gameVariables.value(returnYVariable) || 0;

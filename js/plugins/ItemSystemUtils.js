@@ -31,7 +31,7 @@
   const FOOD_COMMON_EVENT_ACTOR1 = 23;
   const FOOD_COMMON_EVENT_ACTOR2 = 24;
   const FOOD_COMMON_EVENT_ACTOR3 = 25;
-  const { SPRITES_ASSOCIATION } = window.Sprites || {};
+  const { SpritesAssociation } = window.Sprites || {};
 
   //=============================================================================
   // Global Item System Utilities
@@ -50,7 +50,7 @@
     /**
      * Get item weight from note tag
      */
-    getItemWeight: function(item) {
+    getItemWeight: function (item) {
       if (!item || !item.note) return 1; // Minimum 1 gram
 
       const match = item.note.match(/<weight:\s*(\d+)>/i);
@@ -63,7 +63,7 @@
     /**
      * Calculate total inventory weight (only unequipped items)
      */
-    calculateTotalWeight: function() {
+    calculateTotalWeight: function () {
       let totalWeight = 0;
 
       // 1. Regular items
@@ -115,7 +115,7 @@
     /**
      * Calculate max carry weight for party leader
      */
-    calculateMaxCarryWeight: function() {
+    calculateMaxCarryWeight: function () {
       const leader = $gameParty.leader();
       if (!leader) return BASE_CARRY_WEIGHT;
 
@@ -127,14 +127,14 @@
     /**
      * Check if party is overencumbered
      */
-    isOverencumbered: function() {
+    isOverencumbered: function () {
       return this.calculateTotalWeight() > this.calculateMaxCarryWeight();
     },
 
     /**
      * Format weight for display
      */
-    formatWeight: function(grams) {
+    formatWeight: function (grams) {
       if (grams < 1000) {
         return grams + "g";
       } else {
@@ -145,7 +145,7 @@
     /**
      * Get nutrition value from item note tag
      */
-    getNutritionValue: function(item, nutrient) {
+    getNutritionValue: function (item, nutrient) {
       if (!item || !item.note) return 0;
       const regex = new RegExp(`<${nutrient}:\\s*(\\d+)>`, "i");
       const match = item.note.match(regex);
@@ -155,7 +155,7 @@
     /**
      * Check if item has Food category
      */
-    isFoodItem: function(item) {
+    isFoodItem: function (item) {
       if (!item || !item.note) return false;
       return /<category:Food>/i.test(item.note);
     },
@@ -163,7 +163,7 @@
     /**
      * Check if item has Tools category
      */
-    isToolsItem: function(item) {
+    isToolsItem: function (item) {
       if (!item || !item.note) return false;
       return /<category:Tools>/i.test(item.note);
     },
@@ -171,7 +171,7 @@
     /**
      * Check if item has Medical category
      */
-    isMedicalItem: function(item) {
+    isMedicalItem: function (item) {
       if (!item || !item.note) return false;
       return /<category:Medical>/i.test(item.note);
     },
@@ -179,38 +179,38 @@
     /**
      * Count items in each category
      */
-    countMedicalItems: function() {
+    countMedicalItems: function () {
       return $gameParty.allItems().filter((item) => DataManager.isItem(item) && this.isMedicalItem(item)).length;
     },
 
-    countFoodItems: function() {
+    countFoodItems: function () {
       return $gameParty.allItems().filter((item) => DataManager.isItem(item) && this.isFoodItem(item)).length;
     },
 
-    countToolsItems: function() {
+    countToolsItems: function () {
       return $gameParty.allItems().filter((item) => DataManager.isItem(item) && this.isToolsItem(item)).length;
     },
 
-    countWeapons: function() {
+    countWeapons: function () {
       return $gameParty.weapons().length;
     },
 
-    countArmors: function() {
+    countArmors: function () {
       return $gameParty.armors().length;
     },
 
-    countMaterials: function() {
+    countMaterials: function () {
       return $gameParty.allItems().filter((item) => DataManager.isItem(item) && item.itypeId === 2).length;
     },
 
-    countTrash: function() {
+    countTrash: function () {
       return $gameParty.allItems().filter((item) => item && (!DataManager.isItem(item) || item.itypeId !== 2)).length;
     },
 
     /**
      * Get the raw category name from item note tag
      */
-    getRawCategoryFromNote: function(item) {
+    getRawCategoryFromNote: function (item) {
       if (!item || !item.note) return null;
       const match = item.note.match(/<category:\s*(\w+)>/i);
       return match ? match[1] : null;
@@ -219,7 +219,7 @@
     /**
      * Get item category name for display
      */
-    getItemCategoryName: function(item) {
+    getItemCategoryName: function (item) {
       if (!item) return null;
 
       // First, check if item has a category tag in notes
@@ -274,7 +274,7 @@
     /**
      * Get bust image path based on actor ID and custom variables
      */
-    getActorBustImagePath: function(actor) {
+    getActorBustImagePath: function (actor) {
       if (!actor) return null;
 
       const actorId = actor.actorId && actor.actorId();
@@ -296,14 +296,14 @@
           }
         }
 
-        // Priority 3: Fall back to SPRITES_ASSOCIATION
-        if (characterName && SPRITES_ASSOCIATION) {
+        // Priority 3: Fall back to SpritesAssociation
+        if (characterName && SpritesAssociation) {
           const spritesheetName = characterName.split('.')[0];
           const characterIndex = actor.characterIndex();
 
-          if (SPRITES_ASSOCIATION[spritesheetName] &&
-              SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-            const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+          if (SpritesAssociation[spritesheetName] &&
+            SpritesAssociation[spritesheetName][characterIndex]) {
+            const bustName = SpritesAssociation[spritesheetName][characterIndex];
             return "img/busts/" + bustName;
           }
         }
@@ -311,7 +311,7 @@
         return "img/busts/7";
       }
 
-      // Players 2 & 3: Check Variables 107 and 108 first, then SPRITES_ASSOCIATION
+      // Players 2 & 3: Check Variables 107 and 108 first, then SpritesAssociation
       if (actorId === 2) {
         const player2BustName = $gameVariables.value(107);
         if (player2BustName && player2BustName !== "") {
@@ -324,14 +324,14 @@
         }
       }
 
-      // Fallback to SPRITES_ASSOCIATION for actors 2 & 3
-      if (characterName && SPRITES_ASSOCIATION) {
+      // Fallback to SpritesAssociation for actors 2 & 3
+      if (characterName && SpritesAssociation) {
         const spritesheetName = characterName.split('.')[0];
         const characterIndex = actor.characterIndex();
 
-        if (SPRITES_ASSOCIATION[spritesheetName] &&
-            SPRITES_ASSOCIATION[spritesheetName][characterIndex]) {
-          const bustName = SPRITES_ASSOCIATION[spritesheetName][characterIndex];
+        if (SpritesAssociation[spritesheetName] &&
+          SpritesAssociation[spritesheetName][characterIndex]) {
+          const bustName = SpritesAssociation[spritesheetName][characterIndex];
           return "img/busts/" + bustName;
         }
       }
@@ -343,7 +343,7 @@
     /**
      * Truncate text and add ellipsis if needed
      */
-    truncateTextWithEllipsis: function(text, maxLength) {
+    truncateTextWithEllipsis: function (text, maxLength) {
       if (text.length > maxLength) {
         return text.substring(0, maxLength - 3) + "...";
       }
@@ -353,7 +353,7 @@
     /**
      * Check if item has specific category
      */
-    hasItemCategory: function(item, category) {
+    hasItemCategory: function (item, category) {
       if (!item || !item.note) return false;
       const regex = new RegExp(`<category:${category}>`, "i");
       return regex.test(item.note);
