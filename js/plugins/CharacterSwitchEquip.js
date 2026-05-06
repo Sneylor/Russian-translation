@@ -78,27 +78,10 @@
 
     // Translation helper
     const getTranslation = function(key) {
-        const useTranslation = ConfigManager.language === "it";
-        
-        const translations = {
-            arcane: { en: 'Arcane', it: 'Arcano' },
-            substance: { en: 'Substance', it: 'Sostanza' },
-            stealth: { en: 'Stealth', it: 'Furtività' },
-            intimidation: { en: 'Intimidation', it: 'Intimidazione' },
-            scale: { en: 'ATK', it: 'ATT' },
-            str: { en: 'STR', it: 'FOR' },
-            dex: { en: 'DEX', it: 'DES' },
-            mix: { en: 'MIX', it: 'MIS' },
-            psi: { en: 'PSI', it: 'PSI' },
-            int: { en: 'INT', it: 'INT' },
-            con: { en: 'CON', it: 'COS' },
-            wis: { en: 'WIS', it: 'SAG' }
-        };
-        
-        const translation = translations[key.toLowerCase()];
-        if (!translation) return key;
-        
-        return useTranslation ? translation.it : translation.en;
+        if (window.getEquipText) {
+            return window.getEquipText(key);
+        }
+        return key;
     };
 
     // Store original methods
@@ -531,8 +514,14 @@
     Window_EquipCommand.prototype.makeCommandList = function() {
         this.addCommand(TextManager.equip2, "equip");
         this.addCommand(TextManager.optimize, "optimize");
-        const randomText = ConfigManager.language === "it" ? "Casuale" : "Random";
+        const randomText = getTranslation("random");
         this.addCommand(randomText, "random");
+        const clearText = getTranslation("clear");
+        this.addCommand(clearText, "clear");
+    };
+
+    Window_EquipCommand.prototype.maxCols = function() {
+        return 4;
     };
 
     const _Scene_Equip_createCommandWindow = Scene_Equip.prototype.createCommandWindow;
@@ -543,6 +532,7 @@
         commandWindow.setHandler("equip",    this.commandEquip.bind(this));
         commandWindow.setHandler("optimize", this.commandOptimize.bind(this));
         commandWindow.setHandler("random",   this.commandRandom.bind(this));
+        commandWindow.setHandler("clear",    this.commandClear.bind(this));
         commandWindow.setHandler("cancel",   this.popScene.bind(this));
         this.addWindow(commandWindow);
         this._commandWindow = commandWindow;
@@ -550,6 +540,14 @@
 
     Scene_Equip.prototype.commandRandom = function() {
         this._actor.randomEquipments();
+        this._statusWindow.refresh();
+        this._slotWindow.refresh();
+        this._commandWindow.activate();
+        SoundManager.playEquip();
+    };
+
+    Scene_Equip.prototype.commandClear = function() {
+        this._actor.clearEquipments();
         this._statusWindow.refresh();
         this._slotWindow.refresh();
         this._commandWindow.activate();

@@ -57,12 +57,52 @@
  * @default That reading didn't resonate with me at all...\nMaybe the spirits weren't speaking clearly today.
  * 
  */
-const { TarotMeanings } = window.Items;
-
 (() => {
     'use strict';
 
     const pluginName = 'AnimatedTarotReading';
+
+    //=============================================================================
+    // i18n
+    //=============================================================================
+    let _tarotI18n = null;
+
+    const _loadTarotI18n = async () => {
+        const lang = ConfigManager.language || 'en';
+        const url = `js/plugins/i18n/${lang}/tarot.json`;
+        try {
+            const response = await fetch(url);
+            _tarotI18n = await response.json();
+        } catch (e) {
+            console.error('AnimatedTarotReading: Failed to load i18n data from ' + url, e);
+        }
+    };
+
+    // Resolve a dot-path into _tarotI18n (e.g. 'ui.title')
+    const _ti18n = (path, vars) => {
+        if (!_tarotI18n) return path;
+        const parts = path.split('.');
+        let val = _tarotI18n;
+        for (const p of parts) { 
+            if (val) val = val[p]; 
+        }
+        if (typeof val !== 'string' && typeof val !== 'object') return path;
+        if (typeof val === 'string' && vars) {
+            val = val.replace(/%(\d+)/g, (_, k) => (vars[k-1] !== undefined ? vars[k-1] : `%${k}`));
+        }
+        return val;
+    };
+
+    // Load on boot
+    _loadTarotI18n();
+
+    const tarotKeys = [
+        'The Fool', 'The Magician', 'The High Priestess', 'The Empress', 'The Emperor',
+        'The Hierophant', 'The Lovers', 'The Chariot', 'Strength', 'The Hermit',
+        'Wheel of Fortune', 'Justice', 'The Hanged Man', 'Death', 'Temperance',
+        'The Devil', 'The Tower', 'The Star', 'The Moon', 'The Sun',
+        'Judgement', 'The World'
+    ];
 
     // Tarot card meanings database
 
@@ -359,9 +399,9 @@ const { TarotMeanings } = window.Items;
 
         showCardMeaning(index) {
             const card = this._selectedCards[index];
-            const lang = ConfigManager.language === 'it' ? 'it' : 'en';
-            const meanings = TarotMeanings[lang][card.number];
-            const pool = card.isReversed ? meanings.reversed : meanings.upright;
+            const cardKey = tarotKeys[card.number - 1];
+            const cardData = _ti18n(`cards.${cardKey}`);
+            const pool = card.isReversed ? cardData.reversed : cardData.upright;
             const meaning = pool[Math.floor(Math.random() * pool.length)];
 
             this._meaningWindow.contents.clear();
@@ -385,51 +425,11 @@ const { TarotMeanings } = window.Items;
         }
 
         getCardName(number) {
-            const lang = ConfigManager.language === 'it' ? 'it' : 'en';
-            const names = {
-                en: [
-                    'The Fool', 'The Magician', 'The High Priestess', 'The Empress', 'The Emperor',
-                    'The Hierophant', 'The Lovers', 'The Chariot', 'Strength', 'The Hermit',
-                    'Wheel of Fortune', 'Justice', 'The Hanged Man', 'Death', 'Temperance',
-                    'The Devil', 'The Tower', 'The Star', 'The Moon', 'The Sun',
-                    'Judgement', 'The World'
-                ],
-                it: [
-                    'Il Matto', 'Il Mago', 'La Papessa', 'L\'Imperatrice', 'L\'Imperatore',
-                    'Il Papa', 'Gli Amanti', 'Il Carro', 'La Forza', 'L\'Eremita',
-                    'La Ruota della Fortuna', 'La Giustizia', 'L\'Appeso', 'La Morte', 'La Temperanza',
-                    'Il Diavolo', 'La Torre', 'La Stella', 'La Luna', 'Il Sole',
-                    'Il Giudizio', 'Il Mondo'
-                ]
-            };
-            return names[lang][number - 1];
+            return _ti18n(`cards.${tarotKeys[number - 1]}.name`);
         }
 
         getLocalizedText(key) {
-            const lang = ConfigManager.language === 'it' ? 'it' : 'en';
-            const texts = {
-                en: {
-                    title: 'Tarot Reading',
-                    past: 'Past',
-                    present: 'Present',
-                    future: 'Future',
-                    instruction: 'Click on a card to reveal its meaning',
-                    complete: 'Your reading is complete. Press ESC to exit.',
-                    upright: 'Upright',
-                    reversed: 'Reversed'
-                },
-                it: {
-                    title: 'Lettura dei Tarocchi',
-                    past: 'Passato',
-                    present: 'Presente',
-                    future: 'Futuro',
-                    instruction: 'Clicca su una carta per rivelare il suo significato',
-                    complete: 'La tua lettura è completa. Premi ESC per uscire.',
-                    upright: 'Dritto',
-                    reversed: 'Rovesciato'
-                }
-            };
-            return texts[lang][key];
+            return _ti18n(`ui.${key}`);
         }
 
         update() {
@@ -638,9 +638,9 @@ const { TarotMeanings } = window.Items;
 
         setupChoices() {
             const card = this._selectedCards[this._currentCardIndex];
-            const lang = ConfigManager.language === 'it' ? 'it' : 'en';
-            const meanings = TarotMeanings[lang][card.number];
-            const pool = card.isReversed ? meanings.reversed : meanings.upright;
+            const cardKey = tarotKeys[card.number - 1];
+            const cardData = _ti18n(`cards.${cardKey}`);
+            const pool = card.isReversed ? cardData.reversed : cardData.upright;
 
             // Get correct meaning
             const correctIndex = Math.floor(Math.random() * pool.length);
@@ -655,8 +655,9 @@ const { TarotMeanings } = window.Items;
                 const randomCard = Math.floor(Math.random() * 22) + 1;
                 if (!usedCards.includes(randomCard)) {
                     usedCards.push(randomCard);
-                    const wrongPool = TarotMeanings[lang][randomCard];
-                    const wrongOrientation = Math.random() < 0.5 ? wrongPool.reversed : wrongPool.upright;
+                    const wrongCardKey = tarotKeys[randomCard - 1];
+                    const wrongCardData = _ti18n(`cards.${wrongCardKey}`);
+                    const wrongOrientation = Math.random() < 0.5 ? wrongCardData.reversed : wrongCardData.upright;
                     const wrongMeaning = wrongOrientation[Math.floor(Math.random() * wrongOrientation.length)];
                     wrongMeanings.push(wrongMeaning);
                 }
@@ -756,47 +757,11 @@ const { TarotMeanings } = window.Items;
         }
 
         getCardName(number) {
-            const lang = ConfigManager.language === 'it' ? 'it' : 'en';
-            const names = {
-                en: [
-                    'The Fool', 'The Magician', 'The High Priestess', 'The Empress', 'The Emperor',
-                    'The Hierophant', 'The Lovers', 'The Chariot', 'Strength', 'The Hermit',
-                    'Wheel of Fortune', 'Justice', 'The Hanged Man', 'Death', 'Temperance',
-                    'The Devil', 'The Tower', 'The Star', 'The Moon', 'The Sun',
-                    'Judgement', 'The World'
-                ],
-                it: [
-                    'Il Matto', 'Il Mago', 'La Papessa', 'L\'Imperatrice', 'L\'Imperatore',
-                    'Il Papa', 'Gli Amanti', 'Il Carro', 'La Forza', 'L\'Eremita',
-                    'La Ruota della Fortuna', 'La Giustizia', 'L\'Appeso', 'La Morte', 'La Temperanza',
-                    'Il Diavolo', 'La Torre', 'La Stella', 'La Luna', 'Il Sole',
-                    'Il Giudizio', 'Il Mondo'
-                ]
-            };
-            return names[lang][number - 1];
+            return _ti18n(`cards.${tarotKeys[number - 1]}.name`);
         }
 
         getLocalizedText(key) {
-            const lang = ConfigManager.language === 'it' ? 'it' : 'en';
-            const texts = {
-                en: {
-                    npcTitle: 'Reading Tarot for %1',
-                    past: 'Past',
-                    present: 'Present',
-                    future: 'Future',
-                    upright: 'Upright',
-                    reversed: 'Reversed'
-                },
-                it: {
-                    npcTitle: 'Lettura dei Tarocchi per %1',
-                    past: 'Passato',
-                    present: 'Presente',
-                    future: 'Futuro',
-                    upright: 'Dritto',
-                    reversed: 'Rovesciato'
-                }
-            };
-            return texts[lang][key] || texts.en[key];
+            return _ti18n(`ui.${key}`);
         }
 
         update() {

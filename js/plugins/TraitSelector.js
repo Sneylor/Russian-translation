@@ -123,11 +123,27 @@
   };
 
   const t = (key, ...args) => {
-    const useTranslation = ConfigManager.language === "it";
-
-    const lang = useTranslation ? "it" : "en";
-    const text = translations[key][lang];
+    const originalText = translations[key] ? translations[key].en : key;
+    const text = window.Hendrix_Localization ? window.Hendrix_Localization(originalText) : originalText;
     return typeof text === "function" ? text(...args) : text;
+  };
+
+  let i18nData = null;
+
+  const loadI18nData = async () => {
+    const lang = ConfigManager.language || "en";
+    const url = `js/plugins/i18n/${lang}/traits.json`;
+    try {
+      const response = await fetch(url);
+      i18nData = await response.json();
+    } catch (e) {
+      console.error("TraitSelector: Failed to load i18n data from " + url, e);
+    }
+  };
+
+  const resolveI18nPath = (path, obj) => {
+    if (!path || !obj) return null;
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
   };
 
   // Register plugin commands
@@ -147,14 +163,19 @@
 
 
   // Helper function to get translated trait property
-  const getTraitText = (trait, property) => {
+  const getTraitText = (trait, type) => {
+    if (!trait) return "";
+    const intKey = trait[type];
+    if (intKey && i18nData) {
+      const localized = resolveI18nPath(intKey, i18nData);
+      if (localized) return localized;
+    }
     const useTranslation = ConfigManager.language === "it";
-
-    const value = trait[property];
+    const value = trait[type];
     if (typeof value === "object" && value !== null) {
       return useTranslation ? value.it : value.en;
     }
-    return value;
+    return value || (trait[type] || "");
   };
   // Add this helper function near the top with other helpers
   const getParamDisplayName = (paramKey) => {
@@ -192,12 +213,14 @@
       this._selectedTraits = [];
       this.createBackground();
       this.createWindowLayer();
-      this.createHelpWindow();
-      this.createTraitListWindow();
-      this.createSelectedTraitsWindow();
-      this.createConfirmWindow();
-      this.resetSwitches();
-      this.resetActorTraits(); // Add this line
+      loadI18nData().then(() => {
+        this.createHelpWindow();
+        this.createTraitListWindow();
+        this.createSelectedTraitsWindow();
+        this.createConfirmWindow();
+        this.resetSwitches();
+        this.resetActorTraits();
+      });
     }
 
     resetActorTraits() {
@@ -529,7 +552,7 @@
 
       console.log(
         `Applied ${selectedTraits.length} trait(s) to actor ${targetId}: ${selectedTraits
-          .map((t) => t.name.en)
+          .map((t) => getTraitText(t, 'name'))
           .join(', ')}`
       );
     }

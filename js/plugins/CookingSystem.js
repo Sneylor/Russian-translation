@@ -67,6 +67,37 @@
     const playRecoverySound = parameters['Play Recovery Sound'] === 'true';
     const recoverySoundName = parameters['Recovery Sound'] || 'Recovery';
     const requiredItemIds = [127,128]; // Replace with your desired item IDs
+
+    //=============================================================================
+    // i18n
+    //=============================================================================
+    let _cookingI18n = null;
+
+    const _loadCookingI18n = async () => {
+        const lang = ConfigManager.language || 'en';
+        const url = `js/plugins/i18n/${lang}/cooking.json`;
+        try {
+            const response = await fetch(url);
+            _cookingI18n = await response.json();
+        } catch (e) {
+            console.error('CookingSystem: Failed to load i18n data from ' + url, e);
+        }
+    };
+
+    // Resolve a dot-path into _cookingI18n (e.g. 'cooking.ui.cookButton')
+    const _ci18n = (path, vars) => {
+        const parts = ('cooking.' + path).split('.');
+        let val = _cookingI18n;
+        for (const p of parts) { if (val) val = val[p]; }
+        if (typeof val !== 'string') return path;
+        if (vars) {
+            val = val.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
+        }
+        return val;
+    };
+
+    // Load on boot
+    _loadCookingI18n();
     //=============================================================================
     // Plugin Commands
     //=============================================================================
@@ -94,60 +125,6 @@
     const CookingSystem = {
         _item1: null,
         _item2: null,
-        
-        // Adjective lists for same-item cooking
-        _positiveAdjectives: [
-            "Well-Cooked", "Delicious", "Gourmet", "Masterful", "Mystic", 
-            "Divine", "Perfect", "Succulent", "Extraordinary", "Magical"
-        ],
-        
-        _neutralAdjectives: [
-            "Plain", "Simple", "Ordinary", "Basic", "Standard", 
-            "Regular", "Common", "Modest", "Unassuming", "Everyday"
-        ],
-        
-        _negativeAdjectives: [
-            "Charred", "Ruined", "Overcooked", "Burnt", "Spoiled", 
-            "Questionable", "Dubious", "Suspicious", "Failed", "Disastrous"
-        ],
-        _positiveAdjectivesIt: [
-            "Ben cucinato",
-            "Delizioso",
-            "Gourmet",
-            "Magistrale",
-            "Mistico",
-            "Divino",
-            "Perfetto",
-            "Succulento",
-            "Straordinario",
-            "Magico"
-        ],
-        
-        _neutralAdjectivesIt: [
-            "Anodino",
-            "Semplice",
-            "Ordinario",
-            "Di base",
-            "Standard",
-            "Regolare",
-            "Comune",
-            "Modesto",
-            "Discreto",
-            "Quotidiano"
-        ],
-        
-        _negativeAdjectivesIt: [
-            "Carbonizzato",
-            "Rovinato",
-            "Stracotto",
-            "Bruciato",
-            "Avariato",
-            "Dubbio",
-            "Dubitoso",
-            "Sospetto",
-            "Fallito",
-            "Disastroso"
-        ],
         
         isFoodItem: function(item) {
             if (!item) return false;
@@ -189,42 +166,31 @@
         getRandomAdjectiveForSameItem: function() {
             // Randomly choose which type of adjective to use (positive, neutral, negative)
             const rand = Math.random();
-            let adjective;
-            const useTranslation = ConfigManager.language === 'it'
+            let adjectiveKey;
 
             if (rand < 0.35) {
-                // Positive adjective (35% chance)
-                if(useTranslation){
-                    adjective = this._positiveAdjectivesIt[Math.floor(Math.random() * this._positiveAdjectives.length)];
-
-                }else{
-                    adjective = this._positiveAdjectives[Math.floor(Math.random() * this._positiveAdjectives.length)];
-
-                }
-                this._lastAdjectiveEffect = "positive";
+                adjectiveKey = 'positive'; // 35% chance
+                this._lastAdjectiveEffect = 'positive';
             } else if (rand < 0.75) {
-                // Neutral adjective (40% chance)
-                if(useTranslation){
-                    adjective = this._neutralAdjectivesIt[Math.floor(Math.random() * this._neutralAdjectives.length)];
-
-                }else{
-                    adjective = this._neutralAdjectives[Math.floor(Math.random() * this._neutralAdjectives.length)];
-
-                }
-                this._lastAdjectiveEffect = "neutral";
+                adjectiveKey = 'neutral';  // 40% chance
+                this._lastAdjectiveEffect = 'neutral';
             } else {
-                // Negative adjective (25% chance)
-                if(useTranslation){
-                    adjective = this._negativeAdjectivesIt[Math.floor(Math.random() * this._negativeAdjectives.length)];
-
-                }else{
-                    adjective = this._negativeAdjectives[Math.floor(Math.random() * this._negativeAdjectives.length)];
-
-                }
-                this._lastAdjectiveEffect = "negative";
+                adjectiveKey = 'negative'; // 25% chance
+                this._lastAdjectiveEffect = 'negative';
             }
-            
-            return adjective;
+
+            // Pull adjective list from i18n JSON
+            const list = _cookingI18n &&
+                _cookingI18n.cooking &&
+                _cookingI18n.cooking.adjectives &&
+                _cookingI18n.cooking.adjectives[adjectiveKey];
+
+            if (list && list.length > 0) {
+                return list[Math.floor(Math.random() * list.length)];
+            }
+
+            // Fallback plain labels if JSON not loaded yet
+            return adjectiveKey;
         },
         
         getMultiplierForSameItem: function() {
@@ -239,7 +205,6 @@
         },
         
         cookItems: function(item1, item2) {
-            const useTranslation = ConfigManager.language === 'it'
 
             // Remove items from inventory
             $gameParty.loseItem(item1, 1);
@@ -314,16 +279,16 @@
             const cookedName = this.createCookedItemName(item1, item2);
             
             // Show message with recovery amounts and flavor text for same-item cooking
-            let recoverMsg = useTranslation?"Hai preparato "+ cookedName + "!":"You prepared " + cookedName + "!";
+            let recoverMsg = _ci18n('messages.prepared', { name: cookedName });
             
             // Add flavor text for same item cooking
             if (isSameItem) {
-                if (this._lastAdjectiveEffect === "positive") {
-                    recoverMsg += useTranslation?"\nÈ venuto eccezionalmente bene!":"\nIt turned out exceptionally well!";
-                } else if (this._lastAdjectiveEffect === "neutral") {
-                    recoverMsg += useTranslation?"\nNon è niente di speciale, ma commestibile.":"\nIt's nothing special, but edible.";
+                if (this._lastAdjectiveEffect === 'positive') {
+                    recoverMsg += _ci18n('messages.sameItemPositive');
+                } else if (this._lastAdjectiveEffect === 'neutral') {
+                    recoverMsg += _ci18n('messages.sameItemNeutral');
                 } else {
-                    recoverMsg += useTranslation?"\nForse non avresti dovuto provarlo...":"\nPerhaps you shouldn't have tried that...";
+                    recoverMsg += _ci18n('messages.sameItemNegative');
                 }
             }
             
@@ -331,11 +296,10 @@
             const hungerPercent = Math.floor((hungerPerMember / maxHunger) * 100);
             
             if (hungerPercent > 0) {
-                recoverMsg += useTranslation?"\nRecuperati " + hungerPercent + "% Fame per membro":"\nRecovered " + hungerPercent + "% Hunger per member";
+                recoverMsg += _ci18n('messages.recoveredHunger', { percent: hungerPercent });
             }
             
-
-            recoverMsg += useTranslation?" (diviso tra " + partySize + " membri)":" (split among " + partySize + " members)";
+            recoverMsg += _ci18n('messages.splitAmong', { count: partySize });
             window.skipLocalization = true;
 
             $gameMessage.add(recoverMsg);
@@ -486,23 +450,15 @@
     };
     
     Scene_Cooking.prototype.updateHelpMessage = function() {
-        const useTranslation = ConfigManager.language === 'it'
-
         if (!CookingSystem.getFirstItem()) {
-            this._helpWindow.setText(useTranslation?"Seleziona il primo ingrediente da cucinare":"Select first ingredient to cook");
+            this._helpWindow.setText(_ci18n('ui.selectFirstIngredient'));
         } else if (!CookingSystem.getSecondItem()) {
-            this._helpWindow.setText(useTranslation?"Seleziona il secondo ingrediente da cucinare":"Select second ingredient to cook with " + CookingSystem.getFirstItem().name);
+            this._helpWindow.setText(_ci18n('ui.selectSecondIngredient', { name: CookingSystem.getFirstItem().name }));
         } else {
             const item1 = CookingSystem.getFirstItem();
             const item2 = CookingSystem.getSecondItem();
             const cookedName = CookingSystem.createCookedItemName(item1, item2);
-            if(useTranslation){
-                this._helpWindow.setText("Cucini " + item1.name + " e " + item2.name + " ed ottieni " + cookedName + "?");
-
-            }else{
-                this._helpWindow.setText("Cook " + item1.name + " and " + item2.name + " into " + cookedName + "?");
-
-            }
+            this._helpWindow.setText(_ci18n('ui.confirmCook', { item1: item1.name, item2: item2.name, result: cookedName }));
         }
     };
     
@@ -621,12 +577,10 @@
     };
     
     Window_CookingConfirm.prototype.makeCommandList = function() {
-        const useTranslation = ConfigManager.language === 'it'
-
         const item1 = CookingSystem.getFirstItem();
         const item2 = CookingSystem.getSecondItem();
-        this.addCommand(useTranslation?"Cucina":"Cook", "cook", item1 && item2);
-        this.addCommand(useTranslation?"Annulla":"Cancel", "cancel");
+        this.addCommand(_ci18n('ui.cookButton'),   'cook',   item1 && item2);
+        this.addCommand(_ci18n('ui.cancelButton'), 'cancel');
     };
     
     Window_CookingConfirm.prototype.maxCols = function() {
@@ -651,8 +605,6 @@
     //=============================================================================
     const _Window_MenuCommand_addOriginalCommands = Window_MenuCommand.prototype.addOriginalCommands;
     Window_MenuCommand.prototype.addOriginalCommands = function() {
-        const useTranslation = ConfigManager.language === 'it';
-        
         _Window_MenuCommand_addOriginalCommands.call(this);
         
         // Check if player has any of the required items
@@ -661,6 +613,6 @@
             return item && $gameParty.hasItem(item);
         });
         
-        this.addCommand(useTranslation ? "Cucina" : "Cooking", "cooking", hasRequiredItem, 265);
+        this.addCommand(_ci18n('ui.menuLabel'), 'cooking', hasRequiredItem, 265);
     };
 })();

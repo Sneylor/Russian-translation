@@ -14,7 +14,8 @@
       "r": 255,
       "g": 240,
       "b": 200
-    }
+    },
+    "name_int": "galaxy.milky_way.name"
   },
   {
     "name": "Andromeda (M31)",
@@ -31,7 +32,8 @@
       "r": 220,
       "g": 230,
       "b": 255
-    }
+    },
+    "name_int": "galaxy.andromeda_m31.name"
   },
   {
     "name": "Triangulum (M33)",
@@ -48,7 +50,8 @@
       "r": 200,
       "g": 220,
       "b": 255
-    }
+    },
+    "name_int": "galaxy.triangulum_m33.name"
   },
   {
     "name": "Large Magellanic Cloud",
@@ -63,7 +66,8 @@
       "r": 200,
       "g": 210,
       "b": 255
-    }
+    },
+    "name_int": "galaxy.large_magellanic_cloud.name"
   },
   {
     "name": "Small Magellanic Cloud",
@@ -78,7 +82,8 @@
       "r": 210,
       "g": 220,
       "b": 255
-    }
+    },
+    "name_int": "galaxy.small_magellanic_cloud.name"
   },
   {
     "name": "M32",
@@ -94,7 +99,8 @@
       "r": 255,
       "g": 240,
       "b": 220
-    }
+    },
+    "name_int": "galaxy.m32.name"
   },
   {
     "name": "M110 (NGC 205)",
@@ -110,7 +116,8 @@
       "r": 255,
       "g": 235,
       "b": 215
-    }
+    },
+    "name_int": "galaxy.m110_ngc_205.name"
   },
   {
     "name": "NGC 6822",
@@ -125,7 +132,8 @@
       "r": 200,
       "g": 210,
       "b": 240
-    }
+    },
+    "name_int": "galaxy.ngc_6822.name"
   },
   {
     "name": "IC 10",
@@ -140,7 +148,8 @@
       "r": 190,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "galaxy.ic_10.name"
   },
   {
     "name": "Sagittarius Dwarf",
@@ -155,7 +164,8 @@
       "r": 255,
       "g": 230,
       "b": 200
-    }
+    },
+    "name_int": "galaxy.sagittarius_dwarf.name"
   },
   {
     "name": "Fornax Dwarf",
@@ -170,7 +180,8 @@
       "r": 240,
       "g": 220,
       "b": 200
-    }
+    },
+    "name_int": "galaxy.fornax_dwarf.name"
   },
   {
     "name": "Sculptor Dwarf",
@@ -185,7 +196,8 @@
       "r": 235,
       "g": 215,
       "b": 195
-    }
+    },
+    "name_int": "galaxy.sculptor_dwarf.name"
   },
   {
     "name": "Leo I",
@@ -200,7 +212,8 @@
       "r": 240,
       "g": 225,
       "b": 205
-    }
+    },
+    "name_int": "galaxy.leo_i.name"
   },
   {
     "name": "Leo II",
@@ -215,7 +228,8 @@
       "r": 235,
       "g": 220,
       "b": 200
-    }
+    },
+    "name_int": "galaxy.leo_ii.name"
   },
   {
     "name": "Ursa Minor Dwarf",
@@ -230,7 +244,8 @@
       "r": 230,
       "g": 215,
       "b": 195
-    }
+    },
+    "name_int": "galaxy.ursa_minor_dwarf.name"
   },
   {
     "name": "Draco Dwarf",
@@ -245,7 +260,8 @@
       "r": 235,
       "g": 220,
       "b": 200
-    }
+    },
+    "name_int": "galaxy.draco_dwarf.name"
   },
   {
     "name": "Carina Dwarf",
@@ -260,7 +276,8 @@
       "r": 240,
       "g": 220,
       "b": 200
-    }
+    },
+    "name_int": "galaxy.carina_dwarf.name"
   },
   {
     "name": "Sextans Dwarf",
@@ -275,7 +292,8 @@
       "r": 235,
       "g": 218,
       "b": 198
-    }
+    },
+    "name_int": "galaxy.sextans_dwarf.name"
   },
   {
     "name": "IC 1613",
@@ -290,7 +308,8 @@
       "r": 195,
       "g": 205,
       "b": 245
-    }
+    },
+    "name_int": "galaxy.ic_1613.name"
   },
   {
     "name": "WLM",
@@ -305,7 +324,8 @@
       "r": 190,
       "g": 200,
       "b": 240
-    }
+    },
+    "name_int": "galaxy.wlm.name"
   },
   {
     "name": "Phoenix Dwarf",
@@ -320,7 +340,8 @@
       "r": 200,
       "g": 210,
       "b": 235
-    }
+    },
+    "name_int": "galaxy.phoenix_dwarf.name"
   },
   {
     "name": "NGC 3109",
@@ -335,7 +356,8 @@
       "r": 185,
       "g": 195,
       "b": 235
-    }
+    },
+    "name_int": "galaxy.ngc_3109.name"
   },
   {
     "name": "Antlia Dwarf",
@@ -350,7 +372,8 @@
       "r": 230,
       "g": 210,
       "b": 190
-    }
+    },
+    "name_int": "galaxy.antlia_dwarf.name"
   },
   {
     "name": "Leo A",
@@ -365,7 +388,8 @@
       "r": 195,
       "g": 205,
       "b": 240
-    }
+    },
+    "name_int": "galaxy.leo_a.name"
   },
   {
     "name": "Aquarius Dwarf",
@@ -380,7 +404,8 @@
       "r": 200,
       "g": 208,
       "b": 238
-    }
+    },
+    "name_int": "galaxy.aquarius_dwarf.name"
   },
   {
     "name": "Tucana Dwarf",
@@ -395,7 +420,8 @@
       "r": 235,
       "g": 215,
       "b": 195
-    }
+    },
+    "name_int": "galaxy.tucana_dwarf.name"
   },
   {
     "name": "Pegasus Dwarf",
@@ -410,6 +436,7 @@
       "r": 190,
       "g": 200,
       "b": 235
-    }
+    },
+    "name_int": "galaxy.pegasus_dwarf.name"
   }
 ]

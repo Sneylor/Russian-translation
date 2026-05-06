@@ -43,96 +43,53 @@
 
 (() => {
     'use strict';
-    
+
     // Plugin name for data storage
     const PLUGIN_NAME = 'RentSystem';
-    
-    // Translation function
-    function getText(key) {
-        const useTranslation = ConfigManager.language === 'it';
-        
-        const translations = {
-            'rent_question': {
-                'en': 'Rent',
-                'it': 'Affitta'
-            },
-            'free_access': {
-                'en': 'Free access',
-                'it': 'Accesso gratuito'
-            },
-            'already_rented': {
-                'en': 'You have already rented this room',
-                'it': 'Hai già affittato questa camera'
-            },
-            'for_24h_rent': {
-                'en': 'for 24h rent',
-                'it': 'per affitto 24h'
-            },
-            'cancel': {
-                'en': 'Cancel',
-                'it': 'Annulla'
-            },
-            'free_access_granted': {
-                'en': 'Free access granted to',
-                'it': 'Accesso gratuito concesso a'
-            },
-            'access_restored': {
-                'en': 'Access restored to',
-                'it': 'Accesso ripristinato a'
-            },
-            'rented_for_24h': {
-                'en': 'Enjoy your stay!',
-                'it': 'Buona permanenza!'
-            },
-            'for_24_hours': {
-                'en': 'for 24 hours!',
-                'it': 'per 24 ore!'
-            },
-            'not_enough_gold': {
-                'en': 'Not enough euro!',
-                'it': 'Euro insufficienti!'
-            },
-            'error_event_id': {
-                'en': 'Error: Cannot determine event ID',
-                'it': 'Errore: Impossibile determinare ID evento'
-            },
-            'rented': {
-                'en': 'Rented',
-                'it': 'Affittata'
-            },
-            'expired': {
-                'en': 'Expired',
-                'it': 'Scaduta'
-            },
-            'available_rooms': {
-                'en': 'Available Rooms',
-                'it': 'Stanze Disponibili'
-            }
-        };
 
-        // Return translation or key name as fallback
-        if (translations[key]) {
-            return useTranslation ? translations[key]['it'] : translations[key]['en'];
+    //=============================================================================
+    // i18n
+    //=============================================================================
+    let _rentI18n = null;
+
+    const _loadRentI18n = async () => {
+        const lang = ConfigManager.language || 'en';
+        const url = `js/plugins/i18n/${lang}/rent.json`;
+        try {
+            const response = await fetch(url);
+            _rentI18n = await response.json();
+        } catch (e) {
+            console.error('RentSystem: Failed to load i18n data from ' + url, e);
         }
-        console.warn(`RentSystem: Missing translation for key: ${key}`);
+    };
+
+    // Resolve a key under rent.* (e.g. 'rented', 'cancel')
+    function _ri18n(key) {
+        if (_rentI18n && _rentI18n.rent && typeof _rentI18n.rent[key] === 'string') {
+            return _rentI18n.rent[key];
+        }
+        console.warn(`RentSystem: Missing i18n key: ${key}`);
         return key;
     }
-    
+
+    // Load on boot
+    _loadRentI18n();
+
     // Initialize rental system
     function initializeRentals() {
         if (!$dataSystem.rentals) {
             $dataSystem.rentals = {};
         }
     }
-    
+
     // Function to get player's approach direction to an event
     function getApproachDirection(eventX, eventY) {
         const playerX = $gamePlayer.x;
         const playerY = $gamePlayer.y;
-        
+
         const dx = eventX - playerX;
         const dy = eventY - playerY;
-        
+
         // Determine which direction has the larger difference
         if (Math.abs(dx) > Math.abs(dy)) {
             return dx > 0 ? 'W' : 'E'; // Player is West or East of event
@@ -140,35 +97,35 @@
             return dy > 0 ? 'N' : 'S'; // Player is North or South of event
         }
     }
-    
+
     // Function to check if event allows free access from current direction
     function checkDirectionalAccess(eventId) {
         const event = $dataMap.events[eventId];
         if (!event || !event.note) return false;
-        
+
         const eventX = event.x;
         const eventY = event.y;
         const playerX = $gamePlayer.x;
         const playerY = $gamePlayer.y;
-        
+
         // Check if player is on the same tile as the event or adjacent
         const dx = eventX - playerX;
         const dy = eventY - playerY;
         const distance = Math.abs(dx) + Math.abs(dy);
-        
+
         if (distance > 1) {
             console.log(`Event ${eventId}: Player too far from event (distance: ${distance})`);
             return false;
         }
-        
+
         const approachDirection = getApproachDirection(eventX, eventY);
-        
+
         // Check if the event note contains the approach direction letter
         const hasDirectionalAccess = event.note.toUpperCase().includes(approachDirection);
-        
+
         console.log(`Event ${eventId}: Player at (${playerX},${playerY}), Event at (${eventX},${eventY})`);
         console.log(`Approach direction: ${approachDirection}, Note: "${event.note}", Access granted: ${hasDirectionalAccess}`);
-        
+
         return hasDirectionalAccess;
     }
 
@@ -222,7 +179,7 @@
             let statusText, statusColor;
             if (room.isRented) {
                 const timeRemaining = getTimeRemaining(room.expirationTime);
-                statusText = `${getText('rented')} - ${timeRemaining}`;
+                statusText = `${_ri18n('rented')} - ${timeRemaining}`;
                 statusColor = 4; // Blue
             } else {
                 statusText = `€${priceInEuros}`;
@@ -246,7 +203,7 @@
     // Room List Overlay - shown directly on the map scene so camera panning works
     //=============================================================================
 
-    Scene_Map.prototype.showRoomListOverlay = function() {
+    Scene_Map.prototype.showRoomListOverlay = function () {
         if (this._roomListOverlay) return;
 
         const rooms = getRoomsOnCurrentMap();
@@ -270,7 +227,7 @@
         this._roomListOverlay.select(0);
     };
 
-    Scene_Map.prototype._createRoomArrow = function() {
+    Scene_Map.prototype._createRoomArrow = function () {
         if (this._roomArrowSprite) return;
 
         // Build a down-pointing arrow bitmap
@@ -282,8 +239,8 @@
         ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.moveTo(aw / 2, ah - 1);  // tip at bottom center
-        ctx.lineTo(1,       1);       // top-left
-        ctx.lineTo(aw - 1,  1);       // top-right
+        ctx.lineTo(1, 1);       // top-left
+        ctx.lineTo(aw - 1, 1);       // top-right
         ctx.closePath();
         ctx.fill();
         ctx.stroke();
@@ -299,7 +256,7 @@
         this.addChildAt(sprite, idx >= 0 ? idx : this.children.length);
     };
 
-    Scene_Map.prototype.panMapToRoomEvent = function(index) {
+    Scene_Map.prototype.panMapToRoomEvent = function (index) {
         const rooms = getRoomsOnCurrentMap();
         const room = rooms[index];
         if (!room) return;
@@ -317,7 +274,7 @@
         }
     };
 
-    Scene_Map.prototype.onRoomListOverlayOk = function() {
+    Scene_Map.prototype.onRoomListOverlayOk = function () {
         const room = this._roomListOverlay.currentRoom();
         if (!room) {
             this._roomListOverlay.activate();
@@ -327,7 +284,7 @@
         if (room.isRented) {
             window.skipLocalization = true;
             $gameSystem._rentHideBust = true;
-            $gameMessage.add(getText('already_rented'));
+            $gameMessage.add(_ri18n('already_rented'));
             window.skipLocalization = false;
             this._roomListOverlay.activate();
             return;
@@ -341,20 +298,20 @@
             SoundManager.playShop();
             window.skipLocalization = true;
             $gameSystem._rentHideBust = true;
-            $gameMessage.add(getText('rented_for_24h'));
+            $gameMessage.add(_ri18n('rented_for_24h'));
             window.skipLocalization = false;
             this._roomListOverlay.refresh();
             this.closeRoomListOverlay();
         } else {
             window.skipLocalization = true;
             $gameSystem._rentHideBust = true;
-            $gameMessage.add(getText('not_enough_gold'));
+            $gameMessage.add(_ri18n('not_enough_gold'));
             window.skipLocalization = false;
             this._roomListOverlay.activate();
         }
     };
 
-    Scene_Map.prototype.closeRoomListOverlay = function() {
+    Scene_Map.prototype.closeRoomListOverlay = function () {
         if (this._roomListOverlay) {
             this._windowLayer.removeChild(this._roomListOverlay);
             this._roomListOverlay.destroy();
@@ -384,7 +341,7 @@
     //=============================================================================
 
     const _Game_Interpreter_updateWaitMode_rent = Game_Interpreter.prototype.updateWaitMode;
-    Game_Interpreter.prototype.updateWaitMode = function() {
+    Game_Interpreter.prototype.updateWaitMode = function () {
         if (this._waitMode === 'roomList') {
             if ($gameSystem._roomListClosed) {
                 $gameSystem._roomListClosed = false;
@@ -400,16 +357,16 @@
     PluginManager.registerCommand(PLUGIN_NAME, "rent", args => {
 
         const price = parseInt(args.price) || 1000;
-        
+
         // Get current event ID more reliably
         const interpreter = $gameMap._interpreter;
         const eventId = interpreter._eventId || interpreter.eventId();
         const mapId = $gameMap.mapId();
-        
+
         if (!eventId) {
             window.skipLocalization = true;
             $gameSystem._rentHideBust = true;
-            $gameMessage.add(getText('error_event_id'));
+            $gameMessage.add(_ri18n('error_event_id'));
             window.skipLocalization = false;
 
             return;
@@ -431,18 +388,18 @@
             processDirectionalAccess(mapId, eventId);
             window.skipLocalization = true;
             $gameSystem._rentHideBust = true;
-            $gameMessage.add(`${getText('free_access_granted')} ${eventName}!`);
+            $gameMessage.add(`${_ri18n('free_access_granted')} ${eventName}!`);
             window.skipLocalization = false;
 
             return;
         }
-        
+
         const eventKey = mapId + '_' + eventId;
         const eventName = $dataMap.events[eventId]?.name || 'Location';
-        
+
         // Convert gold to euros (1000 gold = 10€)
         const priceInEuros = (price / 100).toFixed(2);
-        
+
         showRentConfirmation(eventName, price, priceInEuros, eventKey, mapId, eventId);
     });
 
@@ -470,45 +427,45 @@
         // Turn on self switch A for the current event
         const key = [mapId, eventId, 'A'];
         $gameSelfSwitches.setValue(key, true);
-        
+
         // Force refresh of the current event
         $gameMap.requestRefresh();
-        
+
         console.log(`Directional access granted: Event ${eventId} on Map ${mapId}, Switch key:`, key);
         console.log('Self switch set to:', $gameSelfSwitches.value(key));
     }
-    
+
     // Function to process already rented access (restore access without resetting timer)
     function processAlreadyRentedAccess(mapId, eventId) {
         // Turn on self switch A for the current event
         const key = [mapId, eventId, 'A'];
         $gameSelfSwitches.setValue(key, true);
-        
+
         // Force refresh of the current event
         $gameMap.requestRefresh();
-        
+
         console.log(`Already rented access restored: Event ${eventId} on Map ${mapId}, Switch key:`, key);
         console.log('Self switch set to:', $gameSelfSwitches.value(key));
     }
-    
+
     // Function to show rent confirmation window
     function showRentConfirmation(eventName, price, priceInEuros, eventKey, mapId, eventId, hasDirectionalAccess, isAlreadyRented) {
-        const message = `${getText('rent_question')} ${eventName}?`;
+        const message = `${_ri18n('rent_question')} ${eventName}?`;
         let option1Text;
-        
+
         if (hasDirectionalAccess) {
-            option1Text = getText('free_access');
+            option1Text = _ri18n('free_access');
         } else if (isAlreadyRented) {
-            option1Text = getText('already_rented');
+            option1Text = _ri18n('already_rented');
         } else {
-            option1Text = `€${priceInEuros} ${getText('for_24h_rent')}`;
+            option1Text = `€${priceInEuros} ${_ri18n('for_24h_rent')}`;
         }
         window.skipLocalization = true;
         $gameSystem._rentHideBust = true;
         $gameMessage.add(message);
         window.skipLocalization = false;
 
-        $gameMessage.setChoices([option1Text, getText('cancel')], 0, 1);
+        $gameMessage.setChoices([option1Text, _ri18n('cancel')], 0, 1);
         $gameMessage.setChoiceCallback(n => {
             if (n === 0) { // First option selected
                 window.skipLocalization = true;
@@ -529,7 +486,7 @@
                     } else {
                         window.skipLocalization = true;
                         $gameSystem._rentHideBust = true;
-                        $gameMessage.add(getText('not_enough_gold'));
+                        $gameMessage.add(_ri18n('not_enough_gold'));
                         window.skipLocalization = false;
 
                     }
@@ -540,7 +497,7 @@
         });
 
     }
-    
+
     // Function to process the rental
     function processRental(eventKey, mapId, eventId) {
         initializeRentals(); // Ensure rentals object exists
@@ -570,51 +527,51 @@
         console.log(`Rental processed: Event ${eventId} on Map ${mapId}, Switch key:`, key);
         console.log('Self switch set to:', $gameSelfSwitches.value(key));
     }
-    
+
     // Function to check and update rental status
     function updateRentalStatus() {
         initializeRentals(); // Ensure rentals object exists
-        
+
         const currentTime = Date.now();
-        
+
         for (const eventKey in $dataSystem.rentals) {
             const rental = $dataSystem.rentals[eventKey];
-            
+
             if (rental.active && currentTime >= rental.expirationTime) {
                 // Rental has expired
                 rental.active = false;
-                
+
                 // Turn off self switch A
                 const key = [rental.mapId, rental.eventId, 'A'];
                 $gameSelfSwitches.setValue(key, false);
-                
+
                 console.log(`Rental expired: Event ${rental.eventId} on Map ${rental.mapId}`);
             }
         }
-        
+
         // Force refresh current map if any rentals changed
         $gameMap.requestRefresh();
     }
-    
+
     // Initialize rentals when creating new game objects
     const _DataManager_createGameObjects = DataManager.createGameObjects;
-    DataManager.createGameObjects = function() {
+    DataManager.createGameObjects = function () {
         _DataManager_createGameObjects.call(this);
         initializeRentals();
     };
-    
+
     // Initialize rentals when loading database
     const _DataManager_onLoad = DataManager.onLoad;
-    DataManager.onLoad = function(object) {
+    DataManager.onLoad = function (object) {
         _DataManager_onLoad.call(this, object);
         if (object === $dataSystem) {
             initializeRentals();
         }
     };
-    
+
     // Override DataManager.makeSaveContents to save rental data
     const _DataManager_makeSaveContents = DataManager.makeSaveContents;
-    DataManager.makeSaveContents = function() {
+    DataManager.makeSaveContents = function () {
         const contents = _DataManager_makeSaveContents.call(this);
         initializeRentals();
         contents.rentals = $dataSystem.rentals;
@@ -624,16 +581,16 @@
 
     // Override DataManager.extractSaveContents to load rental data
     const _DataManager_extractSaveContents = DataManager.extractSaveContents;
-    DataManager.extractSaveContents = function(contents) {
+    DataManager.extractSaveContents = function (contents) {
         _DataManager_extractSaveContents.call(this, contents);
         $dataSystem.rentals = contents.rentals || {};
         $dataSystem.rentalStartTimes = contents.rentalStartTimes || {};
         // Don't update rental status here to prevent players getting stuck
     };
-    
+
     // Clean up expired rentals periodically + refresh room list overlay timer display
     const _Scene_Map_update = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         _Scene_Map_update.call(this);
 
         // Check rentals every 60 seconds (3600 frames at 60 FPS)
@@ -665,22 +622,22 @@
             }
         }
     };
-    
+
     // Function to clean up expired rental data
     function cleanupExpiredRentals() {
         initializeRentals();
         const currentTime = Date.now();
-        
+
         for (const eventKey in $dataSystem.rentals) {
             const rental = $dataSystem.rentals[eventKey];
-            
+
             // Remove rental data that's been expired for more than 24 hours
             if (!rental.active && currentTime >= (rental.expirationTime + 24 * 60 * 60 * 1000)) {
                 delete $dataSystem.rentals[eventKey];
             }
         }
     }
-    
+
     // Function to get time remaining for a rental in human-readable format
     // Uses TimeDateSystem's game time variable (114) for consistency
     function getTimeRemaining(expirationTime) {
@@ -694,7 +651,7 @@
         const remainingMinutes = rentalDurationMinutes - elapsedMinutes;
 
         if (remainingMinutes <= 0) {
-            return getText('expired');
+            return _ri18n('expired');
         }
 
         const remainingHours = Math.floor(remainingMinutes / 60);
@@ -791,59 +748,24 @@
         }
     }
 
-    // Add missing translations
-    const originalGetText = getText;
-    window.getText_RentSystem = function(key) {
-        const useTranslation = ConfigManager.language === 'it';
-
-        const translations = {
-            'expired': {
-                'en': 'Expired',
-                'it': 'Scaduto'
-            },
-            'hours_remaining': {
-                'en': 'hours remaining',
-                'it': 'ore rimanenti'
-            },
-            'rented': {
-                'en': 'Rented',
-                'it': 'Affittato'
-            },
-            'rent_now': {
-                'en': 'Rent Now',
-                'it': 'Affitta Ora'
-            },
-            'no_rooms': {
-                'en': 'No rooms available',
-                'it': 'Nessuna stanza disponibile'
-            },
-            'available_rooms': {
-                'en': 'Available Rooms',
-                'it': 'Stanze Disponibili'
-            }
-        };
-
-        return useTranslation ? translations[key]['it'] : translations[key]['en'];
-    };
-
     // Debug commands
-    window.checkRentals = function() {
+    window.checkRentals = function () {
         initializeRentals();
         console.log('Current rentals:', $dataSystem.rentals);
         console.log('All self switches:', $gameSelfSwitches._data);
         updateRentalStatus();
     };
-    
-    window.testSwitch = function(mapId, eventId) {
+
+    window.testSwitch = function (mapId, eventId) {
         const key = [mapId, eventId, 'A'];
         console.log(`Switch [${mapId}, ${eventId}, A]:`, $gameSelfSwitches.value(key));
         $gameSelfSwitches.setValue(key, true);
         $gameMap.requestRefresh();
         console.log('Switch set to true and map refreshed');
     };
-    
+
     // Debug function to test directional access
-    window.testDirectionalAccess = function(eventId) {
+    window.testDirectionalAccess = function (eventId) {
         console.log('Testing directional access for event:', eventId);
         const hasAccess = checkDirectionalAccess(eventId);
         console.log('Has directional access:', hasAccess);
@@ -851,7 +773,7 @@
 
     // Hide bust after any message flagged by the rent system
     const _RentSystem_terminateMessage = Window_Message.prototype.terminateMessage;
-    Window_Message.prototype.terminateMessage = function() {
+    Window_Message.prototype.terminateMessage = function () {
         _RentSystem_terminateMessage.call(this);
         if ($gameSystem._rentHideBust) {
             $gameSystem._rentHideBust = false;

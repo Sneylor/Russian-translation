@@ -72,6 +72,10 @@
   }
 
   function getTranslated(dataObject, propertyName) {
+    const val = dataObject[propertyName];
+    if (val && typeof val === "string" && val.includes('.')) {
+      return window.getArchetypeText(val);
+    }
     const lang = ConfigManager.language;
     const langKey = `${propertyName}_${lang}`;
     return lang !== "en" && dataObject[langKey] ? dataObject[langKey] : dataObject[propertyName];
@@ -300,7 +304,7 @@
       // Key-based check first, then name-based: hide if the actor already owns
       // any part whose name is contained in this part's name (case-insensitive).
       // e.g. actor has "Right Hand" → hides archetype parts like "Right Hand (Cyber)"
-      const partName = (ConfigManager.language === "it" && part.name_it ? part.name_it : part.name).toLowerCase();
+      const partName = getTranslated(part, "name").toLowerCase();
       let alreadyOwned = !!(this._actor && this._actor._bodyParts && this._actor._bodyParts[partKey]);
       if (!alreadyOwned && this._actor && this._actor._bodyParts) {
         for (const existingKey in this._actor._bodyParts) {
@@ -315,7 +319,7 @@
         isArchetypePart: true,
         partKey,
         archetypeKey: this._archetypeKey,
-        name: ConfigManager.language === "it" && part.name_it ? part.name_it : part.name,
+        name: getTranslated(part, "name"),
         hpPercent: part.hpPercent,
         vital: part.vital,
         statEffect: part.statEffect || null,

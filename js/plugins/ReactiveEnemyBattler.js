@@ -1142,6 +1142,11 @@
         // Disabled - no white flash effect
     };
 
+    // Disable default state icon over the enemy
+    Sprite_Enemy.prototype.initStateIcon = function() {
+        // Disabled - states are shown in the custom HUD
+    };
+
     // Add this to your plugin to override damage popup positioning
     const _Sprite_Damage_setup = Sprite_Damage.prototype.setup;
     Sprite_Damage.prototype.setup = function (target) {

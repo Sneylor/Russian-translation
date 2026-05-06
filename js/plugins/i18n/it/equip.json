@@ -1,0 +1,16 @@
+{
+  "arcane": "Arcano",
+  "substance": "Sostanza",
+  "stealth": "Furtività",
+  "intimidation": "Intimidazione",
+  "scale": "ATT",
+  "str": "FOR",
+  "dex": "DES",
+  "mix": "MIS",
+  "psi": "PSI",
+  "int": "INT",
+  "con": "COS",
+  "wis": "SAG",
+  "random": "Casuale",
+  "clear": "Rimuovi"
+}

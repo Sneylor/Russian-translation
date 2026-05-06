@@ -4,279 +4,319 @@
     "maxMass": 0.1,
     "color": 12092939,
     "description": "Bare‐bones rocky world, thinner crust, minimal atmosphere.",
-    "biome": "Badlands"
+    "biome": "Badlands",
+    "description_int": "planets.sub_mercurian.description"
   },
   "mercurian": {
     "minMass": 0.1,
     "maxMass": 0.2,
     "color": 10506797,
     "description": "Mercury‐like, airless, cratered, iron‐rich.",
-    "biome": "Canyon"
+    "biome": "Canyon",
+    "description_int": "planets.mercurian.description"
   },
   "sub_earth": {
     "minMass": 0.2,
     "maxMass": 0.5,
     "color": 9139029,
     "description": "Smaller than Earth but still geologically active.",
-    "biome": "Mountain"
+    "biome": "Mountain",
+    "description_int": "planets.sub_earth.description"
   },
   "earth_like": {
     "minMass": 0.5,
     "maxMass": 2,
     "color": 3050327,
     "description": "Rocky with plate tectonics, liquid water, breathable air.",
-    "biome": "Fields"
+    "biome": "Fields",
+    "description_int": "planets.earth_like.description"
   },
   "super_earth": {
     "minMass": 2,
     "maxMass": 10,
     "color": 5597999,
     "description": "Large rocky world; higher gravity, thicker atmosphere.",
-    "biome": "Highlands"
+    "biome": "Highlands",
+    "description_int": "planets.super_earth.description"
   },
   "mini_neptune": {
     "minMass": 2,
     "maxMass": 4,
     "color": 8900346,
     "description": "Small ice‐rich envelope over a rocky core.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.mini_neptune.description"
   },
   "ice": {
     "minMass": 0.3,
     "maxMass": 4,
     "color": 14745599,
     "description": "Frozen surface; possible subsurface ocean.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.ice.description"
   },
   "ocean": {
     "minMass": 0.5,
     "maxMass": 2,
     "color": 27028,
     "description": "Global liquid ocean, minimal landmasses.",
-    "biome": "Ocean"
+    "biome": "Ocean",
+    "description_int": "planets.ocean.description"
   },
   "lava_ocean": {
     "minMass": 0.5,
     "maxMass": 5,
     "color": 14501120,
     "description": "Partially molten surface, steam atmosphere.",
-    "biome": "Volcano"
+    "biome": "Volcano",
+    "description_int": "planets.lava_ocean.description"
   },
   "desert": {
     "minMass": 0.3,
     "maxMass": 1.5,
     "color": 15583663,
     "description": "Dry world, sparse vegetation or none at all.",
-    "biome": "Desert"
+    "biome": "Desert",
+    "description_int": "planets.desert.description"
   },
   "rainforest": {
     "minMass": 0.5,
     "maxMass": 2,
     "color": 2263842,
     "description": "Thick jungles, heavy precipitation, high biomass.",
-    "biome": "Jungle"
+    "biome": "Jungle",
+    "description_int": "planets.rainforest.description"
   },
   "tundra": {
     "minMass": 0.3,
     "maxMass": 1.5,
     "color": 11529966,
     "description": "Cold, limited plant life, permafrost‐dominated.",
-    "biome": "Tundra"
+    "biome": "Tundra",
+    "description_int": "planets.tundra.description"
   },
   "acid_ocean": {
     "minMass": 0.5,
     "maxMass": 3,
     "color": 8388352,
     "description": "Sulfuric or hydrochloric acid seas, corrosive skies.",
-    "biome": "Swamp"
+    "biome": "Swamp",
+    "description_int": "planets.acid_ocean.description"
   },
   "gas_giant": {
     "minMass": 10,
     "maxMass": 500,
     "color": 16757606,
     "description": "Massive hydrogen‐helium envelope, no solid surface.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.gas_giant.description"
   },
   "hot_jupiter": {
     "minMass": 50,
     "maxMass": 500,
     "color": 16747520,
     "description": "Orbits extremely close to its star, blistering temperatures.",
-    "biome": "Volcano"
+    "biome": "Volcano",
+    "description_int": "planets.hot_jupiter.description"
   },
   "warm_jupiter": {
     "minMass": 10,
     "maxMass": 100,
     "color": 16753920,
     "description": "Closer in than Jupiter but farther than a hot‐Jupiter.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.warm_jupiter.description"
   },
   "cold_jupiter": {
     "minMass": 50,
     "maxMass": 300,
     "color": 13789470,
     "description": "Far from its star, deep cold atmosphere.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.cold_jupiter.description"
   },
   "ice_giant": {
     "minMass": 5,
     "maxMass": 50,
     "color": 5230816,
     "description": "Rich in volatiles like water, ammonia; thick icy mantle.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.ice_giant.description"
   },
   "ringed_gas_giant": {
     "minMass": 50,
     "maxMass": 800,
     "color": 13808780,
     "description": "Prominent rings, dozens of moons.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.ringed_gas_giant.description"
   },
   "puffy": {
     "minMass": 0.1,
     "maxMass": 0.5,
     "color": 16767673,
     "description": "Extremely low density, bloated by stellar heating.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.puffy.description"
   },
   "chthonian": {
     "minMass": 0.5,
     "maxMass": 2,
     "color": 6684672,
     "description": "Stripped gas giant core, volcanic, metal‐rich.",
-    "biome": "Volcano"
+    "biome": "Volcano",
+    "description_int": "planets.chthonian.description"
   },
   "mega_iron": {
     "minMass": 1,
     "maxMass": 10,
     "color": 4473924,
     "description": "Almost pure iron/nickel, high density, magnetic.",
-    "biome": "Mines"
+    "biome": "Mines",
+    "description_int": "planets.mega_iron.description"
   },
   "carbon": {
     "minMass": 0.5,
     "maxMass": 5,
     "color": 3100495,
     "description": "Graphite and hydrocarbons dominate; tar‐like seas.",
-    "biome": "Landfill"
+    "biome": "Landfill",
+    "description_int": "planets.carbon.description"
   },
   "diamond": {
     "minMass": 2,
     "maxMass": 20,
     "color": 12186367,
     "description": "High pressure turns carbon shell into diamond layer.",
-    "biome": "Crystals"
+    "biome": "Crystals",
+    "description_int": "planets.diamond.description"
   },
   "magma_planet": {
     "minMass": 1,
     "maxMass": 8,
     "color": 16729344,
     "description": "Surface is a global magma bath, constant eruptions.",
-    "biome": "Volcano"
+    "biome": "Volcano",
+    "description_int": "planets.magma_planet.description"
   },
   "plasma": {
     "minMass": 0.2,
     "maxMass": 50,
     "color": 16716947,
     "description": "Ionized atmosphere, glows under stellar wind.",
-    "biome": "Eldritch"
+    "biome": "Eldritch",
+    "description_int": "planets.plasma.description"
   },
   "magnetar": {
     "minMass": 1,
     "maxMass": 2,
     "color": 9699539,
     "description": "Ultra‐magnetic field, exotic radiation environment.",
-    "biome": "Eldritch"
+    "biome": "Eldritch",
+    "description_int": "planets.magnetar.description"
   },
   "quark_planet": {
     "minMass": 0.1,
     "maxMass": 2,
     "color": 9055202,
     "description": "Hypothetical strange matter core, super‐dense.",
-    "biome": "Eldritch"
+    "biome": "Eldritch",
+    "description_int": "planets.quark_planet.description"
   },
   "rogue": {
     "minMass": 0.5,
     "maxMass": 1000,
     "color": 3355443,
     "description": "Free‐floating, cold, no host star.",
-    "biome": "Space"
+    "biome": "Space",
+    "description_int": "planets.rogue.description"
   },
   "habitable": {
     "minMass": 0.5,
     "maxMass": 5,
     "color": 3329330,
     "description": "Within habitable zone, stable climate, liquid water.",
-    "biome": "Meadows"
+    "biome": "Meadows",
+    "description_int": "planets.habitable.description"
   },
   "dwarf": {
     "minMass": 0.002,
     "maxMass": 0.1,
     "color": 8421504,
     "description": "Small icy/rocky body, like Pluto or Ceres.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.dwarf.description"
   },
   "centaur": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 6724044,
     "description": "Icy‐rock hybrid between Jupiter and Neptune orbits.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.centaur.description"
   },
   "planetesimal": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 12303291,
     "description": "Building block of planets, tiny rock/ice clump.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.planetesimal.description"
   },
   "c_type_asteroid": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 5592405,
     "description": "Carbonaceous, dark, primitive composition.",
-    "biome": "Badlands"
+    "biome": "Badlands",
+    "description_int": "planets.c_type_asteroid.description"
   },
   "s_type_asteroid": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 11184810,
     "description": "Silicate and nickel‐iron, brighter surface.",
-    "biome": "Canyon"
+    "biome": "Canyon",
+    "description_int": "planets.s_type_asteroid.description"
   },
   "m_type_asteroid": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 7829367,
     "description": "Metallic, mostly nickel‐iron core fragments.",
-    "biome": "Mines"
+    "biome": "Mines",
+    "description_int": "planets.m_type_asteroid.description"
   },
   "trojan_asteroid": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 8947848,
     "description": "Co‐orbiting in Lagrange points of a larger planet.",
-    "biome": "Badlands"
+    "biome": "Badlands",
+    "description_int": "planets.trojan_asteroid.description"
   },
   "comet": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 16777215,
     "description": "Dirty snowball: ice, dust, develops tail near star.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.comet.description"
   },
   "short_period_comet": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 15724527,
     "description": "Orbits under 200 years, frequent visitor.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.short_period_comet.description"
   },
   "long_period_comet": {
     "minMass": 0.001,
     "maxMass": 0.001,
     "color": 14671839,
     "description": "Orbits over 200 years, from distant Oort cloud.",
-    "biome": "Ice"
+    "biome": "Ice",
+    "description_int": "planets.long_period_comet.description"
   }
 }

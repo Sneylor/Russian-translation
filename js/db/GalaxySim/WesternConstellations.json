@@ -64,7 +64,8 @@
         1,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.andromeda.name"
   },
   "aquarius": {
     "zodiac": true,
@@ -132,7 +133,8 @@
         4,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.aquarius.name"
   },
   "aquila": {
     "name": "Aquila",
@@ -199,7 +201,8 @@
         0,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.aquila.name"
   },
   "aries": {
     "name": "Aries",
@@ -247,7 +250,8 @@
         0,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.aries.name"
   },
   "auriga": {
     "name": "Auriga",
@@ -318,7 +322,8 @@
         0,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.auriga.name"
   },
   "bootes": {
     "name": "Boötes",
@@ -389,7 +394,8 @@
         3,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.bootes.name"
   },
   "canis_major": {
     "name": "Canis Major",
@@ -466,7 +472,8 @@
         1,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.canis_major.name"
   },
   "canis_minor": {
     "name": "Canis Minor",
@@ -493,7 +500,8 @@
         0,
         1
       ]
-    ]
+    ],
+    "name_int": "constellation.canis_minor.name"
   },
   "capricornus": {
     "zodiac": true,
@@ -565,7 +573,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.capricornus.name"
   },
   "cassiopeia": {
     "name": "Cassiopeia",
@@ -622,7 +631,8 @@
         3,
         4
       ]
-    ]
+    ],
+    "name_int": "constellation.cassiopeia.name"
   },
   "cepheus": {
     "name": "Cepheus",
@@ -683,7 +693,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.cepheus.name"
   },
   "cetus": {
     "name": "Cetus",
@@ -754,7 +765,8 @@
         5,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.cetus.name"
   },
   "corona_borealis": {
     "name": "Corona Borealis",
@@ -831,7 +843,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.corona_borealis.name"
   },
   "corvus": {
     "name": "Corvus",
@@ -892,7 +905,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.corvus.name"
   },
   "crater": {
     "name": "Crater",
@@ -953,7 +967,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.crater.name"
   },
   "cygnus": {
     "name": "Cygnus",
@@ -1020,7 +1035,8 @@
         2,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.cygnus.name"
   },
   "delphinus": {
     "name": "Delphinus",
@@ -1081,7 +1097,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.delphinus.name"
   },
   "draco": {
     "name": "Draco",
@@ -1162,7 +1179,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.draco.name"
   },
   "equuleus": {
     "name": "Equuleus",
@@ -1213,7 +1231,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.equuleus.name"
   },
   "eridanus": {
     "name": "Eridanus",
@@ -1294,7 +1313,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.eridanus.name"
   },
   "gemini": {
     "name": "Gemini",
@@ -1372,7 +1392,8 @@
         0,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.gemini.name"
   },
   "hercules": {
     "name": "Hercules",
@@ -1453,7 +1474,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.hercules.name"
   },
   "hydra": {
     "name": "Hydra",
@@ -1534,7 +1556,8 @@
         0,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.hydra.name"
   },
   "lacerta": {
     "name": "Lacerta",
@@ -1595,7 +1618,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.lacerta.name"
   },
   "leo": {
     "name": "Leo",
@@ -1677,7 +1701,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.leo.name"
   },
   "leo_minor": {
     "name": "Leo Minor",
@@ -1724,7 +1749,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.leo_minor.name"
   },
   "lepus": {
     "name": "Lepus",
@@ -1785,7 +1811,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.lepus.name"
   },
   "libra": {
     "name": "Libra",
@@ -1847,7 +1874,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.libra.name"
   },
   "lynx": {
     "name": "Lynx",
@@ -1908,7 +1936,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.lynx.name"
   },
   "lyra": {
     "name": "Lyra",
@@ -1969,7 +1998,8 @@
         1,
         4
       ]
-    ]
+    ],
+    "name_int": "constellation.lyra.name"
   },
   "monoceros": {
     "name": "Monoceros",
@@ -2030,7 +2060,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.monoceros.name"
   },
   "ophiuchus": {
     "name": "Ophiuchus",
@@ -2101,7 +2132,8 @@
         2,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.ophiuchus.name"
   },
   "orion": {
     "name": "Orion",
@@ -2194,7 +2226,8 @@
         3,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.orion.name"
   },
   "pegasus": {
     "name": "Pegasus",
@@ -2265,7 +2298,8 @@
         2,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.pegasus.name"
   },
   "perseus": {
     "name": "Perseus",
@@ -2336,7 +2370,8 @@
         2,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.perseus.name"
   },
   "pisces": {
     "name": "Pisces",
@@ -2408,7 +2443,8 @@
         1,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.pisces.name"
   },
   "piscis_austrinus": {
     "name": "Piscis Austrinus",
@@ -2469,7 +2505,8 @@
         3,
         4
       ]
-    ]
+    ],
+    "name_int": "constellation.piscis_austrinus.name"
   },
   "sagitta": {
     "name": "Sagitta",
@@ -2521,7 +2558,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.sagitta.name"
   },
   "sagittarius": {
     "name": "Sagittarius",
@@ -2602,7 +2640,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.sagittarius.name"
   },
   "scorpius": {
     "zodiac": true,
@@ -2684,7 +2723,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.scorpius.name"
   },
   "scutum": {
     "name": "Scutum",
@@ -2735,7 +2775,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.scutum.name"
   },
   "serpens": {
     "name": "Serpens",
@@ -2797,7 +2838,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.serpens.name"
   },
   "taurus": {
     "name": "Taurus",
@@ -2865,7 +2907,8 @@
         2,
         5
       ]
-    ]
+    ],
+    "name_int": "constellation.taurus.name"
   },
   "triangulum": {
     "name": "Triangulum",
@@ -2906,7 +2949,8 @@
         2,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.triangulum.name"
   },
   "ursa_major": {
     "name": "Ursa Major",
@@ -2987,7 +3031,8 @@
         3,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.ursa_major.name"
   },
   "ursa_minor": {
     "name": "Ursa Minor",
@@ -3068,7 +3113,8 @@
         4,
         6
       ]
-    ]
+    ],
+    "name_int": "constellation.ursa_minor.name"
   },
   "virgo": {
     "name": "Virgo",
@@ -3140,7 +3186,8 @@
         3,
         4
       ]
-    ]
+    ],
+    "name_int": "constellation.virgo.name"
   },
   "vulpecula": {
     "name": "Vulpecula",
@@ -3187,7 +3234,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.vulpecula.name"
   },
   "antlia": {
     "name": "Antlia",
@@ -3234,7 +3282,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.antlia.name"
   },
   "apus": {
     "name": "Apus",
@@ -3285,7 +3334,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.apus.name"
   },
   "ara": {
     "name": "Ara",
@@ -3346,7 +3396,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.ara.name"
   },
   "caelum": {
     "name": "Caelum",
@@ -3393,7 +3444,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.caelum.name"
   },
   "camelopardalis": {
     "name": "Camelopardalis",
@@ -3454,7 +3506,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.camelopardalis.name"
   },
   "cancer": {
     "name": "Cancer",
@@ -3516,7 +3569,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.cancer.name"
   },
   "canes_venatici": {
     "name": "Canes Venatici",
@@ -3543,7 +3597,8 @@
         0,
         1
       ]
-    ]
+    ],
+    "name_int": "constellation.canes_venatici.name"
   },
   "carina": {
     "name": "Carina",
@@ -3604,7 +3659,8 @@
         3,
         4
       ]
-    ]
+    ],
+    "name_int": "constellation.carina.name"
   },
   "centaurus": {
     "name": "Centaurus",
@@ -3665,7 +3721,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.centaurus.name"
   },
   "chamaeleon": {
     "name": "Chamaeleon",
@@ -3712,7 +3769,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.chamaeleon.name"
   },
   "circinus": {
     "name": "Circinus",
@@ -3753,7 +3811,8 @@
         2,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.circinus.name"
   },
   "columba": {
     "name": "Columba",
@@ -3814,7 +3873,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.columba.name"
   },
   "coma_berenices": {
     "name": "Coma Berenices",
@@ -3851,7 +3911,8 @@
         1,
         2
       ]
-    ]
+    ],
+    "name_int": "constellation.coma_berenices.name"
   },
   "corona_australis": {
     "name": "Corona Australis",
@@ -3922,7 +3983,8 @@
         5,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.corona_australis.name"
   },
   "crux": {
     "name": "Crux",
@@ -3975,7 +4037,8 @@
         2,
         4
       ]
-    ]
+    ],
+    "name_int": "constellation.crux.name"
   },
   "dorado": {
     "name": "Dorado",
@@ -4026,7 +4089,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.dorado.name"
   },
   "fornax": {
     "name": "Fornax",
@@ -4063,7 +4127,8 @@
         1,
         2
       ]
-    ]
+    ],
+    "name_int": "constellation.fornax.name"
   },
   "grus": {
     "name": "Grus",
@@ -4124,7 +4189,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.grus.name"
   },
   "horologium": {
     "name": "Horologium",
@@ -4171,7 +4237,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.horologium.name"
   },
   "hydrus": {
     "name": "Hydrus",
@@ -4212,7 +4279,8 @@
         2,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.hydrus.name"
   },
   "indus": {
     "name": "Indus",
@@ -4263,7 +4331,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.indus.name"
   },
   "mensa": {
     "name": "Mensa",
@@ -4300,7 +4369,8 @@
         1,
         2
       ]
-    ]
+    ],
+    "name_int": "constellation.mensa.name"
   },
   "microscopium": {
     "name": "Microscopium",
@@ -4347,7 +4417,8 @@
         2,
         3
       ]
-    ]
+    ],
+    "name_int": "constellation.microscopium.name"
   },
   "musca": {
     "name": "Musca",
@@ -4398,7 +4469,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.musca.name"
   },
   "norma": {
     "name": "Norma",
@@ -4449,7 +4521,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.norma.name"
   },
   "octans": {
     "name": "Octans",
@@ -4490,7 +4563,8 @@
         2,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.octans.name"
   },
   "pavo": {
     "name": "Pavo",
@@ -4551,7 +4625,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.pavo.name"
   },
   "phoenix": {
     "name": "Phoenix",
@@ -4612,7 +4687,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.phoenix.name"
   },
   "pictor": {
     "name": "Pictor",
@@ -4649,7 +4725,8 @@
         1,
         2
       ]
-    ]
+    ],
+    "name_int": "constellation.pictor.name"
   },
   "puppis": {
     "name": "Puppis",
@@ -4710,7 +4787,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.puppis.name"
   },
   "pyxis": {
     "name": "Pyxis",
@@ -4747,7 +4825,8 @@
         1,
         2
       ]
-    ]
+    ],
+    "name_int": "constellation.pyxis.name"
   },
   "reticulum": {
     "name": "Reticulum",
@@ -4798,7 +4877,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.reticulum.name"
   },
   "sculptor": {
     "name": "Sculptor",
@@ -4849,7 +4929,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.sculptor.name"
   },
   "sextans": {
     "name": "Sextans",
@@ -4886,7 +4967,8 @@
         1,
         2
       ]
-    ]
+    ],
+    "name_int": "constellation.sextans.name"
   },
   "telescopium": {
     "name": "Telescopium",
@@ -4923,7 +5005,8 @@
         1,
         2
       ]
-    ]
+    ],
+    "name_int": "constellation.telescopium.name"
   },
   "triangulum_australe": {
     "name": "Triangulum Australe",
@@ -4964,7 +5047,8 @@
         2,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.triangulum_australe.name"
   },
   "tucana": {
     "name": "Tucana",
@@ -5015,7 +5099,8 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.tucana.name"
   },
   "vela": {
     "name": "Vela",
@@ -5076,7 +5161,8 @@
         4,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.vela.name"
   },
   "volans": {
     "name": "Volans",
@@ -5127,6 +5213,7 @@
         3,
         0
       ]
-    ]
+    ],
+    "name_int": "constellation.volans.name"
   }
 }

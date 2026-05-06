@@ -1071,23 +1071,25 @@
             this._commandWindow.setHandler("local", this.commandLocal.bind(this));
             this._commandWindow.setHandler("steam", this.commandSteam.bind(this));
             this._commandWindow.setHandler("server", this.commandServer.bind(this));
+            this._commandWindow.setHandler("disconnectLocal", this.commandDisconnectLocal.bind(this));
             this._commandWindow.setHandler("cancel", this.popScene.bind(this));
             this.addWindow(this._commandWindow);
         }
 
         commandLocal() {
-            if (window.SplitScreenManager && window.SplitScreenManager.active) {
-                if (typeof Scene_SplitScreenTerminate !== 'undefined') {
-                    SceneManager.push(Scene_SplitScreenTerminate);
-                } else {
-                    this._commandWindow.activate();
-                }
+            if (typeof Scene_SplitScreenCharacterSelection !== 'undefined') {
+                SceneManager.push(Scene_SplitScreenCharacterSelection);
             } else {
-                if (typeof Scene_SplitScreenCharacterSelection !== 'undefined') {
-                    SceneManager.push(Scene_SplitScreenCharacterSelection);
-                } else {
-                    this._commandWindow.activate();
-                }
+                this._commandWindow.activate();
+            }
+        }
+
+        commandDisconnectLocal() {
+            if (window.SplitScreenManager) {
+                window.SplitScreenManager.stopSession();
+                this._commandWindow.refresh();
+                this._commandWindow.activate();
+                this._helpWindow.setText("Split-screen session terminated.");
             }
         }
 
@@ -1115,9 +1117,13 @@
 
     class Window_MultiplayerTypeSelection extends Window_Command {
         makeCommandList() {
-            this.addCommand("Local Multiplayer", "local");
-            this.addCommand("Steam Multiplayer", "steam");
-            this.addCommand("Custom Server", "server");
+            if (window.SplitScreenManager && window.SplitScreenManager.active) {
+                this.addCommand("Disconnect Split-Screen", "disconnectLocal");
+            } else {
+                this.addCommand("Local Multiplayer", "local");
+                this.addCommand("Steam Multiplayer", "steam");
+                this.addCommand("Custom Server", "server");
+            }
         }
     }
 

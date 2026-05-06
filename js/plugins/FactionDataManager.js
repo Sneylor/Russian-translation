@@ -164,7 +164,30 @@ function FactionDataManager() {
 
 FactionDataManager.prototype.initialize = function () {
   this._factions = [];
+  this._i18nData = null;
+  this._loadI18nData();
   this._setupHardcodedFactions();
+};
+
+FactionDataManager.prototype._loadI18nData = async function () {
+  const lang = ConfigManager.language || "en";
+  try {
+    const response = await fetch(`js/plugins/i18n/${lang}/faction.json`);
+    this._i18nData = await response.json();
+  } catch (e) {
+    console.error("Failed to load faction i18n data", e);
+  }
+};
+
+FactionDataManager.prototype.t = function (path) {
+  if (!this._i18nData) return path;
+  const keys = path.split(".");
+  let current = this._i18nData;
+  for (const key of keys) {
+    if (current[key] === undefined) return path;
+    current = current[key];
+  }
+  return typeof current === "string" ? current : (current.name || path);
 };
 
 FactionDataManager.prototype._setupHardcodedFactions = function () {
@@ -2025,11 +2048,7 @@ Window_FactionStatus.prototype.drawItem = function (index) {
 
 
 
-    const useItalian = ConfigManager.language === 'it';
-
-
-
-    const factionName = useItalian && faction.name_it ? faction.name_it : faction.name;
+    const factionName = FactionDataManager.instance.t(faction.name);
 
 
 

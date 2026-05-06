@@ -60,7 +60,7 @@
       for (const key in EnemyArchetypes) {
         this._data.push({
           key: key,
-          name: EnemyArchetypes[key].name || key
+          name: window.getArchetypeText(`enemyArchetypes.${key.toLowerCase()}.name`) || key
         });
       }
     }
@@ -486,13 +486,13 @@
     // Draw Titles
     if (arch1) {
       this.changeTextColor(ColorManager.systemColor());
-      const arch1Name = ConfigManager.language === "it" && arch1.name_it ? arch1.name_it : arch1.name;
+      const arch1Name = window.getArchetypeText(`enemyArchetypes.${this._arch1Key.toLowerCase()}.name`) || this._arch1Key;
       this.drawText(arch1Name, 0, y, titleWidth);
       this.resetTextColor();
     }
     if (arch2) {
       this.changeTextColor(ColorManager.crisisColor());
-      const arch2Name = ConfigManager.language === "it" && arch2.name_it ? arch2.name_it : arch2.name;
+      const arch2Name = window.getArchetypeText(`enemyArchetypes.${this._arch2Key.toLowerCase()}.name`) || this._arch2Key;
       this.drawText(arch2Name, titleWidth, y, titleWidth);
       this.resetTextColor();
     }
@@ -502,9 +502,7 @@
     // Draw Merged Part List
     for (const partKey in mergedParts) {
       const { part, from } = mergedParts[partKey];
-      const name = (ConfigManager.language === "it" && part.name_it)
-        ? part.name_it
-        : part.name;
+      const name = window.getArchetypeText(part.name);
 
       // Color-code based on origin
       if (from === 2) {

@@ -193,7 +193,7 @@
     // Hide Followers when Split-Screen is active
     const _Game_Followers_update = Game_Followers.prototype.update;
     Game_Followers.prototype.update = function () {
-        if (SplitScreenManager.active) {
+        if (SplitScreenManager.active && SplitScreenManager.p2Event) {
             this._data.forEach(follower => follower.setOpacity(0));
             return;
         }
@@ -202,7 +202,7 @@
 
     const _Game_Follower_isVisible = Game_Follower.prototype.isVisible;
     Game_Follower.prototype.isVisible = function () {
-        if (SplitScreenManager.active) return false;
+        if (SplitScreenManager.active && SplitScreenManager.p2Event) return false;
         return _Game_Follower_isVisible.call(this);
     };
 
@@ -211,17 +211,20 @@
     // =========================================================================
     const SplitScreenManager = {
         active: false,
+        p2EventName: P2_EVENT_NAME,
         p2CharName: "",
         p2CharIndex: 0,
         p2Event: null,
         isSplit: false,
         p2Input: { up: false, down: false, left: false, right: false, action: false },
         _prevP2Input: { up: false, down: false, left: false, right: false, action: false },
+        _savedPartyIds: [],
 
         init() {
             this.active = false;
             this.p2Event = null;
             this.isSplit = false;
+            this._savedPartyIds = [];
         },
 
         resolveP2Character() {
@@ -231,12 +234,41 @@
                 this.p2CharIndex = actor.characterIndex();
                 this._p2ActorId = actor.actorId();
             } else {
-                // Fallback to random Skab sprite
-                const idx = Math.floor(Math.random() * SKAB_POOL.length);
-                const charName = SKAB_POOL[idx];
-                this.p2CharName = charName;
-                this.p2CharIndex = charName.includes("!$") ? 0 : Math.floor(Math.random() * 8);
+                // Fallback
+                this.p2CharName = "";
+                this.p2CharIndex = 0;
             }
+        },
+
+        createSelectionPool() {
+            const pool = [];
+            // 1. Existing members (skip P1)
+            if ($gameParty) {
+                const members = $gameParty.members();
+                for (let i = 1; i < members.length; i++) {
+                    const actor = members[i];
+                    pool.push({
+                        type: "existing",
+                        actor: actor,
+                        name: actor.name(),
+                        className: actor.currentClass().name,
+                        characterName: actor.characterName(),
+                        characterIndex: actor.characterIndex(),
+                        traits: actor._selectedTraits || [],
+                        weapon: actor.weapons()[0],
+                        stats: {
+                            atk: actor.atk, def: actor.def, mat: actor.mat,
+                            mdf: actor.mdf, agi: actor.agi, luk: actor.luk
+                        }
+                    });
+                }
+            }
+            // 2. Generated candidates
+            this.generateCandidates().forEach(c => {
+                c.type = "generated";
+                pool.push(c);
+            });
+            return pool;
         },
 
         generateCandidates() {
@@ -263,7 +295,19 @@
                 const traits = [];
                 if (TraitsArray.length > 0) {
                     for (let j = 0; j < 2; j++) {
-                        traits.push(TraitsArray[Math.floor(Math.random() * TraitsArray.length)]);
+                        const trait = TraitsArray[Math.floor(Math.random() * TraitsArray.length)];
+                        if (!traits.includes(trait)) traits.push(trait);
+                        else j--;
+                    }
+                }
+
+                // Pre-determine weapon
+                let weapon = null;
+                if (window.StartingEquipment) {
+                    const types = window.StartingEquipment.getCompatibleWeaponTypes(classId);
+                    const pool = window.StartingEquipment.getCompatibleWeapons(types);
+                    if (pool.length > 0) {
+                        weapon = pool[Math.floor(Math.random() * pool.length)];
                     }
                 }
 
@@ -274,6 +318,7 @@
                     characterName: charName,
                     characterIndex: charIndex,
                     traits: traits,
+                    weapon: weapon,
                     stats: {
                         atk: classData.params[2][1] + Math.randomInt(5),
                         def: classData.params[3][1] + Math.randomInt(5),
@@ -306,14 +351,59 @@
             }
 
             // Apply Equipment
-            if (window.StartingEquipment && window.StartingEquipment.applyStartingGear) {
+            if (candidate.weapon) {
+                $gameParty.gainItem(candidate.weapon, 1);
+                actor.changeEquip(0, candidate.weapon);
+                if (window.StartingEquipment && window.StartingEquipment.learnStarterSkills) {
+                    window.StartingEquipment.learnStarterSkills(actor);
+                }
+            } else if (window.StartingEquipment && window.StartingEquipment.applyStartingGear) {
                 window.StartingEquipment.applyStartingGear(actor, candidate.classId);
             }
 
             // Lock equipment
             actor._p2Generated = true;
             this._p2ActorId = actorId;
-            $gameParty.addActor(actorId);
+        },
+
+        startSession(candidate) {
+            this._savedPartyIds = $gameParty._actors.slice();
+            const p1Id = $gameParty._actors[0];
+            
+            if (candidate.type === "existing") {
+                const p2Id = candidate.actor.actorId();
+                $gameParty._actors = [p1Id, p2Id];
+                this._p2ActorId = p2Id;
+            } else {
+                const guestId = 4; // Using Actor 4 for generated guest
+                this.applyCandidateToActor(candidate, guestId);
+                $gameParty._actors = [p1Id, guestId];
+                this._p2ActorId = guestId;
+            }
+            
+            $gamePlayer.refresh();
+            this.active = true;
+            $gameSwitches.setValue(67, true);
+            this.resolveP2Character();
+            if (typeof findOrCreateP2Event === 'function') findOrCreateP2Event();
+        },
+
+        stopSession() {
+            this.active = false;
+            if (this._p2ActorId) {
+                const actor = $gameActors.actor(this._p2ActorId);
+                if (actor && actor._p2Generated) {
+                    actor._p2Generated = false;
+                }
+            }
+            if (this._savedPartyIds && this._savedPartyIds.length > 0) {
+                $gameParty._actors = this._savedPartyIds.slice();
+                this._savedPartyIds = [];
+            }
+            $gameSwitches.setValue(67, false);
+            this.p2Event = null;
+            this.isSplit = false;
+            $gamePlayer.refresh();
         },
 
         pollInput() {
@@ -408,29 +498,11 @@
 
         commandToggle() {
             if (!SplitScreenManager.active) {
-                // Turning ON
-                if ($gameParty.members().length === 1) {
-                    // Solo player, needs to choose a character
-                    SceneManager.push(Scene_SplitScreenCharacterSelection);
-                } else {
-                    SplitScreenManager.active = true;
-                    SplitScreenManager.resolveP2Character();
-                    if (typeof findOrCreateP2Event === 'function') findOrCreateP2Event();
-                    SceneManager.goto(Scene_Map);
-                }
+                // Turning ON - always go to selection to choose P2
+                SceneManager.push(Scene_SplitScreenCharacterSelection);
             } else {
                 // Turning OFF
-                SplitScreenManager.active = false;
-                if (SplitScreenManager._p2ActorId) {
-                    const actor = $gameActors.actor(SplitScreenManager._p2ActorId);
-                    if (actor && actor._p2Generated) {
-                        $gameParty.removeActor(SplitScreenManager._p2ActorId);
-                        actor._p2Generated = false;
-                        SplitScreenManager._p2ActorId = null;
-                    }
-                }
-                SplitScreenManager.p2Event = null;
-                SplitScreenManager.isSplit = false;
+                SplitScreenManager.stopSession();
                 this._commandWindow.refresh();
                 this._statusWindow.refresh();
                 this._commandWindow.activate();
@@ -469,7 +541,7 @@
         }
 
         createCandidates() {
-            this._candidates = SplitScreenManager.generateCandidates();
+            this._candidates = SplitScreenManager.createSelectionPool();
         }
 
         createCommandWindow() {
@@ -505,11 +577,7 @@
 
         onCandidateOk() {
             const candidate = this._candidates[this._commandWindow.index()];
-            SplitScreenManager.applyCandidateToActor(candidate, 2); // Use Actor 2 for P2 fallback
-            SplitScreenManager.active = true;
-            SplitScreenManager.resolveP2Character();
-            // Force spawn P2 event immediately
-            if (typeof findOrCreateP2Event === 'function') findOrCreateP2Event();
+            SplitScreenManager.startSession(candidate);
             SceneManager.goto(Scene_Map);
         }
     }
@@ -520,7 +588,7 @@
             super.initialize(rect);
         }
 
-        maxCols() { return 3; }
+        maxCols() { return this._candidates.length; }
 
         makeCommandList() {
             this._candidates.forEach((c, i) => {
@@ -536,6 +604,11 @@
         }
 
         itemHeight() { return this.lineHeight() * 2; }
+
+        updateHelp() {
+            super.updateHelp();
+            this.callHandler("select");
+        }
     }
 
     class Window_SplitScreenCharDetails extends Window_Base {
@@ -544,20 +617,31 @@
             this.refresh();
         }
 
+        getTraitName(trait) {
+            const lang = ConfigManager.language || "en";
+            if (trait.name && typeof trait.name === "object") {
+                return trait.name[lang] || trait.name["en"];
+            }
+            return trait.name || "Unknown Trait";
+        }
+
         refresh() {
             this.contents.clear();
             if (!this._candidate) return;
 
             const c = this._candidate;
+            this.contents.fontSize = 32;
             this.drawText(c.name, 0, 0, this.contentsWidth(), "center");
+            this.contents.fontSize = 24;
             this.drawText(c.className, 0, this.lineHeight(), this.contentsWidth(), "center");
+            this.resetFontSettings();
 
             let y = this.lineHeight() * 2.5;
             const half = this.contentsWidth() / 2;
 
             // Stats
             this.changeTextColor(this.systemColor());
-            this.drawText("Stats", 0, y, half);
+            this.drawText("Stats", 20, y, half);
             this.resetTextColor();
             y += this.lineHeight();
 
@@ -568,26 +652,65 @@
             ];
 
             stats.forEach((s, i) => {
-                const sx = (i % 2) * (half / 2) + 20;
+                const sx = (i % 2) * (half / 2) + 40;
                 const sy = y + Math.floor(i / 2) * this.lineHeight();
                 this.drawText(`${s.n}: ${s.v}`, sx, sy, half / 2);
             });
 
-            // Traits
+            // Equipment & Traits
             let ty = this.lineHeight() * 2.5;
+            
+            // Equipment
+            this.changeTextColor(this.systemColor());
+            this.drawText("Equipment", half, ty, half);
+            this.resetTextColor();
+            ty += this.lineHeight();
+            if (c.weapon) {
+                this.drawIcon(c.weapon.iconIndex, half + 20, ty);
+                this.drawText(c.weapon.name, half + 56, ty, half - 60);
+            } else {
+                this.drawText("None", half + 56, ty, half - 60);
+            }
+            ty += this.lineHeight() * 1.5;
+
+            // Traits
             this.changeTextColor(this.systemColor());
             this.drawText("Traits", half, ty, half);
             this.resetTextColor();
             ty += this.lineHeight();
 
             c.traits.forEach(t => {
-                if (t.icon) this.drawIcon(t.icon, half + 20, ty);
-                this.drawText(t.name, half + 56, ty, half - 60);
+                const icon = t.icon || 0;
+                if (icon) this.drawIcon(icon, half + 20, ty);
+                this.drawText(this.getTraitName(t), half + 56, ty, half - 60);
                 ty += this.lineHeight();
             });
 
-            // Preview
-            this.drawCharacter(c.characterName, c.characterIndex, this.contentsWidth() - 48, 48);
+            // Preview (Actual Player Sprite - Scaled)
+            this.drawLargeCharacter(c.characterName, c.characterIndex, this.contentsWidth() - 80, this.contentsHeight() - 20);
+        }
+
+        drawLargeCharacter(characterName, characterIndex, x, y) {
+            const bitmap = ImageManager.loadCharacter(characterName);
+            if (bitmap.isReady()) {
+                this.contentsDrawCharacter(bitmap, characterIndex, x, y);
+            } else {
+                bitmap.addLoadListener(() => this.contentsDrawCharacter(bitmap, characterIndex, x, y));
+            }
+        }
+
+        contentsDrawCharacter(bitmap, characterIndex, x, y) {
+            if (!this._candidate) return;
+            const big = ImageManager.isBigCharacter(this._candidate.characterName);
+            const pw = bitmap.width / (big ? 3 : 12);
+            const ph = bitmap.height / (big ? 4 : 8);
+            const n = big ? 0 : characterIndex;
+            const sx = ((n % 4) * 3 + 1) * pw;
+            const sy = Math.floor(n / 4) * 4 * ph;
+            const scale = 2;
+            const dw = pw * scale;
+            const dh = ph * scale;
+            this.contents.blt(bitmap, sx, sy, pw, ph, x - dw / 2, y - dh, dw, dh);
         }
     }
 
@@ -638,17 +761,7 @@
         }
 
         commandTerminate() {
-            SplitScreenManager.active = false;
-            if (SplitScreenManager._p2ActorId) {
-                const actor = $gameActors.actor(SplitScreenManager._p2ActorId);
-                if (actor && actor._p2Generated) {
-                    $gameParty.removeActor(SplitScreenManager._p2ActorId);
-                    actor._p2Generated = false;
-                    SplitScreenManager._p2ActorId = null;
-                }
-            }
-            SplitScreenManager.p2Event = null;
-            SplitScreenManager.isSplit = false;
+            SplitScreenManager.stopSession();
             SceneManager.goto(Scene_Map);
         }
     }
@@ -665,32 +778,7 @@
 
     // Integrated with MultiplayerSystem's selection menu
 
-    // Title Menu Integration
-    const _Window_TitleCommand_makeCommandList = Window_TitleCommand.prototype.makeCommandList;
-    Window_TitleCommand.prototype.makeCommandList = function () {
-        _Window_TitleCommand_makeCommandList.call(this);
-        // Ensure "Multiplayer" command exists on Title screen
-        if (!this._list.find(c => c.symbol === 'multiplayer')) {
-            this.addCommand("Multiplayer", "multiplayer");
-        }
-    };
-
-    const _Scene_Title_createCommandWindow = Scene_Title.prototype.createCommandWindow;
-    Scene_Title.prototype.createCommandWindow = function () {
-        _Scene_Title_createCommandWindow.call(this);
-        this._commandWindow.setHandler("multiplayer", () => {
-            if (typeof Scene_MultiplayerTypeSelection !== 'undefined') {
-                SceneManager.push(Scene_MultiplayerTypeSelection);
-            } else {
-                // Fallback to local if selection scene isn't loaded
-                if (SplitScreenManager.active) {
-                    SceneManager.push(Scene_SplitScreenTerminate);
-                } else {
-                    SceneManager.push(Scene_SplitScreenCharacterSelection);
-                }
-            }
-        });
-    };
+    // Title Menu Integration removed as requested
 
     // Input Hijacking for P1 (if 2+ gamepads, P1 uses GP0, otherwise default)
     const _Input_update = Input.update;
@@ -712,7 +800,7 @@
     const _SceneManager_updateInputData = SceneManager.updateInputData;
     SceneManager.updateInputData = function () {
         _SceneManager_updateInputData.call(this);
-        if (SplitScreenManager.active) SplitScreenManager.pollInput();
+        if (SplitScreenManager.active && SplitScreenManager.p2Event) SplitScreenManager.pollInput();
     };
 
     // =========================================================================

@@ -43,96 +43,24 @@
     const TOKEN_ITEM_ID = parseInt(parameters['tokenItemId']) || 1;
 
     // Translation system
-    const translations = {
-        en: {
-            // Main UI
-            helpText: 'Horse Race - Select a horse to bet on!',
-            raceStarted: 'And they\'re off! The race has begun!',
-            selectHorseFirst: 'Please select a horse first!',
-            noTokens: 'You don\'t have any tokens.',
-            notEnoughTokens: 'Not enough {tokenName}! You have {current}, need {needed}',
-            
-            // Controls
-            selectHorse: '↑/↓: Select Horse',
-            changeBet1: '←/→: Change Bet (±1)',
-            changeBet10: 'Shift+←/→: (±10)',
-            confirmSelection: 'Enter: Confirm & Start',
-            startRace: 'Space: Start Race!',
-            exitGame: 'Esc: Exit',
-            newRace: 'Enter: New Race',
-            
-            // Betting window
-            tokens: 'Tokens',
-            bet: 'Bet',
-            selected: 'Selected',
-            potentialWin: 'Potential Win',
-            odds: 'Odds',
-            
-            // Race window
-            raceInProgress: 'RACE IN PROGRESS',
-            
-            // Results window
-            raceResults: 'RACE RESULTS',
-            winner: 'Winner',
-            youWon: 'YOU WON!',
-            youLost: 'You Lost',
-            profit: 'Profit',
-            lost: 'Lost',
-            won: 'Won',
-            
-            // Result messages
-            winMessage: '🎉 {horseName} wins! You won {amount} tokens! 🎉',
-            loseMessage: '{horseName} wins! Better luck next time!',
-            continuePrompt: ' Press Enter for new race or Esc to exit.'
-        },
-        it: {
-            // Main UI
-            helpText: 'Corsa di Cavalli - Seleziona un cavallo su cui scommettere!',
-            raceStarted: 'Via! La corsa è iniziata!',
-            selectHorseFirst: 'Seleziona prima un cavallo!',
-            noTokens: 'Non hai gettoni.',
-            notEnoughTokens: '{tokenName} insufficienti! Ne hai {current}, servono {needed}',
-            
-            // Controls
-            selectHorse: '↑/↓: Seleziona Cavallo',
-            changeBet1: '←/→: Cambia Scommessa (±1)',
-            changeBet10: 'Shift+←/→: (±10)',
-            confirmSelection: 'Invio: Conferma e Inizia',
-            startRace: 'Spazio: Inizia Corsa!',
-            exitGame: 'Esc: Esci',
-            newRace: 'Invio: Nuova Corsa',
-            
-            // Betting window
-            tokens: 'Gettoni',
-            bet: 'Scommessa',
-            selected: 'Selezionato',
-            potentialWin: 'Vincita Potenziale',
-            odds: 'Quote',
-            
-            // Race window
-            raceInProgress: 'CORSA IN CORSO',
-            
-            // Results window
-            raceResults: 'RISULTATI CORSA',
-            winner: 'Vincitore',
-            youWon: 'HAI VINTO!',
-            youLost: 'Hai Perso',
-            profit: 'Profitto',
-            lost: 'Perso',
-            won: 'Vinto',
-            
-            // Result messages
-            winMessage: '🎉 {horseName} vince! Hai vinto {amount} gettoni! 🎉',
-            loseMessage: '{horseName} vince! Ritenta la prossima volta!',
-            continuePrompt: ' Premi Invio per una nuova corsa o Esc per uscire.'
+    // Translation system
+    let _horseRaceI18n = null;
+
+    const _loadHorseRaceI18n = async () => {
+        const lang = ConfigManager.language || 'en';
+        const url = `js/plugins/i18n/${lang}/horserace.json`;
+        try {
+            const response = await fetch(url);
+            _horseRaceI18n = await response.json();
+        } catch (e) {
+            console.error('AnimatedHorseRace: Failed to load i18n data from ' + url, e);
         }
     };
 
     // Translation helper function
     function getText(key, replacements = {}) {
-        const useTranslation = ConfigManager.language === 'it';
-        const lang = useTranslation ? 'it' : 'en';
-        let text = translations[lang][key] || translations.en[key] || key;
+        if (!_horseRaceI18n) return key;
+        let text = _horseRaceI18n[key] || key;
         
         for (const [placeholder, value] of Object.entries(replacements)) {
             text = text.replace(new RegExp(`{${placeholder}}`, 'g'), value);
@@ -141,30 +69,25 @@
         return text;
     }
 
+    _loadHorseRaceI18n();
+
     PluginManager.registerCommand(pluginName, "openHorseRace", args => {
         SceneManager.push(Scene_HorseRace);
     });
 
-    const NORMAL_PREFIXES = [
-        'Thunder', 'Lightning', 'Storm', 'Midnight', 'Shadow', 'Spirit', 'Blaze', 'Flash',
-        'Star', 'Diamond', 'Ruby', 'Sapphire', 'Gold', 'Silver', 'Champion', 'Victory',
-        'Phoenix', 'Eagle', 'Falcon', 'Arrow', 'Bullet', 'Rocket', 'Comet', 'Meteor',
-        'Wind', 'Fire', 'Ice', 'Steel', 'Crimson', 'Azure', 'Emerald', 'Onyx'
-    ];
-    const NORMAL_SUFFIXES = [
-        'Runner', 'Rider', 'Dash', 'Bolt', 'Strike', 'Wing', 'Heart', 'Soul',
-        'Storm', 'Blaze', 'Flash', 'Star', 'Moon', 'Sun', 'Wind', 'Fire'
-    ];
-    const WEIRD_PREFIXES = [
-        'Sir Wiggles', 'Captain Snort', 'Professor Trot', 'Doctor Neigh', 'Mister Gallop',
-        'Lady Hooves', 'Baron Clip-Clop', 'Duke Whinny', 'Count Mane', 'Princess Tails',
-        'Admiral Chomp', 'General Bounce', 'Colonel Stumble', 'Major Wobble', 'Sergeant Giggle'
-    ];
-    const WEIRD_SUFFIXES = [
-        'the Magnificent', 'the Confused', 'the Sleepy', 'the Dramatic', 'the Mysterious',
-        'the Hungry', 'the Dancing', 'the Singing', 'the Backwards', 'the Sideways',
-        'the Dizzy', 'the Bouncy', 'the Fluffy', 'the Sparkly', 'the Wobbly'
-    ];
+    function getHorseNamePart(type) {
+        if (!_horseRaceI18n || !_horseRaceI18n[type]) {
+            // Fallback to basic English names if i18n not loaded
+            const fallbacks = {
+                normalPrefixes: ['Thunder', 'Lightning', 'Storm', 'Midnight', 'Shadow', 'Spirit', 'Blaze', 'Flash'],
+                normalSuffixes: ['Runner', 'Rider', 'Dash', 'Bolt', 'Strike', 'Wing', 'Heart', 'Soul'],
+                weirdPrefixes: ['Sir Wiggles', 'Captain Snort', 'Professor Trot'],
+                weirdSuffixes: ['the Magnificent', 'the Confused', 'the Sleepy']
+            };
+            return fallbacks[type] || [];
+        }
+        return _horseRaceI18n[type];
+    }
     const HORSE_COLORS = ['#8B4513', '#A0522D', '#000000', '#FFFFFF', '#D2691E', '#CD853F'];
     const HORSE_EMOJIS = ['🐴', '🐎', '🦄'];
 
@@ -179,7 +102,7 @@
     }
 
     function generateSeedFromPlayerName() {
-        const playerName = $dataActors[1] ? $dataActors[1].name : 'Player';
+        const playerName = $dataActors[1] ? $dataActors[1].name : getText('playerFallback');
         let seed = 0;
         for (let i = 0; i < playerName.length; i++) {
             seed += playerName.charCodeAt(i) * (i + 1);
@@ -191,18 +114,24 @@
         const seed = generateSeedFromPlayerName();
         const rng = new SeededRandom(seed);
         const pool = [];
+        
+        const normalPrefixes = getHorseNamePart('normalPrefixes');
+        const normalSuffixes = getHorseNamePart('normalSuffixes');
+        const weirdPrefixes = getHorseNamePart('weirdPrefixes');
+        const weirdSuffixes = getHorseNamePart('weirdSuffixes');
+
         for (let i = 0; i < 30; i++) {
             let name;
             if (rng.next() < 0.4) {
-                const prefix = WEIRD_PREFIXES[Math.floor(rng.next() * WEIRD_PREFIXES.length)];
-                const suffix = WEIRD_SUFFIXES[Math.floor(rng.next() * WEIRD_SUFFIXES.length)];
+                const prefix = weirdPrefixes[Math.floor(rng.next() * weirdPrefixes.length)];
+                const suffix = weirdSuffixes[Math.floor(rng.next() * weirdSuffixes.length)];
                 name = `${prefix} ${suffix}`;
             } else {
                 if (rng.next() < 0.6) {
-                    name = NORMAL_PREFIXES[Math.floor(rng.next() * NORMAL_PREFIXES.length)];
+                    name = normalPrefixes[Math.floor(rng.next() * normalPrefixes.length)];
                 } else {
-                    const prefix = NORMAL_PREFIXES[Math.floor(rng.next() * NORMAL_PREFIXES.length)];
-                    const suffix = NORMAL_SUFFIXES[Math.floor(rng.next() * NORMAL_SUFFIXES.length)];
+                    const prefix = normalPrefixes[Math.floor(rng.next() * normalPrefixes.length)];
+                    const suffix = normalSuffixes[Math.floor(rng.next() * normalSuffixes.length)];
                     name = `${prefix} ${suffix}`;
                 }
             }

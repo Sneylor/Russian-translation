@@ -329,35 +329,30 @@
         // Get colored name for a specific entity
         getActorName(actor) {
             if (!actor) return '';
-            
             const name = actor.name();
-            if (actor.actorId() === 2) {
-                return this._actorCache.get(name) || 
-                    `\\c[${CONFIG.colors.actor2}]${name}\\c[0]`;
-            } 
-            if (actor.actorId() === 3) {
-                return this._actorCache.get(name) || 
-                    `\\c[${CONFIG.colors.actor3}]${name}\\c[0]`;
-            } 
-            else {
-                return this._actorCache.get(name) || 
-                    `\\c[${CONFIG.colors.actor}]${name}\\c[0]`;
-            }
+            const translatedName = typeof window.translateText === 'function' ? window.translateText(name) : name;
+            
+            let color = CONFIG.colors.actor;
+            if (actor.actorId() === 2) color = CONFIG.colors.actor2;
+            if (actor.actorId() === 3) color = CONFIG.colors.actor3;
+
+            return `\\c[${color}]${translatedName}\\c[0]`;
         }
         
         getEnemyName(enemy) {
             if (!enemy) return '';
             const name = enemy.name();
+            const translatedName = typeof window.translateText === 'function' ? window.translateText(name) : name;
             // If enemy name has multiple words, show only the first word
-            const firstName = name.split(' ')[1];
+            const firstName = translatedName.split(' ')[0];
             return `\\c[${CONFIG.colors.enemy}]${firstName}\\c[0]`;
         }
         
         getItemName(item) {
             if (!item) return '';
             const name = item.name;
-            return this._abilityCache.get(name) || 
-                `\\c[${CONFIG.colors.item}]${name}\\c[0]`;
+            const translatedName = typeof window.translateText === 'function' ? window.translateText(name) : name;
+            return `\\c[${CONFIG.colors.item}]${translatedName}\\c[0]`;
         }
         
         refresh() {

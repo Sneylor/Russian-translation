@@ -1,0 +1,44 @@
+{
+  "brain": {
+    "prefrontalcortex": {
+      "name": "Corteccia prefrontale",
+      "function": "Funzioni esecutive, processo decisionale"
+    },
+    "motorcortex": {
+      "name": "Corteccia motoria",
+      "function": "Controllo motorio, movimento"
+    },
+    "sensorycortex": {
+      "name": "Corteccia sensoriale",
+      "function": "Elaborazione sensoriale"
+    },
+    "hippocampus": {
+      "name": "Ippocampo",
+      "function": "Formazione della memoria, apprendimento"
+    },
+    "amygdala": {
+      "name": "Amigdala",
+      "function": "Emozioni, risposta alla paura"
+    },
+    "cerebellum": {
+      "name": "Cervelletto",
+      "function": "Equilibrio, coordinazione"
+    },
+    "brainstem": {
+      "name": "Tronco encefalico",
+      "function": "Funzioni vitali, respirazione"
+    },
+    "occipitallobe": {
+      "name": "Lobo occipitale",
+      "function": "Elaborazione visiva"
+    },
+    "temporallobe": {
+      "name": "Lobo temporale",
+      "function": "Elaborazione uditiva, linguaggio"
+    },
+    "parietallobe": {
+      "name": "Lobo parietale",
+      "function": "Elaborazione spaziale, integrazione"
+    }
+  }
+}

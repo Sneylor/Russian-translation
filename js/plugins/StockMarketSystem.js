@@ -105,6 +105,37 @@
   const soulMedianVariableId = Number(parameters["Soul Median Variable"]) || 53;
 
   //=============================================================================
+  // i18n
+  //=============================================================================
+  let _smI18n = null;
+
+  const _loadStockMarketI18n = async () => {
+    const lang = ConfigManager.language || 'en';
+    const url = `js/plugins/i18n/${lang}/stockmarket.json`;
+    try {
+      const response = await fetch(url);
+      _smI18n = await response.json();
+    } catch (e) {
+      console.error('StockMarketSystem: Failed to load i18n data from ' + url, e);
+    }
+  };
+
+  // Resolve a dot-path under stockmarket.* (e.g. 'info.money')
+  const _smi18n = (path, vars) => {
+    const parts = ('stockmarket.' + path).split('.');
+    let val = _smI18n;
+    for (const p of parts) { if (val) val = val[p]; }
+    if (typeof val !== 'string') return path;
+    if (vars) {
+      val = val.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
+    }
+    return val;
+  };
+
+  // Load on boot
+  _loadStockMarketI18n();
+
+  //=============================================================================
   // Money Formatting Helper Functions
   //=============================================================================
 
@@ -503,59 +534,18 @@
     const stockMarket = $gameSystem.stockMarket;
     const centerX = this.contentsWidth() / 2;
     const colWidth = centerX - 24;
-    const useTranslation = ConfigManager.language === "it";
-    
+
     // Left column
-    this.drawText(
-      useTranslation ? `Denaro: ${goldToEurosForDisplay($gameParty.gold())}` : `Money: ${goldToEurosForDisplay($gameParty.gold())}`,
-      24,
-      0,
-      colWidth
-    );
-    this.drawText(
-      useTranslation ? `Prezzo OIL: ${formatMoney(stockMarket.getOilPrice())}` : `OIL Price: ${formatMoney(stockMarket.getOilPrice())}`,
-      24,
-      this.lineHeight(),
-      colWidth
-    );
-    this.drawText(
-      useTranslation ? `Azioni OIL: ${stockMarket.getOilShares()}` : `OIL Shares: ${stockMarket.getOilShares()}`,
-      24,
-      this.lineHeight() * 2,
-      colWidth
-    );
-    this.drawText(
-      useTranslation ? `Valore OIL: ${formatMoney(Math.round(stockMarket.getOilShares() * stockMarket.getOilPrice()))}` : `OIL Value: ${formatMoney(Math.round(stockMarket.getOilShares() * stockMarket.getOilPrice()))}`,
-      24,
-      this.lineHeight() * 3,
-      colWidth
-    );
-    
+    this.drawText(_smi18n('info.money', { value: goldToEurosForDisplay($gameParty.gold()) }), 24, 0, colWidth);
+    this.drawText(_smi18n('info.oilPrice', { value: formatMoney(stockMarket.getOilPrice()) }), 24, this.lineHeight(), colWidth);
+    this.drawText(_smi18n('info.oilShares', { value: stockMarket.getOilShares() }), 24, this.lineHeight() * 2, colWidth);
+    this.drawText(_smi18n('info.oilValue', { value: formatMoney(Math.round(stockMarket.getOilShares() * stockMarket.getOilPrice())) }), 24, this.lineHeight() * 3, colWidth);
+
     // Right column
-    this.drawText(
-      useTranslation ? `Patrimonio: ${stockMarket.getNetWorthFormatted()}` : `Net Worth: ${stockMarket.getNetWorthFormatted()}`,
-      centerX,
-      0,
-      colWidth
-    );
-    this.drawText(
-      useTranslation ? `Prezzo SOUL: ${formatMoney(stockMarket.getSoulsPrice())}` : `SOUL Price: ${formatMoney(stockMarket.getSoulsPrice())}`,
-      centerX,
-      this.lineHeight(),
-      colWidth
-    );
-    this.drawText(
-      useTranslation ? `Azioni SOUL: ${stockMarket.getSoulsShares()}` : `SOUL Shares: ${stockMarket.getSoulsShares()}`,
-      centerX,
-      this.lineHeight() * 2,
-      colWidth
-    );
-    this.drawText(
-      useTranslation ? `Valore SOUL: ${formatMoney(Math.round(stockMarket.getSoulsShares() * stockMarket.getSoulsPrice()))}` : `SOUL Value: ${formatMoney(Math.round(stockMarket.getSoulsShares() * stockMarket.getSoulsPrice()))}`,
-      centerX,
-      this.lineHeight() * 3,
-      colWidth
-    );
+    this.drawText(_smi18n('info.netWorth', { value: stockMarket.getNetWorthFormatted() }), centerX, 0, colWidth);
+    this.drawText(_smi18n('info.soulPrice', { value: formatMoney(stockMarket.getSoulsPrice()) }), centerX, this.lineHeight(), colWidth);
+    this.drawText(_smi18n('info.soulShares', { value: stockMarket.getSoulsShares() }), centerX, this.lineHeight() * 2, colWidth);
+    this.drawText(_smi18n('info.soulValue', { value: formatMoney(Math.round(stockMarket.getSoulsShares() * stockMarket.getSoulsPrice())) }), centerX, this.lineHeight() * 3, colWidth);
   };
 
   function Window_StockGraph() {
@@ -580,8 +570,6 @@
       graphY = 40;
     const graphWidth = this.contentsWidth() - 100;
     const graphHeight = this.contentsHeight() - 80;
-    const useTranslation = ConfigManager.language === "it";
-    
     this.contents.gradientFillRect(
       graphX,
       graphY,
@@ -647,23 +635,12 @@
     }
     
     this.contents.fillRect(graphX + 15, graphY + 15, 25, 4, "#FFFFFF");
-    this.drawText(useTranslation ? "OIL" : "Oil", graphX + 45, graphY + 6, 80);
+    this.drawText(_smi18n('graph.oilLabel'), graphX + 45, graphY + 6, 80);
     this.contents.fillRect(graphX + 15, graphY + 35, 25, 4, "#0000FF");
-    this.drawText(useTranslation ? "SOUL" : "Souls", graphX + 45, graphY + 26, 80);
-    
-    
-    this.drawText(
-      (useTranslation ? "OIL: " : "Oil: ") + formatMoney(stockMarket.getOilPrice()),
-      graphX,
-      graphY + graphHeight + 10,
-      150
-    );
-    this.drawText(
-      (useTranslation ? "SOUL: " : "Souls: ") + formatMoney(stockMarket.getSoulsPrice()),
-      graphX + graphWidth - 200,
-      graphY + graphHeight + 10,
-      200
-    );
+    this.drawText(_smi18n('graph.soulLabel'), graphX + 45, graphY + 26, 80);
+
+    this.drawText(_smi18n('graph.oilCurrent', { value: formatMoney(stockMarket.getOilPrice()) }), graphX, graphY + graphHeight + 10, 150);
+    this.drawText(_smi18n('graph.soulCurrent', { value: formatMoney(stockMarket.getSoulsPrice()) }), graphX + graphWidth - 200, graphY + graphHeight + 10, 200);
     
 
   };
@@ -721,9 +698,8 @@
   };
   Window_StockCommand.prototype.maxCols = () => 2;
   Window_StockCommand.prototype.makeCommandList = function () {
-    const useTranslation = ConfigManager.language === "it";
-    this.addCommand(useTranslation ? "Compra" : "Buy", "buy");
-    this.addCommand(useTranslation ? "Vendi" : "Sell", "sell");
+    this.addCommand(_smi18n('commands.buy'),  "buy");
+    this.addCommand(_smi18n('commands.sell'), "sell");
   };
 
   function Window_StockSelection() {
@@ -739,23 +715,13 @@
   };
   
   Window_StockSelection.prototype.makeCommandList = function () {
-    const useTranslation = ConfigManager.language === "it";
-    this.addCommand(useTranslation ? "OIL" : "Oil", "oil");
-    this.addCommand(useTranslation ? "SOUL" : "Souls", "souls");
-    this.addCommand(useTranslation ? "Annulla" : "Cancel", "cancel");
+    this.addCommand(_smi18n('commands.oil'),    "oil");
+    this.addCommand(_smi18n('commands.souls'),  "souls");
+    this.addCommand(_smi18n('commands.cancel'), "cancel");
   };
   Window_StockSelection.prototype.setMode = function (mode) {
     this._mode = mode;
-    const useTranslation = ConfigManager.language === "it";
-    this.setTitle(
-      mode === "buy"
-        ? useTranslation
-          ? "Compra quale stock?"
-          : "Buy Which Stock?"
-        : useTranslation
-        ? "Vendi quale stock?"
-        : "Sell Which Stock?"
-    );
+    this.setTitle(mode === "buy" ? _smi18n('titles.buyWhich') : _smi18n('titles.sellWhich'));
   };
   Window_StockSelection.prototype.setTitle = function (title) {
     this._title = title;
@@ -815,67 +781,42 @@
     }
   };
   Window_StockAmount.prototype.makeCommandList = function () {
-    const useTranslation = ConfigManager.language === "it";
     const stockMarket = $gameSystem.stockMarket;
     const playerGold = $gameParty.gold();
-    
-    // Add buy/sell options including new 2 and 4 stock options
+
+    // Add buy/sell options
     [1, 2, 4, 5, 10, 25, 50, 100, 250, 500].forEach((num) => {
       let enabled = true;
-      
+
       if (this._mode === "buy") {
-        // Check if player has enough gold to buy this amount
         const price = this._stockType === "oil" ? stockMarket.getOilPrice() : stockMarket.getSoulsPrice();
-        const cost = Math.round(num * price);
-        enabled = playerGold >= cost;
+        enabled = playerGold >= Math.round(num * price);
       } else if (this._mode === "sell") {
-        // Check if player has enough shares to sell this amount
         const currentShares = this._stockType === "oil" ? stockMarket.getOilShares() : stockMarket.getSoulsShares();
         enabled = currentShares >= num;
       }
-      
+
       this.addCommand(
-        useTranslation
-          ? `${num} ${num > 1 ? "azioni" : "azione"}`
-          : `${num} ${num > 1 ? "Shares" : "Share"}`,
+        `${num} ${_smi18n(num > 1 ? 'commands.shares' : 'commands.share')}`,
         `fixed_${num}`,
         enabled
       );
     });
-    
+
     // Add "Sell All" option for sell mode
     if (this._mode === "sell") {
       const currentShares = this._stockType === "oil" ? stockMarket.getOilShares() : stockMarket.getSoulsShares();
-      const hasShares = currentShares > 0;
-      
-      this.addCommand(
-        useTranslation ? "Vendi Tutto" : "Sell All",
-        "sell_all",
-        hasShares
-      );
+      this.addCommand(_smi18n('commands.sellAll'), "sell_all", currentShares > 0);
     }
-    
-    this.addCommand(useTranslation ? "Annulla" : "Cancel", "cancel");
+
+    this.addCommand(_smi18n('commands.cancel'), "cancel");
   };
   Window_StockAmount.prototype.setMode = function (mode, stockType) {
     this._mode = mode;
     this._stockType = stockType || "oil";
-    const useTranslation = ConfigManager.language === "it";
-    let title;
-    const stockName = this._stockType === "oil" ? 
-      (useTranslation ? "OIL" : "Oil") : 
-      (useTranslation ? "SOUL" : "Souls");
-    
-    if (mode === "buy") {
-      title = useTranslation 
-        ? `Compra quante azioni di ${stockName}?`
-        : `Buy How Many ${this._stockType.charAt(0).toUpperCase() + this._stockType.slice(1)} Shares?`;
-    } else if (mode === "sell") {
-      title = useTranslation 
-        ? `Vendi quante azioni di ${stockName}?`
-        : `Sell How Many ${this._stockType.charAt(0).toUpperCase() + this._stockType.slice(1)} Shares?`;
-    }
-    this.setTitle(title);
+    const stockName = _smi18n(this._stockType === "oil" ? 'stockNames.oil' : 'stockNames.souls');
+    const titleKey = mode === "buy" ? 'titles.buyHowMany' : 'titles.sellHowMany';
+    this.setTitle(_smi18n(titleKey, { stock: stockName }));
   };
   Window_StockAmount.prototype.setTitle = function (title) {
     this._title = title;

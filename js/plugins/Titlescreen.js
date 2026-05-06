@@ -81,7 +81,7 @@
                 const scale = Math.min(1, maxW / bitmap.width);
                 this.scale.set(scale);
                 this.x = Math.floor((Graphics.width - bitmap.width * scale) / 2);
-                this.y = 10;
+                this.y = -40; // Moved up from 10
             });
         }
     }
@@ -101,8 +101,8 @@
         const numItems = this._commandWindow.maxItems();
         const requiredHeight = numItems * itemHeight + windowPadding * 2;
 
-        // Center the window vertically, but account for the ASCII title
-        const titleOffset = 200; // Space for the ASCII title
+        // Center the window vertically, but account for the title logo
+        const titleOffset = 120; // Reduced from 200 to move window up
         const wy = titleOffset + (Graphics.height - requiredHeight - titleOffset) / 2;
 
         this._commandWindow.move(wx, wy);
@@ -144,8 +144,8 @@
 
         this._customWindowBg.clear();
 
-        // Draw simple black semi-transparent background
-        this._customWindowBg.beginFill(0x000000, 0.7);
+        // Draw simple black semi-transparent background (disabled as requested)
+        this._customWindowBg.beginFill(0x000000, 0.0);
         this._customWindowBg.drawRect(
             this._commandWindow.x,
             this._commandWindow.y,
@@ -271,6 +271,7 @@
     Window_TitleCommand.prototype.makeCommandList = function () {
         _Window_TitleCommand_makeCommandList.call(this);
         this.addCommand('Tutorial', 'tutorial');
+        this.addCommand('Exit', 'shutdown');
     };
 
     // -------------------------------------------------------------------------

@@ -1,42 +1,42 @@
 {
   "TESTES": {
     "name_en": "Testes",
-    "name_int": "",
+    "name_int": "prosthetics.testes.name",
     "name_it": "Testicoli",
     "cost": 10000,
     "effects": {}
   },
   "UTERUS": {
     "name_en": "Uterus",
-    "name_int": "",
+    "name_int": "prosthetics.uterus.name",
     "name_it": "Utero",
     "cost": 10000,
     "effects": {}
   },
   "OVIDUCT": {
     "name_en": "Oviduct",
-    "name_int": "",
+    "name_int": "prosthetics.oviduct.name",
     "name_it": "Ovidotto",
     "cost": 10000,
     "effects": {}
   },
   "SPORE_GLAND": {
     "name_en": "Sporangium",
-    "name_int": "",
+    "name_int": "prosthetics.spore_gland.name",
     "name_it": "Sporangio",
     "cost": 10000,
     "effects": {}
   },
   "MITOSIS_GLAND": {
     "name_en": "Mitosis Gland",
-    "name_int": "",
+    "name_int": "prosthetics.mitosis_gland.name",
     "name_it": "Ghiandola Mitotica",
     "cost": 100000,
     "effects": {}
   },
   "CRYSTAL_CORTEX": {
     "name_en": "Crystal Mind Cortex",
-    "name_int": "",
+    "name_int": "prosthetics.crystal_cortex.name",
     "name_it": "Corteccia Mentale Cristallina",
     "type": "magical",
     "effects": {
@@ -48,7 +48,7 @@
   },
   "NEURAL_IMPLANT": {
     "name_en": "Neural Processing Implant",
-    "name_int": "",
+    "name_int": "prosthetics.neural_implant.name",
     "name_it": "Impianto Processore Neurale",
     "type": "technological",
     "effects": {
@@ -60,7 +60,7 @@
   },
   "ANCIENT_WISDOM_ORB": {
     "name_en": "Ancient Wisdom Orb",
-    "name_int": "",
+    "name_int": "prosthetics.ancient_wisdom_orb.name",
     "name_it": "Orbe dell'Antica Saggezza",
     "type": "magical",
     "effects": {
@@ -72,7 +72,7 @@
   },
   "SKULL_REINFORCEMENT": {
     "name_en": "Dwarven Skull Plating",
-    "name_int": "",
+    "name_int": "prosthetics.skull_reinforcement.name",
     "name_it": "Corazza Cranica Nanica",
     "type": "biological",
     "effects": {
@@ -84,7 +84,7 @@
   },
   "HAWKS_EYE": {
     "name_en": "Hawk's Eye Implant",
-    "name_int": "",
+    "name_int": "prosthetics.hawks_eye.name",
     "name_it": "Impianto Occhio di Falco",
     "type": "biological",
     "effects": {
@@ -96,7 +96,7 @@
   },
   "CYBER_OPTICS": {
     "name_en": "Cyber Optics Suite",
-    "name_int": "",
+    "name_int": "prosthetics.cyber_optics.name",
     "name_it": "Suite Ottica Cibernetica",
     "type": "technological",
     "effects": {
@@ -108,7 +108,7 @@
   },
   "VOID_SIGHT": {
     "name_en": "Void Sight Lens",
-    "name_int": "",
+    "name_int": "prosthetics.void_sight.name",
     "name_it": "Lente della Vista del Vuoto",
     "type": "magical",
     "effects": {
@@ -120,7 +120,7 @@
   },
   "DRAGONS_GAZE": {
     "name_en": "Dragon's Gaze",
-    "name_int": "",
+    "name_int": "prosthetics.dragons_gaze.name",
     "name_it": "Sguardo del Drago",
     "type": "magical",
     "effects": {
@@ -132,7 +132,7 @@
   },
   "TELESCOPIC_EYE": {
     "name_en": "Telescopic Eye Mechanism",
-    "name_int": "",
+    "name_int": "prosthetics.telescopic_eye.name",
     "name_it": "Meccanismo Oculare Telescopico",
     "type": "technological",
     "skill": null,
@@ -144,7 +144,7 @@
   },
   "SCENT_TRACKER": {
     "name_en": "Beast Scent Tracker",
-    "name_int": "",
+    "name_int": "prosthetics.scent_tracker.name",
     "name_it": "Tracciatore di Odori Bestiale",
     "type": "biological",
     "skill": null,
@@ -156,7 +156,7 @@
   },
   "CHEMICAL_SENSOR": {
     "name_en": "Chemical Analysis Sensor",
-    "name_int": "",
+    "name_int": "prosthetics.chemical_sensor.name",
     "name_it": "Sensore di Analisi Chimica",
     "type": "technological",
     "skill": null,
@@ -168,7 +168,7 @@
   },
   "ELVEN_HEARING": {
     "name_en": "Elven Hearing Enhancement",
-    "name_int": "",
+    "name_int": "prosthetics.elven_hearing.name",
     "name_it": "Potenziamento Uditivo Elfico",
     "type": "biological",
     "skill": null,
@@ -180,7 +180,7 @@
   },
   "SONIC_DAMPENERS": {
     "name_en": "Sonic Dampening System",
-    "name_int": "",
+    "name_int": "prosthetics.sonic_dampeners.name",
     "name_it": "Sistema di Attenuazione Sonica",
     "type": "technological",
     "effects": {
@@ -191,7 +191,7 @@
   },
   "ASTRAL_RECEPTORS": {
     "name_en": "Astral Sound Receptors",
-    "name_int": "",
+    "name_int": "prosthetics.astral_receptors.name",
     "name_it": "Recettori del Suono Astrale",
     "type": "magical",
     "skill": null,
@@ -203,7 +203,7 @@
   },
   "VAMPIRIC_FANGS": {
     "name_en": "Vampiric Regeneration Fangs",
-    "name_int": "",
+    "name_int": "prosthetics.vampiric_fangs.name",
     "name_it": "Zanne Rigenerative Vampiriche",
     "type": "biological",
     "effects": {
@@ -215,7 +215,7 @@
   },
   "SILVER_TONGUE": {
     "name_en": "Silver Tongue Implant",
-    "name_int": "",
+    "name_int": "prosthetics.silver_tongue.name",
     "name_it": "Impianto Lingua d'Argento",
     "type": "magical",
     "effects": {
@@ -227,7 +227,7 @@
   },
   "VENOM_GLANDS": {
     "name_en": "Serpent Venom Glands",
-    "name_int": "",
+    "name_int": "prosthetics.venom_glands.name",
     "name_it": "Ghiandole Velenifere Serpentine",
     "type": "biological",
     "effects": {
@@ -239,7 +239,7 @@
   },
   "ADAMANTINE_TEETH": {
     "name_en": "Adamantine Teeth Set",
-    "name_int": "",
+    "name_int": "prosthetics.adamantine_teeth.name",
     "name_it": "Dentatura Adamantina",
     "type": "technological",
     "effects": {
@@ -251,7 +251,7 @@
   },
   "CRYSTAL_FANGS": {
     "name_en": "Mana Crystal Fangs",
-    "name_int": "",
+    "name_int": "prosthetics.crystal_fangs.name",
     "name_it": "Zanne di Cristallo Magico",
     "type": "magical",
     "effects": {
@@ -263,7 +263,7 @@
   },
   "IRON_RIBCAGE": {
     "name_en": "Dwarven Iron Ribcage",
-    "name_int": "",
+    "name_int": "prosthetics.iron_ribcage.name",
     "name_it": "Gabbia Toracica di Ferro Nanesca",
     "type": "biological",
     "effects": {
@@ -275,7 +275,7 @@
   },
   "STEAM_BOILER": {
     "name_en": "Steam Power Boiler",
-    "name_int": "",
+    "name_int": "prosthetics.steam_boiler.name",
     "name_it": "Caldaia a Vapore",
     "type": "technological",
     "effects": {
@@ -287,7 +287,7 @@
   },
   "ARCANE_SHARD": {
     "name_en": "Arcane Energy Core",
-    "name_int": "",
+    "name_int": "prosthetics.arcane_shard.name",
     "name_it": "Nucleo di Energia Arcana",
     "type": "magical",
     "effects": {
@@ -299,7 +299,7 @@
   },
   "LIVING_ARMOR": {
     "name_en": "Living Symbiotic Armor",
-    "name_int": "",
+    "name_int": "prosthetics.living_armor.name",
     "name_it": "Armatura Simbiotica Vivente",
     "type": "biological",
     "effects": {
@@ -311,7 +311,7 @@
   },
   "PHOENIX_HEART": {
     "name_en": "Phoenix Fire Heart",
-    "name_int": "",
+    "name_int": "prosthetics.phoenix_heart.name",
     "name_it": "Cuore di Fuoco di Fenice",
     "type": "magical",
     "effects": {
@@ -323,7 +323,7 @@
   },
   "MECHANICAL_HEART": {
     "name_en": "Clockwork Heart Engine",
-    "name_int": "",
+    "name_int": "prosthetics.mechanical_heart.name",
     "name_it": "Cuore Meccanico a Orologeria",
     "type": "technological",
     "effects": {
@@ -335,7 +335,7 @@
   },
   "DRAGON_HEART": {
     "name_en": "Ancient Dragon Heart",
-    "name_int": "",
+    "name_int": "prosthetics.dragon_heart.name",
     "name_it": "Cuore di Drago Antico",
     "type": "biological",
     "effects": {
@@ -347,7 +347,7 @@
   },
   "AQUATIC_GILLS": {
     "name_en": "Aquatic Breathing Gills",
-    "name_int": "",
+    "name_int": "prosthetics.aquatic_gills.name",
     "name_it": "Branchie Respiratorie Acquatiche",
     "type": "biological",
     "effects": {
@@ -359,7 +359,7 @@
   },
   "AIR_FILTRATION": {
     "name_en": "Advanced Air Filtration",
-    "name_int": "",
+    "name_int": "prosthetics.air_filtration.name",
     "name_it": "Sistema di Filtrazione Avanzato",
     "type": "technological",
     "effects": {
@@ -371,7 +371,7 @@
   },
   "ELEMENTAL_LUNGS": {
     "name_en": "Elemental Essence Lungs",
-    "name_int": "",
+    "name_int": "prosthetics.elemental_lungs.name",
     "name_it": "Polmoni dell'Essenza Elementale",
     "type": "magical",
     "effects": {
@@ -383,8 +383,8 @@
   },
   "ALCHEMICAL_PROCESSOR": {
     "name_en": "Alchemical Processing Unit",
-    "name_int": "",
-    "name_it": "Unit\u00e0 di Elaborazione Alchemica",
+    "name_int": "prosthetics.alchemical_processor.name",
+    "name_it": "Unità di Elaborazione Alchemica",
     "type": "magical",
     "effects": {
       "3": 6,
@@ -395,7 +395,7 @@
   },
   "TOXIN_FILTER": {
     "name_en": "Bio-Toxin Filter System",
-    "name_int": "",
+    "name_int": "prosthetics.toxin_filter.name",
     "name_it": "Sistema Filtrante Bio-Tossine",
     "type": "biological",
     "effects": {
@@ -407,7 +407,7 @@
   },
   "DRACONIC_FURNACE": {
     "name_en": "Draconic Flame Furnace",
-    "name_int": "",
+    "name_int": "prosthetics.draconic_furnace.name",
     "name_it": "Fornace Draconiche delle Fiamme",
     "type": "magical",
     "effects": {
@@ -419,7 +419,7 @@
   },
   "NUTRIENT_SYNTHESIZER": {
     "name_en": "Nutrient Synthesis Chamber",
-    "name_int": "",
+    "name_int": "prosthetics.nutrient_synthesizer.name",
     "name_it": "Camera di Sintesi Nutritiva",
     "type": "technological",
     "effects": {
@@ -431,7 +431,7 @@
   },
   "MECHANICAL_ARM": {
     "name_en": "Steam-Powered Mechanical Arm",
-    "name_int": "",
+    "name_int": "prosthetics.mechanical_arm.name",
     "name_it": "Braccio Meccanico a Vapore",
     "type": "technological",
     "effects": {
@@ -443,7 +443,7 @@
   },
   "ASTRAL_LIMB": {
     "name_en": "Astral Projection Limb",
-    "name_int": "",
+    "name_int": "prosthetics.astral_limb.name",
     "name_it": "Arto di Proiezione Astrale",
     "type": "magical",
     "effects": {
@@ -455,7 +455,7 @@
   },
   "GOLEM_ARM": {
     "name_en": "Stone Golem Arm",
-    "name_int": "",
+    "name_int": "prosthetics.golem_arm.name",
     "name_it": "Braccio di Golem di Pietra",
     "type": "biological",
     "effects": {
@@ -467,7 +467,7 @@
   },
   "LIGHTNING_CONDUCTOR": {
     "name_en": "Lightning Conductor Arm",
-    "name_int": "",
+    "name_int": "prosthetics.lightning_conductor.name",
     "name_it": "Braccio Conduttore di Fulmini",
     "type": "magical",
     "effects": {
@@ -479,7 +479,7 @@
   },
   "TITAN_LIMB": {
     "name_en": "Titanium Reinforced Limb",
-    "name_int": "",
+    "name_int": "prosthetics.titan_limb.name",
     "name_it": "Arto Rinforzato al Titanio",
     "type": "technological",
     "effects": {
@@ -491,7 +491,7 @@
   },
   "BLADE_FINGERS": {
     "name_en": "Retractable Blade Fingers",
-    "name_int": "",
+    "name_int": "prosthetics.blade_fingers.name",
     "name_it": "Dita Lama Retrattili",
     "type": "technological",
     "effects": {
@@ -503,7 +503,7 @@
   },
   "MANA_CRYSTALS": {
     "name_en": "Embedded Mana Crystals",
-    "name_int": "",
+    "name_int": "prosthetics.mana_crystals.name",
     "name_it": "Cristalli di Mana Incorporati",
     "type": "magical",
     "effects": {
@@ -515,7 +515,7 @@
   },
   "GRAPPLING_HOOKS": {
     "name_en": "Mechanical Grappling Hooks",
-    "name_int": "",
+    "name_int": "prosthetics.grappling_hooks.name",
     "name_it": "Rampini Meccanici",
     "type": "technological",
     "effects": {
@@ -527,7 +527,7 @@
   },
   "LIVING_VINES": {
     "name_en": "Living Vine Extensions",
-    "name_int": "",
+    "name_int": "prosthetics.living_vines.name",
     "name_it": "Estensioni di Viti Viventi",
     "type": "biological",
     "effects": {
@@ -539,7 +539,7 @@
   },
   "SPIRIT_CHANNELERS": {
     "name_en": "Spirit Channeling Palms",
-    "name_int": "",
+    "name_int": "prosthetics.spirit_channelers.name",
     "name_it": "Palmi Incanalatori di Spiriti",
     "type": "magical",
     "effects": {
@@ -551,7 +551,7 @@
   },
   "LOCK_PICKS": {
     "name_en": "Integrated Lock Picks",
-    "name_int": "",
+    "name_int": "prosthetics.lock_picks.name",
     "name_it": "Grimaldelli Integrati",
     "type": "technological",
     "effects": {
@@ -563,7 +563,7 @@
   },
   "POISON_NEEDLES": {
     "name_en": "Poison Needle Tips",
-    "name_int": "",
+    "name_int": "prosthetics.poison_needles.name",
     "name_it": "Punte ad Ago Velenose",
     "type": "biological",
     "effects": {
@@ -575,7 +575,7 @@
   },
   "RUNIC_INSCRIPTIONS": {
     "name_en": "Runic Power Inscriptions",
-    "name_int": "",
+    "name_int": "prosthetics.runic_inscriptions.name",
     "name_it": "Iscrizioni Runiche di Potere",
     "type": "magical",
     "effects": {
@@ -587,7 +587,7 @@
   },
   "AQUATIC_FINS": {
     "name_en": "Installable Aquatic Fins",
-    "name_int": "",
+    "name_int": "prosthetics.aquatic_fins.name",
     "name_it": "Pinne Acquatiche Installabili",
     "type": "biological",
     "effects": {
@@ -599,7 +599,7 @@
   },
   "MICRO_TOOLS": {
     "name_en": "Micro-Tool Array",
-    "name_int": "",
+    "name_int": "prosthetics.micro_tools.name",
     "name_it": "Array di Micro-Strumenti",
     "type": "technological",
     "effects": {
@@ -611,7 +611,7 @@
   },
   "SPRING_COILS": {
     "name_en": "Spring-Loaded Coil Legs",
-    "name_int": "",
+    "name_int": "prosthetics.spring_coils.name",
     "name_it": "Gambe a Molla Caricata",
     "type": "technological",
     "effects": {
@@ -623,7 +623,7 @@
   },
   "TREE_TRUNK": {
     "name_en": "Living Tree Trunk Leg",
-    "name_int": "",
+    "name_int": "prosthetics.tree_trunk.name",
     "name_it": "Gamba Tronco d'Albero Vivente",
     "type": "biological",
     "effects": {
@@ -635,7 +635,7 @@
   },
   "SHADOW_WALKER": {
     "name_en": "Shadow Walker Limb",
-    "name_int": "",
+    "name_int": "prosthetics.shadow_walker.name",
     "name_it": "Arto del Camminatore d'Ombra",
     "type": "magical",
     "effects": {
@@ -647,7 +647,7 @@
   },
   "HYDRAULIC_PISTONS": {
     "name_en": "Hydraulic Piston System",
-    "name_int": "",
+    "name_int": "prosthetics.hydraulic_pistons.name",
     "name_it": "Sistema a Pistoni Idraulici",
     "type": "technological",
     "effects": {
@@ -659,7 +659,7 @@
   },
   "ELEMENTAL_STRIDE": {
     "name_en": "Elemental Stride Enhancer",
-    "name_int": "",
+    "name_int": "prosthetics.elemental_stride.name",
     "name_it": "Potenziatore del Passo Elementale",
     "type": "magical",
     "effects": {
@@ -671,7 +671,7 @@
   },
   "MAGNETIC_SOLES": {
     "name_en": "Magnetic Grip Soles",
-    "name_int": "",
+    "name_int": "prosthetics.magnetic_soles.name",
     "name_it": "Suole a Presa Magnetica",
     "type": "technological",
     "effects": {
@@ -683,7 +683,7 @@
   },
   "BEAST_CLAWS": {
     "name_en": "Retractable Beast Claws",
-    "name_int": "",
+    "name_int": "prosthetics.beast_claws.name",
     "name_it": "Artigli Bestiali Retrattili",
     "type": "biological",
     "effects": {
@@ -695,7 +695,7 @@
   },
   "HOVER_PADS": {
     "name_en": "Anti-Gravity Hover Pads",
-    "name_int": "",
+    "name_int": "prosthetics.hover_pads.name",
     "name_it": "Cuscinetti Antigravitazionali",
     "type": "magical",
     "effects": {
@@ -707,7 +707,7 @@
   },
   "SHOCK_ABSORBERS": {
     "name_en": "Kinetic Shock Absorbers",
-    "name_int": "",
+    "name_int": "prosthetics.shock_absorbers.name",
     "name_it": "Ammortizzatori Cinetici",
     "type": "technological",
     "effects": {
@@ -719,7 +719,7 @@
   },
   "CLIMBING_SPIKES": {
     "name_en": "Climbing Spike Array",
-    "name_int": "",
+    "name_int": "prosthetics.climbing_spikes.name",
     "name_it": "Array di Ramponi",
     "type": "technological",
     "effects": {
@@ -731,7 +731,7 @@
   },
   "BALANCE_GYROS": {
     "name_en": "Micro-Balance Gyroscopes",
-    "name_int": "",
+    "name_int": "prosthetics.balance_gyros.name",
     "name_it": "Giroscopi Micro-Equilibrio",
     "type": "technological",
     "effects": {
@@ -743,7 +743,7 @@
   },
   "EARTH_SENSE": {
     "name_en": "Earth Tremor Sensors",
-    "name_int": "",
+    "name_int": "prosthetics.earth_sense.name",
     "name_it": "Sensori Sismici Terrestri",
     "type": "magical",
     "effects": {
@@ -755,7 +755,7 @@
   },
   "BLOOD_PURIFIER": {
     "name_en": "Advanced Blood Purifier",
-    "name_int": "",
+    "name_int": "prosthetics.blood_purifier.name",
     "name_it": "Purificatore Sanguigno Avanzato",
     "type": "technological",
     "effects": {
@@ -767,7 +767,7 @@
   },
   "ESSENCE_FILTER": {
     "name_en": "Magical Essence Filter",
-    "name_int": "",
+    "name_int": "prosthetics.essence_filter.name",
     "name_it": "Filtro dell'Essenza Magica",
     "type": "magical",
     "effects": {
@@ -779,7 +779,7 @@
   },
   "NUTRIENT_EXTRACTOR": {
     "name_en": "Nutrient Extraction Matrix",
-    "name_int": "",
+    "name_int": "prosthetics.nutrient_extractor.name",
     "name_it": "Matrice di Estrazione Nutritiva",
     "type": "biological",
     "effects": {
@@ -791,7 +791,7 @@
   },
   "MANA_CONVERTER": {
     "name_en": "Mana Conversion Coils",
-    "name_int": "",
+    "name_int": "prosthetics.mana_converter.name",
     "name_it": "Bobine di Conversione Magica",
     "type": "magical",
     "effects": {

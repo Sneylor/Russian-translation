@@ -19,7 +19,10 @@
     },
     "buyPrice": 1500,
     "sellPrice": 600,
-    "description": "A simple wooden chair with cloth cushion."
+    "description": "A simple wooden chair with cloth cushion.",
+    "name_int": "furniture.wooden_chair.name",
+    "description_int": "furniture.wooden_chair.description",
+    "category_int": "furniture.category.seating"
   },
   "leather_armchair": {
     "name": "Leather Armchair",
@@ -41,7 +44,10 @@
     },
     "buyPrice": 4500,
     "sellPrice": 1800,
-    "description": "A comfortable leather armchair."
+    "description": "A comfortable leather armchair.",
+    "name_int": "furniture.leather_armchair.name",
+    "description_int": "furniture.leather_armchair.description",
+    "category_int": "furniture.category.seating"
   },
   "tech_chair": {
     "name": "Tech Chair",
@@ -64,7 +70,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "An ergonomic high-tech chair with auto-adjustment."
+    "description": "An ergonomic high-tech chair with auto-adjustment.",
+    "name_int": "furniture.tech_chair.name",
+    "description_int": "furniture.tech_chair.description",
+    "category_int": "furniture.category.seating"
   },
   "crystal_throne": {
     "name": "Crystal Throne",
@@ -93,7 +102,10 @@
     },
     "buyPrice": 50000,
     "sellPrice": 20000,
-    "description": "A majestic throne made of magical crystals."
+    "description": "A majestic throne made of magical crystals.",
+    "name_int": "furniture.crystal_throne.name",
+    "description_int": "furniture.crystal_throne.description",
+    "category_int": "furniture.category.seating"
   },
   "wooden_bench": {
     "name": "Wooden Bench",
@@ -116,7 +128,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A simple wooden bench for two."
+    "description": "A simple wooden bench for two.",
+    "name_int": "furniture.wooden_bench.name",
+    "description_int": "furniture.wooden_bench.description",
+    "category_int": "furniture.category.seating"
   },
   "wooden_table": {
     "name": "Wooden Table",
@@ -143,7 +158,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A sturdy wooden table."
+    "description": "A sturdy wooden table.",
+    "name_int": "furniture.wooden_table.name",
+    "description_int": "furniture.wooden_table.description",
+    "category_int": "furniture.category.tables"
   },
   "glass_table": {
     "name": "Glass Table",
@@ -166,7 +184,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A modern glass table with steel frame."
+    "description": "A modern glass table with steel frame.",
+    "name_int": "furniture.glass_table.name",
+    "description_int": "furniture.glass_table.description",
+    "category_int": "furniture.category.tables"
   },
   "tech_desk": {
     "name": "Tech Desk",
@@ -197,7 +218,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A high-tech desk with integrated displays."
+    "description": "A high-tech desk with integrated displays.",
+    "name_int": "furniture.tech_desk.name",
+    "description_int": "furniture.tech_desk.description",
+    "category_int": "furniture.category.tables"
   },
   "alchemy_table": {
     "name": "Alchemy Table",
@@ -226,7 +250,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A table equipped for alchemical experiments."
+    "description": "A table equipped for alchemical experiments.",
+    "name_int": "furniture.alchemy_table.name",
+    "description_int": "furniture.alchemy_table.description",
+    "category_int": "furniture.category.tables"
   },
   "dining_table": {
     "name": "Dining Table",
@@ -256,7 +283,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A large dining table for family meals."
+    "description": "A large dining table for family meals.",
+    "name_int": "furniture.dining_table.name",
+    "description_int": "furniture.dining_table.description",
+    "category_int": "furniture.category.tables"
   },
   "wooden_chest": {
     "name": "Wooden Chest",
@@ -283,7 +313,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A wooden chest for storing items."
+    "description": "A wooden chest for storing items.",
+    "name_int": "furniture.wooden_chest.name",
+    "description_int": "furniture.wooden_chest.description",
+    "category_int": "furniture.category.storage"
   },
   "metal_locker": {
     "name": "Metal Locker",
@@ -311,7 +344,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A secure metal storage locker."
+    "description": "A secure metal storage locker.",
+    "name_int": "furniture.metal_locker.name",
+    "description_int": "furniture.metal_locker.description",
+    "category_int": "furniture.category.storage"
   },
   "quantum_storage": {
     "name": "Quantum Storage Unit",
@@ -343,7 +379,10 @@
     },
     "buyPrice": 100000,
     "sellPrice": 40000,
-    "description": "Uses quantum technology for massive storage."
+    "description": "Uses quantum technology for massive storage.",
+    "name_int": "furniture.quantum_storage.name",
+    "description_int": "furniture.quantum_storage.description",
+    "category_int": "furniture.category.storage"
   },
   "bookshelf": {
     "name": "Bookshelf",
@@ -374,7 +413,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A tall bookshelf for organizing books and items."
+    "description": "A tall bookshelf for organizing books and items.",
+    "name_int": "furniture.bookshelf.name",
+    "description_int": "furniture.bookshelf.description",
+    "category_int": "furniture.category.storage"
   },
   "crystal_display": {
     "name": "Crystal Display Case",
@@ -400,7 +442,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "Display case that preserves magical items."
+    "description": "Display case that preserves magical items.",
+    "name_int": "furniture.crystal_display.name",
+    "description_int": "furniture.crystal_display.description",
+    "category_int": "furniture.category.storage"
   },
   "simple_bed": {
     "name": "Simple Bed",
@@ -434,7 +479,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A basic bed for resting."
+    "description": "A basic bed for resting.",
+    "name_int": "furniture.simple_bed.name",
+    "description_int": "furniture.simple_bed.description",
+    "category_int": "furniture.category.beds"
   },
   "luxury_bed": {
     "name": "Luxury Bed",
@@ -472,7 +520,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A luxurious king-size bed."
+    "description": "A luxurious king-size bed.",
+    "name_int": "furniture.luxury_bed.name",
+    "description_int": "furniture.luxury_bed.description",
+    "category_int": "furniture.category.beds"
   },
   "tech_pod": {
     "name": "Sleep Pod",
@@ -501,7 +552,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "High-tech sleeping pod with health monitoring."
+    "description": "High-tech sleeping pod with health monitoring.",
+    "name_int": "furniture.tech_pod.name",
+    "description_int": "furniture.tech_pod.description",
+    "category_int": "furniture.category.beds"
   },
   "wooden_torch": {
     "name": "Wooden Torch Stand",
@@ -524,7 +578,10 @@
     },
     "buyPrice": 1000,
     "sellPrice": 400,
-    "description": "A simple torch stand for basic lighting."
+    "description": "A simple torch stand for basic lighting.",
+    "name_int": "furniture.wooden_torch.name",
+    "description_int": "furniture.wooden_torch.description",
+    "category_int": "furniture.category.lighting"
   },
   "crystal_lamp": {
     "name": "Crystal Lamp",
@@ -547,7 +604,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A magical lamp powered by crystals."
+    "description": "A magical lamp powered by crystals.",
+    "name_int": "furniture.crystal_lamp.name",
+    "description_int": "furniture.crystal_lamp.description",
+    "category_int": "furniture.category.lighting"
   },
   "neon_light": {
     "name": "Neon Light Panel",
@@ -572,7 +632,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "Modern neon lighting panel."
+    "description": "Modern neon lighting panel.",
+    "name_int": "furniture.neon_light.name",
+    "description_int": "furniture.neon_light.description",
+    "category_int": "furniture.category.lighting"
   },
   "chandelier": {
     "name": "Crystal Chandelier",
@@ -601,7 +664,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "An elegant crystal chandelier."
+    "description": "An elegant crystal chandelier.",
+    "name_int": "furniture.chandelier.name",
+    "description_int": "furniture.chandelier.description",
+    "category_int": "furniture.category.lighting"
   },
   "crafting_bench": {
     "name": "Crafting Bench",
@@ -632,7 +698,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "Basic workbench for crafting furniture."
+    "description": "Basic workbench for crafting furniture.",
+    "name_int": "furniture.crafting_bench.name",
+    "description_int": "furniture.crafting_bench.description",
+    "category_int": "furniture.category.workstations"
   },
   "tech_workstation": {
     "name": "Tech Workstation",
@@ -667,7 +736,10 @@
     },
     "buyPrice": 50000,
     "sellPrice": 20000,
-    "description": "Advanced workstation for tech crafting."
+    "description": "Advanced workstation for tech crafting.",
+    "name_int": "furniture.tech_workstation.name",
+    "description_int": "furniture.tech_workstation.description",
+    "category_int": "furniture.category.workstations"
   },
   "arcane_altar": {
     "name": "Arcane Altar",
@@ -707,7 +779,10 @@
     },
     "buyPrice": 80000,
     "sellPrice": 32000,
-    "description": "Altar for magical furniture enchantments."
+    "description": "Altar for magical furniture enchantments.",
+    "name_int": "furniture.arcane_altar.name",
+    "description_int": "furniture.arcane_altar.description",
+    "category_int": "furniture.category.workstations"
   },
   "chemistry_station": {
     "name": "Chemistry Station",
@@ -739,7 +814,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "Station for chemical processing."
+    "description": "Station for chemical processing.",
+    "name_int": "furniture.chemistry_station.name",
+    "description_int": "furniture.chemistry_station.description",
+    "category_int": "furniture.category.workstations"
   },
   "plant_pot": {
     "name": "Plant Pot",
@@ -761,7 +839,10 @@
     },
     "buyPrice": 1500,
     "sellPrice": 600,
-    "description": "A decorative plant in a pot."
+    "description": "A decorative plant in a pot.",
+    "name_int": "furniture.plant_pot.name",
+    "description_int": "furniture.plant_pot.description",
+    "category_int": "furniture.category.decoration"
   },
   "holographic_display": {
     "name": "Holographic Display",
@@ -788,7 +869,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "Projects holographic images."
+    "description": "Projects holographic images.",
+    "name_int": "furniture.holographic_display.name",
+    "description_int": "furniture.holographic_display.description",
+    "category_int": "furniture.category.decoration"
   },
   "statue": {
     "name": "Stone Statue",
@@ -813,7 +897,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "An artistic stone statue."
+    "description": "An artistic stone statue.",
+    "name_int": "furniture.statue.name",
+    "description_int": "furniture.statue.description",
+    "category_int": "furniture.category.decoration"
   },
   "aquarium": {
     "name": "Aquarium",
@@ -837,7 +924,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A decorative aquarium."
+    "description": "A decorative aquarium.",
+    "name_int": "furniture.aquarium.name",
+    "description_int": "furniture.aquarium.description",
+    "category_int": "furniture.category.decoration"
   },
   "mirror": {
     "name": "Wall Mirror",
@@ -866,7 +956,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A large wall-mounted mirror."
+    "description": "A large wall-mounted mirror.",
+    "name_int": "furniture.mirror.name",
+    "description_int": "furniture.mirror.description",
+    "category_int": "furniture.category.decoration"
   },
   "rug": {
     "name": "Decorative Rug",
@@ -895,7 +988,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A comfortable decorative rug."
+    "description": "A comfortable decorative rug.",
+    "name_int": "furniture.rug.name",
+    "description_int": "furniture.rug.description",
+    "category_int": "furniture.category.decoration"
   },
   "refrigerator": {
     "name": "Refrigerator",
@@ -926,7 +1022,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "Keeps food fresh and preserved."
+    "description": "Keeps food fresh and preserved.",
+    "name_int": "furniture.refrigerator.name",
+    "description_int": "furniture.refrigerator.description",
+    "category_int": "furniture.category.appliances"
   },
   "cooking_stove": {
     "name": "Cooking Stove",
@@ -953,7 +1052,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "Essential for cooking meals."
+    "description": "Essential for cooking meals.",
+    "name_int": "furniture.cooking_stove.name",
+    "description_int": "furniture.cooking_stove.description",
+    "category_int": "furniture.category.appliances"
   },
   "recycler": {
     "name": "Material Recycler",
@@ -985,7 +1087,10 @@
     },
     "buyPrice": 50000,
     "sellPrice": 20000,
-    "description": "Breaks down items into base materials."
+    "description": "Breaks down items into base materials.",
+    "name_int": "furniture.recycler.name",
+    "description_int": "furniture.recycler.description",
+    "category_int": "furniture.category.appliances"
   },
   "teleporter": {
     "name": "Quantum Teleporter",
@@ -1017,7 +1122,10 @@
     },
     "buyPrice": 200000,
     "sellPrice": 80000,
-    "description": "Instant transportation between linked teleporters."
+    "description": "Instant transportation between linked teleporters.",
+    "name_int": "furniture.teleporter.name",
+    "description_int": "furniture.teleporter.description",
+    "category_int": "furniture.category.appliances"
   },
   "television": {
     "name": "Flat Screen TV",
@@ -1044,7 +1152,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "High-definition television for entertainment."
+    "description": "High-definition television for entertainment.",
+    "name_int": "furniture.television.name",
+    "description_int": "furniture.television.description",
+    "category_int": "furniture.category.entertainment"
   },
   "arcade_machine": {
     "name": "Arcade Cabinet",
@@ -1073,7 +1184,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "Classic arcade games for endless fun."
+    "description": "Classic arcade games for endless fun.",
+    "name_int": "furniture.arcade_machine.name",
+    "description_int": "furniture.arcade_machine.description",
+    "category_int": "furniture.category.entertainment"
   },
   "pool_table": {
     "name": "Pool Table",
@@ -1106,7 +1220,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "A premium pool table for recreation."
+    "description": "A premium pool table for recreation.",
+    "name_int": "furniture.pool_table.name",
+    "description_int": "furniture.pool_table.description",
+    "category_int": "furniture.category.entertainment"
   },
   "ping_pong_table": {
     "name": "Ping Pong Table",
@@ -1138,7 +1255,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A competitive ping pong table."
+    "description": "A competitive ping pong table.",
+    "name_int": "furniture.ping_pong_table.name",
+    "description_int": "furniture.ping_pong_table.description",
+    "category_int": "furniture.category.entertainment"
   },
   "dartboard": {
     "name": "Dartboard",
@@ -1166,7 +1286,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A classic dartboard game."
+    "description": "A classic dartboard game.",
+    "name_int": "furniture.dartboard.name",
+    "description_int": "furniture.dartboard.description",
+    "category_int": "furniture.category.entertainment"
   },
   "jukebox": {
     "name": "Jukebox",
@@ -1195,7 +1318,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "Play your favorite music anytime."
+    "description": "Play your favorite music anytime.",
+    "name_int": "furniture.jukebox.name",
+    "description_int": "furniture.jukebox.description",
+    "category_int": "furniture.category.entertainment"
   },
   "billiards_balls_set": {
     "name": "Billiards Ball Set",
@@ -1219,7 +1345,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "Set of billiard balls for pool games."
+    "description": "Set of billiard balls for pool games.",
+    "name_int": "furniture.billiards_balls_set.name",
+    "description_int": "furniture.billiards_balls_set.description",
+    "category_int": "furniture.category.entertainment"
   },
   "gaming_console": {
     "name": "Gaming Console",
@@ -1245,7 +1374,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "Latest gaming console for entertainment."
+    "description": "Latest gaming console for entertainment.",
+    "name_int": "furniture.gaming_console.name",
+    "description_int": "furniture.gaming_console.description",
+    "category_int": "furniture.category.entertainment"
   },
   "virtual_reality_headset": {
     "name": "VR Headset Station",
@@ -1276,7 +1408,10 @@
     },
     "buyPrice": 35000,
     "sellPrice": 14000,
-    "description": "Immersive virtual reality experience."
+    "description": "Immersive virtual reality experience.",
+    "name_int": "furniture.virtual_reality_headset.name",
+    "description_int": "furniture.virtual_reality_headset.description",
+    "category_int": "furniture.category.entertainment"
   },
   "foosball_table": {
     "name": "Foosball Table",
@@ -1302,7 +1437,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "Table football for quick matches."
+    "description": "Table football for quick matches.",
+    "name_int": "furniture.foosball_table.name",
+    "description_int": "furniture.foosball_table.description",
+    "category_int": "furniture.category.entertainment"
   },
   "blackjack_table": {
     "name": "Blackjack Table",
@@ -1332,7 +1470,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "Professional blackjack gaming table."
+    "description": "Professional blackjack gaming table.",
+    "name_int": "furniture.blackjack_table.name",
+    "description_int": "furniture.blackjack_table.description",
+    "category_int": "furniture.category.entertainment"
   },
   "roulette_table": {
     "name": "Roulette Table",
@@ -1365,7 +1506,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "Luxurious roulette gaming table."
+    "description": "Luxurious roulette gaming table.",
+    "name_int": "furniture.roulette_table.name",
+    "description_int": "furniture.roulette_table.description",
+    "category_int": "furniture.category.entertainment"
   },
   "slot_machine": {
     "name": "Slot Machine",
@@ -1394,7 +1538,10 @@
     },
     "buyPrice": 16000,
     "sellPrice": 6400,
-    "description": "Classic slot machine for gambling entertainment."
+    "description": "Classic slot machine for gambling entertainment.",
+    "name_int": "furniture.slot_machine.name",
+    "description_int": "furniture.slot_machine.description",
+    "category_int": "furniture.category.entertainment"
   },
   "karaoke_machine": {
     "name": "Karaoke System",
@@ -1421,7 +1568,10 @@
     },
     "buyPrice": 14000,
     "sellPrice": 5600,
-    "description": "Sing your favorite songs with professional quality."
+    "description": "Sing your favorite songs with professional quality.",
+    "name_int": "furniture.karaoke_machine.name",
+    "description_int": "furniture.karaoke_machine.description",
+    "category_int": "furniture.category.entertainment"
   },
   "movie_projector": {
     "name": "Movie Projector",
@@ -1447,7 +1597,10 @@
     },
     "buyPrice": 13000,
     "sellPrice": 5200,
-    "description": "Project movies on any wall."
+    "description": "Project movies on any wall.",
+    "name_int": "furniture.movie_projector.name",
+    "description_int": "furniture.movie_projector.description",
+    "category_int": "furniture.category.entertainment"
   },
   "dance_floor": {
     "name": "Dance Floor",
@@ -1484,7 +1637,10 @@
     },
     "buyPrice": 22000,
     "sellPrice": 8800,
-    "description": "Disco-style dance floor with lights."
+    "description": "Disco-style dance floor with lights.",
+    "name_int": "furniture.dance_floor.name",
+    "description_int": "furniture.dance_floor.description",
+    "category_int": "furniture.category.entertainment"
   },
   "bowling_lane": {
     "name": "Bowling Lane Set",
@@ -1522,7 +1678,10 @@
     },
     "buyPrice": 28000,
     "sellPrice": 11200,
-    "description": "Full bowling lane setup."
+    "description": "Full bowling lane setup.",
+    "name_int": "furniture.bowling_lane.name",
+    "description_int": "furniture.bowling_lane.description",
+    "category_int": "furniture.category.entertainment"
   },
   "plant": {
     "name": "Plant",
@@ -1544,7 +1703,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A potted decorative plant."
+    "description": "A potted decorative plant.",
+    "name_int": "furniture.plant.name",
+    "description_int": "furniture.plant.description",
+    "category_int": "furniture.category.nature"
   },
   "flowers": {
     "name": "Flower Bed",
@@ -1567,7 +1729,10 @@
     },
     "buyPrice": 1000,
     "sellPrice": 400,
-    "description": "A bed of colorful flowers."
+    "description": "A bed of colorful flowers.",
+    "name_int": "furniture.flowers.name",
+    "description_int": "furniture.flowers.description",
+    "category_int": "furniture.category.nature"
   },
   "tree": {
     "name": "Tree",
@@ -1599,7 +1764,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A large decorative tree."
+    "description": "A large decorative tree.",
+    "name_int": "furniture.tree.name",
+    "description_int": "furniture.tree.description",
+    "category_int": "furniture.category.nature"
   },
   "rock": {
     "name": "Rock",
@@ -1621,7 +1789,10 @@
     },
     "buyPrice": 1000,
     "sellPrice": 400,
-    "description": "A large decorative rock."
+    "description": "A large decorative rock.",
+    "name_int": "furniture.rock.name",
+    "description_int": "furniture.rock.description",
+    "category_int": "furniture.category.nature"
   },
   "pile_of_bones": {
     "name": "Pile of Bones",
@@ -1644,7 +1815,10 @@
     },
     "buyPrice": 1500,
     "sellPrice": 600,
-    "description": "A creepy pile of bones."
+    "description": "A creepy pile of bones.",
+    "name_int": "furniture.pile_of_bones.name",
+    "description_int": "furniture.pile_of_bones.description",
+    "category_int": "furniture.category.nature"
   },
   "fence": {
     "name": "Fence",
@@ -1667,7 +1841,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A wooden fence section."
+    "description": "A wooden fence section.",
+    "name_int": "furniture.fence.name",
+    "description_int": "furniture.fence.description",
+    "category_int": "furniture.category.structures"
   },
   "bridge": {
     "name": "Bridge",
@@ -1697,7 +1874,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A wooden bridge crossing."
+    "description": "A wooden bridge crossing.",
+    "name_int": "furniture.bridge.name",
+    "description_int": "furniture.bridge.description",
+    "category_int": "furniture.category.structures"
   },
   "stairs": {
     "name": "Stairs",
@@ -1725,7 +1905,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A set of wooden stairs."
+    "description": "A set of wooden stairs.",
+    "name_int": "furniture.stairs.name",
+    "description_int": "furniture.stairs.description",
+    "category_int": "furniture.category.structures"
   },
   "ladder": {
     "name": "Ladder",
@@ -1751,7 +1934,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A wooden ladder for climbing."
+    "description": "A wooden ladder for climbing.",
+    "name_int": "furniture.ladder.name",
+    "description_int": "furniture.ladder.description",
+    "category_int": "furniture.category.structures"
   },
   "rails": {
     "name": "Rails",
@@ -1775,7 +1961,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "Metal safety rails."
+    "description": "Metal safety rails.",
+    "name_int": "furniture.rails.name",
+    "description_int": "furniture.rails.description",
+    "category_int": "furniture.category.structures"
   },
   "window_1x1": {
     "name": "Window (1x1)",
@@ -1799,7 +1988,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A small window."
+    "description": "A small window.",
+    "name_int": "furniture.window_1x1.name",
+    "description_int": "furniture.window_1x1.description",
+    "category_int": "furniture.category.structures"
   },
   "window_2x1": {
     "name": "Window (2x1)",
@@ -1824,7 +2016,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A medium window."
+    "description": "A medium window.",
+    "name_int": "furniture.window_2x1.name",
+    "description_int": "furniture.window_2x1.description",
+    "category_int": "furniture.category.structures"
   },
   "window_2x2": {
     "name": "Window (2x2)",
@@ -1853,7 +2048,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A large window."
+    "description": "A large window.",
+    "name_int": "furniture.window_2x2.name",
+    "description_int": "furniture.window_2x2.description",
+    "category_int": "furniture.category.structures"
   },
   "sign": {
     "name": "Sign",
@@ -1875,7 +2073,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A wooden directional sign."
+    "description": "A wooden directional sign.",
+    "name_int": "furniture.sign.name",
+    "description_int": "furniture.sign.description",
+    "category_int": "furniture.category.decoration"
   },
   "vase": {
     "name": "Vase",
@@ -1897,7 +2098,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A decorative vase."
+    "description": "A decorative vase.",
+    "name_int": "furniture.vase.name",
+    "description_int": "furniture.vase.description",
+    "category_int": "furniture.category.decoration"
   },
   "clock": {
     "name": "Wall Clock",
@@ -1921,7 +2125,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A mechanical wall clock."
+    "description": "A mechanical wall clock.",
+    "name_int": "furniture.clock.name",
+    "description_int": "furniture.clock.description",
+    "category_int": "furniture.category.decoration"
   },
   "grandfather_clock": {
     "name": "Grandfather Clock",
@@ -1953,7 +2160,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "An elegant grandfather clock."
+    "description": "An elegant grandfather clock.",
+    "name_int": "furniture.grandfather_clock.name",
+    "description_int": "furniture.grandfather_clock.description",
+    "category_int": "furniture.category.decoration"
   },
   "world_globe": {
     "name": "World Globe",
@@ -1981,7 +2191,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A rotating world globe."
+    "description": "A rotating world globe.",
+    "name_int": "furniture.world_globe.name",
+    "description_int": "furniture.world_globe.description",
+    "category_int": "furniture.category.decoration"
   },
   "world_map": {
     "name": "World Map",
@@ -2010,7 +2223,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A framed world map."
+    "description": "A framed world map.",
+    "name_int": "furniture.world_map.name",
+    "description_int": "furniture.world_map.description",
+    "category_int": "furniture.category.decoration"
   },
   "prayer_rug": {
     "name": "Prayer Rug",
@@ -2037,7 +2253,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A decorative prayer rug."
+    "description": "A decorative prayer rug.",
+    "name_int": "furniture.prayer_rug.name",
+    "description_int": "furniture.prayer_rug.description",
+    "category_int": "furniture.category.decoration"
   },
   "trash_pile": {
     "name": "Trash Pile",
@@ -2060,7 +2279,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A pile of discarded trash."
+    "description": "A pile of discarded trash.",
+    "name_int": "furniture.trash_pile.name",
+    "description_int": "furniture.trash_pile.description",
+    "category_int": "furniture.category.decoration"
   },
   "barrel": {
     "name": "Dungeon Barrel",
@@ -2082,7 +2304,10 @@
     },
     "buyPrice": 2500,
     "sellPrice": 1000,
-    "description": "A barrel for storing supplies."
+    "description": "A barrel for storing supplies.",
+    "name_int": "furniture.barrel.name",
+    "description_int": "furniture.barrel.description",
+    "category_int": "furniture.category.dungeon"
   },
   "pile_of_books": {
     "name": "Pile of Books",
@@ -2105,7 +2330,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A stack of old books."
+    "description": "A stack of old books.",
+    "name_int": "furniture.pile_of_books.name",
+    "description_int": "furniture.pile_of_books.description",
+    "category_int": "furniture.category.decoration"
   },
   "candle": {
     "name": "Candle",
@@ -2127,7 +2355,10 @@
     },
     "buyPrice": 500,
     "sellPrice": 200,
-    "description": "A lit decorative candle."
+    "description": "A lit decorative candle.",
+    "name_int": "furniture.candle.name",
+    "description_int": "furniture.candle.description",
+    "category_int": "furniture.category.lighting"
   },
   "pentagram": {
     "name": "Pentagram Floor",
@@ -2155,7 +2386,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A mystical pentagram drawn on the floor."
+    "description": "A mystical pentagram drawn on the floor.",
+    "name_int": "furniture.pentagram.name",
+    "description_int": "furniture.pentagram.description",
+    "category_int": "furniture.category.decoration"
   },
   "stage_lights": {
     "name": "Stage Lights",
@@ -2184,7 +2418,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "Professional stage lighting rig."
+    "description": "Professional stage lighting rig.",
+    "name_int": "furniture.stage_lights.name",
+    "description_int": "furniture.stage_lights.description",
+    "category_int": "furniture.category.lighting"
   },
   "pipe": {
     "name": "Pipe",
@@ -2209,7 +2446,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "An industrial metal pipe."
+    "description": "An industrial metal pipe.",
+    "name_int": "furniture.pipe.name",
+    "description_int": "furniture.pipe.description",
+    "category_int": "furniture.category.structures"
   },
   "motor_engine": {
     "name": "Big Motor Engine",
@@ -2241,7 +2481,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "A large industrial motor engine."
+    "description": "A large industrial motor engine.",
+    "name_int": "furniture.motor_engine.name",
+    "description_int": "furniture.motor_engine.description",
+    "category_int": "furniture.category.workstations"
   },
   "piano": {
     "name": "Piano",
@@ -2272,7 +2515,10 @@
     },
     "buyPrice": 28000,
     "sellPrice": 11200,
-    "description": "A grand piano for musical performances."
+    "description": "A grand piano for musical performances.",
+    "name_int": "furniture.piano.name",
+    "description_int": "furniture.piano.description",
+    "category_int": "furniture.category.entertainment"
   },
   "guitar": {
     "name": "Acoustic Guitar",
@@ -2300,7 +2546,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "An acoustic guitar for playing."
+    "description": "An acoustic guitar for playing.",
+    "name_int": "furniture.guitar.name",
+    "description_int": "furniture.guitar.description",
+    "category_int": "furniture.category.entertainment"
   },
   "electric_guitar": {
     "name": "Electric Guitar",
@@ -2329,7 +2578,10 @@
     },
     "buyPrice": 22000,
     "sellPrice": 8800,
-    "description": "A modern electric guitar."
+    "description": "A modern electric guitar.",
+    "name_int": "furniture.electric_guitar.name",
+    "description_int": "furniture.electric_guitar.description",
+    "category_int": "furniture.category.entertainment"
   },
   "harp": {
     "name": "Harp",
@@ -2363,7 +2615,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A beautiful golden harp."
+    "description": "A beautiful golden harp.",
+    "name_int": "furniture.harp.name",
+    "description_int": "furniture.harp.description",
+    "category_int": "furniture.category.entertainment"
   },
   "crib": {
     "name": "Baby Crib",
@@ -2393,7 +2648,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "A comfortable baby crib."
+    "description": "A comfortable baby crib.",
+    "name_int": "furniture.crib.name",
+    "description_int": "furniture.crib.description",
+    "category_int": "furniture.category.beds"
   },
   "radio": {
     "name": "Radio",
@@ -2419,7 +2677,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "An old radio for music and news."
+    "description": "An old radio for music and news.",
+    "name_int": "furniture.radio.name",
+    "description_int": "furniture.radio.description",
+    "category_int": "furniture.category.entertainment"
   },
   "wc": {
     "name": "Toilet",
@@ -2447,7 +2708,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A functional toilet."
+    "description": "A functional toilet.",
+    "name_int": "furniture.wc.name",
+    "description_int": "furniture.wc.description",
+    "category_int": "furniture.category.appliances"
   },
   "shower": {
     "name": "Shower",
@@ -2475,7 +2739,10 @@
     },
     "buyPrice": 9000,
     "sellPrice": 3600,
-    "description": "A shower stall for bathing."
+    "description": "A shower stall for bathing.",
+    "name_int": "furniture.shower.name",
+    "description_int": "furniture.shower.description",
+    "category_int": "furniture.category.appliances"
   },
   "pc": {
     "name": "Computer",
@@ -2501,7 +2768,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "A high-performance desktop computer."
+    "description": "A high-performance desktop computer.",
+    "name_int": "furniture.pc.name",
+    "description_int": "furniture.pc.description",
+    "category_int": "furniture.category.workstations"
   },
   "christmas_tree": {
     "name": "Christmas Tree",
@@ -2535,7 +2805,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A festive decorated Christmas tree."
+    "description": "A festive decorated Christmas tree.",
+    "name_int": "furniture.christmas_tree.name",
+    "description_int": "furniture.christmas_tree.description",
+    "category_int": "furniture.category.decoration"
   },
   "warrior_statue": {
     "name": "Warrior Monk Statue",
@@ -2561,7 +2834,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A statue of a mighty warrior monk."
+    "description": "A statue of a mighty warrior monk.",
+    "name_int": "furniture.warrior_statue.name",
+    "description_int": "furniture.warrior_statue.description",
+    "category_int": "furniture.category.decoration"
   },
   "baseball_bat": {
     "name": "Baseball Bat",
@@ -2588,7 +2864,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A wooden baseball bat."
+    "description": "A wooden baseball bat.",
+    "name_int": "furniture.baseball_bat.name",
+    "description_int": "furniture.baseball_bat.description",
+    "category_int": "furniture.category.entertainment"
   },
   "crt_monitor": {
     "name": "CRT Monitor",
@@ -2614,7 +2893,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A bulky CRT computer monitor (2001 era)."
+    "description": "A bulky CRT computer monitor (2001 era).",
+    "name_int": "furniture.crt_monitor.name",
+    "description_int": "furniture.crt_monitor.description",
+    "category_int": "furniture.category.workstations"
   },
   "desktop_computer_2001": {
     "name": "Desktop PC (2001)",
@@ -2640,7 +2922,10 @@
     },
     "buyPrice": 28000,
     "sellPrice": 11200,
-    "description": "A chunky desktop computer from 2001."
+    "description": "A chunky desktop computer from 2001.",
+    "name_int": "furniture.desktop_computer_2001.name",
+    "description_int": "furniture.desktop_computer_2001.description",
+    "category_int": "furniture.category.workstations"
   },
   "keyboard_mouse": {
     "name": "Keyboard & Mouse",
@@ -2663,7 +2948,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "Computer keyboard and mouse combo."
+    "description": "Computer keyboard and mouse combo.",
+    "name_int": "furniture.keyboard_mouse.name",
+    "description_int": "furniture.keyboard_mouse.description",
+    "category_int": "furniture.category.workstations"
   },
   "dial_up_modem": {
     "name": "Dial-up Modem",
@@ -2688,7 +2976,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "Dial-up internet modem (screech and squeal included)."
+    "description": "Dial-up internet modem (screech and squeal included).",
+    "name_int": "furniture.dial_up_modem.name",
+    "description_int": "furniture.dial_up_modem.description",
+    "category_int": "furniture.category.workstations"
   },
   "landline_phone": {
     "name": "Landline Phone",
@@ -2713,7 +3004,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A corded landline telephone."
+    "description": "A corded landline telephone.",
+    "name_int": "furniture.landline_phone.name",
+    "description_int": "furniture.landline_phone.description",
+    "category_int": "furniture.category.entertainment"
   },
   "printer_inkjet": {
     "name": "Inkjet Printer",
@@ -2738,7 +3032,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "An inkjet printer (loud and slow)."
+    "description": "An inkjet printer (loud and slow).",
+    "name_int": "furniture.printer_inkjet.name",
+    "description_int": "furniture.printer_inkjet.description",
+    "category_int": "furniture.category.workstations"
   },
   "fax_machine": {
     "name": "Fax Machine",
@@ -2763,7 +3060,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "A standalone fax machine."
+    "description": "A standalone fax machine.",
+    "name_int": "furniture.fax_machine.name",
+    "description_int": "furniture.fax_machine.description",
+    "category_int": "furniture.category.workstations"
   },
   "vcr_player": {
     "name": "VCR Player",
@@ -2788,7 +3088,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "VCR for playing VHS tapes."
+    "description": "VCR for playing VHS tapes.",
+    "name_int": "furniture.vcr_player.name",
+    "description_int": "furniture.vcr_player.description",
+    "category_int": "furniture.category.entertainment"
   },
   "dvd_player": {
     "name": "DVD Player",
@@ -2813,7 +3116,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "New DVD player (state of the art in 2001)."
+    "description": "New DVD player (state of the art in 2001).",
+    "name_int": "furniture.dvd_player.name",
+    "description_int": "furniture.dvd_player.description",
+    "category_int": "furniture.category.entertainment"
   },
   "cable_box": {
     "name": "Cable Box",
@@ -2838,7 +3144,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "Cable television box with remote control."
+    "description": "Cable television box with remote control.",
+    "name_int": "furniture.cable_box.name",
+    "description_int": "furniture.cable_box.description",
+    "category_int": "furniture.category.entertainment"
   },
   "game_console_ps1": {
     "name": "Battlestation 1",
@@ -2864,7 +3173,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "Sony PlayStation console (2001 era)."
+    "description": "Sony PlayStation console (2001 era).",
+    "name_int": "furniture.game_console_ps1.name",
+    "description_int": "furniture.game_console_ps1.description",
+    "category_int": "furniture.category.entertainment"
   },
   "game_console_n64": {
     "name": "Tintendon 666",
@@ -2890,7 +3202,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "Nintendo 64 gaming console."
+    "description": "Nintendo 64 gaming console.",
+    "name_int": "furniture.game_console_n64.name",
+    "description_int": "furniture.game_console_n64.description",
+    "category_int": "furniture.category.entertainment"
   },
   "dreamcast_console": {
     "name": "Mastercast Console",
@@ -2916,7 +3231,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "Sega Dreamcast gaming console."
+    "description": "Sega Dreamcast gaming console.",
+    "name_int": "furniture.dreamcast_console.name",
+    "description_int": "furniture.dreamcast_console.description",
+    "category_int": "furniture.category.entertainment"
   },
   "crt_television": {
     "name": "CRT Television",
@@ -2947,7 +3265,10 @@
     },
     "buyPrice": 16000,
     "sellPrice": 6400,
-    "description": "Large CRT television set."
+    "description": "Large CRT television set.",
+    "name_int": "furniture.crt_television.name",
+    "description_int": "furniture.crt_television.description",
+    "category_int": "furniture.category.entertainment"
   },
   "stereo_boombox": {
     "name": "Stereo Boombox",
@@ -2974,7 +3295,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "Stereo boombox with cassette and CD player."
+    "description": "Stereo boombox with cassette and CD player.",
+    "name_int": "furniture.stereo_boombox.name",
+    "description_int": "furniture.stereo_boombox.description",
+    "category_int": "furniture.category.entertainment"
   },
   "zip_drive": {
     "name": "Zip Drive",
@@ -2999,7 +3323,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "Iomega Zip drive (100MB storage)."
+    "description": "Iomega Zip drive (100MB storage).",
+    "name_int": "furniture.zip_drive.name",
+    "description_int": "furniture.zip_drive.description",
+    "category_int": "furniture.category.workstations"
   },
   "beanbag_chair": {
     "name": "Beanbag Chair",
@@ -3023,7 +3350,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A comfortable beanbag chair (2001 style)."
+    "description": "A comfortable beanbag chair (2001 style).",
+    "name_int": "furniture.beanbag_chair.name",
+    "description_int": "furniture.beanbag_chair.description",
+    "category_int": "furniture.category.seating"
   },
   "futon": {
     "name": "Futon",
@@ -3053,7 +3383,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A futon couch/bed combo."
+    "description": "A futon couch/bed combo.",
+    "name_int": "furniture.futon.name",
+    "description_int": "furniture.futon.description",
+    "category_int": "furniture.category.beds"
   },
   "metal_shelving": {
     "name": "Metal Shelving Unit",
@@ -3084,7 +3417,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "Industrial metal shelving unit."
+    "description": "Industrial metal shelving unit.",
+    "name_int": "furniture.metal_shelving.name",
+    "description_int": "furniture.metal_shelving.description",
+    "category_int": "furniture.category.storage"
   },
   "loft_bed": {
     "name": "Loft Bed",
@@ -3118,7 +3454,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "A loft bed for small spaces."
+    "description": "A loft bed for small spaces.",
+    "name_int": "furniture.loft_bed.name",
+    "description_int": "furniture.loft_bed.description",
+    "category_int": "furniture.category.beds"
   },
   "bunk_bed": {
     "name": "Bunk Bed",
@@ -3152,7 +3491,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A bunk bed for two sleepers."
+    "description": "A bunk bed for two sleepers.",
+    "name_int": "furniture.bunk_bed.name",
+    "description_int": "furniture.bunk_bed.description",
+    "category_int": "furniture.category.beds"
   },
   "water_cooler": {
     "name": "Water Cooler",
@@ -3180,7 +3522,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "Office water cooler for gossip and hydration."
+    "description": "Office water cooler for gossip and hydration.",
+    "name_int": "furniture.water_cooler.name",
+    "description_int": "furniture.water_cooler.description",
+    "category_int": "furniture.category.appliances"
   },
   "desk_lamp": {
     "name": "Desk Lamp",
@@ -3203,7 +3548,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A simple desk lamp."
+    "description": "A simple desk lamp.",
+    "name_int": "furniture.desk_lamp.name",
+    "description_int": "furniture.desk_lamp.description",
+    "category_int": "furniture.category.lighting"
   },
   "floor_lamp": {
     "name": "Floor Lamp",
@@ -3229,7 +3577,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A tall floor lamp."
+    "description": "A tall floor lamp.",
+    "name_int": "furniture.floor_lamp.name",
+    "description_int": "furniture.floor_lamp.description",
+    "category_int": "furniture.category.lighting"
   },
   "lava_lamp": {
     "name": "Lava Lamp",
@@ -3254,7 +3605,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A groovy lava lamp (2001 essential)."
+    "description": "A groovy lava lamp (2001 essential).",
+    "name_int": "furniture.lava_lamp.name",
+    "description_int": "furniture.lava_lamp.description",
+    "category_int": "furniture.category.decoration"
   },
   "movie_poster": {
     "name": "Movie Poster",
@@ -3277,7 +3631,10 @@
     },
     "buyPrice": 1000,
     "sellPrice": 400,
-    "description": "A movie poster from 2001."
+    "description": "A movie poster from 2001.",
+    "name_int": "furniture.movie_poster.name",
+    "description_int": "furniture.movie_poster.description",
+    "category_int": "furniture.category.decoration"
   },
   "band_poster": {
     "name": "Band Poster",
@@ -3300,7 +3657,10 @@
     },
     "buyPrice": 1000,
     "sellPrice": 400,
-    "description": "A band poster on the wall."
+    "description": "A band poster on the wall.",
+    "name_int": "furniture.band_poster.name",
+    "description_int": "furniture.band_poster.description",
+    "category_int": "furniture.category.decoration"
   },
   "sports_poster": {
     "name": "Sports Poster",
@@ -3323,7 +3683,10 @@
     },
     "buyPrice": 1000,
     "sellPrice": 400,
-    "description": "A sports team poster."
+    "description": "A sports team poster.",
+    "name_int": "furniture.sports_poster.name",
+    "description_int": "furniture.sports_poster.description",
+    "category_int": "furniture.category.decoration"
   },
   "neon_sign": {
     "name": "Neon Sign",
@@ -3347,7 +3710,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A neon sign for cool vibes."
+    "description": "A neon sign for cool vibes.",
+    "name_int": "furniture.neon_sign.name",
+    "description_int": "furniture.neon_sign.description",
+    "category_int": "furniture.category.lighting"
   },
   "string_lights": {
     "name": "String Lights",
@@ -3371,7 +3737,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Decorative string lights."
+    "description": "Decorative string lights.",
+    "name_int": "furniture.string_lights.name",
+    "description_int": "furniture.string_lights.description",
+    "category_int": "furniture.category.lighting"
   },
   "tapestry": {
     "name": "Tapestry",
@@ -3399,7 +3768,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A decorative tapestry on the wall."
+    "description": "A decorative tapestry on the wall.",
+    "name_int": "furniture.tapestry.name",
+    "description_int": "furniture.tapestry.description",
+    "category_int": "furniture.category.decoration"
   },
   "picture_frame": {
     "name": "Picture Frame",
@@ -3423,7 +3795,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A framed photo on the wall."
+    "description": "A framed photo on the wall.",
+    "name_int": "furniture.picture_frame.name",
+    "description_int": "furniture.picture_frame.description",
+    "category_int": "furniture.category.decoration"
   },
   "cubicle_divider": {
     "name": "Cubicle Divider",
@@ -3451,7 +3826,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "Office cubicle partition."
+    "description": "Office cubicle partition.",
+    "name_int": "furniture.cubicle_divider.name",
+    "description_int": "furniture.cubicle_divider.description",
+    "category_int": "furniture.category.structures"
   },
   "filing_cabinet": {
     "name": "Filing Cabinet",
@@ -3479,7 +3857,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "Metal filing cabinet for documents."
+    "description": "Metal filing cabinet for documents.",
+    "name_int": "furniture.filing_cabinet.name",
+    "description_int": "furniture.filing_cabinet.description",
+    "category_int": "furniture.category.storage"
   },
   "office_desk": {
     "name": "Office Desk",
@@ -3509,7 +3890,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A typical office desk."
+    "description": "A typical office desk.",
+    "name_int": "furniture.office_desk.name",
+    "description_int": "furniture.office_desk.description",
+    "category_int": "furniture.category.tables"
   },
   "office_chair": {
     "name": "Office Chair",
@@ -3534,7 +3918,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A rolling office chair."
+    "description": "A rolling office chair.",
+    "name_int": "furniture.office_chair.name",
+    "description_int": "furniture.office_chair.description",
+    "category_int": "furniture.category.seating"
   },
   "bulletin_board": {
     "name": "Bulletin Board",
@@ -3563,7 +3950,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Cork bulletin board for notes and memos."
+    "description": "Cork bulletin board for notes and memos.",
+    "name_int": "furniture.bulletin_board.name",
+    "description_int": "furniture.bulletin_board.description",
+    "category_int": "furniture.category.decoration"
   },
   "whiteboard": {
     "name": "Whiteboard",
@@ -3585,7 +3975,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Whiteboard for sketching and planning."
+    "description": "Whiteboard for sketching and planning.",
+    "name_int": "furniture.whiteboard.name",
+    "description_int": "furniture.whiteboard.description",
+    "category_int": "furniture.category.decoration"
   },
   "bathtub": {
     "name": "Bathtub",
@@ -3619,7 +4012,10 @@
     },
     "buyPrice": 14000,
     "sellPrice": 5600,
-    "description": "A relaxing bathtub."
+    "description": "A relaxing bathtub.",
+    "name_int": "furniture.bathtub.name",
+    "description_int": "furniture.bathtub.description",
+    "category_int": "furniture.category.appliances"
   },
   "sink": {
     "name": "Sink",
@@ -3644,7 +4040,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A functional bathroom/kitchen sink."
+    "description": "A functional bathroom/kitchen sink.",
+    "name_int": "furniture.sink.name",
+    "description_int": "furniture.sink.description",
+    "category_int": "furniture.category.appliances"
   },
   "cabinet": {
     "name": "Cabinet",
@@ -3673,7 +4072,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "Kitchen or bathroom cabinet."
+    "description": "Kitchen or bathroom cabinet.",
+    "name_int": "furniture.cabinet.name",
+    "description_int": "furniture.cabinet.description",
+    "category_int": "furniture.category.storage"
   },
   "counter": {
     "name": "Counter",
@@ -3697,7 +4099,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "Kitchen counter."
+    "description": "Kitchen counter.",
+    "name_int": "furniture.counter.name",
+    "description_int": "furniture.counter.description",
+    "category_int": "furniture.category.tables"
   },
   "microwave": {
     "name": "Microwave",
@@ -3722,7 +4127,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "Microwave oven."
+    "description": "Microwave oven.",
+    "name_int": "furniture.microwave.name",
+    "description_int": "furniture.microwave.description",
+    "category_int": "furniture.category.appliances"
   },
   "dishwasher": {
     "name": "Dishwasher",
@@ -3747,7 +4155,10 @@
     },
     "buyPrice": 9000,
     "sellPrice": 3600,
-    "description": "Automatic dishwasher."
+    "description": "Automatic dishwasher.",
+    "name_int": "furniture.dishwasher.name",
+    "description_int": "furniture.dishwasher.description",
+    "category_int": "furniture.category.appliances"
   },
   "washing_machine": {
     "name": "Washing Machine",
@@ -3777,7 +4188,10 @@
     },
     "buyPrice": 11000,
     "sellPrice": 4400,
-    "description": "Washing machine for laundry."
+    "description": "Washing machine for laundry.",
+    "name_int": "furniture.washing_machine.name",
+    "description_int": "furniture.washing_machine.description",
+    "category_int": "furniture.category.appliances"
   },
   "dryer": {
     "name": "Dryer",
@@ -3805,7 +4219,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "Electric clothes dryer."
+    "description": "Electric clothes dryer.",
+    "name_int": "furniture.dryer.name",
+    "description_int": "furniture.dryer.description",
+    "category_int": "furniture.category.appliances"
   },
   "vhs_collection": {
     "name": "VHS Collection",
@@ -3828,7 +4245,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "Stack of VHS tapes."
+    "description": "Stack of VHS tapes.",
+    "name_int": "furniture.vhs_collection.name",
+    "description_int": "furniture.vhs_collection.description",
+    "category_int": "furniture.category.decoration"
   },
   "dvd_collection": {
     "name": "DVD Collection",
@@ -3851,7 +4271,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Stack of DVD cases."
+    "description": "Stack of DVD cases.",
+    "name_int": "furniture.dvd_collection.name",
+    "description_int": "furniture.dvd_collection.description",
+    "category_int": "furniture.category.decoration"
   },
   "cd_collection": {
     "name": "CD Collection",
@@ -3875,7 +4298,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "Collection of CDs in cases."
+    "description": "Collection of CDs in cases.",
+    "name_int": "furniture.cd_collection.name",
+    "description_int": "furniture.cd_collection.description",
+    "category_int": "furniture.category.decoration"
   },
   "comic_book_stack": {
     "name": "Comic Book Stack",
@@ -3897,7 +4323,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "Stack of comic books."
+    "description": "Stack of comic books.",
+    "name_int": "furniture.comic_book_stack.name",
+    "description_int": "furniture.comic_book_stack.description",
+    "category_int": "furniture.category.decoration"
   },
   "magazine_rack": {
     "name": "Magazine Rack",
@@ -3924,7 +4353,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Rack for magazines and newspapers."
+    "description": "Rack for magazines and newspapers.",
+    "name_int": "furniture.magazine_rack.name",
+    "description_int": "furniture.magazine_rack.description",
+    "category_int": "furniture.category.storage"
   },
   "incense_burner": {
     "name": "Incense Burner",
@@ -3948,7 +4380,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "Incense burner for aromatherapy."
+    "description": "Incense burner for aromatherapy.",
+    "name_int": "furniture.incense_burner.name",
+    "description_int": "furniture.incense_burner.description",
+    "category_int": "furniture.category.decoration"
   },
   "terrarium": {
     "name": "Terrarium",
@@ -3973,7 +4408,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A terrarium with tiny plants."
+    "description": "A terrarium with tiny plants.",
+    "name_int": "furniture.terrarium.name",
+    "description_int": "furniture.terrarium.description",
+    "category_int": "furniture.category.decoration"
   },
   "pinball_machine": {
     "name": "Pinball Machine",
@@ -4002,7 +4440,10 @@
     },
     "buyPrice": 22000,
     "sellPrice": 8800,
-    "description": "Classic pinball machine."
+    "description": "Classic pinball machine.",
+    "name_int": "furniture.pinball_machine.name",
+    "description_int": "furniture.pinball_machine.description",
+    "category_int": "furniture.category.entertainment"
   },
   "floor_cushion": {
     "name": "Floor Cushion",
@@ -4026,7 +4467,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A comfortable floor cushion."
+    "description": "A comfortable floor cushion.",
+    "name_int": "furniture.floor_cushion.name",
+    "description_int": "furniture.floor_cushion.description",
+    "category_int": "furniture.category.seating"
   },
   "floor_pillow_stack": {
     "name": "Floor Pillow Stack",
@@ -4051,7 +4495,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Stack of floor pillows."
+    "description": "Stack of floor pillows.",
+    "name_int": "furniture.floor_pillow_stack.name",
+    "description_int": "furniture.floor_pillow_stack.description",
+    "category_int": "furniture.category.seating"
   },
   "glass_shelves": {
     "name": "Glass Shelves",
@@ -4078,7 +4525,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "Modern glass shelving display."
+    "description": "Modern glass shelving display.",
+    "name_int": "furniture.glass_shelves.name",
+    "description_int": "furniture.glass_shelves.description",
+    "category_int": "furniture.category.storage"
   },
   "low_table": {
     "name": "Low Table",
@@ -4105,7 +4555,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "Low minimalist table."
+    "description": "Low minimalist table.",
+    "name_int": "furniture.low_table.name",
+    "description_int": "furniture.low_table.description",
+    "category_int": "furniture.category.tables"
   },
   "stereo_speaker": {
     "name": "Stereo Speaker",
@@ -4131,7 +4584,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "High-quality stereo speaker."
+    "description": "High-quality stereo speaker.",
+    "name_int": "furniture.stereo_speaker.name",
+    "description_int": "furniture.stereo_speaker.description",
+    "category_int": "furniture.category.entertainment"
   },
   "barn": {
     "name": "Barn",
@@ -4171,7 +4627,10 @@
     },
     "buyPrice": 50000,
     "sellPrice": 20000,
-    "description": "A large barn for storage and animal housing."
+    "description": "A large barn for storage and animal housing.",
+    "name_int": "furniture.barn.name",
+    "description_int": "furniture.barn.description",
+    "category_int": "furniture.category.farm"
   },
   "windmill": {
     "name": "Windmill",
@@ -4208,7 +4667,10 @@
     },
     "buyPrice": 40000,
     "sellPrice": 16000,
-    "description": "A functional windmill for grinding grain."
+    "description": "A functional windmill for grinding grain.",
+    "name_int": "furniture.windmill.name",
+    "description_int": "furniture.windmill.description",
+    "category_int": "furniture.category.farm"
   },
   "silo": {
     "name": "Silo",
@@ -4242,7 +4704,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "A tall storage silo for grain and crops."
+    "description": "A tall storage silo for grain and crops.",
+    "name_int": "furniture.silo.name",
+    "description_int": "furniture.silo.description",
+    "category_int": "furniture.category.farm"
   },
   "chicken_coop": {
     "name": "Chicken Coop",
@@ -4272,7 +4737,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A coop for raising chickens and collecting eggs."
+    "description": "A coop for raising chickens and collecting eggs.",
+    "name_int": "furniture.chicken_coop.name",
+    "description_int": "furniture.chicken_coop.description",
+    "category_int": "furniture.category.farm"
   },
   "pig_pen": {
     "name": "Pig Pen",
@@ -4304,7 +4772,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "An enclosure for raising pigs."
+    "description": "An enclosure for raising pigs.",
+    "name_int": "furniture.pig_pen.name",
+    "description_int": "furniture.pig_pen.description",
+    "category_int": "furniture.category.farm"
   },
   "stable": {
     "name": "Stable",
@@ -4336,7 +4807,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "A stable for keeping horses and other livestock."
+    "description": "A stable for keeping horses and other livestock.",
+    "name_int": "furniture.stable.name",
+    "description_int": "furniture.stable.description",
+    "category_int": "furniture.category.farm"
   },
   "beehive": {
     "name": "Beehive",
@@ -4364,7 +4838,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A beehive for producing honey."
+    "description": "A beehive for producing honey.",
+    "name_int": "furniture.beehive.name",
+    "description_int": "furniture.beehive.description",
+    "category_int": "furniture.category.farm"
   },
   "vegetable_garden": {
     "name": "Vegetable Garden",
@@ -4394,7 +4871,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A tended garden for growing vegetables."
+    "description": "A tended garden for growing vegetables.",
+    "name_int": "furniture.vegetable_garden.name",
+    "description_int": "furniture.vegetable_garden.description",
+    "category_int": "furniture.category.farm"
   },
   "hay_bales": {
     "name": "Hay Bales",
@@ -4416,7 +4896,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Bundled hay bales for animal feed storage."
+    "description": "Bundled hay bales for animal feed storage.",
+    "name_int": "furniture.hay_bales.name",
+    "description_int": "furniture.hay_bales.description",
+    "category_int": "furniture.category.farm"
   },
   "water_trough": {
     "name": "Water Trough",
@@ -4440,7 +4923,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A trough for watering livestock."
+    "description": "A trough for watering livestock.",
+    "name_int": "furniture.water_trough.name",
+    "description_int": "furniture.water_trough.description",
+    "category_int": "furniture.category.farm"
   },
   "scarecrow": {
     "name": "Scarecrow",
@@ -4466,7 +4952,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A scarecrow to protect crops from birds."
+    "description": "A scarecrow to protect crops from birds.",
+    "name_int": "furniture.scarecrow.name",
+    "description_int": "furniture.scarecrow.description",
+    "category_int": "furniture.category.farm"
   },
   "farm_fence": {
     "name": "Farm Fence",
@@ -4489,7 +4978,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A simple wooden fence for farm boundaries."
+    "description": "A simple wooden fence for farm boundaries.",
+    "name_int": "furniture.farm_fence.name",
+    "description_int": "furniture.farm_fence.description",
+    "category_int": "furniture.category.farm"
   },
   "crop_field": {
     "name": "Crop Field",
@@ -4517,7 +5009,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A field planted with crops."
+    "description": "A field planted with crops.",
+    "name_int": "furniture.crop_field.name",
+    "description_int": "furniture.crop_field.description",
+    "category_int": "furniture.category.farm"
   },
   "fruit_tree": {
     "name": "Fruit Tree",
@@ -4544,7 +5039,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A fruit-bearing tree for the farm."
+    "description": "A fruit-bearing tree for the farm.",
+    "name_int": "furniture.fruit_tree.name",
+    "description_int": "furniture.fruit_tree.description",
+    "category_int": "furniture.category.farm"
   },
   "garden_shed": {
     "name": "Garden Shed",
@@ -4574,7 +5072,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A small shed for storing farm tools."
+    "description": "A small shed for storing farm tools.",
+    "name_int": "furniture.garden_shed.name",
+    "description_int": "furniture.garden_shed.description",
+    "category_int": "furniture.category.farm"
   },
   "milking_station": {
     "name": "Milking Station",
@@ -4604,7 +5105,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "A station equipped for milking dairy animals."
+    "description": "A station equipped for milking dairy animals.",
+    "name_int": "furniture.milking_station.name",
+    "description_int": "furniture.milking_station.description",
+    "category_int": "furniture.category.farm"
   },
   "feed_trough": {
     "name": "Feed Trough",
@@ -4628,7 +5132,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A trough for storing and dispensing animal feed."
+    "description": "A trough for storing and dispensing animal feed.",
+    "name_int": "furniture.feed_trough.name",
+    "description_int": "furniture.feed_trough.description",
+    "category_int": "furniture.category.farm"
   },
   "irrigation_system": {
     "name": "Irrigation System",
@@ -4653,7 +5160,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "An automated system for irrigation."
+    "description": "An automated system for irrigation.",
+    "name_int": "furniture.irrigation_system.name",
+    "description_int": "furniture.irrigation_system.description",
+    "category_int": "furniture.category.farm"
   },
   "factory_furnace": {
     "name": "Industrial Furnace",
@@ -4690,7 +5200,10 @@
     },
     "buyPrice": 80000,
     "sellPrice": 32000,
-    "description": "A high-temperature furnace for metal smelting."
+    "description": "A high-temperature furnace for metal smelting.",
+    "name_int": "furniture.factory_furnace.name",
+    "description_int": "furniture.factory_furnace.description",
+    "category_int": "furniture.category.industrial"
   },
   "assembly_line": {
     "name": "Assembly Line",
@@ -4725,7 +5238,10 @@
     },
     "buyPrice": 120000,
     "sellPrice": 48000,
-    "description": "An automated assembly line for manufacturing."
+    "description": "An automated assembly line for manufacturing.",
+    "name_int": "furniture.assembly_line.name",
+    "description_int": "furniture.assembly_line.description",
+    "category_int": "furniture.category.industrial"
   },
   "conveyor_belt": {
     "name": "Conveyor Belt",
@@ -4751,7 +5267,10 @@
     },
     "buyPrice": 35000,
     "sellPrice": 14000,
-    "description": "A motorized belt for transporting materials."
+    "description": "A motorized belt for transporting materials.",
+    "name_int": "furniture.conveyor_belt.name",
+    "description_int": "furniture.conveyor_belt.description",
+    "category_int": "furniture.category.industrial"
   },
   "industrial_crane": {
     "name": "Industrial Crane",
@@ -4790,7 +5309,10 @@
     },
     "buyPrice": 90000,
     "sellPrice": 36000,
-    "description": "A heavy-duty crane for lifting loads."
+    "description": "A heavy-duty crane for lifting loads.",
+    "name_int": "furniture.industrial_crane.name",
+    "description_int": "furniture.industrial_crane.description",
+    "category_int": "furniture.category.industrial"
   },
   "hydraulic_press": {
     "name": "Hydraulic Press",
@@ -4824,7 +5346,10 @@
     },
     "buyPrice": 70000,
     "sellPrice": 28000,
-    "description": "A high-pressure hydraulic press for shaping metal."
+    "description": "A high-pressure hydraulic press for shaping metal.",
+    "name_int": "furniture.hydraulic_press.name",
+    "description_int": "furniture.hydraulic_press.description",
+    "category_int": "furniture.category.industrial"
   },
   "storage_tank": {
     "name": "Storage Tank",
@@ -4858,7 +5383,10 @@
     },
     "buyPrice": 50000,
     "sellPrice": 20000,
-    "description": "A large tank for storing liquids and materials."
+    "description": "A large tank for storing liquids and materials.",
+    "name_int": "furniture.storage_tank.name",
+    "description_int": "furniture.storage_tank.description",
+    "category_int": "furniture.category.industrial"
   },
   "refinery_tower": {
     "name": "Refinery Tower",
@@ -4897,7 +5425,10 @@
     },
     "buyPrice": 110000,
     "sellPrice": 44000,
-    "description": "A distillation tower for refining materials."
+    "description": "A distillation tower for refining materials.",
+    "name_int": "furniture.refinery_tower.name",
+    "description_int": "furniture.refinery_tower.description",
+    "category_int": "furniture.category.industrial"
   },
   "heavy_machinery": {
     "name": "Heavy Machinery",
@@ -4930,7 +5461,10 @@
     },
     "buyPrice": 85000,
     "sellPrice": 34000,
-    "description": "Complex heavy machinery for industrial processing."
+    "description": "Complex heavy machinery for industrial processing.",
+    "name_int": "furniture.heavy_machinery.name",
+    "description_int": "furniture.heavy_machinery.description",
+    "category_int": "furniture.category.industrial"
   },
   "electric_generator": {
     "name": "Electric Generator",
@@ -4961,7 +5495,10 @@
     },
     "buyPrice": 60000,
     "sellPrice": 24000,
-    "description": "A generator for producing electrical power."
+    "description": "A generator for producing electrical power.",
+    "name_int": "furniture.electric_generator.name",
+    "description_int": "furniture.electric_generator.description",
+    "category_int": "furniture.category.industrial"
   },
   "air_compressor": {
     "name": "Air Compressor",
@@ -4990,7 +5527,10 @@
     },
     "buyPrice": 40000,
     "sellPrice": 16000,
-    "description": "Compresses air for pneumatic systems."
+    "description": "Compresses air for pneumatic systems.",
+    "name_int": "furniture.air_compressor.name",
+    "description_int": "furniture.air_compressor.description",
+    "category_int": "furniture.category.industrial"
   },
   "control_panel": {
     "name": "Control Panel",
@@ -5019,7 +5559,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "A control panel for managing machinery systems."
+    "description": "A control panel for managing machinery systems.",
+    "name_int": "furniture.control_panel.name",
+    "description_int": "furniture.control_panel.description",
+    "category_int": "furniture.category.industrial"
   },
   "safety_barrier": {
     "name": "Safety Barrier",
@@ -5042,7 +5585,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A protective barrier for hazardous areas."
+    "description": "A protective barrier for hazardous areas.",
+    "name_int": "furniture.safety_barrier.name",
+    "description_int": "furniture.safety_barrier.description",
+    "category_int": "furniture.category.industrial"
   },
   "chemical_vat": {
     "name": "Chemical Vat",
@@ -5072,7 +5618,10 @@
     },
     "buyPrice": 45000,
     "sellPrice": 18000,
-    "description": "A chemical processing vat for reactions."
+    "description": "A chemical processing vat for reactions.",
+    "name_int": "furniture.chemical_vat.name",
+    "description_int": "furniture.chemical_vat.description",
+    "category_int": "furniture.category.industrial"
   },
   "robotic_arm": {
     "name": "Robotic Arm",
@@ -5104,7 +5653,10 @@
     },
     "buyPrice": 100000,
     "sellPrice": 40000,
-    "description": "An automated robotic arm for precise tasks."
+    "description": "An automated robotic arm for precise tasks.",
+    "name_int": "furniture.robotic_arm.name",
+    "description_int": "furniture.robotic_arm.description",
+    "category_int": "furniture.category.industrial"
   },
   "welding_station": {
     "name": "Welding Station",
@@ -5135,7 +5687,10 @@
     },
     "buyPrice": 35000,
     "sellPrice": 14000,
-    "description": "Equipment for welding metal structures."
+    "description": "Equipment for welding metal structures.",
+    "name_int": "furniture.welding_station.name",
+    "description_int": "furniture.welding_station.description",
+    "category_int": "furniture.category.industrial"
   },
   "laser_cutter": {
     "name": "Laser Cutter",
@@ -5166,7 +5721,10 @@
     },
     "buyPrice": 75000,
     "sellPrice": 30000,
-    "description": "A precision laser cutter for detailed work."
+    "description": "A precision laser cutter for detailed work.",
+    "name_int": "furniture.laser_cutter.name",
+    "description_int": "furniture.laser_cutter.description",
+    "category_int": "furniture.category.industrial"
   },
   "3d_printer": {
     "name": "3D Printer",
@@ -5198,7 +5756,10 @@
     },
     "buyPrice": 95000,
     "sellPrice": 38000,
-    "description": "A 3D printer for manufacturing objects."
+    "description": "A 3D printer for manufacturing objects.",
+    "name_int": "furniture.3d_printer.name",
+    "description_int": "furniture.3d_printer.description",
+    "category_int": "furniture.category.industrial"
   },
   "industrial_oven": {
     "name": "Industrial Oven",
@@ -5228,7 +5789,10 @@
     },
     "buyPrice": 50000,
     "sellPrice": 20000,
-    "description": "A large industrial oven for heat treatment."
+    "description": "A large industrial oven for heat treatment.",
+    "name_int": "furniture.industrial_oven.name",
+    "description_int": "furniture.industrial_oven.description",
+    "category_int": "furniture.category.industrial"
   },
   "sorting_machine": {
     "name": "Sorting Machine",
@@ -5261,7 +5825,10 @@
     },
     "buyPrice": 55000,
     "sellPrice": 22000,
-    "description": "Automatically sorts and categorizes materials."
+    "description": "Automatically sorts and categorizes materials.",
+    "name_int": "furniture.sorting_machine.name",
+    "description_int": "furniture.sorting_machine.description",
+    "category_int": "furniture.category.industrial"
   },
   "vacuum_chamber": {
     "name": "Vacuum Chamber",
@@ -5296,7 +5863,10 @@
     },
     "buyPrice": 65000,
     "sellPrice": 26000,
-    "description": "A chamber for vacuum processing."
+    "description": "A chamber for vacuum processing.",
+    "name_int": "furniture.vacuum_chamber.name",
+    "description_int": "furniture.vacuum_chamber.description",
+    "category_int": "furniture.category.industrial"
   },
   "packaging_unit": {
     "name": "Packaging Unit",
@@ -5327,7 +5897,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "Automated equipment for packaging products."
+    "description": "Automated equipment for packaging products.",
+    "name_int": "furniture.packaging_unit.name",
+    "description_int": "furniture.packaging_unit.description",
+    "category_int": "furniture.category.industrial"
   },
   "quality_scanner": {
     "name": "Quality Scanner",
@@ -5356,7 +5929,10 @@
     },
     "buyPrice": 22000,
     "sellPrice": 8800,
-    "description": "Inspects products for quality control."
+    "description": "Inspects products for quality control.",
+    "name_int": "furniture.quality_scanner.name",
+    "description_int": "furniture.quality_scanner.description",
+    "category_int": "furniture.category.industrial"
   },
   "industrial_duct": {
     "name": "Industrial Duct",
@@ -5384,7 +5960,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "Ductwork for air and material flow."
+    "description": "Ductwork for air and material flow.",
+    "name_int": "furniture.industrial_duct.name",
+    "description_int": "furniture.industrial_duct.description",
+    "category_int": "furniture.category.industrial"
   },
   "power_distribution": {
     "name": "Power Distribution Box",
@@ -5413,7 +5992,10 @@
     },
     "buyPrice": 28000,
     "sellPrice": 11200,
-    "description": "Distributes electrical power to equipment."
+    "description": "Distributes electrical power to equipment.",
+    "name_int": "furniture.power_distribution.name",
+    "description_int": "furniture.power_distribution.description",
+    "category_int": "furniture.category.industrial"
   },
   "tent": {
     "name": "Tent",
@@ -5443,7 +6025,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A portable tent for camping overnight."
+    "description": "A portable tent for camping overnight.",
+    "name_int": "furniture.tent.name",
+    "description_int": "furniture.tent.description",
+    "category_int": "furniture.category.camping"
   },
   "campfire": {
     "name": "Campfire",
@@ -5467,7 +6052,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A cozy campfire for warmth and cooking."
+    "description": "A cozy campfire for warmth and cooking.",
+    "name_int": "furniture.campfire.name",
+    "description_int": "furniture.campfire.description",
+    "category_int": "furniture.category.camping"
   },
   "sleeping_bag": {
     "name": "Sleeping Bag",
@@ -5494,7 +6082,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A comfortable sleeping bag for rest."
+    "description": "A comfortable sleeping bag for rest.",
+    "name_int": "furniture.sleeping_bag.name",
+    "description_int": "furniture.sleeping_bag.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_lantern": {
     "name": "Camping Lantern",
@@ -5519,7 +6110,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A lantern for outdoor lighting."
+    "description": "A lantern for outdoor lighting.",
+    "name_int": "furniture.camping_lantern.name",
+    "description_int": "furniture.camping_lantern.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_stove": {
     "name": "Camping Stove",
@@ -5543,7 +6137,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A portable camping stove for cooking."
+    "description": "A portable camping stove for cooking.",
+    "name_int": "furniture.camping_stove.name",
+    "description_int": "furniture.camping_stove.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_chair": {
     "name": "Camping Chair",
@@ -5565,7 +6162,10 @@
     },
     "buyPrice": 2500,
     "sellPrice": 1000,
-    "description": "A lightweight camping chair."
+    "description": "A lightweight camping chair.",
+    "name_int": "furniture.camping_chair.name",
+    "description_int": "furniture.camping_chair.description",
+    "category_int": "furniture.category.camping"
   },
   "cooler": {
     "name": "Cooler",
@@ -5590,7 +6190,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "An insulated cooler for storing food."
+    "description": "An insulated cooler for storing food.",
+    "name_int": "furniture.cooler.name",
+    "description_int": "furniture.cooler.description",
+    "category_int": "furniture.category.camping"
   },
   "picnic_table": {
     "name": "Picnic Table",
@@ -5617,7 +6220,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "A sturdy table for outdoor dining."
+    "description": "A sturdy table for outdoor dining.",
+    "name_int": "furniture.picnic_table.name",
+    "description_int": "furniture.picnic_table.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_backpack": {
     "name": "Camping Backpack",
@@ -5639,7 +6245,10 @@
     },
     "buyPrice": 5500,
     "sellPrice": 2200,
-    "description": "A large backpack for carrying gear."
+    "description": "A large backpack for carrying gear.",
+    "name_int": "furniture.camping_backpack.name",
+    "description_int": "furniture.camping_backpack.description",
+    "category_int": "furniture.category.camping"
   },
   "water_container": {
     "name": "Water Container",
@@ -5661,7 +6270,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A container for carrying water."
+    "description": "A container for carrying water.",
+    "name_int": "furniture.water_container.name",
+    "description_int": "furniture.water_container.description",
+    "category_int": "furniture.category.camping"
   },
   "bedroll": {
     "name": "Bedroll",
@@ -5688,7 +6300,10 @@
     },
     "buyPrice": 3500,
     "sellPrice": 1400,
-    "description": "A rolled-up bedding for camping."
+    "description": "A rolled-up bedding for camping.",
+    "name_int": "furniture.bedroll.name",
+    "description_int": "furniture.bedroll.description",
+    "category_int": "furniture.category.camping"
   },
   "hammock": {
     "name": "Beach Hammock",
@@ -5713,7 +6328,10 @@
     },
     "buyPrice": 6500,
     "sellPrice": 2600,
-    "description": "A hammock strung between poles."
+    "description": "A hammock strung between poles.",
+    "name_int": "furniture.hammock.name",
+    "description_int": "furniture.hammock.description",
+    "category_int": "furniture.category.beach"
   },
   "tent_cabin": {
     "name": "Tent Cabin",
@@ -5750,7 +6368,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A large tent with cabin-like structure."
+    "description": "A large tent with cabin-like structure.",
+    "name_int": "furniture.tent_cabin.name",
+    "description_int": "furniture.tent_cabin.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_rope": {
     "name": "Camping Rope",
@@ -5771,7 +6392,10 @@
     },
     "buyPrice": 1500,
     "sellPrice": 600,
-    "description": "Rope for securing tents and gear."
+    "description": "Rope for securing tents and gear.",
+    "name_int": "furniture.camping_rope.name",
+    "description_int": "furniture.camping_rope.description",
+    "category_int": "furniture.category.camping"
   },
   "campsite_marker": {
     "name": "Campsite Marker",
@@ -5792,7 +6416,10 @@
     },
     "buyPrice": 1000,
     "sellPrice": 400,
-    "description": "A marker flag for the campsite."
+    "description": "A marker flag for the campsite.",
+    "name_int": "furniture.campsite_marker.name",
+    "description_int": "furniture.campsite_marker.description",
+    "category_int": "furniture.category.camping"
   },
   "food_storage": {
     "name": "Food Storage Box",
@@ -5816,7 +6443,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A secure box for storing food supplies."
+    "description": "A secure box for storing food supplies.",
+    "name_int": "furniture.food_storage.name",
+    "description_int": "furniture.food_storage.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_tent_dome": {
     "name": "Dome Tent",
@@ -5846,7 +6476,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "A durable dome-shaped tent."
+    "description": "A durable dome-shaped tent.",
+    "name_int": "furniture.camping_tent_dome.name",
+    "description_int": "furniture.camping_tent_dome.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_cot": {
     "name": "Camping Cot",
@@ -5873,7 +6506,10 @@
     },
     "buyPrice": 4500,
     "sellPrice": 1800,
-    "description": "An elevated cot for sleeping off the ground."
+    "description": "An elevated cot for sleeping off the ground.",
+    "name_int": "furniture.camping_cot.name",
+    "description_int": "furniture.camping_cot.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_grill": {
     "name": "Camping Grill",
@@ -5897,7 +6533,10 @@
     },
     "buyPrice": 5500,
     "sellPrice": 2200,
-    "description": "A portable grill for cooking."
+    "description": "A portable grill for cooking.",
+    "name_int": "furniture.camping_grill.name",
+    "description_int": "furniture.camping_grill.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_lantern_led": {
     "name": "LED Camping Lantern",
@@ -5922,7 +6561,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A modern LED lantern with battery power."
+    "description": "A modern LED lantern with battery power.",
+    "name_int": "furniture.camping_lantern_led.name",
+    "description_int": "furniture.camping_lantern_led.description",
+    "category_int": "furniture.category.camping"
   },
   "camping_shelter": {
     "name": "Pop-up Shelter",
@@ -5952,7 +6594,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A quick pop-up shelter for protection."
+    "description": "A quick pop-up shelter for protection.",
+    "name_int": "furniture.camping_shelter.name",
+    "description_int": "furniture.camping_shelter.description",
+    "category_int": "furniture.category.camping"
   },
   "shopping_cart": {
     "name": "Shopping Cart",
@@ -5979,7 +6624,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A metal shopping cart for customers."
+    "description": "A metal shopping cart for customers.",
+    "name_int": "furniture.shopping_cart.name",
+    "description_int": "furniture.shopping_cart.description",
+    "category_int": "furniture.category.supermarket"
   },
   "shopping_basket": {
     "name": "Shopping Basket",
@@ -6001,7 +6649,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A hand-held shopping basket."
+    "description": "A hand-held shopping basket.",
+    "name_int": "furniture.shopping_basket.name",
+    "description_int": "furniture.shopping_basket.description",
+    "category_int": "furniture.category.supermarket"
   },
   "checkout_counter": {
     "name": "Checkout Counter",
@@ -6028,7 +6679,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A counter for processing customer purchases."
+    "description": "A counter for processing customer purchases.",
+    "name_int": "furniture.checkout_counter.name",
+    "description_int": "furniture.checkout_counter.description",
+    "category_int": "furniture.category.supermarket"
   },
   "cash_register": {
     "name": "Cash Register",
@@ -6054,7 +6708,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A register for processing transactions."
+    "description": "A register for processing transactions.",
+    "name_int": "furniture.cash_register.name",
+    "description_int": "furniture.cash_register.description",
+    "category_int": "furniture.category.supermarket"
   },
   "display_shelf": {
     "name": "Display Shelf",
@@ -6086,7 +6743,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A shelf for displaying products."
+    "description": "A shelf for displaying products.",
+    "name_int": "furniture.display_shelf.name",
+    "description_int": "furniture.display_shelf.description",
+    "category_int": "furniture.category.supermarket"
   },
   "refrigerated_display": {
     "name": "Refrigerated Display Case",
@@ -6117,7 +6777,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A refrigerated case for perishable items."
+    "description": "A refrigerated case for perishable items.",
+    "name_int": "furniture.refrigerated_display.name",
+    "description_int": "furniture.refrigerated_display.description",
+    "category_int": "furniture.category.supermarket"
   },
   "freezer_unit": {
     "name": "Freezer Unit",
@@ -6148,7 +6811,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "A commercial freezer for frozen items."
+    "description": "A commercial freezer for frozen items.",
+    "name_int": "furniture.freezer_unit.name",
+    "description_int": "furniture.freezer_unit.description",
+    "category_int": "furniture.category.supermarket"
   },
   "product_display_stand": {
     "name": "Product Display Stand",
@@ -6174,7 +6840,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A stand for displaying promotional items."
+    "description": "A stand for displaying promotional items.",
+    "name_int": "furniture.product_display_stand.name",
+    "description_int": "furniture.product_display_stand.description",
+    "category_int": "furniture.category.supermarket"
   },
   "price_sign": {
     "name": "Price Sign",
@@ -6196,7 +6865,10 @@
     },
     "buyPrice": 1500,
     "sellPrice": 600,
-    "description": "A sign for displaying product prices."
+    "description": "A sign for displaying product prices.",
+    "name_int": "furniture.price_sign.name",
+    "description_int": "furniture.price_sign.description",
+    "category_int": "furniture.category.supermarket"
   },
   "shopping_aisle": {
     "name": "Shopping Aisle",
@@ -6222,7 +6894,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "An aisle marker in the supermarket."
+    "description": "An aisle marker in the supermarket.",
+    "name_int": "furniture.shopping_aisle.name",
+    "description_int": "furniture.shopping_aisle.description",
+    "category_int": "furniture.category.supermarket"
   },
   "automatic_door": {
     "name": "Automatic Door",
@@ -6251,7 +6926,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "An automatic sliding door entrance."
+    "description": "An automatic sliding door entrance.",
+    "name_int": "furniture.automatic_door.name",
+    "description_int": "furniture.automatic_door.description",
+    "category_int": "furniture.category.supermarket"
   },
   "customer_service_desk": {
     "name": "Customer Service Desk",
@@ -6277,7 +6955,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A desk for customer inquiries and service."
+    "description": "A desk for customer inquiries and service.",
+    "name_int": "furniture.customer_service_desk.name",
+    "description_int": "furniture.customer_service_desk.description",
+    "category_int": "furniture.category.supermarket"
   },
   "mannequin_display": {
     "name": "Mannequin Display",
@@ -6303,7 +6984,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A mannequin for displaying clothing."
+    "description": "A mannequin for displaying clothing.",
+    "name_int": "furniture.mannequin_display.name",
+    "description_int": "furniture.mannequin_display.description",
+    "category_int": "furniture.category.supermarket"
   },
   "department_sign": {
     "name": "Department Sign",
@@ -6326,7 +7010,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A sign marking different departments."
+    "description": "A sign marking different departments.",
+    "name_int": "furniture.department_sign.name",
+    "description_int": "furniture.department_sign.description",
+    "category_int": "furniture.category.supermarket"
   },
   "stocking_shelf": {
     "name": "Stocking Shelf",
@@ -6353,7 +7040,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "A shelf for storing inventory."
+    "description": "A shelf for storing inventory.",
+    "name_int": "furniture.stocking_shelf.name",
+    "description_int": "furniture.stocking_shelf.description",
+    "category_int": "furniture.category.supermarket"
   },
   "security_gate": {
     "name": "Security Gate",
@@ -6383,7 +7073,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "A security gate at the store entrance."
+    "description": "A security gate at the store entrance.",
+    "name_int": "furniture.security_gate.name",
+    "description_int": "furniture.security_gate.description",
+    "category_int": "furniture.category.supermarket"
   },
   "produce_stand": {
     "name": "Produce Stand",
@@ -6411,7 +7104,10 @@
     },
     "buyPrice": 5500,
     "sellPrice": 2200,
-    "description": "A stand for displaying fresh produce."
+    "description": "A stand for displaying fresh produce.",
+    "name_int": "furniture.produce_stand.name",
+    "description_int": "furniture.produce_stand.description",
+    "category_int": "furniture.category.supermarket"
   },
   "deli_counter": {
     "name": "Deli Counter",
@@ -6438,7 +7134,10 @@
     },
     "buyPrice": 11000,
     "sellPrice": 4400,
-    "description": "A counter for deli and prepared foods."
+    "description": "A counter for deli and prepared foods.",
+    "name_int": "furniture.deli_counter.name",
+    "description_int": "furniture.deli_counter.description",
+    "category_int": "furniture.category.supermarket"
   },
   "bakery_display": {
     "name": "Bakery Display Case",
@@ -6469,7 +7168,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A display case for baked goods."
+    "description": "A display case for baked goods.",
+    "name_int": "furniture.bakery_display.name",
+    "description_int": "furniture.bakery_display.description",
+    "category_int": "furniture.category.supermarket"
   },
   "conveyor_checkout": {
     "name": "Conveyor Checkout Belt",
@@ -6496,7 +7198,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A motorized conveyor belt for checkout."
+    "description": "A motorized conveyor belt for checkout.",
+    "name_int": "furniture.conveyor_checkout.name",
+    "description_int": "furniture.conveyor_checkout.description",
+    "category_int": "furniture.category.supermarket"
   },
   "store_directory": {
     "name": "Store Directory",
@@ -6524,7 +7229,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A directory showing store layout."
+    "description": "A directory showing store layout.",
+    "name_int": "furniture.store_directory.name",
+    "description_int": "furniture.store_directory.description",
+    "category_int": "furniture.category.supermarket"
   },
   "lighting_fixture": {
     "name": "Store Lighting Fixture",
@@ -6547,7 +7255,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "Overhead lighting for the store."
+    "description": "Overhead lighting for the store.",
+    "name_int": "furniture.lighting_fixture.name",
+    "description_int": "furniture.lighting_fixture.description",
+    "category_int": "furniture.category.supermarket"
   },
   "dungeon_torch": {
     "name": "Dungeon Torch",
@@ -6569,7 +7280,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A torch for lighting dark dungeons."
+    "description": "A torch for lighting dark dungeons.",
+    "name_int": "furniture.dungeon_torch.name",
+    "description_int": "furniture.dungeon_torch.description",
+    "category_int": "furniture.category.dungeon"
   },
   "stone_pillar": {
     "name": "Stone Pillar",
@@ -6597,7 +7311,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A tall stone pillar for structural support."
+    "description": "A tall stone pillar for structural support.",
+    "name_int": "furniture.stone_pillar.name",
+    "description_int": "furniture.stone_pillar.description",
+    "category_int": "furniture.category.dungeon"
   },
   "iron_bars": {
     "name": "Iron Bars",
@@ -6621,7 +7338,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "Iron bars for prison cells and cages."
+    "description": "Iron bars for prison cells and cages.",
+    "name_int": "furniture.iron_bars.name",
+    "description_int": "furniture.iron_bars.description",
+    "category_int": "furniture.category.dungeon"
   },
   "wooden_door": {
     "name": "Wooden Door",
@@ -6648,7 +7368,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A reinforced wooden dungeon door."
+    "description": "A reinforced wooden dungeon door.",
+    "name_int": "furniture.wooden_door.name",
+    "description_int": "furniture.wooden_door.description",
+    "category_int": "furniture.category.dungeon"
   },
   "iron_door": {
     "name": "Iron Door",
@@ -6675,7 +7398,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A heavy iron dungeon door."
+    "description": "A heavy iron dungeon door.",
+    "name_int": "furniture.iron_door.name",
+    "description_int": "furniture.iron_door.description",
+    "category_int": "furniture.category.dungeon"
   },
   "prison_cell": {
     "name": "Prison Cell",
@@ -6705,7 +7431,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A cell for imprisoning captives."
+    "description": "A cell for imprisoning captives.",
+    "name_int": "furniture.prison_cell.name",
+    "description_int": "furniture.prison_cell.description",
+    "category_int": "furniture.category.dungeon"
   },
   "torture_rack": {
     "name": "Torture Rack",
@@ -6735,7 +7464,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "A medieval torture device."
+    "description": "A medieval torture device.",
+    "name_int": "furniture.torture_rack.name",
+    "description_int": "furniture.torture_rack.description",
+    "category_int": "furniture.category.dungeon"
   },
   "iron_chain": {
     "name": "Iron Chain",
@@ -6757,7 +7489,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "Heavy chains for binding prisoners."
+    "description": "Heavy chains for binding prisoners.",
+    "name_int": "furniture.iron_chain.name",
+    "description_int": "furniture.iron_chain.description",
+    "category_int": "furniture.category.dungeon"
   },
   "skull_pile": {
     "name": "Skull Pile",
@@ -6778,7 +7513,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A pile of skulls."
+    "description": "A pile of skulls.",
+    "name_int": "furniture.skull_pile.name",
+    "description_int": "furniture.skull_pile.description",
+    "category_int": "furniture.category.dungeon"
   },
   "bone_altar": {
     "name": "Bone Altar",
@@ -6808,7 +7546,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "An altar made of bones for dark rituals."
+    "description": "An altar made of bones for dark rituals.",
+    "name_int": "furniture.bone_altar.name",
+    "description_int": "furniture.bone_altar.description",
+    "category_int": "furniture.category.dungeon"
   },
   "spikes": {
     "name": "Spike Trap",
@@ -6830,7 +7571,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "Spikes as a trap or decoration."
+    "description": "Spikes as a trap or decoration.",
+    "name_int": "furniture.spikes.name",
+    "description_int": "furniture.spikes.description",
+    "category_int": "furniture.category.dungeon"
   },
   "stone_grate": {
     "name": "Stone Grate",
@@ -6853,7 +7597,10 @@
     },
     "buyPrice": 5500,
     "sellPrice": 2200,
-    "description": "A stone grate for floor drainage."
+    "description": "A stone grate for floor drainage.",
+    "name_int": "furniture.stone_grate.name",
+    "description_int": "furniture.stone_grate.description",
+    "category_int": "furniture.category.dungeon"
   },
   "stone_statue": {
     "name": "Stone Statue",
@@ -6878,7 +7625,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "An eerie stone statue."
+    "description": "An eerie stone statue.",
+    "name_int": "furniture.stone_statue.name",
+    "description_int": "furniture.stone_statue.description",
+    "category_int": "furniture.category.dungeon"
   },
   "dark_altar": {
     "name": "Dark Altar",
@@ -6908,7 +7658,10 @@
     },
     "buyPrice": 35000,
     "sellPrice": 14000,
-    "description": "A dark altar for arcane rituals."
+    "description": "A dark altar for arcane rituals.",
+    "name_int": "furniture.dark_altar.name",
+    "description_int": "furniture.dark_altar.description",
+    "category_int": "furniture.category.dungeon"
   },
   "treasure_chest": {
     "name": "Treasure Chest",
@@ -6933,7 +7686,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A treasure chest for storing valuables."
+    "description": "A treasure chest for storing valuables.",
+    "name_int": "furniture.treasure_chest.name",
+    "description_int": "furniture.treasure_chest.description",
+    "category_int": "furniture.category.dungeon"
   },
   "stone_coffin": {
     "name": "Stone Coffin",
@@ -6959,7 +7715,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A stone coffin containing remains."
+    "description": "A stone coffin containing remains.",
+    "name_int": "furniture.stone_coffin.name",
+    "description_int": "furniture.stone_coffin.description",
+    "category_int": "furniture.category.dungeon"
   },
   "dungeon_chest": {
     "name": "Dungeon Chest",
@@ -6984,7 +7743,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A chest locked in the dungeon."
+    "description": "A chest locked in the dungeon.",
+    "name_int": "furniture.dungeon_chest.name",
+    "description_int": "furniture.dungeon_chest.description",
+    "category_int": "furniture.category.dungeon"
   },
   "stone_wall": {
     "name": "Stone Wall",
@@ -7011,7 +7773,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A solid stone wall."
+    "description": "A solid stone wall.",
+    "name_int": "furniture.stone_wall.name",
+    "description_int": "furniture.stone_wall.description",
+    "category_int": "furniture.category.dungeon"
   },
   "hanging_chains": {
     "name": "Hanging Chains",
@@ -7039,7 +7804,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "Heavy chains hanging from the ceiling."
+    "description": "Heavy chains hanging from the ceiling.",
+    "name_int": "furniture.hanging_chains.name",
+    "description_int": "furniture.hanging_chains.description",
+    "category_int": "furniture.category.dungeon"
   },
   "sword_rack": {
     "name": "Sword Rack",
@@ -7064,7 +7832,10 @@
     },
     "buyPrice": 4500,
     "sellPrice": 1800,
-    "description": "A rack for displaying weapons."
+    "description": "A rack for displaying weapons.",
+    "name_int": "furniture.sword_rack.name",
+    "description_int": "furniture.sword_rack.description",
+    "category_int": "furniture.category.dungeon"
   },
   "shield_wall": {
     "name": "Shield Wall",
@@ -7091,7 +7862,10 @@
     },
     "buyPrice": 9000,
     "sellPrice": 3600,
-    "description": "A wall displaying shields."
+    "description": "A wall displaying shields.",
+    "name_int": "furniture.shield_wall.name",
+    "description_int": "furniture.shield_wall.description",
+    "category_int": "furniture.category.dungeon"
   },
   "dungeon_banner": {
     "name": "Dungeon Banner",
@@ -7116,7 +7890,10 @@
     },
     "buyPrice": 3500,
     "sellPrice": 1400,
-    "description": "A dark banner for dungeon decoration."
+    "description": "A dark banner for dungeon decoration.",
+    "name_int": "furniture.dungeon_banner.name",
+    "description_int": "furniture.dungeon_banner.description",
+    "category_int": "furniture.category.dungeon"
   },
   "treadmill": {
     "name": "Treadmill",
@@ -7143,7 +7920,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "An electric treadmill for cardio training."
+    "description": "An electric treadmill for cardio training.",
+    "name_int": "furniture.treadmill.name",
+    "description_int": "furniture.treadmill.description",
+    "category_int": "furniture.category.gym"
   },
   "weight_bench": {
     "name": "Weight Bench",
@@ -7177,7 +7957,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A bench for weight training exercises."
+    "description": "A bench for weight training exercises.",
+    "name_int": "furniture.weight_bench.name",
+    "description_int": "furniture.weight_bench.description",
+    "category_int": "furniture.category.gym"
   },
   "dumbbell_rack": {
     "name": "Dumbbell Rack",
@@ -7204,7 +7987,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A rack for storing dumbbells and weights."
+    "description": "A rack for storing dumbbells and weights.",
+    "name_int": "furniture.dumbbell_rack.name",
+    "description_int": "furniture.dumbbell_rack.description",
+    "category_int": "furniture.category.gym"
   },
   "barbell_rack": {
     "name": "Barbell Rack",
@@ -7231,7 +8017,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "A rack for storing barbells and plates."
+    "description": "A rack for storing barbells and plates.",
+    "name_int": "furniture.barbell_rack.name",
+    "description_int": "furniture.barbell_rack.description",
+    "category_int": "furniture.category.gym"
   },
   "squat_rack": {
     "name": "Squat Rack",
@@ -7264,7 +8053,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "A rack for barbell squats and lifting."
+    "description": "A rack for barbell squats and lifting.",
+    "name_int": "furniture.squat_rack.name",
+    "description_int": "furniture.squat_rack.description",
+    "category_int": "furniture.category.gym"
   },
   "cable_machine": {
     "name": "Cable Machine",
@@ -7295,7 +8087,10 @@
     },
     "buyPrice": 22000,
     "sellPrice": 8800,
-    "description": "A multi-purpose cable exercise machine."
+    "description": "A multi-purpose cable exercise machine.",
+    "name_int": "furniture.cable_machine.name",
+    "description_int": "furniture.cable_machine.description",
+    "category_int": "furniture.category.gym"
   },
   "leg_press": {
     "name": "Leg Press Machine",
@@ -7325,7 +8120,10 @@
     },
     "buyPrice": 28000,
     "sellPrice": 11200,
-    "description": "A leg press machine for lower body training."
+    "description": "A leg press machine for lower body training.",
+    "name_int": "furniture.leg_press.name",
+    "description_int": "furniture.leg_press.description",
+    "category_int": "furniture.category.gym"
   },
   "chest_press": {
     "name": "Chest Press Machine",
@@ -7355,7 +8153,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A chest press machine for upper body training."
+    "description": "A chest press machine for upper body training.",
+    "name_int": "furniture.chest_press.name",
+    "description_int": "furniture.chest_press.description",
+    "category_int": "furniture.category.gym"
   },
   "lat_pulldown": {
     "name": "Lat Pulldown Machine",
@@ -7388,7 +8189,10 @@
     },
     "buyPrice": 22000,
     "sellPrice": 8800,
-    "description": "A lat pulldown machine for back training."
+    "description": "A lat pulldown machine for back training.",
+    "name_int": "furniture.lat_pulldown.name",
+    "description_int": "furniture.lat_pulldown.description",
+    "category_int": "furniture.category.gym"
   },
   "leg_extension": {
     "name": "Leg Extension Machine",
@@ -7417,7 +8221,10 @@
     },
     "buyPrice": 18000,
     "sellPrice": 7200,
-    "description": "A leg extension machine for quadriceps training."
+    "description": "A leg extension machine for quadriceps training.",
+    "name_int": "furniture.leg_extension.name",
+    "description_int": "furniture.leg_extension.description",
+    "category_int": "furniture.category.gym"
   },
   "ab_crunch_machine": {
     "name": "Ab Crunch Machine",
@@ -7445,7 +8252,10 @@
     },
     "buyPrice": 14000,
     "sellPrice": 5600,
-    "description": "A machine for abdominal crunches."
+    "description": "A machine for abdominal crunches.",
+    "name_int": "furniture.ab_crunch_machine.name",
+    "description_int": "furniture.ab_crunch_machine.description",
+    "category_int": "furniture.category.gym"
   },
   "rowing_machine": {
     "name": "Rowing Machine",
@@ -7472,7 +8282,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A rowing machine for full-body cardio."
+    "description": "A rowing machine for full-body cardio.",
+    "name_int": "furniture.rowing_machine.name",
+    "description_int": "furniture.rowing_machine.description",
+    "category_int": "furniture.category.gym"
   },
   "stationary_bike": {
     "name": "Stationary Bike",
@@ -7497,7 +8310,10 @@
     },
     "buyPrice": 16000,
     "sellPrice": 6400,
-    "description": "A stationary bike for cardio training."
+    "description": "A stationary bike for cardio training.",
+    "name_int": "furniture.stationary_bike.name",
+    "description_int": "furniture.stationary_bike.description",
+    "category_int": "furniture.category.gym"
   },
   "elliptical_machine": {
     "name": "Elliptical Machine",
@@ -7523,7 +8339,10 @@
     },
     "buyPrice": 24000,
     "sellPrice": 9600,
-    "description": "An elliptical machine for low-impact cardio."
+    "description": "An elliptical machine for low-impact cardio.",
+    "name_int": "furniture.elliptical_machine.name",
+    "description_int": "furniture.elliptical_machine.description",
+    "category_int": "furniture.category.gym"
   },
   "punching_bag": {
     "name": "Punching Bag",
@@ -7551,7 +8370,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A heavy punching bag for boxing training."
+    "description": "A heavy punching bag for boxing training.",
+    "name_int": "furniture.punching_bag.name",
+    "description_int": "furniture.punching_bag.description",
+    "category_int": "furniture.category.gym"
   },
   "speed_bag": {
     "name": "Speed Bag",
@@ -7579,7 +8401,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A speed bag for reflex training."
+    "description": "A speed bag for reflex training.",
+    "name_int": "furniture.speed_bag.name",
+    "description_int": "furniture.speed_bag.description",
+    "category_int": "furniture.category.gym"
   },
   "pull_up_bar": {
     "name": "Pull-up Bar",
@@ -7604,7 +8429,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A bar for pull-up and chin-up exercises."
+    "description": "A bar for pull-up and chin-up exercises.",
+    "name_int": "furniture.pull_up_bar.name",
+    "description_int": "furniture.pull_up_bar.description",
+    "category_int": "furniture.category.gym"
   },
   "parallel_bars": {
     "name": "Parallel Bars",
@@ -7631,7 +8459,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "Parallel bars for dips and core training."
+    "description": "Parallel bars for dips and core training.",
+    "name_int": "furniture.parallel_bars.name",
+    "description_int": "furniture.parallel_bars.description",
+    "category_int": "furniture.category.gym"
   },
   "gym_mat": {
     "name": "Gym Mat",
@@ -7658,7 +8489,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A protective mat for floor exercises."
+    "description": "A protective mat for floor exercises.",
+    "name_int": "furniture.gym_mat.name",
+    "description_int": "furniture.gym_mat.description",
+    "category_int": "furniture.category.gym"
   },
   "gym_mirror": {
     "name": "Gym Mirror",
@@ -7689,7 +8523,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A large mirror for form checking."
+    "description": "A large mirror for form checking.",
+    "name_int": "furniture.gym_mirror.name",
+    "description_int": "furniture.gym_mirror.description",
+    "category_int": "furniture.category.gym"
   },
   "gym_locker": {
     "name": "Gym Locker",
@@ -7716,7 +8553,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A locker for storing gym belongings."
+    "description": "A locker for storing gym belongings.",
+    "name_int": "furniture.gym_locker.name",
+    "description_int": "furniture.gym_locker.description",
+    "category_int": "furniture.category.gym"
   },
   "shower_stall": {
     "name": "Shower Stall",
@@ -7744,7 +8584,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A shower stall for post-workout cleaning."
+    "description": "A shower stall for post-workout cleaning.",
+    "name_int": "furniture.shower_stall.name",
+    "description_int": "furniture.shower_stall.description",
+    "category_int": "furniture.category.gym"
   },
   "gym_bleachers": {
     "name": "Gym Bleachers",
@@ -7773,7 +8616,10 @@
     },
     "buyPrice": 14000,
     "sellPrice": 5600,
-    "description": "Bleachers for spectators or rest."
+    "description": "Bleachers for spectators or rest.",
+    "name_int": "furniture.gym_bleachers.name",
+    "description_int": "furniture.gym_bleachers.description",
+    "category_int": "furniture.category.gym"
   },
   "foam_roller": {
     "name": "Foam Roller Stand",
@@ -7795,7 +8641,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A stand for foam rollers and recovery tools."
+    "description": "A stand for foam rollers and recovery tools.",
+    "name_int": "furniture.foam_roller.name",
+    "description_int": "furniture.foam_roller.description",
+    "category_int": "furniture.category.gym"
   },
   "resistance_bands_rack": {
     "name": "Resistance Bands Rack",
@@ -7820,7 +8669,10 @@
     },
     "buyPrice": 3500,
     "sellPrice": 1400,
-    "description": "A rack for organizing resistance bands."
+    "description": "A rack for organizing resistance bands.",
+    "name_int": "furniture.resistance_bands_rack.name",
+    "description_int": "furniture.resistance_bands_rack.description",
+    "category_int": "furniture.category.gym"
   },
   "medicine_ball_rack": {
     "name": "Medicine Ball Rack",
@@ -7843,7 +8695,10 @@
     },
     "buyPrice": 4500,
     "sellPrice": 1800,
-    "description": "A rack for storing medicine balls."
+    "description": "A rack for storing medicine balls.",
+    "name_int": "furniture.medicine_ball_rack.name",
+    "description_int": "furniture.medicine_ball_rack.description",
+    "category_int": "furniture.category.gym"
   },
   "gym_clock": {
     "name": "Gym Clock",
@@ -7865,7 +8720,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A wall-mounted clock for interval training."
+    "description": "A wall-mounted clock for interval training.",
+    "name_int": "furniture.gym_clock.name",
+    "description_int": "furniture.gym_clock.description",
+    "category_int": "furniture.category.gym"
   },
   "beach_umbrella": {
     "name": "Beach Umbrella",
@@ -7887,7 +8745,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A colorful umbrella for sun protection."
+    "description": "A colorful umbrella for sun protection.",
+    "name_int": "furniture.beach_umbrella.name",
+    "description_int": "furniture.beach_umbrella.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_chair": {
     "name": "Beach Chair",
@@ -7911,7 +8772,10 @@
     },
     "buyPrice": 3500,
     "sellPrice": 1400,
-    "description": "A comfortable chair for relaxing on the beach."
+    "description": "A comfortable chair for relaxing on the beach.",
+    "name_int": "furniture.beach_chair.name",
+    "description_int": "furniture.beach_chair.description",
+    "category_int": "furniture.category.beach"
   },
   "sand_castle": {
     "name": "Sand Castle",
@@ -7937,7 +8801,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A sand castle for decoration."
+    "description": "A sand castle for decoration.",
+    "name_int": "furniture.sand_castle.name",
+    "description_int": "furniture.sand_castle.description",
+    "category_int": "furniture.category.beach"
   },
   "sailboat": {
     "name": "Sailboat",
@@ -7971,7 +8838,10 @@
     },
     "buyPrice": 20000,
     "sellPrice": 8000,
-    "description": "A wooden sailboat for beach exploration."
+    "description": "A wooden sailboat for beach exploration.",
+    "name_int": "furniture.sailboat.name",
+    "description_int": "furniture.sailboat.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_hut": {
     "name": "Beach Hut",
@@ -8001,7 +8871,10 @@
     },
     "buyPrice": 15000,
     "sellPrice": 6000,
-    "description": "A small beach hut for shelter."
+    "description": "A small beach hut for shelter.",
+    "name_int": "furniture.beach_hut.name",
+    "description_int": "furniture.beach_hut.description",
+    "category_int": "furniture.category.beach"
   },
   "surfboard": {
     "name": "Surfboard",
@@ -8026,7 +8899,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A surfboard for riding waves."
+    "description": "A surfboard for riding waves.",
+    "name_int": "furniture.surfboard.name",
+    "description_int": "furniture.surfboard.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_ball": {
     "name": "Beach Ball",
@@ -8048,7 +8924,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "An inflatable beach ball."
+    "description": "An inflatable beach ball.",
+    "name_int": "furniture.beach_ball.name",
+    "description_int": "furniture.beach_ball.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_towel_rack": {
     "name": "Beach Towel Rack",
@@ -8070,7 +8949,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A rack for hanging beach towels."
+    "description": "A rack for hanging beach towels.",
+    "name_int": "furniture.beach_towel_rack.name",
+    "description_int": "furniture.beach_towel_rack.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_cooler": {
     "name": "Beach Cooler",
@@ -8095,7 +8977,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "A cooler for cold drinks on the beach."
+    "description": "A cooler for cold drinks on the beach.",
+    "name_int": "furniture.beach_cooler.name",
+    "description_int": "furniture.beach_cooler.description",
+    "category_int": "furniture.category.beach"
   },
   "lifeguard_stand": {
     "name": "Lifeguard Stand",
@@ -8129,7 +9014,10 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A tall stand for beach lifeguards."
+    "description": "A tall stand for beach lifeguards.",
+    "name_int": "furniture.lifeguard_stand.name",
+    "description_int": "furniture.lifeguard_stand.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_sign": {
     "name": "Beach Sign",
@@ -8154,7 +9042,10 @@
     },
     "buyPrice": 2500,
     "sellPrice": 1000,
-    "description": "A sign for beach warnings and information."
+    "description": "A sign for beach warnings and information.",
+    "name_int": "furniture.beach_sign.name",
+    "description_int": "furniture.beach_sign.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_anchor": {
     "name": "Anchor",
@@ -8175,7 +9066,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A ship anchor for mooring."
+    "description": "A ship anchor for mooring.",
+    "name_int": "furniture.beach_anchor.name",
+    "description_int": "furniture.beach_anchor.description",
+    "category_int": "furniture.category.beach"
   },
   "wooden_dock": {
     "name": "Wooden Dock",
@@ -8199,7 +9093,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A wooden dock for mooring boats."
+    "description": "A wooden dock for mooring boats.",
+    "name_int": "furniture.wooden_dock.name",
+    "description_int": "furniture.wooden_dock.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_pier": {
     "name": "Beach Pier",
@@ -8230,7 +9127,10 @@
     },
     "buyPrice": 25000,
     "sellPrice": 10000,
-    "description": "A large pier extending into the water."
+    "description": "A large pier extending into the water.",
+    "name_int": "furniture.beach_pier.name",
+    "description_int": "furniture.beach_pier.description",
+    "category_int": "furniture.category.beach"
   },
   "buoy": {
     "name": "Buoy",
@@ -8252,7 +9152,10 @@
     },
     "buyPrice": 3000,
     "sellPrice": 1200,
-    "description": "A buoy for marking water zones."
+    "description": "A buoy for marking water zones.",
+    "name_int": "furniture.buoy.name",
+    "description_int": "furniture.buoy.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_lounge": {
     "name": "Beach Lounger",
@@ -8278,7 +9181,10 @@
     },
     "buyPrice": 7000,
     "sellPrice": 2800,
-    "description": "A luxurious lounger for relaxation."
+    "description": "A luxurious lounger for relaxation.",
+    "name_int": "furniture.beach_lounge.name",
+    "description_int": "furniture.beach_lounge.description",
+    "category_int": "furniture.category.beach"
   },
   "sand_bucket": {
     "name": "Sand Bucket",
@@ -8300,7 +9206,10 @@
     },
     "buyPrice": 2000,
     "sellPrice": 800,
-    "description": "A bucket for sand and water play."
+    "description": "A bucket for sand and water play.",
+    "name_int": "furniture.sand_bucket.name",
+    "description_int": "furniture.sand_bucket.description",
+    "category_int": "furniture.category.beach"
   },
   "sand_shovel": {
     "name": "Sand Shovel",
@@ -8322,7 +9231,10 @@
     },
     "buyPrice": 1500,
     "sellPrice": 600,
-    "description": "A shovel for digging in the sand."
+    "description": "A shovel for digging in the sand.",
+    "name_int": "furniture.sand_shovel.name",
+    "description_int": "furniture.sand_shovel.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_shower": {
     "name": "Beach Shower",
@@ -8350,7 +9262,10 @@
     },
     "buyPrice": 6000,
     "sellPrice": 2400,
-    "description": "An outdoor shower for rinsing off sand."
+    "description": "An outdoor shower for rinsing off sand.",
+    "name_int": "furniture.beach_shower.name",
+    "description_int": "furniture.beach_shower.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_bar": {
     "name": "Beach Bar",
@@ -8376,7 +9291,10 @@
     },
     "buyPrice": 10000,
     "sellPrice": 4000,
-    "description": "A bar counter for beach refreshments."
+    "description": "A bar counter for beach refreshments.",
+    "name_int": "furniture.beach_bar.name",
+    "description_int": "furniture.beach_bar.description",
+    "category_int": "furniture.category.beach"
   },
   "tiki_torch": {
     "name": "Tiki Torch",
@@ -8401,7 +9319,10 @@
     },
     "buyPrice": 4000,
     "sellPrice": 1600,
-    "description": "A tiki torch for evening beach lighting."
+    "description": "A tiki torch for evening beach lighting.",
+    "name_int": "furniture.tiki_torch.name",
+    "description_int": "furniture.tiki_torch.description",
+    "category_int": "furniture.category.beach"
   },
   "palm_tree": {
     "name": "Palm Tree",
@@ -8432,7 +9353,10 @@
     },
     "buyPrice": 8000,
     "sellPrice": 3200,
-    "description": "A tropical palm tree."
+    "description": "A tropical palm tree.",
+    "name_int": "furniture.palm_tree.name",
+    "description_int": "furniture.palm_tree.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_volleyball_net": {
     "name": "Volleyball Net",
@@ -8456,7 +9380,10 @@
     },
     "buyPrice": 5000,
     "sellPrice": 2000,
-    "description": "A net for beach volleyball."
+    "description": "A net for beach volleyball.",
+    "name_int": "furniture.beach_volleyball_net.name",
+    "description_int": "furniture.beach_volleyball_net.description",
+    "category_int": "furniture.category.beach"
   },
   "beach_cabana": {
     "name": "Beach Cabana",
@@ -8493,7 +9420,10 @@
     },
     "buyPrice": 30000,
     "sellPrice": 12000,
-    "description": "A luxurious cabana for privacy on the beach."
+    "description": "A luxurious cabana for privacy on the beach.",
+    "name_int": "furniture.beach_cabana.name",
+    "description_int": "furniture.beach_cabana.description",
+    "category_int": "furniture.category.beach"
   },
   "rowboat": {
     "name": "Rowboat",
@@ -8522,6 +9452,9 @@
     },
     "buyPrice": 12000,
     "sellPrice": 4800,
-    "description": "A small rowboat for water exploration."
+    "description": "A small rowboat for water exploration.",
+    "name_int": "furniture.rowboat.name",
+    "description_int": "furniture.rowboat.description",
+    "category_int": "furniture.category.beach"
   }
 }

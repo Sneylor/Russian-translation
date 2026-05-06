@@ -92,131 +92,6 @@
 
   const { EnemyArchetypes } = window.Health;
 
-  const msgTranslations = {
-    "Torso has been crushed into pulp!":
-      "Il torso è stato ridotto in poltiglia!",
-    "Left Arm has been ripped off!": "Il braccio sinistro è stato strappato!",
-    "Right Arm has been ripped off!": "Il braccio destro è stato strappato!",
-    "Left Leg has been cut off!!": "La gamba sinistra è stata amputata!!",
-    "Right Leg has been cut off!!": "La gamba destra è stata amputata!!",
-    "Body has been crushed into pulp!":
-      "Il corpo è stato ridotto in poltiglia!",
-    "Front Left Leg has been cut off!!":
-      "La zampa anteriore sinistra è stata amputata!!",
-    "Front Right Leg has been cut off!!":
-      "La zampa anteriore destra è stata amputata!!",
-    "Rear Left Leg has been cut off!!":
-      "La zampa posteriore sinistra è stata amputata!!",
-    "Rear Right Leg has been cut off!!":
-      "La zampa posteriore destra è stata amputata!!",
-    "Tail has been hacked off!": "La coda è stata recisa!",
-    "Thorax has been punctured!": "Il torace è stato perforato!",
-    "Abdomen has burst open!": "L'addome è esploso!",
-    "Middle Left Leg has been cut off!!":
-      "La zampa centrale sinistra è stata amputata!!",
-    "Middle Right Leg has been cut off!!":
-      "La zampa centrale destra è stata amputata!!",
-    "Mandibles have been pulverized!": "Le mandibole sono state polverizzate!",
-    "Fire Breath Organ has burst into gore!":
-      "L'organo del soffio di fuoco è esploso in gore!",
-    "Neck has been twisted till it snapped!":
-      "Il collo è stato torcigliato finché non si è spezzato!",
-    "Core has violently collapsed!": "Il nucleo è crollato violentemente!",
-    "Upper Body has been crushed into pulp!":
-      "La parte superiore del corpo è stata ridotta in poltiglia!",
-    "Lower Body has been crushed into pulp!":
-      "La parte inferiore del corpo è stata ridotta in poltiglia!",
-    "Pseudopod 1 has been melted into sludge!":
-      "Il pseudopode 1 è stato fuso in melma!",
-    "Pseudopod 2 has been melted into sludge!":
-      "Il pseudopode 2 è stato fuso in melma!",
-    "Skull has been obliterated!": "Il cranio è stato obliterato!",
-    "Ribcage has caved into gore!":
-      "La gabbia toracica è crollata in un ammasso di carne!",
-    "Flower has withered to rot!": "Il fiore è appassito e marcito!",
-    "Stem has twisted till it split!":
-      "Il gambo si è torcito finché non si è spaccato!",
-    "Roots have been ripped out!": "Le radici sono state estirpate!",
-    "Vine 1 has been ripped into gore!": "La vite 1 è stata fatta a brandelli!",
-    "Vine 2 has been ripped into gore!": "La vite 2 è stata fatta a brandelli!",
-    "Upper Form has unraveled!": "La forma superiore si è disfatta!",
-    "Lower Form has unraveled!": "La forma inferiore si è disfatta!",
-    "Left Appendage has been liquefied on impact!":
-      "L'appendice sinistra è stata liquefatta all'impatto!",
-    "Right Appendage has been liquefied on impact!":
-      "L'appendice destra è stata liquefatta all'impatto!",
-    "Tail Fin has been sliced off!": "La pinna caudale è stata recisa!",
-    "Dorsal Fin has been ripped into gore!":
-      "La pinna dorsale è stata fatta a brandelli!",
-    "Left Pectoral Fin has been torn to ribbons!":
-      "La pinna pettorale sinistra è stata fatta a strisce!",
-    "Right Pectoral Fin has been torn to ribbons!":
-      "La pinna pettorale destra è stata fatta a strisce!",
-    "Mantle has been crushed into pulp!":
-      "Il mantello è stato ridotto in poltiglia!",
-    "Tentacle 1 has been ripped off!": "Il tentacolo 1 è stato strappato!",
-    "Tentacle 2 has been ripped off!": "Il tentacolo 2 è stato strappato!",
-    "Tentacle 3 has been ripped off!": "Il tentacolo 3 è stato strappato!",
-    "Tentacle 4 has been ripped off!": "Il tentacolo 4 è stato strappato!",
-    "Left Arm has been detached!": "Il braccio sinistro è stato sganciato!",
-    "Right Arm has been detached!": "Il braccio destro è stato sganciato!",
-    "Beak has been obliterated!": "Il becco è stato obliterato!",
-    "Talons have been ripped off!": "Gli artigli sono stati strappati!",
-    "Cap has been ripped into gore!": "Il cappello è stato fatto a brandelli!",
-    "Spore Sacs have burst open!": "Le sacche di spore sono esplose!",
-    "Crown has been ripped into gore!": "La chioma è stata fatta a brandelli!",
-    "Trunk has cleaved brutally!": "Il tronco è stato spaccato brutalmente!",
-    "Branch 1 has been broken off!": "Il ramo 1 è stato spezzato!",
-    "Branch 2 has been broken off!": "Il ramo 2 è stato spezzato!",
-    "Nucleus has burst open!": "Il nucleo è esploso!",
-    "Membrane has melted into sludge!": "La membrana si è fusa in melma!",
-    "Flagellum has been torn to ribbons!":
-      "Il flagello è stato fatto a strisce!",
-    "Toxin Sacs have burst!": "Le sacche di veleno sono esplose!",
-    "Head Left has been torn apart!":
-      "La testa sinistra è stata fatta a pezzi!",
-    "Head Right has been torn apart!": "La testa destra è stata fatta a pezzi!",
-    "Stitched Torso has torn down the middle!":
-      "Il torace cucito si è lacerato al centro!",
-    "Power Stitch has erupted messily!":
-      "Il punto di potenza è esploso in modo caotico!",
-    "Horns have been shattered!": "Le corna sono state frantumate!",
-    "Wings have been shredded!": "Le ali sono state sbrindellate!",
-    "Fangs have been shattered!": "Le zanne sono state frantumate!",
-    "Body Segment 1 has ruptured!": "Il segmento corporeo 1 si è rotto!",
-    "Body Segment 2 has ruptured!": "Il segmento corporeo 2 si è rotto!",
-    "Shifting Mass has unraveled!": "La massa mutevole si è disfatta!",
-    "Extra Limb 1 has fallen off!": "L'arto extra 1 si è staccato!",
-    "Extra Limb 2 has fallen off!": "L'arto extra 2 si è staccato!",
-    "Eye Cluster has burst!": "Il cluster di occhi è esploso!",
-    "Tail Spike has wrenched free!": "La spina caudale si è sfilata!",
-    "Crystal Core has cracked!": "Il nucleo di cristallo si è incrinato!",
-    "Left Spire has obliterated!": "La guglia sinistra è stata obliterata!",
-    "Right Spire has obliterated!": "La guglia destra è stata obliterata!",
-    "Focus Gem has snuffed out!": "Il cristallo focale si è spento!",
-    "Shield Crystal has shattered to shards!":
-      "Il cristallo di scudo è esploso in schegge!",
-    "Tongue has been ripped off!": "La lingua è stata strappata!",
-    "Bull Legs have been cut off!": "Le gambe bovine sono state amputate!",
-    "Face has disintegrated into vapor!":
-      "Il volto si è disintegrato in vapore!",
-    "Essence Core has unraveled!": "Il nucleo d'essenza si è disfatto!",
-    "Left Wisp has been dispersed!": "La scintilla sinistra è stata dispersa!",
-    "Right Wisp has been dispersed!": "La scintilla destra è stata dispersa!",
-    "Sensor Array has been wrecked completely!":
-      "La matrice di sensori è stata completamente distrutta!",
-    "Chassis has been crushed into pulp!":
-      "Il telaio è stato ridotto in poltiglia!",
-    "Left Propeller has been smashed into wreckage!":
-      "L'elica sinistra è stata frantumata in rottami!",
-    "Right Propeller has been smashed into wreckage!":
-      "L'elica destra è stata frantumata in rottami!",
-    "Abyssal Eye has been pierced!": "L'occhio abissale è stato perforato!",
-    "Maw has been split open!": "La mascella è stata squarciata!",
-    "Void Tendril 1 has withered!": "Il tentacolo del vuoto 1 è appassito!",
-    "Void Tendril 2 has withered!": "Il tentacolo del vuoto 2 è appassito!",
-    "Core Shard has fractured!": "La scheggia del nucleo si è fratturata!",
-  };
 
   // Weapon type definitions for hit chance calculations
   var WeaponTypes = {
@@ -296,7 +171,7 @@
       var randomHitModifier = (Math.random() * 20 - 10) / 100; // -10% to +10%
 
       enemy._bodyParts[partKey] = {
-        name: basePart.name,
+        name: window.getArchetypeText(basePart.name),
         maxHp: Math.max(1, Math.round(enemy.mhp * hpPercentage)),
         currentHp: Math.max(1, Math.round(enemy.mhp * hpPercentage)),
         vital: basePart.vital || false,
@@ -715,7 +590,12 @@
 
     // Use custom message if available
     if (basePart.msg) {
-      return enemy.name() + "'s " + basePart.msg;
+      const translatedMsg = window.getArchetypeText(basePart.msg);
+      // If it's a full sentence (ends with punctuation or starts with a capital letter that isn't just the part name), use it as is
+      if (translatedMsg.match(/^[A-Z].*[.!?]$/) || (ConfigManager.language === "it" && translatedMsg.match(/^[A-Z]/))) {
+        return translatedMsg;
+      }
+      return enemy.name() + "'s " + translatedMsg;
     }
 
     // For parts that can be cut off with physical attacks

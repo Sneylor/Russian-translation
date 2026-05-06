@@ -41,6 +41,8 @@
     parameters["HelpWindowHeightBonus"] || 20
   );
 
+  const elementIcons = [0, 96, 64, 65, 66, 67, 68, 69, 70, 71];
+
   const statDisplayPlayerX = Number(
     parameters["StatDisplayPlayerX"] || Graphics.width / 2 - 200
   );
@@ -80,33 +82,8 @@
   }
 
   function getStatusTag(state) {
-    if (!state || !state.note) return null;
-
-    const notes = state.note;
-    const currentLanguage = ConfigManager.language || "en";
-
-    // Look for language-specific tags like <En: DMK> or <It: MRT>
-    const langPattern = new RegExp(
-      `<${currentLanguage.toUpperCase()}:\\s*([^>]+)>`,
-      "i"
-    );
-    const match = notes.match(langPattern);
-
-    if (match && match[1]) {
-      return match[1].trim();
-    }
-
-    // Fallback to English if current language not found
-    if (currentLanguage !== "en") {
-      const enPattern = /<En:\s*([^>]+)>/i;
-      const enMatch = notes.match(enPattern);
-      if (enMatch && enMatch[1]) {
-        return enMatch[1].trim();
-      }
-    }
-
-    // If no tags found, return null (don't display anything)
-    return null;
+    if (!state) return "";
+    return window.translateText(state.name);
   }
 
   // Helper function to collect status tags for display
@@ -316,7 +293,7 @@
       this.createDamageFlashOverlay();
     } else {
       // Original initialization for enemies
-      this.bitmap = new Bitmap(this._barBitmapWidth, barHeight * 3);
+      this.bitmap = new Bitmap(this._barBitmapWidth, barHeight * 8); // Increased height for more info
       this._lastHp = battler.hp;
       this._lastMaxHp = battler.mhp;
       this._lastMp = battler.mp;
@@ -366,10 +343,9 @@
   // Replace the createStatDisplay method with this new version:
   Sprite_TekkenBar.prototype.createStatDisplay = function () {
     this._statDisplay = new Sprite();
-    // Increase the width to avoid clipping
     this._statDisplay.bitmap = new Bitmap(
-      barWidth * 1.5,
-      statDisplayHeight * 6
+      barWidth * 2.5,
+      statDisplayHeight * 15
     );
 
     // Position at the top center of the screen
@@ -414,8 +390,17 @@
   };
 
   Sprite_TekkenBar.prototype.refreshStatDisplay = function () {
-    if (!this._statDisplay || !this._battler) return;
+    if (!this._battler || !this._statDisplay) {
+      return;
+    }
 
+    // Remove cycling stats for enemies to avoid overlay with element display
+    if (!this._isPlayer) {
+      this._statDisplay.bitmap.clear();
+      return;
+    }
+
+    const b = this._battler;
     const bitmap = this._statDisplay.bitmap;
     bitmap.clear();
     bitmap.fontFace = $gameSystem.mainFontFace();
@@ -431,16 +416,6 @@
       { id: 6, name: "DEX", base: this._baseStats.agi },
       { id: 7, name: "PSI", base: this._baseStats.luk },
     ];
-    if (ConfigManager.language === "it") {
-      params = [
-        { id: 2, name: "FRZ", base: this._baseStats.atk },
-        { id: 3, name: "COS", base: this._baseStats.def },
-        { id: 4, name: "INT", base: this._baseStats.mat },
-        { id: 5, name: "SAG", base: this._baseStats.mdf },
-        { id: 6, name: "DES", base: this._baseStats.agi },
-        { id: 7, name: "PSI", base: this._baseStats.luk },
-      ];
-    }
 
     // Collect all stat diffs (only stats, no statuses)
     const statParts = params.reduce((arr, p) => {
@@ -519,6 +494,8 @@
         hasContent = true;
       }
     }
+    // Body parts for enemies are now handled in the main refresh() method
+    // to avoid overlay issues and ensure proper positioning under the bar
 
     this._statDisplay.visible = hasContent;
   };
@@ -1225,7 +1202,7 @@
       this.bitmap.fontBold = true;
       this.bitmap.fontFace = $gameSystem.mainFontFace();
 
-      const maxWidth = w - 30;
+      const maxWidth = w - 110;
       const textWidth = this.bitmap.measureTextWidth(nameText);
 
       if (textWidth > maxWidth) {
@@ -1260,28 +1237,146 @@
         }
       }
 
-      this.bitmap.drawText(nameText, 15, 0, w - 15, barHeight, "left");
+      this.bitmap.drawText(nameText, 15, 0, w - 110, barHeight, "left");
     }
 
-      // HP numbers right-aligned on HP bar
-      const hpBarRate = b.hp / Math.max(1, b.mhp);
-      let hpNumColor = "#ffffff";
-      if (hpBarRate <= 0.25) hpNumColor = "#ff4444";
-      else if (hpBarRate <= 0.5) hpNumColor = "#ffff00";
-      this.bitmap.fontSize = 12;
+    // HP numbers right-aligned on HP bar
+    const hpBarRate = b.hp / Math.max(1, b.mhp);
+    let hpNumColor = "#ffffff";
+    if (hpBarRate <= 0.25) hpNumColor = "#ff4444";
+    else if (hpBarRate <= 0.5) hpNumColor = "#ffff00";
+    this.bitmap.fontSize = 12;
+    this.bitmap.fontBold = true;
+    this.bitmap.outlineColor = "black";
+    this.bitmap.outlineWidth = 3;
+    this.bitmap.textColor = hpNumColor;
+
+    const rightPadding = this._isPlayer ? 5 : 60;
+    this.bitmap.drawText(`${b.hp}`, 0, 0, w - rightPadding, barHeight, "right");
+
+    // MP numbers right-aligned on MP bar
+    const mpNumBarY = barHeight + 5;
+    const mpNumH = Math.floor(barHeight / 2);
+    this.bitmap.fontSize = 10;
+    this.bitmap.fontBold = false;
+    this.bitmap.textColor = mpBarColor1;
+    this.bitmap.drawText(`${b.mp}`, 0, mpNumBarY, w - rightPadding, mpNumH, "right");
+
+    // Draw elemental weaknesses and states for enemies
+    if (!this._isPlayer) {
+      let weakX = 15;
+      let weakY = barHeight + 18;
+      const targetSize = 16;
+      this.bitmap.fontSize = 11;
       this.bitmap.fontBold = true;
       this.bitmap.outlineColor = "black";
       this.bitmap.outlineWidth = 3;
-      this.bitmap.textColor = hpNumColor;
-      this.bitmap.drawText(`${b.hp}`, 0, 0, w - 5, barHeight, "right");
 
-      // MP numbers right-aligned on MP bar
-      const mpNumBarY = barHeight + 5;
-      const mpNumH = Math.floor(barHeight / 2);
-      this.bitmap.fontSize = 10;
-      this.bitmap.fontBold = false;
-      this.bitmap.textColor = mpBarColor1;
-      this.bitmap.drawText(`${b.mp}`, 0, mpNumBarY, w - 5, mpNumH, "right");
+      // 1. Elements
+      for (let i = 1; i < elementIcons.length; i++) {
+        const rate = b.elementRate(i);
+        if (rate >= 2.0) {
+          // Skip physical icon (element 1)
+          if (i === 1) continue;
+
+          const iconIndex = elementIcons[i];
+          const rawName = $dataSystem.elements[i] || "";
+          const name = window.translateText(rawName);
+          const multiplier = Math.floor(rate);
+          const text = `${name} ${multiplier}x`;
+
+          // Draw Icon
+          const iconBitmap = ImageManager.loadSystem("IconSet");
+          const pw = ImageManager.iconWidth;
+          const ph = ImageManager.iconHeight;
+          const sx = (iconIndex % 16) * pw;
+          const sy = Math.floor(iconIndex / 16) * ph;
+
+          this.bitmap.blt(iconBitmap, sx, sy, pw, ph, weakX, weakY + 2, targetSize, targetSize);
+
+          // Draw Text
+          this.bitmap.textColor = "#ffffff";
+          this.bitmap.drawText(text, weakX + targetSize + 4, weakY, 120, targetSize + 4, "left");
+
+          weakX += this.bitmap.measureTextWidth(text) + targetSize + 15;
+
+          if (weakX > w - 60) {
+            weakX = 15;
+            weakY += targetSize + 4;
+          }
+        }
+      }
+
+      // 2. States
+      const activeStates = b.states();
+      for (const state of activeStates) {
+        if (state.iconIndex > 0) {
+          const stateName = window.translateText(state.name);
+          const iconIndex = state.iconIndex;
+
+          // Draw Icon
+          const iconBitmap = ImageManager.loadSystem("IconSet");
+          const pw = ImageManager.iconWidth;
+          const ph = ImageManager.iconHeight;
+          const sx = (iconIndex % 16) * pw;
+          const sy = Math.floor(iconIndex / 16) * ph;
+
+          this.bitmap.blt(iconBitmap, sx, sy, pw, ph, weakX, weakY + 2, targetSize, targetSize);
+
+          // Draw Text
+          this.bitmap.textColor = "#ffffff";
+          this.bitmap.drawText(stateName, weakX + targetSize + 4, weakY, 120, targetSize + 4, "left");
+
+          weakX += this.bitmap.measureTextWidth(stateName) + targetSize + 15;
+
+          if (weakX > w - 60) {
+            weakX = 15;
+            weakY += targetSize + 4;
+          }
+        }
+      }
+      // 3. Destroyed Body Parts
+      if (b._bodyParts) {
+        const archetype = window.Health && window.Health.EnemyArchetypes ? window.Health.EnemyArchetypes[b._archetypeName] : null;
+        if (archetype) {
+          // Always start body parts on a new line with extra padding 
+          // to leave room for elements and statuses
+          weakX = 15;
+          weakY += (targetSize + 6);
+
+          for (const partKey in b._bodyParts) {
+            const part = b._bodyParts[partKey];
+            if (part.destroyed) {
+              const basePart = archetype.parts[partKey];
+              if (!basePart) continue;
+
+              const partName = window.getArchetypeText(basePart.name) || partKey;
+
+              // Get stat effect string
+              let effectStr = "";
+              if (basePart.statEffect) {
+                const paramId = basePart.statEffect.param;
+                const amount = basePart.statEffect.amount;
+                // Use consistent stat names
+                const paramNames = ["HP", "MP", "STR", "CON", "INT", "WIS", "DEX", "PSI"];
+                const paramName = paramNames[paramId] || "";
+                effectStr = ` (${paramName}${amount > 0 ? "+" : ""}${amount})`;
+              }
+
+              this.bitmap.textColor = "#ff4444"; // Red for destroyed parts
+              this.bitmap.fontSize = 11;
+              const displayText = "X " + partName + effectStr;
+              this.bitmap.drawText(displayText, weakX, weakY, w - 30, targetSize + 4, "left");
+
+              weakY += targetSize + 4;
+
+              // Ensure we don't go out of bounds
+              if (weakY > this.bitmap.height - 20) break;
+            }
+          }
+        }
+      }
+    }
   };
   const _Window_SkillList_drawSkillCost =
     Window_SkillList.prototype.drawSkillCost;

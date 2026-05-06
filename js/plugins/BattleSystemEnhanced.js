@@ -175,6 +175,32 @@ const FLYING_ENEMY_ARCHETYPES = [
     let _battleRewards = { exp: 0, gold: 0, items: [] };
     let _needsRespawn = false;
     const _enemyCharSprites = {};
+
+    //=============================================================================
+    // i18n
+    //=============================================================================
+    let _battleI18n = null;
+
+    const _loadBattleI18n = async () => {
+        const lang = ConfigManager.language || 'en';
+        const url = `js/plugins/i18n/${lang}/battle.json`;
+        try {
+            const response = await fetch(url);
+            _battleI18n = await response.json();
+        } catch (e) {
+            console.error('BattleSystemEnhanced: Failed to load i18n data from ' + url, e);
+        }
+    };
+
+    // Return a list (array) from a dot-path under battle.*
+    const _bi18nList = (path) => {
+        const parts = ('battle.' + path).split('.');
+        let val = _battleI18n;
+        for (const p of parts) { if (val) val = val[p]; }
+        return Array.isArray(val) ? val : null;
+    };
+
+    _loadBattleI18n();
     
     //=============================================================================
     // NEW: Health Protection System
@@ -257,65 +283,25 @@ function checkAndShowDangerousEnemyWarning() {
  * Shows the actual warning message
  */
 function showDangerWarning(party) {
-    const useTranslation = ConfigManager.language === 'it';
-    
-    const warningMessages = [
-        "This enemy is too dangerous!\nWe should flee!",
-        "This enemy is too powerful!\nWe need to run!",
-        "We're outmatched!\nWe should retreat!",
-        "This foe is beyond us!\nWe must escape!",
-        "We can't handle this enemy!\ Let's get out of here!",
-        "This creature is too strong!\nWe should run away!"
-    ];
-   
-    const singleMessages = [
-        "This enemy is too dangerous!\n I should flee!",
-        "This enemy is too powerful!\n I need to run!",
-        "I'm outmatched!\n I should retreat!",
-        "This foe is beyond me!\n I must escape!",
-        "I can't handle this enemy!\n I need to get out of here!",
-        "This creature is too strong!\n I should run away!"
-    ];
-    
-    const warningMessagesIT = [
-        "Questo nemico è troppo pericoloso!\nDovremmo fuggire!",
-        "Questo nemico è troppo potente!\nDobbiamo scappare!",
-        "Siamo in svantaggio!\nDovremmo ritirarci!",
-        "Questo nemico è oltre le nostre capacità!\nDobbiamo scappare!",
-        "Non possiamo affrontare questo nemico!\nAndiamocene da qui!",
-        "Questa creatura è troppo forte!\nDovremmo scappare!"
-    ];
-   
-    const singleMessagesIT = [
-        "Questo nemico è troppo pericoloso!\nDovrei fuggire!",
-        "Questo nemico è troppo potente!\nDevo scappare!",
-        "Sono in svantaggio!\nDovrei ritirarmi!",
-        "Questo nemico è oltre le mie capacità!\nDevo scappare!",
-        "Non posso affrontare questo nemico!\nDevo andarmene da qui!",
-        "Questa creatura è troppo forte!\nDovrei scappare!"
-    ];
-   
     let message;
-   
+
     if (party.length === 1) {
         // Single party member
-        const messages = useTranslation ? singleMessagesIT : singleMessages;
-        message = messages[Math.floor(Math.random() * messages.length)];
-        message = party[0].name() + ": " + message;
+        const list = _bi18nList('dangerWarning.single');
+        const pool = list || ["I'm outmatched! I should retreat!"];
+        message = party[0].name() + ": " + pool[Math.floor(Math.random() * pool.length)];
     } else {
         // Multiple party members - pick random one
         const randomMember = party[Math.floor(Math.random() * party.length)];
-        const messages = useTranslation ? warningMessagesIT : warningMessages;
-        message = messages[Math.floor(Math.random() * messages.length)];
-        message = randomMember.name() + ": " + message;
+        const list = _bi18nList('dangerWarning.party');
+        const pool = list || ["We're outmatched! We should retreat!"];
+        message = randomMember.name() + ": " + pool[Math.floor(Math.random() * pool.length)];
     }
-   
+
     // Check if switch 45 is on - if so, show at top of screen
     if ($gameSwitches.value(45)) {
-        // Show message at top of screen using a picture or custom window
         showTopScreenMessage(message);
     } else {
-        // Use standard message window
         $gameMessage.add(message);
     }
 }
@@ -1471,6 +1457,19 @@ Game_Event.prototype.isFleeingMovement = function() {
     
             // Show rewards popup if no respawn occurred
             if (!hasRespawned) {
+                // Restore Positions
+                if ($gameSystem._p1PreBattlePos && $gameSystem._p1PreBattlePos.mapId === $gameMap.mapId()) {
+                    $gamePlayer.locate($gameSystem._p1PreBattlePos.x, $gameSystem._p1PreBattlePos.y);
+                    $gamePlayer.setDirection($gameSystem._p1PreBattlePos.d);
+                }
+                if ($gameSystem._p2PreBattlePos && $gameSystem._p2PreBattlePos.mapId === $gameMap.mapId()) {
+                    const p2Name = (window.$gameSplitScreen && window.$gameSplitScreen.p2EventName) || "Player 2";
+                    const p2 = $gameMap.events().find(ev => ev && ev.event().name === p2Name);
+                    if (p2) {
+                        p2.locate($gameSystem._p2PreBattlePos.x, $gameSystem._p2PreBattlePos.y);
+                        p2.setDirection($gameSystem._p2PreBattlePos.d);
+                    }
+                }
                 this.createRewardsPopup();
             }
     
@@ -2542,6 +2541,15 @@ Scene_Battle.prototype.update = function() {
         if ($gameSystem.getBattleCooldown() > 0) {
             return;
         }
+
+        // Save Positions for restoration
+        $gameSystem._p1PreBattlePos = { mapId: $gameMap.mapId(), x: $gamePlayer.x, y: $gamePlayer.y, d: $gamePlayer.direction() };
+        if (window.$gameSplitScreen && window.$gameSplitScreen.active && window.$gameSplitScreen.p2Event) {
+            const p2 = window.$gameSplitScreen.p2Event;
+            $gameSystem._p2PreBattlePos = { mapId: $gameMap.mapId(), x: p2.x, y: p2.y, d: p2.direction() };
+        } else {
+            $gameSystem._p2PreBattlePos = null;
+        }
         
         _currentBattleEventId = persistentId;
         _currentEventId = eventId;
@@ -2680,6 +2688,53 @@ Scene_Battle.prototype.update = function() {
         Game_Event.prototype.update = function() {
             _Game_Event_update.call(this);
             this.updateMovementLock();
+            
+            if (window.$gameSplitScreen && window.$gameSplitScreen.active) {
+                const p2Name = (window.$gameSplitScreen.p2EventName || "Player 2").trim();
+                const myName = (this.event().name || "").trim();
+                
+                if (myName === p2Name) {
+                    this.updateP2EncounterCheck();
+                } else if (myName === "Enemy" && this._fixedTroopId > 0) {
+                    this.updateEnemyTouchP2Check();
+                }
+            }
+        };
+
+        Game_Event.prototype.updateP2EncounterCheck = function() {
+            if ($gameSystem.getBattleCooldown() > 0) return;
+            if ($gameMap.isEventRunning() || SceneManager.isSceneChanging()) return;
+
+            const x = this.x;
+            const y = this.y;
+            const d = this.direction();
+            const x2 = $gameMap.roundXWithDirection(x, d);
+            const y2 = $gameMap.roundYWithDirection(y, d);
+
+            // Check current tile and the tile we are facing/moving into
+            const targets = [...$gameMap.eventsXy(x, y), ...$gameMap.eventsXy(x2, y2)];
+            
+            for (const target of targets) {
+                if (target !== this && (target.event().name || "").trim() === "Enemy" && target._fixedTroopId > 0) {
+                    const persistentId = `${$gameMap.mapId()}_${target.eventId()}`;
+                    startPersistentBattle(target._fixedTroopId, persistentId, target.eventId(), $gameMap.mapId());
+                    break;
+                }
+            }
+        };
+
+        Game_Event.prototype.updateEnemyTouchP2Check = function() {
+            if ($gameSystem.getBattleCooldown() > 0) return;
+            if ($gameMap.isEventRunning() || SceneManager.isSceneChanging()) return;
+            
+            const p2 = window.$gameSplitScreen.p2Event;
+            if (!p2) return;
+
+            // Trigger if on the same tile as P2
+            if (this.x === p2.x && this.y === p2.y) {
+                const persistentId = `${$gameMap.mapId()}_${this.eventId()}`;
+                startPersistentBattle(this._fixedTroopId, persistentId, this.eventId(), $gameMap.mapId());
+            }
         };
     
 

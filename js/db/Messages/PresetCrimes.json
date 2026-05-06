@@ -2,416 +2,499 @@
   "pettyTheft": {
     "name": "Petty Theft",
     "bounty": 50,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.pettytheft.name"
   },
   "pickpocketing": {
     "name": "Pickpocketing",
     "bounty": 75,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.pickpocketing.name"
   },
   "shoplifting": {
     "name": "Shoplifting",
     "bounty": 100,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.shoplifting.name"
   },
   "burglary": {
     "name": "Burglary",
     "bounty": 500,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.burglary.name"
   },
   "robbery": {
     "name": "Robbery",
     "bounty": 750,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.robbery.name"
   },
   "armedRobbery": {
     "name": "Armed Robbery",
     "bounty": 1500,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.armedrobbery.name"
   },
   "bankRobbery": {
     "name": "Bank Robbery",
     "bounty": 5000,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.bankrobbery.name"
   },
   "grandTheft": {
     "name": "Grand Theft",
     "bounty": 2000,
-    "category": "Theft"
+    "category": "Theft",
+    "name_int": "crime.grandtheft.name"
   },
   "assault": {
     "name": "Assault",
     "bounty": 300,
-    "category": "Violence"
+    "category": "Violence",
+    "name_int": "crime.assault.name"
   },
   "battery": {
     "name": "Battery",
     "bounty": 400,
-    "category": "Violence"
+    "category": "Violence",
+    "name_int": "crime.battery.name"
   },
   "aggravatedAssault": {
     "name": "Aggravated Assault",
     "bounty": 800,
-    "category": "Violence"
+    "category": "Violence",
+    "name_int": "crime.aggravatedassault.name"
   },
   "murder": {
     "name": "Murder",
     "bounty": 10000,
-    "category": "Violence"
+    "category": "Violence",
+    "name_int": "crime.murder.name"
   },
   "manslaughter": {
     "name": "Manslaughter",
     "bounty": 6000,
-    "category": "Violence"
+    "category": "Violence",
+    "name_int": "crime.manslaughter.name"
   },
   "serialKilling": {
     "name": "Serial Killing",
     "bounty": 25000,
-    "category": "Violence"
+    "category": "Violence",
+    "name_int": "crime.serialkilling.name"
   },
   "vandalism": {
     "name": "Vandalism",
     "bounty": 150,
-    "category": "Property"
+    "category": "Property",
+    "name_int": "crime.vandalism.name"
   },
   "graffiti": {
     "name": "Graffiti",
     "bounty": 75,
-    "category": "Property"
+    "category": "Property",
+    "name_int": "crime.graffiti.name"
   },
   "arson": {
     "name": "Arson",
     "bounty": 2500,
-    "category": "Property"
+    "category": "Property",
+    "name_int": "crime.arson.name"
   },
   "propertyDestruction": {
     "name": "Property Destruction",
     "bounty": 400,
-    "category": "Property"
+    "category": "Property",
+    "name_int": "crime.propertydestruction.name"
   },
   "publicDisturbance": {
     "name": "Public Disturbance",
     "bounty": 25,
-    "category": "Public Order"
+    "category": "Public Order",
+    "name_int": "crime.publicdisturbance.name"
   },
   "disorderlyConduct": {
     "name": "Disorderly Conduct",
     "bounty": 50,
-    "category": "Public Order"
+    "category": "Public Order",
+    "name_int": "crime.disorderlyconduct.name"
   },
   "trespassing": {
     "name": "Trespassing",
     "bounty": 100,
-    "category": "Public Order"
+    "category": "Public Order",
+    "name_int": "crime.trespassing.name"
   },
   "breakingAndEntering": {
     "name": "Breaking and Entering",
     "bounty": 350,
-    "category": "Public Order"
+    "category": "Public Order",
+    "name_int": "crime.breakingandentering.name"
   },
   "unlawfulEntry": {
     "name": "Unlawful Entry",
     "bounty": 200,
-    "category": "Public Order"
+    "category": "Public Order",
+    "name_int": "crime.unlawfulentry.name"
   },
   "drugPossession": {
     "name": "Drug Possession",
     "bounty": 200,
-    "category": "Drugs"
+    "category": "Drugs",
+    "name_int": "crime.drugpossession.name"
   },
   "drugDealing": {
     "name": "Drug Dealing",
     "bounty": 1000,
-    "category": "Drugs"
+    "category": "Drugs",
+    "name_int": "crime.drugdealing.name"
   },
   "drugTrafficking": {
     "name": "Drug Trafficking",
     "bounty": 5000,
-    "category": "Drugs"
+    "category": "Drugs",
+    "name_int": "crime.drugtrafficking.name"
   },
   "smuggling": {
     "name": "Smuggling",
     "bounty": 3000,
-    "category": "Drugs"
+    "category": "Drugs",
+    "name_int": "crime.smuggling.name"
   },
   "contraband": {
     "name": "Contraband Possession",
     "bounty": 500,
-    "category": "Drugs"
+    "category": "Drugs",
+    "name_int": "crime.contraband.name"
   },
   "fraud": {
     "name": "Fraud",
     "bounty": 1500,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.fraud.name"
   },
   "embezzlement": {
     "name": "Embezzlement",
     "bounty": 2000,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.embezzlement.name"
   },
   "bribery": {
     "name": "Bribery",
     "bounty": 1200,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.bribery.name"
   },
   "corruption": {
     "name": "Corruption",
     "bounty": 3000,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.corruption.name"
   },
   "taxEvasion": {
     "name": "Tax Evasion",
     "bounty": 2500,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.taxevasion.name"
   },
   "moneyLaundering": {
     "name": "Money Laundering",
     "bounty": 4000,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.moneylaundering.name"
   },
   "forgery": {
     "name": "Forgery",
     "bounty": 800,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.forgery.name"
   },
   "counterfeiting": {
     "name": "Counterfeiting",
     "bounty": 1500,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.counterfeiting.name"
   },
   "identityTheft": {
     "name": "Identity Theft",
     "bounty": 1000,
-    "category": "White Collar"
+    "category": "White Collar",
+    "name_int": "crime.identitytheft.name"
   },
   "cybercrime": {
     "name": "Cybercrime",
     "bounty": 1200,
-    "category": "Cyber"
+    "category": "Cyber",
+    "name_int": "crime.cybercrime.name"
   },
   "hacking": {
     "name": "Computer Hacking",
     "bounty": 2000,
-    "category": "Cyber"
+    "category": "Cyber",
+    "name_int": "crime.hacking.name"
   },
   "dataTheft": {
     "name": "Data Theft",
     "bounty": 1800,
-    "category": "Cyber"
+    "category": "Cyber",
+    "name_int": "crime.datatheft.name"
   },
   "piracy": {
     "name": "Digital Piracy",
     "bounty": 300,
-    "category": "Cyber"
+    "category": "Cyber",
+    "name_int": "crime.piracy.name"
   },
   "extortion": {
     "name": "Extortion",
     "bounty": 2000,
-    "category": "Organized Crime"
+    "category": "Organized Crime",
+    "name_int": "crime.extortion.name"
   },
   "blackmail": {
     "name": "Blackmail",
     "bounty": 1500,
-    "category": "Organized Crime"
+    "category": "Organized Crime",
+    "name_int": "crime.blackmail.name"
   },
   "kidnapping": {
     "name": "Kidnapping",
     "bounty": 8000,
-    "category": "Organized Crime"
+    "category": "Organized Crime",
+    "name_int": "crime.kidnapping.name"
   },
   "hostage": {
     "name": "Hostage Taking",
     "bounty": 7000,
-    "category": "Organized Crime"
+    "category": "Organized Crime",
+    "name_int": "crime.hostage.name"
   },
   "humanTrafficking": {
     "name": "Human Trafficking",
     "bounty": 15000,
-    "category": "Organized Crime"
+    "category": "Organized Crime",
+    "name_int": "crime.humantrafficking.name"
   },
   "slavery": {
     "name": "Slavery",
     "bounty": 12000,
-    "category": "Organized Crime"
+    "category": "Organized Crime",
+    "name_int": "crime.slavery.name"
   },
   "poaching": {
     "name": "Poaching",
     "bounty": 400,
-    "category": "Environmental"
+    "category": "Environmental",
+    "name_int": "crime.poaching.name"
   },
   "illegalHunting": {
     "name": "Illegal Hunting",
     "bounty": 300,
-    "category": "Environmental"
+    "category": "Environmental",
+    "name_int": "crime.illegalhunting.name"
   },
   "animalCruelty": {
     "name": "Animal Cruelty",
     "bounty": 600,
-    "category": "Environmental"
+    "category": "Environmental",
+    "name_int": "crime.animalcruelty.name"
   },
   "environmentalCrime": {
     "name": "Environmental Crime",
     "bounty": 2000,
-    "category": "Environmental"
+    "category": "Environmental",
+    "name_int": "crime.environmentalcrime.name"
   },
   "pollutionViolation": {
     "name": "Pollution Violation",
     "bounty": 1500,
-    "category": "Environmental"
+    "category": "Environmental",
+    "name_int": "crime.pollutionviolation.name"
   },
   "illegalDumping": {
     "name": "Illegal Dumping",
     "bounty": 800,
-    "category": "Environmental"
+    "category": "Environmental",
+    "name_int": "crime.illegaldumping.name"
   },
   "speedingMinor": {
     "name": "Minor Speeding",
     "bounty": 25,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.speedingminor.name"
   },
   "speedingMajor": {
     "name": "Major Speeding",
     "bounty": 150,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.speedingmajor.name"
   },
   "recklessDriving": {
     "name": "Reckless Driving",
     "bounty": 300,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.recklessdriving.name"
   },
   "dui": {
     "name": "Driving Under Influence",
     "bounty": 800,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.dui.name"
   },
   "hitAndRun": {
     "name": "Hit and Run",
     "bounty": 1200,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.hitandrun.name"
   },
   "vehicleTheft": {
     "name": "Vehicle Theft",
     "bounty": 1000,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.vehicletheft.name"
   },
   "carjacking": {
     "name": "Carjacking",
     "bounty": 2500,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.carjacking.name"
   },
   "illegalRacing": {
     "name": "Illegal Street Racing",
     "bounty": 500,
-    "category": "Traffic"
+    "category": "Traffic",
+    "name_int": "crime.illegalracing.name"
   },
   "publicIntoxication": {
     "name": "Public Intoxication",
     "bounty": 50,
-    "category": "Minor Offenses"
+    "category": "Minor Offenses",
+    "name_int": "crime.publicintoxication.name"
   },
   "underageDrinking": {
     "name": "Underage Drinking",
     "bounty": 75,
-    "category": "Minor Offenses"
+    "category": "Minor Offenses",
+    "name_int": "crime.underagedrinking.name"
   },
   "disturbing": {
     "name": "Disturbing the Peace",
     "bounty": 40,
-    "category": "Minor Offenses"
+    "category": "Minor Offenses",
+    "name_int": "crime.disturbing.name"
   },
   "loitering": {
     "name": "Loitering",
     "bounty": 20,
-    "category": "Minor Offenses"
+    "category": "Minor Offenses",
+    "name_int": "crime.loitering.name"
   },
   "jaywalking": {
     "name": "Jaywalking",
     "bounty": 15,
-    "category": "Minor Offenses"
+    "category": "Minor Offenses",
+    "name_int": "crime.jaywalking.name"
   },
   "littering": {
     "name": "Littering",
     "bounty": 25,
-    "category": "Minor Offenses"
+    "category": "Minor Offenses",
+    "name_int": "crime.littering.name"
   },
   "noisePollution": {
     "name": "Noise Pollution",
     "bounty": 35,
-    "category": "Minor Offenses"
+    "category": "Minor Offenses",
+    "name_int": "crime.noisepollution.name"
   },
   "perjury": {
     "name": "Perjury",
     "bounty": 1000,
-    "category": "Judicial"
+    "category": "Judicial",
+    "name_int": "crime.perjury.name"
   },
   "contemptOfCourt": {
     "name": "Contempt of Court",
     "bounty": 300,
-    "category": "Judicial"
+    "category": "Judicial",
+    "name_int": "crime.contemptofcourt.name"
   },
   "obstructingJustice": {
     "name": "Obstructing Justice",
     "bounty": 800,
-    "category": "Judicial"
+    "category": "Judicial",
+    "name_int": "crime.obstructingjustice.name"
   },
   "resistingArrest": {
     "name": "Resisting Arrest",
     "bounty": 200,
-    "category": "Judicial"
+    "category": "Judicial",
+    "name_int": "crime.resistingarrest.name"
   },
   "escapingCustody": {
     "name": "Escaping Custody",
     "bounty": 1500,
-    "category": "Judicial"
+    "category": "Judicial",
+    "name_int": "crime.escapingcustody.name"
   },
   "prisonBreak": {
     "name": "Prison Break",
     "bounty": 5000,
-    "category": "Judicial"
+    "category": "Judicial",
+    "name_int": "crime.prisonbreak.name"
   },
   "weaponsPossession": {
     "name": "Illegal Weapons Possession",
     "bounty": 600,
-    "category": "Weapons"
+    "category": "Weapons",
+    "name_int": "crime.weaponspossession.name"
   },
   "illegalWeapons": {
     "name": "Illegal Weapons Manufacturing",
     "bounty": 2000,
-    "category": "Weapons"
+    "category": "Weapons",
+    "name_int": "crime.illegalweapons.name"
   },
   "weaponsTrafficking": {
     "name": "Weapons Trafficking",
     "bounty": 4000,
-    "category": "Weapons"
+    "category": "Weapons",
+    "name_int": "crime.weaponstrafficking.name"
   },
   "terrorism": {
     "name": "Terrorism",
     "bounty": 50000,
-    "category": "State Crimes"
+    "category": "State Crimes",
+    "name_int": "crime.terrorism.name"
   },
   "treason": {
     "name": "Treason",
     "bounty": 30000,
-    "category": "State Crimes"
+    "category": "State Crimes",
+    "name_int": "crime.treason.name"
   },
   "espionage": {
     "name": "Espionage",
     "bounty": 20000,
-    "category": "State Crimes"
+    "category": "State Crimes",
+    "name_int": "crime.espionage.name"
   },
   "warCrimes": {
     "name": "War Crimes",
     "bounty": 100000,
-    "category": "State Crimes"
+    "category": "State Crimes",
+    "name_int": "crime.warcrimes.name"
   },
   "genocide": {
     "name": "Genocide",
     "bounty": 500000,
-    "category": "State Crimes"
+    "category": "State Crimes",
+    "name_int": "crime.genocide.name"
   },
   "crimesAgainstHumanity": {
     "name": "Crimes Against Humanity",
     "bounty": 250000,
-    "category": "State Crimes"
+    "category": "State Crimes",
+    "name_int": "crime.crimesagainsthumanity.name"
   }
 }

@@ -1,15 +1,7 @@
 [
   {
     "id": 1,
-    "name": {
-      "en": "Obese",
-      "it": "Obeso"
-    },
     "icon": 259,
-    "description": {
-      "en": "Carries extra weight",
-      "it": "Porta peso extra"
-    },
     "positive": {
       "hp": 50,
       "def": 1
@@ -25,19 +17,13 @@
     "incompatible": [
       2,
       6
-    ]
+    ],
+    "name": "traits.obese.name",
+    "description": "traits.obese.description"
   },
   {
     "id": 2,
-    "name": {
-      "en": "Underweight",
-      "it": "Sottopeso"
-    },
     "icon": 298,
-    "description": {
-      "en": "Lighter than average",
-      "it": "Pi\u00f9 leggero della media"
-    },
     "positive": {
       "agi": 2,
       "eva": 1
@@ -53,19 +39,13 @@
     "incompatible": [
       1,
       6
-    ]
+    ],
+    "name": "traits.underweight.name",
+    "description": "traits.underweight.description"
   },
   {
     "id": 3,
-    "name": {
-      "en": "Claustrophobic",
-      "it": "Claustrofobico"
-    },
     "icon": 306,
-    "description": {
-      "en": "Fears enclosed spaces",
-      "it": "Teme gli spazi chiusi"
-    },
     "positive": {
       "agi": 1,
       "luk": 5
@@ -78,19 +58,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.claustrophobic.name",
+    "description": "traits.claustrophobic.description"
   },
   {
     "id": 4,
-    "name": {
-      "en": "Trigger Happy",
-      "it": "Impulsivo"
-    },
     "icon": 115,
-    "description": {
-      "en": "Quick to attack",
-      "it": "Rapido ad attaccare"
-    },
     "positive": {
       "atk": 1,
       "agi": 1
@@ -106,19 +80,13 @@
     "incompatible": [
       25,
       30
-    ]
+    ],
+    "name": "traits.trigger_happy.name",
+    "description": "traits.trigger_happy.description"
   },
   {
     "id": 5,
-    "name": {
-      "en": "Paranoid",
-      "it": "Paranoico"
-    },
     "icon": 9,
-    "description": {
-      "en": "Always on edge",
-      "it": "Sempre in allerta"
-    },
     "positive": {
       "eva": 2,
       "luk": 1
@@ -134,19 +102,13 @@
     "incompatible": [
       8,
       37
-    ]
+    ],
+    "name": "traits.paranoid.name",
+    "description": "traits.paranoid.description"
   },
   {
     "id": 6,
-    "name": {
-      "en": "Athletic",
-      "it": "Atletico"
-    },
     "icon": 77,
-    "description": {
-      "en": "Physically fit",
-      "it": "Fisicamente in forma"
-    },
     "positive": {
       "atk": 1,
       "agi": 8,
@@ -165,19 +127,13 @@
       2,
       9,
       21
-    ]
+    ],
+    "name": "traits.athletic.name",
+    "description": "traits.athletic.description"
   },
   {
     "id": 7,
-    "name": {
-      "en": "Genius",
-      "it": "Genio"
-    },
     "icon": 72,
-    "description": {
-      "en": "Intellectually gifted",
-      "it": "Dotato intellettualmente"
-    },
     "positive": {
       "mat": 2,
       "mp": 4,
@@ -194,19 +150,13 @@
     "incompatible": [
       22,
       34
-    ]
+    ],
+    "name": "traits.genius.name",
+    "description": "traits.genius.description"
   },
   {
     "id": 8,
-    "name": {
-      "en": "Lucky",
-      "it": "Fortunato"
-    },
     "icon": 182,
-    "description": {
-      "en": "Fortune favors you",
-      "it": "La fortuna ti favorisce"
-    },
     "positive": {
       "luk": 2,
       "eva": 5
@@ -222,19 +172,13 @@
     "incompatible": [
       5,
       36
-    ]
+    ],
+    "name": "traits.lucky.name",
+    "description": "traits.lucky.description"
   },
   {
     "id": 9,
-    "name": {
-      "en": "Narcoleptic",
-      "it": "Narcolettico"
-    },
     "icon": 11,
-    "description": {
-      "en": "Falls asleep randomly",
-      "it": "Si addormenta casualmente"
-    },
     "positive": {
       "mp": 30,
       "mdf": 1
@@ -251,19 +195,13 @@
       6,
       21,
       24
-    ]
+    ],
+    "name": "traits.narcoleptic.name",
+    "description": "traits.narcoleptic.description"
   },
   {
     "id": 10,
-    "name": {
-      "en": "Hot-headed",
-      "it": "Irascibile"
-    },
     "icon": 5,
-    "description": {
-      "en": "Quick to anger",
-      "it": "Facile all'ira"
-    },
     "positive": {
       "atk": 2,
       "mat": 1
@@ -281,19 +219,13 @@
       25,
       30,
       33
-    ]
+    ],
+    "name": "traits.hot-headed.name",
+    "description": "traits.hot-headed.description"
   },
   {
     "id": 11,
-    "name": {
-      "en": "Defensive",
-      "it": "Difensivo"
-    },
     "icon": 128,
-    "description": {
-      "en": "Prefers protection",
-      "it": "Preferisce la protezione"
-    },
     "positive": {
       "def": 2,
       "mdf": 1,
@@ -309,19 +241,13 @@
     "switches": [],
     "incompatible": [
       24
-    ]
+    ],
+    "name": "traits.defensive.name",
+    "description": "traits.defensive.description"
   },
   {
     "id": 12,
-    "name": {
-      "en": "Marksman",
-      "it": "Tiratore"
-    },
     "icon": 116,
-    "description": {
-      "en": "Expert with ranged weapons",
-      "it": "Esperto con armi a distanza"
-    },
     "positive": {
       "atk": 1,
       "eva": 1,
@@ -342,19 +268,13 @@
     "incompatible": [
       13,
       25
-    ]
+    ],
+    "name": "traits.marksman.name",
+    "description": "traits.marksman.description"
   },
   {
     "id": 13,
-    "name": {
-      "en": "Nearsighted",
-      "it": "Miope"
-    },
     "icon": 151,
-    "description": {
-      "en": "Poor vision without glasses",
-      "it": "Vista scarsa senza occhiali"
-    },
     "positive": {
       "luk": 1
     },
@@ -368,19 +288,13 @@
     "switches": [],
     "incompatible": [
       12
-    ]
+    ],
+    "name": "traits.nearsighted.name",
+    "description": "traits.nearsighted.description"
   },
   {
     "id": 14,
-    "name": {
-      "en": "Lombrosian Physiognomy",
-      "it": "Lombrosiano"
-    },
     "icon": 3,
-    "description": {
-      "en": "Suspicious appearance increases crime detection",
-      "it": "Aspetto sospetto aumenta rilevamento crimini"
-    },
     "positive": {
       "atk": 1,
       "def": 1
@@ -396,19 +310,13 @@
     "incompatible": [
       16,
       33
-    ]
+    ],
+    "name": "traits.lombrosian_physiognomy.name",
+    "description": "traits.lombrosian_physiognomy.description"
   },
   {
     "id": 67,
-    "name": {
-      "en": "Hydrophobic",
-      "it": "Idrofobico"
-    },
     "icon": 71,
-    "description": {
-      "en": "Cannot swim, fears water",
-      "it": "Non pu\u00f2 nuotare, teme l'acqua"
-    },
     "positive": {
       "agi": 2,
       "mp": 2
@@ -421,19 +329,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.hydrophobic.name",
+    "description": "traits.hydrophobic.description"
   },
   {
     "id": 16,
-    "name": {
-      "en": "Silvertongue",
-      "it": "Parlantina"
-    },
     "icon": 246,
-    "description": {
-      "en": "Master of persuasion and speech",
-      "it": "Maestro di persuasione e parola"
-    },
     "positive": {
       "luk": 3,
       "mat": 1,
@@ -453,19 +355,13 @@
       14,
       29,
       32
-    ]
+    ],
+    "name": "traits.silvertongue.name",
+    "description": "traits.silvertongue.description"
   },
   {
     "id": 17,
-    "name": {
-      "en": "Vegan",
-      "it": "Vegano"
-    },
     "icon": 276,
-    "description": {
-      "en": "Cannot consume animal products",
-      "it": "Non pu\u00f2 consumare prodotti animali"
-    },
     "positive": {
       "mdf": 2,
       "mp": 3,
@@ -481,19 +377,13 @@
     "switches": [],
     "incompatible": [
       18
-    ]
+    ],
+    "name": "traits.vegan.name",
+    "description": "traits.vegan.description"
   },
   {
     "id": 18,
-    "name": {
-      "en": "Vegetarian",
-      "it": "Vegetariano"
-    },
     "icon": 267,
-    "description": {
-      "en": "Cannot consume meat",
-      "it": "Non pu\u00f2 consumare carne"
-    },
     "positive": {
       "mdf": 1,
       "mp": 2,
@@ -509,19 +399,13 @@
     "switches": [],
     "incompatible": [
       17
-    ]
+    ],
+    "name": "traits.vegetarian.name",
+    "description": "traits.vegetarian.description"
   },
   {
     "id": 247,
-    "name": {
-      "en": "Impostor Syndrome",
-      "it": "Sindrome dell'Impostore"
-    },
     "icon": 15,
-    "description": {
-      "en": "Doubts own abilities constantly",
-      "it": "Dubita costantemente delle proprie capacit\u00e0"
-    },
     "positive": {
       "mat": 2,
       "luk": 1,
@@ -539,19 +423,13 @@
     "incompatible": [
       7,
       40
-    ]
+    ],
+    "name": "traits.impostor_syndrome.name",
+    "description": "traits.impostor_syndrome.description"
   },
   {
     "id": 20,
-    "name": {
-      "en": "Vampire",
-      "it": "Vampiro"
-    },
     "icon": 84,
-    "description": {
-      "en": "Undead creature of the night",
-      "it": "Creatura non-morta della notte"
-    },
     "positive": {
       "hp": 30,
       "atk": 2,
@@ -572,19 +450,13 @@
       18,
       23,
       39
-    ]
+    ],
+    "name": "traits.vampire.name",
+    "description": "traits.vampire.description"
   },
   {
     "id": 21,
-    "name": {
-      "en": "Insomniac",
-      "it": "Insonne"
-    },
     "icon": 1,
-    "description": {
-      "en": "Cannot sleep properly",
-      "it": "Non riesce a dormire bene"
-    },
     "positive": {
       "agi": 2,
       "eva": 1,
@@ -604,19 +476,13 @@
       9,
       38,
       39
-    ]
+    ],
+    "name": "traits.insomniac.name",
+    "description": "traits.insomniac.description"
   },
   {
     "id": 22,
-    "name": {
-      "en": "Alcoholic",
-      "it": "Alcolista"
-    },
     "icon": 275,
-    "description": {
-      "en": "Dependent on alcohol",
-      "it": "Dipendente dall'alcol"
-    },
     "positive": {
       "atk": 1,
       "def": 1,
@@ -636,19 +502,13 @@
       7,
       30,
       40
-    ]
+    ],
+    "name": "traits.alcoholic.name",
+    "description": "traits.alcoholic.description"
   },
   {
     "id": 23,
-    "name": {
-      "en": "Germaphobe",
-      "it": "Germofobico"
-    },
     "icon": 81,
-    "description": {
-      "en": "Fears contamination and disease",
-      "it": "Teme contaminazione e malattie"
-    },
     "positive": {
       "mdf": 3,
       "def": 1
@@ -665,19 +525,13 @@
     "incompatible": [
       20,
       27
-    ]
+    ],
+    "name": "traits.germaphobe.name",
+    "description": "traits.germaphobe.description"
   },
   {
     "id": 24,
-    "name": {
-      "en": "Adrenaline Junkie",
-      "it": "Dipendente da Adrenalina"
-    },
     "icon": 73,
-    "description": {
-      "en": "Thrives on danger and excitement",
-      "it": "Prospera nel pericolo e nell'eccitazione"
-    },
     "positive": {
       "atk": 2,
       "agi": 2,
@@ -697,19 +551,13 @@
       11,
       25,
       30
-    ]
+    ],
+    "name": "traits.adrenaline_junkie.name",
+    "description": "traits.adrenaline_junkie.description"
   },
   {
     "id": 25,
-    "name": {
-      "en": "Pacifist",
-      "it": "Pacifista"
-    },
     "icon": 84,
-    "description": {
-      "en": "Abhors violence",
-      "it": "Aborrisce la violenza"
-    },
     "positive": {
       "mdf": 2,
       "def": 2,
@@ -731,19 +579,13 @@
       24,
       26,
       32
-    ]
+    ],
+    "name": "traits.pacifist.name",
+    "description": "traits.pacifist.description"
   },
   {
     "id": 26,
-    "name": {
-      "en": "Pyromaniac",
-      "it": "Piromane"
-    },
     "icon": 64,
-    "description": {
-      "en": "Obsessed with fire",
-      "it": "Ossessionato dal fuoco"
-    },
     "positive": {
       "mat": 3,
       "atk": 1
@@ -760,19 +602,13 @@
     "incompatible": [
       25,
       30
-    ]
+    ],
+    "name": "traits.pyromaniac.name",
+    "description": "traits.pyromaniac.description"
   },
   {
     "id": 27,
-    "name": {
-      "en": "Hoarder",
-      "it": "Accumulatore"
-    },
     "icon": 210,
-    "description": {
-      "en": "Cannot let go of items",
-      "it": "Non riesce a liberarsi degli oggetti"
-    },
     "positive": {
       "luk": 2,
       "def": 1,
@@ -789,19 +625,13 @@
     "incompatible": [
       23,
       28
-    ]
+    ],
+    "name": "traits.hoarder.name",
+    "description": "traits.hoarder.description"
   },
   {
     "id": 28,
-    "name": {
-      "en": "Minimalist",
-      "it": "Minimalista"
-    },
     "icon": 208,
-    "description": {
-      "en": "Prefers simplicity and few possessions",
-      "it": "Preferisce semplicit\u00e0 e pochi beni"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -817,19 +647,13 @@
     "switches": [],
     "incompatible": [
       27
-    ]
+    ],
+    "name": "traits.minimalist.name",
+    "description": "traits.minimalist.description"
   },
   {
     "id": 29,
-    "name": {
-      "en": "Compulsive Liar",
-      "it": "Bugiardo Compulsivo"
-    },
     "icon": 8,
-    "description": {
-      "en": "Cannot help but deceive",
-      "it": "Non pu\u00f2 fare a meno di ingannare"
-    },
     "positive": {
       "luk": 2,
       "eva": 2,
@@ -847,19 +671,13 @@
       16,
       33,
       37
-    ]
+    ],
+    "name": "traits.compulsive_liar.name",
+    "description": "traits.compulsive_liar.description"
   },
   {
     "id": 30,
-    "name": {
-      "en": "Perfectionist",
-      "it": "Perfezionista"
-    },
     "icon": 124,
-    "description": {
-      "en": "Everything must be flawless",
-      "it": "Tutto deve essere impeccabile"
-    },
     "positive": {
       "mat": 2,
       "def": 1,
@@ -880,19 +698,13 @@
       22,
       24,
       26
-    ]
+    ],
+    "name": "traits.perfectionist.name",
+    "description": "traits.perfectionist.description"
   },
   {
     "id": 31,
-    "name": {
-      "en": "Masochist",
-      "it": "Masochista"
-    },
     "icon": 224,
-    "description": {
-      "en": "Finds strength in pain",
-      "it": "Trova forza nel dolore"
-    },
     "positive": {
       "def": 3,
       "hp": 20,
@@ -906,19 +718,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.masochist.name",
+    "description": "traits.masochist.description"
   },
   {
     "id": 32,
-    "name": {
-      "en": "Sociopath",
-      "it": "Sociopatico"
-    },
     "icon": 336,
-    "description": {
-      "en": "Lacks empathy and remorse",
-      "it": "Manca di empatia e rimorso"
-    },
     "positive": {
       "atk": 2,
       "mat": 2,
@@ -937,19 +743,13 @@
       16,
       25,
       33
-    ]
+    ],
+    "name": "traits.sociopath.name",
+    "description": "traits.sociopath.description"
   },
   {
     "id": 33,
-    "name": {
-      "en": "Empath",
-      "it": "Empatico"
-    },
     "icon": 312,
-    "description": {
-      "en": "Feels others' emotions deeply",
-      "it": "Sente profondamente le emozioni altrui"
-    },
     "positive": {
       "mdf": 3,
       "mp": 5,
@@ -970,19 +770,13 @@
       16,
       29,
       32
-    ]
+    ],
+    "name": "traits.empath.name",
+    "description": "traits.empath.description"
   },
   {
     "id": 34,
-    "name": {
-      "en": "Technophobe",
-      "it": "Tecnofobo"
-    },
     "icon": 68,
-    "description": {
-      "en": "Fears modern technology",
-      "it": "Teme la tecnologia moderna"
-    },
     "positive": {
       "hp": 15,
       "def": 2,
@@ -1000,19 +794,13 @@
     "incompatible": [
       7,
       35
-    ]
+    ],
+    "name": "traits.technophobe.name",
+    "description": "traits.technophobe.description"
   },
   {
     "id": 35,
-    "name": {
-      "en": "Tech Savvy",
-      "it": "Esperto di Tecnologia"
-    },
     "icon": 83,
-    "description": {
-      "en": "Master of modern technology",
-      "it": "Maestro della tecnologia moderna"
-    },
     "positive": {
       "mat": 3,
       "agi": 1,
@@ -1029,19 +817,13 @@
     "switches": [],
     "incompatible": [
       34
-    ]
+    ],
+    "name": "traits.tech_savvy.name",
+    "description": "traits.tech_savvy.description"
   },
   {
     "id": 36,
-    "name": {
-      "en": "Superstitious",
-      "it": "Superstizioso"
-    },
     "icon": 86,
-    "description": {
-      "en": "Believes in omens and signs",
-      "it": "Crede in presagi e segni"
-    },
     "positive": {
       "luk": 4,
       "eva": 1
@@ -1057,19 +839,13 @@
     "incompatible": [
       8,
       37
-    ]
+    ],
+    "name": "traits.superstitious.name",
+    "description": "traits.superstitious.description"
   },
   {
     "id": 37,
-    "name": {
-      "en": "Skeptic",
-      "it": "Scettico"
-    },
     "icon": 149,
-    "description": {
-      "en": "Questions everything",
-      "it": "Mette in dubbio tutto"
-    },
     "positive": {
       "mat": 2,
       "mdf": 2,
@@ -1087,19 +863,13 @@
       5,
       29,
       36
-    ]
+    ],
+    "name": "traits.skeptic.name",
+    "description": "traits.skeptic.description"
   },
   {
     "id": 38,
-    "name": {
-      "en": "Night Owl",
-      "it": "Nottambulo"
-    },
     "icon": 241,
-    "description": {
-      "en": "More active at night",
-      "it": "Pi\u00f9 attivo di notte"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -1116,19 +886,13 @@
     "incompatible": [
       21,
       39
-    ]
+    ],
+    "name": "traits.night_owl.name",
+    "description": "traits.night_owl.description"
   },
   {
     "id": 39,
-    "name": {
-      "en": "Early Bird",
-      "it": "Mattiniero"
-    },
     "icon": 243,
-    "description": {
-      "en": "More active in morning",
-      "it": "Pi\u00f9 attivo al mattino"
-    },
     "positive": {
       "hp": 15,
       "def": 1,
@@ -1147,19 +911,13 @@
       20,
       21,
       38
-    ]
+    ],
+    "name": "traits.early_bird.name",
+    "description": "traits.early_bird.description"
   },
   {
     "id": 40,
-    "name": {
-      "en": "Workaholic",
-      "it": "Stacanovista"
-    },
     "icon": 193,
-    "description": {
-      "en": "Obsessed with productivity",
-      "it": "Ossessionato dalla produttivit\u00e0"
-    },
     "positive": {
       "atk": 1,
       "mat": 1,
@@ -1178,19 +936,13 @@
     "incompatible": [
       19,
       22
-    ]
+    ],
+    "name": "traits.workaholic.name",
+    "description": "traits.workaholic.description"
   },
   {
     "id": 41,
-    "name": {
-      "en": "Photographic Memory",
-      "it": "Memoria Fotografica"
-    },
     "icon": 222,
-    "description": {
-      "en": "Remembers everything in perfect detail",
-      "it": "Ricorda tutto nei minimi dettagli"
-    },
     "positive": {
       "mat": 3,
       "mdf": 2,
@@ -1208,19 +960,13 @@
     "incompatible": [
       22,
       34
-    ]
+    ],
+    "name": "traits.photographic_memory.name",
+    "description": "traits.photographic_memory.description"
   },
   {
     "id": 42,
-    "name": {
-      "en": "Colorblind",
-      "it": "Daltonico"
-    },
     "icon": 240,
-    "description": {
-      "en": "Cannot distinguish certain colors",
-      "it": "Non riesce a distinguere certi colori"
-    },
     "positive": {
       "def": 1,
       "hp": 5
@@ -1233,19 +979,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.colorblind.name",
+    "description": "traits.colorblind.description"
   },
   {
     "id": 43,
-    "name": {
-      "en": "Ambidextrous",
-      "it": "Ambidestro"
-    },
     "icon": 143,
-    "description": {
-      "en": "Skilled with both hands equally",
-      "it": "Abile con entrambe le mani"
-    },
     "positive": {
       "atk": 2,
       "agi": 1,
@@ -1259,19 +999,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.ambidextrous.name",
+    "description": "traits.ambidextrous.description"
   },
   {
     "id": 44,
-    "name": {
-      "en": "Blind",
-      "it": "Cieco"
-    },
     "icon": 148,
-    "description": {
-      "en": "Cannot see, relies on other senses",
-      "it": "Non pu\u00f2 vedere, si affida ad altri sensi"
-    },
     "positive": {
       "mdf": 5,
       "def": 2,
@@ -1289,19 +1023,13 @@
     "incompatible": [
       12,
       13
-    ]
+    ],
+    "name": "traits.blind.name",
+    "description": "traits.blind.description"
   },
   {
     "id": 45,
-    "name": {
-      "en": "Deaf",
-      "it": "Sordo"
-    },
     "icon": 159,
-    "description": {
-      "en": "Cannot hear sounds",
-      "it": "Non pu\u00f2 sentire i suoni"
-    },
     "positive": {
       "def": 3,
       "hp": 15,
@@ -1316,19 +1044,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.deaf.name",
+    "description": "traits.deaf.description"
   },
   {
     "id": 46,
-    "name": {
-      "en": "Agoraphobic",
-      "it": "Agorafobico"
-    },
     "icon": 183,
-    "description": {
-      "en": "Fears open or crowded spaces",
-      "it": "Teme spazi aperti o affollati"
-    },
     "positive": {
       "def": 2,
       "mdf": 2,
@@ -1344,19 +1066,13 @@
     "switches": [],
     "incompatible": [
       3
-    ]
+    ],
+    "name": "traits.agoraphobic.name",
+    "description": "traits.agoraphobic.description"
   },
   {
     "id": 47,
-    "name": {
-      "en": "Sadist",
-      "it": "Sadico"
-    },
     "icon": 352,
-    "description": {
-      "en": "Derives pleasure from others' pain",
-      "it": "Prova piacere dal dolore altrui"
-    },
     "positive": {
       "atk": 3,
       "mat": 2,
@@ -1375,19 +1091,13 @@
       25,
       31,
       33
-    ]
+    ],
+    "name": "traits.sadist.name",
+    "description": "traits.sadist.description"
   },
   {
     "id": 48,
-    "name": {
-      "en": "Hemophobic",
-      "it": "Emofobico"
-    },
     "icon": 84,
-    "description": {
-      "en": "Fears blood and injury",
-      "it": "Teme sangue e ferite"
-    },
     "positive": {
       "eva": 3,
       "agi": 2,
@@ -1406,19 +1116,13 @@
       24,
       31,
       47
-    ]
+    ],
+    "name": "traits.hemophobic.name",
+    "description": "traits.hemophobic.description"
   },
   {
     "id": 49,
-    "name": {
-      "en": "Kleptomaniac",
-      "it": "Cleptomane"
-    },
     "icon": 143,
-    "description": {
-      "en": "Compulsively steals items",
-      "it": "Ruba oggetti compulsivamente"
-    },
     "positive": {
       "luk": 4,
       "agi": 2,
@@ -1435,19 +1139,13 @@
     "switches": [],
     "incompatible": [
       28
-    ]
+    ],
+    "name": "traits.kleptomaniac.name",
+    "description": "traits.kleptomaniac.description"
   },
   {
     "id": 50,
-    "name": {
-      "en": "Ascetic",
-      "it": "Ascetico"
-    },
     "icon": 75,
-    "description": {
-      "en": "Practices extreme self-discipline",
-      "it": "Pratica estrema autodisciplina"
-    },
     "positive": {
       "mp": 10,
       "mdf": 3,
@@ -1467,19 +1165,13 @@
       22,
       27,
       40
-    ]
+    ],
+    "name": "traits.ascetic.name",
+    "description": "traits.ascetic.description"
   },
   {
     "id": 51,
-    "name": {
-      "en": "Acrophobic",
-      "it": "Acrofobico"
-    },
     "icon": 225,
-    "description": {
-      "en": "Fears heights",
-      "it": "Teme le altezze"
-    },
     "positive": {
       "def": 2,
       "hp": 10,
@@ -1494,19 +1186,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.acrophobic.name",
+    "description": "traits.acrophobic.description"
   },
   {
     "id": 52,
-    "name": {
-      "en": "Synesthete",
-      "it": "Sinesteta"
-    },
     "icon": 82,
-    "description": {
-      "en": "Experiences crossed sensory perceptions",
-      "it": "Sperimenta percezioni sensoriali incrociate"
-    },
     "positive": {
       "mat": 2,
       "luk": 2,
@@ -1524,19 +1210,13 @@
     "incompatible": [
       44,
       45
-    ]
+    ],
+    "name": "traits.synesthete.name",
+    "description": "traits.synesthete.description"
   },
   {
     "id": 53,
-    "name": {
-      "en": "Berserker",
-      "it": "Berserker"
-    },
     "icon": 146,
-    "description": {
-      "en": "Enters uncontrollable rage in combat",
-      "it": "Entra in rabbia incontrollabile in combattimento"
-    },
     "positive": {
       "atk": 4,
       "hp": 20,
@@ -1555,19 +1235,13 @@
       11,
       25,
       30
-    ]
+    ],
+    "name": "traits.berserker.name",
+    "description": "traits.berserker.description"
   },
   {
     "id": 54,
-    "name": {
-      "en": "Coward",
-      "it": "Codardo"
-    },
     "icon": 412,
-    "description": {
-      "en": "Quick to flee from danger",
-      "it": "Veloce a fuggire dal pericolo"
-    },
     "positive": {
       "eva": 4,
       "agi": 3,
@@ -1585,19 +1259,13 @@
     "incompatible": [
       24,
       53
-    ]
+    ],
+    "name": "traits.coward.name",
+    "description": "traits.coward.description"
   },
   {
     "id": 55,
-    "name": {
-      "en": "Xenophobic",
-      "it": "Xenofobo"
-    },
     "icon": 379,
-    "description": {
-      "en": "Fears foreigners and outsiders",
-      "it": "Teme stranieri ed esterni"
-    },
     "positive": {
       "def": 2,
       "atk": 2,
@@ -1615,19 +1283,13 @@
     "incompatible": [
       16,
       33
-    ]
+    ],
+    "name": "traits.xenophobic.name",
+    "description": "traits.xenophobic.description"
   },
   {
     "id": 56,
-    "name": {
-      "en": "Hypochondriac",
-      "it": "Ipocondriaco"
-    },
     "icon": 176,
-    "description": {
-      "en": "Obsessively worried about illness",
-      "it": "Ossessivamente preoccupato per le malattie"
-    },
     "positive": {
       "mdf": 3,
       "def": 2,
@@ -1644,19 +1306,13 @@
     "switches": [],
     "incompatible": [
       23
-    ]
+    ],
+    "name": "traits.hypochondriac.name",
+    "description": "traits.hypochondriac.description"
   },
   {
     "id": 57,
-    "name": {
-      "en": "Eidetic Reader",
-      "it": "Lettore Eidetico"
-    },
     "icon": 190,
-    "description": {
-      "en": "Can recall any text perfectly",
-      "it": "Pu\u00f2 ricordare qualsiasi testo perfettamente"
-    },
     "positive": {
       "mat": 3,
       "mp": 5,
@@ -1674,19 +1330,13 @@
     "incompatible": [
       22,
       34
-    ]
+    ],
+    "name": "traits.eidetic_reader.name",
+    "description": "traits.eidetic_reader.description"
   },
   {
     "id": 58,
-    "name": {
-      "en": "Amblyopic",
-      "it": "Ambliope"
-    },
     "icon": 151,
-    "description": {
-      "en": "Has lazy eye condition",
-      "it": "Ha occhio pigro"
-    },
     "positive": {
       "mp": 3,
       "luk": 1
@@ -1702,19 +1352,13 @@
     "switches": [],
     "incompatible": [
       12
-    ]
+    ],
+    "name": "traits.amblyopic.name",
+    "description": "traits.amblyopic.description"
   },
   {
     "id": 59,
-    "name": {
-      "en": "Prosopagnosic",
-      "it": "Prosopagnosico"
-    },
     "icon": 132,
-    "description": {
-      "en": "Cannot recognize faces",
-      "it": "Non pu\u00f2 riconoscere i volti"
-    },
     "positive": {
       "def": 2,
       "hp": 10,
@@ -1729,19 +1373,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.prosopagnosic.name",
+    "description": "traits.prosopagnosic.description"
   },
   {
     "id": 60,
-    "name": {
-      "en": "Megalomaniac",
-      "it": "Megalomane"
-    },
     "icon": 138,
-    "description": {
-      "en": "Delusions of grandeur and power",
-      "it": "Deliri di grandezza e potere"
-    },
     "positive": {
       "atk": 3,
       "mat": 3,
@@ -1760,19 +1398,13 @@
       19,
       25,
       54
-    ]
+    ],
+    "name": "traits.megalomaniac.name",
+    "description": "traits.megalomaniac.description"
   },
   {
     "id": 61,
-    "name": {
-      "en": "Albinism",
-      "it": "Albinismo"
-    },
     "icon": 131,
-    "description": {
-      "en": "Lacks melanin pigmentation",
-      "it": "Manca di pigmentazione di melanina"
-    },
     "positive": {
       "mp": 4,
       "mat": 2,
@@ -1787,19 +1419,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.albinism.name",
+    "description": "traits.albinism.description"
   },
   {
     "id": 62,
-    "name": {
-      "en": "Gigantism",
-      "it": "Gigantismo"
-    },
     "icon": 392,
-    "description": {
-      "en": "Excessive growth hormone production",
-      "it": "Produzione eccessiva di ormone della crescita"
-    },
     "positive": {
       "hp": 40,
       "atk": 3,
@@ -1817,19 +1443,13 @@
     "incompatible": [
       2,
       63
-    ]
+    ],
+    "name": "traits.gigantism.name",
+    "description": "traits.gigantism.description"
   },
   {
     "id": 63,
-    "name": {
-      "en": "Dwarfism",
-      "it": "Nanismo"
-    },
     "icon": 137,
-    "description": {
-      "en": "Genetic short stature",
-      "it": "Statura bassa genetica"
-    },
     "positive": {
       "eva": 3,
       "agi": 2,
@@ -1847,19 +1467,13 @@
     "incompatible": [
       1,
       62
-    ]
+    ],
+    "name": "traits.dwarfism.name",
+    "description": "traits.dwarfism.description"
   },
   {
     "id": 64,
-    "name": {
-      "en": "Hemophilia",
-      "it": "Emofilia"
-    },
     "icon": 85,
-    "description": {
-      "en": "Blood doesn't clot properly",
-      "it": "Il sangue non coagula correttamente"
-    },
     "positive": {
       "mat": 2,
       "mp": 5,
@@ -1877,19 +1491,13 @@
     "incompatible": [
       20,
       24
-    ]
+    ],
+    "name": "traits.hemophilia.name",
+    "description": "traits.hemophilia.description"
   },
   {
     "id": 65,
-    "name": {
-      "en": "Marfan Syndrome",
-      "it": "Sindrome di Marfan"
-    },
     "icon": 292,
-    "description": {
-      "en": "Connective tissue disorder",
-      "it": "Disturbo del tessuto connettivo"
-    },
     "positive": {
       "agi": 3,
       "eva": 2,
@@ -1906,19 +1514,13 @@
     "switches": [],
     "incompatible": [
       6
-    ]
+    ],
+    "name": "traits.marfan_syndrome.name",
+    "description": "traits.marfan_syndrome.description"
   },
   {
     "id": 66,
-    "name": {
-      "en": "Hypermobility",
-      "it": "Ipermobilit\u00e0"
-    },
     "icon": 352,
-    "description": {
-      "en": "Joints extend beyond normal range",
-      "it": "Le articolazioni si estendono oltre il normale"
-    },
     "positive": {
       "agi": 3,
       "eva": 3,
@@ -1933,19 +1535,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.hypermobility.name",
+    "description": "traits.hypermobility.description"
   },
   {
     "id": 67,
-    "name": {
-      "en": "Polydactyly",
-      "it": "Polidattilia"
-    },
     "icon": 142,
-    "description": {
-      "en": "Born with extra fingers or toes",
-      "it": "Nato con dita extra"
-    },
     "positive": {
       "agi": 2,
       "atk": 1,
@@ -1959,19 +1555,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.polydactyly.name",
+    "description": "traits.polydactyly.description"
   },
   {
     "id": 68,
-    "name": {
-      "en": "Hypertrichosis",
-      "it": "Ipertricosi"
-    },
     "icon": 167,
-    "description": {
-      "en": "Excessive body hair growth",
-      "it": "Crescita eccessiva di peli corporei"
-    },
     "positive": {
       "def": 3,
       "hp": 15,
@@ -1986,19 +1576,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.hypertrichosis.name",
+    "description": "traits.hypertrichosis.description"
   },
   {
     "id": 69,
-    "name": {
-      "en": "Thalassemia",
-      "it": "Talassemia"
-    },
     "icon": 177,
-    "description": {
-      "en": "Inherited blood disorder",
-      "it": "Disturbo del sangue ereditario"
-    },
     "positive": {
       "mdf": 3,
       "mp": 4,
@@ -2016,19 +1600,13 @@
     "incompatible": [
       6,
       24
-    ]
+    ],
+    "name": "traits.thalassemia.name",
+    "description": "traits.thalassemia.description"
   },
   {
     "id": 70,
-    "name": {
-      "en": "Heterochromia",
-      "it": "Eterocromia"
-    },
     "icon": 151,
-    "description": {
-      "en": "Eyes of different colors",
-      "it": "Occhi di colori diversi"
-    },
     "positive": {
       "luk": 3,
       "eva": 2,
@@ -2044,19 +1622,13 @@
     "switches": [],
     "incompatible": [
       44
-    ]
+    ],
+    "name": "traits.heterochromia.name",
+    "description": "traits.heterochromia.description"
   },
   {
     "id": 71,
-    "name": {
-      "en": "Sensitive",
-      "it": "Sensitivo"
-    },
     "icon": 75,
-    "description": {
-      "en": "Sensitive to PSI forces",
-      "it": "Sensitivo alle forze PSI"
-    },
     "positive": {
       "def": 2,
       "eva": 2,
@@ -2075,19 +1647,13 @@
       1,
       62,
       63
-    ]
+    ],
+    "name": "traits.sensitive.name",
+    "description": "traits.sensitive.description"
   },
   {
     "id": 72,
-    "name": {
-      "en": "Sickle Cell Trait",
-      "it": "Tratto Falciforme"
-    },
     "icon": 162,
-    "description": {
-      "en": "Altered red blood cell shape",
-      "it": "Forma alterata dei globuli rossi"
-    },
     "positive": {
       "def": 2,
       "mdf": 2,
@@ -2105,19 +1671,13 @@
     "incompatible": [
       6,
       24
-    ]
+    ],
+    "name": "traits.sickle_cell_trait.name",
+    "description": "traits.sickle_cell_trait.description"
   },
   {
     "id": 73,
-    "name": {
-      "en": "Ehlers-Danlos",
-      "it": "Ehlers-Danlos"
-    },
     "icon": 161,
-    "description": {
-      "en": "Affects connective tissues",
-      "it": "Colpisce i tessuti connettivi"
-    },
     "positive": {
       "agi": 4,
       "eva": 3
@@ -2133,19 +1693,13 @@
     "switches": [],
     "incompatible": [
       6
-    ]
+    ],
+    "name": "traits.ehlers-danlos.name",
+    "description": "traits.ehlers-danlos.description"
   },
   {
     "id": 74,
-    "name": {
-      "en": "Congenital Analgesia",
-      "it": "Analgesia Congenita"
-    },
     "icon": 4,
-    "description": {
-      "en": "Cannot feel physical pain",
-      "it": "Non pu\u00f2 sentire il dolore fisico"
-    },
     "positive": {
       "atk": 3,
       "def": 3,
@@ -2163,19 +1717,13 @@
     "incompatible": [
       31,
       48
-    ]
+    ],
+    "name": "traits.congenital_analgesia.name",
+    "description": "traits.congenital_analgesia.description"
   },
   {
     "id": 75,
-    "name": {
-      "en": "Savant Syndrome",
-      "it": "Sindrome del Savant"
-    },
     "icon": 71,
-    "description": {
-      "en": "Exceptional ability in specific area",
-      "it": "Abilit\u00e0 eccezionale in area specifica"
-    },
     "positive": {
       "mat": 5,
       "mp": 10,
@@ -2191,19 +1739,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.savant_syndrome.name",
+    "description": "traits.savant_syndrome.description"
   },
   {
     "id": 76,
-    "name": {
-      "en": "Asthmatic",
-      "it": "Asmatico"
-    },
     "icon": 69,
-    "description": {
-      "en": "Difficulty breathing under stress",
-      "it": "Difficolt\u00e0 respiratorie sotto stress"
-    },
     "positive": {
       "mdf": 2,
       "mp": 3,
@@ -2221,19 +1763,13 @@
     "incompatible": [
       6,
       24
-    ]
+    ],
+    "name": "traits.asthmatic.name",
+    "description": "traits.asthmatic.description"
   },
   {
     "id": 77,
-    "name": {
-      "en": "ADHD",
-      "it": "ADHD"
-    },
     "icon": 66,
-    "description": {
-      "en": "Attention deficit, hyperactive impulses",
-      "it": "Deficit di attenzione, impulsi iperattivi"
-    },
     "positive": {
       "agi": 3,
       "eva": 2,
@@ -2251,19 +1787,13 @@
     "incompatible": [
       30,
       40
-    ]
+    ],
+    "name": "traits.adhd.name",
+    "description": "traits.adhd.description"
   },
   {
     "id": 78,
-    "name": {
-      "en": "OCD",
-      "it": "DOC"
-    },
     "icon": 82,
-    "description": {
-      "en": "Obsessive compulsive patterns",
-      "it": "Schemi ossessivo-compulsivi"
-    },
     "positive": {
       "def": 3,
       "mdf": 2,
@@ -2282,19 +1812,13 @@
       4,
       24,
       29
-    ]
+    ],
+    "name": "traits.ocd.name",
+    "description": "traits.ocd.description"
   },
   {
     "id": 79,
-    "name": {
-      "en": "Dyslexic",
-      "it": "Dislessico"
-    },
     "icon": 194,
-    "description": {
-      "en": "Difficulty processing written language",
-      "it": "Difficolt\u00e0 nell'elaborare il linguaggio scritto"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -2312,19 +1836,13 @@
       7,
       41,
       57
-    ]
+    ],
+    "name": "traits.dyslexic.name",
+    "description": "traits.dyslexic.description"
   },
   {
     "id": 80,
-    "name": {
-      "en": "Dyscalculic",
-      "it": "Discalculico"
-    },
     "icon": 193,
-    "description": {
-      "en": "Difficulty with numbers and math",
-      "it": "Difficolt\u00e0 con numeri e matematica"
-    },
     "positive": {
       "atk": 2,
       "def": 1,
@@ -2341,19 +1859,13 @@
     "incompatible": [
       7,
       41
-    ]
+    ],
+    "name": "traits.dyscalculic.name",
+    "description": "traits.dyscalculic.description"
   },
   {
     "id": 81,
-    "name": {
-      "en": "Charismatic",
-      "it": "Carismatico"
-    },
     "icon": 262,
-    "description": {
-      "en": "Natural charm and influence",
-      "it": "Fascino e influenza naturali"
-    },
     "positive": {
       "luk": 4,
       "eva": 2,
@@ -2370,19 +1882,13 @@
     "incompatible": [
       14,
       32
-    ]
+    ],
+    "name": "traits.charismatic.name",
+    "description": "traits.charismatic.description"
   },
   {
     "id": 82,
-    "name": {
-      "en": "Extrovert",
-      "it": "Estroverso"
-    },
     "icon": 248,
-    "description": {
-      "en": "Energized by social interaction",
-      "it": "Energizzato dall'interazione sociale"
-    },
     "positive": {
       "luk": 2,
       "eva": 2,
@@ -2399,19 +1905,13 @@
     "switches": [],
     "incompatible": [
       83
-    ]
+    ],
+    "name": "traits.extrovert.name",
+    "description": "traits.extrovert.description"
   },
   {
     "id": 83,
-    "name": {
-      "en": "Introvert",
-      "it": "Introverso"
-    },
     "icon": 130,
-    "description": {
-      "en": "Drained by social interaction",
-      "it": "Prosciugato dall'interazione sociale"
-    },
     "positive": {
       "mat": 2,
       "mdf": 2,
@@ -2428,19 +1928,13 @@
     "switches": [],
     "incompatible": [
       82
-    ]
+    ],
+    "name": "traits.introvert.name",
+    "description": "traits.introvert.description"
   },
   {
     "id": 84,
-    "name": {
-      "en": "Chronic Pain",
-      "it": "Dolore Cronico"
-    },
     "icon": 85,
-    "description": {
-      "en": "Constant physical discomfort",
-      "it": "Disagio fisico costante"
-    },
     "positive": {
       "mdf": 3,
       "def": 2,
@@ -2459,19 +1953,13 @@
       6,
       24,
       74
-    ]
+    ],
+    "name": "traits.chronic_pain.name",
+    "description": "traits.chronic_pain.description"
   },
   {
     "id": 85,
-    "name": {
-      "en": "Ambitious",
-      "it": "Ambizioso"
-    },
     "icon": 410,
-    "description": {
-      "en": "Driven to achieve greatness",
-      "it": "Spinto a raggiungere la grandezza"
-    },
     "positive": {
       "atk": 2,
       "mat": 2,
@@ -2488,19 +1976,13 @@
     "switches": [],
     "incompatible": [
       86
-    ]
+    ],
+    "name": "traits.ambitious.name",
+    "description": "traits.ambitious.description"
   },
   {
     "id": 86,
-    "name": {
-      "en": "Slothful",
-      "it": "Pigro"
-    },
     "icon": 1,
-    "description": {
-      "en": "Prefers minimal effort",
-      "it": "Preferisce il minimo sforzo"
-    },
     "positive": {
       "hp": 20,
       "def": 2,
@@ -2519,19 +2001,13 @@
       6,
       40,
       85
-    ]
+    ],
+    "name": "traits.slothful.name",
+    "description": "traits.slothful.description"
   },
   {
     "id": 87,
-    "name": {
-      "en": "Greedy",
-      "it": "Avido"
-    },
     "icon": 313,
-    "description": {
-      "en": "Obsessed with wealth and possessions",
-      "it": "Ossessionato da ricchezza e beni"
-    },
     "positive": {
       "luk": 4,
       "agi": 1
@@ -2549,19 +2025,13 @@
       28,
       50,
       88
-    ]
+    ],
+    "name": "traits.greedy.name",
+    "description": "traits.greedy.description"
   },
   {
     "id": 88,
-    "name": {
-      "en": "Generous",
-      "it": "Generoso"
-    },
     "icon": 314,
-    "description": {
-      "en": "Freely gives to others",
-      "it": "Dona liberamente agli altri"
-    },
     "positive": {
       "mdf": 3,
       "mp": 5,
@@ -2578,19 +2048,13 @@
     "switches": [],
     "incompatible": [
       87
-    ]
+    ],
+    "name": "traits.generous.name",
+    "description": "traits.generous.description"
   },
   {
     "id": 89,
-    "name": {
-      "en": "Loyal",
-      "it": "Leale"
-    },
     "icon": 334,
-    "description": {
-      "en": "Unwavering devotion to allies",
-      "it": "Devozione incrollabile agli alleati"
-    },
     "positive": {
       "def": 3,
       "mdf": 2,
@@ -2608,19 +2072,13 @@
     "incompatible": [
       90,
       32
-    ]
+    ],
+    "name": "traits.loyal.name",
+    "description": "traits.loyal.description"
   },
   {
     "id": 90,
-    "name": {
-      "en": "Treacherous",
-      "it": "Traditore"
-    },
     "icon": 340,
-    "description": {
-      "en": "Cannot be trusted",
-      "it": "Non ci si pu\u00f2 fidare"
-    },
     "positive": {
       "atk": 3,
       "agi": 2,
@@ -2638,19 +2096,13 @@
     "incompatible": [
       89,
       33
-    ]
+    ],
+    "name": "traits.treacherous.name",
+    "description": "traits.treacherous.description"
   },
   {
     "id": 91,
-    "name": {
-      "en": "Proud",
-      "it": "Orgoglioso"
-    },
     "icon": 402,
-    "description": {
-      "en": "Excessive self-regard",
-      "it": "Eccessiva considerazione di s\u00e9"
-    },
     "positive": {
       "atk": 2,
       "mat": 2,
@@ -2668,19 +2120,13 @@
     "incompatible": [
       19,
       92
-    ]
+    ],
+    "name": "traits.proud.name",
+    "description": "traits.proud.description"
   },
   {
     "id": 92,
-    "name": {
-      "en": "Humble",
-      "it": "Umile"
-    },
     "icon": 135,
-    "description": {
-      "en": "Modest and unassuming",
-      "it": "Modesto e discreto"
-    },
     "positive": {
       "mdf": 3,
       "mp": 5,
@@ -2698,19 +2144,13 @@
     "incompatible": [
       60,
       91
-    ]
+    ],
+    "name": "traits.humble.name",
+    "description": "traits.humble.description"
   },
   {
     "id": 93,
-    "name": {
-      "en": "Gluttonous",
-      "it": "Goloso"
-    },
     "icon": 269,
-    "description": {
-      "en": "Excessive consumption of food",
-      "it": "Consumo eccessivo di cibo"
-    },
     "positive": {
       "hp": 25,
       "def": 2,
@@ -2730,19 +2170,13 @@
       18,
       28,
       50
-    ]
+    ],
+    "name": "traits.gluttonous.name",
+    "description": "traits.gluttonous.description"
   },
   {
     "id": 94,
-    "name": {
-      "en": "Hedonist",
-      "it": "Edonista"
-    },
     "icon": 270,
-    "description": {
-      "en": "Seeks pleasure above all",
-      "it": "Cerca il piacere sopra ogni cosa"
-    },
     "positive": {
       "luk": 3,
       "eva": 2,
@@ -2760,19 +2194,13 @@
     "incompatible": [
       50,
       95
-    ]
+    ],
+    "name": "traits.hedonist.name",
+    "description": "traits.hedonist.description"
   },
   {
     "id": 95,
-    "name": {
-      "en": "Stoic",
-      "it": "Stoico"
-    },
     "icon": 389,
-    "description": {
-      "en": "Endures pain without complaint",
-      "it": "Sopporta il dolore senza lamentarsi"
-    },
     "positive": {
       "def": 4,
       "mdf": 3,
@@ -2790,19 +2218,13 @@
     "incompatible": [
       10,
       94
-    ]
+    ],
+    "name": "traits.stoic.name",
+    "description": "traits.stoic.description"
   },
   {
     "id": 96,
-    "name": {
-      "en": "Tracker",
-      "it": "Segugio"
-    },
     "icon": 247,
-    "description": {
-      "en": "Expert at following trails",
-      "it": "Esperto nel seguire tracce"
-    },
     "positive": {
       "agi": 2,
       "luk": 3,
@@ -2820,19 +2242,13 @@
     "incompatible": [
       13,
       44
-    ]
+    ],
+    "name": "traits.tracker.name",
+    "description": "traits.tracker.description"
   },
   {
     "id": 97,
-    "name": {
-      "en": "Survivalist",
-      "it": "Survivalista"
-    },
     "icon": 288,
-    "description": {
-      "en": "Thrives in harsh environments",
-      "it": "Prospera in ambienti difficili"
-    },
     "positive": {
       "hp": 20,
       "def": 2,
@@ -2847,19 +2263,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.survivalist.name",
+    "description": "traits.survivalist.description"
   },
   {
     "id": 98,
-    "name": {
-      "en": "Tactician",
-      "it": "Tattico"
-    },
     "icon": 189,
-    "description": {
-      "en": "Master of strategy and planning",
-      "it": "Maestro di strategia e pianificazione"
-    },
     "positive": {
       "mat": 3,
       "mdf": 2,
@@ -2877,19 +2287,13 @@
     "incompatible": [
       4,
       77
-    ]
+    ],
+    "name": "traits.tactician.name",
+    "description": "traits.tactician.description"
   },
   {
     "id": 99,
-    "name": {
-      "en": "Cursed",
-      "it": "Maledetto"
-    },
     "icon": 79,
-    "description": {
-      "en": "Bearer of supernatural misfortune",
-      "it": "Portatore di sfortuna soprannaturale"
-    },
     "positive": {
       "atk": 3,
       "mat": 3,
@@ -2907,19 +2311,13 @@
     "incompatible": [
       8,
       100
-    ]
+    ],
+    "name": "traits.cursed.name",
+    "description": "traits.cursed.description"
   },
   {
     "id": 100,
-    "name": {
-      "en": "Blessed",
-      "it": "Benedetto"
-    },
     "icon": 87,
-    "description": {
-      "en": "Touched by divine favor",
-      "it": "Toccato dal favore divino"
-    },
     "positive": {
       "luk": 5,
       "mdf": 3,
@@ -2937,19 +2335,13 @@
     "incompatible": [
       20,
       99
-    ]
+    ],
+    "name": "traits.blessed.name",
+    "description": "traits.blessed.description"
   },
   {
     "id": 101,
-    "name": {
-      "en": "Caffeine Dependent",
-      "it": "Dipendente da Caffeina"
-    },
     "icon": 226,
-    "description": {
-      "en": "Requires caffeine to function normally",
-      "it": "Richiede caffeina per funzionare normalmente"
-    },
     "positive": {
       "agi": 2,
       "eva": 1,
@@ -2966,19 +2358,13 @@
     "switches": [],
     "incompatible": [
       50
-    ]
+    ],
+    "name": "traits.caffeine_dependent.name",
+    "description": "traits.caffeine_dependent.description"
   },
   {
     "id": 102,
-    "name": {
-      "en": "Nicotine Addict",
-      "it": "Dipendente da Nicotina"
-    },
     "icon": 187,
-    "description": {
-      "en": "Dependent on tobacco products",
-      "it": "Dipendente da prodotti del tabacco"
-    },
     "positive": {
       "agi": 1,
       "eva": 1,
@@ -2997,19 +2383,13 @@
       6,
       50,
       76
-    ]
+    ],
+    "name": "traits.nicotine_addict.name",
+    "description": "traits.nicotine_addict.description"
   },
   {
     "id": 103,
-    "name": {
-      "en": "Gambling Addict",
-      "it": "Dipendente dal Gioco"
-    },
     "icon": 196,
-    "description": {
-      "en": "Compulsively gambles resources",
-      "it": "Gioca d'azzardo compulsivamente"
-    },
     "positive": {
       "luk": 4,
       "agi": 1
@@ -3027,19 +2407,13 @@
       28,
       30,
       50
-    ]
+    ],
+    "name": "traits.gambling_addict.name",
+    "description": "traits.gambling_addict.description"
   },
   {
     "id": 104,
-    "name": {
-      "en": "Drug Dependent",
-      "it": "Tossicodipendente"
-    },
     "icon": 179,
-    "description": {
-      "en": "Relies on substances to cope",
-      "it": "Si affida a sostanze per affrontare la vita"
-    },
     "positive": {
       "mp": 5,
       "mat": 2
@@ -3058,19 +2432,13 @@
       6,
       7,
       50
-    ]
+    ],
+    "name": "traits.drug_dependent.name",
+    "description": "traits.drug_dependent.description"
   },
   {
     "id": 105,
-    "name": {
-      "en": "Restrictive Eating",
-      "it": "Alimentazione Restrittiva"
-    },
     "icon": 266,
-    "description": {
-      "en": "Severely limits food intake",
-      "it": "Limita severamente l'assunzione di cibo"
-    },
     "positive": {
       "agi": 2,
       "eva": 2
@@ -3090,19 +2458,13 @@
       6,
       93,
       106
-    ]
+    ],
+    "name": "traits.restrictive_eating.name",
+    "description": "traits.restrictive_eating.description"
   },
   {
     "id": 106,
-    "name": {
-      "en": "Binge Eating",
-      "it": "Alimentazione Compulsiva"
-    },
     "icon": 269,
-    "description": {
-      "en": "Episodes of uncontrolled eating",
-      "it": "Episodi di alimentazione incontrollata"
-    },
     "positive": {
       "hp": 20,
       "def": 2
@@ -3122,19 +2484,13 @@
       6,
       28,
       105
-    ]
+    ],
+    "name": "traits.binge_eating.name",
+    "description": "traits.binge_eating.description"
   },
   {
     "id": 107,
-    "name": {
-      "en": "Nyctophobic",
-      "it": "Nictofobico"
-    },
     "icon": 241,
-    "description": {
-      "en": "Fears darkness",
-      "it": "Teme l'oscurit\u00e0"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -3152,19 +2508,13 @@
     "incompatible": [
       20,
       38
-    ]
+    ],
+    "name": "traits.nyctophobic.name",
+    "description": "traits.nyctophobic.description"
   },
   {
     "id": 108,
-    "name": {
-      "en": "Thanatophobic",
-      "it": "Tanatofobico"
-    },
     "icon": 177,
-    "description": {
-      "en": "Fears death intensely",
-      "it": "Teme intensamente la morte"
-    },
     "positive": {
       "eva": 3,
       "def": 2,
@@ -3182,19 +2532,13 @@
     "incompatible": [
       24,
       53
-    ]
+    ],
+    "name": "traits.thanatophobic.name",
+    "description": "traits.thanatophobic.description"
   },
   {
     "id": 109,
-    "name": {
-      "en": "Entomophobic",
-      "it": "Entomofobico"
-    },
     "icon": 292,
-    "description": {
-      "en": "Fears insects and bugs",
-      "it": "Teme insetti e scarafaggi"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -3209,19 +2553,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.entomophobic.name",
+    "description": "traits.entomophobic.description"
   },
   {
     "id": 110,
-    "name": {
-      "en": "Ophidiophobic",
-      "it": "Ofidiofobico"
-    },
     "icon": 293,
-    "description": {
-      "en": "Fears snakes",
-      "it": "Teme i serpenti"
-    },
     "positive": {
       "eva": 3,
       "agi": 2
@@ -3235,19 +2573,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.ophidiophobic.name",
+    "description": "traits.ophidiophobic.description"
   },
   {
     "id": 111,
-    "name": {
-      "en": "Cynophobic",
-      "it": "Cinofobico"
-    },
     "icon": 298,
-    "description": {
-      "en": "Fears dogs",
-      "it": "Teme i cani"
-    },
     "positive": {
       "eva": 2,
       "agi": 2,
@@ -3262,19 +2594,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.cynophobic.name",
+    "description": "traits.cynophobic.description"
   },
   {
     "id": 112,
-    "name": {
-      "en": "Pyrophobic",
-      "it": "Pirofobico"
-    },
     "icon": 64,
-    "description": {
-      "en": "Fears fire",
-      "it": "Teme il fuoco"
-    },
     "positive": {
       "eva": 3,
       "agi": 2,
@@ -3291,19 +2617,13 @@
     "switches": [],
     "incompatible": [
       26
-    ]
+    ],
+    "name": "traits.pyrophobic.name",
+    "description": "traits.pyrophobic.description"
   },
   {
     "id": 113,
-    "name": {
-      "en": "Trypophobic",
-      "it": "Tripofobico"
-    },
     "icon": 241,
-    "description": {
-      "en": "Fears clustered holes or patterns",
-      "it": "Teme buchi o motivi raggruppati"
-    },
     "positive": {
       "eva": 2,
       "mdf": 2,
@@ -3318,19 +2638,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.trypophobic.name",
+    "description": "traits.trypophobic.description"
   },
   {
     "id": 114,
-    "name": {
-      "en": "Atychiphobic",
-      "it": "Atichifobico"
-    },
     "icon": 74,
-    "description": {
-      "en": "Fears failure",
-      "it": "Teme il fallimento"
-    },
     "positive": {
       "def": 2,
       "mdf": 2,
@@ -3348,19 +2662,13 @@
     "incompatible": [
       85,
       91
-    ]
+    ],
+    "name": "traits.atychiphobic.name",
+    "description": "traits.atychiphobic.description"
   },
   {
     "id": 115,
-    "name": {
-      "en": "Autophobic",
-      "it": "Autofobico"
-    },
     "icon": 130,
-    "description": {
-      "en": "Fears being alone",
-      "it": "Teme di essere solo"
-    },
     "positive": {
       "def": 2,
       "luk": 2,
@@ -3377,19 +2685,13 @@
     "switches": [],
     "incompatible": [
       83
-    ]
+    ],
+    "name": "traits.autophobic.name",
+    "description": "traits.autophobic.description"
   },
   {
     "id": 116,
-    "name": {
-      "en": "Devout",
-      "it": "Devoto"
-    },
     "icon": 221,
-    "description": {
-      "en": "Deeply religious and faithful",
-      "it": "Profondamente religioso e fedele"
-    },
     "positive": {
       "mdf": 4,
       "mp": 6,
@@ -3407,19 +2709,13 @@
     "incompatible": [
       117,
       118
-    ]
+    ],
+    "name": "traits.devout.name",
+    "description": "traits.devout.description"
   },
   {
     "id": 117,
-    "name": {
-      "en": "Atheist",
-      "it": "Ateo"
-    },
     "icon": 229,
-    "description": {
-      "en": "Rejects religious beliefs",
-      "it": "Rifiuta le credenze religiose"
-    },
     "positive": {
       "mat": 3,
       "luk": 2,
@@ -3437,19 +2733,13 @@
       116,
       118,
       119
-    ]
+    ],
+    "name": "traits.atheist.name",
+    "description": "traits.atheist.description"
   },
   {
     "id": 118,
-    "name": {
-      "en": "Heretic",
-      "it": "Eretico"
-    },
     "icon": 79,
-    "description": {
-      "en": "Branded as religious outcast",
-      "it": "Marchiato come emarginato religioso"
-    },
     "positive": {
       "atk": 2,
       "mat": 2,
@@ -3468,19 +2758,13 @@
       116,
       117,
       119
-    ]
+    ],
+    "name": "traits.heretic.name",
+    "description": "traits.heretic.description"
   },
   {
     "id": 119,
-    "name": {
-      "en": "Pilgrim",
-      "it": "Pellegrino"
-    },
     "icon": 399,
-    "description": {
-      "en": "Journeys for spiritual purpose",
-      "it": "Viaggia per scopo spirituale"
-    },
     "positive": {
       "agi": 2,
       "def": 2,
@@ -3498,19 +2782,13 @@
     "incompatible": [
       117,
       118
-    ]
+    ],
+    "name": "traits.pilgrim.name",
+    "description": "traits.pilgrim.description"
   },
   {
     "id": 120,
-    "name": {
-      "en": "Excommunicated",
-      "it": "Scomunicato"
-    },
     "icon": 400,
-    "description": {
-      "en": "Expelled from religious community",
-      "it": "Espulso dalla comunit\u00e0 religiosa"
-    },
     "positive": {
       "atk": 2,
       "agi": 1,
@@ -3528,19 +2806,13 @@
     "incompatible": [
       116,
       119
-    ]
+    ],
+    "name": "traits.excommunicated.name",
+    "description": "traits.excommunicated.description"
   },
   {
     "id": 121,
-    "name": {
-      "en": "Monk-Trained",
-      "it": "Addestrato dai Monaci"
-    },
     "icon": 77,
-    "description": {
-      "en": "Disciplined in monastic ways",
-      "it": "Disciplinato nei modi monastici"
-    },
     "positive": {
       "def": 3,
       "mdf": 2,
@@ -3557,19 +2829,13 @@
     "switches": [],
     "incompatible": [
       117
-    ]
+    ],
+    "name": "traits.monk-trained.name",
+    "description": "traits.monk-trained.description"
   },
   {
     "id": 122,
-    "name": {
-      "en": "Prophetic",
-      "it": "Profetico"
-    },
     "icon": 87,
-    "description": {
-      "en": "Experiences visions of future",
-      "it": "Sperimenta visioni del futuro"
-    },
     "positive": {
       "luk": 5,
       "eva": 3,
@@ -3586,19 +2852,13 @@
     "switches": [],
     "incompatible": [
       117
-    ]
+    ],
+    "name": "traits.prophetic.name",
+    "description": "traits.prophetic.description"
   },
   {
     "id": 123,
-    "name": {
-      "en": "Noble",
-      "it": "Nobile"
-    },
     "icon": 139,
-    "description": {
-      "en": "Born into aristocracy",
-      "it": "Nato nell'aristocrazia"
-    },
     "positive": {
       "luk": 3,
       "mp": 4,
@@ -3617,19 +2877,13 @@
       124,
       125,
       130
-    ]
+    ],
+    "name": "traits.noble.name",
+    "description": "traits.noble.description"
   },
   {
     "id": 124,
-    "name": {
-      "en": "Street Urchin",
-      "it": "Monello di Strada"
-    },
     "icon": 136,
-    "description": {
-      "en": "Grew up in poverty",
-      "it": "Cresciuto nella povert\u00e0"
-    },
     "positive": {
       "agi": 3,
       "eva": 3,
@@ -3647,19 +2901,13 @@
     "incompatible": [
       123,
       131
-    ]
+    ],
+    "name": "traits.street_urchin.name",
+    "description": "traits.street_urchin.description"
   },
   {
     "id": 125,
-    "name": {
-      "en": "Orphan",
-      "it": "Orfano"
-    },
     "icon": 144,
-    "description": {
-      "en": "No living parents",
-      "it": "Nessun genitore vivente"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -3677,19 +2925,13 @@
     "switches": [],
     "incompatible": [
       123
-    ]
+    ],
+    "name": "traits.orphan.name",
+    "description": "traits.orphan.description"
   },
   {
     "id": 126,
-    "name": {
-      "en": "Bastard",
-      "it": "Bastardo"
-    },
     "icon": 411,
-    "description": {
-      "en": "Born outside of wedlock",
-      "it": "Nato fuori dal matrimonio"
-    },
     "positive": {
       "atk": 2,
       "agi": 2,
@@ -3706,19 +2948,13 @@
     "switches": [],
     "incompatible": [
       127
-    ]
+    ],
+    "name": "traits.bastard.name",
+    "description": "traits.bastard.description"
   },
   {
     "id": 127,
-    "name": {
-      "en": "Heir",
-      "it": "Erede"
-    },
     "icon": 210,
-    "description": {
-      "en": "Destined to inherit wealth",
-      "it": "Destinato ad ereditare ricchezza"
-    },
     "positive": {
       "luk": 4,
       "mp": 4,
@@ -3738,19 +2974,13 @@
       125,
       126,
       130
-    ]
+    ],
+    "name": "traits.heir.name",
+    "description": "traits.heir.description"
   },
   {
     "id": 128,
-    "name": {
-      "en": "Twin",
-      "it": "Gemello"
-    },
     "icon": 159,
-    "description": {
-      "en": "Has an identical sibling",
-      "it": "Ha un fratello identico"
-    },
     "positive": {
       "luk": 3,
       "eva": 2,
@@ -3766,19 +2996,13 @@
     "switches": [],
     "incompatible": [
       125
-    ]
+    ],
+    "name": "traits.twin.name",
+    "description": "traits.twin.description"
   },
   {
     "id": 129,
-    "name": {
-      "en": "Exiled",
-      "it": "Esiliato"
-    },
     "icon": 82,
-    "description": {
-      "en": "Banished from homeland",
-      "it": "Bandito dalla patria"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -3794,19 +3018,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.exiled.name",
+    "description": "traits.exiled.description"
   },
   {
     "id": 130,
-    "name": {
-      "en": "Slave-Born",
-      "it": "Nato Schiavo"
-    },
     "icon": 352,
-    "description": {
-      "en": "Born into servitude",
-      "it": "Nato in schiavit\u00f9"
-    },
     "positive": {
       "def": 3,
       "hp": 15,
@@ -3824,19 +3042,13 @@
     "incompatible": [
       123,
       127
-    ]
+    ],
+    "name": "traits.slave-born.name",
+    "description": "traits.slave-born.description"
   },
   {
     "id": 131,
-    "name": {
-      "en": "Wealthy",
-      "it": "Ricco"
-    },
     "icon": 313,
-    "description": {
-      "en": "Born with financial privilege",
-      "it": "Nato con privilegio finanziario"
-    },
     "positive": {
       "luk": 4,
       "mp": 4,
@@ -3854,19 +3066,13 @@
     "incompatible": [
       124,
       130
-    ]
+    ],
+    "name": "traits.wealthy.name",
+    "description": "traits.wealthy.description"
   },
   {
     "id": 132,
-    "name": {
-      "en": "Scholar",
-      "it": "Studioso"
-    },
     "icon": 191,
-    "description": {
-      "en": "Dedicated to learning",
-      "it": "Dedicato all'apprendimento"
-    },
     "positive": {
       "mat": 4,
       "mp": 6,
@@ -3884,19 +3090,13 @@
     "incompatible": [
       79,
       135
-    ]
+    ],
+    "name": "traits.scholar.name",
+    "description": "traits.scholar.description"
   },
   {
     "id": 133,
-    "name": {
-      "en": "Merchant",
-      "it": "Mercante"
-    },
     "icon": 208,
-    "description": {
-      "en": "Skilled in trade and commerce",
-      "it": "Abile nel commercio"
-    },
     "positive": {
       "luk": 4,
       "agi": 1,
@@ -3911,19 +3111,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.merchant.name",
+    "description": "traits.merchant.description"
   },
   {
     "id": 134,
-    "name": {
-      "en": "Criminal",
-      "it": "Criminale"
-    },
     "icon": 209,
-    "description": {
-      "en": "Background in illegal activities",
-      "it": "Passato in attivit\u00e0 illegali"
-    },
     "positive": {
       "agi": 3,
       "eva": 3,
@@ -3941,19 +3135,13 @@
     "incompatible": [
       89,
       116
-    ]
+    ],
+    "name": "traits.criminal.name",
+    "description": "traits.criminal.description"
   },
   {
     "id": 135,
-    "name": {
-      "en": "Illiterate",
-      "it": "Analfabeta"
-    },
     "icon": 193,
-    "description": {
-      "en": "Cannot read or write",
-      "it": "Non sa leggere o scrivere"
-    },
     "positive": {
       "atk": 2,
       "def": 2,
@@ -3973,19 +3161,13 @@
       41,
       57,
       132
-    ]
+    ],
+    "name": "traits.illiterate.name",
+    "description": "traits.illiterate.description"
   },
   {
     "id": 136,
-    "name": {
-      "en": "Veteran",
-      "it": "Veterano"
-    },
     "icon": 321,
-    "description": {
-      "en": "Experienced soldier",
-      "it": "Soldato esperto"
-    },
     "positive": {
       "atk": 3,
       "def": 3,
@@ -4002,19 +3184,13 @@
     "switches": [],
     "incompatible": [
       25
-    ]
+    ],
+    "name": "traits.veteran.name",
+    "description": "traits.veteran.description"
   },
   {
     "id": 137,
-    "name": {
-      "en": "Farmer",
-      "it": "Contadino"
-    },
     "icon": 217,
-    "description": {
-      "en": "Rural agricultural background",
-      "it": "Provenienza agricola rurale"
-    },
     "positive": {
       "hp": 25,
       "def": 2,
@@ -4031,19 +3207,13 @@
     "switches": [],
     "incompatible": [
       123
-    ]
+    ],
+    "name": "traits.farmer.name",
+    "description": "traits.farmer.description"
   },
   {
     "id": 138,
-    "name": {
-      "en": "Herbalist",
-      "it": "Erborista"
-    },
     "icon": 181,
-    "description": {
-      "en": "Expert in medicinal plants",
-      "it": "Esperto in piante medicinali"
-    },
     "positive": {
       "mat": 2,
       "mp": 4,
@@ -4059,19 +3229,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.herbalist.name",
+    "description": "traits.herbalist.description"
   },
   {
     "id": 139,
-    "name": {
-      "en": "Alchemist",
-      "it": "Alchimista"
-    },
     "icon": 179,
-    "description": {
-      "en": "Practices transmutation arts",
-      "it": "Pratica le arti della trasmutazione"
-    },
     "positive": {
       "mat": 4,
       "mp": 5,
@@ -4088,19 +3252,13 @@
     "switches": [],
     "incompatible": [
       34
-    ]
+    ],
+    "name": "traits.alchemist.name",
+    "description": "traits.alchemist.description"
   },
   {
     "id": 140,
-    "name": {
-      "en": "Navigator",
-      "it": "Navigatore"
-    },
     "icon": 312,
-    "description": {
-      "en": "Expert in travel and wayfinding",
-      "it": "Esperto in viaggi e orientamento"
-    },
     "positive": {
       "luk": 3,
       "agi": 2,
@@ -4115,19 +3273,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.navigator.name",
+    "description": "traits.navigator.description"
   },
   {
     "id": 141,
-    "name": {
-      "en": "Blacksmith",
-      "it": "Fabbro"
-    },
     "icon": 324,
-    "description": {
-      "en": "Skilled metalworker",
-      "it": "Metallurgo esperto"
-    },
     "positive": {
       "atk": 3,
       "def": 3,
@@ -4142,19 +3294,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.blacksmith.name",
+    "description": "traits.blacksmith.description"
   },
   {
     "id": 142,
-    "name": {
-      "en": "Thief",
-      "it": "Ladro"
-    },
     "icon": 337,
-    "description": {
-      "en": "Expert at stealing",
-      "it": "Esperto nel rubare"
-    },
     "positive": {
       "agi": 4,
       "eva": 3,
@@ -4172,19 +3318,13 @@
     "incompatible": [
       89,
       116
-    ]
+    ],
+    "name": "traits.thief.name",
+    "description": "traits.thief.description"
   },
   {
     "id": 143,
-    "name": {
-      "en": "Bard",
-      "it": "Bardo"
-    },
     "icon": 199,
-    "description": {
-      "en": "Musician and storyteller",
-      "it": "Musicista e narratore"
-    },
     "positive": {
       "luk": 3,
       "eva": 2,
@@ -4200,19 +3340,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.bard.name",
+    "description": "traits.bard.description"
   },
   {
     "id": 144,
-    "name": {
-      "en": "Beautiful",
-      "it": "Bello"
-    },
     "icon": 184,
-    "description": {
-      "en": "Exceptionally attractive",
-      "it": "Eccezionalmente attraente"
-    },
     "positive": {
       "luk": 4,
       "eva": 2,
@@ -4228,19 +3362,13 @@
     "switches": [],
     "incompatible": [
       145
-    ]
+    ],
+    "name": "traits.beautiful.name",
+    "description": "traits.beautiful.description"
   },
   {
     "id": 145,
-    "name": {
-      "en": "Scarred",
-      "it": "Sfregiato"
-    },
     "icon": 105,
-    "description": {
-      "en": "Marked by visible wounds",
-      "it": "Segnato da ferite visibili"
-    },
     "positive": {
       "atk": 2,
       "def": 3,
@@ -4256,19 +3384,13 @@
     "switches": [],
     "incompatible": [
       144
-    ]
+    ],
+    "name": "traits.scarred.name",
+    "description": "traits.scarred.description"
   },
   {
     "id": 146,
-    "name": {
-      "en": "Tall",
-      "it": "Alto"
-    },
     "icon": 392,
-    "description": {
-      "en": "Above average height",
-      "it": "Altezza sopra la media"
-    },
     "positive": {
       "atk": 2,
       "def": 1,
@@ -4286,19 +3408,13 @@
       63,
       71,
       147
-    ]
+    ],
+    "name": "traits.tall.name",
+    "description": "traits.tall.description"
   },
   {
     "id": 147,
-    "name": {
-      "en": "Short",
-      "it": "Basso"
-    },
     "icon": 137,
-    "description": {
-      "en": "Below average height",
-      "it": "Altezza sotto la media"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -4315,19 +3431,13 @@
     "incompatible": [
       62,
       146
-    ]
+    ],
+    "name": "traits.short.name",
+    "description": "traits.short.description"
   },
   {
     "id": 148,
-    "name": {
-      "en": "Muscular",
-      "it": "Muscoloso"
-    },
     "icon": 153,
-    "description": {
-      "en": "Exceptional physical strength",
-      "it": "Forza fisica eccezionale"
-    },
     "positive": {
       "atk": 3,
       "def": 2,
@@ -4345,19 +3455,13 @@
     "incompatible": [
       2,
       149
-    ]
+    ],
+    "name": "traits.muscular.name",
+    "description": "traits.muscular.description"
   },
   {
     "id": 149,
-    "name": {
-      "en": "Frail",
-      "it": "Fragile"
-    },
     "icon": 152,
-    "description": {
-      "en": "Weak constitution",
-      "it": "Costituzione debole"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -4375,19 +3479,13 @@
     "incompatible": [
       6,
       148
-    ]
+    ],
+    "name": "traits.frail.name",
+    "description": "traits.frail.description"
   },
   {
     "id": 150,
-    "name": {
-      "en": "Left-Handed",
-      "it": "Mancino"
-    },
     "icon": 142,
-    "description": {
-      "en": "Dominant left hand",
-      "it": "Mano sinistra dominante"
-    },
     "positive": {
       "agi": 1,
       "eva": 1,
@@ -4402,19 +3500,13 @@
     "switches": [],
     "incompatible": [
       43
-    ]
+    ],
+    "name": "traits.left-handed.name",
+    "description": "traits.left-handed.description"
   },
   {
     "id": 151,
-    "name": {
-      "en": "Quick Reflexes",
-      "it": "Riflessi Rapidi"
-    },
     "icon": 66,
-    "description": {
-      "en": "Lightning-fast reactions",
-      "it": "Reazioni fulminee"
-    },
     "positive": {
       "agi": 4,
       "eva": 3
@@ -4430,19 +3522,13 @@
     "incompatible": [
       9,
       86
-    ]
+    ],
+    "name": "traits.quick_reflexes.name",
+    "description": "traits.quick_reflexes.description"
   },
   {
     "id": 152,
-    "name": {
-      "en": "Duelist",
-      "it": "Duellante"
-    },
     "icon": 97,
-    "description": {
-      "en": "Master of one-on-one combat",
-      "it": "Maestro del combattimento uno contro uno"
-    },
     "positive": {
       "atk": 3,
       "eva": 2,
@@ -4458,19 +3544,13 @@
     "switches": [],
     "incompatible": [
       25
-    ]
+    ],
+    "name": "traits.duelist.name",
+    "description": "traits.duelist.description"
   },
   {
     "id": 153,
-    "name": {
-      "en": "Brawler",
-      "it": "Rissaiolo"
-    },
     "icon": 106,
-    "description": {
-      "en": "Street fighting expert",
-      "it": "Esperto di lotta di strada"
-    },
     "positive": {
       "atk": 3,
       "def": 2,
@@ -4488,19 +3568,13 @@
     "incompatible": [
       25,
       121
-    ]
+    ],
+    "name": "traits.brawler.name",
+    "description": "traits.brawler.description"
   },
   {
     "id": 154,
-    "name": {
-      "en": "Archer",
-      "it": "Arciere"
-    },
     "icon": 102,
-    "description": {
-      "en": "Skilled with bow and arrow",
-      "it": "Abile con arco e frecce"
-    },
     "positive": {
       "atk": 2,
       "agi": 2,
@@ -4517,19 +3591,13 @@
     "incompatible": [
       13,
       44
-    ]
+    ],
+    "name": "traits.archer.name",
+    "description": "traits.archer.description"
   },
   {
     "id": 155,
-    "name": {
-      "en": "Shield Master",
-      "it": "Maestro dello Scudo"
-    },
     "icon": 128,
-    "description": {
-      "en": "Expert in defensive tactics",
-      "it": "Esperto in tattiche difensive"
-    },
     "positive": {
       "def": 4,
       "mdf": 2,
@@ -4546,19 +3614,13 @@
     "switches": [],
     "incompatible": [
       24
-    ]
+    ],
+    "name": "traits.shield_master.name",
+    "description": "traits.shield_master.description"
   },
   {
     "id": 156,
-    "name": {
-      "en": "Assassin",
-      "it": "Assassino"
-    },
     "icon": 339,
-    "description": {
-      "en": "Trained to kill silently",
-      "it": "Addestrato a uccidere silenziosamente"
-    },
     "positive": {
       "atk": 4,
       "agi": 3,
@@ -4576,19 +3638,13 @@
     "incompatible": [
       25,
       116
-    ]
+    ],
+    "name": "traits.assassin.name",
+    "description": "traits.assassin.description"
   },
   {
     "id": 157,
-    "name": {
-      "en": "Berserker Rage",
-      "it": "Furia Berserker"
-    },
     "icon": 146,
-    "description": {
-      "en": "Channels battle fury",
-      "it": "Canalizza la furia della battaglia"
-    },
     "positive": {
       "atk": 5,
       "hp": 25
@@ -4608,19 +3664,13 @@
       25,
       30,
       98
-    ]
+    ],
+    "name": "traits.berserker_rage.name",
+    "description": "traits.berserker_rage.description"
   },
   {
     "id": 158,
-    "name": {
-      "en": "Mounted Combat",
-      "it": "Combattimento a Cavallo"
-    },
     "icon": 107,
-    "description": {
-      "en": "Expert cavalry fighter",
-      "it": "Combattente di cavalleria esperto"
-    },
     "positive": {
       "atk": 2,
       "agi": 2,
@@ -4637,19 +3687,13 @@
     "switches": [],
     "incompatible": [
       51
-    ]
+    ],
+    "name": "traits.mounted_combat.name",
+    "description": "traits.mounted_combat.description"
   },
   {
     "id": 159,
-    "name": {
-      "en": "Martial Artist",
-      "it": "Artista Marziale"
-    },
     "icon": 77,
-    "description": {
-      "en": "Unarmed combat master",
-      "it": "Maestro del combattimento disarmato"
-    },
     "positive": {
       "atk": 3,
       "agi": 3,
@@ -4663,19 +3707,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.martial_artist.name",
+    "description": "traits.martial_artist.description"
   },
   {
     "id": 160,
-    "name": {
-      "en": "Optimist",
-      "it": "Ottimista"
-    },
     "icon": 7,
-    "description": {
-      "en": "Always sees the bright side",
-      "it": "Vede sempre il lato positivo"
-    },
     "positive": {
       "luk": 4,
       "mp": 4,
@@ -4692,19 +3730,13 @@
     "incompatible": [
       161,
       162
-    ]
+    ],
+    "name": "traits.optimist.name",
+    "description": "traits.optimist.description"
   },
   {
     "id": 161,
-    "name": {
-      "en": "Pessimist",
-      "it": "Pessimista"
-    },
     "icon": 11,
-    "description": {
-      "en": "Expects the worst outcome",
-      "it": "Si aspetta il risultato peggiore"
-    },
     "positive": {
       "def": 3,
       "mdf": 2,
@@ -4721,19 +3753,13 @@
     "switches": [],
     "incompatible": [
       160
-    ]
+    ],
+    "name": "traits.pessimist.name",
+    "description": "traits.pessimist.description"
   },
   {
     "id": 162,
-    "name": {
-      "en": "Nihilist",
-      "it": "Nichilista"
-    },
     "icon": 1,
-    "description": {
-      "en": "Believes life has no meaning",
-      "it": "Crede che la vita non abbia senso"
-    },
     "positive": {
       "atk": 3,
       "mat": 2,
@@ -4751,19 +3777,13 @@
     "incompatible": [
       116,
       160
-    ]
+    ],
+    "name": "traits.nihilist.name",
+    "description": "traits.nihilist.description"
   },
   {
     "id": 163,
-    "name": {
-      "en": "Idealist",
-      "it": "Idealista"
-    },
     "icon": 87,
-    "description": {
-      "en": "Pursues lofty principles",
-      "it": "Persegue principi elevati"
-    },
     "positive": {
       "mp": 5,
       "mdf": 3,
@@ -4781,19 +3801,13 @@
     "incompatible": [
       162,
       164
-    ]
+    ],
+    "name": "traits.idealist.name",
+    "description": "traits.idealist.description"
   },
   {
     "id": 164,
-    "name": {
-      "en": "Pragmatist",
-      "it": "Pragmatico"
-    },
     "icon": 72,
-    "description": {
-      "en": "Practical and realistic",
-      "it": "Pratico e realistico"
-    },
     "positive": {
       "def": 2,
       "mat": 2,
@@ -4810,19 +3824,13 @@
     "switches": [],
     "incompatible": [
       163
-    ]
+    ],
+    "name": "traits.pragmatist.name",
+    "description": "traits.pragmatist.description"
   },
   {
     "id": 165,
-    "name": {
-      "en": "Romantic",
-      "it": "Romantico"
-    },
     "icon": 84,
-    "description": {
-      "en": "Led by heart over mind",
-      "it": "Guidato dal cuore sulla mente"
-    },
     "positive": {
       "luk": 3,
       "mp": 4,
@@ -4840,19 +3848,13 @@
     "incompatible": [
       32,
       164
-    ]
+    ],
+    "name": "traits.romantic.name",
+    "description": "traits.romantic.description"
   },
   {
     "id": 166,
-    "name": {
-      "en": "Cynic",
-      "it": "Cinico"
-    },
     "icon": 85,
-    "description": {
-      "en": "Distrusts others' motives",
-      "it": "Diffida dei motivi altrui"
-    },
     "positive": {
       "def": 3,
       "mdf": 2,
@@ -4869,19 +3871,13 @@
     "incompatible": [
       160,
       165
-    ]
+    ],
+    "name": "traits.cynic.name",
+    "description": "traits.cynic.description"
   },
   {
     "id": 167,
-    "name": {
-      "en": "Vengeful",
-      "it": "Vendicativo"
-    },
     "icon": 120,
-    "description": {
-      "en": "Never forgives a slight",
-      "it": "Non perdona mai un'offesa"
-    },
     "positive": {
       "atk": 3,
       "mat": 2,
@@ -4898,19 +3894,13 @@
     "switches": [],
     "incompatible": [
       168
-    ]
+    ],
+    "name": "traits.vengeful.name",
+    "description": "traits.vengeful.description"
   },
   {
     "id": 168,
-    "name": {
-      "en": "Forgiving",
-      "it": "Perdonatore"
-    },
     "icon": 144,
-    "description": {
-      "en": "Quick to pardon transgressions",
-      "it": "Veloce nel perdonare le trasgressioni"
-    },
     "positive": {
       "mdf": 3,
       "mp": 5,
@@ -4927,19 +3917,13 @@
     "switches": [],
     "incompatible": [
       167
-    ]
+    ],
+    "name": "traits.forgiving.name",
+    "description": "traits.forgiving.description"
   },
   {
     "id": 169,
-    "name": {
-      "en": "Jealous",
-      "it": "Geloso"
-    },
     "icon": 299,
-    "description": {
-      "en": "Envies others constantly",
-      "it": "Invidia costantemente gli altri"
-    },
     "positive": {
       "atk": 2,
       "agi": 2
@@ -4956,19 +3940,13 @@
     "incompatible": [
       88,
       168
-    ]
+    ],
+    "name": "traits.jealous.name",
+    "description": "traits.jealous.description"
   },
   {
     "id": 170,
-    "name": {
-      "en": "Spiteful",
-      "it": "Dispettoso"
-    },
     "icon": 300,
-    "description": {
-      "en": "Petty and vindictive",
-      "it": "Meschino e vendicativo"
-    },
     "positive": {
       "atk": 2,
       "agi": 2,
@@ -4986,19 +3964,13 @@
     "incompatible": [
       88,
       168
-    ]
+    ],
+    "name": "traits.spiteful.name",
+    "description": "traits.spiteful.description"
   },
   {
     "id": 171,
-    "name": {
-      "en": "Honest",
-      "it": "Onesto"
-    },
     "icon": 246,
-    "description": {
-      "en": "Cannot tell lies",
-      "it": "Non pu\u00f2 dire bugie"
-    },
     "positive": {
       "mdf": 3,
       "mp": 4,
@@ -5018,19 +3990,13 @@
       90,
       134,
       142
-    ]
+    ],
+    "name": "traits.honest.name",
+    "description": "traits.honest.description"
   },
   {
     "id": 172,
-    "name": {
-      "en": "Blunt",
-      "it": "Schietto"
-    },
     "icon": 304,
-    "description": {
-      "en": "Speaks without tact",
-      "it": "Parla senza tatto"
-    },
     "positive": {
       "atk": 2,
       "def": 2,
@@ -5048,19 +4014,13 @@
     "incompatible": [
       16,
       81
-    ]
+    ],
+    "name": "traits.blunt.name",
+    "description": "traits.blunt.description"
   },
   {
     "id": 173,
-    "name": {
-      "en": "Famous",
-      "it": "Famoso"
-    },
     "icon": 124,
-    "description": {
-      "en": "Widely recognized and celebrated",
-      "it": "Ampiamente riconosciuto e celebrato"
-    },
     "positive": {
       "luk": 5,
       "mp": 4,
@@ -5077,19 +4037,13 @@
     "incompatible": [
       174,
       175
-    ]
+    ],
+    "name": "traits.famous.name",
+    "description": "traits.famous.description"
   },
   {
     "id": 174,
-    "name": {
-      "en": "Infamous",
-      "it": "Infame"
-    },
     "icon": 123,
-    "description": {
-      "en": "Known for terrible deeds",
-      "it": "Conosciuto per azioni terribili"
-    },
     "positive": {
       "atk": 3,
       "mat": 2,
@@ -5107,19 +4061,13 @@
     "incompatible": [
       173,
       175
-    ]
+    ],
+    "name": "traits.infamous.name",
+    "description": "traits.infamous.description"
   },
   {
     "id": 175,
-    "name": {
-      "en": "Anonymous",
-      "it": "Anonimo"
-    },
     "icon": 247,
-    "description": {
-      "en": "Unknown and unremarkable",
-      "it": "Sconosciuto e irrilevante"
-    },
     "positive": {
       "eva": 4,
       "agi": 2,
@@ -5137,19 +4085,13 @@
       173,
       174,
       176
-    ]
+    ],
+    "name": "traits.anonymous.name",
+    "description": "traits.anonymous.description"
   },
   {
     "id": 176,
-    "name": {
-      "en": "Wanted",
-      "it": "Ricercato"
-    },
     "icon": 368,
-    "description": {
-      "en": "Hunted by authorities",
-      "it": "Cacciato dalle autorit\u00e0"
-    },
     "positive": {
       "agi": 3,
       "eva": 3,
@@ -5167,19 +4109,13 @@
     "incompatible": [
       116,
       175
-    ]
+    ],
+    "name": "traits.wanted.name",
+    "description": "traits.wanted.description"
   },
   {
     "id": 177,
-    "name": {
-      "en": "Hero",
-      "it": "Eroe"
-    },
     "icon": 351,
-    "description": {
-      "en": "Celebrated savior of people",
-      "it": "Salvatore celebrato del popolo"
-    },
     "positive": {
       "atk": 2,
       "def": 2,
@@ -5199,19 +4135,13 @@
       142,
       174,
       176
-    ]
+    ],
+    "name": "traits.hero.name",
+    "description": "traits.hero.description"
   },
   {
     "id": 178,
-    "name": {
-      "en": "Disgraced",
-      "it": "Disonorato"
-    },
     "icon": 321,
-    "description": {
-      "en": "Fallen from former honor",
-      "it": "Caduto dall'onore precedente"
-    },
     "positive": {
       "atk": 2,
       "agi": 2,
@@ -5228,19 +4158,13 @@
     "switches": [],
     "incompatible": [
       177
-    ]
+    ],
+    "name": "traits.disgraced.name",
+    "description": "traits.disgraced.description"
   },
   {
     "id": 179,
-    "name": {
-      "en": "Cold-Blooded",
-      "it": "Sangue Freddo"
-    },
     "icon": 65,
-    "description": {
-      "en": "Adapted to cold climates",
-      "it": "Adattato a climi freddi"
-    },
     "positive": {
       "def": 3,
       "mdf": 2,
@@ -5256,19 +4180,13 @@
     "switches": [],
     "incompatible": [
       180
-    ]
+    ],
+    "name": "traits.cold-blooded.name",
+    "description": "traits.cold-blooded.description"
   },
   {
     "id": 180,
-    "name": {
-      "en": "Heat-Adapted",
-      "it": "Adattato al Calore"
-    },
     "icon": 64,
-    "description": {
-      "en": "Thrives in hot environments",
-      "it": "Prospera in ambienti caldi"
-    },
     "positive": {
       "agi": 3,
       "eva": 2,
@@ -5284,19 +4202,13 @@
     "switches": [],
     "incompatible": [
       179
-    ]
+    ],
+    "name": "traits.heat-adapted.name",
+    "description": "traits.heat-adapted.description"
   },
   {
     "id": 181,
-    "name": {
-      "en": "Mountain-Born",
-      "it": "Nato in Montagna"
-    },
     "icon": 69,
-    "description": {
-      "en": "High altitude endurance",
-      "it": "Resistenza ad alta quota"
-    },
     "positive": {
       "hp": 20,
       "def": 2,
@@ -5312,19 +4224,13 @@
     "switches": [],
     "incompatible": [
       51
-    ]
+    ],
+    "name": "traits.mountain-born.name",
+    "description": "traits.mountain-born.description"
   },
   {
     "id": 182,
-    "name": {
-      "en": "Island-Raised",
-      "it": "Cresciuto in Isola"
-    },
     "icon": 67,
-    "description": {
-      "en": "Maritime survival skills",
-      "it": "Abilit\u00e0 di sopravvivenza marittima"
-    },
     "positive": {
       "agi": 2,
       "eva": 2,
@@ -5340,19 +4246,13 @@
     "switches": [],
     "incompatible": [
       15
-    ]
+    ],
+    "name": "traits.island-raised.name",
+    "description": "traits.island-raised.description"
   },
   {
     "id": 183,
-    "name": {
-      "en": "Desert Dweller",
-      "it": "Abitante del Deserto"
-    },
     "icon": 68,
-    "description": {
-      "en": "Survives arid wastelands",
-      "it": "Sopravvive in terre aride"
-    },
     "positive": {
       "def": 3,
       "hp": 15,
@@ -5368,19 +4268,13 @@
     "switches": [],
     "incompatible": [
       15
-    ]
+    ],
+    "name": "traits.desert_dweller.name",
+    "description": "traits.desert_dweller.description"
   },
   {
     "id": 184,
-    "name": {
-      "en": "Cave Dweller",
-      "it": "Abitante delle Caverne"
-    },
     "icon": 289,
-    "description": {
-      "en": "Adapted to underground life",
-      "it": "Adattato alla vita sotterranea"
-    },
     "positive": {
       "def": 3,
       "mdf": 2,
@@ -5397,19 +4291,13 @@
     "switches": [],
     "incompatible": [
       3
-    ]
+    ],
+    "name": "traits.cave_dweller.name",
+    "description": "traits.cave_dweller.description"
   },
   {
     "id": 185,
-    "name": {
-      "en": "Animal Handler",
-      "it": "Addestratore di Animali"
-    },
     "icon": 260,
-    "description": {
-      "en": "Bonds easily with creatures",
-      "it": "Si lega facilmente con le creature"
-    },
     "positive": {
       "luk": 3,
       "mp": 3,
@@ -5426,19 +4314,13 @@
     "switches": [],
     "incompatible": [
       111
-    ]
+    ],
+    "name": "traits.animal_handler.name",
+    "description": "traits.animal_handler.description"
   },
   {
     "id": 186,
-    "name": {
-      "en": "Beast Whisperer",
-      "it": "Sussurratore di Bestie"
-    },
     "icon": 254,
-    "description": {
-      "en": "Communicates with animals",
-      "it": "Comunica con gli animali"
-    },
     "positive": {
       "luk": 4,
       "eva": 2,
@@ -5453,19 +4335,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.beast_whisperer.name",
+    "description": "traits.beast_whisperer.description"
   },
   {
     "id": 187,
-    "name": {
-      "en": "Nature Attuned",
-      "it": "In Sintonia con la Natura"
-    },
     "icon": 276,
-    "description": {
-      "en": "Deep connection to wilderness",
-      "it": "Profonda connessione con la natura"
-    },
     "positive": {
       "mdf": 3,
       "mp": 5,
@@ -5482,19 +4358,13 @@
     "switches": [],
     "incompatible": [
       188
-    ]
+    ],
+    "name": "traits.nature_attuned.name",
+    "description": "traits.nature_attuned.description"
   },
   {
     "id": 188,
-    "name": {
-      "en": "Urban Native",
-      "it": "Nativo Urbano"
-    },
     "icon": 212,
-    "description": {
-      "en": "Thrives only in cities",
-      "it": "Prospera solo in citt\u00e0"
-    },
     "positive": {
       "agi": 3,
       "eva": 2,
@@ -5511,19 +4381,13 @@
     "incompatible": [
       187,
       97
-    ]
+    ],
+    "name": "traits.urban_native.name",
+    "description": "traits.urban_native.description"
   },
   {
     "id": 189,
-    "name": {
-      "en": "Feral",
-      "it": "Selvaggio"
-    },
     "icon": 184,
-    "description": {
-      "en": "Raised in wilderness",
-      "it": "Cresciuto nella natura selvaggia"
-    },
     "positive": {
       "atk": 3,
       "agi": 3,
@@ -5542,19 +4406,13 @@
       123,
       132,
       188
-    ]
+    ],
+    "name": "traits.feral.name",
+    "description": "traits.feral.description"
   },
   {
     "id": 190,
-    "name": {
-      "en": "Magically Gifted",
-      "it": "Dotato Magicamente"
-    },
     "icon": 79,
-    "description": {
-      "en": "Natural arcane talent",
-      "it": "Talento arcano naturale"
-    },
     "positive": {
       "mat": 5,
       "mp": 10,
@@ -5572,19 +4430,13 @@
     "incompatible": [
       34,
       191
-    ]
+    ],
+    "name": "traits.magically_gifted.name",
+    "description": "traits.magically_gifted.description"
   },
   {
     "id": 191,
-    "name": {
-      "en": "Mana-Starved",
-      "it": "Privo di Mana"
-    },
     "icon": 74,
-    "description": {
-      "en": "Cannot channel magical energy",
-      "it": "Non pu\u00f2 canalizzare energia magica"
-    },
     "positive": {
       "atk": 4,
       "def": 4,
@@ -5603,19 +4455,13 @@
       7,
       190,
       192
-    ]
+    ],
+    "name": "traits.mana-starved.name",
+    "description": "traits.mana-starved.description"
   },
   {
     "id": 192,
-    "name": {
-      "en": "Spell-Scarred",
-      "it": "Segnato da Incantesimi"
-    },
     "icon": 118,
-    "description": {
-      "en": "Marked by magical mishap",
-      "it": "Segnato da incidente magico"
-    },
     "positive": {
       "mdf": 4,
       "def": 2,
@@ -5630,19 +4476,13 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.spell-scarred.name",
+    "description": "traits.spell-scarred.description"
   },
   {
     "id": 193,
-    "name": {
-      "en": "Witch-Marked",
-      "it": "Marchiato dalla Strega"
-    },
     "icon": 133,
-    "description": {
-      "en": "Bears supernatural curse mark",
-      "it": "Porta il marchio di maledizione soprannaturale"
-    },
     "positive": {
       "mat": 3,
       "mp": 4,
@@ -5659,19 +4499,13 @@
     "switches": [],
     "incompatible": [
       100
-    ]
+    ],
+    "name": "traits.witch-marked.name",
+    "description": "traits.witch-marked.description"
   },
   {
     "id": 194,
-    "name": {
-      "en": "Possessed",
-      "it": "Posseduto"
-    },
     "icon": 77,
-    "description": {
-      "en": "Shares body with spirit",
-      "it": "Condivide il corpo con uno spirito"
-    },
     "positive": {
       "mat": 4,
       "atk": 3,
@@ -5689,19 +4523,13 @@
     "switches": [],
     "incompatible": [
       116
-    ]
+    ],
+    "name": "traits.possessed.name",
+    "description": "traits.possessed.description"
   },
   {
     "id": 195,
-    "name": {
-      "en": "Lycanthrope",
-      "it": "Licantropo"
-    },
     "icon": 240,
-    "description": {
-      "en": "Transforms under moon",
-      "it": "Si trasforma sotto la luna"
-    },
     "positive": {
       "atk": 4,
       "agi": 3,
@@ -5719,19 +4547,13 @@
     "switches": [],
     "incompatible": [
       20
-    ]
+    ],
+    "name": "traits.lycanthrope.name",
+    "description": "traits.lycanthrope.description"
   },
   {
     "id": 196,
-    "name": {
-      "en": "Clairvoyant",
-      "it": "Chiaroveggente"
-    },
     "icon": 308,
-    "description": {
-      "en": "Sees beyond normal perception",
-      "it": "Vede oltre la percezione normale"
-    },
     "positive": {
       "luk": 5,
       "eva": 3,
@@ -5750,19 +4572,13 @@
     "incompatible": [
       44,
       117
-    ]
+    ],
+    "name": "traits.clairvoyant.name",
+    "description": "traits.clairvoyant.description"
   },
   {
     "id": 197,
-    "name": {
-      "en": "Booming Voice",
-      "it": "Voce Tonante"
-    },
     "icon": 246,
-    "description": {
-      "en": "Naturally loud and commanding",
-      "it": "Naturalmente forte e autorevole"
-    },
     "positive": {
       "atk": 2,
       "def": 2,
@@ -5779,19 +4595,13 @@
     "incompatible": [
       198,
       199
-    ]
+    ],
+    "name": "traits.booming_voice.name",
+    "description": "traits.booming_voice.description"
   },
   {
     "id": 198,
-    "name": {
-      "en": "Soft-Spoken",
-      "it": "Dalla Voce Morbida"
-    },
     "icon": 182,
-    "description": {
-      "en": "Quiet and gentle voice",
-      "it": "Voce tranquilla e gentile"
-    },
     "positive": {
       "eva": 3,
       "agi": 2,
@@ -5807,19 +4617,13 @@
     "switches": [],
     "incompatible": [
       197
-    ]
+    ],
+    "name": "traits.soft-spoken.name",
+    "description": "traits.soft-spoken.description"
   },
   {
     "id": 199,
-    "name": {
-      "en": "Mute",
-      "it": "Muto"
-    },
     "icon": 148,
-    "description": {
-      "en": "Cannot speak",
-      "it": "Non pu\u00f2 parlare"
-    },
     "positive": {
       "eva": 4,
       "agi": 3,
@@ -5839,19 +4643,13 @@
       81,
       143,
       197
-    ]
+    ],
+    "name": "traits.mute.name",
+    "description": "traits.mute.description"
   },
   {
     "id": 200,
-    "name": {
-      "en": "Polyglot",
-      "it": "Poliglotta"
-    },
     "icon": 191,
-    "description": {
-      "en": "Speaks many languages",
-      "it": "Parla molte lingue"
-    },
     "positive": {
       "mat": 3,
       "mp": 4,
@@ -5869,19 +4667,13 @@
     "incompatible": [
       135,
       199
-    ]
+    ],
+    "name": "traits.polyglot.name",
+    "description": "traits.polyglot.description"
   },
   {
     "id": 201,
-    "name": {
-      "en": "Prosopometamorphopsia",
-      "it": "Prosopometamorfopsia"
-    },
     "icon": 132,
-    "description": {
-      "en": "See demon faces",
-      "it": "Vede volti demoniaci"
-    },
     "positive": {
       "def": 2,
       "hp": 10,
@@ -5896,6 +4688,8 @@
     "items": [],
     "equipment": [],
     "switches": [],
-    "incompatible": []
+    "incompatible": [],
+    "name": "traits.prosopometamorphopsia.name",
+    "description": "traits.prosopometamorphopsia.description"
   }
 ]

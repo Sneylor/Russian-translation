@@ -510,83 +510,114 @@
     // Storage
     // =========================================================================
 
+    function createVolatilePuzzleData() {
+        return {
+            // Push / Sokoban
+            pushables: {},  // id → { maxPushes, pushCount, puzzleId, initialX, initialY }
+            pits: {},  // id → { filled, puzzleId }
+            pitRegions: {},  // regionId → { damage }
+            undoStack: [],
+            // Goal / solve system
+            goalEvents: {},  // id → { puzzleId } — Self Switch A = ON means active
+            // Plates & gates
+            plates: {},  // id → { switchId, requireObject, puzzleId, active }
+            timedPlates: {},  // id → { switchId, holdSeconds, requireObject, puzzleId, heldFrames, armed }
+            levers: {},  // id → { state, puzzleId }
+            gates: {},  // id → { leverIds[], logicMode, puzzleId, open }
+            // Floor
+            iceRegions: [],
+            arrowTiles: {},  // id → { direction }
+            conveyors: {},  // regionId → { direction, speed }
+            conveyorCounter: 0,
+            // Crystal switches
+            crystalSwitches: {},  // id → { groupId }
+            crystalBlocks: {},  // id → { groupId, state }
+            // Torches
+            torches: {},  // id → { lit, spreadFire, timerSeconds, puzzleId, timer }
+            // Color tiles / Lights-Out
+            colorTiles: {},  // id → { numColors, currentState, puzzleId }
+            lightsOutLinks: {},  // id → neighborIds[]
+            // Doors & locks
+            colorDoors: {},  // id → { keyItemId, consumeKey, puzzleId }
+            comboLocks: {},  // id → { variableId, targetValue, switchId }
+            // Warp / obstacles
+            warpTiles: {},  // id → { targetX, targetY }
+            crackableWalls: {},  // id → { requireItemId, consumeItem, puzzleId }
+            // Timed tiles
+            timedTiles: {},  // id → { disappearSteps, stepCount, triggered, puzzleId }
+            blinkPlatforms: {},  // id → { onFrames, offFrames, frameCount, visible }
+            // Environment
+            eyeStatues: {},  // id → { visionRange, switchId }
+            stateTiles: {},  // id → { stateVariableId, passableStates[] }
+            // Magnetic
+            magneticObjects: {},  // id → {}
+            // Counterweights
+            counterweights: {},  // idA → { partnerEventId }
+            // Beam
+            beamEmitters: {},  // id → { direction }
+            mirrors: {},  // id → { orientation: 'slash'|'backslash' }
+            beamReceivers: {},  // id → { switchId, active }
+            beamPath: [],  // [{x,y}] current frame path
+            // Clone / shadow
+            clones: {},  // id → { invertX, invertY, puzzleId, initialX, initialY }
+            // Water fill
+            waterSources: {},  // id → { active }
+            waterChannels: {},  // id → { filled, switchId, puzzleId }
+            waterDrains: {},  // id → {}
+            // Self-setup: persistent auto-checks
+            solveChecks: {},  // id → { puzzleId, switchId }
+            torchChecks: {},  // id → { puzzleId, switchId }
+            colorChecks: {},  // id → { puzzleId, targetState, switchId }
+            waterChecks: {},  // id → { switchId }
+            waterSourceActivations: {},  // id → { switchId } (activate source when switch ON)
+            // Self-setup: interactive / shrine types
+            resetShrines: {},  // id → { puzzleId }
+            undoShrines: {},  // id → true
+            variableLevers: {},  // id → { variableId, increment }
+            magnetConsoles: {},  // id → { polarity, range, steps }
+            reflectionPools: {},  // id → { swapWithId }
+            keyGrants: {},  // id → { itemId, quantity }
+            _needsRefresh: true,
+        };
+    }
+
     function puzzleData() {
         if (!$gameSystem._puzzleData) {
             $gameSystem._puzzleData = {
-                // Push / Sokoban
-                pushables:        {},  // id → { maxPushes, pushCount, puzzleId, initialX, initialY }
-                pits:             {},  // id → { filled, puzzleId }
-                pitRegions:       {},  // regionId → { damage }
-                undoStack:        [],
-                // Goal / solve system
-                goalEvents:       {},  // id → { puzzleId } — Self Switch A = ON means active
-                solvedGroups:     {},  // groupId → true — currently solved (all goals active)
-                _skipNextReset:   false, // set by warp tiles so teleport doesn't reset puzzles
-                // Plates & gates
-                plates:           {},  // id → { switchId, requireObject, puzzleId, active }
-                timedPlates:      {},  // id → { switchId, holdSeconds, requireObject, puzzleId, heldFrames, armed }
-                levers:           {},  // id → { state, puzzleId }
-                gates:            {},  // id → { leverIds[], logicMode, puzzleId, open }
-                // Floor
-                iceRegions:       [],
-                arrowTiles:       {},  // id → { direction }
-                conveyors:        {},  // regionId → { direction, speed }
-                conveyorCounter:  0,
-                // Crystal switches
-                crystalSwitches:  {},  // id → { groupId }
-                crystalBlocks:    {},  // id → { groupId, state }
-                // Torches
-                torches:          {},  // id → { lit, spreadFire, timerSeconds, puzzleId, timer }
-                // Color tiles / Lights-Out
-                colorTiles:       {},  // id → { numColors, currentState, puzzleId }
-                lightsOutLinks:   {},  // id → neighborIds[]
-                // Doors & locks
-                colorDoors:       {},  // id → { keyItemId, consumeKey, puzzleId }
-                comboLocks:       {},  // id → { variableId, targetValue, switchId }
-                // Warp / obstacles
-                warpTiles:        {},  // id → { targetX, targetY }
-                crackableWalls:   {},  // id → { requireItemId, consumeItem, puzzleId }
-                // Timed tiles
-                timedTiles:       {},  // id → { disappearSteps, stepCount, triggered, puzzleId }
-                blinkPlatforms:   {},  // id → { onFrames, offFrames, frameCount, visible }
-                // Environment
-                eyeStatues:       {},  // id → { visionRange, switchId }
-                stateTiles:       {},  // id → { stateVariableId, passableStates[] }
-                // Magnetic
-                magneticObjects:  {},  // id → {}
-                // Counterweights
-                counterweights:   {},  // idA → { partnerEventId }
-                // Beam
-                beamEmitters:     {},  // id → { direction }
-                mirrors:          {},  // id → { orientation: 'slash'|'backslash' }
-                beamReceivers:    {},  // id → { switchId, active }
-                beamPath:         [],  // [{x,y}] current frame path
-                // Clone / shadow
-                clones:           {},  // id → { invertX, invertY, puzzleId, initialX, initialY }
-                // Water fill
-                waterSources:     {},  // id → { active }
-                waterChannels:    {},  // id → { filled, switchId, puzzleId }
-                waterDrains:      {},  // id → {}
-                // Safe position for pit region recovery
-                lastSafeX:        0,
-                lastSafeY:        0,
-                // Self-setup: persistent auto-checks
-                solveChecks:            {},  // id → { puzzleId, switchId }
-                torchChecks:            {},  // id → { puzzleId, switchId }
-                colorChecks:            {},  // id → { puzzleId, targetState, switchId }
-                waterChecks:            {},  // id → { switchId }
-                waterSourceActivations: {},  // id → { switchId } (activate source when switch ON)
-                // Self-setup: interactive / shrine types
-                resetShrines:           {},  // id → { puzzleId }
-                undoShrines:            {},  // id → true
-                variableLevers:         {},  // id → { variableId, increment }
-                magnetConsoles:         {},  // id → { polarity, range, steps }
-                reflectionPools:        {},  // id → { swapWithId }
-                keyGrants:              {},  // id → { itemId, quantity }
+                // Persistent cross-map data
+                solvedGroups: {},  // groupId → true — currently solved (all goals active)
+                _skipNextReset: false, // set by warp tiles so teleport doesn't reset puzzles
+                lastSafeX: 0,
+                lastSafeY: 0,
+                ...createVolatilePuzzleData()
             };
         }
         return $gameSystem._puzzleData;
     }
+
+    function resetVolatilePuzzleData() {
+        if ($gameSystem._puzzleData) {
+            Object.assign($gameSystem._puzzleData, createVolatilePuzzleData());
+        }
+    }
+
+    function requestPuzzleRefresh() {
+        if ($gameSystem && $gameSystem._puzzleData) {
+            $gameSystem._puzzleData._needsRefresh = true;
+        }
+    }
+
+    const _gameSwitches_onChange = Game_Switches.prototype.onChange;
+    Game_Switches.prototype.onChange = function () {
+        _gameSwitches_onChange.call(this);
+        requestPuzzleRefresh();
+    };
+
+    const _gameVariables_onChange = Game_Variables.prototype.onChange;
+    Game_Variables.prototype.onChange = function () {
+        _gameVariables_onChange.call(this);
+        requestPuzzleRefresh();
+    };
 
     // =========================================================================
     // =========================================================================
@@ -600,45 +631,45 @@
         const fmt = (type, group) =>
             group ? `"${type} ev${id}" of group "${group}"` : `"${type} ev${id}"`;
         /* eslint-disable no-multi-spaces */
-        if (pd.pushables[id])       return fmt('pushable',       pd.pushables[id].puzzleId);
-        if (pd.pits[id])            return fmt('pit',            pd.pits[id].puzzleId);
-        if (pd.goalEvents[id])      return fmt('goal',           pd.goalEvents[id].puzzleId);
-        if (pd.solveChecks[id])     return fmt('solveCheck',     pd.solveChecks[id].puzzleId);
-        if (pd.plates[id])          return fmt('plate',          pd.plates[id].puzzleId);
-        if (pd.timedPlates[id])     return fmt('timedPlate',     pd.timedPlates[id].puzzleId);
-        if (pd.levers[id])          return fmt('lever',          pd.levers[id].puzzleId);
-        if (pd.gates[id])           return fmt('gate',           pd.gates[id].puzzleId);
-        if (pd.crystalSwitches[id]) return fmt('crystalSwitch',  pd.crystalSwitches[id].groupId);
-        if (pd.crystalBlocks[id])   return fmt('crystalBlock',   pd.crystalBlocks[id].groupId);
-        if (pd.torches[id])         return fmt('torch',          pd.torches[id].puzzleId);
-        if (pd.torchChecks[id])     return fmt('torchCheck',     pd.torchChecks[id].puzzleId);
-        if (pd.colorTiles[id])      return fmt('colorTile',      pd.colorTiles[id].puzzleId);
-        if (pd.colorChecks[id])     return fmt('colorCheck',     pd.colorChecks[id].puzzleId);
-        if (pd.colorDoors[id])      return fmt('colorDoor',      pd.colorDoors[id].puzzleId);
-        if (pd.crackableWalls[id])  return fmt('crackable',      pd.crackableWalls[id].puzzleId);
-        if (pd.timedTiles[id])      return fmt('timedTile',      pd.timedTiles[id].puzzleId);
-        if (pd.clones[id])          return fmt('clone',          pd.clones[id].puzzleId);
-        if (pd.waterChannels[id])   return fmt('waterChannel',   pd.waterChannels[id].puzzleId);
-        if (pd.resetShrines[id])    return fmt('resetShrine',    pd.resetShrines[id].puzzleId);
-        if (pd.arrowTiles[id])      return fmt('arrow',          pd.arrowTiles[id].direction);
-        if (pd.warpTiles[id])       return fmt('warp',           `(${pd.warpTiles[id].targetX},${pd.warpTiles[id].targetY})`);
-        if (pd.blinkPlatforms[id])  return fmt('blinkPlatform',  '');
-        if (pd.eyeStatues[id])      return fmt('eyeStatue',      '');
-        if (pd.magneticObjects[id]) return fmt('magnetic',       '');
-        if (pd.magnetConsoles[id])  return fmt('magnetConsole',  pd.magnetConsoles[id].polarity);
-        if (pd.mirrors[id])         return fmt('mirror',         pd.mirrors[id].orientation);
-        if (pd.beamEmitters[id])    return fmt('beamEmitter',    pd.beamEmitters[id].direction);
-        if (pd.beamReceivers[id])   return fmt('beamReceiver',   '');
-        if (pd.waterSources[id])    return fmt('waterSource',    '');
-        if (pd.waterDrains[id])     return fmt('waterDrain',     '');
-        if (pd.waterChecks[id])     return fmt('waterCheck',     '');
-        if (pd.undoShrines[id])     return fmt('undoShrine',     '');
-        if (pd.variableLevers[id])  return fmt('variableLever',  '');
+        if (pd.pushables[id]) return fmt('pushable', pd.pushables[id].puzzleId);
+        if (pd.pits[id]) return fmt('pit', pd.pits[id].puzzleId);
+        if (pd.goalEvents[id]) return fmt('goal', pd.goalEvents[id].puzzleId);
+        if (pd.solveChecks[id]) return fmt('solveCheck', pd.solveChecks[id].puzzleId);
+        if (pd.plates[id]) return fmt('plate', pd.plates[id].puzzleId);
+        if (pd.timedPlates[id]) return fmt('timedPlate', pd.timedPlates[id].puzzleId);
+        if (pd.levers[id]) return fmt('lever', pd.levers[id].puzzleId);
+        if (pd.gates[id]) return fmt('gate', pd.gates[id].puzzleId);
+        if (pd.crystalSwitches[id]) return fmt('crystalSwitch', pd.crystalSwitches[id].groupId);
+        if (pd.crystalBlocks[id]) return fmt('crystalBlock', pd.crystalBlocks[id].groupId);
+        if (pd.torches[id]) return fmt('torch', pd.torches[id].puzzleId);
+        if (pd.torchChecks[id]) return fmt('torchCheck', pd.torchChecks[id].puzzleId);
+        if (pd.colorTiles[id]) return fmt('colorTile', pd.colorTiles[id].puzzleId);
+        if (pd.colorChecks[id]) return fmt('colorCheck', pd.colorChecks[id].puzzleId);
+        if (pd.colorDoors[id]) return fmt('colorDoor', pd.colorDoors[id].puzzleId);
+        if (pd.crackableWalls[id]) return fmt('crackable', pd.crackableWalls[id].puzzleId);
+        if (pd.timedTiles[id]) return fmt('timedTile', pd.timedTiles[id].puzzleId);
+        if (pd.clones[id]) return fmt('clone', pd.clones[id].puzzleId);
+        if (pd.waterChannels[id]) return fmt('waterChannel', pd.waterChannels[id].puzzleId);
+        if (pd.resetShrines[id]) return fmt('resetShrine', pd.resetShrines[id].puzzleId);
+        if (pd.arrowTiles[id]) return fmt('arrow', pd.arrowTiles[id].direction);
+        if (pd.warpTiles[id]) return fmt('warp', `(${pd.warpTiles[id].targetX},${pd.warpTiles[id].targetY})`);
+        if (pd.blinkPlatforms[id]) return fmt('blinkPlatform', '');
+        if (pd.eyeStatues[id]) return fmt('eyeStatue', '');
+        if (pd.magneticObjects[id]) return fmt('magnetic', '');
+        if (pd.magnetConsoles[id]) return fmt('magnetConsole', pd.magnetConsoles[id].polarity);
+        if (pd.mirrors[id]) return fmt('mirror', pd.mirrors[id].orientation);
+        if (pd.beamEmitters[id]) return fmt('beamEmitter', pd.beamEmitters[id].direction);
+        if (pd.beamReceivers[id]) return fmt('beamReceiver', '');
+        if (pd.waterSources[id]) return fmt('waterSource', '');
+        if (pd.waterDrains[id]) return fmt('waterDrain', '');
+        if (pd.waterChecks[id]) return fmt('waterCheck', '');
+        if (pd.undoShrines[id]) return fmt('undoShrine', '');
+        if (pd.variableLevers[id]) return fmt('variableLever', '');
         if (pd.reflectionPools[id]) return fmt('reflectionPool', '');
-        if (pd.keyGrants[id])       return fmt('keyGrant',       '');
-        if (pd.comboLocks[id])      return fmt('comboLock',      '');
-        if (pd.stateTiles[id])      return fmt('stateTile',      '');
-        if (pd.counterweights[id])  return fmt('counterweightA', '');
+        if (pd.keyGrants[id]) return fmt('keyGrant', '');
+        if (pd.comboLocks[id]) return fmt('comboLock', '');
+        if (pd.stateTiles[id]) return fmt('stateTile', '');
+        if (pd.counterweights[id]) return fmt('counterweightA', '');
         /* eslint-enable no-multi-spaces */
         return `ev${id}`;
     }
@@ -647,20 +678,20 @@
     // Direction utilities
     // =========================================================================
 
-    const DIR_STR  = { 2:'down', 4:'left', 6:'right', 8:'up' };
-    const DIR_MAP  = { up:8, down:2, left:4, right:6 };
-    const DIR_D    = { up:[0,-1], down:[0,1], left:[-1,0], right:[1,0] };
-    const MZ_DELTA = { 2:[0,1], 4:[-1,0], 6:[1,0], 8:[0,-1] };
+    const DIR_STR = { 2: 'down', 4: 'left', 6: 'right', 8: 'up' };
+    const DIR_MAP = { up: 8, down: 2, left: 4, right: 6 };
+    const DIR_D = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+    const MZ_DELTA = { 2: [0, 1], 4: [-1, 0], 6: [1, 0], 8: [0, -1] };
 
     function mzDir(s) { return (typeof s === 'string') ? DIR_MAP[s] : s; }
     function strDir(d) { return (typeof d === 'string') ? d : DIR_STR[d]; }
     function delta(d) {
-        return (typeof d === 'string') ? (DIR_D[d] || [0,0]) : (MZ_DELTA[d] || [0,0]);
+        return (typeof d === 'string') ? (DIR_D[d] || [0, 0]) : (MZ_DELTA[d] || [0, 0]);
     }
 
     // Beam reflection tables
-    const REFLECT_SLASH  = { right:'up',   left:'down',  up:'right', down:'left'  };
-    const REFLECT_BSLASH = { right:'down', left:'up',    up:'left',  down:'right' };
+    const REFLECT_SLASH = { right: 'up', left: 'down', up: 'right', down: 'left' };
+    const REFLECT_BSLASH = { right: 'down', left: 'up', up: 'left', down: 'right' };
 
     // =========================================================================
     // Shared utilities
@@ -675,8 +706,8 @@
     }
 
     function canPassTile(x, y) {
-        return $gameMap.isPassable(x,y,2) || $gameMap.isPassable(x,y,4) ||
-               $gameMap.isPassable(x,y,6) || $gameMap.isPassable(x,y,8);
+        return $gameMap.isPassable(x, y, 2) || $gameMap.isPassable(x, y, 4) ||
+            $gameMap.isPassable(x, y, 6) || $gameMap.isPassable(x, y, 8);
     }
 
     const PUSHABLE_BLOCKED_TERRAIN = [4, 7];
@@ -684,10 +715,10 @@
     function blockedForPushable(x, y, excludeId, dx, dy) {
         if (!$gameMap.isValid(x, y)) return true;
         // Mirror Game_Character.canPass: check source-tile exit AND destination-tile entry.
-        const d  = dx === 1 ? 6 : dx === -1 ? 4 : dy === 1 ? 2 : 8;
+        const d = dx === 1 ? 6 : dx === -1 ? 4 : dy === 1 ? 2 : 8;
         const rd = 10 - d; // reverse direction (MZ convention)
-        if (!$gameMap.isPassable(x - dx, y - dy, d))  return true; // source can't exit
-        if (!$gameMap.isPassable(x, y, rd))            return true; // dest can't be entered
+        if (!$gameMap.isPassable(x - dx, y - dy, d)) return true; // source can't exit
+        if (!$gameMap.isPassable(x, y, rd)) return true; // dest can't be entered
         if (PUSHABLE_BLOCKED_TERRAIN.includes($gameMap.terrainTag(x, y))) return true;
         return eventsAt(x, y, excludeId).some(e => {
             if (e._priorityType === 0) return false; // below characters — never blocks pushables
@@ -739,10 +770,10 @@
         checkPuzzleSolved(a) {
             const solved = isGroupSolved(a.puzzleId);
             $gameSwitches.setValue(+a.switchId, solved);
-            if (solved) AudioManager.playSe({ name: 'Fanfare1', volume: 90, pitch: 100, pan: 0 });
+            if (solved) AudioManager.playSe({ name: 'PixelUi/PixelUI (29)', volume: 90, pitch: 100, pan: 0 });
         },
-        resetPuzzle(a)       { resetPuzzle(a.puzzleId); },
-        undoStep()           { undoLastPush(); },
+        resetPuzzle(a) { resetPuzzle(a.puzzleId); },
+        undoStep() { undoLastPush(); },
 
         // ── Plates & gates ───────────────────────────────────────────────────
         setPressurePlate(a) {
@@ -813,7 +844,7 @@
             };
             applyTorchVisual(id);
         },
-        lightTorch(a)      { lightTorch(+a.eventId); },
+        lightTorch(a) { lightTorch(+a.eventId); },
         checkAllTorches(a) { checkAllTorches(a.puzzleId, +a.switchId); },
 
         // ── Color tiles / Lights-Out ─────────────────────────────────────────
@@ -972,18 +1003,18 @@
     function resolveEventGroup(id) {
         const pd = puzzleData();
         for (const map of [pd.pushables, pd.plates, pd.timedPlates, pd.levers, pd.gates,
-                           pd.torches, pd.colorTiles, pd.crackableWalls, pd.clones,
-                           pd.waterChannels, pd.resetShrines, pd.solveChecks, pd.torchChecks]) {
+        pd.torches, pd.colorTiles, pd.crackableWalls, pd.clones,
+        pd.waterChannels, pd.resetShrines, pd.solveChecks, pd.torchChecks]) {
             if (map[id] && map[id].puzzleId) return map[id].puzzleId;
         }
         if (pd.crystalSwitches[id]) return pd.crystalSwitches[id].groupId || '';
-        if (pd.crystalBlocks[id])   return pd.crystalBlocks[id].groupId || '';
+        if (pd.crystalBlocks[id]) return pd.crystalBlocks[id].groupId || '';
         return '';
     }
 
     function applyPuzzleSetup(eventId, type, attrs) {
         const pd = puzzleData();
-        const a  = attrs;
+        const a = attrs;
         const id = eventId;
         switch (type) {
             case 'pushable':
@@ -1006,28 +1037,36 @@
                 pd.undoShrines[id] = true;
                 break;
             case 'plate':
-                CMDS.setPressurePlate({ eventId: id, switchId: a.switch || 0,
-                    requireObject: a.requireObject || 'false', puzzleId: a.group || '' });
+                CMDS.setPressurePlate({
+                    eventId: id, switchId: a.switch || 0,
+                    requireObject: a.requireObject || 'false', puzzleId: a.group || ''
+                });
                 break;
             case 'timedPlate':
-                CMDS.setTimedPlate({ eventId: id, switchId: a.switch || 0,
+                CMDS.setTimedPlate({
+                    eventId: id, switchId: a.switch || 0,
                     holdSeconds: a.holdSeconds || 3, requireObject: a.requireObject || 'false',
-                    puzzleId: a.group || '' });
+                    puzzleId: a.group || ''
+                });
                 break;
             case 'lever':
                 CMDS.setLever({ eventId: id, puzzleId: a.group || '' });
                 break;
             case 'gate':
-                CMDS.setGate({ eventId: id, leverIds: a.levers || '',
-                    logicMode: a.logic || 'AND', puzzleId: a.group || '' });
+                CMDS.setGate({
+                    eventId: id, leverIds: a.levers || '',
+                    logicMode: a.logic || 'AND', puzzleId: a.group || ''
+                });
                 break;
             case 'arrow':
                 CMDS.setArrowTile({ eventId: id, direction: a.dir || 'right' });
                 break;
             case 'torch':
-                CMDS.setTorch({ eventId: id, lit: a.lit || 'false',
+                CMDS.setTorch({
+                    eventId: id, lit: a.lit || 'false',
                     spreadFire: a.spread !== undefined ? a.spread : 'true',
-                    timerSeconds: a.timer || 0, puzzleId: a.group || '' });
+                    timerSeconds: a.timer || 0, puzzleId: a.group || ''
+                });
                 break;
             case 'torchCheck':
                 pd.torchChecks[id] = { puzzleId: a.group || '', switchId: +(a.switch || 0) };
@@ -1042,19 +1081,25 @@
                 CMDS.setColorTile({ eventId: id, numColors: a.states || 2, puzzleId: a.group || '' });
                 break;
             case 'colorCheck':
-                pd.colorChecks[id] = { puzzleId: a.group || '', targetState: +(a.target || 0),
-                    switchId: +(a.switch || 0) };
+                pd.colorChecks[id] = {
+                    puzzleId: a.group || '', targetState: +(a.target || 0),
+                    switchId: +(a.switch || 0)
+                };
                 break;
             case 'lightsOutLink':
                 CMDS.setLightsOut({ eventId: id, neighborIds: a.neighbors || '' });
                 break;
             case 'colorDoor':
-                CMDS.setColorDoor({ eventId: id, keyItemId: a.item || 1,
-                    consumeKey: a.consume !== undefined ? a.consume : 'true', puzzleId: a.group || '' });
+                CMDS.setColorDoor({
+                    eventId: id, keyItemId: a.item || 1,
+                    consumeKey: a.consume !== undefined ? a.consume : 'true', puzzleId: a.group || ''
+                });
                 break;
             case 'comboLock':
-                CMDS.setComboLock({ eventId: id, variableId: a.variable || 0,
-                    targetValue: a.target || 0, switchId: a.switch || 0 });
+                CMDS.setComboLock({
+                    eventId: id, variableId: a.variable || 0,
+                    targetValue: a.target || 0, switchId: a.switch || 0
+                });
                 break;
             case 'variableLever':
                 pd.variableLevers[id] = { variableId: +(a.variable || 0), increment: +(a.increment || 1) };
@@ -1066,8 +1111,10 @@
                 pd.reflectionPools[id] = { swapWithId: +(a.swapWith || 0) };
                 break;
             case 'crackable':
-                CMDS.setCrackableWall({ eventId: id, requireItemId: a.item || 1,
-                    consumeItem: a.consume !== undefined ? a.consume : 'false', puzzleId: a.group || '' });
+                CMDS.setCrackableWall({
+                    eventId: id, requireItemId: a.item || 1,
+                    consumeItem: a.consume !== undefined ? a.consume : 'false', puzzleId: a.group || ''
+                });
                 break;
             case 'timedTile':
                 CMDS.setTimedTile({ eventId: id, disappearSteps: a.steps || 3, puzzleId: a.group || '' });
@@ -1079,15 +1126,19 @@
                 CMDS.setEyeStatue({ eventId: id, visionRange: a.range || 4, switchId: a.switch || 0 });
                 break;
             case 'stateTile':
-                CMDS.setStateTile({ eventId: id, stateVariableId: a.variable || 0,
-                    passableStates: a.passable || '' });
+                CMDS.setStateTile({
+                    eventId: id, stateVariableId: a.variable || 0,
+                    passableStates: a.passable || ''
+                });
                 break;
             case 'magnetic':
                 CMDS.setMagnetic({ eventId: id });
                 break;
             case 'magnetConsole':
-                pd.magnetConsoles[id] = { polarity: a.polarity || 'attract',
-                    range: +(a.range || 5), steps: +(a.steps || 1) };
+                pd.magnetConsoles[id] = {
+                    polarity: a.polarity || 'attract',
+                    range: +(a.range || 5), steps: +(a.steps || 1)
+                };
                 break;
             case 'counterweightA':
                 CMDS.setCounterweight({ eventIdA: id, eventIdB: a.partner || 0 });
@@ -1102,8 +1153,10 @@
                 CMDS.setBeamReceiver({ eventId: id, switchId: a.switch || 0 });
                 break;
             case 'clone':
-                CMDS.setClone({ eventId: id, invertX: a.invertX || 'false',
-                    invertY: a.invertY || 'false', puzzleId: a.group || '' });
+                CMDS.setClone({
+                    eventId: id, invertX: a.invertX || 'false',
+                    invertY: a.invertY || 'false', puzzleId: a.group || ''
+                });
                 break;
             case 'waterSource': {
                 const activateSw = +(a.activateSwitch || 0);
@@ -1137,6 +1190,7 @@
 
     function scanEventPuzzleComments(event) {
         if (!event || typeof event.event !== 'function' || !event.event()) return;
+        if (event._originalMoveSpeed === undefined) event._originalMoveSpeed = event.moveSpeed();
         const page = event.page && event.page();
         if (!page || !page.list) return;
         const id = event.eventId();
@@ -1164,10 +1218,57 @@
     // only runs when the event is already in $gameMap._events (i.e. not during
     // initial construction, which is handled by the Game_Map.setup hook below).
     const _setupPage = Game_Event.prototype.setupPage;
-    Game_Event.prototype.setupPage = function() {
+    Game_Event.prototype.setupPage = function () {
         _setupPage.call(this);
         if ($gameSystem && $gameMap.event(this._eventId) === this) {
             scanEventPuzzleComments(this);
+        }
+    };
+
+    const _Game_Event_update = Game_Event.prototype.update;
+    Game_Event.prototype.update = function () {
+        const wasMoving = this.isMoving();
+        _Game_Event_update.call(this);
+        if (wasMoving && !this.isMoving() && $gameSystem && $gameSystem._puzzleData) {
+            this.onPuzzleMoveEnd();
+        }
+    };
+
+    Game_Event.prototype.onPuzzleMoveEnd = function () {
+        const id = this.eventId();
+        const pd = puzzleData();
+        if (!pd.pushables[id]) return;
+
+        const x = this.x, y = this.y;
+
+        // Pit check
+        const pitId = pitAt(x, y);
+        if (pitId !== null) {
+            pd.pits[pitId].filled = true;
+            this.erase();
+            const pitEv = getEvent(pitId);
+            if (pitEv) pitEv.erase();
+            propagateWater();
+            updatePressurePlates();
+            requestPuzzleRefresh();
+            return;
+        }
+
+        // Ice slide
+        if (isIceTile(x, y)) {
+            const d = this.direction();
+            const [dx, dy] = MZ_DELTA[d] || [0, 0];
+            if (!blockedForPushable(x + dx, y + dy, id, dx, dy)) {
+                this.setMoveSpeed(5);
+                this.moveStraight(d);
+                updatePressurePlates();
+                propagateWater();
+                requestPuzzleRefresh();
+            } else {
+                this.setMoveSpeed(this._originalMoveSpeed || 4);
+            }
+        } else {
+            this.setMoveSpeed(this._originalMoveSpeed || 4);
         }
     };
 
@@ -1188,6 +1289,7 @@
                 setSelfSwitch(+id, 'A', block.state === 'open');
             }
         }
+        requestPuzzleRefresh();
     }
 
     // =========================================================================
@@ -1205,6 +1307,7 @@
         t.lit = true; t.timer = 0;
         applyTorchVisual(id);
         if (t.spreadFire) spreadFire(id);
+        requestPuzzleRefresh();
     }
 
     function extinguishTorch(id) {
@@ -1212,6 +1315,7 @@
         if (!t) return;
         t.lit = false; t.timer = 0;
         applyTorchVisual(id);
+        requestPuzzleRefresh();
     }
 
     function spreadFire(srcId) {
@@ -1252,7 +1356,11 @@
                 const pe = getEvent(+pid);
                 return pe && pe.x === ev.x && pe.y === ev.y;
             });
-            const active = plate.requireObject ? objOn : (objOn || (px === ev.x && py === ev.y));
+            const cloneOn = Object.keys(pd.clones).some(cid => {
+                const ce = getEvent(+cid);
+                return ce && ce.x === ev.x && ce.y === ev.y;
+            });
+            const active = plate.requireObject ? (objOn || cloneOn) : (objOn || cloneOn || (px === ev.x && py === ev.y));
             if (active !== plate.active) {
                 plate.active = active;
                 $gameSwitches.setValue(plate.switchId, active);
@@ -1270,7 +1378,10 @@
             const objOn = Object.keys(pd.pushables).some(pid => {
                 const pe = getEvent(+pid); return pe && pe.x === ev.x && pe.y === ev.y;
             });
-            const occupied = plate.requireObject ? objOn : (objOn || (px === ev.x && py === ev.y));
+            const cloneOn = Object.keys(pd.clones).some(cid => {
+                const ce = getEvent(+cid); return ce && ce.x === ev.x && ce.y === ev.y;
+            });
+            const occupied = plate.requireObject ? (objOn || cloneOn) : (objOn || cloneOn || (px === ev.x && py === ev.y));
             if (occupied) {
                 plate.heldFrames++;
                 if (!plate.armed && plate.heldFrames >= plate.holdSeconds * 60) {
@@ -1298,8 +1409,8 @@
         for (const [id, gate] of Object.entries(pd.gates)) {
             const states = gate.leverIds.map(lid => !!(pd.levers[lid] && pd.levers[lid].state));
             let open = gate.logicMode === 'AND' ? states.every(Boolean)
-                     : gate.logicMode === 'OR'  ? states.some(Boolean)
-                     : states.filter(Boolean).length % 2 === 1;
+                : gate.logicMode === 'OR' ? states.some(Boolean)
+                    : states.filter(Boolean).length % 2 === 1;
             if (open !== gate.open) {
                 gate.open = open;
                 const ev = getEvent(+id);
@@ -1313,43 +1424,42 @@
     // =========================================================================
 
     function tryPush(pushedId, dx, dy) {
-        const pd   = puzzleData();
+        const pd = puzzleData();
         const info = pd.pushables[pushedId];
         if (!info) { puzzleLog(`push ev${pushedId}: not registered as pushable`); return false; }
         if (info.maxPushes > 0 && info.pushCount >= info.maxPushes) { puzzleLog(`push ${evLabel(pushedId)}: max pushes reached`); return false; }
         const ev = getEvent(pushedId);
         if (!ev) return false;
 
-        let nx = ev.x + dx, ny = ev.y + dy;
+        const d = mzDir(dx === -1 ? 'left' : dx === 1 ? 'right' : dy === -1 ? 'up' : 'down');
+        if (blockedForPushable(ev.x + dx, ev.y + dy, pushedId, dx, dy)) {
+            puzzleLog(`push ${evLabel(pushedId)}: blocked at (${ev.x + dx},${ev.y + dy})`);
+            return false;
+        }
 
-        // Slide on ice
-        if (isIceTile(nx, ny)) {
-            while (!blockedForPushable(nx + dx, ny + dy, pushedId, dx, dy) && isIceTile(nx + dx, ny + dy)) {
-                nx += dx; ny += dy;
+        // Calculate final destination for undo stack only
+        let fx = ev.x + dx, fy = ev.y + dy;
+        if (isIceTile(fx, fy)) {
+            while (!blockedForPushable(fx + dx, fy + dy, pushedId, dx, dy) && isIceTile(fx + dx, fy + dy)) {
+                if (pitAt(fx, fy) !== null) break;
+                fx += dx; fy += dy;
             }
         }
 
-        if (blockedForPushable(nx, ny, pushedId, dx, dy)) { puzzleLog(`push ${evLabel(pushedId)}: blocked at (${nx},${ny})`); return false; }
-
-        // Pit check
-        const pitId = pitAt(nx, ny);
-        if (pitId !== null) {
-            pd.pits[pitId].filled = true;
-            ev.erase();
-            const pitEv = getEvent(pitId);
-            if (pitEv) pitEv.erase();
-            propagateWater();
-            return true;
-        }
-
-        pd.undoStack.push({ eventId: pushedId, fromX: ev.x, fromY: ev.y, toX: nx, toY: ny });
+        pd.undoStack.push({ eventId: pushedId, fromX: ev.x, fromY: ev.y, toX: fx, toY: fy });
         if (pd.undoStack.length > 20) pd.undoStack.shift();
 
-        puzzleLog(`pushed ${evLabel(pushedId)}: (${ev.x},${ev.y}) → (${nx},${ny})`);
-        ev.locate(nx, ny);
+        puzzleLog(`pushed ${evLabel(pushedId)}: step (${ev.x},${ev.y}) → (${ev.x + dx},${ev.y + dy})`);
+        
+        if (isIceTile(ev.x + dx, ev.y + dy)) ev.setMoveSpeed(5);
+        else ev.setMoveSpeed(ev._originalMoveSpeed || 4);
+        
+        ev.moveStraight(d);
         info.pushCount++;
+        
         updatePressurePlates();
         propagateWater();
+        requestPuzzleRefresh();
         return true;
     }
 
@@ -1369,13 +1479,15 @@
     let _sliding = false;
     function slideStep(dx, dy) {
         if (_sliding) return;
-        const p  = $gamePlayer;
-        const d  = mzDir(dx === -1 ? 'left' : dx === 1 ? 'right' : dy === -1 ? 'up' : 'down');
+        const p = $gamePlayer;
+        if (p._originalMoveSpeed === undefined) p._originalMoveSpeed = p.moveSpeed();
+        const d = mzDir(dx === -1 ? 'left' : dx === 1 ? 'right' : dy === -1 ? 'up' : 'down');
         const nx = p.x + dx, ny = p.y + dy;
         if (!isIceTile(nx, ny)) return;
         if (!$gameMap.isPassable(p.x, p.y, d)) return;
         if (eventsAt(nx, ny, -1).some(e => !e.isThrough())) return;
         _sliding = true;
+        p.setMoveSpeed(5);
         p.moveStraight(d);
         _sliding = false;
     }
@@ -1394,6 +1506,7 @@
         // Lights-Out: also toggle neighbors
         const neighbors = puzzleData().lightsOutLinks[id];
         if (neighbors) neighbors.forEach(nid => cycleColorTile(nid));
+        requestPuzzleRefresh();
     }
 
     function checkColorGoal(puzzleId, targetState, switchId) {
@@ -1419,7 +1532,7 @@
             // Axis with greatest separation
             let mdx = 0, mdy = 0;
             if (Math.abs(adx) >= Math.abs(ady)) mdx = adx > 0 ? 1 : -1;
-            else                                  mdy = ady > 0 ? 1 : -1;
+            else mdy = ady > 0 ? 1 : -1;
             if (polarity === 'attract') { mdx = -mdx; mdy = -mdy; }
             for (let i = 0; i < steps; i++) {
                 if (blockedForPushable(ev.x + mdx, ev.y + mdy, +id, mdx, mdy)) break;
@@ -1428,6 +1541,7 @@
             }
         }
         updatePressurePlates();
+        requestPuzzleRefresh();
     }
 
     // =========================================================================
@@ -1440,7 +1554,14 @@
         for (const [idA, cw] of Object.entries(pd.counterweights)) {
             const evA = getEvent(+idA), evB = getEvent(cw.partnerEventId);
             if (!evA || !evB) continue;
-            const pressed = (px === evA.x && py === evA.y);
+            const playerOn = (px === evA.x && py === evA.y);
+            const cloneOn = Object.keys(pd.clones).some(cid => {
+                const ce = getEvent(+cid); return ce && ce.x === evA.x && ce.y === evA.y;
+            });
+            const objOn = Object.keys(pd.pushables).some(pid => {
+                const pe = getEvent(+pid); return pe && pe.x === evA.x && pe.y === evA.y;
+            });
+            const pressed = playerOn || cloneOn || objOn;
             evB.setThrough(pressed);
             evB.setOpacity(pressed ? 100 : 255);
         }
@@ -1451,7 +1572,7 @@
     // =========================================================================
 
     function calculateBeam() {
-        const pd  = puzzleData();
+        const pd = puzzleData();
         // Clear previous receivers
         for (const [id, recv] of Object.entries(pd.beamReceivers)) {
             if (recv.active) {
@@ -1511,7 +1632,18 @@
             const cdy = clone.invertY ? -dy : dy;
             if (cdx === 0 && cdy === 0) continue;
             const nx = ev.x + cdx, ny = ev.y + cdy;
-            if (!blockedForPushable(nx, ny, +id, cdx, cdy)) ev.locate(nx, ny);
+            if (!blockedForPushable(nx, ny, +id, cdx, cdy)) {
+                ev.locate(nx, ny);
+                const pitId = pitAt(nx, ny);
+                if (pitId !== null) {
+                    puzzleData().pits[pitId].filled = true;
+                    ev.erase();
+                    const pitEv = getEvent(pitId);
+                    if (pitEv) pitEv.erase();
+                    propagateWater();
+                    requestPuzzleRefresh();
+                }
+            }
         }
     }
 
@@ -1533,7 +1665,7 @@
 
         // BFS from active sources
         const visited = new Set();
-        const queue   = [];
+        const queue = [];
         for (const [id, src] of Object.entries(pd.waterSources)) {
             if (!src.active) continue;
             const ev = getEvent(+id);
@@ -1560,7 +1692,7 @@
                 if (ch.switchId) $gameSwitches.setValue(ch.switchId, true);
                 setSelfSwitch(+id, 'A', true);
                 // Spread to orthogonal tiles
-                for (const [ddx, ddy] of [[0,1],[0,-1],[1,0],[-1,0]])
+                for (const [ddx, ddy] of [[0, 1], [0, -1], [1, 0], [-1, 0]])
                     queue.push({ x: x + ddx, y: y + ddy });
             }
         }
@@ -1586,7 +1718,7 @@
             if (ev) ev.locate(info.initialX, info.initialY);
             info.pushCount = 0;
         }
-        for (const [,lev] of Object.entries(pd.levers))
+        for (const [, lev] of Object.entries(pd.levers))
             if (lev.puzzleId === puzzleId) lev.state = false;
         updateGates();
         for (const [id, t] of Object.entries(pd.torches)) {
@@ -1610,6 +1742,7 @@
         pd.undoStack = [];
         updatePressurePlates();
         propagateWater();
+        requestPuzzleRefresh();
     }
 
     function undoLastPush() {
@@ -1617,10 +1750,11 @@
         if (!stack.length) return;
         const last = stack.pop();
         puzzleLog(`undo ${evLabel(last.eventId)}: (${last.toX},${last.toY}) → (${last.fromX},${last.fromY})`);
-        const ev   = getEvent(last.eventId);
+        const ev = getEvent(last.eventId);
         if (ev) ev.locate(last.fromX, last.fromY);
         updatePressurePlates();
         propagateWater();
+        requestPuzzleRefresh();
     }
 
     // =========================================================================
@@ -1643,7 +1777,7 @@
             const nowSolved = isGroupSolved(groupId);
             if (!wasSolved && nowSolved) {
                 pd.solvedGroups[groupId] = true;
-                AudioManager.playMe({ name: 'Fanfare1', volume: 90, pitch: 100, pan: 0 });
+                AudioManager.playSe({ name: 'PixelUi/PixelUI (29)', volume: 90, pitch: 100, pan: 0 });
                 puzzleLog(`group "${groupId}" SOLVED`);
                 // Honour any solveCheck switch registered for this group
                 for (const chk of Object.values(pd.solveChecks)) {
@@ -1736,7 +1870,7 @@
 
     function updateStateTiles() {
         for (const [id, st] of Object.entries(puzzleData().stateTiles)) {
-            const ev  = getEvent(+id);
+            const ev = getEvent(+id);
             if (!ev) continue;
             const val = $gameVariables.value(st.stateVariableId);
             ev.setThrough(st.passableStates.length === 0 || st.passableStates.includes(val));
@@ -1748,9 +1882,9 @@
     // =========================================================================
 
     function checkPitRegion(x, y) {
-        const pd     = puzzleData();
+        const pd = puzzleData();
         const region = $gameMap.regionId(x, y);
-        const pit    = pd.pitRegions[region];
+        const pit = pd.pitRegions[region];
         if (!pit) return false;
         if (pit.damage > 0) $gameParty.members().forEach(m => m.gainHp(-pit.damage));
         $gamePlayer.locate(pd.lastSafeX, pd.lastSafeY);
@@ -1761,29 +1895,85 @@
     // Game_Player hooks
     // =========================================================================
 
+    const _setDirection = Game_Player.prototype.setDirection;
+    Game_Player.prototype.setDirection = function (d) {
+        if (this._isPullingBlock && !this.isDirectionFixed()) return;
+        _setDirection.call(this, d);
+    };
+
+    const _moveByInput = Game_Player.prototype.moveByInput;
+    Game_Player.prototype.moveByInput = function () {
+        this._isPullingBlock = Input.isPressed('ok');
+        _moveByInput.call(this);
+        this._isPullingBlock = false;
+    };
+
     const _moveStraight = Game_Player.prototype.moveStraight;
-    Game_Player.prototype.moveStraight = function(d) {
+    Game_Player.prototype.moveStraight = function (d) {
+        const pd = puzzleData();
+        const oldX = this.x;
+        const oldY = this.y;
+        const fd = this.direction();
+
+        let pullingEventId = null;
+        if (Input.isPressed('ok') && d === this.reverseDir(fd)) {
+            const [fdx, fdy] = MZ_DELTA[fd] || [0, 0];
+            const px = oldX + fdx, py = oldY + fdy;
+            const pushable = $gameMap.events().find(e =>
+                e.x === px && e.y === py && pd.pushables[e.eventId()] && !e._erased);
+
+            if (pushable) {
+                const info = pd.pushables[pushable.eventId()];
+                if (info && (info.maxPushes === 0 || info.pushCount < info.maxPushes)) {
+                    pullingEventId = pushable.eventId();
+                }
+            }
+        }
+
         const [dx, dy] = MZ_DELTA[d] || [0, 0];
         const nx = this.x + dx, ny = this.y + dy;
-        const pd = puzzleData();
 
         // Try to push
         const pushable = $gameMap.events().find(e =>
             e.x === nx && e.y === ny && pd.pushables[e.eventId()] && !e._erased);
-        if (pushable) {
+        if (pushable && !pullingEventId) {
             puzzleLog(`move into ${evLabel(pushable.eventId())} at (${nx},${ny})`);
             tryPush(pushable.eventId(), dx, dy);
         }
 
         _moveStraight.call(this, d);
+
+        if (pullingEventId && (this.x !== oldX || this.y !== oldY)) {
+            const ev = getEvent(pullingEventId);
+            const info = pd.pushables[pullingEventId];
+
+            pd.undoStack.push({ eventId: pullingEventId, fromX: ev.x, fromY: ev.y, toX: oldX, toY: oldY });
+            if (pd.undoStack.length > 20) pd.undoStack.shift();
+
+            ev.moveStraight(this.direction());
+            if (info) info.pushCount++;
+
+            const pitId = pitAt(oldX, oldY);
+            if (pitId !== null) {
+                pd.pits[pitId].filled = true;
+                ev.erase();
+                const pitEv = getEvent(pitId);
+                if (pitEv) pitEv.erase();
+            }
+
+            updatePressurePlates();
+            propagateWater();
+            requestPuzzleRefresh();
+        }
+
         moveClones(dx, dy);
     };
 
     const _increaseSteps = Game_Player.prototype.increaseSteps;
-    Game_Player.prototype.increaseSteps = function() {
+    Game_Player.prototype.increaseSteps = function () {
         _increaseSteps.call(this);
         const pd = puzzleData();
-        const x  = this.x, y = this.y;
+        const x = this.x, y = this.y;
 
         // Track last safe position (non-pit region)
         if (!pd.pitRegions[$gameMap.regionId(x, y)]) {
@@ -1797,6 +1987,7 @@
             if (ev.x === x && ev.y === y && !tt.triggered) { tt.triggered = true; tt.stepCount = 0; }
             if (tt.triggered && ++tt.stepCount >= tt.disappearSteps) {
                 ev.erase(); delete pd.timedTiles[id];
+                requestPuzzleRefresh();
             }
         }
 
@@ -1818,12 +2009,12 @@
     };
 
     const _update = Game_Player.prototype.update;
-    Game_Player.prototype.update = function(sceneActive) {
+    Game_Player.prototype.update = function (sceneActive) {
         _update.call(this, sceneActive);
         if (!sceneActive || this.isMoving()) return;
 
         const pd = puzzleData();
-        const x  = this.x, y = this.y;
+        const x = this.x, y = this.y;
 
         // Pit region
         if (checkPitRegion(x, y)) return;
@@ -1832,6 +2023,9 @@
         if (isIceTile(x, y)) {
             const [dx, dy] = MZ_DELTA[this.direction()] || [0, 0];
             slideStep(dx, dy);
+        } else if (this._originalMoveSpeed !== undefined && !this.isMoving()) {
+            this.setMoveSpeed(this._originalMoveSpeed);
+            this._originalMoveSpeed = undefined;
         }
 
         // Arrow tiles
@@ -1872,7 +2066,7 @@
 
     // Action button (interact): levers, crystal switches, crackable walls, mirrors, combo locks, doors, torches
     const _checkEventTriggerThere = Game_Player.prototype.checkEventTriggerThere;
-    Game_Player.prototype.checkEventTriggerThere = function(triggers) {
+    Game_Player.prototype.checkEventTriggerThere = function (triggers) {
         _checkEventTriggerThere.call(this, triggers);
         if (!triggers.includes(0)) return;
 
@@ -1889,7 +2083,8 @@
                 puzzleLog(`  ${evLabel(id)} → ${pd.levers[id].state}`);
                 setSelfSwitch(id, 'A', pd.levers[id].state);
                 ev.setOpacity(pd.levers[id].state ? 255 : 150);
-                updateGates(); return;
+                updateGates();
+                requestPuzzleRefresh(); return;
             }
             if (pd.crystalSwitches[id]) {
                 flipCrystalGroup(pd.crystalSwitches[id].groupId); return;
@@ -1897,13 +2092,14 @@
             if (pd.mirrors[id]) {
                 pd.mirrors[id].orientation = pd.mirrors[id].orientation === 'slash' ? 'backslash' : 'slash';
                 setSelfSwitch(id, 'A', pd.mirrors[id].orientation === 'backslash');
-                calculateBeam(); return;
+                requestPuzzleRefresh(); return;
             }
             if (pd.crackableWalls[id]) {
                 const cw = pd.crackableWalls[id];
                 if ($gameParty.hasItem($dataItems[cw.requireItemId])) {
                     if (cw.consumeItem) $gameParty.loseItem($dataItems[cw.requireItemId], 1);
                     ev.erase(); delete pd.crackableWalls[id];
+                    requestPuzzleRefresh();
                 }
                 return;
             }
@@ -1912,6 +2108,7 @@
                 if ($gameParty.hasItem($dataItems[door.keyItemId])) {
                     if (door.consumeKey) $gameParty.loseItem($dataItems[door.keyItemId], 1);
                     ev.erase(); delete pd.colorDoors[id];
+                    requestPuzzleRefresh();
                 }
                 return;
             }
@@ -1947,6 +2144,7 @@
                     const ax = ev.x, ay = ev.y;
                     ev.locate(evB.x, evB.y);
                     evB.locate(ax, ay);
+                    requestPuzzleRefresh();
                 }
                 return;
             }
@@ -1958,16 +2156,20 @@
     // =========================================================================
 
     const _sceneMapUpdate = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
+    Scene_Map.prototype.update = function () {
         _sceneMapUpdate.call(this);
         if (!$gameSystem._puzzleData) return;
         updateBlinkPlatforms();
-        updateStateTiles();
         updateTorchTimers();
         updateTimedPlates();
-        calculateBeam();
-        updateAutoChecks();
-        updateGroupSolveState();
+
+        if ($gameSystem._puzzleData._needsRefresh) {
+            $gameSystem._puzzleData._needsRefresh = false;
+            updateStateTiles();
+            calculateBeam();
+            updateAutoChecks();
+            updateGroupSolveState();
+        }
     };
 
     // =========================================================================
@@ -1975,18 +2177,20 @@
     // =========================================================================
 
     const _gameMapSetup = Game_Map.prototype.setup;
-    Game_Map.prototype.setup = function(mapId) {
+    Game_Map.prototype.setup = function (mapId) {
         _gameMapSetup.call(this, mapId);
         if (!$gameSystem) return;
+
+        // Wipe old map's volatile data so events don't cross-contaminate
+        if ($gameSystem._puzzleData) {
+            resetVolatilePuzzleData();
+        }
+
         // Scan first — puzzleData() is created here if it doesn't exist yet.
         for (const ev of this.events()) scanEventPuzzleComments(ev);
+
         if (!$gameSystem._puzzleData) return;
         const pd = $gameSystem._puzzleData;
-        pd.conveyorCounter = 0;
-        for (const bp of Object.values(pd.blinkPlatforms)) {
-            bp.frameCount = 0; bp.visible = true;
-        }
-        pd.beamPath = [];
         pd.lastSafeX = $gamePlayer.x;
         pd.lastSafeY = $gamePlayer.y;
     };
@@ -1996,13 +2200,79 @@
     // =========================================================================
 
     const _performTransfer = Game_Player.prototype.performTransfer;
-    Game_Player.prototype.performTransfer = function() {
+    Game_Player.prototype.performTransfer = function () {
         if (this.isTransferring() && $gameSystem._puzzleData) {
             const pd = $gameSystem._puzzleData;
             if (!pd._skipNextReset) resetUnsolvedGroups();
             pd._skipNextReset = false;
         }
         _performTransfer.call(this);
+    };
+
+    // =========================================================================
+    // Locked Key HUD
+    // =========================================================================
+
+    function Window_LockedKeyHUD() {
+        this.initialize(...arguments);
+    }
+
+    Window_LockedKeyHUD.prototype = Object.create(Window_Base.prototype);
+    Window_LockedKeyHUD.prototype.constructor = Window_LockedKeyHUD;
+
+    Window_LockedKeyHUD.prototype.initialize = function (rect) {
+        Window_Base.prototype.initialize.call(this, rect);
+        this.opacity = 0;
+        this.contentsOpacity = 255;
+        this._lastCount = -1;
+        this._hasEvent = undefined;
+        this.refresh();
+    };
+
+    Window_LockedKeyHUD.prototype.update = function () {
+        Window_Base.prototype.update.call(this);
+        this.updateVisibility();
+        if (this.visible) {
+            const count = $gameParty.numItems($dataItems[593]);
+            if (this._lastCount !== count) {
+                this._lastCount = count;
+                this.refresh();
+            }
+        }
+    };
+
+    Window_LockedKeyHUD.prototype.updateVisibility = function () {
+        if (Graphics.frameCount % 30 === 0 || this._hasEvent === undefined) {
+            this._hasEvent = $gameMap.events().some(ev => ev.event() && ev.event().name === 'locked_key');
+        }
+        this.visible = !!this._hasEvent && !$gameMessage.isBusy() && !$gameMap.isEventRunning();
+    };
+
+    Window_LockedKeyHUD.prototype.refresh = function () {
+        this.contents.clear();
+        const iconId = 195;
+        const count = $gameParty.numItems($dataItems[593]);
+
+        this.drawIcon(iconId, 0, 0);
+        this.contents.fontSize = 24;
+        this.contents.fontBold = true;
+        this.drawText("X " + count, 40, 0, this.contentsWidth() - 40, "left");
+    };
+
+    const _Scene_Map_createAllWindows = Scene_Map.prototype.createAllWindows;
+    Scene_Map.prototype.createAllWindows = function () {
+        _Scene_Map_createAllWindows.call(this);
+        this.createLockedKeyHUD();
+    };
+
+    Scene_Map.prototype.createLockedKeyHUD = function () {
+        const width = 160;
+        const height = 60; // Standard height for a single line HUD
+        const x = Graphics.width - width - 200;
+        const y = 20;
+        const rect = new Rectangle(x, y, width, height);
+        this._lockedKeyHUD = new Window_LockedKeyHUD(rect);
+        this.addWindow(this._lockedKeyHUD);
     };
 
 })();

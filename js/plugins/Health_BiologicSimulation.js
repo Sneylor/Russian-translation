@@ -33,6 +33,24 @@
     return ConfigManager.language === "it" ? italianText : englishText;
   }
 
+  let brainI18nData = null;
+
+  const loadBrainI18nData = async () => {
+    const lang = ConfigManager.language || "en";
+    const url = `js/plugins/i18n/${lang}/brain.json`;
+    try {
+      const response = await fetch(url);
+      brainI18nData = await response.json();
+    } catch (e) {
+      console.error("Health_BiologicSimulation: Failed to load brain i18n data from " + url, e);
+    }
+  };
+
+  const resolveBrainI18nPath = (path, obj) => {
+    if (!path || !obj) return null;
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  };
+
   function getGameDateFromVariable() {
     const dateStr = $gameVariables.value(113) || '01 JAN 2001 12:00';
     // Format: "01 JAN 2001 12:00"
@@ -685,14 +703,7 @@
     }
   };
   // Override the refresh method to include state reactions
-  var _Window_BiologicSimulation_refresh =
-    Window_BiologicSimulation.prototype.refresh;
-  Window_BiologicSimulation.prototype.refresh = function () {
-    if (this._actor) {
-      this.applyStateReactions();
-    }
-    _Window_BiologicSimulation_refresh.call(this);
-  };
+  // State Reaction System for Biologic Simulation
 
   // Enhanced drawImmuneSystem to show viruses and bacteria
   Window_BiologicSimulation.prototype.drawImmuneSystem = function (startY) {
@@ -2957,7 +2968,7 @@
 
 
     if (entries.length === 0) {
-      this.drawText(useTranslation ? "Nessun aumento installato." : "No augments installed.", 6, startY, contentWidth);
+      this.drawText(useTranslation ? "Nessun impianto installato." : "No augments installed.", 6, startY, contentWidth);
       this._maxAugmentsScroll = 0;
       return;
     }
@@ -3126,6 +3137,13 @@
     this.contents.clear();
 
     if (!this._actor) return;
+
+    this.applyStateReactions();
+    if (!brainI18nData) {
+      loadBrainI18nData().then(() => {
+        if (this._category === 5) this.refresh();
+      });
+    }
 
     this.initializeBiologicData();
     this.updateLeyVeinsFromDamage();
@@ -4381,12 +4399,22 @@
     var regionArray = [];
     for (var regionKey in brain.regions) {
       var region = brain.regions[regionKey];
+      var name = region.name;
+      var func = region.function;
+
+      if (typeof name === 'string' && name.includes('.')) {
+        name = (brainI18nData ? resolveBrainI18nPath(name, brainI18nData) : null) || name;
+      }
+      if (typeof func === 'string' && func.includes('.')) {
+        func = (brainI18nData ? resolveBrainI18nPath(func, brainI18nData) : null) || func;
+      }
+
       regionArray.push({
         key: regionKey,
-        name: region.name,
+        name: name,
         activity: region.activity,
         status: region.status,
-        function: region.function,
+        function: func,
         oxygen: region.oxygenConsumption,
         neurotransmitters: region.neurotransmitters,
       });

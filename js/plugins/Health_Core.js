@@ -170,24 +170,83 @@
     LEFT_LEG: { weight: 10, parts: ["LEFT_LEG", "LEFT_FOOT", "LEFT_TOES"] },
     RIGHT_LEG: { weight: 10, parts: ["RIGHT_LEG", "RIGHT_FOOT", "RIGHT_TOES"] },
   };
+  let i18nData = {};
+  let i18nLoading = false;
+  let i18nLoaded = false;
+
+  const loadAllI18n = async () => {
+    const categories = ["enemyArchetypes", "equip"];
+    const lang = ConfigManager.language || "en";
+    
+    const loadPromises = categories.map(async (category) => {
+      const url = `js/plugins/i18n/${lang}/${category}.json`;
+      try {
+        const response = await fetch(url);
+        i18nData[category] = await response.json();
+        console.log(`Health_Core: Loaded ${category} i18n for ${lang}`);
+      } catch (e) {
+        console.error(`Health_Core: Failed to load ${category} i18n from ${url}`, e);
+        i18nData[category] = {};
+      }
+    });
+
+    await Promise.all(loadPromises);
+    i18nLoaded = true;
+  };
+
+  const resolveI18nPath = (path, obj) => {
+    if (!path || !obj) return null;
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  };
+
+  function getArchetypeText(key) {
+    if (!key) return "";
+    // If it doesn't look like a key, return as is
+    if (typeof key === "string" && !key.includes('.')) return key;
+    
+    if (i18nData.enemyArchetypes) {
+      const localized = resolveI18nPath(key, i18nData.enemyArchetypes);
+      if (localized) return localized;
+    }
+    return key;
+  }
+
+  function getEquipText(key) {
+    if (!key) return "";
+    const lowerKey = key.toLowerCase();
+    if (i18nData.equip) {
+      return i18nData.equip[lowerKey] || key;
+    }
+    return key;
+  }
+
+  const _DataManager_isDatabaseLoaded = DataManager.isDatabaseLoaded;
+  DataManager.isDatabaseLoaded = function() {
+    if (!_DataManager_isDatabaseLoaded.call(this)) return false;
+    if (!i18nLoaded) {
+      if (!i18nLoading) {
+        i18nLoading = true;
+        loadAllI18n();
+      }
+      return false;
+    }
+    return true;
+  };
+
   /**
    * Retrieves a translated property from a data object.
+   * Updated to support i18n keys.
    */
   function getTranslated(dataObject, propertyName) {
+    const val = dataObject[propertyName];
+    if (val && typeof val === "string" && val.includes('.')) {
+      return getArchetypeText(val);
+    }
     const lang = ConfigManager.language;
     const langKey = `${propertyName}_${lang}`;
     return lang !== "en" && dataObject[langKey]
       ? dataObject[langKey]
       : dataObject[propertyName];
-  }
-
-  /**
-   * Retrieves a translated UI string from the UI_TRANSLATIONS object.
-   */
-  function getTranslatedUI(key) {
-    const lang = ConfigManager.language || "en";
-    const entry = UI_TRANSLATIONS[key];
-    return entry ? entry[lang] || entry["en"] : "";
   }
 
   // Initialize actor body parts
@@ -205,9 +264,7 @@
         const hpPercentage = archetypePart.hpPercent / 100;
 
         actor._bodyParts[partKey] = {
-          name: ConfigManager.language === "it" && archetypePart.name_it
-            ? archetypePart.name_it
-            : archetypePart.name,
+          name: getArchetypeText(archetypePart.name),
           maxHp: Math.round(actor.mhp * hpPercentage),
           currentHp: Math.round(actor.mhp * hpPercentage),
           vital: archetypePart.vital,
@@ -215,9 +272,7 @@
           equipSlot: archetypePart.equipSlot || null,
           multiple: archetypePart.multiple || false,
           statEffect: archetypePart.statEffect || null,
-          damageMsg: ConfigManager.language === "it" && archetypePart.msg_it
-            ? archetypePart.msg_it
-            : archetypePart.msg || null,
+          damageMsg: getArchetypeText(archetypePart.msg) || null,
           appliedStatEffect: false,
           hpPercent: archetypePart.hpPercent,
         };
@@ -270,18 +325,14 @@
       const hpPercentage = archetypePart.hpPercent / 100;
 
       actor._bodyParts[partKey] = {
-        name: ConfigManager.language === "it" && archetypePart.name_it
-          ? archetypePart.name_it
-          : archetypePart.name,
+        name: getArchetypeText(archetypePart.name),
         maxHp: Math.round(actor.mhp * hpPercentage),
         currentHp: Math.round(actor.mhp * hpPercentage),
         vital: false, // Players don't have vital parts that cause instant death
         damaged: false,
         canCutoff: archetypePart.canCutoff || false,
         statEffect: archetypePart.statEffect || null,
-        damageMsg: ConfigManager.language === "it" && archetypePart.msg_it
-          ? archetypePart.msg_it
-          : archetypePart.msg,
+        damageMsg: getArchetypeText(archetypePart.msg),
         specialEffect: archetypePart.specialEffect || null,
         appliedStatEffect: false,
       };
@@ -598,10 +649,10 @@
           bodyPart.appliedStatEffect = false;
 
           // Reset the stat modifier if it exists and it's not affecting max HP
-          if (basePart.statEffect && basePart.statEffect.param !== 0) {
-            var paramId = basePart.statEffect.param;
+          if (bodyPart.statEffect && bodyPart.statEffect.param !== 0) {
+            var paramId = bodyPart.statEffect.param;
             if (actor._statModifiers[paramId]) {
-              actor._statModifiers[paramId] -= basePart.statEffect.amount;
+              actor._statModifiers[paramId] -= bodyPart.statEffect.amount;
               if (actor._statModifiers[paramId] === 0) {
                 delete actor._statModifiers[paramId];
               }
@@ -1462,6 +1513,8 @@
   // Expose functions globally for use by other plugins
   window.changeArchetypeForActor = changeArchetype;
   window.initializeBodyParts = initializeBodyParts;
+  window.getArchetypeText = getArchetypeText; // Expose translation helper
+  window.getEquipText = getEquipText; // Expose equipment translation helper
   window.HealthCore = window.HealthCore || {};
   window.HealthCore.restoreAllBodyParts = restoreAllBodyParts;
 

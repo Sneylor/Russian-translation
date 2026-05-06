@@ -325,8 +325,26 @@
 
     function getText(key) {
         const useTranslation = ConfigManager.language === "it";
-        return useTranslation ? translations[key].it : translations[key].en;
+        return translations[key] ? (useTranslation ? translations[key].it : translations[key].en) : key;
     }
+
+    let i18nData = null;
+
+    const loadI18nData = async () => {
+        const lang = ConfigManager.language || "en";
+        const url = `js/plugins/i18n/${lang}/traits.json`;
+        try {
+            const response = await fetch(url);
+            i18nData = await response.json();
+        } catch (e) {
+            console.error("CustomSceneStatus: Failed to load i18n data from " + url, e);
+        }
+    };
+
+    const resolveI18nPath = (path, obj) => {
+        if (!path || !obj) return null;
+        return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    };
 
     //=============================================================================
     // Seeded Random Number Generator
@@ -601,7 +619,11 @@
         this.contents.clear();
         if (this._actor) {
             this.drawPartyTabs();
-            this.drawActorStatus();
+            if (!i18nData) {
+                loadI18nData().then(() => this.drawActorStatus());
+            } else {
+                this.drawActorStatus();
+            }
         }
     };
 
@@ -866,7 +888,15 @@
 
         for (let i = 0; i < actor._selectedTraits.length; i++) {
             const trait = actor._selectedTraits[i];
-            const traitName = useTranslation ? trait.name.it : trait.name.en;
+            let traitName = "";
+
+            if (typeof trait.name === 'string' && trait.name.includes('.')) {
+                traitName = (i18nData ? resolveI18nPath(trait.name, i18nData) : null) || trait.name;
+            } else if (trait.name && typeof trait.name === 'object') {
+                traitName = useTranslation ? trait.name.it : trait.name.en;
+            } else {
+                traitName = trait.name || "";
+            }
 
             // Draw icon
             this.drawIcon(trait.icon, x, y);
@@ -890,6 +920,7 @@
 
     // Helper function to wrap text without breaking words
     Window_CustomStatus.prototype.wrapTextWithoutBreakingWords = function (text, maxChars) {
+        if (!text) return [""];
         const words = text.split(' ');
         const lines = [];
         let currentLine = '';

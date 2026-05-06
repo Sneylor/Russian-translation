@@ -12,7 +12,8 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.virgo_supercluster.name"
   },
   {
     "name": "Hydra-Centaurus Supercluster",
@@ -27,7 +28,8 @@
       "r": 255,
       "g": 200,
       "b": 180
-    }
+    },
+    "name_int": "supercluster.hydra-centaurus_supercluster.name"
   },
   {
     "name": "Pavo-Indus Supercluster",
@@ -42,7 +44,8 @@
       "r": 200,
       "g": 180,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.pavo-indus_supercluster.name"
   },
   {
     "name": "Southern Supercluster",
@@ -57,7 +60,8 @@
       "r": 180,
       "g": 255,
       "b": 200
-    }
+    },
+    "name_int": "supercluster.southern_supercluster.name"
   },
   {
     "name": "Antlia Supercluster",
@@ -72,7 +76,8 @@
       "r": 255,
       "g": 220,
       "b": 180
-    }
+    },
+    "name_int": "supercluster.antlia_supercluster.name"
   },
   {
     "name": "Centaurus Supercluster",
@@ -87,7 +92,8 @@
       "r": 200,
       "g": 255,
       "b": 220
-    }
+    },
+    "name_int": "supercluster.centaurus_supercluster.name"
   },
   {
     "name": "Hydra Supercluster",
@@ -102,7 +108,8 @@
       "r": 220,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.hydra_supercluster.name"
   },
   {
     "name": "Fornax Supercluster",
@@ -117,7 +124,8 @@
       "r": 255,
       "g": 180,
       "b": 220
-    }
+    },
+    "name_int": "supercluster.fornax_supercluster.name"
   },
   {
     "name": "Norma Supercluster",
@@ -132,7 +140,8 @@
       "r": 180,
       "g": 220,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.norma_supercluster.name"
   },
   {
     "name": "Great Attractor",
@@ -147,7 +156,8 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.great_attractor.name"
   },
   {
     "name": "Perseus-Pisces Supercluster",
@@ -162,7 +172,8 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.perseus-pisces_supercluster.name"
   },
   {
     "name": "Coma Supercluster",
@@ -177,7 +188,8 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.coma_supercluster.name"
   },
   {
     "name": "Hercules Superclusters",
@@ -192,7 +204,8 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.hercules_superclusters.name"
   },
   {
     "name": "Shapley Supercluster",
@@ -207,7 +220,8 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.shapley_supercluster.name"
   },
   {
     "name": "Sculptor Supercluster",
@@ -222,7 +236,8 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.sculptor_supercluster.name"
   },
   {
     "name": "Bootes Supercluster",
@@ -237,6 +252,7 @@
       "r": 180,
       "g": 200,
       "b": 255
-    }
+    },
+    "name_int": "supercluster.bootes_supercluster.name"
   }
 ]

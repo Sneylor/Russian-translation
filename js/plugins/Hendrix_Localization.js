@@ -256,44 +256,61 @@ Imported.Hendrix_Localization = true;
     const wordTranslationRegexes = new Map();
     const messageData = new Map();
 
-    function detectCSVSeparator() {
-        const numberWithDecimal = 1.1;
-        const formatted = numberWithDecimal.toLocaleString();
+    const I18N_DIR = 'js/plugins/i18n/';
+    const JSON_FILE_PATH = 'game_messages.json'; // Keep for compatibility or legacy
 
-        const usesSemicolon = formatted.includes(',');
+    const CATEGORY_MAP = {
+        '[Actors]': 'actors',
+        '[Classes]': 'classes',
+        '[Skills]': 'skills',
+        '[Items]': 'items',
+        '[Weapons]': 'weapons',
+        '[Armors]': 'armors',
+        '[Enemies]': 'enemies',
+        '[States]': 'states',
+        '[Types]': 'types',
+        '[Terms]': 'terms',
+        '[System Messages]': 'terms',
+        '[DATABASE ENTRIES]': 'database',
+        '[GAME TITLE]': 'system',
+        '[Title Screen]': 'system',
+        '[TROOPS]': 'troops',
+        '[SHOW PICTURES]': 'pictures',
+        '[PLAY MOVIES]': 'movies',
+        '[SCRIPT CALLS]': 'scripts',
+        '[PLUGIN COMMANDS]': 'plugin_commands',
+        '[Common Events]': 'common_events',
+        '[VARIABLES]': 'variables',
+        '[MAP DISPLAY NAMES]': 'maps',
+        '[Comments]': 'comments',
+        '[GARBAGE AND \\nCUSTOM LINES]': 'misc'
+    };
 
-        if (usesSemicolon) {
-            //console.log.log("Your system language doesn't use ',' for decimals, so I'm going to switch to ';' for CSV separation");
-        } else {
-            //console.log.log("Your system language uses ',' for decimals");
-        }
-
-        return usesSemicolon ? ';' : ',';
+    function getCategory(header) {
+        if (CATEGORY_MAP[header]) return CATEGORY_MAP[header];
+        if (header && header.startsWith('[') && header.endsWith(']')) return 'maps';
+        return 'misc';
     }
 
-    function detectCSVSeparatorFromContent(content) {
-        // Sample the first few lines of content
-        const lines = content.split('\n').slice(0, 5);
-        if (lines.length > 0) {
-            const header = lines[0];
-            const commaCount = (header.match(/,/g) || []).length;
-            const semicolonCount = (header.match(/;/g) || []).length;
-
-            //console.log.log("CSV Separator Detection:");
-            //console.log.log("- Commas found in header:", commaCount);
-            //console.log.log("- Semicolons found in header:", semicolonCount);
-
-            const detectedSeparator = semicolonCount > commaCount ? ';' : ',';
-            //console.log.log("-> Using separator:", detectedSeparator);
-
-            return detectedSeparator;
+    function copyFolderRecursiveSync(source, target) {
+        if (!fs.existsSync(target)) {
+            fs.mkdirSync(target, { recursive: true });
         }
 
-        ////console.log.log("No header found in content, defaulting to comma separator");
-        return ',';
+        if (fs.existsSync(source)) {
+            const files = fs.readdirSync(source);
+            files.forEach(file => {
+                const curSource = path.join(source, file);
+                const curTarget = path.join(target, file);
+                if (fs.lstatSync(curSource).isDirectory()) {
+                    copyFolderRecursiveSync(curSource, curTarget);
+                } else {
+                    fs.copyFileSync(curSource, curTarget);
+                }
+            });
+        }
     }
 
-    const CSV_SEPARATOR = detectCSVSeparator();
 
     function escapeRegExp(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -563,25 +580,21 @@ Imported.Hendrix_Localization = true;
 
     function extractAllMessages() {
         if (!fs || !path) {
-            ////console.log.warn('Text extraction is not available in this environment.');
             return;
         }
         messages = [];
-        if (confirm("Do you want to generate/update the csv file?")) {
-            let filePath = 'game_messages.csv';
-            if (!fs.existsSync(filePath)) {
-                filePath = path.join('www', 'game_messages.csv');
-            }
-
-            if (fs.existsSync(filePath)) {
-                if (confirm("Do you want to create a backup of your current localization file before proceeding?\n\nSelect 'OK' to make a backup, or 'Cancel' to proceed without a backup.")) {
+        if (confirm("Do you want to generate/update the localization files in " + I18N_DIR + "?")) {
+            if (fs.existsSync(I18N_DIR)) {
+                if (confirm("Do you want to create a backup of your current i18n folder before proceeding?")) {
                     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-                    const backupPath = path.join(path.dirname(filePath), `game_messages_backup_${timestamp}.csv`);
-                    fs.copyFileSync(filePath, backupPath);
-                    alert(`Backup created: ${backupPath}`);
-                } else {
-
+                    const backupDir = path.join(path.dirname(I18N_DIR), `i18n_backup_${timestamp}`);
+                    fs.mkdirSync(backupDir, { recursive: true });
+                    
+                    copyFolderRecursiveSync(I18N_DIR, backupDir);
+                    alert(`Backup created in: ${backupDir}`);
                 }
+            } else {
+                fs.mkdirSync(I18N_DIR, { recursive: true });
             }
 
             // Proceed with extraction
@@ -624,8 +637,8 @@ Imported.Hendrix_Localization = true;
                 extractPluginCommandMessages();
             }
 
-            updateMessagesCSV();
-            alert("CSV file has been generated/updated successfully.");
+            updateMessagesJSON();
+            alert("JSON file has been generated/updated successfully.");
         } else {
 
         }
@@ -728,11 +741,15 @@ Imported.Hendrix_Localization = true;
                 let currentMessage = [];
                 let currentSpeaker = '';
 
-                commonEvent.list.forEach(command => {
+                commonEvent.list.forEach((command, cmdIndex) => {
                     if (command.code === 101) {
                         if (currentMessage.length > 0) {
                             const fullMessage = currentMessage.join('\n');
-                            messages.push(fullMessage);
+                            messages.push({
+                                category: 'misc',
+                                id: index,
+                                val: fullMessage
+                            });
                             if (extractNamesMZ) {
                                 messageData.set(fullMessage, currentSpeaker);
                             }
@@ -751,21 +768,33 @@ Imported.Hendrix_Localization = true;
                     } else if (command.code === 102) {
                         if (currentMessage.length > 0) {
                             const fullMessage = currentMessage.join('\n');
-                            messages.push(fullMessage);
+                            messages.push({
+                                category: 'misc',
+                                id: index,
+                                val: fullMessage
+                            });
                             if (extractNamesMZ) {
                                 messageData.set(fullMessage, currentSpeaker);
                             }
                             currentMessage = [];
                         }
-                        command.parameters[0].forEach(choice => {
-                            messages.push(choice);
+                        command.parameters[0].forEach((choice, choiceIdx) => {
+                            messages.push({
+                                category: 'misc',
+                                id: `${index}_c${choiceIdx}`,
+                                val: choice
+                            });
                             if (extractNamesMZ) {
                                 messageData.set(choice, '');
                             }
                         });
                     } else if (currentMessage.length > 0) {
                         const fullMessage = currentMessage.join('\n');
-                        messages.push(fullMessage);
+                        messages.push({
+                            category: 'misc',
+                            id: index,
+                            val: fullMessage
+                        });
                         if (extractNamesMZ) {
                             messageData.set(fullMessage, currentSpeaker);
                         }
@@ -776,7 +805,11 @@ Imported.Hendrix_Localization = true;
 
                 if (currentMessage.length > 0) {
                     const fullMessage = currentMessage.join('\n');
-                    messages.push(fullMessage);
+                    messages.push({
+                        category: 'misc',
+                        id: index,
+                        val: fullMessage
+                    });
                     if (extractNamesMZ) {
                         messageData.set(fullMessage, currentSpeaker);
                     }
@@ -850,118 +883,170 @@ Imported.Hendrix_Localization = true;
         }
 
         // Actors
-        messages.push('\n[Actors]\n');
         $dataActors.forEach((actor, index) => {
             if (actor) {
-                if (actor.name) messages.push(actor.name);
-                if (actor.nickname) messages.push(actor.nickname);
-                if (actor.profile) messages.push(actor.profile);
+                messages.push({
+                    category: 'actors',
+                    id: index,
+                    name: actor.name || '',
+                    nickname: actor.nickname || '',
+                    profile: actor.profile || ''
+                });
             }
         });
 
         // Classes
-        messages.push('\n[Classes]\n');
         $dataClasses.forEach((klass, index) => {
-            if (klass && klass.name) {
-                messages.push(klass.name);
+            if (klass) {
+                messages.push({
+                    category: 'classes',
+                    id: index,
+                    name: klass.name || ''
+                });
             }
         });
 
         // Skills
-        messages.push('\n[Skills]\n');
         $dataSkills.forEach((skill, index) => {
-            if (skill && skill.name) {
-                messages.push(removePrefix(skill.name));
-                if (skill.description) messages.push(skill.description);
-                if (skill.message1) messages.push(skill.message1);
-                if (skill.message2) messages.push(skill.message2);
+            if (skill) {
+                messages.push({
+                    category: 'skills',
+                    id: index,
+                    name: removePrefix(skill.name) || '',
+                    description: skill.description || '',
+                    message1: skill.message1 || '',
+                    message2: skill.message2 || ''
+                });
             }
         });
 
         // Items
-        messages.push('\n[Items]\n');
         $dataItems.forEach((item, index) => {
-            if (item && item.name) {
-                messages.push(item.name);
-                if (item.description) messages.push(item.description);
+            if (item) {
+                messages.push({
+                    category: 'items',
+                    id: index,
+                    name: item.name || '',
+                    description: item.description || ''
+                });
             }
         });
 
         // Weapons
-        messages.push('\n[Weapons]\n');
         $dataWeapons.forEach((weapon, index) => {
-            if (weapon && weapon.name) {
-                messages.push(removePrefix(weapon.name));
-                if (weapon.description) messages.push(weapon.description);
+            if (weapon) {
+                messages.push({
+                    category: 'weapons',
+                    id: index,
+                    name: removePrefix(weapon.name) || '',
+                    description: weapon.description || ''
+                });
             }
         });
 
         // Armors
-        messages.push('\n[Armors]\n');
         $dataArmors.forEach((armor, index) => {
-            if (armor && armor.name) {
-                messages.push(removePrefix(armor.name));
-                if (armor.description) messages.push(armor.description);
+            if (armor) {
+                messages.push({
+                    category: 'armors',
+                    id: index,
+                    name: removePrefix(armor.name) || '',
+                    description: armor.description || ''
+                });
             }
         });
 
         // Enemies
-        messages.push('\n[Enemies]\n');
         $dataEnemies.forEach((enemy, index) => {
-            if (enemy && enemy.name) {
-                messages.push(enemy.name);
+            if (enemy) {
+                const enDescMatch = enemy.note.match(/<En:\s*([^>]+)>/i);
+                const itDescMatch = enemy.note.match(/<It:\s*([^>]+)>/i);
+                
+                const enemyMsg = {
+                    category: 'enemies',
+                    id: index,
+                    name: enemy.name || '',
+                    description: (enDescMatch ? enDescMatch[1].trim() : '')
+                };
+
+                if (itDescMatch) {
+                    enemyMsg.translations = {
+                        it: { description: itDescMatch[1].trim() }
+                    };
+                }
+                
+                messages.push(enemyMsg);
             }
         });
 
         // States
-        messages.push('\n[States]\n');
         $dataStates.forEach((state, index) => {
-            if (state && state.name) {
-                messages.push(removePrefix(state.name));
-                if (state.message1) messages.push(state.message1);
-                if (state.message2) messages.push(state.message2);
-                if (state.message3) messages.push(state.message3);
-                if (state.message4) messages.push(state.message4);
+            if (state) {
+                messages.push({
+                    category: 'states',
+                    id: index,
+                    name: removePrefix(state.name) || '',
+                    message1: state.message1 || '',
+                    message2: state.message2 || '',
+                    message3: state.message3 || '',
+                    message4: state.message4 || ''
+                });
             }
         });
 
         // Types
-        messages.push('\n[Types]\n');
         ['weaponTypes', 'armorTypes', 'equipTypes', 'skillTypes'].forEach(typeCategory => {
             if (Array.isArray($dataSystem[typeCategory])) {
                 $dataSystem[typeCategory].forEach((type, index) => {
                     if (type) {
-                        messages.push(type);
+                        messages.push({
+                            category: 'types',
+                            id: type,
+                            val: type
+                        });
                     }
                 });
             }
         });
 
         // Terms
-        messages.push('\n[Terms]\n');
         const terms = $dataSystem.terms;
         Object.keys(terms).forEach(termCategory => {
             if (typeof terms[termCategory] === 'string') {
-                messages.push(terms[termCategory]);
+                messages.push({
+                    category: 'terms',
+                    id: terms[termCategory],
+                    val: terms[termCategory]
+                });
             } else if (Array.isArray(terms[termCategory])) {
                 terms[termCategory].forEach((term, index) => {
-                    messages.push(term);
+                    if (term) {
+                        messages.push({
+                            category: 'terms',
+                            id: term,
+                            val: term
+                        });
+                    }
                 });
             }
         });
 
-        // Terms Messages
-        messages.push('\n[System Messages]\n');
+        // Terms Messages (System Messages)
         if ($dataSystem && $dataSystem.terms && $dataSystem.terms.messages) {
             const messageTypes = Object.keys($dataSystem.terms.messages);
             messageTypes.forEach(key => {
                 const messageText = $dataSystem.terms.messages[key];
                 if (messageText) {
-                    messages.push(messageText);
+                    messages.push({
+                        category: 'system',
+                        id: key,
+                        val: messageText
+                    });
                 }
             });
         }
     }
+
 
     function extractMessagesFromMap(mapData, mapId) {
         if (addingMapsName) {
@@ -999,7 +1084,11 @@ Imported.Hendrix_Localization = true;
                                     currentScrollText.push(command.parameters[0]);
                                 } else if (command.code !== 405 && currentScrollText.length > 0) {
                                     // When we hit a non-scroll text command, process any collected scroll text
-                                    messages.push(currentScrollText.join('\n'));
+                                    messages.push({
+                                        category: 'misc',
+                                        id: `${mapId}_${event.id}_${index}`,
+                                        val: currentScrollText.join('\n')
+                                    });
                                     currentScrollText = [];
                                 }
 
@@ -1007,7 +1096,11 @@ Imported.Hendrix_Localization = true;
                                 if (command.code === 101) { // Show Text settings
                                     if (currentMessage.length > 0) {
                                         const fullMessage = currentMessage.join('\n');
-                                        messages.push(fullMessage);
+                                        messages.push({
+                                            category: 'misc',
+                                            id: `${mapId}_${event.id}_${index}`,
+                                            val: fullMessage
+                                        });
                                         if (extractNamesMZ) {
                                             messageData.set(fullMessage, currentSpeaker);
                                         }
@@ -1026,21 +1119,33 @@ Imported.Hendrix_Localization = true;
                                 } else if (command.code === 102) { // Show Choices
                                     if (currentMessage.length > 0) {
                                         const fullMessage = currentMessage.join('\n');
-                                        messages.push(fullMessage);
+                                        messages.push({
+                                            category: 'misc',
+                                            id: `map${mapId}_ev${event.id}_p${event.pages.indexOf(page)}_idx${index}`,
+                                            val: fullMessage
+                                        });
                                         if (extractNamesMZ) {
                                             messageData.set(fullMessage, currentSpeaker);
                                         }
                                         currentMessage = [];
                                     }
-                                    command.parameters[0].forEach(choice => {
-                                        messages.push(choice);
+                                    command.parameters[0].forEach((choice, choiceIdx) => {
+                                        messages.push({
+                                            category: 'misc',
+                                            id: `${mapId}_${event.id}_${index}_c${choiceIdx}`,
+                                            val: choice
+                                        });
                                         if (extractNamesMZ) {
                                             messageData.set(choice, '');
                                         }
                                     });
                                 } else if (currentMessage.length > 0) {
                                     const fullMessage = currentMessage.join('\n');
-                                    messages.push(fullMessage);
+                                    messages.push({
+                                        category: 'misc',
+                                        id: `${mapId}_${event.id}_${index}`,
+                                        val: fullMessage
+                                    });
                                     if (extractNamesMZ) {
                                         messageData.set(fullMessage, currentSpeaker);
                                     }
@@ -1051,13 +1156,21 @@ Imported.Hendrix_Localization = true;
 
                             // Process any remaining scroll text
                             if (currentScrollText.length > 0) {
-                                messages.push(currentScrollText.join('\n'));
+                                messages.push({
+                                    category: 'misc',
+                                    id: `${mapId}_${event.id}_last`,
+                                    val: currentScrollText.join('\n')
+                                });
                             }
 
                             // Process any remaining messages
                             if (currentMessage.length > 0) {
                                 const fullMessage = currentMessage.join('\n');
-                                messages.push(fullMessage);
+                                messages.push({
+                                    category: 'misc',
+                                    id: `${mapId}_${event.id}_last`,
+                                    val: fullMessage
+                                });
                                 if (extractNamesMZ) {
                                     messageData.set(fullMessage, currentSpeaker);
                                 }
@@ -1295,388 +1408,348 @@ Imported.Hendrix_Localization = true;
         });
     }
 
-    function updateMessagesCSV() {
-        if (!fs || !path) {
-            return;
-        }
-        const filePath = path.join(process.cwd(), 'game_messages.csv');
-        let existingContent = [];
-        let updatedMessages = new Set();
-        let uniqueMessages = new Set();
+    function updateMessagesJSON() {
+        if (!fs || !path) return;
 
-        // Read existing CSV file if it exists
-        if (fs.existsSync(filePath)) {
-            const content = fs.readFileSync(filePath, 'utf8');
-            existingContent = parseCSV(content);
+        if (!fs.existsSync(I18N_DIR)) {
+            fs.mkdirSync(I18N_DIR, { recursive: true });
         }
 
-        // Prepare CSV content
-        const BOM = '\uFEFF';
-        const headers = ['Change', 'Excluded'];
-        if (extractNamesMZ) {
-            headers.push('Name');
-        }
-        headers.push('Original');
-        headers.push(...languageSymbols);
+        const categoryData = {}; // category -> { _isDB, entries }
+        const dbCategories = ['actors', 'classes', 'skills', 'items', 'weapons', 'armors', 'enemies', 'states'];
 
-        let csvContent = BOM + headers.join(CSV_SEPARATOR) + '\n';
+        // 1. Load ALL existing translations from ALL files first (to never delete anything)
+        languageSymbols.forEach(symbol => {
+            const langDir = path.join(I18N_DIR, symbol);
+            if (!fs.existsSync(langDir)) return;
 
-        // Create maps for existing data
-        const existingTranslations = new Map();
-        const existingYepNames = new Map();
-        const existingNames = new Map();
+            const files = fs.readdirSync(langDir).filter(f => f.endsWith('.json'));
+            files.forEach(file => {
+                const cat = file.replace('.json', '');
+                const filePath = path.join(langDir, file);
+                try {
+                    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+                    if (!categoryData[cat]) {
+                        categoryData[cat] = { 
+                            _isDB: dbCategories.includes(cat), 
+                            entries: {} 
+                        };
+                    }
+                    
+                    const catInfo = categoryData[cat];
+                    for (const key in data) {
+                        if (!catInfo.entries[key]) {
+                            catInfo.entries[key] = { translations: {} };
+                        }
+                        catInfo.entries[key].translations[symbol] = data[key];
+                        
+                        // For non-DB entries, we might want to capture excluded/name from any language file
+                        if (!catInfo._isDB && typeof data[key] === 'object') {
+                            if (data[key].excluded) catInfo.entries[key].Excluded = data[key].excluded;
+                            if (data[key].name) catInfo.entries[key].Name = data[key].name;
+                        }
+                    }
+                } catch (e) {
+                    console.error(`Error reading ${filePath}:`, e);
+                }
+            });
+        });
 
-        if (existingContent.length > 0) {
-            const headers = existingContent[0];
-            const changeIndex = headers.indexOf('Change');
-            const yepNameIndex = headers.indexOf('Excluded');
-            const nameIndex = headers.indexOf('Name');
-            const originalIndex = headers.indexOf('Original');
+        // 2. Overlay current game messages (update existing or add new)
+        const modifiedCategories = new Set();
+        let currentCategory = 'misc';
+        messages.forEach(msg => {
+            if (!msg) return;
 
-            if (originalIndex !== -1) {
-                for (let i = 1; i < existingContent.length; i++) {
-                    const row = existingContent[i];
-                    if (row.length > originalIndex) {
-                        const originalText = row[originalIndex];
-                        // Calculate the correct starting index for translations based on whether Name column exists
-                        const translationsStartIndex = originalIndex + 1;
-                        const translations = headers.slice(translationsStartIndex).map((lang, index) =>
-                            row[translationsStartIndex + index] || '');
-                        existingTranslations.set(originalText, translations);
+            // Handle DB objects (ID-based)
+            if (typeof msg === 'object' && msg.category) {
+                const cat = msg.category;
+                const simpleCategories = ['terms', 'types', 'misc', 'system'];
+                const isSimple = simpleCategories.includes(cat);
+                
+                modifiedCategories.add(cat);
+                if (!categoryData[cat]) {
+                    categoryData[cat] = { _isDB: !isSimple, entries: {} };
+                }
+                
+                const id = msg.id;
+                if (!categoryData[cat].entries[id]) {
+                    categoryData[cat].entries[id] = { translations: {} };
+                }
+                
+                if (isSimple) {
+                    // For simple categories, the object usually has a 'val' field
+                    if (msg.val !== undefined) {
+                        categoryData[cat].entries[id].val = msg.val;
+                    }
+                } else {
+                    // Update original fields from current game state
+                    Object.keys(msg).forEach(key => {
+                        if (key !== 'category' && key !== 'id' && key !== 'translations') {
+                            categoryData[cat].entries[id][key] = msg[key];
+                        }
+                    });
+                }
 
-                        // Store Excluded column content
-                        if (yepNameIndex !== -1 && row.length > yepNameIndex) {
-                            existingYepNames.set(originalText, row[yepNameIndex]);
+                // Handle manual translations if provided
+                if (msg.translations) {
+                    Object.keys(msg.translations).forEach(symbol => {
+                        if (!categoryData[cat].entries[id].translations[symbol]) {
+                            categoryData[cat].entries[id].translations[symbol] = {};
+                        }
+                        if (typeof msg.translations[symbol] === 'object' && typeof categoryData[cat].entries[id].translations[symbol] === 'object') {
+                            Object.assign(categoryData[cat].entries[id].translations[symbol], msg.translations[symbol]);
+                        } else {
+                            categoryData[cat].entries[id].translations[symbol] = msg.translations[symbol];
+                        }
+                    });
+                }
+                return;
+            }
+
+            // Handle strings (Content-based)
+            if (typeof msg !== 'string' || msg.trim() === '') return;
+            const trimmedMsg = msg.trim();
+            if (trimmedMsg.startsWith('[') && trimmedMsg.endsWith(']')) {
+                currentCategory = getCategory(trimmedMsg);
+                modifiedCategories.add(currentCategory);
+                return;
+            }
+
+            modifiedCategories.add(currentCategory);
+            if (!categoryData[currentCategory]) {
+                categoryData[currentCategory] = { 
+                    _isDB: dbCategories.includes(currentCategory), 
+                    entries: {} 
+                };
+            }
+            
+            const { yepName, remainingText } = extractYepName(msg);
+            if (!categoryData[currentCategory].entries[remainingText]) {
+                categoryData[currentCategory].entries[remainingText] = {
+                    Excluded: yepName,
+                    Name: messageData.get(msg) || '',
+                    translations: {}
+                };
+            } else {
+                // Update metadata if it was missing
+                if (yepName && !categoryData[currentCategory].entries[remainingText].Excluded) {
+                    categoryData[currentCategory].entries[remainingText].Excluded = yepName;
+                }
+                const speaker = messageData.get(msg);
+                if (speaker && !categoryData[currentCategory].entries[remainingText].Name) {
+                    categoryData[currentCategory].entries[remainingText].Name = speaker;
+                }
+            }
+        });
+
+        // 3. Save back to files
+        languageSymbols.forEach(symbol => {
+            const langDir = path.join(I18N_DIR, symbol);
+            if (!fs.existsSync(langDir)) {
+                fs.mkdirSync(langDir, { recursive: true });
+            }
+
+            for (const cat in categoryData) {
+                if (!modifiedCategories.has(cat)) continue;
+                const filePath = path.join(langDir, `${cat}.json`);
+                const catInfo = categoryData[cat];
+                const outputData = {};
+                
+                if (catInfo._isDB) {
+                    for (const id in catInfo.entries) {
+                        const entry = catInfo.entries[id];
+                        const translations = entry.translations || {};
+                        const currentLangTrans = (translations[symbol] && typeof translations[symbol] === 'object') ? translations[symbol] : {};
+                        
+                        outputData[id] = {};
+                        
+                        // Fields can come from game state OR file
+                        const allFields = new Set();
+                        Object.keys(entry).forEach(f => {
+                            if (f !== 'translations') allFields.add(f);
+                        });
+                        Object.keys(currentLangTrans).forEach(f => allFields.add(f));
+
+                        allFields.forEach(field => {
+                            if (symbol === defaultLanguage) {
+                                // For default language, prioritize game state value
+                                outputData[id][field] = entry[field] !== undefined ? entry[field] : (currentLangTrans[field] || '');
+                            } else {
+                                // For other languages, prioritize existing translation
+                                outputData[id][field] = currentLangTrans[field] || '';
+                            }
+                        });
+                    }
+                } else {
+                    const simpleCategories = ['terms', 'types', 'misc', 'system'];
+                    const isSimple = simpleCategories.includes(cat);
+                    for (const orig in catInfo.entries) {
+                        const entry = catInfo.entries[orig];
+                        const translations = entry.translations || {};
+                        
+                        let val = '';
+                        if (translations[symbol]) {
+                            val = typeof translations[symbol] === 'object' ? translations[symbol].val : translations[symbol];
                         }
 
-                        // Only store Name data if the feature is enabled
-                        if (extractNamesMZ && nameIndex !== -1 && row.length > nameIndex) {
-                            existingNames.set(originalText, row[nameIndex]);
+                        if (isSimple) {
+                            // Prioritize game state 'val' for default language
+                            const defaultVal = entry.val !== undefined ? entry.val : orig;
+                            outputData[orig] = val || (symbol === defaultLanguage ? defaultVal : '');
+                        } else {
+                            outputData[orig] = {
+                                val: val || (symbol === defaultLanguage ? orig : ''),
+                                excluded: entry.Excluded || '',
+                                name: entry.Name || ''
+                            };
                         }
                     }
                 }
-            }
-        }
 
-        function processMessage(msg) {
-            if (!msg || uniqueMessages.has(msg)) return;
-            uniqueMessages.add(msg);
-
-            const { yepName, remainingText } = extractYepName(msg);
-            const escapedMsg = escapeCSV(remainingText);
-            const escapedYepName = escapeCSV(yepName);
-            let line = ['', escapedYepName];
-
-            // Only include Name column if feature is enabled
-            if (extractNamesMZ) {
-                const speakerName = messageData.get(msg) || '';
-                const escapedSpeakerName = escapeCSV(speakerName);
-                line.push(escapedSpeakerName);
-            }
-
-            line.push(escapedMsg);
-
-            if (existingTranslations.has(remainingText)) {
-                line[0] = '';
-                line = line.concat(existingTranslations.get(remainingText).map(t => escapeCSV(t)));
-            } else {
-                line[0] = 'NEW';
-                line = line.concat(Array(languageSymbols.length).fill(''));
-            }
-
-            csvContent += line.join(CSV_SEPARATOR) + '\n';
-            updatedMessages.add(remainingText);
-        }
-
-        messages.forEach(processMessage);
-
-        // Process map names
-        if (addingMapsName) {
-            const mapNames = messages.filter(msg => msg && msg.startsWith('[') && msg !== '[DATABASE ENTRIES]' && !msg.startsWith('[Choice]'));
-            mapNames.forEach(processMessage);
-        }
-
-        // Process common event messages
-        if (messages.includes('[Common Events]')) {
-            csvContent += `,,[Common Events]${CSV_SEPARATOR.repeat(languageSymbols.length + 1)}\n`;
-            const commonEventMessages = messages.slice(messages.indexOf('[Common Events]') + 1);
-            commonEventMessages.forEach(processMessage);
-        }
-
-        // Process variable messages
-        if (extractVariableText && messages.includes('[VARIABLES]')) {
-            csvContent += `,,[VARIABLES]${CSV_SEPARATOR.repeat(languageSymbols.length + 1)}\n`;
-            const variableMessages = messages.slice(messages.indexOf('[VARIABLES]') + 1);
-            variableMessages.forEach(processMessage);
-        }
-
-        // Process database entries
-        if (extractDatabaseEntries) {
-            csvContent += `,,[DATABASE ENTRIES]${CSV_SEPARATOR.repeat(languageSymbols.length + 1)}\n`;
-            const databaseContentIndex = messages.findIndex(msg => msg === '[DATABASE ENTRIES]');
-            const databaseContent = databaseContentIndex !== -1 ? messages.slice(databaseContentIndex + 1) : [];
-
-            let currentCategory = '';
-            databaseContent.forEach((item) => {
-                if (!item) return; // Skip null or undefined items
-                if (/^\[.+\]$/.test(item)) {
-                    currentCategory = item;
-                    csvContent += `,,${escapeCSV(item)}${CSV_SEPARATOR.repeat(languageSymbols.length + 1)}\n`;
-                } else if (item.trim() !== '' && item !== '[DATABASE ENTRIES]') {
-                    processMessage(item);
+                if (Object.keys(outputData).length > 0) {
+                    fs.writeFileSync(filePath, JSON.stringify(outputData, null, 2), 'utf8');
                 }
-            });
-        }
-
-        csvContent += `,,${escapeCSV('[GARBAGE AND \nCUSTOM LINES]')}${CSV_SEPARATOR.repeat(languageSymbols.length + 1)}\n`;
-
-        // Collect custom lines and preserve existing translations
-        let customLines = '';
-        existingContent.slice(1).forEach(row => {
-            if (!row || row.length < 3) return; // Skip invalid rows
-
-            const headers = existingContent[0];
-            const changeIndex = headers.indexOf('Change');
-            const excludedIndex = headers.indexOf('Excluded');
-            const nameIndex = headers.indexOf('Name');
-            const originalIndex = headers.indexOf('Original');
-
-            // Get the text from the correct Original column
-            const originalText = row[originalIndex];
-
-            if (!updatedMessages.has(originalText) &&
-                originalText !== '[GARBAGE AND \nCUSTOM LINES]' &&
-                originalText !== '[DATABASE ENTRIES]') {
-
-                // Create a new row with proper mapping
-                let newRow = [];
-
-                // Always include Change and Excluded
-                newRow.push(row[changeIndex] || '');
-                newRow.push(row[excludedIndex] || '');
-
-                // Name for MZ
-                if (extractNamesMZ && nameIndex !== -1) {
-                    newRow.push(row[nameIndex] || '');
-                }
-
-                // Add Original
-                newRow.push(originalText);
-
-                // Add all translations, making sure to get them from the correct indices
-                const translations = languageSymbols.map(symbol => {
-                    const langIndex = headers.indexOf(symbol);
-                    return langIndex !== -1 ? row[langIndex] || '' : '';
-                });
-                newRow = newRow.concat(translations);
-
-                customLines += newRow.map(escapeCSV).join(CSV_SEPARATOR) + '\n';
             }
         });
 
-        // Append custom lines after the GARBAGE AND CUSTOM LINES section
-        csvContent += customLines;
-
-        if (addGibberishLines) {
-            csvContent += `,,[GIBBERISH LINES FOR PERFORMANCE TESTING]${CSV_SEPARATOR.repeat(languageSymbols.length + 1)}\n`;
-            for (let i = 0; i < 80000; i++) {
-                const gibberish = generateGibberish(50); // Generate 50-character gibberish
-                csvContent += `NEW,,${escapeCSV(gibberish)}${CSV_SEPARATOR.repeat(languageSymbols.length + 1)}\n`;
-            }
-        }
-
-        fs.writeFile(filePath, csvContent, { encoding: 'utf8' }, (err) => {
-            if (err) {
-                ////console.log.error('Error writing CSV file:', err);
-            } else {
-                ////console.log.log('Messages updated in:', filePath);
-            }
-        });
+        alert("Localization files have been generated/updated successfully in language subfolders within " + I18N_DIR);
     }
 
-    function escapeCSV(text) {
-        if (typeof text !== 'string') {
-            return text;
-        }
-        if (text.includes('"') || text.includes(CSV_SEPARATOR) || text.includes('\n') || text.includes('\r')) {
-            return '"' + text.replace(/"/g, '""') + '"';
-        }
-        return text;
-    }
-
-    function parseCSV(text) {
-        const separator = detectCSVSeparatorFromContent(text);
-        const lines = [];
-        let currentLine = [];
-        let currentField = '';
-        let withinQuotes = false;
-
-        for (let i = 0; i < text.length; i++) {
-            const char = text[i];
-            if (char === '"') {
-                if (withinQuotes && text[i + 1] === '"') {
-                    currentField += '"';
-                    i++;
-                } else {
-                    withinQuotes = !withinQuotes;
-                }
-            } else if (char === separator && !withinQuotes) {
-                currentLine.push(currentField);
-                currentField = '';
-            } else if ((char === '\n' || char === '\r') && !withinQuotes) {
-                if (char === '\r' && text[i + 1] === '\n') {
-                    i++; // Skip the next \n for \r\n line endings
-                }
-                currentLine.push(currentField);
-                lines.push(currentLine);
-                currentLine = [];
-                currentField = '';
-            } else {
-                currentField += char;
-            }
-        }
-
-        if (currentField) {
-            currentLine.push(currentField);
-        }
-        if (currentLine.length > 0) {
-            lines.push(currentLine);
-        }
-
-        return lines;
-    }
 
     let wordTranslations = {};
 
     function loadTranslations(lang) {
-        let filePath = 'game_messages.csv';
-        translations = {}; // Clear existing translations
-        wordTranslations = {}; // Clear existing word translations
-        wordTranslationRegexes.clear(); // Clear existing word translation regexes
-        translationCache = {}; // Clear the translation cache
+        translations = {}; 
+        wordTranslations = {}; 
+        wordTranslationRegexes.clear(); 
+        translationCache = {}; 
 
-        let content = '';
-        if (typeof require === 'function') {
-            // Desktop environment
-            if (fs.existsSync(filePath)) {
-                content = fs.readFileSync(filePath, 'utf8');
+        const defLang = defaultLanguage || 'en';
+        const categories = new Set();
+
+        function loadFileData(language, filename) {
+            const relativePath = path ? path.join(language, filename) : language + '/' + filename;
+            const filePath = path ? path.join(I18N_DIR, relativePath) : I18N_DIR + relativePath;
+            if (fs && fs.existsSync(filePath)) {
+                return fs.readFileSync(filePath, 'utf8');
             } else {
-                // Try www folder next (for deployed projects)
-                filePath = path.join('www', filePath);
-                if (fs.existsSync(filePath)) {
-                    content = fs.readFileSync(filePath, 'utf8');
-                } else {
-                    //console.log.error('Translation file not found in root or www folder');
-                    return;
-                }
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', filePath, false);
+                xhr.overrideMimeType('application/json; charset=utf-8');
+                try {
+                    xhr.send();
+                    if (xhr.status === 200) return xhr.responseText;
+                } catch (e) {}
+            }
+            return null;
+        }
+
+        // Detect categories from default language folder
+        if (fs) {
+            const defDir = path.join(I18N_DIR, defLang);
+            if (fs.existsSync(defDir)) {
+                fs.readdirSync(defDir).forEach(f => {
+                    if (f.endsWith('.json') && f !== 'actors.json') categories.add(f.replace('.json', ''));
+                });
+            }
+            // Also check target language folder
+            const targetDir = path.join(I18N_DIR, lang);
+            if (fs.existsSync(targetDir)) {
+                fs.readdirSync(targetDir).forEach(f => {
+                    if (f.endsWith('.json') && f !== 'actors.json') categories.add(f.replace('.json', ''));
+                });
             }
         } else {
-            // Mobile environment
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', filePath, false);
-            xhr.overrideMimeType('text/plain; charset=utf-8');
-            try {
-                xhr.send();
-                if (xhr.status === 200) {
-                    content = xhr.responseText;
-                } else {
-                    throw new Error('HTTP status: ' + xhr.status);
+            // Hardcoded categories fallback
+            ['weapons', 'armors', 'terms', 'skills', 'items', 'enemies', 'states', 'system', 'classes', 'maps', 'common_events', 'variables', 'pictures', 'movies', 'scripts', 'plugin_commands', 'misc'].forEach(c => categories.add(c));
+        }
+
+        function mergeRecursive(def, target) {
+            for (const key in def) {
+                const dVal = def[key];
+                const tVal = target ? target[key] : null;
+
+                if (typeof dVal === 'object' && dVal !== null) {
+                    // Check if it's our flat format {val, excluded, name}
+                    if (dVal.hasOwnProperty('val')) {
+                        const original = (dVal.val || "").trim();
+                        const tValObj = (tVal && typeof tVal === 'object' ? tVal.val : (typeof tVal === 'string' ? tVal : original)) || "";
+                        const translated = tValObj.trim().replace(/\n/g, '{{LINEBREAK}}');
+                        const excluded = dVal.excluded || '';
+                        if (original) {
+                            translations[original] = translated;
+                            if (excluded) {
+                                translations[excluded + original] = translated;
+                                wordTranslations[excluded] = translated;
+                            }
+                        }
+                    } else {
+                        mergeRecursive(dVal, tVal);
+                    }
+                } else if (typeof dVal === 'string') {
+                    const original = dVal.trim();
+                    let translated = original;
+                    if (typeof tVal === 'string') {
+                        translated = tVal;
+                    } else if (tVal && typeof tVal === 'object' && tVal.val) {
+                        translated = tVal.val;
+                    }
+                    translated = translated.trim().replace(/\n/g, '{{LINEBREAK}}');
+                    if (original) {
+                        translations[original] = translated;
+                    }
                 }
-            } catch (e) {
-                //console.log.error('Failed to load translations file:', e.message);
-                return;
             }
         }
 
-        if (!content) {
-            //console.log.error('No content loaded from translations file');
-            return;
-        }
+        categories.forEach(cat => {
+            const defContent = loadFileData(defLang, `${cat}.json`);
+            const targetContent = loadFileData(lang, `${cat}.json`);
+            
+            if (defContent) {
+                try {
+                    const defData = JSON.parse(defContent);
+                    const targetData = targetContent ? JSON.parse(targetContent) : null;
+                    mergeRecursive(defData, targetData);
+                } catch (e) {
+                    console.error(`Error parsing ${cat} translation:`, e);
+                }
+            }
+        });
 
-        const lines = parseCSV(content);
-        if (lines.length > 0) {
-            const headers = lines[0];
-            const yepNameIndex = headers.indexOf('Excluded');
-            const originalIndex = headers.indexOf('Original');
-            const langIndex = headers.indexOf(lang);
-
-            availableLanguages = [];
-
-            // Check which languages have non-empty columns
-            languages.forEach(langObj => {
-                const langColIndex = headers.indexOf(langObj.Symbol);
-                if (langColIndex !== -1) {
-                    let hasTranslation = false;
-                    for (let j = 1; j < lines.length; j++) {
-                        if (lines[j][langColIndex] && lines[j][langColIndex].trim() !== '') {
-                            hasTranslation = true;
-                            break;
-                        }
-                    }
-                    if (hasTranslation) {
-                        availableLanguages.push(langObj.Symbol);
+        // Detect available languages based on folders in I18N_DIR
+        availableLanguages = [];
+        if (fs && fs.existsSync(I18N_DIR)) {
+            const items = fs.readdirSync(I18N_DIR);
+            items.forEach(item => {
+                const fullPath = path.join(I18N_DIR, item);
+                if (fs.statSync(fullPath).isDirectory()) {
+                    // Check if there is at least one json file in the folder
+                    if (fs.readdirSync(fullPath).some(f => f.endsWith('.json'))) {
+                        availableLanguages.push(item);
                     }
                 }
             });
-
-            // If the current language is not available, switch to the first available language
-            if (!availableLanguages.includes(currentLanguage)) {
-                currentLanguage = availableLanguages[0] || defaultLanguage;
-                ConfigManager.language = currentLanguage;
-                window.currentLanguage = currentLanguage
-            }
-            //////////////////////////////////////////////////////
-
-            if (originalIndex !== -1 && langIndex !== -1 && yepNameIndex !== -1) {
-                for (let i = 1; i < lines.length; i++) {
-                    const columns = lines[i];
-                    if (columns.length > Math.max(originalIndex, langIndex, yepNameIndex)) {
-                        const originalText = columns[originalIndex];
-                        const translatedText = columns[langIndex].replace(/\n/g, '{{LINEBREAK}}');
-                        const yepName = columns[yepNameIndex];
-
-                        if (originalText && translatedText) {
-                            translations[originalText] = translatedText;
-
-                            if (yepName) {
-                                translations[yepName + originalText] = translatedText;
-                                // Store word-level translations only for Excluded words
-                                wordTranslations[yepName] = translatedText;
-                            }
-
-                            //translations[originalText.replace(/\n/g, ' ')] = translatedText;
-
-                            // const originalLines = originalText.split('\n');
-                            // const translatedLines = translatedText.split('\n');
-                            // const maxLines = Math.max(originalLines.length, translatedLines.length);
-
-                            // for (let j = 0; j < maxLines; j++) {
-                            //    const origLine = j < originalLines.length ? originalLines[j].trim() : '';
-                            //    const transLine = j < translatedLines.length ? translatedLines[j].trim() : '';
-
-                            //    if (origLine && !translations[origLine]) {
-                            //        translations[origLine] = transLine;
-                            //    }
-
-                            //    if (j >= originalLines.length && transLine) {
-                            //        translations[`__EXTRA_LINE_${j - originalLines.length}__${originalText}`] = transLine;
-                            //    }
-                            //  }
-                        }
-                    }
-                }
-            }
+        }
+        
+        // If nothing found or no fs, fallback to languageSymbols
+        if (availableLanguages.length === 0) {
+            availableLanguages = languageSymbols.slice();
         }
 
-        originalTexts.length = 0; // Clear the array
-        //Object.keys(translations).sort((a, b) => b.length - a.length).forEach(key => originalTexts.push(key));
+        if (!availableLanguages.includes(currentLanguage)) {
+            currentLanguage = availableLanguages[0] || defaultLanguage;
+            ConfigManager.language = currentLanguage;
+            window.currentLanguage = currentLanguage;
+        }
+
+        originalTexts.length = 0;
         Object.keys(translations)
             .sort((a, b) => b.length - a.length)
             .forEach(key => originalTexts.push(key));
-
-        ////console.log.log('Loaded translations:', translations);
-        ////console.log.log('Updated originalTexts:', originalTexts);
     }
+
 
     Game_Message.prototype.messageBuffer = [];
 

@@ -272,13 +272,22 @@
 
     getPlaceholders: () => {
       let placeholders = [];
+      const p2Active = window.$gameSplitScreen && window.$gameSplitScreen.active;
+      const p2Name = p2Active ? window.$gameSplitScreen.p2EventName : null;
+
       for (let i = 1; i <= 8; i++) {
-        const ev = $gameMap.events().find(e => e?.event()?.name === `Player${i}`);
+        const name = `Player${i}`;
+        if (p2Active && name === p2Name) continue;
+        const ev = $gameMap.events().find(e => e?.event()?.name === name);
         if (ev) placeholders.push({ event: ev, originalX: ev.x, originalY: ev.y });
       }
       if (!placeholders.length) {
         placeholders = $gameMap.events()
-          .filter(e => e?.event()?.name.startsWith("NPC") || e?.event()?.name.startsWith("Placeholder"))
+          .filter(e => {
+            const name = e?.event()?.name;
+            if (p2Active && name === p2Name) return false;
+            return name.startsWith("NPC") || name.startsWith("Placeholder");
+          })
           .map(ev => ({ event: ev, originalX: ev.x, originalY: ev.y }));
       }
       return placeholders;
@@ -418,7 +427,14 @@
       const worldY = $gameVariables.value(44) || 1;
       const baseSeed = (worldX * 73856093) ^ (worldY * 19349663);
 
-      const npcEvents = $gameMap.events().filter(e => e?.event()?.name.match(/^(NPC|Player)/));
+      const p2Active = window.$gameSplitScreen && window.$gameSplitScreen.active;
+      const p2Name = p2Active ? window.$gameSplitScreen.p2EventName : null;
+
+      const npcEvents = $gameMap.events().filter(e => {
+        const name = e?.event()?.name;
+        if (p2Active && name === p2Name) return false;
+        return name.match(/^(NPC|Player)/);
+      });
       if (!npcEvents.length) return;
 
       const isCityBiome = ($gameSystem?._procGenData?.currentBiome || "Fields").toLowerCase().includes("city");
@@ -574,6 +590,10 @@
     update() {
       const time = performance.now();
       this.lastUpdateTime = time;
+
+      if (window.$gameSplitScreen && window.$gameSplitScreen.active && this.eventName === window.$gameSplitScreen.p2EventName) {
+        return;
+      }
 
       if (!this.event || this.isAbsent) return this.handleAbsence();
       if ($gameMap.isEventRunning() && $gameMap._interpreter.eventId() === this.eventId) {
